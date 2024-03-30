@@ -121,9 +121,53 @@ main {
 }
 
 .card{
-  height: 400px;
+  height: 470px;
   border: 2px solid #408840;
+  border-radius: 15px;
 }
+
+.discount-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #408840; /* Color verde */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.textoCal{
+  font-size: 15px;
+}
+
+.fa-star {
+  color: #ffd700;
+  font-size: 10px;
+}
+
+/*galeria de fotos*/
+
+.gallery{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 30rem);
+  gap: 0.5rem;
+  margin-bottom: 30px;
+}
+
+.gallery img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*Formato para que la imagen número 3 tenga un mayor tamaño que las demás*/
+.gallery-img-3{
+  grid-column: 2/4;
+  grid-row: 1/3;
+}
+
 
 #floatingTextarea{
   border: 2px solid #274E27;
@@ -136,6 +180,10 @@ main {
   color: white;
   border: none;
   height: 50px;
+}
+
+.textoboton{
+  font-size: 20px;
 }
 
 /*footer*/
@@ -168,12 +216,19 @@ footer {
     /* Ajusta el margen superior para pantallas pequeñas */
 
   }
+
+  .textoboton{
+    font-size: 14px;
+  }
 }
 
 /* Media query para pantallas de tamaño mediano */
 @media (min-width: 576px) and (max-width: 992px) {
   main {
     margin-top: 150px;
+  }
+  .textoboton{
+    font-size: 15px;
   }
 }
 
