@@ -45,7 +45,7 @@ HEADER.innerHTML = `
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav me-auto">
 
-                                    <li class="nav-item"><a class="nav-link me-2 text-white" href="#">
+                                    <li class="nav-item"><a class="nav-link me-2 text-white" href="#categorias">
                                         <img src="../../../resources/images/categorias.png" alt="..." width="20px"
                                         height="20px" class="me-2">Categorías</a>
                                     </li>
@@ -54,7 +54,7 @@ HEADER.innerHTML = `
                                        <img src="../../../resources/images/mensualidad.png" alt="..." width="20px"
                                        height="20px" class="me-1"> Pagos de mensualidad</a></li>
 
-                                    <li class="nav-item"><a class="nav-link me-1 text-white" href="#">
+                                    <li class="nav-item"><a class="nav-link me-1 text-white" href="miscompras.html">
                                        <img src="../../../resources/images/cesta.png" alt="..." width="20px"
                                        height="20px" class="me-1"> Mis compras</a></li>
 
