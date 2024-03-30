@@ -1,136 +1,185 @@
 /* Estilo para el encabezado fijo */
 header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Estilo para el contenido principal */
-  main {
-    margin-top: 200px; /* Ajusta el margen superior según el tamaño del encabezado */
-    z-index: 1; /* Asegura que el contenido principal esté por encima del encabezado */
-  }
-  
-  
-  .position-relative {
-    position: relative;
-  }
-  
-  .position-absolute {
-    position: absolute;
-  }
-  
-  .end-0 {
-    right: 0;
-  }
-  
-  .lupa {
-    transform: translate(-120%, 10%);
-  }
-  
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  .textoBuscar{
-    width: 350px;
-  }
-  
-  .conteNav{
-    background-color: #408840;
-  }
-  
-  
-  .image-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /*El último valor del rgba define la intensidad del color negro del overlay, o la capa
+.imagenUser{
+  cursor: pointer;
+}
+
+/* Estilo para el contenido principal */
+main {
+  margin-top: 200px;
+  /* Ajusta el margen superior según el tamaño del encabezado */
+  z-index: 1;
+  /* Asegura que el contenido principal esté por encima del encabezado */
+}
+
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.end-0 {
+  right: 0;
+}
+
+.lupa {
+  transform: translate(-120%, 10%);
+}
+
+
+.textoBuscar {
+  width: 350px;
+}
+
+.conteNav {
+  background-color: #408840;
+}
+
+
+/*Todo el main*/
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  /*El último valor del rgba define la intensidad del color negro del overlay, o la capa
     que se encuentra sobre la imagen que le da una tonalidad oscura*/
-    z-index: 1; /* Ajusta el z-index para que la superposición, posición adicional, esté por encima de la imagen */
-  }
-  
-  .primerTextoImagen1,
-  .primerTextoImagen2{
-    position: absolute;
-    z-index: 3; /* Asegura que esté encima del overlay */
-    transform: translateX(-50%);
-    font-weight: bold;
-  }
-  
-  .primerTextoImagen1 {
-    color: rgb(132, 132, 132);
-  }
-  
-  .primerTextoImagen2 {
-    color: #408840;
-    top: 60%; /* Ajusta la posición vertical para colocarlo debajo del primero */
-  }
-  
-  .botonImagen{
-    position: absolute;
-    z-index: 3;
-    transform: translateX(-50%);
-    top: 70%;
-    background-color: #408840;
-    color: white;
-    padding: 10px 20px; /* Espaciado interno del botón, el primer valor es el espacio de arriba y abajo del botón,
+  z-index: 1;
+  /* Ajusta el z-index para que la superposición, posición adicional, esté por encima de la imagen */
+}
+
+.primerTextoImagen1, .primerTextoImagen2 {
+  position: absolute;
+  z-index: 3;
+  /* Asegura que esté encima del overlay */
+  font-weight: bold;
+}
+
+.primerTextoImagen1 {
+  color: rgb(132, 132, 132);
+  top: 35%;
+}
+
+.primerTextoImagen2 {
+  color: #408840;
+  top: 45%;
+  /* Ajusta la posición vertical para colocarlo debajo del primero */
+}
+
+.botonImagen {
+  position: absolute;
+  z-index: 3;
+  transform: translateX(-50%);
+  top: 58%;
+  background-color: #408840;
+  color: white;
+  padding: 10px 20px;
+  /* Espaciado interno del botón, el primer valor es el espacio de arriba y abajo del botón,
     el segundo valor es el espacio a los lados del texto dentro del botón*/
-    border: none;
-    border-radius: 5px;
-    cursor: pointer; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/*imagenes de las categorías*/
+.span-overlay {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/*texto dentro de las imagenes*/
+.span-uniforme,.span-texto-mochilas,.span-texto-gorras {
+  top: 20%;
+}
+
+.span-guiones, .span-guiones-mochilas, .span-guiones-gorras {
+  top: 40%;
+}
+
+.span-ver, .span-ver-mochilas, .span-ver-gorras {
+  top: 60%;
+}
+
+.card{
+  height: 400px;
+  border: 2px solid #408840;
+}
+
+#floatingTextarea{
+  border: 2px solid #274E27;
+  height: 150px;
+}
+
+#btnEnviarConsulta {
+  background-image: linear-gradient(to right, #59B459, #274E27);
+  /*Gradiente para el botón*/
+  color: white;
+  border: none;
+  height: 50px;
+}
+
+/*footer*/
+footer {
+  background-color: #408840;
+  color: #fff;
+}
+
+.filaCopy {
+  border-top: 1px solid #fff;
+}
+
+@media (max-width: 281px) {
+  main {
+    margin-top: 400px;
+    /* Ajusta el margen superior para pantallas pequeñas */
+
   }
-  
-  #btnEnviarConsulta{
-    background-image: linear-gradient(to right, #59B459, #274E27); /*Gradiente para el botón*/
-      color: white;
-      border: none;
+
+  section {
+    margin-top: 240px;
+    /* Ajusta el margen superior para pantallas pequeñas */
   }
-  
-  footer{
-    background-color: #408840;
-    color: #fff;
+}
+
+
+@media (max-width: 576px) {
+  main {
+    margin-top: 230px;
+    /* Ajusta el margen superior para pantallas pequeñas */
+
   }
-  
-  .filaCopy{
-    border-top: 1px solid #fff;
+}
+
+/* Media query para pantallas de tamaño mediano */
+@media (min-width: 576px) and (max-width: 992px) {
+  main {
+    margin-top: 150px;
   }
-  
-  @media (max-width: 281px) {
-    main {
-      margin-top: 400px; /* Ajusta el margen superior para pantallas pequeñas */
-  
-    }
-    section{
-      margin-top: 240px; /* Ajusta el margen superior para pantallas pequeñas */
-    }
+}
+
+/* Media query para pantallas de tamaño grande*/
+@media (min-width: 992px) {
+  main {
+    margin-top: 150px;
   }
-  
-  
-  @media (max-width: 576px) {
-    main {
-      margin-top: 230px; /* Ajusta el margen superior para pantallas pequeñas */
-  
-    }
-  }
-  
-  /* Media query para pantallas de tamaño mediano (por ejemplo, tabletas) */
-  @media (min-width: 576px) and (max-width: 992px) {
-    main {
-      margin-top: 150px; /* Ajusta el margen superior para pantallas medianas */
-    }
-  }
-  
-  /* Media query para pantallas de tamaño grande (por ejemplo, computadoras de escritorio) */
-  @media (min-width: 992px) {
-    main {
-      margin-top: 150px; /* Ajusta el margen superior para pantallas grandes */
-    }
-  }
+}

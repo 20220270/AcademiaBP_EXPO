@@ -7,11 +7,11 @@ FOOTER.innerHTML = `
         <div class="container text-center iconos mt-4">
             <div class="row">
                 <div class="col">
-                    <img src="../../resources/images/logoFacebook.png" alt="..." width="30px" height="30px">
+                    <img src="../../../resources/images/logoFacebook.png" alt="..." width="30px" height="30px">
                     La Academia BP
                 </div>
                 <div class="col">
-                    <img src="../../resources/images/logoInsta.png" alt="..." width="30px" height="30px">
+                    <img src="../../../resources/images/logoInsta.png" alt="..." width="30px" height="30px">
                     academiafc.sv
                 </div>
                 <div class="col">

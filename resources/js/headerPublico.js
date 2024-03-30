@@ -2,13 +2,12 @@ const HEADER = document.querySelector('header');
 HEADER.innerHTML = `
 <!-- Parte de arriba del header -->
 
-
-        <div class="container-fluid text-center mt-3">
+<div class="container-fluid text-center mt-3">
             <div class="row w-100">
                 <div class="col-lg-4 col-md-3 col-sm-4 ">
                     <!-- Contenedor con un display flex para alinear elementos horizontalmente -->
                     <div class="d-flex align-items-center mt-2">
-                        <img src="../../resources/images/soporte-tecnico-colorNegro.png" class="mt-4 me-1" alt="..." height="40px"
+                        <img src="../../../resources/images/soporte-tecnico-colorNegro.png" class="mt-4 me-1" alt="..." height="40px"
                             width="40px">
                         <div class="texto mt-4">
                             <span class="d-block texto1">Soporte técnico</span>
@@ -19,12 +18,15 @@ HEADER.innerHTML = `
                     </div>
                 </div>
                 <div class="col col-lg-4 col-md-5 col-sm-5 align-self-center"> <!-- Alinear verticalmente la columna -->
-                    <img src="../../resources/images/logoAcademiaBP.png" alt="..." height="120px" width="120px">
+                    <img src="../../../resources/images/logoAcademiaBP.png" alt="..." height="120px" width="120px">
                 </div>
                 <div class="col mt-5 text-end">
-                    <img src="../../resources/images/userIcon.png" class="me-5" alt="..." width="30px" height="30px">
-                    <img src="../../resources/images/cesta2.png" alt="..." width="30px" height="30px">
-                    <span class="textoCarrito">Carrito de compras</span>
+                    <img src="../../../resources/images/userIcon.png" class="me-5 imagenUser" alt="..." width="30px" height="30px">
+                    <button class="btn">
+                        <img src="../../../resources/images/cesta2.png" alt="..." width="30px" height="30px" class="me-1">
+                        <span class="textoCarrito">Carrito de compras</span>
+                    </button>
+                    
                 </div>
             </div>
         </div>
@@ -72,7 +74,7 @@ HEADER.innerHTML = `
                                         placeholder="Buscador de productos" aria-label="Search">
                                     <button type="submit"
                                         class="btn btn-link p-0 position-absolute end-0 align-middle lupa">
-                                        <img src="../../resources/images/lupa.png" id="imagenLupa" class="mt-1 mb-1" alt="..."
+                                        <img src="../../../resources/images/lupa.png" id="imagenLupa" class="mt-1 mb-1" alt="..."
                                             width="20px" height="20px">
                                     </button>
                                 </form>
