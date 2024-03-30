@@ -4,7 +4,7 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000;
-    background-color: white; /* Cambia el color de fondo según tus preferencias */
+    background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
@@ -28,14 +28,10 @@ header {
   }
   
   .lupa {
-    transform: translate(-30%, 10%);
+    transform: translate(-120%, 10%);
   }
   
-  #imagenLupa{
-    margin-right: 10px;
-    margin-left: 10px;
-  }
-  
+
   .textoBuscar{
     width: 350px;
   }
