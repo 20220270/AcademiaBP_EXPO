@@ -1,40 +1,54 @@
   /* Estilo para el encabezado fijo */
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
-main {
-  margin-top: 220px;
+  main {
+    margin-top: 220px;
 
-}
-  
+  }
+
   .conteNav {
     background-color: #408840;
   }
 
-  .nav-item{
+  .nav-item {
     font-size: 13.9px;
   }
 
   .carruselAliados .img-fluid {
-    width: 200px; /* Establece el tamaño mediano deseado */
-    height: 200px; /* Establece el tamaño mediano deseado */
+    width: 200px;
+    height: 200px;
     object-fit: cover; /* Ajusta la imagen para que cubra todo el contenedor */
-    border-radius: 55%; /* Aplica bordes redondeados para hacer que las imágenes se vean como círculos */
+    border-radius: 55%;
     margin-left: 55px;
 
-}
+  }
 
-.card{
-  height: 470px;
-  border: 2px solid #408840;
-  border-radius: 15px;
-}
+  .card {
+    height: 470px;
+    border: 2px solid #408840;
+    border-radius: 15px;
+  }
+
+  /*Ajustamos el cuerpo de la card para que no tenga ni un espacio, para que la imagen abarque toda la parte de arriba y los costados*/
+  .card-body{
+    padding: 0;
+  }
+
+  .imagenProfe{
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .imagenesE{
+    width: 100%;
+  }
 
   footer {
     background-color: #408840;
