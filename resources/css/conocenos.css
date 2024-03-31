@@ -1,6 +1,40 @@
+  /* Estilo para el encabezado fijo */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+main {
+  margin-top: 220px;
+
+}
+  
   .conteNav {
     background-color: #408840;
   }
+
+  .nav-item{
+    font-size: 13.9px;
+  }
+
+  .carruselAliados .img-fluid {
+    width: 200px; /* Establece el tamaño mediano deseado */
+    height: 200px; /* Establece el tamaño mediano deseado */
+    object-fit: cover; /* Ajusta la imagen para que cubra todo el contenedor */
+    border-radius: 55%; /* Aplica bordes redondeados para hacer que las imágenes se vean como círculos */
+    margin-left: 55px;
+
+}
+
+.card{
+  height: 470px;
+  border: 2px solid #408840;
+  border-radius: 15px;
+}
 
   footer {
     background-color: #408840;
