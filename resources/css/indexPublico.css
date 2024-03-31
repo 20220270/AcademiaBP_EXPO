@@ -12,15 +12,6 @@ header {
   cursor: pointer;
 }
 
-/* Estilo para el contenido principal */
-main {
-  margin-top: 200px;
-  /* Ajusta el margen superior según el tamaño del encabezado */
-  z-index: 1;
-  /* Asegura que el contenido principal esté por encima del encabezado */
-}
-
-
 .position-relative {
   position: relative;
 }
@@ -48,6 +39,15 @@ main {
 
 
 /*Todo el main*/
+
+/* Estilo para el contenido principal */
+main {
+  margin-top: 140px;
+  /* Ajusta el margen superior según el tamaño del encabezado */
+  z-index: 1;
+
+}
+
 .image-container {
   position: relative;
   display: inline-block;
@@ -195,14 +195,46 @@ footer {
 .filaCopy {
   border-top: 1px solid #fff;
 }
-
-@media (max-width: 281px) {
-  main {
-    margin-top: 400px;
-    /* Ajusta el margen superior para pantallas pequeñas */
-
+@media (max-width: 360px) {
+  .imagenPrincipal{
+    margin-top: 25px;
   }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-top: 26px;
+    height: 89%;
+    background-color: rgba(0, 0, 0, 0.7);
+    /*El último valor del rgba define la intensidad del color negro del overlay, o la capa
+      que se encuentra sobre la imagen que le da una tonalidad oscura*/
+    z-index: 1;
+    /* Ajusta el z-index para que la superposición, posición adicional, esté por encima de la imagen */
+  }
+  section {
+    margin-top: 240px;
+    /* Ajusta el margen superior para pantallas pequeñas */
+  }
+}
 
+@media (max-width: 370px) {
+  .imagenPrincipal{
+    margin-top: 25px;
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-top: 26px;
+    height: 89%;
+    background-color: rgba(0, 0, 0, 0.7);
+    /*El último valor del rgba define la intensidad del color negro del overlay, o la capa
+      que se encuentra sobre la imagen que le da una tonalidad oscura*/
+    z-index: 1;
+    /* Ajusta el z-index para que la superposición, posición adicional, esté por encima de la imagen */
+  }
   section {
     margin-top: 240px;
     /* Ajusta el margen superior para pantallas pequeñas */
@@ -210,31 +242,43 @@ footer {
 }
 
 
+
 @media (max-width: 576px) {
   main {
-    margin-top: 230px;
+    margin-top: 240px;
     /* Ajusta el margen superior para pantallas pequeñas */
-
   }
 
   .textoboton{
     font-size: 14px;
+  }
+
+  #textoCarrito{
+    font-size: 12px;
   }
 }
 
 /* Media query para pantallas de tamaño mediano */
 @media (min-width: 576px) and (max-width: 992px) {
   main {
-    margin-top: 150px;
+    margin-top: 151px;
   }
   .textoboton{
     font-size: 15px;
   }
+  #textoCarrito{
+    font-size: 7px;
+  }
+
 }
 
 /* Media query para pantallas de tamaño grande*/
 @media (min-width: 992px) {
   main {
-    margin-top: 150px;
+    margin-top: 153px;
+  }
+
+  #textoCarrito{
+    font-size: 10px;
   }
 }
