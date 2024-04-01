@@ -41,19 +41,37 @@ header {
   
   }
 
-  .formsPerfil{
+  .formsPerfil,
+  .formsContra{
     border: none;
     border-bottom: 1px solid #000000;
     border-radius: 0;
     padding: 1%;
     background-color: transparent;
     box-shadow: none;
-    border-radius: 10px;
   }
+
+  input:disabled {
+    background-color: #ffffff; /* Cambia el color de fondo de los inputs deshabilitados a blanco */
+    }
 
   .botonC{
     cursor: pointer;
   }
+
+  .popover-header,
+  .modal-header,
+  .modal-footer {
+    background-color: #408840;
+    color: #fff;
+}
+
+
+.popover-body {
+    background-color: #000;
+    color: #fff;
+}
+
 
   footer {
     background-color: #408840;
