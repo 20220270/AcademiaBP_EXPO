@@ -1,0 +1,54 @@
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    margin-top: 220px;
+
+}
+
+.conteNav {
+    background-color: #408840;
+}
+
+.nav-item {
+    font-size: 13.9px;
+}
+
+
+.lupa {
+    transform: translate(-120%, 10%);
+}
+
+#noResultsMessage,
+#imageError{
+    display: none;
+}
+
+#imageError{
+    vertical-align: middle; 
+    margin-right: 10px;
+}
+
+footer {
+    background-color: #408840;
+    color: #fff;
+}
+
+.filaCopy {
+    border-top: 1px solid #fff;
+}
+
+.nu {
+    border: 4px solid #000;
+}
+
+.aa {
+    text-decoration: none;
+    color: #fff;
+}
