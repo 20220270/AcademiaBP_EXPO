@@ -18,14 +18,16 @@ HEADER.innerHTML = `
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-5 col-sm-5 col-6 align-self-center">
-                    <!-- Alinear verticalmente la columna -->
-                    <img src="../../../resources/images/logoAcademiaBP.png" alt="..." height="120px" width="120px">
+                    <a href="index.html">
+                        <img src="../../../resources/images/logoAcademiaBP.png" alt="..." height="120px" width="120px">
+                    </a>
                 </div>
 
                 <div class="mt-5 text-end col-lg-2 col-md-1 col-sm-1 col-6">
+                <a href="perfil.html">
                     <img src="../../../resources/images/userIcon.png" class="me-5 mt-2 imagenUser text-end" alt="..."
                         width="30px" height="30px">
-
+                </a>
                 </div>
                 <div class="mt-5 text-start col-lg-2 col-md-2 col-sm-2 col-6">
                     <button class="btn botonCarrito">

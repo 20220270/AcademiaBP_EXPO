@@ -1,0 +1,104 @@
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .imagenUser{
+    cursor: pointer;
+  }
+  
+  .position-relative {
+    position: relative;
+  }
+  
+  .position-absolute {
+    position: absolute;
+  }
+  
+  .end-0 {
+    right: 0;
+  }
+
+  .lupa {
+    transform: translate(-120%, 10%);
+  }
+  
+  
+  .textoBuscar {
+    width: 350px;
+  }
+  
+  .conteNav {
+    background-color: #408840;
+  }
+
+  main {
+    margin-top: 220px;
+  
+  }
+
+  .formsPerfil{
+    border: none;
+    border-bottom: 1px solid #000000;
+    border-radius: 0;
+    padding: 1%;
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 10px;
+  }
+
+  .botonC{
+    cursor: pointer;
+  }
+
+  footer {
+    background-color: #408840;
+    color: #fff;
+  }
+  
+  .aa{
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .filaCopy {
+    border-top: 1px solid #fff;
+  }
+
+  /* Media query para pantallas de tamaño grande*/
+@media (min-width: 768px) and (max-width: 991px) {
+    main {
+      margin-top: 220px;
+    }
+  
+    #textoCarrito{
+      font-size: 10px;
+    }
+  }
+
+    /* Media query para pantallas de tamaño grande*/
+@media (min-width: 576px) and (max-width: 767px) {
+    main {
+      margin-top: 250px;
+    }
+  
+    #textoCarrito{
+      font-size: 10px;
+    }
+
+    
+  }
+    /* Media query para pantallas de tamaño grande*/
+@media (min-width: 200px) and (max-width: 575px) {
+    main {
+      margin-top: 340px;
+    }
+  
+    #textoCarrito{
+      font-size: 10px;
+    }
+  }
