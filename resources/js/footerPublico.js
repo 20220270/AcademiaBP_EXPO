@@ -7,12 +7,18 @@ FOOTER.innerHTML = `
         <div class="container text-center iconos mt-4">
             <div class="row">
                 <div class="col">
-                    <img src="../../../resources/images/logoFacebook.png" alt="..." width="30px" height="30px">
-                    La Academia BP
+                    <a href="https://www.facebook.com/LaAcademiaFC" target="_blank" class="aa">
+                        <img src="../../../resources/images/logoFacebook.png" alt="Facebook" width="35px" height="35px">
+
+                        <span>La Academia FC</span>
+                    </a>
                 </div>
                 <div class="col">
-                    <img src="../../../resources/images/logoInsta.png" alt="..." width="30px" height="30px">
-                    academiafc.sv
+                    <a href="https://www.instagram.com/academiafc.sv" target="_blank" class="aa">
+                        <img src="../../../resources/images/logoInsta.png" alt="Instagram" width="35px" height="35px">
+
+                        <span>academiafc.sv</span>
+                    </a>
                 </div>
                 <div class="col">
                     <h6 class="d-block">No olvides utlizar el</h6>

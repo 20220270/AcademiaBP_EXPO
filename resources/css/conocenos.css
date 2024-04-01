@@ -30,6 +30,14 @@
 
   }
 
+  .flechregre {
+    left: 0; /* Mueve la flecha de navegación previa a la izquierda */
+}
+
+.flechaVer {
+    right: 0; /* Mueve la flecha de navegación siguiente a la derecha */
+}
+
   .card {
     height: 470px;
     border: 2px solid #408840;
@@ -46,9 +54,19 @@
     border-radius: 10px 10px 0 0;
   }
 
+
   .imagenesE{
     width: 100%;
   }
+
+  .i{
+    background-color: #408840;
+  }
+
+  .carousel-caption-text {
+    max-width: 700px; /* Ajusta el ancho máximo del contenedor del texto */
+    margin: 0 auto; /* Centra horizontalmente el contenedor del texto */
+}
 
   footer {
     background-color: #408840;
@@ -58,3 +76,32 @@
   .filaCopy {
     border-top: 1px solid #fff;
   }
+
+  .nu{
+    border: 4px solid #000;
+  }
+
+  .aa{
+    text-decoration: none;
+    color: #fff;
+  }
+
+  /* Media query para pantallas de tamaño mediano */
+@media (min-width: 576px) and (max-width: 992px) {
+  main {
+    margin-top: 250px;
+  }
+
+
+}
+
+@media (min-width: 260px) and (max-width: 576px) {
+  main {
+    margin-top: 370px;
+  }
+
+.card{
+  height: 600px;
+  margin-top: 10px;
+}
+}

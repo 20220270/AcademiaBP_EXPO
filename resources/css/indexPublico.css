@@ -192,6 +192,11 @@ footer {
   color: #fff;
 }
 
+.aa{
+  text-decoration: none;
+  color: #fff;
+}
+
 .filaCopy {
   border-top: 1px solid #fff;
 }
@@ -282,3 +287,4 @@ footer {
     font-size: 10px;
   }
 }
+
