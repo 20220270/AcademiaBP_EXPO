@@ -12,6 +12,8 @@ iniciarBtn.addEventListener('click', () => {
     container.classList.remove("active");
 });
 
+
+//Codigo para generar una contraseña automaticamente y asignarla al input de la contraseña
 document.addEventListener('DOMContentLoaded', function () {
     // Seleccionar el input de contraseña
     var inputContrasena = document.getElementById('contraseña');
@@ -32,7 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
             popup.textContent = 'Tu contraseña generada es: ' + contrasenaGenerada + ' puedes usarla o ingresa tu contraseña propia';
 
             // Posicionar el popup encima del input de contraseña
-            var rect = inputContrasena.getBoundingClientRect();
+            var rect = inputContrasena.getBoundingClientRect();//getBoundingClientRect nos devuelve un objeto de tipo DOMRect,
+            //que trae el tamaño del input de la contraseña para ubicar luego el popup
             popup.style.top = rect.top - popup.offsetHeight - 10 + 'px'; // Posición arriba del input
             popup.style.left = rect.left + 'px'; // Misma posición horizontal que el input
 
@@ -68,12 +71,17 @@ document.addEventListener('DOMContentLoaded', function () {
     function generarContrasenaSegura() {
         // Definir caracteres permitidos en la contraseña
         var caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=';
-        var longitud = 12; // Longitud de la contraseña
+        var longitud = 20; // Longitud de la contraseña
 
-        var contrasena = '';
+        var contrasena = ''; //Aquí se guardará la contraseña generada
+
         for (var i = 0; i < longitud; i++) {
-            var caracterAleatorio = caracteres.charAt(Math.floor(Math.random() * caracteres.length));
-            contrasena += caracterAleatorio;
+            var caracterAleatorio = caracteres.charAt(Math.floor(Math.random() * caracteres.length)); 
+            //Math.floor se utiliza para una coincidencia mas exacta del caracter, ya que Math.Random puede devolver valores decimales, 
+            //lo que afecta la coincidencia de un caracter
+            //Se utiliza Math.random para generar un numero aleatorio y que ese sea el caracter que se colocara en la contraseña
+
+            contrasena += caracterAleatorio; //Agrega cada caracter a la contraseña hasta que el ciclo se detenga
         }
         return contrasena;
     }
