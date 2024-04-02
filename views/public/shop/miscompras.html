@@ -7,8 +7,8 @@
     <title>Mis compras</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <!--Link para las estrellitas en la valoración de productos-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!--Link para las estrellitas en la valoración de productos-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/resources/css/compras.css">
 </head>
 
@@ -180,17 +180,21 @@
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Dar mi valoración a este producto</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-header d-flex justify-content-center align-items-center">
+                        <img src="/resources/images/comentario.png" alt="..." width="100px" height="100px"
+                            class="mx-auto" data-bs-dismiss="modal" id="botonCerrar">
+                            <img src="/resources/images/logoAcademiaBP.png" alt="..." width="100px" height="100px"
+                            class="mx-auto" data-bs-dismiss="modal" id="botonCerrar2">
                     </div>
                     <div class="modal-body">
+                        <h5 class="text-center">¡Dale una valoración a este producto!</h5>
+                        <p class="text-center">Tu opinión nos será de mucha utilidad para que las personas quieran
+                            adquirir este producto. </p>
                         <div class="container text-center">
                             <div class="row">
-                                <div class="col">
-                                    <input type="hidden" id="idOrden" name="idOrden">
-                                    <label for="nombreCategoria"
-                                        class="col-sm-7 col-md-12 col-lg-12 col-form-label text-center">Calificación para este producto:</label>
+                                <div class="col col-lg-12">
+                                    <input type="hidden" id="iddetalleOrden" name="iddetalleOrden">
+                                    <input type="hidden" id="idProducto" name="idProducto">
                                     <div class="rating">
                                         <i class="bi bi-star-fill star"></i>
                                         <i class="bi bi-star-fill star"></i>
@@ -199,8 +203,9 @@
                                         <i class="bi bi-star-fill star"></i>
 
                                     </div>
+                                    <input class="mt-3" type="text" name="texto" id="texto" readonly>
                                 </div>
-                                <div class="col">
+                                <div class="col col-lg-12 mt-2 mb-4">
                                     <div class="form-floating">
                                         <textarea class="form-control" placeholder="Leave a comment here"
                                             id="floatingTextarea2" style="height: 100px"></textarea>
@@ -208,20 +213,20 @@
                                     </div>
                                 </div>
 
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <button type="button" class="btn btnEnviarValoracion">
+                                        <img src="/resources/images/enviarValoracion.png" alt="..." width="40px" height="40px">
+                                    </button>
+                                </div>
                             </div>
-
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary botonModalEnviarValoracion" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary botonModalEnviarValoracion">Enviar valoración</button>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer>
+    <footer class="mt-5">
 
     </footer>
     <!--Scripts de bootstrap-->
@@ -229,11 +234,15 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-
-
     <script src="https://kit.fontawesome.com/22fd8b70d9.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!--Carrusel-->
+    <!--Aqui se encuentra el controlador para la ventana Mis Compras,
+    aqui estarán los datos que irán en la cards, la barra de busqueda,
+    el relleno de estrellas y
+    el pop up de la imagen para cerrar la modal de valorar productos-->
     <script src="/controllers/public/compras.js"></script>
+
+    <!--Plantillas para header y footer-->
     <script src="/resources/js/headerPublico.js"></script>
     <script src="/resources/js/footerPublico.js"></script>
 </body>

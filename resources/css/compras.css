@@ -41,16 +41,50 @@ footer {
 }
 
 .modal-header{
-    background-color: #408840;
-    color: #fff;
+    background: linear-gradient(to right, #04B704, #408340);
+    height: 160px;
 }
 
-.botonModalEnviarValoracion{
-    background-color: #00063C;
-    /*Gradiente para el botón*/
-    color: white;
+.rating{
+    display: flex;
+    justify-content: space-between;
+}
+
+.star{
+    font-size: 32px;
+    color: gray;
+    transition: color 0.1s;
+    cursor: pointer;
+}
+
+#texto{
     border: none;
-    height: 50px;
+    text-align: center;
+}
+
+.star:hover,
+.star.checked{
+    color: #408840;
+}
+
+.popover-header,
+.modal-header,
+.modal-footer {
+  background-color: #408840;
+  color: #fff;
+}
+
+
+.popover-body {
+  background-color: #000;
+  color: #fff;
+}
+
+
+.btnEnviarValoracion{
+    background: linear-gradient(to right, #04B704, #408340);
+    border-radius: 10px;
+    width: 70px;
 }
 
 .filaCopy {
