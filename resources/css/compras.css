@@ -40,6 +40,19 @@ footer {
     color: #fff;
 }
 
+.modal-header{
+    background-color: #408840;
+    color: #fff;
+}
+
+.botonModalEnviarValoracion{
+    background-color: #00063C;
+    /*Gradiente para el botón*/
+    color: white;
+    border: none;
+    height: 50px;
+}
+
 .filaCopy {
     border-top: 1px solid #fff;
 }
