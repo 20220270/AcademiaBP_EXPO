@@ -70,3 +70,11 @@ body{
     border-radius: 20px;
     color: #fff;
 }
+
+@media (min-width: 900px) and (max-width: 1300px) {
+    
+}
+
+@media (min-width: 700px) and (max-width: 899px) {
+    
+}
