@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const cardContainer = document.getElementById("cardContainer");
     const noResultsMessage = document.getElementById("noResultsMessage");
     const cards = document.querySelectorAll(".card");
-    const btnMostrarModalVa = document.querySelector(".btnMostrarModalVa");
 
     input.addEventListener("input", function () {
         const searchTerm = input.value.trim().toLowerCase();
@@ -19,19 +18,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        const TITULOVALORAR = document.querySelector(".tituloValoracion");
-
         // Ocultar el título y el botón de valoración si no hay resultados
         if (hasResults) {
             noResultsMessage.style.display = "none";
             cardContainer.style.display = "block";
-            TITULOVALORAR.style.display = "block";
-            btnMostrarModalVa.style.display = "block"; // Mostrar el botón de valoración
         } else {
             noResultsMessage.style.display = "block";
             cardContainer.style.display = "none";
-            TITULOVALORAR.style.display = "none"; // Ocultar el título de valoración
-            btnMostrarModalVa.style.display = "none"; // Ocultar el botón de valoración
         }
     });
 });
@@ -47,16 +40,14 @@ const stars = document.querySelectorAll('.star');
 const ratingText = document.getElementById('texto');
 
 //Función para pintar y despintar las estrellas a las que se les de click
-stars.forEach(function(star, index){
-    star.addEventListener('click', function(){
+stars.forEach(function (star, index) {
+    star.addEventListener('click', function () {
         //Aquí las pinta dependiendo el index de la estrella
-        for(let i = 0; i<=index; i++)
-        {
+        for (let i = 0; i <= index; i++) {
             stars[i].classList.add('checked');
         }
         //Aquí las despinta dependiendo el index de la estrella
-        for(let i = index + 1; i< stars.length; i++)
-        {
+        for (let i = index + 1; i < stars.length; i++) {
             stars[i].classList.remove('checked');
         }
         //Se almacena la cantidad de estrellas seleccionadas
