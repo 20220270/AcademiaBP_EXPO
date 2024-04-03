@@ -1,0 +1,75 @@
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  
+  .imagenUser{
+    cursor: pointer;
+  }
+  
+  .position-relative {
+    position: relative;
+  }
+  
+  .position-absolute {
+    position: absolute;
+  }
+  
+  .end-0 {
+    right: 0;
+  }
+
+  .lupa {
+    transform: translate(-120%, 10%);
+  }
+
+  .textoBuscar {
+    width: 350px;
+  }
+  
+  .conteNav {
+    background-color: #408840;
+  }
+
+  main {
+    margin-top: 220px;
+  
+  }
+
+
+  .contenedorTotal{
+    border-radius: 15px;
+    border: 2px solid #408840;
+    
+  }
+
+  .botonpagar{
+    background-color: #408840;
+    color: #fff;
+  }
+
+  footer {
+    background-color: #408840;
+    color: #fff;
+  }
+  
+  .aa{
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .filaCopy {
+    border-top: 1px solid #fff;
+  }
+
+  .incrementBtn,
+  .decrementBtn{
+    background-color: #408840;
+    color: #fff;
+  }
+  
