@@ -1,3 +1,5 @@
+
+
 const container = document.getElementById('container');
 
 const registrarBtn = document.getElementById('registrarse');

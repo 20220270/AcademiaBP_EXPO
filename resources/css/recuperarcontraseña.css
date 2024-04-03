@@ -1,0 +1,72 @@
+body{
+    background-color: #c9d6ff;
+    background: linear-gradient(to right, #e2e2e2, #9ed392);
+}
+
+.contenedor1,
+.contenedor2,
+.contenedor3{
+    background-color: #fff;
+    height: 600px;
+    border-radius: 5px;
+}
+
+.contenedor1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /*Posicion inicial del contenedor*/
+    width: 30%; /* Ajusta el ancho al 50% de la pantalla */
+    display: block;
+    max-width: 500px; /* Opcional: establece un ancho máximo */
+}
+
+.contenedor2 {
+    position: absolute;
+    width: 30%; /* Ajusta el ancho al 50% de la pantalla */
+    display: block;
+    max-width: 500px; /* Opcional: establece un ancho máximo */
+    bottom: 5.4%;
+}
+
+.contenedor3 {
+    position: absolute;
+    width: 30%; /* Ajusta el ancho al 50% de la pantalla */
+    display: block;
+    max-width: 500px; /* Opcional: establece un ancho máximo */
+    bottom: 5.5%;
+}
+
+.contenedor2,
+.contenedor3 {
+    display: none; /* Oculta los contenedores 2 y 3 */
+}
+
+.input-with-icon input[type="email"] {
+    padding-left: 50px; /* Espacio para la imagen */
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon img {
+    position: absolute;
+    left: 10px; /* Distancia desde el borde izquierdo */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#botonEnviarCorreo,
+#botonResetContra,
+#botonReenviarCodigo,
+#botonVerificarCodigo,
+#regresarBoton,
+#regresarBoton1,
+#regresarBoton2{
+    background-color: #408844;
+    border: none;
+    padding: 5px;
+    border-radius: 20px;
+    color: #fff;
+}
