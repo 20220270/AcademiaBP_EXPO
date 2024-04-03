@@ -3,7 +3,7 @@ function mostrarContenedor2() {
     // Obtener el contenedor1 y contenedor2 por su clase
     var contenedor1 = document.querySelector('.contenedor1');
     var contenedor2 = document.querySelector('.contenedor2');
-    
+
     // Mover el contenedor1 ligeramente a la izquierda
     contenedor1.style.left = 'calc(45% - 250px)'; // Ajustamos el valor de desplazamiento a la izquierda
     contenedor1.style.top = '50%'; // Alineamos verticalmente el contenedor1
@@ -15,22 +15,25 @@ function mostrarContenedor2() {
     // Asignamos la propiedad readonly al input del contenedor1 cuando el contenedor2 sea visible
     var inputCorreo = document.getElementById('inputCorreo');
     inputCorreo.readOnly = true;
+
+    // Habilitamos el botón regresarBoton1 cuando el contenedor3 no se muestre
+    document.getElementById('regresarBoton1').disabled = false;
 }
 
 // Agregar un evento de clic al botón botonEnviarCorreo
-document.getElementById('botonEnviarCorreo').addEventListener('click', function() {
+document.getElementById('botonEnviarCorreo').addEventListener('click', function () {
     // Llamar a la función mostrarContenedor2 cuando se haga clic en el botón
     mostrarContenedor2();
 });
 
 // Función para mostrar el contenedor3 y ajustar posición de contenedor1 y contenedor2
-// Función para mostrar el contenedor3 y ajustar posición de contenedor1 y contenedor2
+
 function mostrarContenedor3() {
     // Obtener los contenedores por su clase
     var contenedor1 = document.querySelector('.contenedor1');
     var contenedor2 = document.querySelector('.contenedor2');
     var contenedor3 = document.querySelector('.contenedor3');
-    
+
     // Ajustar posición del contenedor1 a la izquierda
     contenedor1.style.left = 'calc(35.7% - 240px)'; // Ajustamos el valor de desplazamiento a la izquierda
     contenedor1.style.top = '50%'; // Alinea verticalmente el contenedor1
@@ -43,17 +46,16 @@ function mostrarContenedor3() {
     contenedor3.style.display = 'block';
     contenedor3.style.right = 'calc(21% - 250px)'; // Ajustamos el valor de desplazamiento a la derecha
 
-    // Asignamos la propiedad readonly al input del contenedor1 cuando el contenedor2 sea visible
-    var inputCorreo = document.getElementById('inputCorreo');
-    inputCorreo.readOnly = true;
-
     // Asignamos la propiedad readonly al input del contenedor1 y contenedor2 cuando el contenedor3 sea visible
     var inputCorreo = document.getElementById('inputCodigo');
     inputCorreo.readOnly = true;
+
+    // Deshabilitamos el botón regresarBoton1 cuando el contenedor3 esté visible
+    document.getElementById('regresarBoton1').disabled = true;
 }
 
 // Agregar un evento de clic al botón botonVerificarCodigo
-document.getElementById('botonVerificarCodigo').addEventListener('click', function() {
+document.getElementById('botonVerificarCodigo').addEventListener('click', function () {
     // Llamar a la función mostrarContenedor3 cuando se haga clic en el botón
     mostrarContenedor3();
 });
@@ -63,7 +65,7 @@ function ocultarContenedor2() {
     // Obtener los contenedores por su clase
     var contenedor1 = document.querySelector('.contenedor1');
     var contenedor2 = document.querySelector('.contenedor2');
-    
+
     // Ocultar el contenedor2
     contenedor2.style.display = 'none';
 
@@ -77,7 +79,7 @@ function ocultarContenedor2() {
 }
 
 // Agregar un evento de clic al botón regresarBoton1
-document.getElementById('regresarBoton1').addEventListener('click', function() {
+document.getElementById('regresarBoton1').addEventListener('click', function () {
     // Llamar a la función ocultarContenedor2 cuando se haga clic en el botón
     ocultarContenedor2();
 });
@@ -86,7 +88,7 @@ document.getElementById('regresarBoton1').addEventListener('click', function() {
 function ocultarContenedor3() {
     // Obtener el contenedor3 por su clase
     var contenedor3 = document.querySelector('.contenedor3');
-    
+
     // Ocultar el contenedor3
     contenedor3.style.display = 'none';
 
@@ -102,7 +104,7 @@ function ocultarContenedor3() {
 }
 
 // Agregar un evento de clic al botón regresarBoton2
-document.getElementById('regresarBoton2').addEventListener('click', function() {
+document.getElementById('regresarBoton2').addEventListener('click', function () {
     // Llamar a la función ocultarContenedor3 cuando se haga clic en el botón
     ocultarContenedor3();
 });
