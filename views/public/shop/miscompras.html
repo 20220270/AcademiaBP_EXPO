@@ -10,6 +10,7 @@
     <!--Link para las estrellitas en la valoración de productos-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/resources/css/compras.css">
+
 </head>
 
 <body>
@@ -20,9 +21,23 @@
 
     <main>
         <h3 class="text-center">Mis compras</h3>
-        <div class="d-flex justify-content-center">
-            <input type="text" class="form-control formsPerfil w-50" id="Buscador" placeholder="Busca tus compras">
+
+        <!-- buscador -->
+        <div class="row">
+            <div class="col-6">
+                <div class="buscador">
+                    <input class="busc light-table-filter" data-table="order-table" type="text" placeholder="Buscar">
+                    <div class="btna">
+                        <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+
+            </div>
         </div>
+        <!-- fin buscador -->
+
         <!--Card con la informacion de la compra-->
         <div class="d-flex justify-content-center text-center mt-4">
             <div class="card col-lg-10">

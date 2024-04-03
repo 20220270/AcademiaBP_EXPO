@@ -1,0 +1,258 @@
+/* Estilo para el encabezado fijo */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .seccion1{
+margin-top: 230px;
+  }
+
+  .imagenUser{
+    cursor: pointer;
+  }
+  
+  .position-relative {
+    position: relative;
+  }
+  
+  .position-absolute {
+    position: absolute;
+  }
+  
+  .end-0 {
+    right: 0;
+  }
+  
+  .lupa {
+    transform: translate(-120%, 10%);
+  }
+  
+  
+  .textoBuscar {
+    width: 350px;
+  }
+  
+  .conteNav {
+    background-color: #408840;
+  }
+  
+  
+  /*Todo el main*/
+  
+  /* Estilo para el contenido principal */
+  main {
+    margin-top: 140px;
+    /* Ajusta el margen superior según el tamaño del encabezado */
+    z-index: 1;
+  
+  }
+  
+  .image-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    /*El último valor del rgba define la intensidad del color negro del overlay, o la capa
+      que se encuentra sobre la imagen que le da una tonalidad oscura*/
+    z-index: 1;
+    /* Ajusta el z-index para que la superposición, posición adicional, esté por encima de la imagen */
+  }
+  
+  .primerTextoImagen1, .primerTextoImagen2 {
+    position: absolute;
+    z-index: 3;
+    /* Asegura que esté encima del overlay */
+    font-weight: bold;
+  }
+  
+  .primerTextoImagen1 {
+    color: rgb(132, 132, 132);
+    top: 35%;
+  }
+  
+  .primerTextoImagen2 {
+    color: #408840;
+    top: 45%;
+    /* Ajusta la posición vertical para colocarlo debajo del primero */
+  }
+  
+  .botonImagen {
+    position: absolute;
+    z-index: 3;
+    transform: translateX(-50%);
+    top: 58%;
+    background-color: #408840;
+    color: white;
+    padding: 10px 20px;
+    /* Espaciado interno del botón, el primer valor es el espacio de arriba y abajo del botón,
+      el segundo valor es el espacio a los lados del texto dentro del botón*/
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /*imagenes de las categorías*/
+  .span-overlay {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+  
+  /*texto dentro de las imagenes*/
+  .span-uniforme,.span-texto-mochilas,.span-texto-gorras {
+    top: 20%;
+  }
+  
+  .span-guiones, .span-guiones-mochilas, .span-guiones-gorras {
+    top: 40%;
+  }
+  
+  .span-ver, .span-ver-mochilas, .span-ver-gorras {
+    top: 60%;
+  }
+  
+  .card{
+    height: 470px;
+    border: 2px solid #408840;
+    border-radius: 15px;
+  }
+  
+  .discount-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #408840; /* Color verde */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+  
+  .textoCal{
+    font-size: 15px;
+  }
+  
+  .fa-star {
+    color: #ffd700;
+    font-size: 10px;
+  }
+  
+ 
+ 
+  
+  /*footer*/
+  footer {
+    background-color: #408840;
+    color: #fff;
+  }
+  
+  .aa{
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .filaCopy {
+    border-top: 1px solid #fff;
+  }
+  @media (max-width: 360px) {
+    .imagenPrincipal{
+      margin-top: 25px;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      margin-top: 26px;
+      height: 89%;
+      background-color: rgba(0, 0, 0, 0.7);
+      /*El último valor del rgba define la intensidad del color negro del overlay, o la capa
+        que se encuentra sobre la imagen que le da una tonalidad oscura*/
+      z-index: 1;
+      /* Ajusta el z-index para que la superposición, posición adicional, esté por encima de la imagen */
+    }
+    section {
+      margin-top: 240px;
+      /* Ajusta el margen superior para pantallas pequeñas */
+    }
+  }
+  
+  @media (max-width: 370px) {
+    .imagenPrincipal{
+      margin-top: 25px;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      margin-top: 26px;
+      height: 89%;
+      background-color: rgba(0, 0, 0, 0.7);
+      /*El último valor del rgba define la intensidad del color negro del overlay, o la capa
+        que se encuentra sobre la imagen que le da una tonalidad oscura*/
+      z-index: 1;
+      /* Ajusta el z-index para que la superposición, posición adicional, esté por encima de la imagen */
+    }
+    section {
+      margin-top: 240px;
+      /* Ajusta el margen superior para pantallas pequeñas */
+    }
+  }
+  
+  
+  
+  @media (max-width: 576px) {
+    main {
+      margin-top: 240px;
+      /* Ajusta el margen superior para pantallas pequeñas */
+    }
+  
+    .textoboton{
+      font-size: 14px;
+    }
+  
+    #textoCarrito{
+      font-size: 12px;
+    }
+  }
+  
+  /* Media query para pantallas de tamaño mediano */
+  @media (min-width: 576px) and (max-width: 992px) {
+    main {
+      margin-top: 151px;
+    }
+    .textoboton{
+      font-size: 15px;
+    }
+    #textoCarrito{
+      font-size: 7px;
+    }
+  
+  }
+  
+  /* Media query para pantallas de tamaño grande*/
+  @media (min-width: 992px) {
+    main {
+      margin-top: 153px;
+    }
+  
+    #textoCarrito{
+      font-size: 10px;
+    }
+  }
+  
+  
