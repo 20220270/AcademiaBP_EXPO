@@ -2,9 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const input = document.getElementById("Buscador");
     const cardContainer = document.getElementById("cardContainer");
     const noResultsMessage = document.getElementById("noResultsMessage");
-    const valoraTitulo = document.getElementById("valoraTitulo");
-    const valoraBoton = document.getElementById("valoraBoton");
     const cards = document.querySelectorAll(".card");
+    const btnMostrarModalVa = document.querySelector(".btnMostrarModalVa");
 
     input.addEventListener("input", function () {
         const searchTerm = input.value.trim().toLowerCase();
@@ -20,19 +19,24 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
+        const TITULOVALORAR = document.querySelector(".tituloValoracion");
+
+        // Ocultar el título y el botón de valoración si no hay resultados
         if (hasResults) {
             noResultsMessage.style.display = "none";
             cardContainer.style.display = "block";
-            valoraTitulo.style.display = "block"; // Mostrar el título para valorar la compra
-            valoraBoton.style.display = "block"; // Mostrar el botón para valorar la compra
+            TITULOVALORAR.style.display = "block";
+            btnMostrarModalVa.style.display = "block"; // Mostrar el botón de valoración
         } else {
             noResultsMessage.style.display = "block";
             cardContainer.style.display = "none";
-            valoraTitulo.style.display = "none"; // Ocultar el título para valorar la compra
-            valoraBoton.style.display = "none"; // Ocultar el botón para valorar la compra
+            TITULOVALORAR.style.display = "none"; // Ocultar el título de valoración
+            btnMostrarModalVa.style.display = "none"; // Ocultar el botón de valoración
         }
     });
 });
+
+
 
 //Estrellas
 
