@@ -107,6 +107,11 @@ main {
   z-index: 1;
 }
 
+#textoCarrito a{
+  text-decoration: none;
+}
+
+
 /*texto dentro de las imagenes*/
 .span-uniforme,.span-texto-mochilas,.span-texto-gorras {
   top: 20%;
@@ -200,6 +205,9 @@ footer {
 .filaCopy {
   border-top: 1px solid #fff;
 }
+
+
+
 @media (max-width: 360px) {
   .imagenPrincipal{
     margin-top: 25px;
@@ -275,6 +283,10 @@ footer {
     font-size: 7px;
   }
 
+  .imagenn{
+    width: 100%;
+  }
+
 }
 
 /* Media query para pantallas de tamaño grande*/
@@ -284,7 +296,13 @@ footer {
   }
 
   #textoCarrito{
-    font-size: 10px;
+    font-size: 11px;
   }
+
+  .imagenn{
+    width: 100%;
+  }
+
 }
+
 

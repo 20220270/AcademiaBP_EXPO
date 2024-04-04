@@ -29,15 +29,20 @@ HEADER.innerHTML = `
                         width="30px" height="30px">
                 </a>
                 </div>
+                
+               
                 <div class="mt-5 text-start col-lg-2 col-md-2 col-sm-2 col-6">
+                <a href="carrito.html">
                     <button class="btn botonCarrito">
+                    
                         <img src="../../../resources/images/cesta2.png" alt="..." width="30px" height="30px"
-                            class="me-1">
+                            class="">
+                            
                         <span class="text" id="textoCarrito">Carrito de compras</span>
                     </button>
-
+                    </a>
                 </div>
-
+                
             </div>
         </div>
 
