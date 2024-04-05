@@ -82,16 +82,16 @@ HEADER.innerHTML = `
                                     </li>
 
                                 </ul>
-                                <form class="d-flex justify-content-lg-end justify-content-md-end justify-content-sm-end justify-content-end
-                                 position-relative col-lg-3 col-md-12 col-sm-12 col-10" role="search">
-                                    <input class="form-control me-2 textoBuscar rounded-4" type="search"
-                                        placeholder="Buscador de productos" aria-label="Search">
-                                    <button type="submit"
-                                        class="btn btn-link p-0 position-absolute end-0 align-middle lupa">
-                                        <img src="../../../resources/images/lupa.png" id="imagenLupa" class="mt-1 mb-1"
-                                            alt="..." width="20px" height="20px">
-                                    </button>
-                                </form>
+                                <div class="row">
+                                    <div class="col-6 offset-3"> <!-- Añadimos una clase offset-3 para centrar el buscador -->
+                                        <div class="buscador">
+                                            <input class="busc light-table-filter" data-table="order-table" type="text" placeholder="Buscador de productos" id="Buscador">
+                                            <div class="btna">
+                                                <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
 
@@ -101,5 +101,6 @@ HEADER.innerHTML = `
 
             </div>
         </div>
+
 
 `;
