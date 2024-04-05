@@ -3,6 +3,10 @@ body{
     background: linear-gradient(to right, #e2e2e2, #9ed392);
 }
 
+#numeroGenerado{
+    display: none;
+}
+
 .contenedor1,
 .contenedor2,
 .contenedor3{
@@ -42,7 +46,9 @@ body{
     display: none; /* Oculta los contenedores 2 y 3 */
 }
 
-.input-with-icon input[type="email"] {
+.input-with-icon input[type="email"],
+.input-with-icon input[type="text"],
+.input-with-icon input[type="password"] {
     padding-left: 50px; /* Espacio para la imagen */
 }
 
