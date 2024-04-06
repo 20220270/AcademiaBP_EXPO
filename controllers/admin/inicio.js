@@ -65,7 +65,7 @@ NAVASIDE.innerHTML = `
             <!-- Pie de página de la barra lateral -->
             <div class="sidebar-footer">
                 <a href="#" class="sidebar-link">
-                <img src="imagenes/cerrarsesion.png" alt="..." width="30px" height="30px" class="avatar img-fluid">
+                <img src="/resources/images/cerrarsesion.png" alt="..." width="30px" height="30px" class="avatar img-fluid">
                     <span>Cerrar sesión</span>
                 </a>
             </div>
