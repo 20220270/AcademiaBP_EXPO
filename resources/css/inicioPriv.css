@@ -33,13 +33,14 @@ body {
 }
 
 /* Estilos del contenido principal */
-.main {
+main {
     min-height: 100vh;
     width: 100%;
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     background-color: #fafbfe;
 }
+
 
 /* Estilos del sidebar */
 #sidebar {
