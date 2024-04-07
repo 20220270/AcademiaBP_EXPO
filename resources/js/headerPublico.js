@@ -84,9 +84,9 @@ HEADER.innerHTML = `
                                 </ul>
                                 <div class="row">
                                     <div class="col-6 offset-3"> <!-- Añadimos una clase offset-3 para centrar el buscador -->
-                                        <div class="buscador">
-                                            <input class="busc light-table-filter" data-table="order-table" type="text" placeholder="Buscador de productos" id="Buscador">
-                                            <div class="btna">
+                                        <div class="buscador1">
+                                            <input class="busc1 light-table-filter" data-table="order-table" type="text" placeholder="Buscador de productos" id="Buscador1">
+                                            <div class="btna1">
                                                 <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
                                             </div>
                                         </div>
