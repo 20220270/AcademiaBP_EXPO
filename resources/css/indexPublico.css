@@ -494,69 +494,6 @@ footer {
   }
 
 
-  .buscador {
-    position: absolute;
-    left: 75%;
-    top: 85%;
-    transform: translate(-50%, -50%);
-    padding: 15px;
-  }
-  
-  .busc {
-    outline: none;
-    box-sizing: border-box;
-    height: 35px;
-    width: 0;
-    padding: 0 20px 6px;
-    color: #000;
-    border-radius: 20px;
-    font-size: 20px;
-    border: 1px solid #408340;
-    transition: all .7s ease;
-  }
-  
-  .busc::placeholder{
-    font-size: 12px;
-  }
-
-  ::placeholder {
-    color: grey;
-  }
-  
-  .btna {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    right: 0;
-    top: 2.8px;
-    width: 60px;
-    height: 58px;
-    background: #408340;
-    border-radius: 50%;
-    text-align: center;
-    cursor: pointer;
-    transition: .5s;
-  }
-  
-  .btna i {
-    font-size: 20px;
-    color: white;
-    transition: all .1 ease;
-  }
-  
-  .buscador:hover input {
-    width: 200px;
-  }
-  
-  .buscador:hover i {
-    transform: rotate(-360deg);
-  }
-  
-  .btna:hover {
-    background: #4fa34f;
-  }
-
 }
 
 
