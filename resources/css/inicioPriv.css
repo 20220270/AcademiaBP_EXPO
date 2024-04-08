@@ -163,3 +163,28 @@ a.sidebar-link:hover {
     transform: rotate(45deg);
     transition: all .2s ease-out;
 }
+
+
+.menu-lateral {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 250px; /* Ancho del menú lateral */
+    background-color: #000; /* Color de fondo del menú */
+    padding-top: 1rem;
+    z-index: 1000; /* Asegurar que esté por encima del contenido */
+}
+
+.contenido-principal {
+    margin-left: 150px; /* Ajustar el margen izquierdo para que el contenido no quede detrás del menú */
+    padding: 0px; /* Añadir espacio para que el contenido no esté pegado al borde del menú */
+}
+
+.nav-item {
+    margin-bottom: -10px; /* Espacio entre elementos del menú */
+}
+
+.nav-link {
+    font-size: 15px; /* Restaurar tamaño de la letra del menú */
+}
