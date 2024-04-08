@@ -45,7 +45,7 @@ header {
   .contenedorTotal{
     border-radius: 15px;
     border: 2px solid #408840;
-    
+    width: 100%;
   }
 
   .botonpagar{
@@ -71,6 +71,25 @@ header {
   .decrementBtn{
     background-color: #408840;
     color: #fff;
+  }
+
+  @media (min-width:576px) and (max-width: 706px) {
+    main{
+      margin-top: 250px;
+    }
+  }
+
+  
+  @media (min-width:426px) and (max-width: 576px) {
+    main{
+      margin-top: 300px;
+    }
+  }
+
+  @media (min-width:279px) and (max-width: 426px) {
+    main{
+      margin-top: 350px;
+    }
   }
 
  
