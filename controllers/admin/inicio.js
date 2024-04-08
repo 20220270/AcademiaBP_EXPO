@@ -2,71 +2,65 @@ const contenedorMenu = document.querySelector('#contenedor-menu');
 
 const menuHTML = `
 <!-- Menú lateral -->
-<div class="menu-lateral">
-    <!-- Encabezado de la barra lateral -->
-    <div class="d-flex justify-content-between align-items-center px-4">
-        <!-- Botón de toggle para expandir/cerrar el sidebar -->
-        <button class="toggle-btn" type="button">
-            <!-- Logotipo de la academia -->
-            <img src="/resources/images/logoAcademiaBP.png" alt="..." width="100px" height="100px">
-        </button>
-        <!-- Nombre de la academia -->
-        <div class="sidebar-logo"></div>
+<div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="bg-black col-auto col-md-3 min-vh-100 col-lg-3 ">
+                <div class="bg-black p-2">
+                    <a class="d-flex text-decoration-none mt-1 align-items-center ">
+                        <span class="fs-4 d-none d-sm-inline"><img src="/resources/images/logoAcademiaBP.png" alt="Logo"width="80" height="90" style="margin-left: 40px;">
+                        </span>
+                    </a>
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item ">
+                            <a href="" class="nav-link active bg-black mt-3" aria-current="page">
+                                <i class="bi bi-house-door fs-4 me-2"></i><span class="ms-1 d-none d-sm-inline">Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link active bg-black mt-3">
+                                <i class="bi bi-sliders fs-4 me-2" ></i><span class="ms-1 d-none d-sm-inline">Categoria de<br>productos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link active bg-black mt-3">
+                                <i class="fa-solid fa-money-bills fs-4 me-2"></i><span class="ms-1 d-none d-sm-inline">productos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link active bg-black mt-3">
+                                <i class="fas fa-hand-holding-usd fs-4 me-2"></i><span class="ms-1 d-none d-sm-inline">Pagos de<br>mensualidad</span> 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link active bg-black mt-3">
+                                <i class="bi bi-person-vcard fs-4 me-2"></i><span class="ms-1 d-none d-sm-inline">Alumnos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link active bg-black mt-3">
+                                <i class="bi bi-journal-text fs-4 me-2"></i><span class="ms-1 d-none d-sm-inline">Inscripciones</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link active bg-black mt-3">
+                                <i class="fas fa-chalkboard-teacher fs-4 me-2"></i><span class="ms-1 d-none d-sm-inline">Profesores</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link active bg-black mt-3">
+                                <i class="fa-solid fa-table-cells fs-4 me-2"></i><span class="ms-1 d-none d-sm-inline">Categoria de<br>alumnos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link active bg-black mt-4">
+                                <i class="bi bi-box-arrow-right fs-4 me-2"></i><span class="ms-1 d-none d-sm-inline">Cerrar Sesion</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="wrapper d-flex flex-column mt-3">
-        <ul class="nav flex-column pl-0">
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                    <i class="bi bi-house-door" style="font-size: 1.7rem; color: #006400;"></i>
-                    Inicio
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                    <i class="bi bi-inboxes" style="font-size: 1.7rem; color: #006400;"></i>                        
-                    Categorias de Productos
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                    <i class="bi bi-box-seam" style="font-size: 1.7rem; color: #006400;"></i>                        
-                    Productos
-                </a>
-            </li>
-            <!-- Elemento con submenú colapsable -->
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                    <i class="bi bi-cash-stack" style="font-size: 1.7rem; color: #006400;"></i>
-                    Pagos de mensualidad
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                    <i class="bi bi-file-person" style="font-size: 1.7rem; color: #006400;"></i>
-                    Alumnos
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                    <i class="bi bi-people" style="font-size: 1.7rem; color: #006400;"></i>
-                    Staff
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                    <i class="bi bi-chat-left-dots" style="font-size: 1.7rem; color: #006400;"></i>
-                    Consultas
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                    <i class="bi bi-arrow-left" style="font-size: 1.7rem; color: #006400;"></i>
-                    Cerrar Sesion
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
 `;
 contenedorMenu.innerHTML = menuHTML;
 
