@@ -18,7 +18,7 @@ const menuHTML = `
                         </li>
                         <li class="nav-item">
                             <a href="" class="nav-link active bg-black mt-3">
-                                <i class="bi bi-sliders fs-4 me-2" ></i><span class="ms-1 d-none d-sm-inline">Categoria de<br>productos</span>
+                                <i class="bi bi-sliders fs-4 me-2" ></i><span class="ms-1 d-none d-sm-inline">Categoria de productos</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -28,7 +28,7 @@ const menuHTML = `
                         </li>
                         <li class="nav-item">
                             <a href="" class="nav-link active bg-black mt-3">
-                                <i class="fas fa-hand-holding-usd fs-4 me-2"></i><span class="ms-1 d-none d-sm-inline">Pagos de<br>mensualidad</span> 
+                                <i class="fas fa-hand-holding-usd fs-4 me-2"></i><span class="ms-1 d-none d-sm-inline">Pagos de mensualidad</span> 
                             </a>
                         </li>
                         <li class="nav-item">
@@ -48,7 +48,7 @@ const menuHTML = `
                         </li>
                         <li class="nav-item">
                             <a href="" class="nav-link active bg-black mt-3">
-                                <i class="fa-solid fa-table-cells fs-4 me-2"></i><span class="ms-1 d-none d-sm-inline">Categoria de<br>alumnos</span>
+                                <i class="fa-solid fa-table-cells fs-4 me-2"></i><span class="ms-1 d-none d-sm-inline">Categoria de alumnos</span>
                             </a>
                         </li>
                         <li class="nav-item">
