@@ -50,6 +50,11 @@ body{
 .input-with-icon input[type="text"],
 .input-with-icon input[type="password"] {
     padding-left: 50px; /* Espacio para la imagen */
+    border: none;
+    border-bottom: 1px solid #000000;
+    border-radius: 0;
+    background-color: transparent;
+    box-shadow: none;
 }
 
 .input-with-icon {
