@@ -14,20 +14,24 @@
 <body>
 
     <div class="container" id="container">
-        <div class="form-container inscripcion">
-            <form>
-                <h2 class="mb-4">Pago de mensualidad</h2>
-               
-                <span class="mb-4">Completa los siguientes campos para que puedas pagar la mensualidad de tu hijo.</span>
-                <input type="text" placeholder="Ingresar nombres">
-                <input type="text" placeholder="Ingresa apellidos">
-                <input type="date" placeholder="Ingresa su fecha de nacimiento">
-                
-                <input type="text" placeholder="Categoría en la que se encuentra tu hijo">
-                
-                <button>Verificar datos</button>
-            </form>
-        
+    <div class="form-container inscripcion">
+        <form>
+            <label for="idusuario" hidden></label> <!--Se tomará el id del usuario que quiere realizar el pago para verificar que los datos sean correctos-->
+            <h2 class="mb-4">Pago de mensualidad</h2>
+            <span>Completa los siguientes campos para que puedas realizar el pago de mensualidad de tu hijo.</span>
+            <input type="text" placeholder="Ingresar nombres">
+            <input type="text" placeholder="Ingresa apellidos">
+            <input type="date" placeholder="Ingresa su fecha de nacimiento">
+            <div class="col-lg-12 mt-3">
+                <select id="categoria" class="form-select rounded-0" required>
+                    <option value="" disabled selected>Selecciona la categoría de tu hijo</option>
+                    <option value="categoria1">Categoría 1</option>
+                    <option value="categoria2">Categoría 2</option>
+                    <option value="categoria3">Categoría 3</option>
+                </select>
+            </div>
+            <button>Enviar datos</button>
+        </form>
         <div class="toggle-container">
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
@@ -38,6 +42,8 @@
             </div>
         </div>
     </div>
+</div>
+
 
 
 </body>

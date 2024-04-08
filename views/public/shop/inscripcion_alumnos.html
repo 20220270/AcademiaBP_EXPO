@@ -16,35 +16,38 @@
     <div class="container" id="container">
         <div class="form-container inscripcion">
             <form>
-                <h1>¡Inscribe a tu hijo!</h1>
-               
-                <span>Completa los siguientes campos para que puedas inscribir a tu hijo en La Academia BP.</span>
-                <input type="text" placeholder="Ingresar nombres">
-                <input type="text" placeholder="Ingresa apellidos">
-                <input type="date" placeholder="Ingresa su fecha de nacimiento">
-                <div class="col-lg-12">
-                    <select id="inputState" class="form-select">
-                      <option selected>Selecciona la posición en la que juega</option>
-                      <option>...</option>
+                <h1 class="mb-4">¡Inscribe a tu hijo!</h1>
+                <span class="mb-4">Completa los siguientes campos para que puedas inscribir a tu hijo en La Academia BP:
+                     Ingresa el nombre, apellido, fecha de nacimiento y posición en la que se inscribirá tu hijo.
+                    ¡Automáticamente asignaremos la categoría para tu hijo! </span>
+                <input type="text" placeholder="Ingresar nombres" class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <input type="text" placeholder="Ingresa apellidos" class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <input type="date" class="col-lg-12 col-md-12 col-sm-12 col-12 col-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <select id="posicion" class="form-select mb-4 mt-3 rounded-0" required>
+                        <option value="" disabled selected>Posición en la que se inscribirá tu hijo</option>
+                        <option value="categoria1">Portero</option>
+                        <option value="categoria2">Jugador de campo</option>
                     </select>
-                  </div>
-                <input type="text" placeholder="Categoría en la que inscribirá a tu hijo">
-                
+                </div>
+                <input type="text" placeholder="Tu hijo será inscrito en la categoría:" readonly class="col-lg-12 col-md-12 col-sm-12 col-12">
+
                 <button>Enviar datos</button>
             </form>
-        
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="toggle-panel toggle-left">
-                    <div class="toggle-image">
-                        <img src="../../../resources/images/logoAcademiaBP.png" alt="logoAcademiaBP">
+            <div class="toggle-container ">
+                <div class="toggle">
+                    <div class="toggle-panel toggle-left justify-content-center align-self-center mt-5">
+                        <div class="toggle-image mt-5">
+                            <img src="../../../resources/images/logoAcademiaBP.png" alt="logoAcademiaBP" class="mt-5 mx-5">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
 
-    <script src="/controllers/public/inscripcion_alumnos.js"></script>
+    <script src="/controllers/public/inscripcion.js"></script>
 </body>
 
 </html>

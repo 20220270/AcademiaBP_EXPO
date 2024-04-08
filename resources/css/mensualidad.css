@@ -69,14 +69,27 @@ body {
 }
 
 .container input {
-    background-color: #eee;
     border: none;
     margin: 8px 0;
-    padding: 10px 15px;
+    padding: 10px 0px;
     font-size: 12px;
-    border-radius: 8px;
     width: 100%;
     outline: none;
+    border-bottom: 1px solid #000000;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+#categoria{
+    border: none;
+    margin: 8px 0;
+    padding: 10px 0px;
+    font-size: 12px;
+    width: 100%;
+    outline: none;
+    border-bottom: 1px solid #000000;
+    background-color: transparent;
+    box-shadow: none;
 }
 
 
