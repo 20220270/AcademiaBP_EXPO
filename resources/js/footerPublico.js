@@ -7,7 +7,7 @@ FOOTER.innerHTML = `
         <div class="container text-center iconos mt-4">
             <div class="row">
                 <div class="col">
-                    <a href="https://www.facebook.com/LaAcademiaFC" target="_blank" class="aa">
+                    <a href="https://www.facebook.com/academiafcelsalvador" target="_blank" class="aa">
                         <img src="../../../resources/images/logoFacebook.png" alt="Facebook" width="35px" height="35px">
 
                         <span>La Academia FC</span>
@@ -27,7 +27,7 @@ FOOTER.innerHTML = `
             </div>
         </div>
         <div class="row filaCopy">
-            <div class="col-md-12 text-center mt-2">
+            <div class="col-md-12 text-center">
                 <p>&copy; 2024 Copyright <a href="#" class="text-white">Academia BP</a></p>
             </div>
         </div>
