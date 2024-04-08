@@ -1,7 +1,7 @@
 .buscador1 {
     position: absolute;
     left: 85%;
-    top: 46.5%;
+    top: 47.8%;
     transform: translate(-50%, -50%);
     padding: 15px;
 }
@@ -14,7 +14,7 @@
     padding: 0 20px;
     color: #000;
     border-radius: 20px;
-    font-size: 20px;
+    font-size: 18px;
     border: 1px solid #408340;
     transition: all .7s ease;
 }
@@ -31,7 +31,7 @@
   right: 0;
   top: 2.8px;
   width: 60px;
-  height: 58px;
+  height: 56px;
   background: #408340;
   border-radius: 50%;
   text-align: center;
@@ -46,7 +46,7 @@
 }
 
 .buscador1:hover input{
-    width: 340px;
+    width: 260px;
 }
 
 .buscador1:hover i{
@@ -55,5 +55,327 @@
 
 .btna1:hover{
     background: #4fa34f;
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .buscador1 {
+        position: absolute;
+        left: 85%;
+        top: 46.5%;
+        transform: translate(-100%, -50%);
+        padding: 15px;
+    }
+    
+    .busc1{
+        outline: none;
+        box-sizing: border-box;
+        height: 30px;
+        width: 0;
+        padding: 0 20px;
+        color: #000;
+        border-radius: 20px;
+        font-size: 15px;
+        border: 1px solid #408340;
+        transition: all .7s ease;
+    }
+    
+    ::placeholder{
+        color: grey;
+    }
+    
+    .btna1 {
+      display: flex;
+      justify-content: center; /* Centra horizontalmente */
+      align-items: center; /* Centra verticalmente */
+      position: absolute;
+      right: 0;
+      top: 2.8px;
+      width: 60px;
+      height: 58px;
+      background: #408340;
+      border-radius: 50%;
+      text-align: center;
+      cursor: pointer;
+      transition: .5s;
+    }
+    
+    .btna1 i {
+      font-size: 20px;
+      color: white;
+      transition: all .1 ease;
+    }
+    
+    .buscador1:hover input{
+        width: 340px;
+    }
+    
+    .buscador1:hover i{
+        transform: rotate(-360deg);
+    }
+    
+    .btna1:hover{
+        background: #4fa34f;
+    }
+}
+  
+
+@media (min-width: 576px) and (max-width: 768px) {
+
+    
+
+    .buscador1 {
+        position: absolute;
+        left: 85%;
+        top: 46.5%;
+        transform: translate(-100%, -50%);
+        padding: 15px;
+    }
+    
+    .busc1{
+        outline: none;
+        box-sizing: border-box;
+        height: 30px;
+        width: 0;
+        padding: 0 20px;
+        color: #000;
+        border-radius: 20px;
+        font-size: 15px;
+        border: 1px solid #408340;
+        transition: all .7s ease;
+    }
+    
+    ::placeholder{
+        color: grey;
+        font-size: 15px;
+    }
+    
+    .btna1 {
+      display: flex;
+      justify-content: center; /* Centra horizontalmente */
+      align-items: center; /* Centra verticalmente */
+      position: absolute;
+      right: 0;
+      top: 2.8px;
+      width: 60px;
+      height: 58px;
+      background: #408340;
+      border-radius: 50%;
+      text-align: center;
+      cursor: pointer;
+      transition: .5s;
+    }
+    
+    .btna1 i {
+      font-size: 20px;
+      color: white;
+      transition: all .1 ease;
+    }
+    
+    .buscador1:hover input{
+        width: 240px;
+    }
+    
+    .buscador1:hover i{
+        transform: rotate(-360deg);
+    }
+    
+    .btna1:hover{
+        background: #4fa34f;
+    }
+}
+
+
+
+
+@media (min-width: 475px) and (max-width: 576px) {
+
+    
+
+    .buscador1 {
+        position: absolute;
+        left: 85%;
+        top: 46.5%;
+        transform: translate(-80%, -50%);
+        padding: 15px;
+    }
+    
+    .busc1{
+        outline: none;
+        box-sizing: border-box;
+        height: 30px;
+        width: 0;
+        padding: 0 20px;
+        color: #000;
+        border-radius: 20px;
+        font-size: 12px;
+        border: 1px solid #408340;
+        transition: all .7s ease;
+    }
+    
+    ::placeholder{
+        color: grey;
+        font-size: 12px;
+    }
+    
+    .btna1 {
+      display: flex;
+      justify-content: center; /* Centra horizontalmente */
+      align-items: center; /* Centra verticalmente */
+      position: absolute;
+      right: 0;
+      top: 2.8px;
+      width: 60px;
+      height: 58px;
+      background: #408340;
+      border-radius: 50%;
+      text-align: center;
+      cursor: pointer;
+      transition: .5s;
+    }
+    
+    .btna1 i {
+      font-size: 20px;
+      color: white;
+      transition: all .1 ease;
+    }
+    
+    .buscador1:hover input{
+        width: 220px;
+    }
+    
+    .buscador1:hover i{
+        transform: rotate(-360deg);
+    }
+    
+    .btna1:hover{
+        background: #4fa34f;
+    }
+}
+
+
+
+@media (min-width: 353px) and (max-width: 475px) {
+    .buscador1 {
+        position: absolute;
+        left: 80%;
+        top: 42.5%;
+        transform: translate(-90%, -160%);
+        padding: 15px;
+    }
+    
+    .busc1{
+        outline: none;
+        box-sizing: border-box;
+        height: 23px;
+        width: 0;
+        padding: 0 8px;
+        color: #000;
+        border-radius: 20px;
+        font-size: 11px;
+        border: 1px solid #408340;
+        transition: all .7s ease;
+    }
+    
+    ::placeholder{
+        color: grey;
+        font-size: 10px;
+    }
+    
+    .btna1 {
+      display: flex;
+      justify-content: center; /* Centra horizontalmente */
+      align-items: center; /* Centra verticalmente */
+      position: absolute;
+      right: 12px;
+      top: 2.8px;
+      width: 50px;
+      height: 48px;
+      background: #408340;
+      border-radius: 50%;
+      text-align: center;
+      cursor: pointer;
+      transition: .5s;
+    }
+    
+    .btna1 i {
+      font-size: 20px;
+      color: white;
+      transition: all .1 ease;
+    }
+    
+    .buscador1:hover input{
+        width: 180px;
+    }
+    
+    .buscador1:hover i{
+        transform: rotate(-360deg);
+    }
+    
+    .btna1:hover{
+        background: #4fa34f;
+    }
+}
+  
+
+@media (min-width: 210px) and (max-width: 353px) {
+    .buscador1 {
+        position: absolute;
+        left: 80%;
+        top: 42.5%;
+        transform: translate(-95%, -160%);
+        padding: 15px;
+    }
+    
+    .busc1{
+        outline: none;
+        box-sizing: border-box;
+        height: 23px;
+        width: 0;
+        padding: 0 8px;
+        color: #000;
+        border-radius: 20px;
+        font-size: 11px;
+        border: 1px solid #408340;
+        transition: all .7s ease;
+    }
+    
+    ::placeholder{
+        color: grey;
+        font-size: 10px;
+    }
+    
+    .btna1 {
+      display: flex;
+      justify-content: center; /* Centra horizontalmente */
+      align-items: center; /* Centra verticalmente */
+      position: absolute;
+      right: 12px;
+      top: 2.8px;
+      width: 50px;
+      height: 48px;
+      background: #408340;
+      border-radius: 50%;
+      text-align: center;
+      cursor: pointer;
+      transition: .5s;
+    }
+    
+    .btna1 i {
+      font-size: 20px;
+      color: white;
+      transition: all .1 ease;
+    }
+    
+    .buscador1:hover input{
+        width: 180px;
+    }
+    
+    .buscador1:hover i{
+        transform: rotate(-360deg);
+    }
+    
+    .btna1:hover{
+        background: #4fa34f;
+    }
 }
   
