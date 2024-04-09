@@ -7,7 +7,7 @@ const menuHTML = `
             <div class="bg-black col-auto col-md-3 min-vh-100 col-lg-3 ">
                 <div class="bg-black p-2">
                     <a class="d-flex text-decoration-none mt-1 align-items-center ">
-                        <span class="fs-4 d-none d-sm-inline"><img src="/resources/images/logoAcademiaBP.png" alt="Logo"width="80" height="90" style="margin-left: 40px;">
+                        <span class="fs-4 d-none d-sm-inline"><img src="/resources/images/logoAcademiaBP.png" alt="Logo"width="120px" height="125px" style="margin-left: 90px;">
                         </span>
                     </a>
                     <ul class="nav nav-pills flex-column">
@@ -59,8 +59,31 @@ const menuHTML = `
                     </ul>
                 </div>
             </div>
+            <div class="col-md-9">
+            <div class="container mt-5">
+                <div style="margin-left: 100px;">
+                <h1>Bienvenido usuario</h1>
+                <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-white border-right-0"><i class="fas fa-search text-dark p-1"></i></span>
+                                </div>
+                                <input type="text" class="form-control border-left-0" placeholder="Buscar">
+                            </div>
+                            <div class="overflow-x-auto" style="max-height: 700px;">
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <img class="px-5" src="https://img.freepik.com/foto-gratis/vista-balon-futbol-campo_23-2150885897.jpg" alt="Imagen" class="img-fluid mt-3 mr-2" style="max-width: 750px;">
+                                    <img class="px-5" src="https://www.tudn.com/api/image/x/us/futbol" alt="Imagen" class="img-fluid mt-3 mr-2" style="max-width: 750px;">
+                                    <img class="px-5" src="https://images.pexels.com/photos/274422/pexels-photo-274422.jpeg?cs=srgb&dl=pexels-pixabay-274422.jpg&fm=jpg" alt="Imagen" class="img-fluid mt-3" style="max-width: 750px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 `;
 contenedorMenu.innerHTML = menuHTML;
 
