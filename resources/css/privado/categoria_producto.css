@@ -9,3 +9,33 @@
 .fa-solid{
     color: #408840;
 }
+
+#card1{
+    width: 18rem; 
+    border-radius: 30px;
+    margin-top: 150px;
+    margin-left: 80px;
+}
+
+#card2{
+    width: 18rem; 
+    border-radius: 30px;
+    margin-top: 110px;
+    margin-left: 80px;
+}
+
+#card3{
+    width: 18rem; 
+    border-radius: 30px;
+    margin-top: 150px;
+}
+
+#card4{
+    width: 18rem; 
+    border-radius: 30px;
+    margin-top: 110px;
+}
+
+.card-img-top{
+    border-radius: 30px;
+}
