@@ -34,6 +34,7 @@ header {
   
   .conteNav {
     background-color: #408840;
+    font-size: 13px;
   }
 
   main {
@@ -45,10 +46,11 @@ header {
   .contenedorTotal{
     border-radius: 15px;
     border: 2px solid #408840;
-    width: 100%;
   }
 
-  .botonpagar{
+  .botonpagar,
+  .botonpagar:hover,
+  .botonpagar:focus{
     background-color: #408840;
     color: #fff;
   }
@@ -73,6 +75,32 @@ header {
     color: #fff;
   }
 
+  .modal-header{
+    background-color: #408840;
+  }
+
+  .LetraO{
+    transform: translateY(-110px);
+  }
+
+  .botonPago,
+  .botonCerrar,
+  .botonCerrar:hover,
+  .botonPago:hover{
+    background-color: #408840;
+    color: #fff;
+  }
+
+  @media (min-width:768px) and (max-width: 992px) {
+    .LetraO{
+      transform: translateY(-175px);
+    }
+
+    .debito{
+      margin-top: 20px;
+    }
+  }
+
   @media (min-width:576px) and (max-width: 706px) {
     main{
       margin-top: 250px;
@@ -84,11 +112,27 @@ header {
     main{
       margin-top: 300px;
     }
+
+    .LetraO{
+      transform: translateY(-175px);
+    }
+
+    .debito{
+      margin-top: 20px;
+    }
   }
 
   @media (min-width:279px) and (max-width: 426px) {
     main{
       margin-top: 350px;
+    }
+
+    .LetraO{
+      transform: translateY(-175px);
+    }
+
+    .debito{
+      margin-top: 20px;
     }
   }
 
