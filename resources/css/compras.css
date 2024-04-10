@@ -17,7 +17,7 @@ main {
 }
 
 .nav-item {
-    font-size: 13.9px;
+    font-size: 13px;
 }
 
 
@@ -161,14 +161,28 @@ footer {
 }
 
 
-@media (min-width:768px) and (max-width: 1400px) {
+@media (min-width:1200px) and (max-width: 1281px) {
+    .buscador {
+        position: absolute;
+        left: 50%;
+        top: 46.5%;
+        transform: translate(-50%, -120%);
+        padding: 15px;
+    }
+    footer{
+        height: 25vh;
+    }
+}
+
+
+@media (min-width:768px) and (max-width: 992px) {
 
     /*buscador propio de compras*/
     .buscador {
         position: absolute;
         left: 50%;
         top: 46.5%;
-        transform: translate(-50%, -380%);
+        transform: translate(-50%, -310%);
         padding: 15px;
     }
 
@@ -176,6 +190,7 @@ footer {
         height: 25vh;
     }
 }
+
 
 @media (min-width:576px) and (max-width: 768px) {
 
@@ -188,15 +203,43 @@ footer {
         position: absolute;
         left: 50%;
         top: 46.5%;
-        transform: translate(-50%, -350%);
+        transform: translate(-50%, -210%);
+        padding: 15px;
+    }
+
+    .card-img{
+        margin-left: 40px;
+
+    }   
+
+    .contenedorVCal{
+        margin-left: 20px;
+    }
+}
+
+
+@media (min-width:390px) and (max-width: 576px) {
+
+    main{
+        margin-top: 325px;
+    }
+
+    /*buscador propio de compras*/
+    .buscador {
+        position: absolute;
+        left: 50%;
+        top: 48.1%;
+        transform: translate(-50%, -65%);
         padding: 15px;
     }
 }
 
-@media (min-width:400px) and (max-width: 576px) {
+
+
+@media (min-width:263px) and (max-width: 390px) {
 
     main{
-        margin-top: 320px;
+        margin-top: 350px;
     }
 
     /*buscador propio de compras*/
@@ -204,23 +247,7 @@ footer {
         position: absolute;
         left: 50%;
         top: 46.5%;
-        transform: translate(-50%, -270%);
-        padding: 15px;
-    }
-}
-
-@media (min-width:263px) and (max-width: 400px) {
-
-    main{
-        margin-top: 370px;
-    }
-
-    /*buscador propio de compras*/
-    .buscador {
-        position: absolute;
-        left: 50%;
-        top: 46.5%;
-        transform: translate(-50%, -215%);
+        transform: translate(-50%, 75%);
         padding: 15px;
     }
 }
