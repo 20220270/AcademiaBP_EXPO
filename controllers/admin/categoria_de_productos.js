@@ -59,28 +59,36 @@ const menuHTML = `
                     </ul>
                 </div>
             </div>
-            <div class="col-md-9">
-            <div class="container mt-5">
-                <div style="margin-left: 100px;">
-                <h1>Bienvenido usuario</h1>
-                <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text bg-white border-right-0"><i class="fas fa-search text-dark p-1"></i></span>
-                                </div>
-                                <input type="text" class="form-control border-left-0" placeholder="Buscar">
-                            </div>
-                            <div class="overflow-x-auto" style="max-height: 700px;">
-                            <div class="col-md-6">
-                                <div class="d-flex">
-                                    <img class="px-5" src="https://img.freepik.com/foto-gratis/vista-balon-futbol-campo_23-2150885897.jpg" alt="Imagen" class="img-fluid mt-3 mr-2" style="max-width: 750px;">
-                                    <img class="px-5" src="https://www.tudn.com/api/image/x/us/futbol" alt="Imagen" class="img-fluid mt-3 mr-2" style="max-width: 750px;">
-                                    <img class="px-5" src="https://images.pexels.com/photos/274422/pexels-photo-274422.jpeg?cs=srgb&dl=pexels-pixabay-274422.jpg&fm=jpg" alt="Imagen" class="img-fluid mt-3" style="max-width: 750px;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="container py-5">
+            <span class="position-absolute top-0 end-0 m-2">
+    <i class="bi bi-plus-circle fs-3 text-dark"></i>
+</span>
+<div class="row">
+        <div class="col-md-4 py-5 px-5">
+            <div class="py-5 rounded p-3 bg-success text-white text-center mb-3">
+                <p class="m-0">Botellas</p>
             </div>
+        </div>
+        <div class="col-md-4 py-5 px-5">
+            <div class="py-5 rounded p-3 bg-success text-white text-center mb-3">
+                <p class="m-0">Camisas</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 py-5 px-5">
+            <div class="py-5 rounded p-3 bg-success text-white text-center mb-3">
+                <p class="m-0">Pelotas</p>
+            </div>
+        </div>
+        <div class="col-md-4 py-5 px-5">
+            <div class="py-5 rounded p-3 bg-success text-white text-center mb-3">
+                <p class="m-0">Guantes</p>
+            </div>
+        </div>
+    </div>
+</div>
+
         </div>
     </div>
 </div>

@@ -1,0 +1,39 @@
+.bi{
+    color: #408840;
+}
+
+.fas{
+    color: #408840;
+}
+
+.fa-solid{
+    color: #408840;
+}
+
+.card {
+    width: 20% !important;
+  }
+
+  @media only screen and (max-width:6000px) {
+    .card {
+      width: 23% !important;
+    }
+  }
+
+#card1{
+    border-radius: 20px;
+    margin-top: 150px;
+    margin-left: 80px;
+}
+
+
+
+#card2{ 
+    border-radius: 20px;
+    margin-top: 110px;
+    margin-left: 80px;
+}
+
+.card-img-top{
+    border-radius: 20px;
+}

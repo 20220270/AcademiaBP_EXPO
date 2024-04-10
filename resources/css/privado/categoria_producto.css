@@ -1,11 +1,35 @@
-.bi{
-    color: #408840;
+
+.custom-rounded {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: #28a745;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
-.fas{
-    color: #408840;
+/* Estilo para remover el subrayado de los enlaces */
+a {
+text-decoration: none;
 }
 
 .fa-solid{
     color: #408840;
+}
+
+.card {
+    width: 20% !important;
+  }
+
+  @media only screen and (max-width:6000px) {
+    .card {
+      width: 23% !important;
+      border-radius: 20px;
+    }
+  }
+
+
+
+.card-img-top{
+    border-radius: 20px;
 }
