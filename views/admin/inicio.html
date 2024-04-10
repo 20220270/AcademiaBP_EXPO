@@ -26,31 +26,53 @@
     <!-- Div contenedor donde se insertará el menú -->
     <div id="contenedor-menu"></div>
 
-        <!-- codigo principal -->
+    <!-- codigo principal -->
 
-        <div class="col-md-9">
-            <div class="container mt-5">
-               <div style="margin-left: 100px;">
-               <h1>Bienvenido usuario</h1>
-               <div class="input-group mb-3">
-                               <div class="input-group-prepend">
-                                   <span class="input-group-text bg-white border-right-0"><i class="fas fa-search text-dark p-1"></i></span>
-                               </div>
-                               <input type="text" class="form-control border-left-0" placeholder="Buscar">
-                           </div>
-                           <div class="overflow-x-auto" style="max-height: 700px;">
-                           <div class="col-md-6">
-                               <div class="d-flex">
-                                   <img class="px-5" src="https://img.freepik.com/foto-gratis/vista-balon-futbol-campo_23-2150885897.jpg" alt="Imagen" class="img-fluid mt-3 mr-2" style="max-width: 750px;">
-                                   <img class="px-5" src="https://www.tudn.com/api/image/x/us/futbol" alt="Imagen" class="img-fluid mt-3 mr-2" style="max-width: 750px;">
-                                   <img class="px-5" src="https://images.pexels.com/photos/274422/pexels-photo-274422.jpeg?cs=srgb&dl=pexels-pixabay-274422.jpg&fm=jpg" alt="Imagen" class="img-fluid mt-3" style="max-width: 750px;">
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
+    <div class="col-md-9">
+        <div class="container mt-5">
+            <div style="margin-left: 280px;">
+                <h1 class="py-4 text-center">Bienvenido usuario</h1>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-white border-right-0"><i class="fas fa-search text-dark p-1"></i></span>
+                    </div>
+                    <input type="text" class="form-control border-left-0" placeholder="Buscar">
+                </div>
+                <div id="carouselExample" class="carousel slide">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://www.tudn.com/api/image/x/us/futbol" class="d-block w-60" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src=" https://images.pexels.com/photos/274422/pexels-photo-274422.jpeg?cs=srgb&dl=pexels-pixabay-274422.jpg&fm=jpg"
+                                class="d-block w-60" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://img.freepik.com/foto-gratis/vista-balon-futbol-campo_23-2150885897.jpg"
+                                class="d-block w-60" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+
+
+
+
             </div>
-       </div>
+        </div>
+    </div>
+    </div>
+    </div>
 
     <!-- Script de Bootstrap 5 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
