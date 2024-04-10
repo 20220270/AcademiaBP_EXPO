@@ -9,9 +9,9 @@ document.addEventListener("DOMContentLoaded", function() {
         const inputs = document.querySelectorAll(".formsPerfil");
 
         inputs.forEach(function(input) {
-            if (input.disabled && input.id !== "campoContraseña") {
+            if (input.disabled && input.id !== "formsPerfilContra") {
                 input.disabled = false; // Habilitar input si está deshabilitado y no es el campo de contraseña
-            } else if (input.id !== "campoContraseña") {
+            } else if (input.id !== "formsPerfilContra") {
                 input.disabled = true; // Deshabilitar input si está habilitado y no es el campo de contraseña
             }
         });
