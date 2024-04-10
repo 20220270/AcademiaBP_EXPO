@@ -76,21 +76,11 @@ const menuHTML = `
                                     class="ms-1 d-none d-sm-inline text-white ">Cerrar Sesion</span>
                             </a>
                         </li>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
-            
 `;
 contenedorMenu.innerHTML = menuHTML;
 
