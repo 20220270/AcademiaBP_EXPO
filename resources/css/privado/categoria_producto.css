@@ -13,9 +13,19 @@ a {
 text-decoration: none;
 }
 
-.fa-solid{
+.bi{
     color: #408840;
 }
+
+.fa-solid{
+  color: #408840;
+}
+
+
+.fas{
+  color: #408840;
+}
+
 
 .card {
     width: 20% !important;
