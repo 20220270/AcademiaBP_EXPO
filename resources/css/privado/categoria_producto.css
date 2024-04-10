@@ -1,9 +1,16 @@
-.bi{
-    color: #408840;
+
+.custom-rounded {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: #28a745;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
-.fas{
-    color: #408840;
+/* Estilo para remover el subrayado de los enlaces */
+a {
+text-decoration: none;
 }
 
 .fa-solid{
