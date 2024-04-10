@@ -17,11 +17,22 @@
   @media only screen and (max-width:6000px) {
     .card {
       width: 23% !important;
-      border-radius: 20px;
     }
   }
 
+#card1{
+    border-radius: 20px;
+    margin-top: 150px;
+    margin-left: 80px;
+}
 
+
+
+#card2{ 
+    border-radius: 20px;
+    margin-top: 110px;
+    margin-left: 80px;
+}
 
 .card-img-top{
     border-radius: 20px;
