@@ -1,11 +1,192 @@
-.bi{
-    color: #408840;
+
+.custom-rounded {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: #28a745;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
-.fas{
-    color: #408840;
+/* Estilo para remover el subrayado de los enlaces */
+a {
+text-decoration: none;
 }
 
-.fa-solid{
-    color: #408840;
+/* Estilo para remover las viñetas de las listas */
+li {
+list-style: none;
+}
+
+/* Estilo para los encabezados h1 */
+h1 {
+font-weight: 600;
+font-size: 1.5rem;
+}
+
+/* Estilos de fuente para el cuerpo */
+body {
+font-family: 'Poppins', sans-serif;
+}
+
+/* Estilos del contenedor principal */
+.wrapper {
+display: flex;
+}
+
+/* Estilos del contenido principal */
+main {
+min-height: 100vh;
+width: 100%;
+overflow: hidden;
+transition: all 0.35s ease-in-out;
+background-color: #fafbfe;
+}
+
+
+/* Estilos del sidebar */
+#sidebar {
+width: 100px;
+min-width: 70px;
+z-index: 1000;
+transition: all .25s ease-in-out;
+background-color: #000000;
+display: flex;
+flex-direction: column;
+height: 100vh;
+}
+
+/* Estilo del sidebar cuando se expande */
+#sidebar.expand {
+width: 260px;
+min-width: 260px;
+}
+
+/* Estilos del botón de toggle */
+.toggle-btn {
+background-color: transparent;
+cursor: pointer;
+border: 0;
+padding: 1rem 1.5rem;
+}
+
+/* Estilos del icono dentro del botón de toggle */
+.toggle-btn i {
+font-size: 1.5rem;
+color: #FFF;
+}
+
+/* Estilos del logo en el sidebar */
+.sidebar-logo {
+margin: auto 0;
+}
+
+/* Estilos del enlace del logo en el sidebar */
+.sidebar-logo a {
+color: #FFF;
+font-size: 1rem;
+font-weight: 600;
+}
+
+/* Ocultar el logo y los enlaces del sidebar cuando no está expandido */
+#sidebar:not(.expand) .sidebar-logo,
+#sidebar:not(.expand) a.sidebar-link span {
+display: none;
+}
+
+/* Estilos de la lista de navegación en el sidebar */
+.sidebar-nav {
+padding: 2rem 0;
+flex: 1 1 auto;
+}
+
+/* Estilos del enlace en el sidebar */
+a.sidebar-link {
+padding: .625rem 2.3rem;
+color: #FFF;
+display: block;
+font-size: 0.9rem;
+white-space: nowrap;
+border-left: 3px solid transparent;
+}
+
+/* Estilos del icono dentro del enlace en el sidebar */
+.sidebar-link i {
+font-size: 1.1rem;
+margin-right: .75rem;
+}
+
+/* Estilos de hover para los enlaces en el sidebar */
+a.sidebar-link:hover {
+background-color: rgba(255, 255, 255, .075);
+border-left: 3px solid #3b7ddd;
+}
+
+/* Estilos del item en el sidebar */
+.sidebar-item {
+position: relative;
+}
+
+/* Estilos del dropdown en el sidebar */
+#sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
+position: absolute;
+top: 0;
+left: 70px;
+background-color: #0e2238;
+padding: 0;
+min-width: 15rem;
+display: none;
+}
+
+/* Mostrar el dropdown en el sidebar cuando se hace hover */
+#sidebar:not(.expand) .sidebar-item:hover .has-dropdown+.sidebar-dropdown {
+display: block;
+max-height: 15em;
+width: 100%;
+opacity: 1;
+}
+
+/* Estilos del ícono de flecha en el enlace del sidebar cuando se expande */
+#sidebar.expand .sidebar-link[data-bs-toggle="collapse"]::after {
+border: solid;
+border-width: 0 .075rem .075rem 0;
+content: "";
+display: inline-block;
+padding: 2px;
+position: absolute;
+right: 1.5rem;
+top: 1.4rem;
+transform: rotate(-135deg);
+transition: all .2s ease-out;
+}
+
+/* Estilos del ícono de flecha en el enlace del sidebar cuando se contrae */
+#sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+transform: rotate(45deg);
+transition: all .2s ease-out;
+}
+
+
+.menu-lateral {
+position: fixed;
+top: 0;
+bottom: 0;
+left: 0;
+width: 250px; /* Ancho del menú lateral */
+background-color: #000; /* Color de fondo del menú */
+padding-top: 1rem;
+z-index: 1000; /* Asegurar que esté por encima del contenido */
+}
+
+.contenido-principal {
+margin-left: 150px; /* Ajustar el margen izquierdo para que el contenido no quede detrás del menú */
+padding: 0px; /* Añadir espacio para que el contenido no esté pegado al borde del menú */
+}
+
+.nav-item {
+margin-bottom: -10px; /* Espacio entre elementos del menú */
+}
+
+.nav-link {
+font-size: 15px; /* Restaurar tamaño de la letra del menú */
 }
