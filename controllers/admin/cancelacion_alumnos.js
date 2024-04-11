@@ -63,18 +63,7 @@ const menuHTML = `
             <span class="position-absolute top-0 end-0 m-2">
     <i class="bi bi-plus-circle fs-3 text-dark"></i>
 </span>
-<div class="row">
-    <div class="col-md-4 py-5 px-5">
-        <div class="py-5 rounded p-3 bg-success text-white text-center mb-3 h-custom">
-            <h3 class="m-0">Alumnos que han cancelado</h3>
-        </div>
-    </div>
-    <div class="col-md-4 py-5 px-5">
-        <div class="py-5 rounded p-3 bg-success text-white text-center mb-3 h-custom">
-            <h3 class="m-0">Alumnos que no han cancelado</h3>
-        </div>
-    </div>
-</div>
+
 
 </div>
 
