@@ -118,16 +118,23 @@ a{
       font-size: 10px;
     }
 
+    .fechaR{
+      margin-left: 50px;
+    }
     
   }
     /* Media query para pantallas de tamaño grande*/
-@media (min-width: 200px) and (max-width: 575px) {
+@media (min-width: 200px) and (max-width: 576px) {
     main {
       margin-top: 340px;
     }
   
     #textoCarrito{
       font-size: 10px;
+    }
+
+    .textito{
+      margin-bottom: 50px;
     }
   }
 

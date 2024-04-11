@@ -55,6 +55,27 @@ stars.forEach(function (star, index) {
     })
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    // Obtener todas las tarjetas
+    const cards = document.querySelectorAll(".card");
+
+    // Iterar sobre cada tarjeta para verificar si contiene un label con estado "Pendiente"
+    cards.forEach(function(card) {
+        // Obtener el label de estado dentro de la tarjeta actual
+        const estadoOrdenLabel = card.querySelector("#estadoOrdenD");
+        // Obtener el botón de mostrar modal dentro de la tarjeta actual
+        const modalValorarButton = card.querySelector(".btnMostrarModalVa");
+
+        // Verificar si el label de estado es "Pendiente"
+        if (estadoOrdenLabel && estadoOrdenLabel.textContent.trim().toLowerCase() === "pendiente") {
+            // Si es "Pendiente", deshabilitar el botón de mostrar modal
+            modalValorarButton.disabled = true;
+        }
+    });
+});
+
+
+
 //Popup para la imagen 1
 document.getElementById('botonCerrar').addEventListener('mouseenter', function () {
     var popover = new bootstrap.Popover(this, {

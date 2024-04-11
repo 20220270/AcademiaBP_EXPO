@@ -35,6 +35,13 @@ main {
     margin-right: 10px;
 }
 
+.btnMostrarModalVa,
+.tituloValoracion,
+.tituloDevolucion,
+.btnDevolucion{
+    display: none;
+}
+
 footer {
     background-color: #408840;
     color: #fff;
