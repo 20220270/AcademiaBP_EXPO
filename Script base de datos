@@ -10,6 +10,8 @@ id_nivel INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 nivel  VARCHAR(100) NOT NULL
 );
 
+INSERT INTO tb_niveles_administradores (nivel) VALUES('Administrador'), ('Trabajador');
+
 -- administradores
 CREATE TABLE tb_administradores(
 id_administrador INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -33,12 +35,29 @@ ALTER TABLE tb_administradores ADD CONSTRAINT u_telefono_admin UNIQUE(telefono_a
 ALTER TABLE tb_administradores ADD CONSTRAINT u_alias_admin UNIQUE(alias_administrador);
 -----------------------------------
 
+
+INSERT INTO tb_administradores (nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, id_nivel, fecha_registro) VALUES
+('Juan', 'Perez', '12345678-9', 'juan@example.com', '12345678', 'juanito', 'clave123', 1, NOW()),
+('María', 'González', '98765432-1', 'maria@example.com', '98765432', 'mary', 'clave456', 2, NOW()),
+('Luis', 'Martínez', '45678901-2', 'luis@example.com', '45678901', 'luisito', 'clave789', 1, NOW()),
+('Ana', 'Rodríguez', '21098765-3', 'ana@example.com', '21098765', 'anita', 'claveabc', 2, NOW()),
+('Carlos', 'López', '67890123-4', 'carlos@example.com', '67890123', 'carlitos', 'clavedef', 2, NOW()),
+('Laura', 'Hernández', '34567890-5', 'laura@example.com', '34567890', 'laurita', 'claveghi', 1, NOW()),
+('Pedro', 'Díaz', '78901234-6', 'pedro@example.com', '78901234', 'pedrito', 'clavejkl', 2, NOW()),
+('Sofía', 'Sánchez', '54321098-7', 'sofia@example.com', '54321098', 'sofi', 'clavemno', 1, NOW()),
+('Pablo', 'Gómez', '89012345-8', 'pablo@example.com', '89012345', 'pablito', 'clavepqr', 1, NOW()),
+('Elena', 'Fernández', '23456789-0', 'elena@example.com', '23456789', 'elenita', 'clavestu', 2, NOW());
+
 -- categorias de productos
 CREATE TABLE tb_categorias_productos(
 id_categoria_productos INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 categoria_producto VARCHAR(50) NOT NULL,
 imagen_categoria VARCHAR(100) NOT NULL
 );
+
+INSERT INTO tb_categorias_productos (categoria_producto, imagen_categoria)
+VALUES('Botellas', 'botella.png'), ('Gorras', 'gorra.png'), ('Uniformes', 'uniforme.png'),
+('Mochilas', 'mochila.png'), ('Chumpas', 'chumpa.png');
 
 -- productos
 CREATE TABLE tb_productos(
@@ -55,6 +74,7 @@ fecha_registro DATE NOT NULL default NOW(),
 descuento_producto DECIMAL(4,2) NULL
 );
 
+
 -- restricciones de productos
 ALTER TABLE tb_productos ADD CONSTRAINT fk_admin_productos FOREIGN KEY(id_administrador) REFERENCES tb_administradores(id_administrador);
 ALTER TABLE tb_productos ADD CONSTRAINT fk_cat_productos FOREIGN KEY (id_categoria_productos) REFERENCES tb_categorias_productos(id_categoria_productos);
@@ -63,22 +83,70 @@ ALTER TABLE tb_productos ADD CONSTRAINT ch_existencias CHECK(existencias_product
 ALTER TABLE tb_productos ADD CONSTRAINT ch_descuento CHECK(descuento_producto < 100);
 --------------------------------
 
+-- Botellas
+INSERT INTO tb_productos (id_administrador, id_categoria_productos, nombre_producto, descripcion_producto, precio_producto, imagen_producto, estado_producto, existencias_producto, fecha_registro, descuento_producto)
+VALUES (1, 1, 'Botella de Agua Deportiva', 'Botella de agua deportiva con capacidad de 750ml', 10.99, 'botella_deportiva.jpg', 'En venta', 100, NOW(), NULL),
+       (2, 1, 'Botella de Acero Inoxidable', 'Botella de acero inoxidable con doble pared y tapa hermética', 15.99, 'botella_acero.jpg', 'En venta', 50, NOW(), 0.10);
+
+-- Gorras
+INSERT INTO tb_productos (id_administrador, id_categoria_productos, nombre_producto, descripcion_producto, precio_producto, imagen_producto, estado_producto, existencias_producto, fecha_registro, descuento_producto)
+VALUES (3, 2, 'Gorra Negra', 'Gorra snapback negra con logo bordado', 19.99, 'gorra_negra.jpg', 'En venta', 30, NOW(), NULL),
+       (4, 2, 'Gorra Personalizada', 'Gorra trucker roja con malla trasera y visera curva', 17.50, 'gorra_roja.jpg', 'En venta', 20, NOW(), NULL);
+
+-- Uniformes
+INSERT INTO tb_productos (id_administrador, id_categoria_productos, nombre_producto, descripcion_producto, precio_producto, imagen_producto, estado_producto, existencias_producto, fecha_registro, descuento_producto)
+VALUES (5, 3, 'Uniforme Deportivo', 'Uniforme deportivo completo para entrenamientos', 49.99, 'uniforme_deportivo.jpg', 'En venta', 15, NOW(), NULL),
+       (6, 3, 'Uniforme Escolar', 'Uniforme escolar con camisa, pantalón y corbata', 29.99, 'uniforme_escolar.jpg', 'En venta', 10, NOW(), NULL);
+
+-- Mochilas
+INSERT INTO tb_productos (id_administrador, id_categoria_productos, nombre_producto, descripcion_producto, precio_producto, imagen_producto, estado_producto, existencias_producto, fecha_registro, descuento_producto)
+VALUES (7, 4, 'Mochila Deportiva', 'Mochila deportiva con compartimento para portátil', 39.99, 'mochila_deportiva.jpg', 'En venta', 25, NOW(), NULL),
+       (8, 4, 'Mochila Personalizada', 'Mochila escolar con diseño moderno y varios compartimentos', 34.99, 'mochila_escolar.jpg', 'En venta', 20, NOW(), NULL);
+
+-- Chumpas
+INSERT INTO tb_productos (id_administrador, id_categoria_productos, nombre_producto, descripcion_producto, precio_producto, imagen_producto, estado_producto, existencias_producto, fecha_registro, descuento_producto)
+VALUES (9, 5, 'Chumpa Deportiva', 'Chumpa deportiva con capucha y cierre completo', 59.99, 'chumpa_deportiva.jpg', 'En venta', 10, NOW(), NULL),
+       (10, 5, 'Chumpa Personalizada', 'Chumpa casual con bolsillos laterales y cierre frontal', 49.99, 'chumpa_casual.jpg', 'En venta', 15, NOW(), NULL);
+
 -- staff, o personal, de la academia
 CREATE TABLE tb_staffs(
-id_staff INT PRIMARY KEY NOT NULL PRIMARY KEY,
+id_staff INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 nombre_staff VARCHAR(100) NOT NULL,
 apellido_staff VARCHAR(100) NOT NULL,
 descripcion_extra VARCHAR(500) NOT NULL
 );
+
+INSERT INTO tb_staffs (nombre_staff, apellido_staff, descripcion_extra) VALUES
+('Pablo', 'Leguizamo', 'Entrenador certificado con más de 10 años de experiencia en fútbol.'),
+('Napoleon', 'Baires', 'Preparadora física especializada en entrenamiento de resistencia y fuerza.'),
+('Andy', 'Alas', 'Nutricionista deportivo con experiencia en planificación de dietas para atletas.'),
+('Carlos', 'Aparicio', 'Psicóloga deportiva con enfoque en el rendimiento y motivación de los deportistas.'),
+('Justino', 'Amaya', 'Fisioterapeuta especializado en rehabilitación de lesiones deportivas.'),
+('Wilmer', 'Melara', 'Entrenadora de yoga certificada con enfoque en mejorar la flexibilidad y el equilibrio.'),
+('Diego', 'Aguero', 'Entrenador de natación con experiencia en enseñanza de técnicas de respiración y estilo.'),
+('Nelson', 'Torres', 'Coach de vida y bienestar, experta en mindfulness y técnicas de manejo del estrés.'),
+('Lucas', 'Rivera', 'Especialista en acondicionamiento físico y entrenamiento de fuerza para deportistas.'),
+('Eduardo', 'Quintanilla', 'Entrenadora personal con enfoque en pérdida de peso y mejora de la salud general.');
 
 
 -- categorias de alumnos
 CREATE TABLE tb_categorias_alumnos(
 id_categoria_alumno INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 categoria VARCHAR(30) NOT NULL,
-edad_maxima INT, -- Edad máxima para estar en una categoría
-horario_entrenamiento VARCHAR(200) NOT NULL
+edad_maxima INT NOT NULL, -- Edad máxima para estar en una categoría
+horario_entrenamiento VARCHAR(500) NOT NULL
 );
+
+ALTER TABLE tb_categorias_alumnos ADD CONSTRAINT ch_eddad CHECK(edad_maxima > 0);
+
+INSERT INTO tb_categorias_alumnos (categoria, edad_maxima, horario_entrenamiento) VALUES
+('Baby Soccer', 3, 'Martes y Jueves: 4:00 p.m. - 6:00 p.m., Sabado: 9:00 a.m. - 12:00 p.m.'),
+('Nivel 2', 6, 'Martes y Jueves: 4:00 p.m. - 6:00 p.m., Sabado: 9:00 a.m. - 12:00 p.m.'),
+('Nivel 3', 9, 'Martes y Jueves: 4:00 p.m. - 6:00 p.m., Sabado: 9:00 a.m. - 12:00 p.m.'),
+('Nivel 4', 12, 'Martes y Jueves: 4:00 p.m. - 6:00 p.m., Sabado: 9:00 a.m. - 12:00 p.m.'),
+('Sub 15', 15, 'Martes y Jueves: 4:00 p.m. - 6:00 p.m., Sabado: 9:00 a.m. - 12:00 p.m.'),
+('Sub 18', 18, 'Martes y Jueves: 4:00 p.m. - 6:00 p.m., Sabado: 9:00 a.m. - 12:00 p.m.'),
+('Primera Aficionado', 30, 'Lunes y Miercoles: 4:00 p.m. - 6:00 p.m., Sabado: 10:30 a.m. - 12:00 p.m.');
 
 CREATE TABLE tb_staffs_categorias(
 id_staff_categorias INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -88,6 +156,19 @@ id_categoria_alumno INT NOT NULL
 
 ALTER TABLE tb_staffs_categorias ADD CONSTRAINT fk_staff_cate FOREIGN KEY (id_staff) REFERENCES tb_staffs(id_staff);
 ALTER TABLE tb_staffs_categorias ADD CONSTRAINT fk_cate_cate FOREIGN KEY (id_categoria_alumno) REFERENCES tb_categorias_alumnos(id_categoria_alumno);
+
+INSERT INTO tb_staffs_categorias (id_staff, id_categoria_alumno) VALUES(1, 1),
+(2, 2), 
+(3, 3),
+(4, 4),
+(5, 3),
+(6, 5),
+(7, 2),
+(8, 1),
+(9, 3),
+(10, 6);
+
+SELECT * from tb_staffs_categorias;
 
 -- alumnos
 CREATE TABLE tb_alumnos(
@@ -101,6 +182,21 @@ estado_alumno ENUM('Activo', 'Inactivo') NOT NULL DEFAULT('Activo')
 );
 
 ALTER TABLE tb_alumnos ADD CONSTRAINT fk_alumno_categoria FOREIGN KEY(id_staff_categorias) REFERENCES tb_staffs_categorias(id_staff_categorias);
+
+
+INSERT INTO tb_alumnos (nombre_alumno, apellido_alumno, fecha_nacimiento, posicion_alumno, id_staff_categorias, estado_alumno) VALUES
+('Luis', 'Martínez', '2015-03-10', 'Jugador de campo', 1, 'Activo'),
+('Ana', 'García', '2014-06-15', 'Portero', 2, 'Activo'),
+('Carlos', 'López', '2013-09-20', 'Jugador de campo', 3, 'Activo'),
+('María', 'Hernández', '2012-12-25', 'Portero', 4, 'Activo'),
+('Juan', 'Rodríguez', '2011-07-08', 'Jugador de campo', 5, 'Activo'),
+('Laura', 'Gómez', '2010-04-12', 'Jugador de campo', 6, 'Activo'),
+('Pedro', 'Pérez', '2009-01-28', 'Portero', 7, 'Activo'),
+('Sofía', 'Díaz', '2008-11-05', 'Jugador de campo', 8, 'Activo'),
+('Elena', 'Fernández', '2007-10-15', 'Portero', 9, 'Activo'),
+('Pablo', 'Sánchez', '2006-05-20', 'Jugador de campo', 10, 'Activo'),
+('Lucía', 'Martín', '2005-09-03', 'Portero', 7, 'Activo'),
+('Diego', 'González', '2004-02-18', 'Jugador de campo', 7, 'Activo');
 
 -- clientes de la tienda en linea
 CREATE TABLE tb_clientes(
@@ -123,7 +219,23 @@ ALTER TABLE tb_clientes ADD CONSTRAINT u_correo_cliente UNIQUE(correo_cliente);
 ALTER TABLE tb_clientes ADD CONSTRAINT u_telefono_cliente UNIQUE(telefono_cliente);
 ------------------------------
 
--- ordenes que se realicen
+INSERT INTO tb_clientes (nombre_cliente, apellido_cliente, dui_cliente, correo_cliente, telefono_cliente, direccion_cliente, clave_cliente, estado_cliente, fecha_registro, foto_cliente) VALUES
+('María', 'López', '12345678-9', 'maria@example.com', '78901234', 'Calle Principal #123', 'clave123', 'Activo', NOW(), 'maria_foto.jpg'),
+('Juan', 'Martínez', '98765432-1', 'juan@example.com', '45678901', 'Avenida Central #456', 'clave456', 'Activo', NOW(), 'juan_foto.jpg'),
+('Luis', 'González', '23456789-0', 'luis@example.com', '12345678', 'Calle Secundaria #789', 'clave789', 'Activo', NOW(), 'luis_foto.jpg'),
+('Ana', 'Rodríguez', '34567890-1', 'ana@example.com', '23456789', 'Calle Principal #234', 'claveabc', 'Activo', NOW(), 'ana_foto.jpg'),
+('Carlos', 'Hernández', '45678901-2', 'carlos@example.com', '34567890', 'Avenida Central #567', 'clavedef', 'Activo', NOW(), 'carlos_foto.jpg'),
+('Laura', 'Pérez', '56789012-3', 'laura@example.com', '45178901', 'Calle Secundaria #890', 'claveghi', 'Activo', NOW(), 'laura_foto.jpg'),
+('Pedro', 'Sánchez', '67890123-4', 'pedro@example.com', '56789012', 'Avenida Principal #1234', 'clavejkl', 'Activo', NOW(), 'pedro_foto.jpg'),
+('Sofía', 'Gómez', '78901234-5', 'sofia@example.com', '67890123', 'Calle Principal #5678', 'clavemno', 'Activo', NOW(), 'sofia_foto.jpg'),
+('Pablo', 'Díaz', '89012345-6', 'pablo@example.com', '78909234', 'Avenida Central #9012', 'clavepqr', 'Activo', NOW(), 'pablo_foto.jpg'),
+('Elena', 'Fernández', '90123456-7', 'elena@example.com', '89012345', 'Calle Secundaria #3456', 'clavestu', 'Activo', NOW(), 'elena_foto.jpg'),
+('Diego', 'González', '01234567-8', 'diego@example.com', '90123456', 'Avenida Principal #7890', 'clavevwx', 'Activo', NOW(), 'diego_foto.jpg'),
+('Lucía', 'Martín', '09876543-2', 'lucia@example.com', '01234567', 'Calle Principal #8901', 'claveyz', 'Activo', NOW(), 'lucia_foto.jpg');
+
+select * from tb_clientes;
+
+-- compras que se realicen
 CREATE TABLE tb_compras(
 id_compra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 id_cliente INT NOT NULL,
@@ -134,8 +246,20 @@ direccion_compra VARCHAR(250) NOT NULL
 
 ALTER TABLE tb_compras ADD CONSTRAINT fk_pedido_cliente FOREIGN KEY(id_cliente) REFERENCES tb_clientes(id_cliente);
 
+INSERT INTO tb_compras (id_cliente, estado_compra, fecha_registro, direccion_compra) VALUES
+(1, 'Entregada', '2024-04-11', 'Calle Principal #123'),
+(2, 'Anulada', '2024-04-10', 'Avenida Central #456'),
+(3, 'Finalizada', '2024-04-09', 'Calle Secundaria #789'),
+(4, 'Pendiente', '2024-04-08', 'Calle Principal #234'),
+(5, 'Entregada', '2024-04-07', 'Avenida Central #567'),
+(6, 'Finalizada', '2024-04-06', 'Calle Secundaria #890'),
+(7, 'Pendiente', '2024-04-05', 'Avenida Principal #1234'),
+(8, 'Entregada', '2024-04-04', 'Calle Principal #5678'),
+(9, 'Anulada', '2024-04-03', 'Avenida Central #9012'),
+(10, 'Finalizada', '2024-04-02', 'Calle Secundaria #3456');
 
--- detalles de cada orden
+
+-- detalles de cada compra
 CREATE TABLE tb_detalles_compras(
 id_detalle_compra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 id_compra INT NOT NULL,
@@ -151,6 +275,18 @@ ALTER TABLE tb_detalles_compras ADD CONSTRAINT ch_cantidadP CHECK(cantidad_produ
 ALTER TABLE tb_detalles_compras ADD CONSTRAINT ch_totalPa CHECK(total_a_pagar > 0);
 -------------------------------------
 
+INSERT INTO tb_detalles_compras (id_compra, id_producto, cantidad_producto, total_a_pagar) VALUES
+(1, 1, 2, 60.00),
+(2, 3, 1, 25.00),
+(3, 5, 3, 90.00),
+(4, 2, 2, 50.00),
+(5, 4, 1, 15.00),
+(6, 6, 4, 120.00),
+(7, 8, 2, 70.00),
+(8, 7, 3, 105.00),
+(9, 9, 1, 40.00),
+(10, 10, 2, 80.00);
+
 
 -- valoracion de los productos comprados
 CREATE TABLE tb_valoraciones(
@@ -165,6 +301,19 @@ estado_comentario ENUM("Habilitado", "Deshabilitado") NOT NULL
 ALTER TABLE tb_valoraciones ADD CONSTRAINT fk_orden_valoracion FOREIGN KEY (id_detalle_compra) REFERENCES tb_detalles_compras(id_detalle_compra);
 ALTER TABLE tb_valoraciones ADD CONSTRAINT ch_valoracion CHECK(calificacion_producto < 6); -- la mayor calificación será 5
 
+INSERT INTO tb_valoraciones (id_detalle_compra, calificacion_producto, comentario_producto, fecha_valoracion, estado_comentario) VALUES
+(1, 4, '¡Excelente producto!', NOW(), 'Habilitado'),
+(2, 5, 'Muy satisfecho con la compra.', NOW(), 'Habilitado'),
+(3, 3, 'Regular, podría mejorar.', NOW(), 'Deshabilitado'),
+(4, 5, 'Producto de calidad.', NOW(), 'Habilitado'),
+(5, 2, 'No era lo que esperaba.', NOW(), 'Deshabilitado'),
+(6, 4, 'Buen producto, entrega rápida.', NOW(), 'Habilitado'),
+(7, 1, 'Producto defectuoso.', NOW(), 'Deshabilitado'),
+(8, 5, '¡Me encantó! Lo recomiendo.', NOW(), 'Habilitado'),
+(9, 3, 'Podría mejorar el empaque.', NOW(), 'Habilitado'),
+(10, 4, 'Buena relación calidad-precio.', NOW(), 'Habilitado');
+
+
 -- mensualidades
 -- tabla para relacionar si un cliente posee un alumno registrado
 CREATE TABLE tb_alumnos_clientes(
@@ -175,6 +324,17 @@ id_alumno INT NOT NULL
 
 ALTER TABLE tb_alumnos_clientes ADD CONSTRAINT fk_cliente_alumno FOREIGN KEY(id_cliente) REFERENCES tb_clientes(id_cliente);
 ALTER TABLE tb_alumnos_clientes ADD CONSTRAINT fk_alumno_alumno FOREIGN KEY(id_alumno) REFERENCES tb_alumnos(id_alumno);
+
+INSERT INTO tb_alumnos_clientes (id_cliente, id_alumno) VALUES (1, 2),
+(2, 1),
+(3, 3),
+(4, 4),
+(5, 5),
+(7, 6),
+(7, 7),
+(6, 8),
+(9, 9),
+(10, 10);
 
 
 -- pagos de mensualidad
@@ -191,6 +351,21 @@ ALTER TABLE tb_pagos ADD CONSTRAINT Fk_cliente_pago FOREIGN KEY (id_alumno_clien
 ALTER TABLE tb_pagos ADD CONSTRAINT ch_cuotasAn CHECK(cuotas_anuales > 0);
 ALTER TABLE tb_pagos ADD CONSTRAINT cuotasPe CHECK(cuotas_pendientes > 0);
 
+INSERT INTO tb_pagos (fecha_pago, mensualidad_a_pagar, cuotas_anuales, cuotas_pendientes, id_alumno_cliente) VALUES
+('2024-04-01', 50.00, 12, 12, 1),
+('2024-04-02', 60.00, 12, 11, 2),
+('2024-04-03', 70.00, 12, 10, 3),
+('2024-04-04', 80.00, 12, 9, 4),
+('2024-04-05', 90.00, 12, 8, 5),
+('2024-04-06', 100.00, 12, 7, 6),
+('2024-04-07', 110.00, 12, 6, 7),
+('2024-04-08', 120.00, 12, 5, 8),
+('2024-04-09', 130.00, 12, 4, 9),
+('2024-04-10', 140.00, 12, 3, 10);
+
+select * from tb_pagos;
+
+
 -- detalles de cada pago
 CREATE TABLE tb_detalles_pagos(
 id_detalle_pago INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -204,6 +379,20 @@ estado_pago ENUM('Pagado', 'Pendiente de pago') NOT NULL
 ALTER TABLE tb_detalles_pagos ADD CONSTRAINT Fk_detalle_pago FOREIGN KEY (id_pago) REFERENCES tb_pagos(id_pago);
 ALTER TABLE tb_detalles_pagos ADD CONSTRAINT ch_totalPa CHECK(total_pagado > 0);
 
+INSERT INTO tb_detalles_pagos (id_pago, total_pagado, descripcion_pago, fecha_proximo_pago, estado_pago) VALUES
+(1, 50.00, 'Pago mensualidad abril', '2024-05-01', 'Pagado'),
+(2, 60.00, 'Pago mensualidad abril', '2024-05-02', 'Pendiente de pago'),
+(3, 70.00, 'Pago mensualidad abril', '2024-05-03', 'Pendiente de pago'),
+(4, 80.00, 'Pago mensualidad abril', '2024-05-04', 'Pendiente de pago'),
+(5, 90.00, 'Pago mensualidad abril', '2024-05-05', 'Pendiente de pago'),
+(6, 100.00, 'Pago mensualidad abril', '2024-05-06', 'Pendiente de pago'),
+(7, 110.00, 'Pago mensualidad abril', '2024-05-07', 'Pendiente de pago'),
+(8, 120.00, 'Pago mensualidad abril', '2024-05-08', 'Pendiente de pago'),
+(9, 130.00, 'Pago mensualidad abril', '2024-05-09', 'Pendiente de pago'),
+(10, 140.00, 'Pago mensualidad abril', '2024-05-10', 'Pendiente de pago');
+
+select * from tb_detalles_pagos;
+
 -- soporte tecnico
 CREATE TABLE tb_soporte_tecnico(
 id_soporte INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -215,6 +404,19 @@ id_cliente INT NOT NULL
 
 ALTER TABLE tb_soporte_tecnico ADD CONSTRAINT Fk_cliente_soporte FOREIGN KEY (id_cliente) REFERENCES tb_clientes(id_cliente);
 
+INSERT INTO tb_soporte_tecnico (mensaje, estado_mensaje, id_cliente, fecha_envio) VALUES
+('El sistema no responde, necesito ayuda.', 'Pendiente', 1, NOW()),
+('No puedo acceder a mi cuenta, ¿qué debo hacer?', 'Visto', 2, NOW()),
+('Problemas para procesar el pago, favor de revisar.', 'Atendido', 3, NOW()),
+('Necesito asistencia técnica para configurar mi equipo nuevo.', 'Pendiente', 4, NOW()),
+('No se pueden cargar imágenes en el sitio web.', 'Pendiente', 5, NOW()),
+('La página de inicio muestra un error 404.', 'Atendido', 6, NOW()),
+('¿Cómo puedo recuperar mi contraseña?', 'Visto', 7, NOW()),
+('Requiero información sobre el plan de servicios.', 'Pendiente', 8, NOW()),
+('No puedo descargar el archivo adjunto del correo electrónico.', 'Pendiente', 9, NOW()),
+('El chat en vivo no está funcionando correctamente.', 'Visto', 10, NOW());
+
+select * from tb_soporte_tecnico;
 ---------------------------------------------------------------------------------
 -- triggers
 
@@ -234,19 +436,21 @@ DELIMITER ;
 DELIMITER //
 
 CREATE TRIGGER actualizar_cuotas_pendientes
-AFTER INSERT ON	tb_detalles_pagos
+AFTER INSERT ON tb_detalles_pagos
 FOR EACH ROW
 BEGIN
-UPDATE tb_pagos set cuotas_pendientes = cuotas_pendientes - 1
-WHERE id_pago = NEW.id_pago;
-END
+    -- Actualizar las cuotas pendientes
+    UPDATE tb_pagos
+    SET cuotas_pendientes = cuotas_pendientes - 1
+    WHERE id_pago = NEW.id_pago;
+END;
 //
 DELIMITER ;
 
-------------------------------------------------------------------------------------------------
--- procedimiento almacenado
 
--- Procedimiento almacenado para devolucion de productos
+
+
+------------------------------------------------------------------------------------------------
 DELIMITER //
 
 CREATE PROCEDURE devolucion_producto(
@@ -256,11 +460,19 @@ CREATE PROCEDURE devolucion_producto(
 BEGIN
     DECLARE producto_id INT;
     DECLARE cantidad_devuelta INT;
+    DECLARE precio_unitario DECIMAL(8,2);
+    DECLARE total_anterior DECIMAL(10,2);
+    DECLARE nuevo_total DECIMAL(10,2);
     
-    -- Obtener el ID del producto y la cantidad devuelta del detalle del pedido
-    SELECT id_producto, cantidad_producto INTO producto_id, cantidad_devuelta
+    -- Obtener el ID del producto, la cantidad devuelta y el precio unitario del detalle del pedido
+    SELECT id_producto, cantidad_producto, total_a_pagar INTO producto_id, cantidad_devuelta, precio_unitario
     FROM tb_detalles_compras
-    WHERE id_detalle = id_detalle_in;
+    WHERE id_detalle_compra = id_detalle_in;
+    
+    -- Obtener el total anterior de la compra
+    SELECT calcular_total_compra(id_compra) INTO total_anterior
+    FROM tb_detalles_compras
+    WHERE id_detalle_compra = id_detalle_in;
     
     -- Actualizar la cantidad en la tabla de productos
     UPDATE tb_productos
@@ -270,10 +482,21 @@ BEGIN
     -- Actualizar la cantidad en el detalle del pedido
     UPDATE tb_detalles_compras
     SET cantidad_producto = nueva_cantidad
-    WHERE id_detalle = id_detalle_in;
+    WHERE id_detalle_compra = id_detalle_in;
     
+    -- Recalcular el nuevo total de la compra
+    SET nuevo_total = total_anterior - (cantidad_devuelta - nueva_cantidad) * precio_unitario;
+    
+    -- Actualizar el nuevo total en la tabla de compras
+    UPDATE tb_compras
+    SET total_a_pagar = nuevo_total
+    WHERE id_compra = (SELECT id_compra FROM tb_detalles_compras WHERE id_detalle_compra = id_detalle_in);
     
 END
+//
+DELIMITER ;
+
+
 
 -----------------------------------------------------------------------------------------------------------------
 -- funcion
