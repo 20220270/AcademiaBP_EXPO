@@ -22,13 +22,13 @@ const menuHTML = `
                     </form>
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 mt-3">
                         <li class="nav-item ">
-                            <a href="" class="nav-link active bg-black mt-3" aria-current="page">
+                            <a href="/views/admin/inicio.html" class="nav-link active bg-black mt-3" aria-current="page">
                                 <i class="bi bi-house-door fs-4 me-2"></i><span
                                     class="ms-1 d-none d-sm-inline text-white">Home</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link active bg-black mt-3">
+                            <a href="/views/admin/categorias_de_producto.html" class="nav-link active bg-black mt-3">
                                 <i class="bi bi-sliders fs-4 me-2"></i><span
                                     class="ms-1 d-none d-sm-inline text-white">Categoria
                                     de productos</span>
@@ -41,7 +41,7 @@ const menuHTML = `
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link active bg-black mt-3">
+                            <a href="/views/admin/cancelacion_alumnos.html" class="nav-link active bg-black mt-3">
                                 <i class="fas fa-hand-holding-usd fs-4 me-2"></i><span
                                     class="ms-1 d-none d-sm-inline text-white">Pagos de mensualidad</span>
                             </a>
@@ -65,7 +65,7 @@ const menuHTML = `
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link active bg-black mt-3">
+                            <a href="/views/admin/categorias_de_alumnos.html" class="nav-link active bg-black mt-3">
                                 <i class="fa-solid fa-table-cells fs-4 me-2"></i><span
                                     class="ms-1 d-none d-sm-inline text-white">Categoria de alumnos</span>
                             </a>

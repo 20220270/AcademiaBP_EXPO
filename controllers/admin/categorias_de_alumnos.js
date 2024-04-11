@@ -64,30 +64,7 @@ const menuHTML = `
     <i class="bi bi-plus-circle fs-3 text-dark"></i>
 </span>
 
-    <div class="row">
-        <div class="col-md-4 py-5 px-5">
-            <div class="py-5 rounded p-3 bg-success text-white text-center mb-3">
-                <p class="m-0">Sub 20</p>
-            </div>
-        </div>
-        <div class="col-md-4 py-5 px-5">
-            <div class="py-5 rounded p-3 bg-success text-white text-center mb-3">
-                <p class="m-0">Sub 17</p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 py-5 px-5">
-            <div class="py-5 rounded p-3 bg-success text-white text-center mb-3">
-                <p class="m-0">Primera División</p>
-            </div>
-        </div>
-        <div class="col-md-4 py-5 px-5">
-            <div class="py-5 rounded p-3 bg-success text-white text-center mb-3">
-                <p class="m-0">Segunda División</p>
-            </div>
-        </div>
-    </div>
+    
 </div>
 
         </div>

@@ -63,30 +63,7 @@ const menuHTML = `
             <span class="position-absolute top-0 end-0 m-2">
     <i class="bi bi-plus-circle fs-3 text-dark"></i>
 </span>
-<div class="row">
-        <div class="col-md-4 py-5 px-5">
-            <div class="py-5 rounded p-3 bg-success text-white text-center mb-3">
-                <p class="m-0">Botellas</p>
-            </div>
-        </div>
-        <div class="col-md-4 py-5 px-5">
-            <div class="py-5 rounded p-3 bg-success text-white text-center mb-3">
-                <p class="m-0">Camisas</p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 py-5 px-5">
-            <div class="py-5 rounded p-3 bg-success text-white text-center mb-3">
-                <p class="m-0">Pelotas</p>
-            </div>
-        </div>
-        <div class="col-md-4 py-5 px-5">
-            <div class="py-5 rounded p-3 bg-success text-white text-center mb-3">
-                <p class="m-0">Guantes</p>
-            </div>
-        </div>
-    </div>
+
 </div>
 
         </div>
