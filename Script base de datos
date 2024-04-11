@@ -15,17 +15,23 @@ CREATE TABLE tb_administradores(
 id_administrador INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 nombre_admistrador  VARCHAR(50) NOT NULL,
 apellido_administrador VARCHAR(50) NOT NULL,
-dui_administrador VARCHAR(10) NOT NULL UNIQUE,
-correo_administrador VARCHAR(100) UNIQUE NOT NULL,
-telefono_administrador VARCHAR(9) NOT NULL UNIQUE,
-alias_administrador VARCHAR(100) UNIQUE NOT NULL,
+dui_administrador VARCHAR(10) NOT NULL,
+correo_administrador VARCHAR(100) NOT NULL,
+telefono_administrador VARCHAR(9) NOT NULL,
+alias_administrador VARCHAR(100) NOT NULL,
 clave_administrador VARCHAR(100) NOT NULL,
 fecha_registro DATE NOT NULL DEFAULT NOW(),
 foto_administrador VARCHAR(200) NULL,
 id_nivel INT NOT NULL
 );
 
+-- restricciones de administradores
 ALTER TABLE tb_administradores ADD CONSTRAINT fk_nivel_admin FOREIGN KEY(id_nivel) REFERENCES tb_niveles_administradores(id_nivel);
+ALTER TABLE tb_administradores ADD CONSTRAINT u_dui_admin UNIQUE(dui_administrador);
+ALTER TABLE tb_administradores ADD CONSTRAINT u_correo_admin UNIQUE(correo_administrador);
+ALTER TABLE tb_administradores ADD CONSTRAINT u_telefono_admin UNIQUE(telefono_administrador);
+ALTER TABLE tb_administradores ADD CONSTRAINT u_alias_admin UNIQUE(alias_administrador);
+-----------------------------------
 
 -- categorias de productos
 CREATE TABLE tb_categorias_productos(
@@ -41,17 +47,21 @@ id_administrador INT NOT NULL,
 id_categoria_productos INT NOT NULL,
 nombre_producto VARCHAR(50) NOT NULL,
 descripcion_producto VARCHAR(250) NOT NULL,
-precio_producto NUMERIC(8,2) NOT NULL CHECK(precio_producto > 0),
+precio_producto NUMERIC(8,2) NOT NULL,
 imagen_producto VARCHAR(100) NOT NULL,
 estado_producto ENUM("En venta", "No disponible") NOT NULL,
-existencias_producto INT NOT NULL CHECK(existencias_producto >= 0),
+existencias_producto INT NOT NULL,
 fecha_registro DATE NOT NULL default NOW(),
-descuento_producto DECIMAL(4,2) NULL CHECK(descuento_producto < 100)
+descuento_producto DECIMAL(4,2) NULL
 );
 
+-- restricciones de productos
 ALTER TABLE tb_productos ADD CONSTRAINT fk_admin_productos FOREIGN KEY(id_administrador) REFERENCES tb_administradores(id_administrador);
 ALTER TABLE tb_productos ADD CONSTRAINT fk_cat_productos FOREIGN KEY (id_categoria_productos) REFERENCES tb_categorias_productos(id_categoria_productos);
-
+ALTER TABLE tb_productos ADD CONSTRAINT ch_precio CHECK(precio_producto > 0);
+ALTER TABLE tb_productos ADD CONSTRAINT ch_existencias CHECK(existencias_producto >= 0);
+ALTER TABLE tb_productos ADD CONSTRAINT ch_descuento CHECK(descuento_producto < 100);
+--------------------------------
 
 -- staff, o personal, de la academia
 CREATE TABLE tb_staff(
@@ -92,15 +102,21 @@ CREATE TABLE tb_clientes(
 id_cliente INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 nombre_cliente VARCHAR(50) NOT NULL,
 apellido_cliente VARCHAR(50) NOT NULL,
-dui_cliente VARCHAR(10) UNIQUE NOT NULL,
-correo_cliente VARCHAR(100) UNIQUE NOT NULL,
-telefono_cliente varchar(9) UNIQUE NOT NULL,
+dui_cliente VARCHAR(10) NOT NULL,
+correo_cliente VARCHAR(100) NOT NULL,
+telefono_cliente varchar(9) NOT NULL,
 direccion_cliente VARCHAR(250) NOT NULL,
 clave_cliente VARCHAR(100) NOT NULL,
 estado_cliente ENUM("Activo", "Inactivo") NOT NULL DEFAULT("Inactivo"),
 fecha_registro DATE NOT NULL default NOW(),
 foto_cliente VARCHAR(200) NULL
 );
+
+-- restricciones de clientes
+ALTER TABLE tb_clientes ADD CONSTRAINT u_dui_cliente UNIQUE(dui_cliente);
+ALTER TABLE tb_clientes ADD CONSTRAINT u_correo_cliente UNIQUE(correo_cliente);
+ALTER TABLE tb_clientes ADD CONSTRAINT u_telefono_cliente UNIQUE(telefono_cliente);
+------------------------------
 
 -- ordenes que se realicen
 CREATE TABLE tb_compras(
@@ -119,12 +135,16 @@ CREATE TABLE tb_detalles_compras(
 id_detalle_compra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 id_compra INT NOT NULL,
 id_producto INT NOT NULL,
-cantidad_producto INT NOT NULL CHECK(cantidad_producto > 0),
-total_a_pagar DECIMAL(5,2) NOT NULL CHECK(total_a_pagar > 0)
+cantidad_producto INT NOT NULL,
+total_a_pagar DECIMAL(5,2) NOT NULL
 );
 
+-- restricciones de detalles compras
 ALTER TABLE tb_detalles_compras ADD CONSTRAINT fk_orden_detalle FOREIGN KEY(id_compra) REFERENCES tb_compras(id_compra);
 ALTER TABLE tb_detalles_compras ADD CONSTRAINT fk_orden_productos FOREIGN KEY (id_producto) REFERENCES tb_productos(id_producto);
+ALTER TABLE tb_detalles_compras ADD CONSTRAINT ch_cantidadP CHECK(cantidad_producto > 0);
+ALTER TABLE tb_detalles_compras ADD CONSTRAINT ch_totalPa CHECK(total_a_pagar > 0);
+-------------------------------------
 
 
 -- valoracion de los productos comprados
@@ -138,7 +158,7 @@ estado_comentario ENUM("Habilitado", "Deshabilitado") NOT NULL
 );
 
 ALTER TABLE tb_valoraciones ADD CONSTRAINT fk_orden_valoracion FOREIGN KEY (id_detalle_compra) REFERENCES tb_detalles_compras(id_detalle_compra);
-
+ALTER TABLE tb_valoraciones ADD CONSTRAINT ch_valoracion CHECK(calificacion_producto < 6); -- la mayor calificación será 5
 
 -- mensualidades
 -- tabla para relacionar si un cliente posee un alumno registrado
@@ -155,7 +175,7 @@ ALTER TABLE tb_alumnos_clientes ADD CONSTRAINT fk_alumno_alumno FOREIGN KEY(id_a
 -- pagos de mensualidad
 CREATE TABLE tb_pagos(
 id_pago INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-fecha_pago DATE NOT NULL,
+fecha_pago DATE NOT NULL DEFAULT NOW(),
 mensualidad_a_pagar NUMERIC(8, 2) NOT NULL,
 cuotas_anuales INT NOT NULL DEFAULT 12,
 cuotas_pendientes INT NOT NULL,
@@ -163,7 +183,8 @@ id_alumno_cliente INT NOT NULL -- hará referencia al cliente que realizará el 
 );
 
 ALTER TABLE tb_pagos ADD CONSTRAINT Fk_cliente_pago FOREIGN KEY (id_alumno_cliente) REFERENCES tb_alumnos_clientes(id_alumno_cliente);
-
+ALTER TABLE tb_pagos ADD CONSTRAINT ch_cuotasAn CHECK(cuotas_anuales > 0);
+ALTER TABLE tb_pagos ADD CONSTRAINT cuotasPe CHECK(cuotas_pendientes > 0);
 
 -- detalles de cada pago
 CREATE TABLE tb_detalles_pagos(
@@ -176,13 +197,13 @@ estado_pago ENUM('Pagado', 'Pendiente de pago') NOT NULL
 );
 
 ALTER TABLE tb_detalles_pagos ADD CONSTRAINT Fk_detalle_pago FOREIGN KEY (id_pago) REFERENCES tb_pagos(id_pago);
-
+ALTER TABLE tb_detalles_pagos ADD CONSTRAINT ch_totalPa CHECK(total_pagado > 0);
 
 -- soporte tecnico
 CREATE TABLE tb_soporte_tecnico(
 id_soporte INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 mensaje VARCHAR(2000) NOT NULL,
-fecha_envio DATE NOT NULL,
+fecha_envio DATE NOT NULL DEFAULT NOW(),
 estado_mensaje ENUM('Pendiente', 'Visto', 'Atendido') NOT NULL,
 id_cliente INT NOT NULL
 );
