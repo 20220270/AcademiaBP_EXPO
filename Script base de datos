@@ -64,7 +64,7 @@ ALTER TABLE tb_productos ADD CONSTRAINT ch_descuento CHECK(descuento_producto < 
 --------------------------------
 
 -- staff, o personal, de la academia
-CREATE TABLE tb_staff(
+CREATE TABLE tb_staffs(
 id_staff INT PRIMARY KEY NOT NULL PRIMARY KEY,
 nombre_staff VARCHAR(100) NOT NULL,
 apellido_staff VARCHAR(100) NOT NULL,
@@ -77,12 +77,17 @@ CREATE TABLE tb_categorias_alumnos(
 id_categoria_alumno INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 categoria VARCHAR(30) NOT NULL,
 edad_maxima INT, -- Edad máxima para estar en una categoría
-horario_entrenamiento VARCHAR(200) NOT NULL,
-id_staff INT NOT NULL -- Miembro del staff encargado de la categoría
+horario_entrenamiento VARCHAR(200) NOT NULL
 );
 
-ALTER TABLE tb_categorias_alumnos ADD CONSTRAINT fk_alumno_staff FOREIGN KEY(id_staff) REFERENCES tb_staff(id_staff);
+CREATE TABLE tb_staffs_categorias(
+id_staff_categorias INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+id_staff INT NOT NULL,
+id_categoria_alumno INT NOT NULL
+);
 
+ALTER TABLE tb_staffs_categorias ADD CONSTRAINT fk_staff_cate FOREIGN KEY (id_staff) REFERENCES tb_staffs(id_staff);
+ALTER TABLE tb_staffs_categorias ADD CONSTRAINT fk_cate_cate FOREIGN KEY (id_categoria_alumno) REFERENCES tb_categorias_alumnos(id_categoria_alumno);
 
 -- alumnos
 CREATE TABLE tb_alumnos(
@@ -91,11 +96,11 @@ nombre_alumno VARCHAR(100) NOT NULL,
 apellido_alumno VARCHAR(100) NOT NULL,
 fecha_nacimiento DATE NOT NULL DEFAULT NOW(),
 posicion_alumno ENUM('Portero', 'Jugador de campo') NOT NULL,
-id_categoria_alumno INT NOT NULL, -- La categoría se asignará dependiendo la edad del alumno
+id_staff_categorias INT NOT NULL, -- La categoría se asignará dependiendo la edad del alumno
 estado_alumno ENUM('Activo', 'Inactivo') NOT NULL DEFAULT('Activo')
 );
 
-ALTER TABLE tb_alumnos ADD CONSTRAINT fk_alumno_categoria FOREIGN KEY(id_categoria_alumno) REFERENCES tb_categorias_alumnos(id_categoria_alumno);
+ALTER TABLE tb_alumnos ADD CONSTRAINT fk_alumno_categoria FOREIGN KEY(id_staff_categorias) REFERENCES tb_staffs_categorias(id_staff_categorias);
 
 -- clientes de la tienda en linea
 CREATE TABLE tb_clientes(
@@ -303,6 +308,7 @@ select * from tb_alumnos;
 select * from tb_alumnos_clientes;
 select * from tb_categorias_alumnos;
 select * from tb_categorias_productos;
+select * from tb_staffs_categorias;
 select * from tb_clientes;
 select * from tb_detalles_compras;
 select * from tb_detalles_pagos;
@@ -311,5 +317,5 @@ select * from tb_compras;
 select * from tb_pagos;
 select * from tb_productos;
 select * from tb_soporte_tecnico;
-select * from tb_staff;
+select * from tb_staffs;
 select * from tb_valoraciones;
