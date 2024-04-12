@@ -27,13 +27,9 @@ text-decoration: none;
 }
 
 
-.card {
-    width: 20% !important;
-  }
-
   @media only screen and (max-width:6000px) {
     .card {
-      width: 23% !important;
+      width: 18rem !important;
       border-radius: 20px;
     }
   }
@@ -41,10 +37,14 @@ text-decoration: none;
 
 
 .card-img-top{
-    border-radius: 20px;
+    border-radius: 20px; 
 }
 
 
 #inicio{
   margin-top: 7%;
+}
+
+.m-0{
+border: radius 80px; 
 }

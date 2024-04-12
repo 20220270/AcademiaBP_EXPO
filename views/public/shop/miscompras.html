@@ -23,17 +23,18 @@
     <main>
         <h3 class="text-center">Mis compras</h3>
 
-    <!-- Movemos el buscador aquí -->
-    <div class="row">
-        <div class="col-6 offset-3"> <!-- Añadimos una clase offset-3 para centrar el buscador -->
-            <div class="buscador">
-                <input class="busc light-table-filter" data-table="order-table" type="text" placeholder="Buscar" id="Buscador">
-                <div class="btna">
-                    <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
+        <!-- Movemos el buscador aquí -->
+        <div class="row">
+            <div class="col-6 offset-3"> <!-- Añadimos una clase offset-3 para centrar el buscador -->
+                <div class="buscador">
+                    <input class="busc light-table-filter" data-table="order-table" type="text" placeholder="Buscar"
+                        id="Buscador">
+                    <div class="btna">
+                        <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
         <!-- fin buscador -->
 
         <!--Card con la informacion de la compra-->
@@ -73,7 +74,7 @@
                                         <div class="col col-lg-3 col-md-4">
                                             <label for="estadoOrden" class="form-label fw-bold">Estado de la
                                                 compra:</label>
-                                            <label for="estadoOrdenD" class="form-label">Entregada</label>
+                                            <label for="estadoOrdenD" class="form-label estadoOrdenD">Entregada</label>
                                         </div>
                                         <div class="col col-lg-4 col-md-4">
                                             <label for="direccion" class="form-label fw-bold">Dirección:</label>
@@ -85,12 +86,19 @@
                             </div>
                         </div>
                         <!-- Botón para valorar la compra dentro de la tarjeta -->
-                        <div class=" col-lg-1 col-md-10 col-sm-9 col-11 d-flex justify-content-end align-items-center contenedorVCal">
+                        <div
+                            class=" col-lg-1 col-md-10 col-sm-9 col-11 d-flex justify-content-end align-items-center contenedorVCal">
                             <div class="d-flex flex-column align-items-center">
                                 <h5 class="mx-5 mt-4 tituloValoracion">Dar mi valoración</h5>
                                 <button type="button" class="btn btnMostrarModalVa" data-bs-toggle="modal"
                                     data-bs-target="#modalValorar">
                                     <img src="/resources/images/valorarP.png" alt="..." width="60px" height="50px"
+                                        class="mt-2">
+                                </button>
+                                <h5 class="mx-5 mt-4 tituloDevolucion">Devolución</h5>
+                                <button type="button" class="btn btnDevolucion" data-bs-toggle="modal"
+                                    data-bs-target="#modalDevolucion">
+                                    <img src="/resources/images/devolucionVerde.png" alt="..."  width="60px" height="60px"
                                         class="mt-2">
                                 </button>
                             </div>
@@ -125,7 +133,7 @@
                                         <div class="col col-lg-3 col-md-4">
                                             <label for="cantidadP" class="form-label fw-bold">Cantidad de
                                                 productos:</label>
-                                            <label for="cantidadPD" class="form-label">4</label>
+                                            <label for="cantidadPD" class="form-label cantidadProducto">4</label>
                                         </div>
                                     </div>
                                     <div class="row mt-4">
@@ -136,7 +144,7 @@
                                         <div class="col col-lg-3 col-md-4">
                                             <label for="estadoOrden" class="form-label fw-bold">Estado de la
                                                 compra:</label>
-                                            <label for="estadoOrdenD" class="form-label">Pendiente</label>
+                                            <label for="estadoOrdenD" class="form-label estadoOrdenD">Pendiente</label>
                                         </div>
                                         <div class="col col-lg-4 col-md-4">
                                             <label for="direccion" class="form-label fw-bold">Dirección:</label>
@@ -148,12 +156,19 @@
                             </div>
                         </div>
                         <!-- Botón para valorar la compra dentro de la tarjeta -->
-                        <div class=" col-lg-1 col-md-10 col-sm-9 col-11 d-flex justify-content-end align-items-center contenedorVCal">
+                        <div
+                            class=" col-lg-1 col-md-10 col-sm-9 col-11 d-flex justify-content-end align-items-center contenedorVCal">
                             <div class="d-flex flex-column align-items-center">
                                 <h5 class="mx-5 mt-4 tituloValoracion">Dar mi valoración</h5>
                                 <button type="button" class="btn btnMostrarModalVa" data-bs-toggle="modal"
                                     data-bs-target="#modalValorar">
                                     <img src="/resources/images/valorarP.png" alt="..." width="60px" height="50px"
+                                        class="mt-2">
+                                </button>
+                                <h5 class="mx-5 mt-4 tituloDevolucion">Devolución</h5>
+                                <button type="button" class="btn btnDevolucion" data-bs-toggle="modal"
+                                    data-bs-target="#modalDevolucion">
+                                    <img src="/resources/images/devolucionVerde.png" alt="..." width="60px" height="60px"
                                         class="mt-2">
                                 </button>
                             </div>
@@ -200,7 +215,8 @@
                                         <div class="col col-lg-3 col-md-4">
                                             <label for="estadoOrden" class="form-label fw-bold">Estado de la
                                                 compra:</label>
-                                            <label for="estadoOrdenD" class="form-label" id="estadoOrdenD">Entregada</label>
+                                            <label for="estadoOrdenD" class="form-label estadoOrdenD"
+                                                id="estadoOrdenD">Entregada</label>
                                         </div>
                                         <div class="col col-lg-4 col-md-4">
                                             <label for="direccion" class="form-label fw-bold">Dirección:</label>
@@ -212,7 +228,8 @@
                             </div>
                         </div>
                         <!-- Botón para valorar la compra dentro de la tarjeta -->
-                        <div class=" col-lg-1 col-md-10 col-sm-9 col-11 d-flex justify-content-end align-items-center contenedorVCal">
+                        <div
+                            class=" col-lg-1 col-md-10 col-sm-9 col-11 d-flex justify-content-end align-items-center contenedorVCal">
                             <div class="d-flex flex-column align-items-center">
                                 <h5 class="mx-5 mt-4 tituloValoracion">Dar mi valoración</h5>
                                 <button type="button" class="btn btnMostrarModalVa" data-bs-toggle="modal"
@@ -222,29 +239,97 @@
                                 </button>
                                 <h5 class="mx-5 mt-4 tituloDevolucion">Devolución</h5>
                                 <button type="button" class="btn btnDevolucion" data-bs-toggle="modal"
-                                    data-bs-target="#modalValorar">
-                                    <img src="/resources/images/valorarP.png" alt="..." width="60px" height="50px"
+                                    data-bs-target="#modalDevolucion">
+                                    <img src="/resources/images/devolucionVerde.png" alt="..."  width="60px" height="60px"
                                         class="mt-2">
                                 </button>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <div class="d-flex justify-content-center text-center">
+            <div class="card col-lg-10 col-sm-10 col-11 mt-5">
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col col-lg-3 col-md-4 col-sm-10 col-12">
+                            <img src="/resources/images/imagenTmochilas.png" class="card-img mt-4 mb-4" alt="..."
+                                height="240px">
+                        </div>
+                        <div class="col col-lg-8 col-md-7 col-sm-12">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">Compra número 000002</h5>
+                                <div class="container text-center">
+                                    <div class="row">
+                                        <div class="col-3 col-lg-3 col-md-4">
+                                            <label for="fechaCompra" class="form-label fw-bold">Producto
+                                                adquirido:</label>
+                                            <label for="fechaCompra" class="form-label">Mochila</label>
+                                        </div>
+                                        <div class="col-4 col-lg-4 col-md-4">
+                                            <label for="fechaCompra" class="form-label fw-bold">Fecha de compra:</label>
+                                            <label for="fechaCompraD" class="form-label">00/00/0000</label>
+                                        </div>
+                                        <div class="col col-lg-3 col-md-4">
+                                            <label for="cantidadP" class="form-label fw-bold">Cantidad de
+                                                productos:</label>
+                                            <label for="cantidadPD" class="form-label cantidadProducto">4</label>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col col-lg-3 col-md-4">
+                                            <label for="totalPagado" class="form-label fw-bold">Total pagado:</label>
+                                            <label for="totalPagadoD" class="form-label">$30.00</label>
+                                        </div>
+                                        <div class="col col-lg-3 col-md-4">
+                                            <label for="estadoOrden" class="form-label fw-bold">Estado de la
+                                                compra:</label>
+                                            <label for="estadoOrdenD" class="form-label estadoOrdenD">Finalizada</label>
+                                        </div>
+                                        <div class="col col-lg-4 col-md-4">
+                                            <label for="direccion" class="form-label fw-bold">Dirección:</label>
+                                            <label for="direccionD" class="form-label">Instituto Tecnico
+                                                Ricaldone</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Botón para valorar la compra dentro de la tarjeta -->
+                        <div
+                            class=" col-lg-1 col-md-10 col-sm-9 col-11 d-flex justify-content-end align-items-center contenedorVCal">
+                            <div class="d-flex flex-column align-items-center">
+                                <h5 class="mx-5 mt-4 tituloValoracion">Dar mi valoración</h5>
+                                <button type="button" class="btn btnMostrarModalVa" data-bs-toggle="modal"
+                                    data-bs-target="#modalValorar">
+                                    <img src="/resources/images/valorarP.png" alt="..." width="60px" height="50px"
+                                        class="mt-2">
+                                </button>
+                                <h5 class="mx-5 mt-4 tituloDevolucion">Devolución</h5>
+                                <button type="button" class="btn btnDevolucion" data-bs-toggle="modal"
+                                    data-bs-target="#modalDevolucion">
+                                    <img src="/resources/images/devolucionVerde.png" alt="..."  width="60px" height="60px"
+                                        class="mt-2">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <p class="text-center mt-3" id="noResultsMessage">
+        
+
+
+        <p class="text-center mt-5" id="noResultsMessage">
             <img src="/resources/images/advertencia.png" alt="Advertencia" width="50px" height="50px"> No se ha
             encontrado ninguna compra
         </p>
 
         <!--Modal para valorar productos-->
-        <!-- Button trigger modal -->
-
-
-        <!-- Modal -->
         <div class="modal fade" id="modalValorar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -294,6 +379,49 @@
                 </div>
             </div>
         </div>
+
+        <!--Modal para devolución de productos-->
+        <div class="modal fade" id="modalDevolucion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-center align-items-center">
+                        <img src="/resources/images/devolucionBlanco.png" alt="..." width="100px" height="100px"
+                            class="mx-auto" data-bs-dismiss="modal" id="botonCerrarDevo">
+                        <img src="/resources/images/logoAcademiaBP.png" alt="..." width="100px" height="100px"
+                            class="mx-auto" data-bs-dismiss="modal" id="botonCerrarDevo2">
+                    </div>
+                    <div class="modal-body">
+                        <h5 class="text-center">Devolución de productos</h5>
+                        <p class="text-center">Ingresa la cantidad de este producto que deseas devolver.</p>
+                        <div class="container text-center">
+                            <div class="row">
+                                <div class="col col-lg-12">
+                                    <input type="hidden" id="iddetalleOrden" name="iddetalleOrden">
+                                    <input type="hidden" id="idProducto" name="idProducto">
+                                    <div class="input-group spinner mt-2">
+                                        <button class="btn decrementBtn" type="button"
+                                            id="decrementBtn">-</button>
+                                        <input type="text" class="form-control cantidadAdevolver" value="1"
+                                            readonly>
+                                        <button class="btn incrementBtn" type="button"
+                                            id="incrementBtn">+</button>
+                                    </div>
+                                </div>
+                               
+
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <button type="button" class="btn btnEnviarValoracion mt-3">
+                                        <img src="/resources/images/enviarValoracion.png" alt="..." width="40px"
+                                            height="40px">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer class="mt-5">
@@ -316,7 +444,7 @@
 
     <!--Buscador general de productos-->
     <script src="/resources/js/buscador_productos.js"></script>
-    
+
     <!--Plantillas para header y footer-->
     <script src="/resources/js/headerPublico.js"></script>
     <script src="/resources/js/footerPublico.js"></script>

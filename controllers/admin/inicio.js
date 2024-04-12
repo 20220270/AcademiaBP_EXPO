@@ -4,7 +4,7 @@ const menuHTML = `
 <!-- Menú lateral -->
 <nav class="navbar navbar-dark  bg-black fixed-top ">
         <div class="container-fluid">
-            <img src="/resources/images/logoAcademiaBP.png" alt="Logo" width="60px" height="60px">
+            <img src="/resources/images/logoAcademiaBP.png" class="position-absolute top  end-0" alt="Logo" width=60px" height="60px">
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                 aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
