@@ -35,6 +35,8 @@ main {
     margin-right: 10px;
 }
 
+
+
 .btnMostrarModalVa,
 .tituloValoracion,
 .tituloDevolucion,
@@ -42,8 +44,21 @@ main {
     display: none;
 }
 
-footer {
+
+
+
+footer,
+.incrementBtn,
+.incrementBtn:hover,
+.incrementBtn:focus {
     background-color: #408840;
+    color: #fff;
+}
+
+.decrementBtn,
+.decrementBtn:hover,
+.decrementBtn:focus{
+    background-color: #04B704;
     color: #fff;
 }
 
@@ -168,12 +183,14 @@ footer {
 }
 
 
-@media (min-width:1200px) and (max-width: 1281px) {
+
+
+@media (min-width:992px) and (max-width: 1281px) {
     .buscador {
         position: absolute;
         left: 50%;
         top: 46.5%;
-        transform: translate(-50%, -120%);
+        transform: translate(-50%, -160%);
         padding: 15px;
     }
     footer{
@@ -189,7 +206,7 @@ footer {
         position: absolute;
         left: 50%;
         top: 46.5%;
-        transform: translate(-50%, -310%);
+        transform: translate(-50%, -60%);
         padding: 15px;
     }
 
@@ -210,7 +227,7 @@ footer {
         position: absolute;
         left: 50%;
         top: 46.5%;
-        transform: translate(-50%, -210%);
+        transform: translate(-50%, -20%);
         padding: 15px;
     }
 
@@ -236,7 +253,7 @@ footer {
         position: absolute;
         left: 50%;
         top: 48.1%;
-        transform: translate(-50%, -65%);
+        transform: translate(-50%, 45%);
         padding: 15px;
     }
 }
@@ -246,7 +263,7 @@ footer {
 @media (min-width:263px) and (max-width: 390px) {
 
     main{
-        margin-top: 350px;
+        margin-top: 330px;
     }
 
     /*buscador propio de compras*/
