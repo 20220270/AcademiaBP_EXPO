@@ -16,7 +16,7 @@
 <body>
     <!-- Header de la página, conectado desde Javascript -->
     <header>
-        
+
     </header>
 
     <!--Contenido principal del sitio público-->
@@ -25,8 +25,7 @@
         <section class="text-center position-relative seccion1 w-100">
             <!-- Se agrega position relative para que los elementos sean relativos a esta sección -->
             <div class="image-container mt-5 position-relative w-100">
-                <img src="/resources/images/imaegnPrincipal.png" class="img-fluid imagenPrincipal w-100"
-                    alt="..." />
+                <img src="/resources/images/imaegnPrincipal.png" class="img-fluid imagenPrincipal w-100" alt="..." />
                 <div class="overlay"></div>
                 <span class="primerTextoImagen1 d-block position-absolute start-50 translate-middle">
                     Inscribe a tu hijo hoy en
@@ -136,7 +135,7 @@
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                                             <!--Agregar al carrito-->
                                             <img src="../../../resources/images/cesta2.png" alt="..." width="30px"
-                                                height="30px" />
+                                                height="30px" class="agregarCarrito" />
                                         </div>
                                         <div class="col-lg-5 col-md-5 text-start col-sm-4 col-4">
                                             <!--Precio del producto-->
@@ -145,7 +144,7 @@
                                         <div class="col-lg-3 col-md-3 col-sm-4 col-4">
                                             <!--Ver comentarios del producto-->
                                             <img src="../../../resources/images/comentarios.png" alt="..." width="30px"
-                                                height="30px" />
+                                                height="30px" class="verComentarios" />
                                         </div>
                                     </div>
                                 </div>
@@ -203,7 +202,7 @@
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                                             <!--Agregar al carrito-->
                                             <img src="../../../resources/images/cesta2.png" alt="..." width="30px"
-                                                height="30px" />
+                                                height="30px" class="agregarCarrito" />
                                         </div>
                                         <div class="col-lg-5 col-md-5 text-start col-sm-4 col-4">
                                             <!--Precio del producto-->
@@ -212,7 +211,7 @@
                                         <div class="col-lg-3 col-md-3 col-sm-4 col-4">
                                             <!--Ver comentarios del producto-->
                                             <img src="../../../resources/images/comentarios.png" alt="..." width="30px"
-                                                height="30px" />
+                                                height="30px" class="verComentarios" />
                                         </div>
                                     </div>
                                 </div>
@@ -269,7 +268,7 @@
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                                             <!--Agregar al carrito-->
                                             <img src="../../../resources/images/cesta2.png" alt="..." width="30px"
-                                                height="30px" />
+                                                height="30px" class="agregarCarrito" />
                                         </div>
                                         <div class="col-lg-5 col-md-5 text-start col-sm-4 col-4">
                                             <!--Precio del producto-->
@@ -278,7 +277,7 @@
                                         <div class="col-lg-3 col-md-3 col-sm-4 col-4">
                                             <!--Ver comentarios del producto-->
                                             <img src="../../../resources/images/comentarios.png" alt="..." width="30px"
-                                                height="30px" />
+                                                height="30px" class="verComentarios" />
                                         </div>
                                     </div>
                                 </div>
@@ -335,7 +334,7 @@
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                                             <!--Agregar al carrito-->
                                             <img src="../../../resources/images/cesta2.png" alt="..." width="30px"
-                                                height="30px" />
+                                                height="30px" class="agregarCarrito" />
                                         </div>
                                         <div class="col-lg-5 col-md-5 text-start col-sm-4 col-4">
                                             <!--Precio del producto-->
@@ -344,7 +343,7 @@
                                         <div class="col-lg-3 col-md-3 col-sm-4 col-4">
                                             <!--Ver comentarios del producto-->
                                             <img src="../../../resources/images/comentarios.png" alt="..." width="30px"
-                                                height="30px" />
+                                                height="30px" class="verComentarios" />
                                         </div>
                                     </div>
                                 </div>
@@ -352,6 +351,8 @@
                         </div>
                     </div>
                 </div>
+
+
             </div>
 
             <div>
@@ -359,7 +360,7 @@
                     Familia Academia
                 </h3>
             </div>
-            
+
         </section>
 
         <!--Sección 4, Fotos de la familia Academia-->
@@ -411,14 +412,16 @@
     <!--Iconos en font awesome-->
     <script src="https://kit.fontawesome.com/22fd8b70d9.js" crossorigin="anonymous"></script>
     <!--Plantilla del header, sitio público-->
-    
+
     <script src="../../../resources/js/headerPublico.js"></script>
-        <!--Plantilla del footer, sitio público-->
+    <!--Plantilla del footer, sitio público-->
     <script src="../../../resources/js/footerPublico.js"></script>
-        <!--Plantilla del menú hamburguesa, sitio público-->
+    <!--Plantilla del menú hamburguesa, sitio público-->
     <script src="../../../controllers/utils/dropdownMenu.js"></script>
-        <!--Buscador general de productos-->
-        <script src="/resources/js/buscador_productos.js"></script>
+    <!--Buscador general de productos-->
+    <script src="/resources/js/buscador_productos.js"></script>
+
+    <script src="/controllers/public/index.js"></script>
 </body>
 
 </html>
