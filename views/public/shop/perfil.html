@@ -86,15 +86,18 @@
         <div class="modal fade" id="exampleModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar contraseña</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-header d-flex justify-content-center align-items-center">
+                        <img src="/resources/images/nuevacontra.png" alt="..." width="100px" height="100px"
+                            class="mx-auto" data-bs-dismiss="modal" id="botonCerrarCon">
+                        <img src="/resources/images/logoAcademiaBP.png" alt="..." width="100px" height="100px"
+                            class="mx-auto" data-bs-dismiss="modal" id="botonCerrarCon2">
                     </div>
                     <div class="modal-body">
                         <div class="container text-center">
                             <div class="row">
                                 <div class="col col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="mb-3  text-start">
+                                        <h3 class="text-center mb-4">Edita tu contraseña</h3>
                                         <label for="inputDui" class="form-label">Contraseña actual:</label>
                                         <input type="password" class="form-control formsContra text-dark" id="formsContraAct"
                                             placeholder="Ingresa tu contraseña actual">
@@ -118,10 +121,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn text-white botonFooter" data-bs-dismiss="modal">
-                            <img src="/resources/images/cerrarventanaN.png" alt="..." width="30px" height="30px"> Cerrar ventana</button>
                         <button type="submit" class="btn text-white botonFooter" id="botonActualizarContrasena">
-                            <img src="/resources/images/nuevacontra.png" alt="..." width="30px" height="30px"> Actualizar contraseña</button>
+                            <img src="/resources/images/nuevacontra.png" alt="..." width="30px" height="30px"> Editar contraseña</button>
                     </div>
                 </div>
             </div>

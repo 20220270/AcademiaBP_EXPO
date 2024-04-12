@@ -111,6 +111,44 @@ main {
   color: #000;
 }
 
+#inputLaberls{
+  display: inline-block;
+}
+
+.contenedorComentario{
+  border: 2px solid #408840;
+  border-radius: 10px;
+}
+
+.imagenCliente{
+  border-radius: 15px;
+  border: 1px solid #000;
+}
+
+.modal-header{
+  background: linear-gradient(to right, #04B704, #408340);
+    height: 160px;
+}
+
+.text1{
+  display: inline-block;
+}
+
+.scroll {
+  max-height: 300px; /* Define la altura máxima del div scroll */
+  overflow-y: auto; /* Habilita el desplazamiento vertical */
+  overflow-x: hidden; /* Deshabilita el desplazamiento horizontal */
+}
+
+
+#stars2{
+  transform: translate(70%, -70%);
+}
+
+.fechacomentario{
+  transform: translate(170%, -165%);
+}
+
 
 /*texto dentro de las imagenes*/
 .span-uniforme,
@@ -129,6 +167,19 @@ main {
 .span-ver-mochilas,
 .span-ver-gorras {
   top: 60%;
+}
+
+.popover-header,
+.modal-header,
+.modal-footer {
+    background-color: #408840;
+    color: #fff;
+}
+
+
+.popover-body {
+    background-color: #000;
+    color: #fff;
 }
 
 .card {

@@ -74,7 +74,7 @@ HEADER.innerHTML = `
                                                 height="25px" class="me-1"> Mis compras</a></li>
 
                                     <li class="nav-item col-lg-3 col-md-12 text-start">
-                                        <a class="nav-link me-2 text-white" href="../about us/index.html">
+                                        <a class="nav-link me-2 text-white" href="conocenos.html">
                                             <img src="../../../resources/images/nosotros.png" class="me-1" alt="..."
                                                 height="25px" width="25px">
                                             Conócenos
