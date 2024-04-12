@@ -142,11 +142,11 @@ main {
 
 
 #stars2{
-  transform: translate(70%, -30%);
+  transform: translate(70%, -70%);
 }
 
 .fechacomentario{
-  transform: translate(50%, -10%);
+  transform: translate(170%, -165%);
 }
 
 
@@ -167,6 +167,19 @@ main {
 .span-ver-mochilas,
 .span-ver-gorras {
   top: 60%;
+}
+
+.popover-header,
+.modal-header,
+.modal-footer {
+    background-color: #408840;
+    color: #fff;
+}
+
+
+.popover-body {
+    background-color: #000;
+    color: #fff;
 }
 
 .card {
