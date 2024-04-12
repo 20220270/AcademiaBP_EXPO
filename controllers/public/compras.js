@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function showPopoverOnDisabledButton(button) {
         var popover = new bootstrap.Popover(button, {
             title: '¡Pronto podrás valorar esta compra!',
-            content: 'El botón para valorar esta compra estará disponible una vez que la compra se haya finalizado.',
+            content: 'El botón para valorar esta compra estará disponible una vez que la compra se haya entregado.',
             placement: 'top',
             trigger: 'manual',
             boundary: 'viewport'
