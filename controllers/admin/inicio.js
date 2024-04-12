@@ -1,25 +1,25 @@
 const contenedorMenu = document.querySelector('#contenedor-menu');
 
 const menuHTML = `
+
+<link rel="stylesheet" href="/resources/css/privado/navbar.css">
+
+
 <!-- Menú lateral -->
-<nav class="navbar navbar-dark  bg-black fixed-top ">
+<nav class="navbar navbar-dark bg-black fixed-top ">
         <div class="container-fluid">
             <img src="/resources/images/logoAcademiaBP.png" class="position-absolute top  end-0" alt="Logo" width=60px" height="60px">
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                 aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+            <div class="offcanvas offcanvas-lg offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header bg-black">
                     <img src="/resources/images/logoAcademiaBP.png" class="position-absolute top-0 start-50 translate-middle-x" alt="Logo" width="60px" height="60px">
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body bg-black">
-                    <form class="d-flex mt-3" role="search">
-                        <input class="form-control me-2 mt-3" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 mt-3">
                         <li class="nav-item ">
                             <a href="/views/admin/inicio.html" class="nav-link active bg-black mt-3" aria-current="page">
