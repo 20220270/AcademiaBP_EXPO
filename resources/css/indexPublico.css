@@ -105,8 +105,10 @@ main {
   z-index: 1;
 }
 
-#textoCarrito a {
+#textoCarrito,
+#textoCarrito:hover {
   text-decoration: none;
+  color: #000;
 }
 
 
@@ -154,6 +156,11 @@ main {
 .fa-star {
   color: #ffd700;
   font-size: 10px;
+}
+
+.agregarCarrito,
+.verComentarios{
+  cursor: pointer;
 }
 
 /*galeria de fotos*/

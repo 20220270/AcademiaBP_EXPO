@@ -86,6 +86,13 @@
     color: #fff;
   }
 
+  #textoCarrito,
+#textoCarrito:hover {
+  text-decoration: none;
+  color: #000;
+  font-size: 12px;
+}
+
   /* Media query para pantallas de tamaño mediano */
 @media (min-width: 576px) and (max-width: 992px) {
   main {

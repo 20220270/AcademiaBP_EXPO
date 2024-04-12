@@ -24,6 +24,13 @@ header {
     right: 0;
   }
 
+  #textoCarrito,
+  #textoCarrito:hover {
+  text-decoration: none;
+  color: #000;
+  font-size: 12px;
+}
+
   .lupa {
     transform: translate(-120%, 10%);
   }

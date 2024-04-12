@@ -38,7 +38,7 @@ HEADER.innerHTML = `
                         <img src="../../../resources/images/cesta2.png" alt="..." width="30px" height="30px"
                             class="">
                             
-                        <span class="text" id="textoCarrito">Carrito de compras</span>
+                        <span class="text" id="textoCarrito">Carrito de compras()</span>
                     </button>
                     </a>
                 </div>
