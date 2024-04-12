@@ -60,9 +60,7 @@ header {
     cursor: pointer;
   }
 
-  .popover-header,
-  .modal-header,
-  .modal-footer {
+  .popover-header{
     background-color: #408840;
     color: #fff;
 }
@@ -70,6 +68,15 @@ header {
 .imagenCerarr,
 .textito{
   display: inline-block;
+}
+
+.modal-header{
+  background: linear-gradient(to right, #04B704, #408340);
+    height: 160px;
+}
+
+.modal-footer{
+  background: linear-gradient(to right, #04B704, #408340);
 }
 
 a{
