@@ -1,0 +1,9 @@
+SELECT USER, HOST FROM MYSQL.USER;
+
+CREATE USER 'academiabp_desarrollador'@'localhost'; 
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON academiabp_db.* TO 'academiabp_desarrollador'@'localhost';
+
+GRANT CREATE VIEW, TRIGGER ON academiabp_db.* TO 'academiabp_desarrollador'@'localhost';
+
+GRANT CREATE ROUTINE ON academiabp_db.* TO 'academiabp_desarrollador'@'localhost';
