@@ -1,4 +1,5 @@
-w<!DOCTYPE html>
+w
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -17,7 +18,8 @@ w<!DOCTYPE html>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Enlace al conjunto de iconos de boostrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
+    <!-- Enlace al conjunto de sweet alert 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Enlace a tu propio archivo de estilos CSS -->
     <link rel="stylesheet" href="/resources/css/privado/categoria_producto.css">
 </head>
@@ -26,6 +28,13 @@ w<!DOCTYPE html>
     <!-- Div contenedor donde se insertará el menú -->
     <div id="contenedor-menu"></div>
     <!-- Codigo de html -->
+
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button type="button" class="btn btn-white me-md-2 mt-5"><img src="/resources/images/agregar.png"
+                alt="buttonpng" width="60rem" />     <script src="/controllers/admin/swal2/agregar_producto.js"></script></button>
+        </button>
+    </div>
 
     <div class="container py-5">
         <div class="row ms-2">
@@ -55,7 +64,7 @@ w<!DOCTYPE html>
             </div>
         </div>
     </div>
-    
+
 
 
 </body>
