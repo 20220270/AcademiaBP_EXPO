@@ -42,9 +42,8 @@ main {
 .tituloDevolucion,
 .btnDevolucion{
     display: none;
+    border: none;
 }
-
-
 
 
 footer,

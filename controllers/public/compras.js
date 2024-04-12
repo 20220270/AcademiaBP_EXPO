@@ -1,32 +1,40 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Obtener todas las tarjetas
+    // Obtenemos todas las cards
     const cards = document.querySelectorAll(".card");
 
-    // Iterar sobre cada tarjeta para verificar el estado de la compra
+    // Verificamos el estado de la compra en cada card
     cards.forEach(function(card) {
-        // Obtener el label de estado dentro de la tarjeta actual
+        // Obtenemos el label de estado dentro de la tarjeta actual
         const estadoOrdenLabel = card.querySelector(".estadoOrdenD");
-        // Obtener el botón de mostrar modal dentro de la tarjeta actual
+        // Obtenemos el botón de mostrar modal dentro de la tarjeta actual
         const modalValorarButton = card.querySelector(".btnMostrarModalVa");
-        // Obtener el título de valoración dentro de la tarjeta actual
+        // Obtenemos el título de valoración dentro de la tarjeta actual
         const tituloValoracion = card.querySelector(".tituloValoracion");
-        // Obtener el botón de devolución dentro de la tarjeta actual
+        // Obtenemos el botón de devolución dentro de la tarjeta actual
         const btnDevolucion = card.querySelector(".btnDevolucion");
-        // Obtener el título de devolución dentro de la tarjeta actual
+        // Obtenemos el título de devolución dentro de la tarjeta actual
         const tituloDevolucion = card.querySelector(".tituloDevolucion");
 
-        // Verificar si el estado de la compra es "Entregada"
+        // Verificamos si el estado de la compra es "Entregada"
         if (estadoOrdenLabel && estadoOrdenLabel.textContent.trim().toLowerCase() === "entregada") {
             // Si es "Entregada", mostrar el botón y el título de valoración
             modalValorarButton.style.display = "block";
             tituloValoracion.style.display = "block";
         }
 
-        // Verificar si el estado de la compra es "Pendiente"
+        // Verificamos si el estado de la compra es "Pendiente"
         if (estadoOrdenLabel && estadoOrdenLabel.textContent.trim().toLowerCase() === "pendiente") {
             // Si es "Pendiente", mostrar el botón y el título de devolución
             btnDevolucion.style.display = "block";
             tituloDevolucion.style.display = "block";
+        }
+
+        // Verificamos si el estado de la compra es "Finalizada"
+        if (estadoOrdenLabel && estadoOrdenLabel.textContent.trim().toLowerCase() === "finalizada") {
+            // Si es "Pendiente", mostrar el botón y el título de devolución
+            modalValorarButton.style.display = "block";
+            modalValorarButton.disabled = "true";
+            tituloValoracion.style.display = "block";
         }
     });
 });
@@ -43,17 +51,19 @@ document.addEventListener("DOMContentLoaded", function () {
         const searchTerm = input.value.trim().toLowerCase();
         let hasResults = false;
 
+        //Mostramos las cards en caso de que se encuentren coincidencias
         cards.forEach(card => {
             const cardText = card.textContent.toLowerCase();
             if (cardText.includes(searchTerm)) {
                 card.style.display = "block";
                 hasResults = true;
+                //Sino, no se mostrarán
             } else {
                 card.style.display = "none";
             }
         });
 
-        // Ocultar el título y el botón de valoración si no hay resultados
+        // Ocultamos el título y el botón de valoración si no hay resultados
         if (hasResults) {
             noResultsMessage.style.display = "none";
             cardContainer.style.display = "block";
@@ -68,17 +78,17 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     // Función para incrementar y decrementar el valor del spinner
     function handleSpinner(btn, input) {
-        // Obtener el botón de incremento y decremento
+        // Obtenemos el botón de incremento y decremento
         const incrementBtn = btn.querySelector(".incrementBtn");
         const decrementBtn = btn.querySelector(".decrementBtn");
 
-        // Agregar evento de clic al botón de incremento
+        // Agregamos evento de clic al botón de incremento
         incrementBtn.addEventListener("click", function () {
             // Incrementar el valor en el input
             input.value = parseInt(input.value) + 1;
         });
 
-        // Agregar evento de clic al botón de decremento
+        // Agregamos evento de clic al botón de decremento
         decrementBtn.addEventListener("click", function () {
             // Obtener el valor actual del input
             let value = parseInt(input.value);
@@ -89,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Obtener todos los spinners en la página
+    // Obtenemos todos los spinners en la página
     const spinners = document.querySelectorAll(".spinner");
 
     // Iterar sobre cada spinner y llamar a la función handleSpinner
@@ -106,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
 //Almacenamos todos los objetos que tienen la clase star
 const stars = document.querySelectorAll('.star');
 
-//Aquí irá la variable para almacenar la cantidad de estrellas seleccionadas
+//Variable para almacenar la cantidad de estrellas seleccionadas
 const ratingText = document.getElementById('texto');
 
 //Función para pintar y despintar las estrellas a las que se les de click
@@ -127,19 +137,19 @@ stars.forEach(function (star, index) {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Obtener todas las tarjetas
+    // Obtenemos todas las tarjetas
     const cards = document.querySelectorAll(".card");
 
-    // Iterar sobre cada tarjeta para verificar si contiene un label con estado "Pendiente"
+    // Verificamos si la card contiene un label con estado "Pendiente"
     cards.forEach(function(card) {
-        // Obtener el label de estado dentro de la tarjeta actual
+        // Obtenemos el label de estado dentro de la tarjeta actual
         const estadoOrdenLabel = card.querySelector("#estadoOrdenD");
-        // Obtener el botón de mostrar modal dentro de la tarjeta actual
+        // Obtenemos el botón de mostrar modal dentro de la tarjeta actual
         const modalValorarButton = card.querySelector(".btnMostrarModalVa");
 
-        // Verificar si el label de estado es "Pendiente"
+        // Verificamos si el label de estado es "Pendiente"
         if (estadoOrdenLabel && estadoOrdenLabel.textContent.trim().toLowerCase() === "pendiente") {
-            // Si es "Pendiente", deshabilitar el botón de mostrar modal
+            // Si es "Pendiente", deshabilitamos el botón de mostrar modal
             modalValorarButton.disabled = true;
         }
     });
@@ -221,4 +231,32 @@ document.getElementById('botonCerrarDevo2').addEventListener('mouseleave', funct
     if (popover) {
         popover.hide();
     }
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Función para mostrar el popover sobre el botón deshabilitado
+    function showPopoverOnDisabledButton(button) {
+        var popover = new bootstrap.Popover(button, {
+            title: '¡Pronto podrás valorar esta compra!',
+            content: 'El botón para valorar esta compra estará disponible una vez que la compra se haya finalizado.',
+            placement: 'top',
+            trigger: 'manual',
+            boundary: 'viewport'
+        });
+        popover.show();
+    }
+
+    // Obtenemos todos los botones de mostrar modal en la página
+    const modalValorarButtons = document.querySelectorAll(".btnMostrarModalVa");
+
+    // Iteramos sobre cada botón y verificamos si está deshabilitado
+    modalValorarButtons.forEach(function(button) {
+        // Verificamos si el botón está deshabilitado
+        if (button.disabled) {
+            // Si está deshabilitado, mostramos el popover
+            showPopoverOnDisabledButton(button);
+        }
+    });
 });
