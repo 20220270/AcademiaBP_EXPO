@@ -25,47 +25,71 @@ w
 </head>
 
 <body>
-    <!-- Div contenedor donde se insertará el menú -->
-    <div id="contenedor-menu"></div>
-    <!-- Codigo de html -->
+    <main>
+        <!-- Div contenedor donde se insertará el menú -->
+        <div id="contenedor-menu"></div>
+        <!-- Codigo de html -->
 
 
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="button" class="btn btn-white me-md-2 mt-5"><img src="/resources/images/agregar.png"
-                alt="buttonpng" width="60rem" />     <script src="/controllers/admin/swal2/agregar_producto.js"></script></button>
-        </button>
-    </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="button" class="btn btn-white me-md-2 mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="/resources/images/agregar.png"
+                    alt="buttonpng" width="60rem" />
+            </button>
+            </button>
+        </div>
 
-    <div class="container py-5">
-        <div class="row ms-2">
-            <div class="col-md-5 py-5 px-5">
-                <div class="card border-0">
-                    <img src="/resources/images/botellas.png" class="card-img" alt="...">
-                    <div class="card-img-overlay"></div>
+        <div class="container py-5">
+            <div class="row ms-2">
+                <div class="col-md-5 py-5 px-5">
+                    <div class="card border-0">
+                        <img src="/resources/images/botellas.png" class="card-img" alt="...">
+                        <div class="card-img-overlay"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5 py-5 px-5">
-                <div class="card border-0">
-                    <img src="/resources/images/pelotas.png" class="card-img" alt="...">
-                    <div class="card-img-overlay"></div>
+                <div class="col-md-5 py-5 px-5">
+                    <div class="card border-0">
+                        <img src="/resources/images/pelotas.png" class="card-img" alt="...">
+                        <div class="card-img-overlay"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5 py-5 px-5">
-                <div class="card border-0">
-                    <img src="/resources/images/camisas.png" class="card-img" alt="...">
-                    <div class="card-img-overlay"></div>
+                <div class="col-md-5 py-5 px-5">
+                    <div class="card border-0">
+                        <img src="/resources/images/camisas.png" class="card-img" alt="...">
+                        <div class="card-img-overlay"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5 py-5 px-5">
-                <div class="card border-0">
-                    <img src="/resources/images/guantes.png" class="card-img" alt="...">
-                    <div class="card-img-overlay"></div>
+                <div class="col-md-5 py-5 px-5">
+                    <div class="card border-0">
+                        <img src="/resources/images/guantes.png" class="card-img" alt="...">
+                        <div class="card-img-overlay"></div>
+                    </div>
                 </div>
             </div>
         </div>
+
+       <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
     </div>
-
-
+  </div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
