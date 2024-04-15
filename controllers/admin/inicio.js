@@ -13,7 +13,7 @@ const menuHTML = `
                 aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="offcanvas offcanvas-lg offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header bg-black">
                     <img src="/resources/images/logoAcademiaBP.png" class="position-absolute top-0 start-50 translate-middle-x" alt="Logo" width="60px" height="60px">
@@ -24,7 +24,7 @@ const menuHTML = `
                         <li class="nav-item ">
                             <a href="/views/admin/inicio.html" class="nav-link active bg-black mt-3" aria-current="page">
                                 <i class="bi bi-house-door fs-4 me-2"></i><span
-                                    class="ms-1 d-none d-sm-inline text-white">Home</span>
+                                    class="ms-1 d-none d-sm-inline text-white">Inicio</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -35,7 +35,7 @@ const menuHTML = `
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link active bg-black mt-3">
+                            <a href="/views/admin/productos.html" class="nav-link active bg-black mt-3">
                                 <i class="fa-solid fa-money-bills fs-4 me-2"></i><span
                                     class="ms-1 d-none d-sm-inline text-white">productos</span>
                             </a>
