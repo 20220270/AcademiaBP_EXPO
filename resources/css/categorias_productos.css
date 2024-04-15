@@ -123,6 +123,11 @@ margin-top: 230px;
     height: 160px;
 }
 
+.imaegnProducto{
+  float: left;
+  margin-right: 10px;
+}
+
 .scroll {
   max-height: 300px; /* Define la altura máxima del div scroll */
   overflow-y: auto; /* Habilita el desplazamiento vertical */

@@ -140,6 +140,11 @@ main {
   overflow-x: hidden; /* Deshabilita el desplazamiento horizontal */
 }
 
+.imaegnProducto{
+  float: left;
+  margin-right: 10px;
+}
+
 
 #stars2{
   transform: translate(70%, -70%);
