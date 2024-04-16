@@ -52,64 +52,7 @@ margin-top: 230px;
   
   }
   
-  .image-container {
-    position: relative;
-    display: inline-block;
-  }
   
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    /*El último valor del rgba define la intensidad del color negro del overlay, o la capa
-      que se encuentra sobre la imagen que le da una tonalidad oscura*/
-    z-index: 1;
-    /* Ajusta el z-index para que la superposición, posición adicional, esté por encima de la imagen */
-  }
-  
-  .primerTextoImagen1, .primerTextoImagen2 {
-    position: absolute;
-    z-index: 3;
-    /* Asegura que esté encima del overlay */
-    font-weight: bold;
-  }
-  
-  .primerTextoImagen1 {
-    color: rgb(132, 132, 132);
-    top: 35%;
-  }
-  
-  .primerTextoImagen2 {
-    color: #408840;
-    top: 45%;
-    /* Ajusta la posición vertical para colocarlo debajo del primero */
-  }
-  
-  .botonImagen {
-    position: absolute;
-    z-index: 3;
-    transform: translateX(-50%);
-    top: 58%;
-    background-color: #408840;
-    color: white;
-    padding: 10px 20px;
-    /* Espaciado interno del botón, el primer valor es el espacio de arriba y abajo del botón,
-      el segundo valor es el espacio a los lados del texto dentro del botón*/
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  /*imagenes de las categorías*/
-  .span-overlay {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-  }
   
   /*texto dentro de las imagenes*/
   .span-uniforme,.span-texto-mochilas,.span-texto-gorras {
@@ -150,8 +93,46 @@ margin-top: 230px;
     font-size: 10px;
   }
   
+ .textoPrecio{
+  font-size: 20px;
+ }
  
- 
+ .popover-header,
+.modal-header,
+.modal-footer {
+    background-color: #408840;
+    color: #fff;
+}
+
+.popover-body {
+  background-color: #000;
+  color: #fff;
+}
+
+#inputLaberls{
+  display: inline-block;
+}
+
+.contenedorComentario{
+  border: 2px solid #408840;
+  border-radius: 10px;
+}
+
+.modal-header{
+  background: linear-gradient(to right, #04B704, #408340);
+    height: 160px;
+}
+
+.imaegnProducto{
+  float: left;
+  margin-right: 10px;
+}
+
+.scroll {
+  max-height: 300px; /* Define la altura máxima del div scroll */
+  overflow-y: auto; /* Habilita el desplazamiento vertical */
+  overflow-x: hidden; /* Deshabilita el desplazamiento horizontal */
+}
   
   /*footer*/
   footer {
@@ -166,58 +147,41 @@ margin-top: 230px;
   
   .filaCopy {
     border-top: 1px solid #fff;
+
+
   }
+
+
+
   @media (max-width: 360px) {
-    .imagenPrincipal{
-      margin-top: 25px;
-    }
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      margin-top: 26px;
-      height: 89%;
-      background-color: rgba(0, 0, 0, 0.7);
-      /*El último valor del rgba define la intensidad del color negro del overlay, o la capa
-        que se encuentra sobre la imagen que le da una tonalidad oscura*/
-      z-index: 1;
-      /* Ajusta el z-index para que la superposición, posición adicional, esté por encima de la imagen */
-    }
-    section {
+
+    .seccion1 {
       margin-top: 240px;
       /* Ajusta el margen superior para pantallas pequeñas */
     }
+
+    
   }
+
   
   @media (max-width: 370px) {
-    .imagenPrincipal{
-      margin-top: 25px;
-    }
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      margin-top: 26px;
-      height: 89%;
-      background-color: rgba(0, 0, 0, 0.7);
-      /*El último valor del rgba define la intensidad del color negro del overlay, o la capa
-        que se encuentra sobre la imagen que le da una tonalidad oscura*/
-      z-index: 1;
-      /* Ajusta el z-index para que la superposición, posición adicional, esté por encima de la imagen */
-    }
+ 
     section {
       margin-top: 240px;
       /* Ajusta el margen superior para pantallas pequeñas */
     }
+
+    .textoPrecio{
+      font-size: 17px;
+     }
+     
   }
   
   
   
   @media (max-width: 576px) {
     main {
-      margin-top: 240px;
+      margin-top: 330px;
       /* Ajusta el margen superior para pantallas pequeñas */
     }
   
@@ -227,6 +191,10 @@ margin-top: 230px;
   
     #textoCarrito{
       font-size: 12px;
+    }
+
+    #textoPrecio{
+      font-size: 10px;
     }
   }
   
@@ -241,7 +209,7 @@ margin-top: 230px;
     #textoCarrito{
       font-size: 7px;
     }
-  
+
   }
   
   /* Media query para pantallas de tamaño grande*/
@@ -254,6 +222,33 @@ margin-top: 230px;
       font-size: 10px;
     }
   }
+
+  @media (min-width: 992px) and (max-width: 1200px) {
+    .card{
+      height: 510px;
+    }
+
+    .conteNav {
+      font-size: 13.5px;
+    }
+
+    .textoCal{
+      font-size: 12.5px;
+    }
+
+    .fa-star{
+      font-size: 8px;
+    }
+
+    .textoPrecio{
+      font-size: 15.5px;
+    }
+
+    .existencias-label{
+      font-size: 15.5px;
+    }
+  }
+ 
 
  
   

@@ -140,6 +140,11 @@ main {
   overflow-x: hidden; /* Deshabilita el desplazamiento horizontal */
 }
 
+.imaegnProducto{
+  float: left;
+  margin-right: 10px;
+}
+
 
 #stars2{
   transform: translate(70%, -70%);
@@ -273,11 +278,13 @@ footer {
 
 
 
-@media (max-width: 360px) {
+@media (min-width: 270px) and (max-width: 360px) {
 
   .imagenPrincipal {
     margin-top: 25px;
+    width: 100%;
   }
+
 
   .overlay {
     position: absolute;
@@ -297,6 +304,7 @@ footer {
     margin-top: 240px;
     /* Ajusta el margen superior para pantallas pequeñas */
   }
+
 }
 
 
@@ -350,7 +358,7 @@ footer {
   .botonImagen {
     margin-top: 10px;
     font-size: 10px;
-    padding: 10px;
+    padding: 8px;
   }
 
   /*galeria de fotos*/

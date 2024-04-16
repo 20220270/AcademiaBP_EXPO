@@ -58,3 +58,8 @@ border: radius 80px;
   animation: none;
   background-color: white;
 }
+
+.btn-secondary{
+  background-color: #408840;
+  width: 200px;
+}
