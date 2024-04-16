@@ -27,12 +27,6 @@ text-decoration: none;
 }
 
 
-  @media only screen and (max-width:6000px) {
-    .card {
-      width: 18rem !important;
-      border-radius: 20px;
-    }
-  }
 
 
 

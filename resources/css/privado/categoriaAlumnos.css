@@ -141,14 +141,14 @@ a.sidebar-link:hover {
     transition: all .2s ease-out;
 }
 
-#myChart{
-    
-}
-
 
 .estado-activo {
     color: green;
   }
 
-
+  .btn-secondary{
+    background-color: #408840;
+    width: 200px;
+  }
+  
   

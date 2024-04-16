@@ -8,8 +8,6 @@ const menuHTML = `
 <!-- Menú lateral -->
 <div class="wrapper">
         <aside id="sidebar">
-
-            
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
                     <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
@@ -21,74 +19,91 @@ const menuHTML = `
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
-                        <i class="lni lni-user"></i>
+                        <i class="lni lni-home"></i>
                         <span>inicio</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="lni lni-agenda"></i>
-                        <span>Categoria Productos</span>
+                        <span>Categorias</span>
                     </a>
+                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Categoria Productos</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Categoria Alumnos</a>
+                        </li>
+                    </ul>
                 </li>
-
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
-                        <i class="lni lni-agenda"></i>
-                        <span>Pagos dde Mensualidad</span>
+                        <i class="lni lni-shopping-basket"></i>
+                        <span>Productos</span>
                     </a>
                 </li>
-
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
-                        <i class="lni lni-agenda"></i>
+                        <i class="lni lni-graduation"></i>
                         <span>Alumnos</span>
                     </a>
                 </li>
-
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
-                        <i class="lni lni-agenda"></i>
+                        <i class="lni lni-dollar"></i>
+                        <span>Pagos de Mensualidad</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <i class="lni lni-book"></i>
                         <span>Inscripciones</span>
                     </a>
                 </li>
-
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
-                        <i class="lni lni-agenda"></i>
-                        <span>Categoria Productos</span>
-                    </a>
-                </li>
-
-
-
-               
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="lni lni-popup"></i>
+                        <i class="lni lni-certificate"></i>
                         <span>Profesores</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
-                        <i class="lni lni-cog"></i>
+                        <i class="lni lni-basketball"></i>
                         <span>Entrenamientos</span>
                     </a>
                 </li>
+
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#auth23" aria-expanded="false" aria-controls="auth">
+                        <i class="lni lni-cogs"></i>
+                        <span>Opciones de usuaio</span>
+                    </a>
+                    <ul id="auth23" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+
+                            <a href="#" class="sidebar-link "> <i class="lni lni-user"></i>
+                                Ver perfil</a>
+
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link"> <i class="lni lni-exit"></i>Cerrar Sesión</a>
+                        </li>
+                    </ul>
+                </li>
+
+
             </ul>
-            <div class="sidebar-footer">
-                <a href="#" class="sidebar-link">
-                    <i class="lni lni-exit"></i>
-                    <span>Cerrar sesiòn</span>
-                </a>
-            </div>
+
         </aside>
         <div class="main p-3">
             <div class="text-center">
-                <h1>
-                Categoria Productos
-                </h1>
-
+                <h1>Categoria Alumnos</h1>
+                <div class="scrollable-content">
+                    
+                </div>
             </div>
         </div>
     </div>
