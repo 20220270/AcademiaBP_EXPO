@@ -17,56 +17,61 @@
     background-color: #408840;
   }
 
+
   .nav-item {
-    font-size: 13.9px;
+    font-size: 12.5px;
   }
 
   .carruselAliados .img-fluid {
-    width: 200px;
-    height: 200px;
-    object-fit: cover; /* Ajusta la imagen para que cubra todo el contenedor */
+    width: 210px;
+    height: 210px;
+    object-fit: cover;
+    /* Ajusta la imagen para que cubra todo el contenedor */
     border-radius: 55%;
     margin-left: 55px;
 
   }
 
   .flechregre {
-    left: 0; /* Mueve la flecha de navegación previa a la izquierda */
-}
+    left: 0;
+  }
 
-.flechaVer {
-    right: 0; /* Mueve la flecha de navegación siguiente a la derecha */
-}
+  .flechaVer {
+    right: 0;
+  }
 
   .card {
-    height: 470px;
+    height: 490px;
     border: 2px solid #408840;
     border-radius: 15px;
   }
 
   /*Ajustamos el cuerpo de la card para que no tenga ni un espacio, para que la imagen abarque toda la parte de arriba y los costados*/
-  .card-body{
+  .card-body {
     padding: 0;
   }
 
-  .imagenProfe{
+  .imagenProfe {
     width: 100%;
     border-radius: 10px 10px 0 0;
   }
 
 
-  .imagenesE{
+  .imagenesE {
     width: 100%;
   }
 
-  .i{
+  .i {
     background-color: #408840;
   }
 
+  /*Texto dentro de las imagenes de los equipos*/
   .carousel-caption-text {
-    max-width: 700px; /* Ajusta el ancho máximo del contenedor del texto */
-    margin: 0 auto; /* Centra horizontalmente el contenedor del texto */
-}
+    max-width: 700px;
+    /* Ajusta el ancho máximo del contenedor del texto */
+    margin: 0 auto;
+    /* Centra horizontalmente el contenedor del texto */
+  }
 
   footer {
     background-color: #408840;
@@ -77,38 +82,125 @@
     border-top: 1px solid #fff;
   }
 
-  .nu{
+  .nu {
     border: 4px solid #000;
   }
 
-  .aa{
+  .aa {
     text-decoration: none;
     color: #fff;
   }
 
   #textoCarrito,
-#textoCarrito:hover {
-  text-decoration: none;
-  color: #000;
-  font-size: 12px;
-}
+  #textoCarrito:hover {
+    text-decoration: none;
+    color: #000;
+    font-size: 12px;
+  }
 
-  /* Media query para pantallas de tamaño mediano */
-@media (min-width: 576px) and (max-width: 992px) {
-  main {
-    margin-top: 250px;
+  @media (min-width: 992px) and (max-width: 1200px) {
+    .nav-item {
+      font-size: 10.5px;
+    }
+
+    .carruselAliados{
+      width: 100%;
+    }
+
+    .carruselAliados .img-fluid {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      /* Ajusta la imagen para que cubra todo el contenedor */
+      border-radius: 55%;
+      margin-left: 55px;
+  
+    }
+
+    .spanMarca{
+      margin-left: 25px;
+    }
   }
 
 
-}
 
-@media (min-width: 260px) and (max-width: 576px) {
-  main {
-    margin-top: 370px;
+  @media (min-width: 768px) and (max-width: 992px) {
+    main {
+      margin-top: 250px;
+    }
+
+    .navbar {
+      text-align: start;
+    }
+
+    .card {
+      height: 530px;
+      margin-top: 20px;
+    }
   }
 
-.card{
-  height: 600px;
-  margin-top: 10px;
-}
-}
+  @media (min-width: 576px) and (max-width: 768px) {
+    main {
+      margin-top: 250px;
+    }
+
+    .navbar {
+      text-align: start;
+    }
+
+    .card {
+      height: 700px;
+      margin-top: 20px;
+    }
+  }
+
+
+
+  @media (min-width: 260px) and (max-width: 576px) {
+    main {
+      margin-top: 350px;
+    }
+
+    .card {
+      height: 710px;
+      margin-top: 10px;
+    }
+
+    .navbar {
+      text-align: start;
+    }
+
+    .imaegenesForma,
+    .imaegenesCompe{
+      width: 350px;
+    }
+
+    .carruselAliados .img-fluid {
+      width: 155px;
+      height: 155px;
+      object-fit: cover;
+      /* Ajusta la imagen para que cubra todo el contenedor */
+      border-radius: 55%;
+      margin-left: 55px;
+  
+    }
+
+    .imagenValores{
+      width: 224px;
+      height: 200px;
+    }
+
+    #competitivo,
+    #formacion{
+      font-size: 17px;
+    }
+
+    footer span{
+      font-size: 13px;
+    }
+
+    footer h6{
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  }
