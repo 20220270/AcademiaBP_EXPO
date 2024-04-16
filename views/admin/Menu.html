@@ -25,7 +25,7 @@
                 </div>
             </div>
             <ul class="sidebar-nav">
-                <li class="sidebar-item">
+                <li class="sidebar-item" onclick="Menu()">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-home"></i>
                         <span>inicio</span>
@@ -38,45 +38,45 @@
                         <span>Categorias</span>
                     </a>
                     <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" onclick="categoriaProductos()">
                             <a href="#" class="sidebar-link">Categoria Productos</a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" onclick="categoriaAlumnos()">
                             <a href="#" class="sidebar-link">Categoria Alumnos</a>
                         </li>
                     </ul>
                 </li>
-                <li class="sidebar-item">
+                <li class="sidebar-item" onclick="productosP()">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-shopping-basket"></i>
                         <span>Productos</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                <li class="sidebar-item" onclick="cancelacion_alumnos()">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-graduation"></i>
                         <span>Alumnos</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                <li class="sidebar-item" onclick="pagosDeMensualidad()">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-dollar"></i>
                         <span>Pagos de Mensualidad</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                <li class="sidebar-item"  onclick="A()">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-book"></i>
                         <span>Inscripciones</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                <li class="sidebar-item"  onclick="categoriaProfesores()">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-certificate"></i>
                         <span>Profesores</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                <li class="sidebar-item" onclick="A()">
                     <a href="#" class="sidebar-link">
                         <i class="lni lni-basketball"></i>
                         <span>Entrenamientos</span>
@@ -90,13 +90,13 @@
                         <span>Opciones de usuaio</span>
                     </a>
                     <ul id="auth23" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" onclick="A()">
 
                             <a href="#" class="sidebar-link "> <i class="lni lni-user"></i>
                                 Ver perfil</a>
 
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" onclick="index()">
                             <a href="#" class="sidebar-link"> <i class="lni lni-exit"></i>Cerrar Sesión</a>
                         </li>
                     </ul>
@@ -109,7 +109,7 @@
         <div class="main p-3">
             <div class="text-center">
                 <h1>
-                    Alumnos que no han cancelado
+                    Menu
                 </h1>
 
                 <div class="row">
@@ -147,9 +147,6 @@
                             }
                         }
                     });
-                
-                
-                
                 </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
