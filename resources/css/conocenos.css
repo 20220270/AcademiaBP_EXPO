@@ -32,13 +32,6 @@
 
   }
 
-  .flechregre {
-    left: 0;
-  }
-
-  .flechaVer {
-    right: 0;
-  }
 
   .card {
     height: 490px;
@@ -61,10 +54,6 @@
     width: 100%;
   }
 
-  .i {
-    background-color: #408840;
-  }
-
   /*Texto dentro de las imagenes de los equipos*/
   .carousel-caption-text {
     max-width: 700px;
@@ -82,7 +71,7 @@
     border-top: 1px solid #fff;
   }
 
-  .nu {
+  .imagenMarcas {
     border: 4px solid #000;
   }
 
@@ -155,8 +144,13 @@
   }
 
 
+@media (min-width: 380px) and (max-width: 576px) {
 
-  @media (min-width: 260px) and (max-width: 576px) {
+    .texto1,
+    .texto2{
+      font-size: 12px;
+    }
+
     main {
       margin-top: 350px;
     }
@@ -176,12 +170,68 @@
     }
 
     .carruselAliados .img-fluid {
-      width: 155px;
-      height: 155px;
+      width: 205px;
+      height: 200px;
       object-fit: cover;
       /* Ajusta la imagen para que cubra todo el contenedor */
       border-radius: 55%;
-      margin-left: 55px;
+      margin-left: 100px;
+  
+    }
+
+    .imagenValores{
+      width: 224px;
+      height: 200px;
+    }
+
+    #competitivo,
+    #formacion{
+      font-size: 17px;
+    }
+
+    footer span{
+      font-size: 13px;
+    }
+
+    footer h6{
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  }
+
+
+  @media (min-width: 260px) and (max-width: 380px) {
+
+    .texto1,
+    .texto2{
+      font-size: 12px;
+    }
+
+    main {
+      margin-top: 350px;
+    }
+
+    .card {
+      height: 710px;
+      margin-top: 10px;
+    }
+
+    .navbar {
+      text-align: start;
+    }
+
+    .imaegenesForma,
+    .imaegenesCompe{
+      width: 350px;
+    }
+
+    .carruselAliados .img-fluid {
+      width: 205px;
+      height: 200px;
+      object-fit: cover;
+      /* Ajusta la imagen para que cubra todo el contenedor */
+      border-radius: 55%;
+      margin-left: 15px;
   
     }
 
