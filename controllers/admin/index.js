@@ -28,8 +28,8 @@ function cancelacion_alumnos() {
   window.location.href = "../../views/admin/cancelacion_alumnos.html";
 }
 
-function A() {
-  window.location.href = "../../views/admin/Menu.html";
+function inscripciones() {
+  window.location.href = "../../views/admin/inscripciones.html";
 }
 
 function categoriaProfesores() {
