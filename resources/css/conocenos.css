@@ -23,8 +23,8 @@
   }
 
   .carruselAliados .img-fluid {
-    width: 210px;
-    height: 210px;
+    width: 220px;
+    height: 220px;
     object-fit: cover;
     /* Ajusta la imagen para que cubra todo el contenedor */
     border-radius: 55%;
@@ -109,6 +109,8 @@
     .spanMarca{
       margin-left: 25px;
     }
+
+    
   }
 
 
@@ -125,6 +127,11 @@
     .card {
       height: 530px;
       margin-top: 20px;
+    }
+
+    .carruselAliados{
+      margin-left: 40px;
+      margin-right: 40px;
     }
   }
 
@@ -164,6 +171,11 @@
       text-align: start;
     }
 
+    .carruselAliados{
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
     .imaegenesForma,
     .imaegenesCompe{
       width: 350px;
@@ -175,13 +187,19 @@
       object-fit: cover;
       /* Ajusta la imagen para que cubra todo el contenedor */
       border-radius: 55%;
-      margin-left: 100px;
+      margin-left: 75px;
   
     }
 
     .imagenValores{
-      width: 224px;
-      height: 200px;
+      width: 330px;
+      height: 290px;
+    }
+
+    .botonPrevio,
+    .botonLuego{
+      width: 15px;
+      height: 20px;
     }
 
     #competitivo,
@@ -222,7 +240,7 @@
 
     .imaegenesForma,
     .imaegenesCompe{
-      width: 350px;
+      width: 280px;
     }
 
     .carruselAliados .img-fluid {
@@ -231,13 +249,19 @@
       object-fit: cover;
       /* Ajusta la imagen para que cubra todo el contenedor */
       border-radius: 55%;
-      margin-left: 15px;
+      margin-left: 50px;
   
     }
 
+    .botonPrevio,
+    .botonLuego{
+      width: 15px;
+      height: 20px;
+    }
+
     .imagenValores{
-      width: 224px;
-      height: 200px;
+      width: 260px;
+      height: 250px;
     }
 
     #competitivo,

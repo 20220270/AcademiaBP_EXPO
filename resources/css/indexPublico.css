@@ -146,13 +146,6 @@ main {
 }
 
 
-#stars2{
-  transform: translate(70%, -70%);
-}
-
-.fechacomentario{
-  transform: translate(170%, -165%);
-}
 
 
 /*texto dentro de las imagenes*/
@@ -310,7 +303,7 @@ footer {
 
 
 
-@media (max-width: 370px) {
+@media (min-width: 360px) and (max-width: 400px) {
 
   .imagenPrincipal {
     margin-top: 25px;
@@ -334,14 +327,25 @@ footer {
     margin-top: 240px;
     /* Ajusta el margen superior para pantallas pequeñas */
   }
+  #stars2{
+    transform: translate(-2%, -160%);
+  }
+  
+  .fechacomentario{
+    transform: translate(10%, -15%);
+  }
 
+  .textoPrecio{
+    font-size: 20px;
+    margin-left: 10px;
+  }
 
 }
 
 
 
 
-@media (max-width: 576px) {
+@media (min-width: 400px) and (max-width: 556px) {
   main {
     margin-top: 240px;
     /* Ajusta el margen superior para pantallas pequeñas */
@@ -352,7 +356,7 @@ footer {
   }
 
   #textoCarrito {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .botonImagen {
@@ -383,12 +387,44 @@ footer {
     grid-row: 1/3;
   }
 
+  #stars2{
+    transform: translate(-2%, -160%);
+  }
+  
+  .fechacomentario{
+    transform: translate(50%, -15%);
+  }
+
+  .textoPrecio{
+    font-size: 25px;
+    margin-left: 10px;
+  }
+
 }
 
 
+@media (min-width: 556px) and (max-width: 768px) {
+
+  main{
+    margin-top: 170px
+  }
+  #stars2{
+    transform: translate(-10%, -160%);
+  }
+  
+  .fechacomentario{
+    transform: translate(70%, -25%);
+  }
+
+  .textoPrecio{
+    font-size: 25px;
+    margin-left: 10px;
+  }
+}
+
 
 /* Media query para pantallas de tamaño mediano */
-@media (min-width: 576px) and (max-width: 992px) {
+@media (min-width: 768px) and (max-width: 992px) {
   #imagenLogoA {
     margin-right: 40px;
   }
@@ -444,7 +480,18 @@ footer {
     grid-row: 1/3;
   }
 
+  #stars2{
+    transform: translate(-20%, -80%);
+  }
+  
+  .fechacomentario{
+    transform: translate(100%, -55%);
+  }
 
+  .textoPrecio{
+    font-size: 25px;
+
+  }
 }
 
 
@@ -452,13 +499,17 @@ footer {
 
 
 /* Media query para pantallas de tamaño grande*/
-@media (min-width: 992px) {
+@media (min-width: 992px) and (max-width: 1224px) {
   main {
     margin-top: 153px;
   }
 
   #textoCarrito {
     font-size: 11px;
+  }
+
+  .card{
+    height: 550px;
   }
 
   .primerTextoImagen1,
@@ -472,6 +523,35 @@ footer {
 
   .imagenn {
     width: 100%;
+  }
+
+  #stars2{
+    transform: translate(70%, -70%);
+  }
+
+  .fechacomentario{
+    transform: translate(100%, -35%);
+  }
+
+  .textoCal{
+    font-size: 11px;
+  }
+
+}
+
+@media (min-width: 1224px) and (max-width: 1555px) {
+
+
+  #stars2{
+    transform: translate(80%, -70%);
+  }
+
+  .fechacomentario{
+    transform: translate(140%, -65%);
+  }
+
+  .textoPrecio{
+    font-size: 20px;
   }
 
 }
