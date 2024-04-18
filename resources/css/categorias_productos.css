@@ -113,6 +113,11 @@ margin-top: 230px;
   color: #fff;
 }
 
+.botonmodal,
+.agregar{
+  cursor: pointer;
+}
+
 #inputLaberls{
   display: inline-block;
 }
