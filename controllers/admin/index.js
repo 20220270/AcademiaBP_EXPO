@@ -48,9 +48,6 @@ function categoriaProfesores() {
   window.location.href = "../../views/admin/categoriaAlumnos.html";
 }
 
-function A() {
-  window.location.href = "../../views/admin/index.html";
-}
 
 function A() {
   window.location.href = "../../views/admin/Menu.html";
@@ -58,5 +55,9 @@ function A() {
 
 function index() {
   window.location.href = "../../views/admin/index.html";
+}
+
+function entre() {
+  window.location.href = "../../views/admin/entrenamientos.html";
 }
 
