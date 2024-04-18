@@ -210,3 +210,9 @@ a.sidebar-link:hover {
   .profile-details{
     margin-top: 5%;
   }
+
+  .btn-secondary{
+    background-color: #408840;
+    width: 200px;
+  }
+  
