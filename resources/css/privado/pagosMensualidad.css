@@ -172,4 +172,6 @@ a.sidebar-link:hover {
     background-color: #eeeeee; 
 }
 
-
+a{
+    text-decoration: underline;
+}
