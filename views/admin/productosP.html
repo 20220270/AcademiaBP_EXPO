@@ -246,60 +246,59 @@
                         <div class="col">
                             <!-- campo del nombre producto -->
                             <input type="nombre_completo" class="form-control mt-1"
-                                placeholder="Nombre producto:" id="nombre" id="exampleInputUsuario"
-                                aria-describedby="Usuario">
+                                placeholder="Nombre producto:" id="nombre_producto">
                         </div>
                         <!-- campo del nombre producto -->
-                        <div class="col">
-                            <input type="identificacion" class="form-control mt-1"
-                                placeholder="Estado del producto:" id="dui" id="exampleInputUsuario"
-                                aria-describedby="Usuario">
+                        <div class="col mt-1">
+                            <button class="btn btn-secondary dropdown-toggle" id="Edproducto" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                                Estado del producto:                              
+                            </button>
+                              <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Botellas</a></li>
+                                <li><a class="dropdown-item" href="#">Pelotas</a></li>
+                                <li><a class="dropdown-item" href="#">Camisas</a></li>
+                                <li><a class="dropdown-item" href="#">Guantes</a></li>
+                              </ul>
                         </div>
                         <!-- campo del nombre producto -->
                     </div>
                     <div class="row" style="margin-top: 30px;">
                         <div class="col">
-                            <input type="correo" class="form-control mt-1"
-                                placeholder="Descripción  del producto:" id="correo"
-                                id="exampleInputUsuario" aria-describedby="Usuario">
+                            <input type="descripcion" class="form-control mt-1"
+                                placeholder="Descripción  del producto:" id="descrip_producto">
                         </div>
-                        <!-- campo del nombre producto -->
+                        <!-- campo de Existencias producto -->
 
                         <div class="col">
-                            <input type="universidad" class="form-control mt-1"
-                                placeholder="Existencias producto:" id="universidad"
-                                id="exampleInputUsuario" aria-describedby="Usuario">
+                            <input type="Existencias" class="form-control mt-1"
+                                placeholder="Existencias producto:" id="Existencias_productos">
                         </div>
-                        <!-- campo del nombre producto -->
+                        <!-- campo del Precio del producto -->
                     </div>
                     <div class="row" style="margin-top: 30px;">
                         <div class="col">
-                            <input type="telefono" class="form-control mt-1"
-                                placeholder="Precio del producto:" id="telefono"
-                                id="exampleInputUsuario" aria-describedby="Usuario">
+                            <input type="Precio" class="form-control mt-1"
+                                placeholder="Precio del producto:" id="precio_producto">
                         </div>
-                        <!-- campo del nombre producto -->
+                        <!-- campo de Fechá de registro -->
                         <div class="col">
-                            <input type="carrera" class="form-control mt-1"
-                                placeholder="Fechá de registro:" id="carrera" id="exampleInputUsuario"
-                                aria-describedby="Usuario">
+                            <input type="Fecha" class="form-control mt-1"
+                                placeholder="Fechá de registro:" id="Fecha_registro">
                         </div>
-                        <!-- campo del nombre producto -->
+                        <!-- campo de Imagen del producto -->
                     </div>
                     <div class="row" style="margin-top: 30px;">
                         <div class="col text-start">
                             <label for="">Imagen del producto:</label>
                             <input type="file" class="form-control mt-1"
-                                placeholder="Imagen del producto:" id="nombre_usuario"
-                                id="exampleInputUsuario" aria-describedby="Usuario">
+                                placeholder="Imagen del producto:" id="nombre_usuario">
                         </div>
-                        <!-- campo del nombre producto -->
-                        <div class="col">
-                            <input type="clave" class="form-control mt-1"
-                                placeholder="Descuento producto:" id="clave" id="exampleInputUsuario"
-                                aria-describedby="Usuario">
+                        <!-- campo de Descuento producto -->
+                        <div class="col mt-4">
+                            <input type="Descuento" class="form-control mt-1"
+                                placeholder="Descuento producto:" id="Descuento_pro">
                         </div>
-                        <!-- campo del nombre producto -->
+                        <!-- espacio para el modal -->
                     </div>
                     <div class="row" style="margin-top: 80px;">
                         <div class="col">
@@ -311,7 +310,7 @@
             </div>
             <!-- footer del modal -->
             <div class="modal-footer border-0">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Agregar</button>
+                <button type="button" class="btn agregar btn-secondary" data-bs-dismiss="modal">Agregar</button>
             </div>
         </div>
     </div>

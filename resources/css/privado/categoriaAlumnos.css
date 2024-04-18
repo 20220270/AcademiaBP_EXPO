@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+body{
+    background-color: white;
+}
+
 ::after,
 ::before {
     box-sizing: border-box;
@@ -33,7 +37,6 @@ body {
     width: 100%;
     overflow: hidden;
     transition: all 0.35s ease-in-out;
-    background-color: #f8ffec;
 }
 
 #sidebar {
@@ -151,4 +154,12 @@ a.sidebar-link:hover {
     width: 200px;
   }
   
+
+  @media only screen and (max-width:6000px) {
+    #horario {
+        color: black;
+        background-color: white;
+    }
+  }
   
+

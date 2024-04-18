@@ -53,6 +53,17 @@ border: radius 80px;
   background-color: white;
 }
 
+.agregar{
+  background-color: #408840;
+  width: 200px;
+}
+
+
+#Edproducto{
+  color: black;
+  background-color: white;
+}
+
 .btn-secondary{
   background-color: #408840;
   width: 200px;

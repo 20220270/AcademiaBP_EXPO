@@ -109,52 +109,38 @@
         </aside>
         <div class="main p-3">
             <div class="text-center">
-                <h1>
-                    Categoria Productos
-                </h1>
-
-
-
+                <h1>Categoria productos</h1>
                 <div class="scrollable-content">
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
                         <button type="button" class="btn btn-white me-md-2 mt-5" data-bs-toggle="modal"
                             data-bs-target="#exampleModal"><img src="/resources/images/agregar.png" alt="buttonpng"
                                 width="60rem" />
                         </button>
-                        </button>
                     </div>
-    
-                    <div class="container py-5">
-                        <div class="row ms-2">
-                            <div class="col-md-5 py-5 px-5">
-                                <div class="card border-0">
-                                    <img src="/resources/images/botellas.png" class="card-img" alt="...">
-                                    <div class="card-img-overlay"></div>
-                                </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-4 py-2 px-5">
+                            <div class="card border-0">
+                                <img src="/resources/images/botellas.png" class="card-img-top" alt="...">
                             </div>
-                            <div class="col-md-5 py-5 px-5">
-                                <div class="card border-0">
-                                    <img src="/resources/images/pelotas.png" class="card-img" alt="...">
-                                    <div class="card-img-overlay"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-5 py-5 px-5">
-                                <div class="card border-0">
-                                    <img src="/resources/images/camisas.png" class="card-img" alt="...">
-                                    <div class="card-img-overlay"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-5 py-5 px-5">
-                                <div class="card border-0">
-                                    <img src="/resources/images/guantes.png" class="card-img" alt="...">
-                                    <div class="card-img-overlay"></div>
-                                </div>
+                        </div>
+                        <div class="col-md-4 py-2 px-5">
+                            <div class="card border-0">
+                                <img src="/resources/images/pelotas.png" class="card-img-top" alt="...">
                             </div>
                         </div>
                     </div>
-    
-    
-    
+                    <div class="row justify-content-center">
+                        <div class="col-md-4 py-2 px-5 mt-5">
+                            <div class="card border-0">
+                                <img src="/resources/images/camisas.png" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                        <div class="col-md-4 py-2 px-5 mt-5">
+                            <div class="card border-0">
+                                <img src="/resources/images/guantes.png" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                    </div>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
@@ -173,15 +159,15 @@
                                         <div class="row" style="margin-top: 30px;">
                                             <div class="col">
                                                 <!-- campo del nombre producto -->
+                                                <label for=""></label>
                                                 <input type="nombre_completo" class="form-control mt-1"
-                                                    placeholder="Nombre categoria producto:" id="nombre" id="exampleInputUsuario"
-                                                    aria-describedby="Usuario">
+                                                    placeholder="Nombre categoria producto:" id="nombre_cate_producto">
                                             </div>
                                             <!-- campo del nombre producto -->
-                                            <div class="col">
-                                                <input type="identificacion" class="form-control mt-1"
-                                                    placeholder="Imagen de la categoria del producto:" id="dui" id="exampleInputUsuario"
-                                                    aria-describedby="Usuario">
+                                            <div class="col text-start">
+                                                <label for="">Imagen del producto:</label>
+                                                <input type="file" class="form-control mt-1"
+                                                    placeholder="Imagen del producto:" id="Imagen_producto">
                                             </div>
                                             <!-- campo del nombre producto -->
                                         </div>
