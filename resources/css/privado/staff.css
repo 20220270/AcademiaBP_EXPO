@@ -147,66 +147,6 @@ a.sidebar-link:hover {
     overflow-y: auto; /* Habilita el desplazamiento vertical */
 }
 
-
-
-
-
-
-  
-.contenedor {
-    margin: 50px auto;
-    border: 2px solid #000000;
-  }
-  
-  .profile-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-  }
-  
-  .profile-header {
-    padding: 20px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .profile-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-  }
-  
-  .profile-info {
-    flex: 1;
-  }
-  
-  .profile-name {
-    margin: 0;
-    font-size: 24px;
-    color: #333;
-  }
-  
-  .profile-details {
-    margin: 5px 0;
-    font-size: 16px;
-    color: #666;
-  }
-  
-  .badge {
-    background-color: #002853;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-
-  .profile-details{
-    margin-top: 5%;
-  }
-
-  #Actualizar,
-  #ModalContraseña{
-    background-color: #408840;
-    width: 250px;
-  }
+.contenedorStaff{
+    border-radius: 20px;
+}
