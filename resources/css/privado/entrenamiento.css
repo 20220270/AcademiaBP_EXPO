@@ -156,3 +156,50 @@ a.sidebar-link:hover {
     background-color: #408844;
     color: #FFF;
 }
+
+.img-fluid{
+    height: 100%;
+}
+
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .img-fluid{
+        height: 200px;
+        margin-top: 30px;
+        width: 100%;
+
+    }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    .img-fluid{
+        height: 170px;
+        margin-top: 50px;
+        width: 100%;
+    }
+}
+
+@media (min-width: 424px) and (max-width: 576px) {
+    .img-fluid{
+        height: 140px;
+        margin-top: 50px;
+        width: 100%;
+    }
+}
+
+
+@media (min-width: 374px) and (max-width: 424px) {
+    .imagenContenedor{
+        display: none;
+    }
+
+    
+}
+
+@media (min-width: 200px) and (max-width: 374px) {
+    .imagenContenedor{
+        display: none;
+    }
+
+    
+}

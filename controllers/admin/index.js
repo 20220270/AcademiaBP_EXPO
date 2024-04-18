@@ -45,7 +45,7 @@ function inscripciones() {
 }
 
 function categoriaProfesores() {
-  window.location.href = "../../views/admin/categoriaAlumnos.html";
+  window.location.href = "../../views/admin/staff.html";
 }
 
 
