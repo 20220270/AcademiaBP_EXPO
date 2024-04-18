@@ -162,4 +162,18 @@ a.sidebar-link:hover {
     }
   }
   
+  @media (max-width: 800px) {
+    .card {
+      width: 550px;
+      height: 220px; 
+    }
+  }
 
+  @media (max-width: 800px) {
+    .btn.btn-sm {
+        margin-left: auto;
+        width: 45px;
+        height: 30px; 
+    }
+  }
+  
