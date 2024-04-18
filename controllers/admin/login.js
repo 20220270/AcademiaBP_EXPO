@@ -31,7 +31,7 @@ function pagosDeMensualidad() {
 }
 
 function cancelacion_alumnos() {
-  window.location.href = "../../views/admin/cancelacion_alumnos.html";
+  window.location.href = "../../views/admin/alumnos_que_han_cancelado.html";
 }
 
 function A() {
