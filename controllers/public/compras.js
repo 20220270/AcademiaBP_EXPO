@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     // Obtenemos todas las cards
     const cards = document.querySelectorAll(".card");
@@ -261,7 +262,5 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
-
-
 
 
