@@ -113,36 +113,39 @@ main {
   color: #000;
 }
 
-#inputLaberls{
+#inputLaberls {
   display: inline-block;
 }
 
-.contenedorComentario{
+.contenedorComentario {
   border: 2px solid #408840;
   border-radius: 10px;
 }
 
-.imagenCliente{
+.imagenCliente {
   border-radius: 15px;
   border: 1px solid #000;
 }
 
-.modal-header{
+.modal-header {
   background: linear-gradient(to right, #04B704, #408340);
-    height: 160px;
+  height: 160px;
 }
 
-.text1{
+.text1 {
   display: inline-block;
 }
 
 .scroll {
-  max-height: 300px; /* Define la altura máxima del div scroll */
-  overflow-y: auto; /* Habilita el desplazamiento vertical */
-  overflow-x: hidden; /* Deshabilita el desplazamiento horizontal */
+  max-height: 300px;
+  /* Define la altura máxima del div scroll */
+  overflow-y: auto;
+  /* Habilita el desplazamiento vertical */
+  overflow-x: hidden;
+  /* Deshabilita el desplazamiento horizontal */
 }
 
-.imaegnProducto{
+.imaegnProducto {
   float: left;
   margin-right: 10px;
 }
@@ -172,14 +175,14 @@ main {
 .popover-header,
 .modal-header,
 .modal-footer {
-    background-color: #408840;
-    color: #fff;
+  background-color: #408840;
+  color: #fff;
 }
 
 
 .popover-body {
-    background-color: #000;
-    color: #fff;
+  background-color: #000;
+  color: #fff;
 }
 
 .card {
@@ -210,7 +213,7 @@ main {
 }
 
 .agregarCarrito,
-.verComentarios{
+.verComentarios {
   cursor: pointer;
 }
 
@@ -237,7 +240,7 @@ main {
 }
 
 
-#floatingTextarea {
+#EspacioConsultas {
   border: 2px solid #274E27;
   height: 150px;
 }
@@ -276,7 +279,7 @@ footer {
 @media (min-width: 270px) and (max-width: 360px) {
 
   .imagenPrincipal {
-    margin-top: 25px;
+    margin-top: 30px;
     width: 100%;
   }
 
@@ -295,6 +298,11 @@ footer {
     /* Ajusta el z-index para que la superposición, posición adicional, esté por encima de la imagen */
   }
 
+  .imagenn {
+    width: 300px;
+    height: 260px;
+  }
+
   section {
     margin-top: 240px;
     /* Ajusta el margen superior para pantallas pequeñas */
@@ -305,7 +313,7 @@ footer {
     top: 35%;
     font-size: 13px;
   }
-  
+
   .primerTextoImagen2 {
     color: #408840;
     top: 45%;
@@ -317,6 +325,30 @@ footer {
     margin-top: 10px;
     font-size: 10px;
     padding: 5px;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(1, 9rem);
+    gap: 0.09rem;
+    margin-bottom: 20px;
+  }
+
+  .gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /*Formato para que la imagen número 3 tenga un mayor tamaño que las demás*/
+  .gallery-img-3 {
+    grid-column: 2/4;
+    grid-row: 1/3;
+  }
+
+  #btnEnviarConsulta {
+    height: 80px;
   }
 
 }
@@ -348,15 +380,16 @@ footer {
     margin-top: 240px;
     /* Ajusta el margen superior para pantallas pequeñas */
   }
-  #stars2{
+
+  #stars2 {
     transform: translate(-2%, -160%);
   }
-  
-  .fechacomentario{
+
+  .fechacomentario {
     transform: translate(10%, -15%);
   }
 
-  .textoPrecio{
+  .textoPrecio {
     font-size: 20px;
     margin-left: 10px;
   }
@@ -366,7 +399,7 @@ footer {
     top: 35%;
     font-size: 15px;
   }
-  
+
   .primerTextoImagen2 {
     color: #408840;
     top: 45%;
@@ -378,6 +411,26 @@ footer {
     margin-top: 10px;
     font-size: 10px;
     padding: 6px;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(1, 9rem);
+    gap: 0.09rem;
+    margin-bottom: 20px;
+  }
+
+  .gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /*Formato para que la imagen número 3 tenga un mayor tamaño que las demás*/
+  .gallery-img-3 {
+    grid-column: 2/4;
+    grid-row: 1/3;
   }
 }
 
@@ -403,7 +456,7 @@ footer {
     top: 35%;
     font-size: 15px;
   }
-  
+
   .primerTextoImagen2 {
     color: #408840;
     top: 45%;
@@ -439,15 +492,15 @@ footer {
     grid-row: 1/3;
   }
 
-  #stars2{
+  #stars2 {
     transform: translate(-2%, -160%);
   }
-  
-  .fechacomentario{
+
+  .fechacomentario {
     transform: translate(50%, -15%);
   }
 
-  .textoPrecio{
+  .textoPrecio {
     font-size: 25px;
     margin-left: 10px;
   }
@@ -457,18 +510,19 @@ footer {
 
 @media (min-width: 556px) and (max-width: 768px) {
 
-  main{
+  main {
     margin-top: 170px
   }
-  #stars2{
+
+  #stars2 {
     transform: translate(-10%, -160%);
   }
-  
-  .fechacomentario{
+
+  .fechacomentario {
     transform: translate(70%, -25%);
   }
 
-  .textoPrecio{
+  .textoPrecio {
     font-size: 25px;
     margin-left: 10px;
   }
@@ -480,7 +534,7 @@ footer {
   #imagenLogoA {
     margin-right: 40px;
   }
-  
+
 
 
   main {
@@ -532,15 +586,15 @@ footer {
     grid-row: 1/3;
   }
 
-  #stars2{
+  #stars2 {
     transform: translate(-20%, -80%);
   }
-  
-  .fechacomentario{
+
+  .fechacomentario {
     transform: translate(100%, -55%);
   }
 
-  .textoPrecio{
+  .textoPrecio {
     font-size: 25px;
 
   }
@@ -560,7 +614,7 @@ footer {
     font-size: 11px;
   }
 
-  .card{
+  .card {
     height: 550px;
   }
 
@@ -577,15 +631,15 @@ footer {
     width: 100%;
   }
 
-  #stars2{
+  #stars2 {
     transform: translate(70%, -70%);
   }
 
-  .fechacomentario{
+  .fechacomentario {
     transform: translate(100%, -35%);
   }
 
-  .textoCal{
+  .textoCal {
     font-size: 11px;
   }
 
@@ -594,15 +648,15 @@ footer {
 @media (min-width: 1224px) and (max-width: 1555px) {
 
 
-  #stars2{
+  #stars2 {
     transform: translate(80%, -70%);
   }
 
-  .fechacomentario{
+  .fechacomentario {
     transform: translate(140%, -65%);
   }
 
-  .textoPrecio{
+  .textoPrecio {
     font-size: 20px;
   }
 

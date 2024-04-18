@@ -52,3 +52,25 @@ document.getElementById('botonCerrarCo2').addEventListener('mouseleave', functio
         popover.hide();
     }
 });
+
+
+
+const buscadorInput = document.getElementById('Buscador1');
+
+// Añadir un EventListener para el evento "keydown" en el input de búsqueda
+buscadorInput.addEventListener('keydown', function(event) {
+    // Verificar si la tecla presionada es "Enter"
+    if (event.key === 'Enter') {
+        // Obtener el valor del input de búsqueda
+        const searchTerm = buscadorInput.value.trim();
+        
+        // Verificar si hay un término de búsqueda ingresado
+        if (searchTerm !== '') {
+            // Construir la URL de redirección con el término de búsqueda como parámetro
+            const url = `categorias_productos.html?search=${encodeURIComponent(searchTerm)}`;
+            
+            // Redirigir a la página de categorías con el término de búsqueda
+            window.location.href = url;
+        }
+    }
+});

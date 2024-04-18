@@ -1,3 +1,6 @@
+
+
+
 //Funcion para añadir un numero al texto Carrito de Compras
 // Obtener el botón y el contador del carrito
 const botonAgregarCarrito = document.querySelectorAll('.agregar');
@@ -53,5 +56,6 @@ document.getElementById('botonCerrarComen2').addEventListener('mouseleave', func
         popover.hide();
     }
 });
+
 
 
