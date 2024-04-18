@@ -154,8 +154,8 @@ a.sidebar-link:hover {
 }
 
 
-  .estado-activo {
-    color: rgb(0, 203, 0);
+  .estado-activo td{
+    color: green;
   }
   .estado-inactivo {
     color: red;
