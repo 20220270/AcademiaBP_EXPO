@@ -58,15 +58,15 @@
                                 </div>
 
                                 <!--Nombre del producto destacado-->
-                                <h5 class="card-title mt-2 mb-3">Mochila didáctica</h5>
+                                <h5 class="card-title mt-2 mb-3 nombreDelProducto">Mochila didáctica</h5>
 
                                 <!--Espacio para el estado y las existencias de los productos destacados-->
                                 <div class="row">
                                     <div class="col-6 text-end">
-                                        <span id="estado">Estado:</span>
+                                        <span id="estado" class="estado">Estado:</span>
                                     </div>
                                     <div class="col-6 text-start">
-                                        <span id="disponible">Disponible</span>
+                                        <span id="disponible" class="disponible">Disponible</span>
                                     </div>
                                 </div>
                                 <div class="row mt-2 text-end">
@@ -74,7 +74,75 @@
                                         <span class="existencias-label" id="existencias-label">Existencias:</span>
                                     </div>
                                     <div class="col-6 text-start">
-                                        <span id="existencias-value">40</span>
+                                        <span id="existencias-value" class="existencias-value">40</span>
+                                    </div>
+                                </div>
+
+                                <!--Agregar al carrito, precio del producto y espacio para ver comentarios-->
+                                <div class="container text-center mt-4">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-5 col-4">
+                                            <!--Agregar al carrito-->
+                                            <img src="/resources/images/cesta2.png" alt="..." width="30px" height="30px"
+                                                class="agregar" />
+                                        </div>
+                                        <div class="col-lg-5 col-md-5 text-start col-sm-3 col-4">
+                                            <!--Precio del producto-->
+                                            <span class="fw-bold textoPrecio" name="textoPrecio">$50.00</span>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-4 col-3">
+                                            <!--Ver comentarios del producto-->
+                                            <img src="/resources/images/comentarios.png" alt="..." width="30px"
+                                                height="30px" data-bs-toggle="modal" data-bs-target="#modalComentarios"
+                                                class="botonmodal" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-2 d-flex align-items-start">
+                        <div class="card col-md-12 col-sm-12 col-12">
+                            <div class="card-body">
+                                <span class="discount-badge">20% de descuento</span>
+                                <img src="../../../resources/images/imagenTmochilas.png" alt="..." width="180px"
+                                    height="170px" class="mt-4" />
+
+                                <!--Grid para la parte de la calificación promedia del producto-->
+                                <div class="container text-center mt-2">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <span class="textoCal">Calificación promedio:</span>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 mt-2" id="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Nombre del producto destacado-->
+                                <h5 class="card-title mt-2 mb-3 nombreDelProducto">Mochila didáctica</h5>
+
+                                <!--Espacio para el estado y las existencias de los productos destacados-->
+                                <div class="row">
+                                    <div class="col-6 text-end">
+                                        <span id="estado" class="estado">Estado:</span>
+                                    </div>
+                                    <div class="col-6 text-start">
+                                        <span id="disponible" class="disponible">Disponible</span>
+                                    </div>
+                                </div>
+                                <div class="row mt-2 text-end">
+                                    <div class="col-6">
+                                        <span class="existencias-label" id="existencias-label">Existencias:</span>
+                                    </div>
+                                    <div class="col-6 text-start">
+                                        <span id="existencias-value" class="existencias-value">40</span>
                                     </div>
                                 </div>
 
@@ -126,7 +194,7 @@
                                 </div>
 
                                 <!--Nombre del producto destacado-->
-                                <h5 class="card-title mt-2 mb-3">Mochila didáctica</h5>
+                                <h5 class="card-title mt-2 mb-3 nombreDelProducto">Mochila didáctica</h5>
 
                                 <!--Espacio para el estado y las existencias de los productos destacados-->
                                 <div class="row">
@@ -169,7 +237,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12  mb-2 d-flex align-items-start">
+
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-2 d-flex align-items-start">
                         <div class="card col-md-12 col-sm-12 col-12">
                             <div class="card-body">
                                 <span class="discount-badge">20% de descuento</span>
@@ -193,15 +262,15 @@
                                 </div>
 
                                 <!--Nombre del producto destacado-->
-                                <h5 class="card-title mt-2 mb-3">Mochila didáctica</h5>
+                                <h5 class="card-title mt-2 mb-3 nombreDelProducto">Mochila didáctica</h5>
 
                                 <!--Espacio para el estado y las existencias de los productos destacados-->
                                 <div class="row">
                                     <div class="col-6 text-end">
-                                        <span id="estado">Estado:</span>
+                                        <span id="estado" class="estado">Estado:</span>
                                     </div>
                                     <div class="col-6 text-start">
-                                        <span id="disponible">Disponible</span>
+                                        <span id="disponible" class="disponible">Disponible</span>
                                     </div>
                                 </div>
                                 <div class="row mt-2 text-end">
@@ -209,7 +278,7 @@
                                         <span class="existencias-label" id="existencias-label">Existencias:</span>
                                     </div>
                                     <div class="col-6 text-start">
-                                        <span id="existencias-value">40</span>
+                                        <span id="existencias-value" class="existencias-value">40</span>
                                     </div>
                                 </div>
 
@@ -236,73 +305,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12  mb-2 d-flex align-items-start">
-                        <div class="card col-md-12 col-sm-12 col-12">
-                            <div class="card-body">
-                                <span class="discount-badge">20% de descuento</span>
-                                <img src="../../../resources/images/imagenTmochilas.png" alt="..." width="180px"
-                                    height="170px" class="mt-4" />
 
-                                <!--Grid para la parte de la calificación promedia del producto-->
-                                <div class="container text-center mt-2">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <span class="textoCal">Calificación promedio:</span>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 mt-2" id="stars">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!--Nombre del producto destacado-->
-                                <h5 class="card-title mt-2 mb-3">Mochila didáctica</h5>
-
-                                <!--Espacio para el estado y las existencias de los productos destacados-->
-                                <div class="row">
-                                    <div class="col-6 text-end">
-                                        <span id="estado">Estado:</span>
-                                    </div>
-                                    <div class="col-6 text-start">
-                                        <span id="disponible">Disponible</span>
-                                    </div>
-                                </div>
-                                <div class="row mt-2 text-end">
-                                    <div class="col-6">
-                                        <span class="existencias-label" id="existencias-label">Existencias:</span>
-                                    </div>
-                                    <div class="col-6 text-start">
-                                        <span id="existencias-value">40</span>
-                                    </div>
-                                </div>
-
-                                <!--Agregar al carrito, precio del producto y espacio para ver comentarios-->
-                                <div class="container text-center mt-4">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-sm-5 col-4">
-                                            <!--Agregar al carrito-->
-                                            <img src="/resources/images/cesta2.png" alt="..." width="30px" height="30px"
-                                                class="agregar" />
-                                        </div>
-                                        <div class="col-lg-5 col-md-5 text-start col-sm-3 col-4">
-                                            <!--Precio del producto-->
-                                            <span class="fw-bold textoPrecio" name="textoPrecio">$50.00</span>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-4 col-3">
-                                            <!--Ver comentarios del producto-->
-                                            <img src="/resources/images/comentarios.png" alt="..." width="30px"
-                                                height="30px" data-bs-toggle="modal" data-bs-target="#modalComentarios"
-                                                class="botonmodal" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -344,15 +347,15 @@
                                 </div>
 
                                 <!--Nombre del producto destacado-->
-                                <h5 class="card-title mt-2 mb-3">Uniforme</h5>
+                                <h5 class="card-title mt-2 mb-3 nombreDelProducto">Uniforme</h5>
 
                                 <!--Espacio para el estado y las existencias de los productos destacados-->
                                 <div class="row">
                                     <div class="col-6 text-end">
-                                        <span id="estado">Estado:</span>
+                                        <span id="estado" class="estado">Estado:</span>
                                     </div>
                                     <div class="col-6 text-start">
-                                        <span id="disponible">Disponible</span>
+                                        <span id="disponible" class="disponible">Disponible</span>
                                     </div>
                                 </div>
                                 <div class="row mt-2 text-end">
@@ -360,7 +363,7 @@
                                         <span class="existencias-label" id="existencias-label">Existencias:</span>
                                     </div>
                                     <div class="col-6 text-start">
-                                        <span id="existencias-value">40</span>
+                                        <span id="existencias-value" class="existencias-value">40</span>
                                     </div>
                                 </div>
 
@@ -388,74 +391,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 col-sm-12  mb-2 d-flex align-items-start">
-                        <div class="card col-md-12 col-sm-12 col-12">
-                            <div class="card-body">
-                                <span class="discount-badge">20% de descuento</span>
-                                <img src="/resources/images/uniforme2.jpeg" alt="..." width="180px" height="170px"
-                                    class="mt-4 rounded-3" />
-
-                                <!--Grid para la parte de la calificación promedia del producto-->
-                                <div class="container text-center mt-2">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <span class="textoCal">Calificación promedio:</span>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12 mt-2" id="stars">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!--Nombre del producto destacado-->
-                                <h5 class="card-title mt-2 mb-3">Uniforme</h5>
-
-                                <!--Espacio para el estado y las existencias de los productos destacados-->
-                                <div class="row">
-                                    <div class="col-6 text-end">
-                                        <span id="estado">Estado:</span>
-                                    </div>
-                                    <div class="col-6 text-start">
-                                        <span id="disponible">Disponible</span>
-                                    </div>
-                                </div>
-                                <div class="row mt-2 text-end">
-                                    <div class="col-6">
-                                        <span class="existencias-label" id="existencias-label">Existencias:</span>
-                                    </div>
-                                    <div class="col-6 text-start">
-                                        <span id="existencias-value">40</span>
-                                    </div>
-                                </div>
-
-                                <!--Agregar al carrito, precio del producto y espacio para ver comentarios-->
-                                <div class="container text-center mt-4">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-sm-5 col-4">
-                                            <!--Agregar al carrito-->
-                                            <img src="/resources/images/cesta2.png" alt="..." width="30px" height="30px"
-                                                class="agregar" />
-                                        </div>
-                                        <div class="col-lg-5 col-md-5 text-start col-sm-3 col-4">
-                                            <!--Precio del producto-->
-                                            <span class="fw-bold textoPrecio" name="textoPrecio">$50.00</span>
-                                        </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-4 col-3">
-                                            <!--Ver comentarios del producto-->
-                                            <img src="/resources/images/comentarios.png" alt="..." width="30px"
-                                                height="30px" data-bs-toggle="modal" data-bs-target="#modalComentarios"
-                                                class="botonmodal" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12  mb-2 d-flex align-items-start">
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-2 d-flex align-items-start">
                         <div class="card col-md-12 col-sm-12 col-12">
                             <div class="card-body">
                                 <span class="discount-badge">20% de descuento</span>
@@ -479,15 +415,15 @@
                                 </div>
 
                                 <!--Nombre del producto destacado-->
-                                <h5 class="card-title mt-2 mb-3">Uniforme</h5>
+                                <h5 class="card-title mt-2 mb-3 nombreDelProducto">Uniforme</h5>
 
                                 <!--Espacio para el estado y las existencias de los productos destacados-->
                                 <div class="row">
                                     <div class="col-6 text-end">
-                                        <span id="estado">Estado:</span>
+                                        <span id="estado" class="estado">Estado:</span>
                                     </div>
                                     <div class="col-6 text-start">
-                                        <span id="disponible">Disponible</span>
+                                        <span id="disponible" class="disponible">Disponible</span>
                                     </div>
                                 </div>
                                 <div class="row mt-2 text-end">
@@ -495,7 +431,74 @@
                                         <span class="existencias-label" id="existencias-label">Existencias:</span>
                                     </div>
                                     <div class="col-6 text-start">
-                                        <span id="existencias-value">40</span>
+                                        <span id="existencias-value" class="existencias-value">40</span>
+                                    </div>
+                                </div>
+
+                                <!--Agregar al carrito, precio del producto y espacio para ver comentarios-->
+                                <div class="container text-center mt-4">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-5 col-4">
+                                            <!--Agregar al carrito-->
+                                            <img src="/resources/images/cesta2.png" alt="..." width="30px" height="30px"
+                                                class="agregar" />
+                                        </div>
+                                        <div class="col-lg-5 col-md-5 text-start col-sm-3 col-4">
+                                            <!--Precio del producto-->
+                                            <span class="fw-bold textoPrecio" name="textoPrecio">$50.00</span>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-4 col-3">
+                                            <!--Ver comentarios del producto-->
+                                            <img src="/resources/images/comentarios.png" alt="..." width="30px"
+                                                height="30px" data-bs-toggle="modal" data-bs-target="#modalComentarios"
+                                                class="botonmodal" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-2 d-flex align-items-start">
+                        <div class="card col-md-12 col-sm-12 col-12">
+                            <div class="card-body">
+                                <span class="discount-badge">20% de descuento</span>
+                                <img src="/resources/images/uniforme1.jpeg" alt="..." width="180px" height="170px"
+                                    class="mt-4 rounded-3" />
+
+                                <!--Grid para la parte de la calificación promedia del producto-->
+                                <div class="container text-center mt-2">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <span class="textoCal">Calificación promedio:</span>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 mt-2" id="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Nombre del producto destacado-->
+                                <h5 class="card-title mt-2 mb-3 nombreDelProducto">Uniforme</h5>
+
+                                <!--Espacio para el estado y las existencias de los productos destacados-->
+                                <div class="row">
+                                    <div class="col-6 text-end">
+                                        <span id="estado" class="estado">Estado:</span>
+                                    </div>
+                                    <div class="col-6 text-start">
+                                        <span id="disponible" class="disponible">Disponible</span>
+                                    </div>
+                                </div>
+                                <div class="row mt-2 text-end">
+                                    <div class="col-6">
+                                        <span class="existencias-label" id="existencias-label">Existencias:</span>
+                                    </div>
+                                    <div class="col-6 text-start">
+                                        <span id="existencias-value" class="existencias-value">40</span>
                                     </div>
                                 </div>
 
@@ -565,15 +568,15 @@
                                 </div>
 
                                 <!--Nombre del producto destacado-->
-                                <h5 class="card-title mt-2 mb-3">Gorra</h5>
+                                <h5 class="card-title mt-2 mb-3 nombreDelProducto">Gorra</h5>
 
                                 <!--Espacio para el estado y las existencias de los productos destacados-->
                                 <div class="row">
                                     <div class="col-6 text-end">
-                                        <span id="estado">Estado:</span>
+                                        <span id="estado" class="estado">Estado:</span>
                                     </div>
                                     <div class="col-6 text-start">
-                                        <span id="disponible">Disponible</span>
+                                        <span id="disponible" class="disponible">Disponible</span>
                                     </div>
                                 </div>
                                 <div class="row mt-2 text-end">
@@ -581,7 +584,7 @@
                                         <span class="existencias-label" id="existencias-label">Existencias:</span>
                                     </div>
                                     <div class="col-6 text-start">
-                                        <span id="existencias-value">40</span>
+                                        <span id="existencias-value" class="existencias-value">40</span>
                                     </div>
                                 </div>
 
@@ -610,7 +613,7 @@
                     </div>
 
 
-                    <div class="col-lg-3 col-md-6 col-sm-12  mb-2 d-flex align-items-start">
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-2 d-flex align-items-start">
                         <div class="card col-md-12 col-sm-12 col-12">
                             <div class="card-body">
                                 <span class="discount-badge">20% de descuento</span>
@@ -634,15 +637,15 @@
                                 </div>
 
                                 <!--Nombre del producto destacado-->
-                                <h5 class="card-title mt-2 mb-3">Gorra</h5>
+                                <h5 class="card-title mt-2 mb-3 nombreDelProducto">Gorra</h5>
 
                                 <!--Espacio para el estado y las existencias de los productos destacados-->
                                 <div class="row">
                                     <div class="col-6 text-end">
-                                        <span id="estado">Estado:</span>
+                                        <span id="estado" class="estado">Estado:</span>
                                     </div>
                                     <div class="col-6 text-start">
-                                        <span id="disponible">Disponible</span>
+                                        <span id="disponible" class="disponible">Disponible</span>
                                     </div>
                                 </div>
                                 <div class="row mt-2 text-end">
@@ -650,7 +653,7 @@
                                         <span class="existencias-label" id="existencias-label">Existencias:</span>
                                     </div>
                                     <div class="col-6 text-start">
-                                        <span id="existencias-value">40</span>
+                                        <span id="existencias-value" class="existencias-value">40</span>
                                     </div>
                                 </div>
 
@@ -680,7 +683,10 @@
                 </div>
             </div>
 
-
+            <p class="text-center mt-5" id="noResultsMessage">
+                <img src="/resources/images/advertencia.png" alt="Advertencia" width="50px" height="50px"> No se ha
+                encontrado ningún producto
+            </p>
 
             <!--Modal para ver comentarios-->
 

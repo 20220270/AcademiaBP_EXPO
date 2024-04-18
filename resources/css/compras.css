@@ -40,7 +40,7 @@ main {
 .btnMostrarModalVa,
 .tituloValoracion,
 .tituloDevolucion,
-.btnDevolucion{
+.btnDevolucion {
     display: none;
     border: none;
 }
@@ -56,7 +56,7 @@ footer,
 
 .decrementBtn,
 .decrementBtn:hover,
-.decrementBtn:focus{
+.decrementBtn:focus {
     background-color: #04B704;
     color: #fff;
 }
@@ -192,7 +192,8 @@ footer,
         transform: translate(-50%, -160%);
         padding: 15px;
     }
-    footer{
+
+    footer {
         height: 25vh;
     }
 }
@@ -209,7 +210,7 @@ footer,
         padding: 15px;
     }
 
-    footer{
+    footer {
         height: 25vh;
     }
 }
@@ -217,7 +218,7 @@ footer,
 
 @media (min-width:576px) and (max-width: 768px) {
 
-    main{
+    main {
         margin-top: 250px;
     }
 
@@ -230,12 +231,12 @@ footer,
         padding: 15px;
     }
 
-    .card-img{
+    .card-img {
         margin-left: 40px;
 
-    }   
+    }
 
-    .contenedorVCal{
+    .contenedorVCal {
         margin-left: 20px;
     }
 }
@@ -243,7 +244,7 @@ footer,
 
 @media (min-width:390px) and (max-width: 576px) {
 
-    main{
+    main {
         margin-top: 325px;
     }
 
@@ -261,7 +262,7 @@ footer,
 
 @media (min-width:263px) and (max-width: 390px) {
 
-    main{
+    main {
         margin-top: 330px;
     }
 

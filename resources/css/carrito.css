@@ -1,146 +1,144 @@
 header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  
-  .imagenUser{
-    cursor: pointer;
-  }
-  
-  .position-relative {
-    position: relative;
-  }
-  
-  .position-absolute {
-    position: absolute;
-  }
-  
-  .end-0 {
-    right: 0;
-  }
 
-  #textoCarrito,
-  #textoCarrito:hover {
+.imagenUser {
+  cursor: pointer;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.end-0 {
+  right: 0;
+}
+
+#textoCarrito,
+#textoCarrito:hover {
   text-decoration: none;
   color: #000;
   font-size: 12px;
 }
 
-  .lupa {
-    transform: translate(-120%, 10%);
+.lupa {
+  transform: translate(-120%, 10%);
+}
+
+.textoBuscar {
+  width: 350px;
+}
+
+.conteNav {
+  background-color: #408840;
+  font-size: 13px;
+}
+
+main {
+  margin-top: 220px;
+
+}
+
+
+.contenedorTotal {
+  border-radius: 15px;
+  border: 2px solid #408840;
+}
+
+.botonpagar,
+.botonpagar:hover,
+.botonpagar:focus {
+  background-color: #408840;
+  color: #fff;
+}
+
+footer {
+  background-color: #408840;
+  color: #fff;
+}
+
+.aa {
+  text-decoration: none;
+  color: #fff;
+}
+
+.filaCopy {
+  border-top: 1px solid #fff;
+}
+
+.incrementBtn,
+.decrementBtn {
+  background-color: #408840;
+  color: #fff;
+}
+
+.modal-header {
+  background-color: #408840;
+}
+
+.LetraO {
+  transform: translateY(-110px);
+}
+
+.botonPago,
+.botonCerrar,
+.botonCerrar:hover,
+.botonPago:hover {
+  background-color: #408840;
+  color: #fff;
+}
+
+@media (min-width:768px) and (max-width: 992px) {
+  .LetraO {
+    transform: translateY(-175px);
   }
 
-  .textoBuscar {
-    width: 350px;
+  .debito {
+    margin-top: 20px;
   }
-  
-  .conteNav {
-    background-color: #408840;
-    font-size: 13px;
-  }
+}
 
+@media (min-width:576px) and (max-width: 706px) {
   main {
-    margin-top: 220px;
-  
+    margin-top: 250px;
+  }
+}
+
+
+@media (min-width:426px) and (max-width: 576px) {
+  main {
+    margin-top: 300px;
   }
 
-
-  .contenedorTotal{
-    border-radius: 15px;
-    border: 2px solid #408840;
+  .LetraO {
+    transform: translateY(-175px);
   }
 
-  .botonpagar,
-  .botonpagar:hover,
-  .botonpagar:focus{
-    background-color: #408840;
-    color: #fff;
+  .debito {
+    margin-top: 20px;
+  }
+}
+
+@media (min-width:279px) and (max-width: 426px) {
+  main {
+    margin-top: 350px;
   }
 
-  footer {
-    background-color: #408840;
-    color: #fff;
-  }
-  
-  .aa{
-    text-decoration: none;
-    color: #fff;
-  }
-  
-  .filaCopy {
-    border-top: 1px solid #fff;
+  .LetraO {
+    transform: translateY(-175px);
   }
 
-  .incrementBtn,
-  .decrementBtn{
-    background-color: #408840;
-    color: #fff;
+  .debito {
+    margin-top: 20px;
   }
-
-  .modal-header{
-    background-color: #408840;
-  }
-
-  .LetraO{
-    transform: translateY(-110px);
-  }
-
-  .botonPago,
-  .botonCerrar,
-  .botonCerrar:hover,
-  .botonPago:hover{
-    background-color: #408840;
-    color: #fff;
-  }
-
-  @media (min-width:768px) and (max-width: 992px) {
-    .LetraO{
-      transform: translateY(-175px);
-    }
-
-    .debito{
-      margin-top: 20px;
-    }
-  }
-
-  @media (min-width:576px) and (max-width: 706px) {
-    main{
-      margin-top: 250px;
-    }
-  }
-
-  
-  @media (min-width:426px) and (max-width: 576px) {
-    main{
-      margin-top: 300px;
-    }
-
-    .LetraO{
-      transform: translateY(-175px);
-    }
-
-    .debito{
-      margin-top: 20px;
-    }
-  }
-
-  @media (min-width:279px) and (max-width: 426px) {
-    main{
-      margin-top: 350px;
-    }
-
-    .LetraO{
-      transform: translateY(-175px);
-    }
-
-    .debito{
-      margin-top: 20px;
-    }
-  }
-
- 
+}

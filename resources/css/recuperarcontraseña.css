@@ -1,15 +1,15 @@
-body{
+body {
     background-color: #c9d6ff;
     background: linear-gradient(to right, #e2e2e2, #9ed392);
 }
 
-#numeroGenerado{
+#numeroGenerado {
     display: none;
 }
 
 .contenedor1,
 .contenedor2,
-.contenedor3{
+.contenedor3 {
     background-color: #fff;
     height: 600px;
     border-radius: 5px;
@@ -19,15 +19,18 @@ body{
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /*Posicion inicial del contenedor*/
-    width: 30%; /* Ajusta el ancho al 30% de la pantalla */
+    transform: translate(-50%, -50%);
+    /*Posicion inicial del contenedor*/
+    width: 30%;
+    /* Ajusta el ancho al 30% de la pantalla */
     display: block;
     width: 500px;
 }
 
 .contenedor2 {
     position: absolute;
-    width: 30%; /* Ajusta el ancho al 30% de la pantalla */
+    width: 30%;
+    /* Ajusta el ancho al 30% de la pantalla */
     display: block;
     width: 500px;
     bottom: 5.4%;
@@ -36,7 +39,8 @@ body{
 
 .contenedor3 {
     position: absolute;
-    width: 30%; /* Ajusta el ancho al 30% de la pantalla */
+    width: 30%;
+    /* Ajusta el ancho al 30% de la pantalla */
     display: block;
     width: 500px;
     bottom: 5.5%;
@@ -44,13 +48,15 @@ body{
 
 .contenedor2,
 .contenedor3 {
-    display: none; /* Oculta los contenedores 2 y 3 */
+    display: none;
+    /* Oculta los contenedores 2 y 3 */
 }
 
 .input-with-icon input[type="email"],
 .input-with-icon input[type="text"],
 .input-with-icon input[type="password"] {
-    padding-left: 50px; /* Espacio para la imagen */
+    padding-left: 50px;
+    /* Espacio para la imagen */
     border: none;
     border-bottom: 1px solid #000000;
     border-radius: 0;
@@ -64,7 +70,8 @@ body{
 
 .input-with-icon img {
     position: absolute;
-    left: 10px; /* Distancia desde el borde izquierdo */
+    left: 10px;
+    /* Distancia desde el borde izquierdo */
     top: 50%;
     transform: translateY(-50%);
 }
@@ -75,7 +82,7 @@ body{
 #botonVerificarCodigo,
 #regresarBoton,
 #regresarBoton1,
-#regresarBoton2{
+#regresarBoton2 {
     background-color: #408844;
     border: none;
     padding: 5px;
@@ -83,231 +90,257 @@ body{
     color: #fff;
 }
 
-@media (min-width: 992px) and (max-width: 1300px) {
-    
-}
+@media (min-width: 992px) and (max-width: 1300px) {}
 
 
 
 
 
 @media (min-width: 768px) and (max-width: 992px) {
+
     .contenedor1,
-.contenedor2,
-.contenedor3{
-    background-color: #fff;
-    height: 600px;
-    border-radius: 5px;
-}
+    .contenedor2,
+    .contenedor3 {
+        background-color: #fff;
+        height: 600px;
+        border-radius: 5px;
+    }
 
-.contenedor1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /*Posicion inicial del contenedor*/
-    width: 30%; /* Ajusta el ancho al 50% de la pantalla */
-    display: block;
-    width: 500px; /* establece un ancho máximo */
-}
+    .contenedor1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        /*Posicion inicial del contenedor*/
+        width: 30%;
+        /* Ajusta el ancho al 50% de la pantalla */
+        display: block;
+        width: 500px;
+        /* establece un ancho máximo */
+    }
 
-.contenedor2 {
-    position: absolute;
-    width: 30%; /* Ajusta el ancho al 50% de la pantalla */
-    display: block;
-    width: 500px; /* establece un ancho máximo */
-    bottom: 5.4%;
-}
+    .contenedor2 {
+        position: absolute;
+        width: 30%;
+        /* Ajusta el ancho al 50% de la pantalla */
+        display: block;
+        width: 500px;
+        /* establece un ancho máximo */
+        bottom: 5.4%;
+    }
 
-.contenedor3 {
-    position: absolute;
-    width: 30%; /* Ajusta el ancho al 50% de la pantalla */
-    display: block;
-    width: 500px; /* establece un ancho máximo */
-    bottom: 5.5%;
-}
+    .contenedor3 {
+        position: absolute;
+        width: 30%;
+        /* Ajusta el ancho al 50% de la pantalla */
+        display: block;
+        width: 500px;
+        /* establece un ancho máximo */
+        bottom: 5.5%;
+    }
 
-.contenedor2,
-.contenedor3 {
-    display: none; /* Oculta los contenedores 2 y 3 */
-}
+    .contenedor2,
+    .contenedor3 {
+        display: none;
+        /* Oculta los contenedores 2 y 3 */
+    }
 
-.input-with-icon input[type="email"],
-.input-with-icon input[type="text"],
-.input-with-icon input[type="password"] {
-    padding-left: 50px; /* Espacio para la imagen */
-    border: none;
-    border-bottom: 1px solid #000000;
-    border-radius: 0;
-    background-color: transparent;
-    box-shadow: none;
-}
+    .input-with-icon input[type="email"],
+    .input-with-icon input[type="text"],
+    .input-with-icon input[type="password"] {
+        padding-left: 50px;
+        /* Espacio para la imagen */
+        border: none;
+        border-bottom: 1px solid #000000;
+        border-radius: 0;
+        background-color: transparent;
+        box-shadow: none;
+    }
 
-.input-with-icon {
-    position: relative;
-}
+    .input-with-icon {
+        position: relative;
+    }
 
-.input-with-icon img {
-    position: absolute;
-    left: 10px; /* Distancia desde el borde izquierdo */
-    top: 50%;
-    transform: translateY(-50%);
-}
+    .input-with-icon img {
+        position: absolute;
+        left: 10px;
+        /* Distancia desde el borde izquierdo */
+        top: 50%;
+        transform: translateY(-50%);
+    }
 
-#botonEnviarCorreo,
-#botonResetContra,
-#botonReenviarCodigo,
-#botonVerificarCodigo,
-#regresarBoton,
-#regresarBoton1,
-#regresarBoton2{
-    background-color: #408844;
-    border: none;
-    padding: 5px;
-    border-radius: 20px;
-    color: #fff;
-}
+    #botonEnviarCorreo,
+    #botonResetContra,
+    #botonReenviarCodigo,
+    #botonVerificarCodigo,
+    #regresarBoton,
+    #regresarBoton1,
+    #regresarBoton2 {
+        background-color: #408844;
+        border: none;
+        padding: 5px;
+        border-radius: 20px;
+        color: #fff;
+    }
 }
 
 @media (min-width: 420px) and (max-width: 576px) {
+
     .contenedor1,
-.contenedor2,
-.contenedor3{
-    background-color: #fff;
-    height: 600px;
-    border-radius: 5px;
-}
+    .contenedor2,
+    .contenedor3 {
+        background-color: #fff;
+        height: 600px;
+        border-radius: 5px;
+    }
 
-.contenedor1 {
-    position: absolute;
-    top: 50%;
-    left: 48%;
-    transform: translate(-50%, -50%); /*Posicion inicial del contenedor*/
-    width: 30%; /* Ajusta el ancho al 50% de la pantalla */
-    display: block;
-    width: 400px; /* establece un ancho máximo */
-}
+    .contenedor1 {
+        position: absolute;
+        top: 50%;
+        left: 48%;
+        transform: translate(-50%, -50%);
+        /*Posicion inicial del contenedor*/
+        width: 30%;
+        /* Ajusta el ancho al 50% de la pantalla */
+        display: block;
+        width: 400px;
+        /* establece un ancho máximo */
+    }
 
-.contenedor2 {
-    position: absolute;
-    width: 30%; /* Ajusta el ancho al 50% de la pantalla */
-    display: block;
-    width: 400px; /* establece un ancho máximo */
-    bottom: 5.4%;
-    left: 48%;
-}
+    .contenedor2 {
+        position: absolute;
+        width: 30%;
+        /* Ajusta el ancho al 50% de la pantalla */
+        display: block;
+        width: 400px;
+        /* establece un ancho máximo */
+        bottom: 5.4%;
+        left: 48%;
+    }
 
-.contenedor3 {
-    position: absolute;
-    width: 30%; /* Ajusta el ancho al 50% de la pantalla */
-    display: block;
-    width: 400px; /* establece un ancho máximo */
-    bottom: 5.5%;
-    
-}
+    .contenedor3 {
+        position: absolute;
+        width: 30%;
+        /* Ajusta el ancho al 50% de la pantalla */
+        display: block;
+        width: 400px;
+        /* establece un ancho máximo */
+        bottom: 5.5%;
 
-.contenedor2,
-.contenedor3 {
-    display: none; /* Oculta los contenedores 2 y 3 */
-}
+    }
 
-.input-with-icon input[type="email"],
-.input-with-icon input[type="text"],
-.input-with-icon input[type="password"] {
-    padding-left: 50px; /* Espacio para la imagen */
-    border: none;
-    border-bottom: 1px solid #000000;
-    border-radius: 0;
-    background-color: transparent;
-    box-shadow: none;
-}
+    .contenedor2,
+    .contenedor3 {
+        display: none;
+        /* Oculta los contenedores 2 y 3 */
+    }
 
-.input-with-icon {
-    position: relative;
-}
+    .input-with-icon input[type="email"],
+    .input-with-icon input[type="text"],
+    .input-with-icon input[type="password"] {
+        padding-left: 50px;
+        /* Espacio para la imagen */
+        border: none;
+        border-bottom: 1px solid #000000;
+        border-radius: 0;
+        background-color: transparent;
+        box-shadow: none;
+    }
 
-.input-with-icon img {
-    position: absolute;
-    left: 10px; /* Distancia desde el borde izquierdo */
-    top: 50%;
-    transform: translateY(-50%);
-}
+    .input-with-icon {
+        position: relative;
+    }
 
-#botonEnviarCorreo,
-#botonResetContra,
-#botonReenviarCodigo,
-#botonVerificarCodigo,
-#regresarBoton,
-#regresarBoton1,
-#regresarBoton2{
-    background-color: #408844;
-    border: none;
-    padding: 5px;
-    border-radius: 20px;
-    color: #fff;
-}
+    .input-with-icon img {
+        position: absolute;
+        left: 10px;
+        /* Distancia desde el borde izquierdo */
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    #botonEnviarCorreo,
+    #botonResetContra,
+    #botonReenviarCodigo,
+    #botonVerificarCodigo,
+    #regresarBoton,
+    #regresarBoton1,
+    #regresarBoton2 {
+        background-color: #408844;
+        border: none;
+        padding: 5px;
+        border-radius: 20px;
+        color: #fff;
+    }
 }
 
 
 
 @media (min-width: 318px) and (max-width: 420px) {
+
     .contenedor1,
-.contenedor2,
-.contenedor3{
-    background-color: #fff;
-    height: 600px;
-    border-radius: 5px;
-}
+    .contenedor2,
+    .contenedor3 {
+        background-color: #fff;
+        height: 600px;
+        border-radius: 5px;
+    }
 
 
 
-.contenedor2 {
-    position: absolute;
-    width: 30%; /* Ajusta el ancho al 50% de la pantalla */
-    display: block;
-    width: 400px; /* establece un ancho máximo */
-    bottom: 5.4%;
-    margin-left: 38px;
-}
+    .contenedor2 {
+        position: absolute;
+        width: 30%;
+        /* Ajusta el ancho al 50% de la pantalla */
+        display: block;
+        width: 400px;
+        /* establece un ancho máximo */
+        bottom: 5.4%;
+        margin-left: 38px;
+    }
 
 
-.contenedor2,
-.contenedor3 {
-    display: none; /* Oculta los contenedores 2 y 3 */
-}
+    .contenedor2,
+    .contenedor3 {
+        display: none;
+        /* Oculta los contenedores 2 y 3 */
+    }
 
-.input-with-icon input[type="email"],
-.input-with-icon input[type="text"],
-.input-with-icon input[type="password"] {
-    padding-left: 50px; /* Espacio para la imagen */
-    border: none;
-    border-bottom: 1px solid #000000;
-    border-radius: 0;
-    background-color: transparent;
-    box-shadow: none;
-}
+    .input-with-icon input[type="email"],
+    .input-with-icon input[type="text"],
+    .input-with-icon input[type="password"] {
+        padding-left: 50px;
+        /* Espacio para la imagen */
+        border: none;
+        border-bottom: 1px solid #000000;
+        border-radius: 0;
+        background-color: transparent;
+        box-shadow: none;
+    }
 
-.input-with-icon {
-    position: relative;
-}
+    .input-with-icon {
+        position: relative;
+    }
 
-.input-with-icon img {
-    position: absolute;
-    left: 10px; /* Distancia desde el borde izquierdo */
-    top: 50%;
-    transform: translateY(-50%);
-}
+    .input-with-icon img {
+        position: absolute;
+        left: 10px;
+        /* Distancia desde el borde izquierdo */
+        top: 50%;
+        transform: translateY(-50%);
+    }
 
-#botonEnviarCorreo,
-#botonResetContra,
-#botonReenviarCodigo,
-#botonVerificarCodigo,
-#regresarBoton,
-#regresarBoton1,
-#regresarBoton2{
-    background-color: #408844;
-    border: none;
-    padding: 5px;
-    border-radius: 20px;
-    color: #fff;
-}
+    #botonEnviarCorreo,
+    #botonResetContra,
+    #botonReenviarCodigo,
+    #botonVerificarCodigo,
+    #regresarBoton,
+    #regresarBoton1,
+    #regresarBoton2 {
+        background-color: #408844;
+        border: none;
+        padding: 5px;
+        border-radius: 20px;
+        color: #fff;
+    }
 }

@@ -80,7 +80,7 @@ body {
     box-shadow: none;
 }
 
-#categoria{
+#categoria {
     border: none;
     margin: 8px 0;
     padding: 10px 0px;
@@ -96,7 +96,7 @@ body {
 .form-container {
     top: 0;
     height: 100%;
-    
+
 }
 
 
@@ -120,7 +120,7 @@ body {
     height: 100%;
     overflow: hidden;
     border-radius: 150px 0 0 100px;
-   
+
 }
 
 
@@ -147,7 +147,7 @@ body {
     display: flex;
     padding: 0 50px;
     top: 0;
-    
+
 }
 
 
@@ -162,13 +162,15 @@ body {
 .toggle-image {
     position: absolute;
     top: 165px;
-    right: 32%; /* Centrar horizontalmente */
-    transform: translateX(-50%); /* Ajustar para centrar completamente */
+    right: 32%;
+    /* Centrar horizontalmente */
+    transform: translateX(-50%);
+    /* Ajustar para centrar completamente */
 }
 
 .toggle img {
-    width: 250px; 
-    height: auto; 
+    width: 250px;
+    height: auto;
 }
 
 @media (min-width: 220px) and (max-width:268px) {
@@ -190,22 +192,22 @@ body {
         position: relative;
         overflow: hidden;
         max-width: 100%;
-        
+
     }
 
-    
-.inscripcion {
-    left: 0;
-    width: 100%;
-    z-index: 2;
-}
+
+    .inscripcion {
+        left: 0;
+        width: 100%;
+        z-index: 2;
+    }
 
     .container span {
         font-size: 9px;
         letter-spacing: 0.5px;
     }
 
-    h1{
+    h1 {
         margin-top: 10%;
         font-size: 18px;
     }
@@ -214,13 +216,12 @@ body {
         display: none;
     }
 
-    .toggle-container
-    {
+    .toggle-container {
         display: none;
     }
 
     .toggle-image {
-       display: none;
+        display: none;
     }
 }
 
@@ -244,15 +245,15 @@ body {
         position: relative;
         overflow: hidden;
         max-width: 100%;
-        
+
     }
 
-    
-.inscripcion {
-    left: 0;
-    width: 100%;
-    z-index: 2;
-}
+
+    .inscripcion {
+        left: 0;
+        width: 100%;
+        z-index: 2;
+    }
 
     .container span {
         font-size: 10px;
@@ -263,13 +264,12 @@ body {
         display: none;
     }
 
-    .toggle-container
-    {
+    .toggle-container {
         display: none;
     }
 
     .toggle-image {
-       display: none;
+        display: none;
     }
 }
 
@@ -294,7 +294,7 @@ body {
         position: relative;
         overflow: hidden;
         max-width: 100%;
-        
+
     }
 
     .container span {
@@ -302,7 +302,7 @@ body {
         letter-spacing: 0.5px;
     }
 
-    h1{
+    h1 {
         font-weight: bold;
         font-size: 17px;
     }
@@ -315,7 +315,7 @@ body {
 
     .toggle-image {
         position: absolute;
-        transform: translateX(-20%);
+        transform: translateX(-50%);
     }
 }
 
@@ -338,7 +338,7 @@ body {
         position: relative;
         overflow: hidden;
         max-width: 100%;
-        
+
     }
 
     .container span {
@@ -346,7 +346,7 @@ body {
         letter-spacing: 0.5px;
     }
 
-    h1{
+    h1 {
         font-weight: bold;
         font-size: 17px;
     }

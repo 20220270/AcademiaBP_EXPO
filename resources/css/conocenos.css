@@ -92,7 +92,7 @@
       font-size: 10.5px;
     }
 
-    .carruselAliados{
+    .carruselAliados {
       width: 100%;
     }
 
@@ -103,14 +103,14 @@
       /* Ajusta la imagen para que cubra todo el contenedor */
       border-radius: 55%;
       margin-left: 55px;
-  
+
     }
 
-    .spanMarca{
+    .spanMarca {
       margin-left: 25px;
     }
 
-    
+
   }
 
 
@@ -129,7 +129,7 @@
       margin-top: 20px;
     }
 
-    .carruselAliados{
+    .carruselAliados {
       margin-left: 40px;
       margin-right: 40px;
     }
@@ -151,10 +151,10 @@
   }
 
 
-@media (min-width: 380px) and (max-width: 576px) {
+  @media (min-width: 380px) and (max-width: 576px) {
 
     .texto1,
-    .texto2{
+    .texto2 {
       font-size: 12px;
     }
 
@@ -171,13 +171,13 @@
       text-align: start;
     }
 
-    .carruselAliados{
+    .carruselAliados {
       margin-left: 10px;
       margin-right: 10px;
     }
 
     .imaegenesForma,
-    .imaegenesCompe{
+    .imaegenesCompe {
       width: 350px;
     }
 
@@ -188,30 +188,30 @@
       /* Ajusta la imagen para que cubra todo el contenedor */
       border-radius: 55%;
       margin-left: 75px;
-  
+
     }
 
-    .imagenValores{
+    .imagenValores {
       width: 330px;
       height: 290px;
     }
 
     .botonPrevio,
-    .botonLuego{
+    .botonLuego {
       width: 15px;
       height: 20px;
     }
 
     #competitivo,
-    #formacion{
+    #formacion {
       font-size: 17px;
     }
 
-    footer span{
+    footer span {
       font-size: 13px;
     }
 
-    footer h6{
+    footer h6 {
       font-size: 16px;
       margin-top: 10px;
     }
@@ -221,7 +221,7 @@
   @media (min-width: 260px) and (max-width: 380px) {
 
     .texto1,
-    .texto2{
+    .texto2 {
       font-size: 12px;
     }
 
@@ -239,7 +239,7 @@
     }
 
     .imaegenesForma,
-    .imaegenesCompe{
+    .imaegenesCompe {
       width: 280px;
     }
 
@@ -250,30 +250,30 @@
       /* Ajusta la imagen para que cubra todo el contenedor */
       border-radius: 55%;
       margin-left: 50px;
-  
+
     }
 
     .botonPrevio,
-    .botonLuego{
+    .botonLuego {
       width: 15px;
       height: 20px;
     }
 
-    .imagenValores{
+    .imagenValores {
       width: 260px;
       height: 250px;
     }
 
     #competitivo,
-    #formacion{
+    #formacion {
       font-size: 17px;
     }
 
-    footer span{
+    footer span {
       font-size: 13px;
     }
 
-    footer h6{
+    footer h6 {
       font-size: 16px;
       margin-top: 10px;
     }

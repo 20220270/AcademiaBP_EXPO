@@ -6,7 +6,7 @@
     padding: 15px;
 }
 
-.busc1{
+.busc1 {
     outline: none;
     box-sizing: border-box;
     height: 30px;
@@ -19,41 +19,43 @@
     transition: all .7s ease;
 }
 
-::placeholder{
+::placeholder {
     color: grey;
 }
 
 .btna1 {
-  display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
-  position: absolute;
-  right: 0;
-  top: 2.8px;
-  width: 60px;
-  height: 56px;
-  background: #408340;
-  border-radius: 50%;
-  text-align: center;
-  cursor: pointer;
-  transition: .5s;
+    display: flex;
+    justify-content: center;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    position: absolute;
+    right: 0;
+    top: 2.8px;
+    width: 60px;
+    height: 56px;
+    background: #408340;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    transition: .5s;
 }
 
 .btna1 i {
-  font-size: 20px;
-  color: white;
-  transition: all .1 ease;
+    font-size: 20px;
+    color: white;
+    transition: all .1 ease;
 }
 
-.buscador1:hover input{
+.buscador1:hover input {
     width: 260px;
 }
 
-.buscador1:hover i{
+.buscador1:hover i {
     transform: rotate(-360deg);
 }
 
-.btna1:hover{
+.btna1:hover {
     background: #4fa34f;
 }
 
@@ -65,8 +67,8 @@
         transform: translate(-100%, -50%);
         padding: 15px;
     }
-    
-    .busc1{
+
+    .busc1 {
         outline: none;
         box-sizing: border-box;
         height: 30px;
@@ -78,50 +80,52 @@
         border: 1px solid #408340;
         transition: all .7s ease;
     }
-    
-    ::placeholder{
+
+    ::placeholder {
         color: grey;
     }
-    
+
     .btna1 {
-      display: flex;
-      justify-content: center; /* Centra horizontalmente */
-      align-items: center; /* Centra verticalmente */
-      position: absolute;
-      right: 0;
-      top: 2.8px;
-      width: 60px;
-      height: 58px;
-      background: #408340;
-      border-radius: 50%;
-      text-align: center;
-      cursor: pointer;
-      transition: .5s;
+        display: flex;
+        justify-content: center;
+        /* Centra horizontalmente */
+        align-items: center;
+        /* Centra verticalmente */
+        position: absolute;
+        right: 0;
+        top: 2.8px;
+        width: 60px;
+        height: 58px;
+        background: #408340;
+        border-radius: 50%;
+        text-align: center;
+        cursor: pointer;
+        transition: .5s;
     }
-    
+
     .btna1 i {
-      font-size: 20px;
-      color: white;
-      transition: all .1 ease;
+        font-size: 20px;
+        color: white;
+        transition: all .1 ease;
     }
-    
-    .buscador1:hover input{
+
+    .buscador1:hover input {
         width: 340px;
     }
-    
-    .buscador1:hover i{
+
+    .buscador1:hover i {
         transform: rotate(-360deg);
     }
-    
-    .btna1:hover{
+
+    .btna1:hover {
         background: #4fa34f;
     }
 }
-  
+
 
 @media (min-width: 576px) and (max-width: 768px) {
 
-    
+
 
     .buscador1 {
         position: absolute;
@@ -130,8 +134,8 @@
         transform: translate(-100%, -50%);
         padding: 15px;
     }
-    
-    .busc1{
+
+    .busc1 {
         outline: none;
         box-sizing: border-box;
         height: 30px;
@@ -143,43 +147,45 @@
         border: 1px solid #408340;
         transition: all .7s ease;
     }
-    
-    ::placeholder{
+
+    ::placeholder {
         color: grey;
         font-size: 15px;
     }
-    
+
     .btna1 {
-      display: flex;
-      justify-content: center; /* Centra horizontalmente */
-      align-items: center; /* Centra verticalmente */
-      position: absolute;
-      right: 0;
-      top: 2.8px;
-      width: 60px;
-      height: 58px;
-      background: #408340;
-      border-radius: 50%;
-      text-align: center;
-      cursor: pointer;
-      transition: .5s;
+        display: flex;
+        justify-content: center;
+        /* Centra horizontalmente */
+        align-items: center;
+        /* Centra verticalmente */
+        position: absolute;
+        right: 0;
+        top: 2.8px;
+        width: 60px;
+        height: 58px;
+        background: #408340;
+        border-radius: 50%;
+        text-align: center;
+        cursor: pointer;
+        transition: .5s;
     }
-    
+
     .btna1 i {
-      font-size: 20px;
-      color: white;
-      transition: all .1 ease;
+        font-size: 20px;
+        color: white;
+        transition: all .1 ease;
     }
-    
-    .buscador1:hover input{
+
+    .buscador1:hover input {
         width: 240px;
     }
-    
-    .buscador1:hover i{
+
+    .buscador1:hover i {
         transform: rotate(-360deg);
     }
-    
-    .btna1:hover{
+
+    .btna1:hover {
         background: #4fa34f;
     }
 }
@@ -189,7 +195,7 @@
 
 @media (min-width: 475px) and (max-width: 576px) {
 
-    
+
 
     .buscador1 {
         position: absolute;
@@ -198,8 +204,8 @@
         transform: translate(-80%, -50%);
         padding: 15px;
     }
-    
-    .busc1{
+
+    .busc1 {
         outline: none;
         box-sizing: border-box;
         height: 30px;
@@ -211,43 +217,45 @@
         border: 1px solid #408340;
         transition: all .7s ease;
     }
-    
-    ::placeholder{
+
+    ::placeholder {
         color: grey;
         font-size: 12px;
     }
-    
+
     .btna1 {
-      display: flex;
-      justify-content: center; /* Centra horizontalmente */
-      align-items: center; /* Centra verticalmente */
-      position: absolute;
-      right: 0;
-      top: 2.8px;
-      width: 60px;
-      height: 58px;
-      background: #408340;
-      border-radius: 50%;
-      text-align: center;
-      cursor: pointer;
-      transition: .5s;
+        display: flex;
+        justify-content: center;
+        /* Centra horizontalmente */
+        align-items: center;
+        /* Centra verticalmente */
+        position: absolute;
+        right: 0;
+        top: 2.8px;
+        width: 60px;
+        height: 58px;
+        background: #408340;
+        border-radius: 50%;
+        text-align: center;
+        cursor: pointer;
+        transition: .5s;
     }
-    
+
     .btna1 i {
-      font-size: 20px;
-      color: white;
-      transition: all .1 ease;
+        font-size: 20px;
+        color: white;
+        transition: all .1 ease;
     }
-    
-    .buscador1:hover input{
+
+    .buscador1:hover input {
         width: 220px;
     }
-    
-    .buscador1:hover i{
+
+    .buscador1:hover i {
         transform: rotate(-360deg);
     }
-    
-    .btna1:hover{
+
+    .btna1:hover {
         background: #4fa34f;
     }
 }
@@ -262,8 +270,8 @@
         transform: translate(-90%, -160%);
         padding: 15px;
     }
-    
-    .busc1{
+
+    .busc1 {
         outline: none;
         box-sizing: border-box;
         height: 23px;
@@ -275,47 +283,49 @@
         border: 1px solid #408340;
         transition: all .7s ease;
     }
-    
-    ::placeholder{
+
+    ::placeholder {
         color: grey;
         font-size: 10px;
     }
-    
+
     .btna1 {
-      display: flex;
-      justify-content: center; /* Centra horizontalmente */
-      align-items: center; /* Centra verticalmente */
-      position: absolute;
-      right: 12px;
-      top: 2.8px;
-      width: 50px;
-      height: 48px;
-      background: #408340;
-      border-radius: 50%;
-      text-align: center;
-      cursor: pointer;
-      transition: .5s;
+        display: flex;
+        justify-content: center;
+        /* Centra horizontalmente */
+        align-items: center;
+        /* Centra verticalmente */
+        position: absolute;
+        right: 12px;
+        top: 2.8px;
+        width: 50px;
+        height: 48px;
+        background: #408340;
+        border-radius: 50%;
+        text-align: center;
+        cursor: pointer;
+        transition: .5s;
     }
-    
+
     .btna1 i {
-      font-size: 20px;
-      color: white;
-      transition: all .1 ease;
+        font-size: 20px;
+        color: white;
+        transition: all .1 ease;
     }
-    
-    .buscador1:hover input{
+
+    .buscador1:hover input {
         width: 180px;
     }
-    
-    .buscador1:hover i{
+
+    .buscador1:hover i {
         transform: rotate(-360deg);
     }
-    
-    .btna1:hover{
+
+    .btna1:hover {
         background: #4fa34f;
     }
 }
-  
+
 
 @media (min-width: 210px) and (max-width: 353px) {
     .buscador1 {
@@ -325,8 +335,8 @@
         transform: translate(-95%, -160%);
         padding: 15px;
     }
-    
-    .busc1{
+
+    .busc1 {
         outline: none;
         box-sizing: border-box;
         height: 23px;
@@ -338,44 +348,45 @@
         border: 1px solid #408340;
         transition: all .7s ease;
     }
-    
-    ::placeholder{
+
+    ::placeholder {
         color: grey;
         font-size: 10px;
     }
-    
+
     .btna1 {
-      display: flex;
-      justify-content: center; /* Centra horizontalmente */
-      align-items: center; /* Centra verticalmente */
-      position: absolute;
-      right: 12px;
-      top: 2.8px;
-      width: 50px;
-      height: 48px;
-      background: #408340;
-      border-radius: 50%;
-      text-align: center;
-      cursor: pointer;
-      transition: .5s;
+        display: flex;
+        justify-content: center;
+        /* Centra horizontalmente */
+        align-items: center;
+        /* Centra verticalmente */
+        position: absolute;
+        right: 12px;
+        top: 2.8px;
+        width: 50px;
+        height: 48px;
+        background: #408340;
+        border-radius: 50%;
+        text-align: center;
+        cursor: pointer;
+        transition: .5s;
     }
-    
+
     .btna1 i {
-      font-size: 20px;
-      color: white;
-      transition: all .1 ease;
+        font-size: 20px;
+        color: white;
+        transition: all .1 ease;
     }
-    
-    .buscador1:hover input{
+
+    .buscador1:hover input {
         width: 160px;
     }
-    
-    .buscador1:hover i{
+
+    .buscador1:hover i {
         transform: rotate(-360deg);
     }
-    
-    .btna1:hover{
+
+    .btna1:hover {
         background: #4fa34f;
     }
 }
-  

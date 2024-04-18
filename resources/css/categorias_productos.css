@@ -96,6 +96,10 @@ margin-top: 230px;
  .textoPrecio{
   font-size: 20px;
  }
+
+ #noResultsMessage{
+  display: none;
+ }
  
  .popover-header,
 .modal-header,
