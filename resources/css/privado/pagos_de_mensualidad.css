@@ -37,3 +37,7 @@
 .card-img-top{
     border-radius: 20px;
 }
+
+.card-clickable {
+    cursor: pointer;
+}

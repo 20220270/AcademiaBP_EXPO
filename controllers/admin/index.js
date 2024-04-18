@@ -24,8 +24,16 @@ function pagosDeMensualidad() {
   window.location.href = "../../views/admin/pagosDeMensualidad.html";
 }
 
-function cancelacion_alumnos() {
+function alumnos_total() {
+  window.location.href = "../../views/admin/alumnos_total.html";
+}
+
+function alumnos_que_han_cancelado() {
   window.location.href = "../../views/admin/alumnos_que_han_cancelado.html";
+}
+
+function alumnos_que_no_han_cancelado() {
+  window.location.href = "../../views/admin/alumnos_que_no_han_cancelado.html";
 }
 
 function perfil_usuario(){
