@@ -93,7 +93,7 @@
                             <span>Entrenamientos</span>
                         </a>
                     </li>
-      
+
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                             data-bs-target="#auth23" aria-expanded="false" aria-controls="auth">
@@ -102,14 +102,16 @@
                         </a>
                         <ul id="auth23" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item" onclick="perfil_usuario()">
-      
+
                                 <a href="#" class="sidebar-link "> <i class="lni lni-user"></i>
                                     Ver perfil</a>
-      
+
                             </li>
 
                             <li class="sidebar-item">
-                                <a href="/views/public/index.html" class="sidebar-link"><img src="/resources/images/tienda.png" alt="..." width="20px" height="20px" class="me-2"></i>Ver sitio público</a>
+                                <a href="/views/public/index.html" class="sidebar-link"><img
+                                        src="/resources/images/tienda.png" alt="..." width="20px" height="20px"
+                                        class="me-2"></i>Ver sitio público</a>
                             </li>
 
                             <li class="sidebar-item" onclick="index()">
@@ -128,112 +130,95 @@
                                 data-bs-target="#modalAgregarStaaff"><img src="/resources/images/agregar.png"
                                     alt="buttonpng" width="60rem" />
                             </button>
-                            <button type="button" class="btn btn-white me-md-2 mt-5" data-bs-toggle="modal"
-                                data-bs-target="#modalAsignarCategoria"><img src="/resources/images/agregar.png"
-                                    alt="buttonpng" width="60rem" />
-                            </button>
                         </div>
+
+                        <!--cards de alumnos que han cancelado-->
                         <div class="container px-5 py-5">
-                            <div class="card mb-3 text-bg-success contenedorStaff">
+                            <div class="card mb-3" style="background-color: #062E00;">
                                 <div class="card-body">
-                                    <table class="table table-sm text-white ">
+                                    <table class="table table-sm text-white table-borderless">
                                         <thead>
                                             <tr>
-                                                <div class="text-end">
-                                                    <img src="/resources/images/editarVerde.png" alt="..."
-                                                        class="me-3 botonActualizar">
-                                                    <img src="/resources/images/eliminar.png" alt="..."
-                                                        class="botonEliminar">
+                                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                    <button type="button" class="btn btn-dark btn-sm"><i
+                                                            class="bi bi-arrow-repeat"></i></button>
+                                                    <button type="button" class="btn btn-danger btn-sm"><i
+                                                            class="bi bi-trash-fill"></i></button>
                                                 </div>
-
                                                 <th scope="col"><img
                                                         src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
-                                                        class="img-thumbnail" style="max-width: 50px;" alt="..."></th>
+                                                        class="img-thumbnail" style="max-width: 90px;" alt="..."></th>
                                                 <th scope="col">Encargado de:</th>
                                                 <th scope="col">Descripción:</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th scope="row">Dennis Gonzalez</th>
-                                                <td>Sexto Nivek</td>
+                                                <th scope="row">Anderson Figueroa</th>
+                                                <td>Sexto nivel</td>
                                                 <th>Trayectoria amplia</th>
-
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-
-                                    </div>
                                 </div>
                             </div>
 
-                            <div class="card mb-3 text-bg-success contenedorStaff">
+                            <div class="card mb-3" style="background-color: #062E00;">
                                 <div class="card-body">
-                                    <table class="table table-sm text-white">
+                                    <table class="table table-sm text-white table-borderless">
                                         <thead>
                                             <tr>
-                                                <div class="text-end">
-                                                    <img src="/resources/images/editarVerde.png" alt="..."
-                                                        class="me-3 botonActualizar">
-                                                    <img src="/resources/images/eliminar.png" alt="..."
-                                                        class="botonEliminar">
-                                                </div>
                                                 <th scope="col"><img
                                                         src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
-                                                        class="img-thumbnail" style="max-width: 50px;" alt="..."></th>
+                                                        class="img-thumbnail" style="max-width: 90px;" alt="..."></th>
                                                 <th scope="col">Encargado de:</th>
                                                 <th scope="col">Descripción:</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th scope="row">Dennis Gonzalez</th>
-                                                <td>Sexto Nivek</td>
+                                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                    <button type="button" class="btn btn-dark btn-sm"><i
+                                                            class="bi bi-arrow-repeat"></i></button>
+                                                    <button type="button" class="btn btn-danger btn-sm"><i
+                                                            class="bi bi-trash-fill"></i></button>
+                                                </div>
+                                                <th scope="row">Anderson Figueroa</th>
+                                                <td>Sexto nivel</td>
                                                 <th>Trayectoria amplia</th>
-
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
-                                    </div>
                                 </div>
                             </div>
 
-                            <div class="card mb-3 text-bg-secondary contenedorStaff">
-                                <div class="card-body ">
-                                    <table class="table table-sm text-white">
+                            <div class="card mb-3" style="background-color: #062E00;">
+                                <div class="card-body">
+                                    <table class="table table-sm text-white table-borderless">
                                         <thead>
                                             <tr>
-                                                <div class="text-end">
-                                                    <img src="/resources/images/editarVerde.png" alt="..."
-                                                        class="me-3 botonActualizar">
-                                                    <img src="/resources/images/eliminar.png" alt="..."
-                                                        class="botonEliminar">
-                                                </div>
                                                 <th scope="col"><img
                                                         src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
-                                                        class="img-thumbnail" style="max-width: 50px;" alt="..."></th>
+                                                        class="img-thumbnail" style="max-width: 90px;" alt="..."></th>
                                                 <th scope="col">Encargado de:</th>
                                                 <th scope="col">Descripción:</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th scope="row">Dennis Gonzalez</th>
-                                                <td>Sexto Nivek</td>
+                                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                    <button type="button" class="btn btn-dark btn-sm"><i
+                                                            class="bi bi-arrow-repeat"></i></button>
+                                                    <button type="button" class="btn btn-danger btn-sm"><i
+                                                            class="bi bi-trash-fill"></i></button>
+                                                </div>
+                                                <th scope="row">Anderson Figueroa</th>
+                                                <td>Sexto nivel</td>
                                                 <th>Trayectoria amplia</th>
-
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -288,6 +273,9 @@
                         <!-- footer del modal -->
                         <div class="modal-footer border-0">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Agregar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                                data-bs-target="#modalAsignarCategoria" data-bs-dismiss="modal">Asignar
+                                categoria</button>
                         </div>
                     </div>
                 </div>
