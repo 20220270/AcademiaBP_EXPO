@@ -1,5 +1,15 @@
-canvas {
+.chartCard {
+    width: 100vw;
+    height: calc(100vh - 0px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    width: 800px !important;
-    height: 500px;
-}
+  .chartBox {
+    width: 80%;
+    height: 80%;
+    border-radius: 20px;
+    border: solid 3px #408840;
+    background: white;
+  }
