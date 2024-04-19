@@ -41,3 +41,8 @@
 .card-clickable {
     cursor: pointer;
 }
+
+
+.sidebar {
+    position: sticky !important;
+}
