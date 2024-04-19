@@ -70,3 +70,116 @@ border: radius 80px;
   background-color: #408840;
   width: 200px;
 }
+
+.comentario,
+.botonEliminar,
+.botonActualizar{
+  cursor: pointer;
+}
+
+.fa-star {
+  color: #ffd700;
+  font-size: 10px;
+  transform: translate(500%,-250%);
+}
+
+
+#inputLaberls{
+  display: inline-block;
+}
+
+.contenedorComentario{
+  border: 2px solid #000000;
+  border-radius: 10px;
+}
+
+.header1{
+  background-color: #000;
+    height: 160px;
+}
+
+.imaegnProducto{
+  float: left;
+  margin-right: 10px;
+}
+
+.scroll {
+  max-height: 300px; /* Define la altura máxima del div scroll */
+  overflow-y: auto; /* Habilita el desplazamiento vertical */
+  overflow-x: hidden; /* Deshabilita el desplazamiento horizontal */
+}
+
+.text1{
+  transform: translate(100%, -150%);
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .fa-star {
+    color: #ffd700;
+    font-size: 10px;
+    transform: translate(-90%,-250%);
+  }
+  .text1{
+    transform: translate(30%, -150%);
+  }
+
+  .imaegnProducto{
+    margin-left: 130px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .fa-star {
+    color: #ffd700;
+    font-size: 10px;
+    transform: translate(-90%,-850%);
+  }
+  .text1{
+    transform: translate(20%, -150%);
+  }
+  .imaegnProducto{
+    margin-left: 130px;
+  }
+}
+
+@media (min-width: 424px) and (max-width: 576px) {
+  .fa-star {
+    color: #ffd700;
+    font-size: 10px;
+    transform: translate(-90%,-850%);
+  }
+  .text1{
+    transform: translate(20%, -150%);
+  }
+  .imaegnProducto{
+    margin-left:85px;
+  }
+}
+
+@media (min-width: 374px) and (max-width: 424px) {
+  .fa-star {
+    color: #ffd700;
+    font-size: 10px;
+    transform: translate(-90%,-850%);
+  }
+  .text1{
+    transform: translate(20%, -150%);
+  }
+  .imaegnProducto{
+    margin-left:60px;
+  }
+}
+
+@media (min-width: 319px) and (max-width: 374px) {
+  .fa-star {
+    color: #ffd700;
+    font-size: 10px;
+    transform: translate(-90%,-850%);
+  }
+  .text1{
+    transform: translate(20%, -150%);
+  }
+  .imaegnProducto{
+    margin-left:30px;
+  }
+}
