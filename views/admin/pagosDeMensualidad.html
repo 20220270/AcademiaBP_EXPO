@@ -116,60 +116,74 @@
 
                 <div class="scrollable-content mt-5">
 
-                    <div class="card-group">
+
+
+
+
+
+
+
+                    <div class="card-container">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Total Estudiantes</h5>
+                                <h1 class="card-title">Total estudiantes registrados.</h1>
                                 <p class="card-text mt-5">
-                                <h3>10</h3>
-                                <img src="../../resources/images/barra.png" alt="" width="200px" height="10px"></p>
-                                <button class="border-0 text-decoration-underline" onclick="alumnos_total()">ver màs</button>
-
+                                    <h3>10</h3>
+                                    <img src="../../resources/images/barraAzul.png" alt="" width="200px" height="10px">
+                                </p>
+                                <div class="d-flex justify-content-start"> <!-- Flexbox para alinear el botón a la izquierda -->
+                                    <button class="border-0 text-decoration-underline" onclick="alumnos_total()">ver más</button>
+                                </div>
                             </div>
-
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Alumnos solventes</h5>
+                                <h1 class="card-title">Alumnos solventes con el pago.</h1>
                                 <p class="card-text mt-5">
-                                <h3>20</h3>
-
-                                <img src="../../resources/images/barra.png" alt="" width="200px" height="10px"></p>
-
-                                <button class="border-0 text-decoration-underline" onclick="alumnos_que_han_cancelado()">ver màs</button>
-
+                                    <h3>20</h3>
+                                    <img src="../../resources/images/barraNaranja.png" alt="" width="200px" height="10px">
+                                </p>
+                                <div class="d-flex justify-content-start"> <!-- Flexbox para alinear el botón a la izquierda -->
+                                    <button class="border-0 text-decoration-underline" onclick="alumnos_que_han_cancelado()">ver más</button>
+                                </div>
                             </div>
-
                         </div>
-                        <div class="card" >
-
+                        <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Alumnos que no han cancelado</h5>
+                                <h1 class="card-title">Alumnos que no han cancelado.</h1>
                                 <p class="card-text mt-5">
-                                <h3>7</h3>
-                                <img src="../../resources/images/barra.png" alt="" width="200px" height="10px"></p>
-                                <button class="border-0 text-decoration-underline" onclick="alumnos_que_no_han_cancelado()">ver màs</button>
+                                    <h3>7</h3>
+                                    <img src="../../resources/images/barra.png" alt="" width="200px" height="10px">
+                                </p>
+                                <div class="d-flex justify-content-start"> <!-- Flexbox para alinear el botón a la izquierda -->
+                                    <button class="border-0 text-decoration-underline" onclick="alumnos_que_no_han_cancelado()">ver más</button>
+                                </div>
                             </div>
-
                         </div>
                     </div>
+                    
 
                     <div class="container mt-5 text-center">
 
                         <h5>Alumnos y pagos</h5>
-
-
-
-                        <div class="table-search mt-2">
-                            <nav class="navbar navbar-light bg-light">
-                                <div class="container-fluid text-center">
-                                    <form class="d-flex">
-                                        <input class="form-control me-2" type="search" placeholder="Search"
-                                            aria-label="Search">
-                                        <button class="btn btn-outline-success" type="submit">Search</button>
-                                    </form>
+                        <div class="col-md-12">
+                            <div class="input-group mb-3 barra_busqueda_estudiantes mt-5">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-outline-light text-dark dropdown-toggle" type="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Divisiòn</button>
+                                    <div class="dropdown-menu">
+                                        <h6>sub 17</h6>
+                                        <h6>sub 19</h6>
+                                    </div>
                                 </div>
-                            </nav>
+        
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                </div>
+        
+                                <input type="text" class="form-control" placeholder="Buscar" id="boton_buscar_estudiantes">
+        
+                            </div>
                         </div>
 
 
