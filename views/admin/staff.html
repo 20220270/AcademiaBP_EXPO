@@ -24,13 +24,7 @@
 </head>
 
 <body>
-    <!-- Div contenedor donde se insertará el menú -->
-    <div id="contenedor-menu"></div>
-    <!-- Codigo de html -->
     <main>
-
-
-
         <div class="wrapper">
             <aside id="sidebar">
                 <div class="d-flex">
@@ -69,7 +63,7 @@
                             <span>Productos</span>
                         </a>
                     </li>
-                    <li class="sidebar-item" onclick="cancelacion_alumnos()">
+                    <li class="sidebar-item" onclick="alumnos_total()">
                         <a href="#" class="sidebar-link">
                             <i class="lni lni-graduation"></i>
                             <span>Alumnos</span>
@@ -99,7 +93,7 @@
                             <span>Entrenamientos</span>
                         </a>
                     </li>
-
+      
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                             data-bs-target="#auth23" aria-expanded="false" aria-controls="auth">
@@ -108,20 +102,17 @@
                         </a>
                         <ul id="auth23" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item" onclick="perfil_usuario()">
-
+      
                                 <a href="#" class="sidebar-link "> <i class="lni lni-user"></i>
                                     Ver perfil</a>
-
+      
                             </li>
                             <li class="sidebar-item" onclick="index()">
                                 <a href="#" class="sidebar-link"> <i class="lni lni-exit"></i>Cerrar Sesión</a>
                             </li>
                         </ul>
                     </li>
-
-
                 </ul>
-
             </aside>
             <div class="main p-3">
                 <div class="text-center">

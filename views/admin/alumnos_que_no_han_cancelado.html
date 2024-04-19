@@ -27,99 +27,96 @@
 <body>
 
   <main>
-
     <div class="wrapper">
       <aside id="sidebar">
-        <div class="d-flex">
-          <button class="toggle-btn" type="button">
-            <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
-          </button>
-          <div class="sidebar-logo">
-            <a href="#">Menú</a>
+          <div class="d-flex">
+              <button class="toggle-btn" type="button">
+                  <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
+              </button>
+              <div class="sidebar-logo">
+                  <a href="#">Menú</a>
+              </div>
           </div>
-        </div>
-        <ul class="sidebar-nav">
-          <li class="sidebar-item" onclick="Menu()">
-            <a href="#" class="sidebar-link">
-              <i class="lni lni-home"></i>
-              <span>inicio</span>
-            </a>
-          </li>
-          <li class="sidebar-item">
-            <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth"
-              aria-expanded="false" aria-controls="auth">
-              <i class="lni lni-agenda"></i>
-              <span>Categorias</span>
-            </a>
-            <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-              <li class="sidebar-item" onclick="categoriaProductos()">
-                <a href="#" class="sidebar-link">Categoria Productos</a>
+          <ul class="sidebar-nav">
+              <li class="sidebar-item" onclick="Menu()">
+                  <a href="#" class="sidebar-link">
+                      <i class="lni lni-home"></i>
+                      <span>inicio</span>
+                  </a>
               </li>
-              <li class="sidebar-item" onclick="categoriaAlumnos()">
-                <a href="#" class="sidebar-link">Categoria Alumnos</a>
+              <li class="sidebar-item">
+                  <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                      data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+                      <i class="lni lni-agenda"></i>
+                      <span>Categorias</span>
+                  </a>
+                  <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                      <li class="sidebar-item" onclick="categoriaProductos()">
+                          <a href="#" class="sidebar-link">Categoria Productos</a>
+                      </li>
+                      <li class="sidebar-item" onclick="categoriaAlumnos()">
+                          <a href="#" class="sidebar-link">Categoria Alumnos</a>
+                      </li>
+                  </ul>
               </li>
-            </ul>
-          </li>
-          <li class="sidebar-item" onclick="productosP()">
-            <a href="#" class="sidebar-link">
-              <i class="lni lni-shopping-basket"></i>
-              <span>Productos</span>
-            </a>
-          </li>
-          <li class="sidebar-item" onclick="cancelacion_alumnos()">
-            <a href="#" class="sidebar-link">
-              <i class="lni lni-graduation"></i>
-              <span>Alumnos</span>
-            </a>
-          </li>
-          <li class="sidebar-item" onclick="pagosDeMensualidad()">
-            <a href="#" class="sidebar-link">
-              <i class="lni lni-dollar"></i>
-              <span>Pagos de Mensualidad</span>
-            </a>
-          </li>
-          <li class="sidebar-item" onclick="inscripciones()">
-            <a href="#" class="sidebar-link">
-              <i class="lni lni-book"></i>
-              <span>Inscripciones</span>
-            </a>
-          </li>
-          <li class="sidebar-item" onclick="categoriaProfesores()">
-            <a href="#" class="sidebar-link">
-              <i class="lni lni-certificate"></i>
-              <span>Staff</span>
-            </a>
-          </li>
-          <li class="sidebar-item" onclick="entre()">
-            <a href="#" class="sidebar-link">
-              <i class="lni lni-basketball"></i>
-              <span>Entrenamientos</span>
-            </a>
-          </li>
-
-          <li class="sidebar-item">
-            <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth23"
-              aria-expanded="false" aria-controls="auth">
-              <i class="lni lni-cogs"></i>
-              <span>Opciones de usuario</span>
-            </a>
-            <ul id="auth23" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-              <li class="sidebar-item" onclick="A()">
-
-                <a href="#" class="sidebar-link "> <i class="lni lni-user"></i>
-                  Ver perfil</a>
-
+              <li class="sidebar-item" onclick="productosP()">
+                  <a href="#" class="sidebar-link">
+                      <i class="lni lni-shopping-basket"></i>
+                      <span>Productos</span>
+                  </a>
               </li>
-              <li class="sidebar-item" onclick="index()">
-                <a href="#" class="sidebar-link"> <i class="lni lni-exit"></i>Cerrar Sesión</a>
+              <li class="sidebar-item" onclick="alumnos_total()">
+                  <a href="#" class="sidebar-link">
+                      <i class="lni lni-graduation"></i>
+                      <span>Alumnos</span>
+                  </a>
               </li>
-            </ul>
-          </li>
+              <li class="sidebar-item" onclick="pagosDeMensualidad()">
+                  <a href="#" class="sidebar-link">
+                      <i class="lni lni-dollar"></i>
+                      <span>Pagos de Mensualidad</span>
+                  </a>
+              </li>
+              <li class="sidebar-item" onclick="inscripciones()">
+                  <a href="#" class="sidebar-link">
+                      <i class="lni lni-book"></i>
+                      <span>Inscripciones</span>
+                  </a>
+              </li>
+              <li class="sidebar-item" onclick="categoriaProfesores()">
+                  <a href="#" class="sidebar-link">
+                      <i class="lni lni-certificate"></i>
+                      <span>Staff</span>
+                  </a>
+              </li>
+              <li class="sidebar-item" onclick="entre()">
+                  <a href="#" class="sidebar-link">
+                      <i class="lni lni-basketball"></i>
+                      <span>Entrenamientos</span>
+                  </a>
+              </li>
 
+              <li class="sidebar-item">
+                  <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                      data-bs-target="#auth23" aria-expanded="false" aria-controls="auth">
+                      <i class="lni lni-cogs"></i>
+                      <span>Opciones de usuario</span>
+                  </a>
+                  <ul id="auth23" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                      <li class="sidebar-item" onclick="perfil_usuario()">
 
-        </ul>
+                          <a href="#" class="sidebar-link "> <i class="lni lni-user"></i>
+                              Ver perfil</a>
 
+                      </li>
+                      <li class="sidebar-item" onclick="index()">
+                          <a href="#" class="sidebar-link"> <i class="lni lni-exit"></i>Cerrar Sesión</a>
+                      </li>
+                  </ul>
+              </li>
+          </ul>
       </aside>
+      
       <div class="main p-3">
         <div class="text-center">
           <h1>Alumnos que no han cancelado</h1>
@@ -137,92 +134,92 @@
                 </div>
               </div>
               <!--cards de alumnos que han cancelado-->
-              <div class="container px-5 py-5">
-                <div class="card mb-3">
-                  <div class="card-body">
-                    <table class="table table-sm">
-                      <thead>
-                        <tr>
-                          <th scope="col"><img
-                              src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
-                              class="img-thumbnail" style="max-width: 50px;" alt="..."></th>
-                          <th scope="col">Edad</th>
-                          <th scope="col">Carnet</th>
-                          <th scope="col">Exta</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">Dennis Gonzalez</th>
-                          <td>16</td>
-                          <td>(2)0220039</td>
-                          <td>9908</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                      <button type="button" class="btn btn-dark btn-sm">Actualizar</button>
-                      <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
-                    </div>
-                  </div>
+            <div class="container px-5 py-5">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <table class="table table-sm table-borderless">
+                    <thead>
+                      <tr>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                          <button type="button" class="btn btn-dark btn-sm"><i class="bi bi-arrow-repeat"></i></button>
+                          <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
+                        </div>
+                        <th scope="col"><img
+                            src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
+                            class="img-thumbnail" style="max-width: 90px;" alt="..."></th>
+                        <th scope="col">Edad</th>
+                        <th scope="col">Carnet</th>
+                        <th scope="col">Extra</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Dennis Gonzalez</th>
+                        <td>16</td>
+                        <td>(2)0220039</td>
+                        <td>9908</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
+              </div>
 
-                <div class="card mb-3">
-                  <div class="card-body">
-                    <table class="table table-sm">
-                      <thead>
-                        <tr>
-                          <th scope="col"><img
-                              src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
-                              class="img-thumbnail" style="max-width: 50px;" alt="..."></th>
-                          <th scope="col">Edad</th>
-                          <th scope="col">Carnet</th>
-                          <th scope="col">Exta</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">Dennis Gonzalez</th>
-                          <td>16</td>
-                          <td>(2)0220039</td>
-                          <td>9908</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                      <button type="button" class="btn btn-dark btn-sm">Actualizar</button>
-                      <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
-                    </div>
-                  </div>
+              <div class="card mb-3">
+                <div class="card-body">
+                  <table class="table table-sm table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col"><img
+                            src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
+                            class="img-thumbnail" style="max-width: 90px;" alt="..."></th>
+                        <th scope="col">Edad</th>
+                        <th scope="col">Carnet</th>
+                        <th scope="col">Extra</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                          <button type="button" class="btn btn-dark btn-sm"><i class="bi bi-arrow-repeat"></i></button>
+                          <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
+                        </div>
+                        <th scope="row">Dennis Gonzalez</th>
+                        <td>16</td>
+                        <td>(2)0220039</td>
+                        <td>9908</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  
                 </div>
+              </div>
 
-                <div class="card mb-3">
-                  <div class="card-body">
-                    <table class="table table-sm">
-                      <thead>
-                        <tr>
-                          <th scope="col"><img
-                              src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
-                              class="img-thumbnail" style="max-width: 50px;" alt="..."></th>
-                          <th scope="col">Edad</th>
-                          <th scope="col">Carnet</th>
-                          <th scope="col">Exta</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">Dennis Gonzalez</th>
-                          <td>16</td>
-                          <td>(2)0220039</td>
-                          <td>9908</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                      <button type="button" class="btn btn-dark btn-sm">Actualizar</button>
-                      <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
-                    </div>
-                  </div>
+              <div class="card mb-3">
+                <div class="card-body">
+                  <table class="table table-sm table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col"><img
+                            src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
+                            class="img-thumbnail" style="max-width: 90px;" alt="..."></th>
+                        <th scope="col">Edad</th>
+                        <th scope="col">Carnet</th>
+                        <th scope="col">Extra</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                          <button type="button" class="btn btn-dark btn-sm"><i class="bi bi-arrow-repeat"></i></button>
+                          <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
+                        </div>
+                        <th scope="row">Dennis Gonzalez</th>
+                        <td>16</td>
+                        <td>(2)0220039</td>
+                        <td>9908</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
