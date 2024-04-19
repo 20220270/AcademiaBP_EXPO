@@ -1,28 +1,36 @@
 const ctx = document.getElementById('graficoProductos');
 
-new Chart(ctx, {
+
+// setup 
+const data = {
+    labels: ['Mochilas', 'Gorras', 'Botellas', 'Uniformes', 'Lapiceros', 'Chumpas'],
+    datasets: [{
+      label: 'Weekly Sales',
+      data: [18, 12, 6, 9, 12, 3, 9],
+      backgroundColor:'#408840',
+    }]
+  };
+
+  // config 
+  const config = {
     type: 'bar',
-    data: {
-        labels: ['Mochilas', 'Gorras', 'Botellas', 'Uniformes', 'Lapiceros', 'Chumpas'],
-        datasets: [{
-            label: 'Total de ventas en el mes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1,
-            backgroundColor: '#408840'
-        }]
-    },
+    data,
     options: {
-        responsive: true,
         maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true
-            }
+      scales: {
+        y: {
+          beginAtZero: true
         }
+      }
     }
-});
+  };
 
+  // render init block
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
 
-
-
-
+  // Instantly assign Chart.js version
+  const chartVersion = document.getElementById('chartVersion');
+  chartVersion.innerText = Chart.version;
