@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cancelacion alumnos</title>
+  <title>Alumnos que no han cancelado</title>
   <!-- Enlace al conjunto de iconos bootstrap,fontawesome y LineIcons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <script src="https://kit.fontawesome.com/051460de0f.js" crossorigin="anonymous"></script>
@@ -48,14 +48,14 @@
             <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth"
               aria-expanded="false" aria-controls="auth">
               <i class="lni lni-agenda"></i>
-              <span>Categorias</span>
+              <span>Categorías</span>
             </a>
             <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
               <li class="sidebar-item" onclick="categoriaProductos()">
-                <a href="#" class="sidebar-link">Categoria Productos</a>
+                <a href="#" class="sidebar-link">Categoría productos</a>
               </li>
               <li class="sidebar-item" onclick="categoriaAlumnos()">
-                <a href="#" class="sidebar-link">Categoria Alumnos</a>
+                <a href="#" class="sidebar-link">Categoría alumnos</a>
               </li>
             </ul>
           </li>
@@ -74,7 +74,7 @@
           <li class="sidebar-item" onclick="pagosDeMensualidad()">
             <a href="#" class="sidebar-link">
               <i class="lni lni-dollar"></i>
-              <span>Pagos de Mensualidad</span>
+              <span>Pagos de mensualidad</span>
             </a>
           </li>
           <li class="sidebar-item" onclick="inscripciones()">
@@ -116,7 +116,7 @@
               </li>
 
               <li class="sidebar-item" onclick="index()">
-                <a href="#" class="sidebar-link"> <i class="lni lni-exit"></i>Cerrar Sesión</a>
+                <a href="#" class="sidebar-link"> <i class="lni lni-exit"></i>Cerrar sesión</a>
               </li>
             </ul>
           </li>
@@ -139,96 +139,102 @@
                   </div>
                 </div>
               </div>
-             <!--cards de alumnos que han cancelado-->
-            <div class="container px-5 py-5">
-              <div class="card mb-3" style="background-color: #062E00;">
-                <div class="card-body">
-                  <table class="table table-sm text-white table-borderless">
-                    <thead>
-                      <tr>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                          <button type="button" class="btn btn-dark btn-sm"><i class="bi bi-arrow-repeat"></i></button>
-                          <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
-                        </div>
-                        <th scope="col"><img
-                            src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
-                            class="img-thumbnail" style="max-width: 90px;" alt="..."></th>
-                        <th scope="col">Edad</th>
-                        <th scope="col">Posicion</th>
-                        <th scope="col">Extra</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">Dennis Gonzalez</th>
-                        <td>16</td>
-                        <td>Jugador de campo</td>
-                        <td>9908</td>
-                      </tr>
-                    </tbody>
-                  </table>
+              <!--cards de alumnos que han cancelado-->
+              <div class="container px-5 py-5">
+                <div class="card mb-3" style="background-color: #062E00;">
+                  <div class="card-body">
+                    <table class="table table-sm text-white table-borderless">
+                      <thead>
+                        <tr>
+                          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" class="btn btn-dark btn-sm"><i
+                                class="bi bi-arrow-repeat"></i></button>
+                            <button type="button" class="btn btn-danger btn-sm"><i
+                                class="bi bi-trash-fill"></i></button>
+                          </div>
+                          <th scope="col"><img
+                              src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
+                              class="img-thumbnail" style="max-width: 90px;" alt="..."></th>
+                          <th scope="col">Edad</th>
+                          <th scope="col">Posicion</th>
+                          <th scope="col">Extra</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">Dennis Gonzalez</th>
+                          <td>16</td>
+                          <td>Jugador de campo</td>
+                          <td>9908</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="card mb-3" style="background-color: #062E00;">
+                  <div class="card-body">
+                    <table class="table table-sm text-white table-borderless">
+                      <thead>
+                        <tr>
+                          <th scope="col"><img
+                              src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
+                              class="img-thumbnail" style="max-width: 90px;" alt="..."></th>
+                          <th scope="col">Edad</th>
+                          <th scope="col">Posicion</th>
+                          <th scope="col">Extra</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" class="btn btn-dark btn-sm"><i
+                                class="bi bi-arrow-repeat"></i></button>
+                            <button type="button" class="btn btn-danger btn-sm"><i
+                                class="bi bi-trash-fill"></i></button>
+                          </div>
+                          <th scope="row">Dennis Gonzalez</th>
+                          <td>16</td>
+                          <td>Portero</td>
+                          <td>9908</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+
+                <div class="card mb-3" style="background-color: #062E00;">
+                  <div class="card-body">
+                    <table class="table table-sm text-white table-borderless">
+                      <thead>
+                        <tr>
+                          <th scope="col"><img
+                              src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
+                              class="img-thumbnail" style="max-width: 90px;" alt="..."></th>
+                          <th scope="col">Edad</th>
+                          <th scope="col">Posicion</th>
+                          <th scope="col">Extra</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" class="btn btn-dark btn-sm"><i
+                                class="bi bi-arrow-repeat"></i></button>
+                            <button type="button" class="btn btn-danger btn-sm"><i
+                                class="bi bi-trash-fill"></i></button>
+                          </div>
+                          <th scope="row">Dennis Gonzalez</th>
+                          <td>16</td>
+                          <td>Portero</td>
+                          <td>9908</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-
-              <div class="card mb-3" style="background-color: #062E00;">
-                <div class="card-body">
-                  <table class="table table-sm text-white table-borderless">
-                    <thead>
-                      <tr>
-                        <th scope="col"><img
-                            src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
-                            class="img-thumbnail" style="max-width: 90px;" alt="..."></th>
-                        <th scope="col">Edad</th>
-                        <th scope="col">Posicion</th>
-                        <th scope="col">Extra</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                          <button type="button" class="btn btn-dark btn-sm"><i class="bi bi-arrow-repeat"></i></button>
-                          <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
-                        </div>
-                        <th scope="row">Dennis Gonzalez</th>
-                        <td>16</td>
-                        <td>Portero</td>
-                        <td>9908</td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                </div>
-              </div>
-
-              <div class="card mb-3" style="background-color: #062E00;">
-                <div class="card-body">
-                  <table class="table table-sm text-white table-borderless">
-                    <thead>
-                      <tr>
-                        <th scope="col"><img
-                            src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
-                            class="img-thumbnail" style="max-width: 90px;" alt="..."></th>
-                        <th scope="col">Edad</th>
-                        <th scope="col">Posicion</th>
-                        <th scope="col">Extra</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                          <button type="button" class="btn btn-dark btn-sm"><i class="bi bi-arrow-repeat"></i></button>
-                          <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
-                        </div>
-                        <th scope="row">Dennis Gonzalez</th>
-                        <td>16</td>
-                        <td>Portero</td>
-                        <td>9908</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
             </div>
           </div>
   </main>
