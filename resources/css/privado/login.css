@@ -9,6 +9,7 @@
 body,
 input {
   font-family: "Poppins", sans-serif;
+  background-color: #000000;
 }
 
 .container {
@@ -62,20 +63,20 @@ form.sign-in-form {
 
 .title {
   font-size: 1.7rem;
-  color: #00b200;
+  color: #ffffff;
   margin-bottom: 7px;
 }
 
 .input-field {
-  max-width: 220px;
-  width: 55%;
+  max-width: 300px;
+  width: 60%;
   background-color: #1b9100;
   margin: 5px 0;
   height: 37px;
   border-radius: 55px;
   display: grid;
   grid-template-columns: 20% 85%;
-  padding: 0 0.4rem;
+  padding: 0 1rem;
   position: relative;
 }
 
@@ -273,6 +274,18 @@ form.sign-in-form {
   pointer-events: all;
 }
 
+
+a{
+  color: #FFF;
+  text-decoration: none;
+}
+
+.botonContraC{
+  background-color: #000000;
+  border: none;
+  padding: 20px;
+}
+
 @media (max-width: 870px) {
   .container {
     min-height: 800px;
@@ -374,6 +387,10 @@ form.sign-in-form {
     top: 5%;
     transform: translate(-50%, 0);
   }
+
+  #sign-up-btn{
+    height: 50px;
+  }
 }
 
 @media (max-width: 570px) {
@@ -399,6 +416,10 @@ form.sign-in-form {
   .container.sign-up-mode:before {
     bottom: 28%;
     left: 50%;
+  }
+
+  #sign-up-btn{
+    height: 50px;
   }
 }
 

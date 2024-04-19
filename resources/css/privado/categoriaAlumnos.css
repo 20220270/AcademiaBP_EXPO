@@ -177,3 +177,6 @@ a.sidebar-link:hover {
     }
   }
   
+  .card-clickable {
+    cursor: pointer;
+}
