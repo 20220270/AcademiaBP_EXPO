@@ -30,8 +30,6 @@
   <!-- Codigo de html -->
   <main>
 
-
-
     <div class="wrapper">
       <aside id="sidebar">
           <div class="d-flex">
@@ -70,7 +68,7 @@
                       <span>Productos</span>
                   </a>
               </li>
-              <li class="sidebar-item" onclick="cancelacion_alumnos()">
+              <li class="sidebar-item" onclick="alumnos_total()">
                   <a href="#" class="sidebar-link">
                       <i class="lni lni-graduation"></i>
                       <span>Alumnos</span>
@@ -82,19 +80,20 @@
                       <span>Pagos de Mensualidad</span>
                   </a>
               </li>
-              <li class="sidebar-item"  onclick="inscripciones()">
+              <li class="sidebar-item" onclick="inscripciones()">
                   <a href="#" class="sidebar-link">
                       <i class="lni lni-book"></i>
                       <span>Inscripciones</span>
                   </a>
               </li>
-              <li class="sidebar-item"  onclick="categoriaProfesores()">
+              <li class="sidebar-item" onclick="categoriaProfesores()">
                   <a href="#" class="sidebar-link">
                       <i class="lni lni-certificate"></i>
                       <span>Staff</span>
                   </a>
               </li>
-                  <a href="#" class="sidebar-link" onclick="entre()">
+              <li class="sidebar-item" onclick="entre()">
+                  <a href="#" class="sidebar-link">
                       <i class="lni lni-basketball"></i>
                       <span>Entrenamientos</span>
                   </a>
@@ -120,6 +119,8 @@
               </li>
           </ul>
       </aside>
+
+
       <div class="main p-3">
         <div class="text-center">
           <h1>Alumnos que han cancelado</h1>
@@ -144,7 +145,7 @@
                 <div class="card-body">
                   <table class="table table-sm text-white table-borderless">
                     <thead>
-                      <tr>r
+                      <tr>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                           <button type="button" class="btn btn-dark btn-sm"><i class="bi bi-arrow-repeat"></i></button>
                           <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
