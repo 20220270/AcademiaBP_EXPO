@@ -169,9 +169,35 @@ a.sidebar-link:hover {
 }
 
 .card {
-    background-color: #eeeeee; 
+    background-color: #f8f8f8ce; 
 }
 
 a{
     text-decoration: underline;
 }
+
+
+
+.card{
+    margin: 7px;
+
+}
+
+
+.card-container {
+    display: flex; /* Display flex para colocar las cards en línea */
+    gap: 0px; /* Espacio entre las cards */
+}
+
+.card {
+    flex: 1; /* Hace que las cards ocupen todo el espacio disponible */
+    border: 2px solid rgba(171, 164, 164, 0.1); /* Borde borroso */
+    border-radius: 17px; /* Borde redondeado */
+}
+
+.card-body {
+    padding:7px; /* Espacio interior de la card */
+}
+
+
+

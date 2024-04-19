@@ -27,7 +27,9 @@ text-decoration: none;
 }
 
 
-
+.card-clickable {
+  cursor: pointer;
+}
 
 
 .card-img-top{
