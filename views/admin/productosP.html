@@ -156,7 +156,7 @@
                                 </div>
                                 <div class="text-end">
                                     <img src="/resources/images/comentarios.png" alt="..." width="20px" height="20px"
-                                        class="me-3 comentario" data-bs-toggle="modal"
+                                        class="me-3 comentarioB" data-bs-toggle="modal"
                                         data-bs-target="#modalComentarios">
                                     <img src="/resources/images/editarVerde.png" alt="..." class="me-3 botonActualizar">
                                     <img src="/resources/images/eliminar.png" alt="..." class="botonEliminar">
@@ -176,7 +176,7 @@
                                 </div>
                                 <div class="text-end">
                                     <img src="/resources/images/comentarios.png" alt="..." width="20px" height="20px"
-                                        class="me-3 comentario" data-bs-toggle="modal"
+                                        class="me-3 comentarioB" data-bs-toggle="modal"
                                         data-bs-target="#modalComentarios">
                                     <img src="/resources/images/editarVerde.png" alt="..." class="me-3 botonActualizar">
                                     <img src="/resources/images/eliminar.png" alt="..." class="botonEliminar">
@@ -195,7 +195,7 @@
                                 </div>
                                 <div class="text-end">
                                     <img src="/resources/images/comentarios.png" alt="..." width="20px" height="20px"
-                                        class="me-3 comentario" data-bs-toggle="modal"
+                                        class="me-3 comentarioB" data-bs-toggle="modal"
                                         data-bs-target="#modalComentarios">
                                     <img src="/resources/images/editarVerde.png" alt="..." class="me-3 botonActualizar">
                                     <img src="/resources/images/eliminar.png" alt="..." class="botonEliminar">
@@ -215,7 +215,7 @@
                                 </div>
                                 <div class="text-end">
                                     <img src="/resources/images/comentarios.png" alt="..." width="20px" height="20px"
-                                        class="me-3 comentario" data-bs-toggle="modal"
+                                        class="me-3 comentarioB" data-bs-toggle="modal"
                                         data-bs-target="#modalComentarios">
                                     <img src="/resources/images/editarVerde.png" alt="..." class="me-3 botonActualizar">
                                     <img src="/resources/images/eliminar.png" alt="..." class="botonEliminar">
@@ -235,7 +235,7 @@
                                 </div>
                                 <div class="text-end">
                                     <img src="/resources/images/comentarios.png" alt="..." width="20px" height="20px"
-                                        class="me-3 comentario" data-bs-toggle="modal"
+                                        class="me-3 comentarioB" data-bs-toggle="modal"
                                         data-bs-target="#modalComentarios">
                                     <img src="/resources/images/editarVerde.png" alt="..." class="me-3 botonActualizar">
                                     <img src="/resources/images/eliminar.png" alt="..." class="botonEliminar">
@@ -255,7 +255,7 @@
                                 </div>
                                 <div class="text-end">
                                     <img src="/resources/images/comentarios.png" alt="..." width="20px" height="20px"
-                                        class="me-3 comentario" data-bs-toggle="modal"
+                                        class="me-3 comentarioB" data-bs-toggle="modal"
                                         data-bs-target="#modalComentarios">
                                     <img src="/resources/images/editarVerde.png" alt="..." class="me-3 botonActualizar">
                                     <img src="/resources/images/eliminar.png" alt="..." class="botonEliminar">
@@ -421,7 +421,7 @@
                                                 comentario:</label>
 
                                             <label for="comentario" name="comentario"
-                                                class="comentario mt-3 mx-3 mb-1 col-lg-12 d-inline rounded-3 bg-success text-white"
+                                                class="comentario mt-3 mx-3 mb-1 col-lg-12 d-inline rounded-3 text-white activo"
                                                 id="comentario">Activo</label>
                                         </div>
                                     </div>
@@ -456,7 +456,42 @@
                                                 comentario:</label>
 
                                             <label for="comentario" name="comentario"
-                                                class="comentario mt-3 mx-3 mb-1 col-lg-12 d-inline rounded-3 bg-success text-white"
+                                                class="comentario mt-3 mx-3 mb-1 col-lg-12 d-inline rounded-3 text-white inactivo"
+                                                id="comentario">Inactivo</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-2 text-start contenedorComentario">
+                                        <div class="container text-start mt-2">
+                                            <div class="row align-items-center">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <img src="/resources/images/userIcon.png" alt="..." width="40px"
+                                                        height="40px" class="imagenCliente mt-2">
+                                                    <div class="text1 col-lg-4">
+                                                        <span>AMLO</span>
+                                                    </div>
+
+                                                    <label for="fechacomentario" class="fechacomentario"
+                                                        name="fechacomentario" id="fechacomentario">
+                                                        09/09/2023
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-3 col-md-6 col-sm-12 text-end" id="stars2">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="comentarios mt-3">
+                                            <label for="comentario" name="comentario"
+                                                class="comentario mt-3 mx-3 mb-1 col-lg-12 d-inline" id="comentario">Estado del
+                                                comentario:</label>
+
+                                            <label for="comentario" name="comentario"
+                                                class="comentario mt-3 mx-3 mb-1 col-lg-12 d-inline rounded-3 text-white activo"
                                                 id="comentario">Activo</label>
                                         </div>
                                     </div>
@@ -491,42 +526,7 @@
                                                 comentario:</label>
 
                                             <label for="comentario" name="comentario"
-                                                class="comentario mt-3 mx-3 mb-1 col-lg-12 d-inline rounded-3 bg-success text-white"
-                                                id="comentario">Activo</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="mt-2 text-start contenedorComentario">
-                                        <div class="container text-start mt-2">
-                                            <div class="row align-items-center">
-                                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                                    <img src="/resources/images/userIcon.png" alt="..." width="40px"
-                                                        height="40px" class="imagenCliente mt-2">
-                                                    <div class="text1 col-lg-4">
-                                                        <span>AMLO</span>
-                                                    </div>
-
-                                                    <label for="fechacomentario" class="fechacomentario"
-                                                        name="fechacomentario" id="fechacomentario">
-                                                        09/09/2023
-                                                    </label>
-                                                </div>
-                                                <div class="col-lg-3 col-md-6 col-sm-12 text-end" id="stars2">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="comentarios mt-3">
-                                            <label for="comentario" name="comentario"
-                                                class="comentario mt-3 mx-3 mb-1 col-lg-12 d-inline" id="comentario">Estado del
-                                                comentario:</label>
-
-                                            <label for="comentario" name="comentario"
-                                                class="comentario mt-3 mx-3 mb-1 col-lg-12 d-inline rounded-3 bg-success text-white"
+                                                class="comentario mt-3 mx-3 mb-1 col-lg-12 d-inline rounded-3 text-white activo"
                                                 id="comentario">Activo</label>
                                         </div>
                                     </div>
@@ -549,7 +549,8 @@
         crossorigin="anonymous"></script>
 
     <script src="https://kit.fontawesome.com/22fd8b70d9.js" crossorigin="anonymous"></script>
-    <script src="../../controllers/admin/index.js"></script>
+    <script src="/controllers/admin/index.js"></script>
+    <script src="/controllers/admin/productos.js"></script>
 </body>
 
 </html>
