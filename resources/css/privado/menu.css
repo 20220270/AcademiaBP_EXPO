@@ -13,3 +13,20 @@
     border: solid 3px #408840;
     background: white;
   }
+
+
+  .chartCard2 {
+    width: 100vw;
+    height: calc(100vh - 0px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .chartBox2 {
+    width: 80%;
+    height: 80%;
+    border-radius: 20px;
+    border: solid 3px #408840;
+    background: white;
+  }
