@@ -32,97 +32,98 @@
 
     <div class="wrapper">
       <aside id="sidebar">
-          <div class="d-flex">
-              <button class="toggle-btn" type="button">
-                  <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
-              </button>
-              <div class="sidebar-logo">
-                  <a href="#">Menú</a>
-              </div>
+        <div class="d-flex">
+          <button class="toggle-btn" type="button">
+            <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
+          </button>
+          <div class="sidebar-logo">
+            <a href="#">Menú</a>
           </div>
-          <ul class="sidebar-nav">
-              <li class="sidebar-item" onclick="Menu()">
-                  <a href="#" class="sidebar-link">
-                      <i class="lni lni-home"></i>
-                      <span>inicio</span>
-                  </a>
+        </div>
+        <ul class="sidebar-nav">
+          <li class="sidebar-item" onclick="Menu()">
+            <a href="#" class="sidebar-link">
+              <i class="lni lni-home"></i>
+              <span>inicio</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth"
+              aria-expanded="false" aria-controls="auth">
+              <i class="lni lni-agenda"></i>
+              <span>Categorias</span>
+            </a>
+            <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item" onclick="categoriaProductos()">
+                <a href="#" class="sidebar-link">Categoria Productos</a>
               </li>
-              <li class="sidebar-item">
-                  <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                      data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                      <i class="lni lni-agenda"></i>
-                      <span>Categorias</span>
-                  </a>
-                  <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                      <li class="sidebar-item" onclick="categoriaProductos()">
-                          <a href="#" class="sidebar-link">Categoria Productos</a>
-                      </li>
-                      <li class="sidebar-item" onclick="categoriaAlumnos()">
-                          <a href="#" class="sidebar-link">Categoria Alumnos</a>
-                      </li>
-                  </ul>
+              <li class="sidebar-item" onclick="categoriaAlumnos()">
+                <a href="#" class="sidebar-link">Categoria Alumnos</a>
               </li>
-              <li class="sidebar-item" onclick="productosP()">
-                  <a href="#" class="sidebar-link">
-                      <i class="lni lni-shopping-basket"></i>
-                      <span>Productos</span>
-                  </a>
-              </li>
-              <li class="sidebar-item" onclick="alumnos_total()">
-                  <a href="#" class="sidebar-link">
-                      <i class="lni lni-graduation"></i>
-                      <span>Alumnos</span>
-                  </a>
-              </li>
-              <li class="sidebar-item" onclick="pagosDeMensualidad()">
-                  <a href="#" class="sidebar-link">
-                      <i class="lni lni-dollar"></i>
-                      <span>Pagos de Mensualidad</span>
-                  </a>
-              </li>
-              <li class="sidebar-item" onclick="inscripciones()">
-                  <a href="#" class="sidebar-link">
-                      <i class="lni lni-book"></i>
-                      <span>Inscripciones</span>
-                  </a>
-              </li>
-              <li class="sidebar-item" onclick="categoriaProfesores()">
-                  <a href="#" class="sidebar-link">
-                      <i class="lni lni-certificate"></i>
-                      <span>Staff</span>
-                  </a>
-              </li>
-              <li class="sidebar-item" onclick="entre()">
-                  <a href="#" class="sidebar-link">
-                      <i class="lni lni-basketball"></i>
-                      <span>Entrenamientos</span>
-                  </a>
+            </ul>
+          </li>
+          <li class="sidebar-item" onclick="productosP()">
+            <a href="#" class="sidebar-link">
+              <i class="lni lni-shopping-basket"></i>
+              <span>Productos</span>
+            </a>
+          </li>
+          <li class="sidebar-item" onclick="alumnos_total()">
+            <a href="#" class="sidebar-link">
+              <i class="lni lni-graduation"></i>
+              <span>Alumnos</span>
+            </a>
+          </li>
+          <li class="sidebar-item" onclick="pagosDeMensualidad()">
+            <a href="#" class="sidebar-link">
+              <i class="lni lni-dollar"></i>
+              <span>Pagos de Mensualidad</span>
+            </a>
+          </li>
+          <li class="sidebar-item" onclick="inscripciones()">
+            <a href="#" class="sidebar-link">
+              <i class="lni lni-book"></i>
+              <span>Inscripciones</span>
+            </a>
+          </li>
+          <li class="sidebar-item" onclick="categoriaProfesores()">
+            <a href="#" class="sidebar-link">
+              <i class="lni lni-certificate"></i>
+              <span>Staff</span>
+            </a>
+          </li>
+          <li class="sidebar-item" onclick="entre()">
+            <a href="#" class="sidebar-link">
+              <i class="lni lni-basketball"></i>
+              <span>Entrenamientos</span>
+            </a>
+          </li>
+
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth23"
+              aria-expanded="false" aria-controls="auth">
+              <i class="lni lni-cogs"></i>
+              <span>Opciones de usuario</span>
+            </a>
+            <ul id="auth23" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item" onclick="perfil_usuario()">
+
+                <a href="#" class="sidebar-link "> <i class="lni lni-user"></i>
+                  Ver perfil</a>
+
               </li>
 
               <li class="sidebar-item">
-                  <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                      data-bs-target="#auth23" aria-expanded="false" aria-controls="auth">
-                      <i class="lni lni-cogs"></i>
-                      <span>Opciones de usuario</span>
-                  </a>
-                  <ul id="auth23" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                      <li class="sidebar-item" onclick="perfil_usuario()">
-
-                          <a href="#" class="sidebar-link "> <i class="lni lni-user"></i>
-                              Ver perfil</a>
-
-                      </li>
-
-                      <li class="sidebar-item">
-                        <a href="/views/public/index.html" class="sidebar-link"><img src="/resources/images/tienda.png" alt="..." width="20px" height="20px" class="me-2"></i>Ver sitio público</a>
-                    </li>
-                    
-                      <li class="sidebar-item" onclick="index()">
-                          <a href="#" class="sidebar-link"> <i class="lni lni-exit"></i>Cerrar Sesión</a>
-                      </li>
-                  </ul>
+                <a href="/views/public/index.html" class="sidebar-link"><img src="/resources/images/tienda.png"
+                    alt="..." width="20px" height="20px" class="me-2"></i>Ver sitio público</a>
               </li>
-          </ul>
+
+              <li class="sidebar-item" onclick="index()">
+                <a href="#" class="sidebar-link"> <i class="lni lni-exit"></i>Cerrar Sesión</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </aside>
       <div class="main p-3">
         <div class="text-center">
@@ -130,17 +131,17 @@
           <div class="scrollable-content">
             <div class="py-5 justify-content-center">
               <div>
-                  <label class="text-center">Buscar alumnos</label>
-                  <div class="input-group">
-                      <input class="typeahead form-control" type="text" placeholder="Buscar...">
-                      <div class="input-group-append">
-                          <button class="btn btn-outline-secondary" type="button">
-                              <i class="fas fa-search"></i>
-                          </button>
-                      </div>
+                <label class="text-center">Buscar alumnos</label>
+                <div class="input-group">
+                  <input class="typeahead form-control" type="text" placeholder="Buscar...">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">
+                      <i class="fas fa-search"></i>
+                    </button>
                   </div>
+                </div>
               </div>
-          </div>
+            </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
               <button type="button" class="btn btn-white me-md-2 mt-5" data-bs-toggle="modal"
                 data-bs-target="#exampleModal"><img src="/resources/images/agregar.png" alt="buttonpng" width="60rem" />
@@ -203,7 +204,7 @@
                       </tr>
                     </tbody>
                   </table>
-                  
+
                 </div>
               </div>
 
@@ -246,7 +247,8 @@
           <div class="modal-content">
             <!-- header del modal -->
             <div class="modal-header border-0">
-              <h1 class="modal-title fs-3 w-100 text-center" id="exampleModalLabel">Alumnos que cancelado la Mensualidad</h1>
+              <h1 class="modal-title fs-3 w-100 text-center" id="exampleModalLabel">Alumnos que cancelado la Mensualidad
+              </h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!-- cuerpo del modal -->
@@ -260,21 +262,19 @@
                   </div>
                   <!-- campo del nombre producto -->
                   <div class="col">
-                    <input type="identificacion" class="form-control mt-1" placeholder="Edad del alumno:"
-                      id="dui" id="exampleInputUsuario" aria-describedby="Usuario">
+                    <input type="identificacion" class="form-control mt-1" placeholder="Edad del alumno:" id="dui"
+                      id="exampleInputUsuario" aria-describedby="Usuario">
                   </div>
                   <!-- campo del nombre producto -->
                 </div>
                 <div class="row" style="margin-top: 30px;">
                   <div class="col">
-                    <input type="correo" class="form-control mt-1"
-                      placeholder="Carnet del alumno :" id="correo" id="exampleInputUsuario"
-                      aria-describedby="Usuario">
+                    <input type="correo" class="form-control mt-1" placeholder="Carnet del alumno :" id="correo"
+                      id="exampleInputUsuario" aria-describedby="Usuario">
                   </div>
                   <div class="col">
-                    <input type="correo" class="form-control mt-1"
-                      placeholder="id alumno:" id="correo" id="exampleInputUsuario"
-                      aria-describedby="Usuario">
+                    <input type="correo" class="form-control mt-1" placeholder="id alumno:" id="correo"
+                      id="exampleInputUsuario" aria-describedby="Usuario">
                   </div>
                 </div>
 
