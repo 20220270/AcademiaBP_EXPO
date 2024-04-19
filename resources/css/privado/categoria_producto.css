@@ -90,9 +90,13 @@ border: radius 80px;
   display: inline-block;
 }
 
-.contenedorComentario{
+.contenedorComentario {
   border: 2px solid #000000;
   border-radius: 10px;
+}
+
+.com{
+  font-size: 10px;
 }
 
 .header1{
