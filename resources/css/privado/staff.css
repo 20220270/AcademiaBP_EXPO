@@ -150,3 +150,8 @@ a.sidebar-link:hover {
 .contenedorStaff{
     border-radius: 20px;
 }
+
+.btn-secondary{
+    background-color: #408840;
+    width: 200px;
+  }
