@@ -48,6 +48,9 @@ function categoriaProfesores() {
   window.location.href = "../../views/admin/staff.html";
 }
 
+function niveles_categorias() {
+  window.location.href = "../../views/admin/niveles_categorias.html";
+}
 
 function A() {
   window.location.href = "../../views/admin/Menu.html";
