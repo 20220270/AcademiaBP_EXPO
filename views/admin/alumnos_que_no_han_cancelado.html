@@ -44,27 +44,39 @@
                             <span>inicio</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                            data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+    
+                    <li class="sidebar-item" onclick="categoriaProductos()">
+                        <a href="#" class="sidebar-link">
                             <i class="lni lni-agenda"></i>
-                            <span>Categorías</span>
+                            <span>Categorías de productos</span>
                         </a>
-                        <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            <li class="sidebar-item" onclick="categoriaProductos()">
-                                <a href="#" class="sidebar-link">Categoría productos</a>
-                            </li>
-                            <li class="sidebar-item" onclick="categoriaAlumnos()">
-                                <a href="#" class="sidebar-link">Categoría alumnos</a>
-                            </li>
-                        </ul>
                     </li>
+    
+    
                     <li class="sidebar-item" onclick="productosP()">
                         <a href="#" class="sidebar-link">
                             <i class="lni lni-shopping-basket"></i>
                             <span>Productos</span>
                         </a>
                     </li>
+    
+    
+                    <li class="sidebar-item" onclick="entre()">
+                        <a href="#" class="sidebar-link">
+                            <i class="lni lni-basketball"></i>
+                            <span>Entrenamientos</span>
+                        </a>
+                    </li>
+    
+    
+                    <li class="sidebar-item" onclick="niveles_categorias()">
+                        <a href="#" class="sidebar-link">
+                            <i class="lni lni-layers"></i>
+                            <span>Niveles</span>
+                        </a>
+                    </li>
+    
+    
                     <li class="sidebar-item" onclick="alumnos_total()">
                         <a href="#" class="sidebar-link">
                             <i class="lni lni-graduation"></i>
@@ -89,13 +101,8 @@
                             <span>Staff</span>
                         </a>
                     </li>
-                    <li class="sidebar-item" onclick="entre()">
-                        <a href="#" class="sidebar-link">
-                            <i class="lni lni-basketball"></i>
-                            <span>Entrenamientos</span>
-                        </a>
-                    </li>
-
+    
+    
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                             data-bs-target="#auth23" aria-expanded="false" aria-controls="auth">
@@ -104,24 +111,27 @@
                         </a>
                         <ul id="auth23" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item" onclick="perfil_usuario()">
-
+    
                                 <a href="#" class="sidebar-link "> <i class="lni lni-user"></i>
                                     Ver perfil</a>
-
+    
                             </li>
-
+    
                             <li class="sidebar-item">
                                 <a href="/views/public/index.html" class="sidebar-link"><img
                                         src="/resources/images/tienda.png" alt="..." width="20px" height="20px"
                                         class="me-2"></i>Ver sitio público</a>
                             </li>
-
+    
                             <li class="sidebar-item" onclick="index()">
                                 <a href="#" class="sidebar-link"> <i class="lni lni-exit"></i>Cerrar sesión</a>
                             </li>
                         </ul>
                     </li>
+    
+    
                 </ul>
+    
             </aside>
 
             <div class="main p-3">
@@ -241,6 +251,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
     </main>
 
 
