@@ -104,6 +104,7 @@ w
                     </li>
     
     
+                    
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                             data-bs-target="#auth23" aria-expanded="false" aria-controls="auth">
@@ -111,19 +112,27 @@ w
                             <span>Opciones de usuario</span>
                         </a>
                         <ul id="auth23" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+
+                            <li class="sidebar-item" onclick="gestion_usuario()">
+
+                                <a href="#" class="sidebar-link "> <i class="lni lni-user"></i>
+                                    Gestionar usuarios</a>
+
+                            </li>
+
                             <li class="sidebar-item" onclick="perfil_usuario()">
-    
+
                                 <a href="#" class="sidebar-link "> <i class="lni lni-user"></i>
                                     Ver perfil</a>
-    
+
                             </li>
-    
+
                             <li class="sidebar-item">
                                 <a href="/views/public/index.html" class="sidebar-link"><img
                                         src="/resources/images/tienda.png" alt="..." width="20px" height="20px"
                                         class="me-2"></i>Ver sitio público</a>
                             </li>
-    
+
                             <li class="sidebar-item" onclick="index()">
                                 <a href="#" class="sidebar-link"> <i class="lni lni-exit"></i>Cerrar sesión</a>
                             </li>
