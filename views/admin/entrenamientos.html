@@ -46,39 +46,39 @@
                             <span>inicio</span>
                         </a>
                     </li>
-    
+
                     <li class="sidebar-item" onclick="categoriaProductos()">
                         <a href="#" class="sidebar-link">
                             <i class="lni lni-agenda"></i>
                             <span>Categorías de productos</span>
                         </a>
                     </li>
-    
-    
+
+
                     <li class="sidebar-item" onclick="productosP()">
                         <a href="#" class="sidebar-link">
                             <i class="lni lni-shopping-basket"></i>
                             <span>Productos</span>
                         </a>
                     </li>
-    
-    
+
+
                     <li class="sidebar-item" onclick="entre()">
                         <a href="#" class="sidebar-link">
                             <i class="lni lni-basketball"></i>
                             <span>Entrenamientos</span>
                         </a>
                     </li>
-    
-    
+
+
                     <li class="sidebar-item" onclick="niveles_categorias()">
                         <a href="#" class="sidebar-link">
                             <i class="lni lni-layers"></i>
                             <span>Niveles</span>
                         </a>
                     </li>
-    
-    
+
+
                     <li class="sidebar-item" onclick="alumnos_total()">
                         <a href="#" class="sidebar-link">
                             <i class="lni lni-graduation"></i>
@@ -103,8 +103,8 @@
                             <span>Staff</span>
                         </a>
                     </li>
-    
-    
+
+
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                             data-bs-target="#auth23" aria-expanded="false" aria-controls="auth">
@@ -113,27 +113,27 @@
                         </a>
                         <ul id="auth23" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item" onclick="perfil_usuario()">
-    
+
                                 <a href="#" class="sidebar-link "> <i class="lni lni-user"></i>
                                     Ver perfil</a>
-    
+
                             </li>
-    
+
                             <li class="sidebar-item">
                                 <a href="/views/public/index.html" class="sidebar-link"><img
                                         src="/resources/images/tienda.png" alt="..." width="20px" height="20px"
                                         class="me-2"></i>Ver sitio público</a>
                             </li>
-    
+
                             <li class="sidebar-item" onclick="index()">
                                 <a href="#" class="sidebar-link"> <i class="lni lni-exit"></i>Cerrar sesión</a>
                             </li>
                         </ul>
                     </li>
-    
-    
+
+
                 </ul>
-    
+
             </aside>
 
 
@@ -170,8 +170,24 @@
                                                     <label>6:00 p.m.</label>
                                                 </div>
                                             </div>
+
+                                            <div class="container contendorBotones">
+                                                <div class="row gx-2 justify-content-end">
+                                                    
+                                                    <div class="col-auto">
+                                                        <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal" data-bs-target="#modalHorarioos">
+                                                            <img src="/resources/images/editarVerde.png" alt="buttonpng" width="20px" height="20px"/>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal" data-bs-target="#modalHorarioos">
+                                                            <img src="/resources/images/eliminar.png" alt="buttonpng" width="20px" height="20px" />
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        
+
 
                                     </div>
 
@@ -191,6 +207,22 @@
                                                 <div class="text-start mb-3">
                                                     <label>Hora de finalización:</label>
                                                     <label>6:00 p.m.</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="container contendorBotones">
+                                                <div class="row gx-2 justify-content-end">
+                                                    
+                                                    <div class="col-auto">
+                                                        <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal" data-bs-target="#modalHorarioos">
+                                                            <img src="/resources/images/editarVerde.png" alt="buttonpng" width="20px" height="20px"/>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal" data-bs-target="#modalHorarioos">
+                                                            <img src="/resources/images/eliminar.png" alt="buttonpng" width="20px" height="20px" />
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -213,6 +245,24 @@
                                                 <div class="text-start mb-3">
                                                     <label>Hora de finalización:</label>
                                                     <label>6:00 p.m.</label>
+                                                </div>
+
+                                                
+                                            </div>
+
+                                            <div class="container contendorBotones">
+                                                <div class="row gx-2 justify-content-end">
+                                                    
+                                                    <div class="col-auto">
+                                                        <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal" data-bs-target="#modalHorarioos">
+                                                            <img src="/resources/images/editarVerde.png" alt="buttonpng" width="20px" height="20px"/>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal" data-bs-target="#modalHorarioos">
+                                                            <img src="/resources/images/eliminar.png" alt="buttonpng" width="20px" height="20px" />
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -232,76 +282,139 @@
 
                                         <div class="container text-center ">
                                             <div class="row">
-                                              <div class="col imagenContenedor">
-                                                <img src="/resources/images/Monumental_Estadio_Cuscatlan.jpg" class="img-fluid rounded-1" alt="...">
-                                              </div>
-                                              <div class="col">
-                                                <div class="card-body">
-                                                    <label for="" id="lugar" class="fw-bold mb-4">Monumental Estadio Cuscatlán</label>
-                                                    <label for="" id="direccion" class="mb-4">Calle 1, Avenida 1</label>
-                                                    <label for="" id="horario">Martes 4:00 p.m - 6:00 p.m.</label>
+                                                <div class="col imagenContenedor">
+                                                    <img src="/resources/images/Monumental_Estadio_Cuscatlan.jpg"
+                                                        class="img-fluid rounded-1" alt="...">
                                                 </div>
-                                              </div>
-                                              
+                                                <div class="col">
+                                                    <div class="card-body">
+                                                        <label for="" id="lugar" class="fw-bold mb-4">Monumental Estadio
+                                                            Cuscatlán</label>
+                                                        <label for="" id="direccion" class="mb-4">Calle 1, Avenida
+                                                            1</label>
+                                                        <label for="" id="horario">Martes 4:00 p.m - 6:00 p.m.</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="container contendorBotones">
+                                                    <div class="row gx-2 justify-content-end">
+                                                        <div class="col-auto">
+                                                            <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal" data-bs-target="#modalHorarioosE">
+                                                                <img src="/resources/images/agregarHorario.png" alt="buttonpng" width="60px" height="60px" />
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal" data-bs-target="#modalHorarioos">
+                                                                <img src="/resources/images/editarVerde.png" alt="buttonpng" width="20px" height="20px"/>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal" data-bs-target="#modalHorarioos">
+                                                                <img src="/resources/images/eliminar.png" alt="buttonpng" width="20px" height="20px" />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
-                                          </div>
-                                        
-                                        
+                                        </div>
+
+
                                     </div>
                                     <div class="card w-100 mb-2 mt-2">
 
                                         <div class="container text-center">
                                             <div class="row">
-                                              <div class="col imagenContenedor">
-                                                <img src="/resources/images/Monumental_Estadio_Cuscatlan.jpg" class="img-fluid rounded-1" alt="...">
-                                              </div>
-                                              <div class="col">
-                                                <div class="card-body">
-                                                    <label for="" id="lugar" class="fw-bold mb-4">Monumental Estadio Cuscatlán</label>
-                                                    <label for="" id="direccion" class="mb-4">Calle 1, Avenida 1</label>
-                                                    <label for="" id="horario">Martes 4:00 p.m - 6:00 p.m.</label>
+                                                <div class="col imagenContenedor">
+                                                    <img src="/resources/images/Monumental_Estadio_Cuscatlan.jpg"
+                                                        class="img-fluid rounded-1" alt="...">
                                                 </div>
-                                              </div>
-                                              
+                                                <div class="col">
+                                                    <div class="card-body">
+                                                        <label for="" id="lugar" class="fw-bold mb-4">Monumental Estadio
+                                                            Cuscatlán</label>
+                                                        <label for="" id="direccion" class="mb-4">Calle 1, Avenida
+                                                            1</label>
+                                                        <label for="" id="horario">Martes 4:00 p.m - 6:00 p.m.</label>
+                                                    </div>
+                                                </div>
+
                                             </div>
-                                          </div>
-                                        
-                                        
+
+                                            <div class="container contendorBotones">
+                                                <div class="row gx-2 justify-content-end">
+                                                    <div class="col-auto">
+                                                        <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal" data-bs-target="#modalHorarioos">
+                                                            <img src="/resources/images/agregarHorario.png" alt="buttonpng" width="60px" height="60px" />
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal" data-bs-target="#modalHorarioos">
+                                                            <img src="/resources/images/editarVerde.png" alt="buttonpng" width="20px" height="20px"/>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal" data-bs-target="#modalHorarioos">
+                                                            <img src="/resources/images/eliminar.png" alt="buttonpng" width="20px" height="20px" />
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                     </div>
 
                                     <div class="card w-100 mb-2 mt-2">
 
                                         <div class="container text-center">
                                             <div class="row">
-                                              <div class="col imagenContenedor">
-                                                <img src="/resources/images/Monumental_Estadio_Cuscatlan.jpg" class="img-fluid rounded-1" alt="...">
-                                              </div>
-                                              <div class="col">
-                                                <div class="card-body">
-                                                    <label for="" id="lugar" class="fw-bold mb-4">Monumental Estadio Cuscatlán</label>
-                                                    <label for="" id="direccion" class="mb-4">Calle 1, Avenida 1</label>
-                                                    <label for="" id="horario">Martes 4:00 p.m - 6:00 p.m.</label>
+                                                <div class="col imagenContenedor">
+                                                    <img src="/resources/images/Monumental_Estadio_Cuscatlan.jpg"
+                                                        class="img-fluid rounded-1" alt="...">
                                                 </div>
-                                              </div>
-                                              
+                                                <div class="col">
+                                                    <div class="card-body">
+                                                        <label for="" id="lugar" class="fw-bold mb-4">Monumental Estadio
+                                                            Cuscatlán</label>
+                                                        <label for="" id="direccion" class="mb-4">Calle 1, Avenida
+                                                            1</label>
+                                                        <label for="" id="horario">Martes 4:00 p.m - 6:00 p.m.</label>
+                                                    </div>
+                                                </div>
+                                                <div class="container contendorBotones">
+                                                    <div class="row gx-2 justify-content-end">
+                                                        <div class="col-auto">
+                                                            <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal" data-bs-target="#modalHorarioos">
+                                                                <img src="/resources/images/agregarHorario.png" alt="buttonpng" width="60px" height="60px" />
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal" data-bs-target="#modalHorarioos">
+                                                                <img src="/resources/images/editarVerde.png" alt="buttonpng" width="20px" height="20px"/>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal" data-bs-target="#modalHorarioos">
+                                                                <img src="/resources/images/eliminar.png" alt="buttonpng" width="20px" height="20px" />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                          </div>
-                                        
-                                        
+                                        </div>
+
                                     </div>
                                 </div>
-
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="modalhorario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-                aria-hidden="true">
+            <div class="modal fade" id="modalhorario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <!-- header del modal -->
@@ -322,25 +435,27 @@
                                             <option value="1">Lunes</option>
                                             <option value="2">Martes</option>
                                             <option value="3">Miércoles</option>
-                                          </select>
+                                            <option value="4">Jueves</option>
+                                            <option value="5">Viernes</option>
+                                            <option value="6">Sábado</option>
+                                            <option value="7">Domingo</option>
+                                        </select>
                                     </div>
                                     <!-- campo del nombre producto -->
                                     <div class="col col-lg-4 text-start">
                                         <label for="DiaEntreno" id="DiaEntreno">Hora de inicio:</label>
-                                        <input type="time" class="form-control"
-                                            placeholder="Apellido del encargado" id="apellido"
-                                            aria-describedby="apellido">
+                                        <input type="time" class="form-control" placeholder="Apellido del encargado"
+                                            id="apellido" aria-describedby="apellido">
                                     </div>
 
                                     <div class="col col-lg-4 text-start">
                                         <label for="DiaEntreno" id="DiaEntreno">Hora de finalización:</label>
-                                        <input type="time" class="form-control"
-                                            placeholder="Apellido del encargado" id="apellido"
-                                            aria-describedby="apellido">
+                                        <input type="time" class="form-control" placeholder="Apellido del encargado"
+                                            id="apellido" aria-describedby="apellido">
                                     </div>
                                     <!-- campo del nombre producto -->
                                 </div>
-                                
+
 
 
 
@@ -354,13 +469,15 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="modalLugar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-            aria-hidden="true">
+
+            <div class="modal fade" id="modalLugar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <!-- header del modal -->
                         <div class="modal-header border-0">
-                            <h1 class="modal-title fs-3 w-100 text-center" id="exampleModalLabel">Agregar lugar de entrenamiento</h1>
+                            <h1 class="modal-title fs-3 w-100 text-center" id="exampleModalLabel">Agregar lugar de
+                                entrenamiento</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <!-- cuerpo del modal -->
@@ -368,33 +485,28 @@
                             <div class="container text-center">
                                 <div class="row">
                                     <div class="col mb-3">
-                                        <input type="text" class="form-control" placeholder="Nombre del lugar" aria-label="First name">
-                                      </div>
-                                      <div class="col">
-                                        <input type="file" class="form-control" placeholder="Imagen del lugar" aria-label="Last name">
-                                      </div>
-                                    
-                                </div>
-                                
-                                <div class="row">
-                                    <div class="col mb-3">
-                                        <input type="text" class="form-control" placeholder="Dirección del lugar" aria-label="First name">
-                                      </div>
-                                      <div class="col">
-                                        <input type="url" class="form-control" placeholder="URL del lugar" aria-label="Last name">
-                                      </div>
-                                    
+                                        <input type="text" class="form-control" placeholder="Nombre del lugar"
+                                            aria-label="First name">
+                                    </div>
+                                    <div class="col">
+                                        <input type="file" class="form-control" placeholder="Imagen del lugar"
+                                            aria-label="Last name">
+                                    </div>
+
                                 </div>
 
-                                <div class="row col-lg-7 mx-auto">
-                                    <select class="form-select " aria-label="Default select example">
-                                        <option selected>Selecciona el horario de entreno</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                      </select>
-                                    
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <input type="text" class="form-control" placeholder="Dirección del lugar"
+                                            aria-label="First name">
+                                    </div>
+                                    <div class="col">
+                                        <input type="url" class="form-control" placeholder="URL del lugar"
+                                            aria-label="Last name">
+                                    </div>
+
                                 </div>
+
                             </div>
                         </div>
                         <!-- footer del modal -->
@@ -404,6 +516,44 @@
                     </div>
                 </div>
             </div>
+
+            <!--Modal para agregar los horarios de entrenamiento-->
+        <div class="modal fade" id="modalHorarioosE" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- header del modal -->
+                <div class="modal-header border-0">
+                    <h1 class="modal-title fs-3 w-100 text-center" id="exampleModalLabel">Agregar horario de
+                        entrenamiento
+                        para esta categoría</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- cuerpo del modal -->
+                <div class="modal-body">
+                    <div class="container text-center">
+                        <div class="row">
+                            <label for="idHorarioE" class="idHorarioE" id="idHorarioE" hidden></label>
+                        </div>
+
+                        <div class="row col-lg-12 mx-auto">
+                            <select class="form-select " aria-label="Default select example">
+                                <option selected>Selecciona el horario de entrenamiento</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- footer del modal -->
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn" data-bs-dismiss="modal" id="AgregarLugar">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     </main>
     <!-- Scripts -->
