@@ -140,7 +140,7 @@ footer,
     color: #000;
     border-radius: 20px;
     font-size: 20px;
-    border: 1px solid #408340;
+    border: 1px solid #000000;
     transition: all .7s ease;
 }
 
@@ -154,7 +154,7 @@ footer,
     top: 0;
     width: 80px;
     height: 80px;
-    background: #408340;
+    background: #000000;
     line-height: 80px;
     border-radius: 50%;
     text-align: center;
@@ -178,9 +178,8 @@ footer,
 }
 
 .btna:hover {
-    background: #4fa34f;
+    background: #000000;
 }
-
 
 
 

@@ -7,3 +7,61 @@
     background-color: #408840;
     width: 200px;
 }
+
+.buscador {
+    position: absolute;
+    left: 50%;
+    top: 46.5%;
+    transform: translate(-50%, -305%);
+    padding: 15px;
+}
+
+.busc {
+    outline: none;
+    box-sizing: border-box;
+    height: 60px;
+    width: 0;
+    padding: 0 20px;
+    color: #000;
+    border-radius: 20px;
+    font-size: 20px;
+    border: 1px solid #000000;
+    transition: all .7s ease;
+}
+
+::placeholder {
+    color: grey;
+}
+
+.btna {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 80px;
+    height: 80px;
+    background: #000000;
+    line-height: 80px;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.btna i {
+    font-size: 20px;
+    color: white;
+    line-height: 80px;
+    transition: all .1 ease;
+}
+
+.buscador:hover input {
+    width: 340px;
+}
+
+.buscador:hover i {
+    transform: rotate(-360deg);
+}
+
+.btna:hover {
+    background: #000000;
+}
