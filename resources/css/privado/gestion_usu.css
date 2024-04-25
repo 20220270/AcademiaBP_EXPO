@@ -8,6 +8,12 @@
     width: 200px;
 }
 
+.scrollable-content {
+    max-height: 400px; /* Define la altura máxima del div scroll */
+    overflow-y: auto; /* Habilita el desplazamiento vertical */
+    overflow-x: hidden; /* Deshabilita el desplazamiento horizontal */
+  }
+
 .buscador {
     position: absolute;
     left: 50%;
