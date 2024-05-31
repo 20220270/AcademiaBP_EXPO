@@ -2,127 +2,179 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="../../resources/css/privado/login.css" />
-  <title>Inicio de sesión</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../resources/css/privado/login.css" />
+    <title>Inicio de sesión</title>
 </head>
 
 <body>
-  <div class="container ">
-    <div class="forms-container">
-      <div class="signin-signup">
-        <form action="#" class="sign-in-form">
-          <h2 class="title">Iniciar sesión </h2>
-          <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Usuario" />
-          </div>
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Contraseña" />
-          </div>
+    <div class="container">
+        <div class="forms-container">
+            <div class="signin-signup">
+                <form action="#" class="sign-in-form" id="sessionForm">
+                    <h2 class="title">Iniciar sesión </h2>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="Usuario" id="usuarioAdmin" name="usuarioAdmin" />
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Contraseña" id="contraseñaAdmin" name="contraseñaAdmin" />
+                    </div>
 
 
-          <button class="mt-2 mb-2"><a href="recuperarcontraseña.html" class="text-white botonContraC">¿Has olvido tu
-              contraseña?</a></button>
-          <button class="btn mb-3"><a href="Menu.html" class="linkIni text-white">Iniciar sesión</a></button>
-          <p class="social-text text-white">Iniciar sesión con otros métodos</p>
-          <div class="social-media">
-            <a href="https://www.facebook.com/?locale=es_LA" class="social-icon">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://www.google.com/search?client=opera-gx&q=twiter&sourceid=opera&ie=UTF-8&oe=UTF-8" class="social-icon">
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://www.google.com/?hl=es" class="social-icon">
-              <i class="fab fa-google"></i>
-            </a>
-            <a href="https://www.instagram.com" class="social-icon">
-              <i class="fab fa-instagram"></i>
-            </a>
-          </div>
-        </form>
-        <form action="#" class="sign-up-form">
-          <h2 class="title">Regístrate</h2>
-          <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Nombre" />
-          </div>
-          <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Apellido" />
-          </div>
-          <div class="input-field">
-            <i class="fas fa-passport"></i>
-            <input type="text" placeholder="DUI" />
-          </div>
-          <div class="input-field">
-            <i class="fas fa-envelope"></i>
-            <input type="text" placeholder="Correo" />
-          </div>
-          <div class="input-field">
-            <i class="fas fa-phone"></i>
-            <input type="text" placeholder="Telefono" />
-          </div>
+                    <button class="mt-2 mb-2"><a href="recuperarcontraseña.html" class="text-white botonContraC">¿Has
+                            olvido tu contraseña?</a></button>
+                    <button class="btn mb-3"><a data-bs-toggle="modal" data-bs-target="#modalRegistrasrte"
+                            class="linkIni text-white">Iniciar sesión</a></button>
+                    <p class="social-text text-white">Iniciar sesión con otros métodos</p>
+                    <div class="social-media">
+                        <a href="https://www.facebook.com/?locale=es_LA" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.google.com/search?client=opera-gx&q=twiter&sourceid=opera&ie=UTF-8&oe=UTF-8"
+                            class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.google.com/?hl=es" class="social-icon">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="https://www.instagram.com" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </form>
+            </div>
 
-          <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input type="email" placeholder="Usuario" />
-          </div>
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Contraseña" />
-          </div>
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Confirmar Contraseña" />
-          </div>
-          <input type="submit" class="btn" value="Registrarme" />
-         
-        </form>
-      </div>
+            <div class="">
+                <img src="../../resources/images/logoAcademiaBP.png" alt="logo" class="logo">
+            </div>
+        </div>
     </div>
 
-    <div class="panels-container">
-      <div class="panel left-panel">
-        <div class="content">
-          <h3>Crear cuenta</h3>
-          <p>
-            ¿No dispones de una cuenta? ¡Crea una ahora!
-          </p>
-          <button class="btn transparent" id="sign-up-btn">
-            Crear Cuenta
-          </button>
-        </div>
-        <img src="img/log.svg" class="image" alt="" />
-      </div>
-      <div class="panel right-panel">
-        <div class="content">
-          <h3>¿Ya dispones de una cuenta?</h3>
-          <p>
-            Si ya dispones de una cuenta ¡Inicia sesión ahora!
-          </p>
-          <button class="btn transparent" id="sign-in-btn">
-            Iniciar sesión
-          </button>
-        </div>
-        <img src="img/register.svg" class="image" alt="" />
-      </div>
-    </div>
-  </div>
+    <div class="modal fade" id="modalRegistrasrte" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="staticBackdropLabel">Registre sus datos</h1>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Labels identificadores e inputs para ingresar la información de los administradores, 
+                             separados por espacios -->
+                        <form id="FormValidacion">
+                            <div class="text-center" id="contenedorPrincipal">
+                                <div class="row">
+                                    <div class="col col-lg-4 col-md-12 me-md-4">
+                                        <div class="mb-2">
+                                            <!--Label e input para agregar el nombre del administrador-->
+                                            <label class="form-label">Nombre del administrador:</label>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+                                            <input type="text" class="form-control mb-5" id="nombreAdministrador"
+                                                name="nombreAdministrador" required>
+                                            <small>Ingresa tu nombre</small>
+                                        </div>
 
-  <script src="https://kit.fontawesome.com/22fd8b70d9.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!--Carrusel-->
-  <script src="/controllers/admin/login.js"></script>
-  <script src="/controllers/admin/index.js"></script>
+
+                                        <div class="mb-2 col-md-12">
+                                            <!--Label e input para agregar el apellido del administrador-->
+                                            <label class="form-label">Apellido del administrador:</label>
+
+                                            <input type="text" class="form-control mb-5" id="apellidoAdministrador"
+                                                name="apellidoAdministrador" required>
+                                            <small>Ingresa tu apellido</small>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <!--Label e input para agregar el correo del administrador-->
+                                            <label class="form-label">Correo del administrador:</label>
+
+                                            <input type="email" class="form-control mb-5" id="correoAdministrador"
+                                                name="correoAdministrador" required>
+                                            <small>Ingresa tu correo</small>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col col-lg-4 col-md-12">
+                                        <div class="mb-3">
+                                            <!--Label e input para agregar el alias del administrador-->
+                                            <label class="form-label mb-2">Alias del administrador:</label>
+
+                                            <input type="text" class="form-control mb-5" id="alias" required
+                                                name="aliasAdministrador">
+                                            <small>Ingresa un alias</small>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <!--Label e input para agregar la clave del administrador-->
+                                            <label class="form-label mb-2">Clave del administrador:</label>
+
+                                            <input type="password" class="form-control mb-5" id="clave" required
+                                                name="claveAdministrador">
+                                            <small>Ingresa tu clave</small>
+                                        </div>
+
+
+                                        <div class="mb-3">
+                                            <!--Label e input para confirmar la clave del administrador-->
+                                            <label class="form-label2 mb-2">Confirmar clave:</label>
+
+                                            <input type="password" class="form-control mb-5" id="Confirmar"
+                                                name="confirmarClave" required>
+                                            <small>Por favor confirma tu contraseña</small>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-lg-3 col-md-12 col-sm-12 mt-5">
+                                        <div class="dropdown">
+                                            <label class="form-label1 mb-2">Estado del usuario:</label>
+                                            <select class="form-select" aria-label="Default select example"
+                                                name="selectEstado">
+
+                                                <option>Activo</option>
+                                                <option>Inactivo</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-12 col-lg-12 col-md-12 col-sm-12 mt-5 mb-4">
+                                            <div class="dropdown">
+                                                <label class="form-label1 nivel mb-2">Nivel de usuario:</label>
+                                                <select class="form-select" aria-label="Default select example"
+                                                    id="selectNivelAdmin" name="selectNivelAdmin">
+                                                    <option value="1"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!--Fin de los labels e inputs-->
+                                </div>
+                                <!--Botón para registrar la información-->
+                                <div class="col">
+                                    <button type="submit" class="btn btn-dark" id="btnRegistrar">Registrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <script src="https://kit.fontawesome.com/22fd8b70d9.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!--Carrusel-->
+    <script src="/controllers/admin/login.js"></script>
+    <script src="/controllers/admin/index.js"></script>
 </body>
 
 </html>
