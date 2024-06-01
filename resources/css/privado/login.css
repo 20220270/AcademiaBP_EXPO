@@ -295,6 +295,10 @@ img.logo {
   transform: translate(50%, 80%);
 }
 
+.modal-dialog {
+  max-width: 70%;
+}
+
 @media (max-width: 870px) {
   .container {
     min-height: 800px;
@@ -447,3 +451,5 @@ img.logo {
     height: 50px;
   }
 }
+
+
