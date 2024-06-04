@@ -1,0 +1,256 @@
+/*
+*   Controlador de uso general en las páginas web del sitio privado.
+*   Sirve para manejar la plantilla del encabezado y pie del documento.
+*/
+
+// Constante para completar la ruta de la API.
+const USER_API = 'services/admin/administrador.php';
+// Constante para establecer el elemento del contenido principal.
+const MAIN = document.querySelector('main');
+
+MAIN.classList.add('container');
+
+
+
+/*  Función asíncrona para cargar el encabezado y pie del documento.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const loadTemplate = async () => {
+    // Petición para obtener en nombre del usuario que ha iniciado sesión.
+    const DATA = await fetchData(USER_API, 'getUser');
+    // Se verifica si el usuario está autenticado, de lo contrario se envía a iniciar sesión.
+    if (DATA.session) {
+        // Se comprueba si existe un alias definido para el usuario, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            // Se agrega el encabezado de la página web antes del contenido principal.
+            MAIN.insertAdjacentHTML('beforebegin', `
+            <div class="wrapper">
+            <aside id="sidebar">
+                <div class="d-flex">
+                    <button class="toggle-btn" type="button">
+                        <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
+                    </button>
+                    <div class="sidebar-logo">
+                        <a href="menu.html">Menú</a>
+                    </div>
+                </div>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-item">
+                        <a href="menu.html" class="sidebar-link">
+                            <i class="lni lni-home"></i>
+                            <span>inicio</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="categoriaProductos.html" class="sidebar-link">
+                            <i class="lni lni-agenda"></i>
+                            <span>Categorías de productos</span>
+                        </a>
+                    </li>
+
+
+                    <li class="sidebar-item">
+                        <a href="productos.html" class="sidebar-link">
+                            <i class="lni lni-shopping-basket"></i>
+                            <span>Productos</span>
+                        </a>
+                    </li>
+
+
+                    <li class="sidebar-item">
+                        <a href="entrenamientos.html" class="sidebar-link">
+                            <i class="lni lni-basketball"></i>
+                            <span>Entrenamientos</span>
+                        </a>
+                    </li>
+
+
+                    <li class="sidebar-item">
+                        <a href="nivelescategorias.html" class="sidebar-link">
+                            <i class="lni lni-layers"></i>
+                            <span>Niveles</span>
+                        </a>
+                    </li>
+
+
+                    <li class="sidebar-item">
+                        <a href="alumnostotal.html" class="sidebar-link">
+                            <i class="lni lni-graduation"></i>
+                            <span>Alumnos</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="pagosdemensualidad.html" class="sidebar-link">
+                            <i class="lni lni-dollar"></i>
+                            <span>Pagos de mensualidad</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="inscripciones.html" class="sidebar-link">
+                            <i class="lni lni-book"></i>
+                            <span>Inscripciones</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="staff.html" class="sidebar-link">
+                            <i class="lni lni-certificate"></i>
+                            <span>Staff</span>
+                        </a>
+                    </li>
+
+
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                            data-bs-target="#auth23" aria-expanded="false" aria-controls="auth">
+                            <i class="lni lni-cogs"></i>
+                            <span>Opciones de usuario</span>
+                        </a>
+                        <ul id="auth23" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+
+                            <li class="sidebar-item">
+
+                                <a href="usuarios.html" class="sidebar-link "> <i class="lni lni-user"></i>
+                                    Gestionar usuarios</a>
+
+                            </li>
+
+                            <li class="sidebar-item">
+
+                                <a href="perfilusuario.html" class="sidebar-link "> <i class="lni lni-user"></i>
+                                    Ver perfil</a>
+
+                            </li>
+
+                            <li class="sidebar-item">
+                                <a href="/views/public/index.html" class="sidebar-link"><img
+                                        src="../../resources/images/tienda.png" alt="..." width="20px" height="20px"
+                                        class="me-2"></i>Ver sitio público</a>
+                            </li>
+
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link" onclick="logOut()"> <i class="lni lni-exit"></i>Cerrar
+                                    sesión</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+
+            
+    
+            <div class="chartCard">
+                <div class="chartBox">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chartCard2">
+                <div class="chartBox2">
+                    <canvas id="myChart2"></canvas>
+                </div>
+            </div>
+            `);
+
+        } else {
+            sweetAlert(3, DATA.error, false, 'index.html');
+        }
+    } else {
+        // Se comprueba si la página web es la principal, de lo contrario se direcciona a iniciar sesión.
+        if (location.pathname.endsWith('index.html')) {
+            // Se agrega el encabezado de la página web antes del contenido principal.
+            MAIN.insertAdjacentHTML('beforebegin', `
+            <div class="wrapper">
+            <aside id="sidebar">
+                <div class="d-flex">
+                    <button class="toggle-btn" type="button">
+                        <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
+                    </button>
+                    <div class="sidebar-logo">
+                        <a href="menu.html">Menú</a>
+                    </div>
+                </div>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-item">
+                        <a href="menu.html" class="sidebar-link">
+                            <i class="lni lni-home"></i>
+                            <span>inicio</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="categoriaProductos.html" class="sidebar-link">
+                            <i class="lni lni-agenda"></i>
+                            <span>Categorías de productos</span>
+                        </a>
+                    </li>
+
+
+                    <li class="sidebar-item">
+                        <a href="productos.html" class="sidebar-link">
+                            <i class="lni lni-shopping-basket"></i>
+                            <span>Productos</span>
+                        </a>
+                    </li>
+
+
+                    <li class="sidebar-item">
+                        <a href="entrenamientos.html" class="sidebar-link">
+                            <i class="lni lni-basketball"></i>
+                            <span>Entrenamientos</span>
+                        </a>
+                    </li>
+
+
+                    <li class="sidebar-item">
+                        <a href="nivelescategorias.html" class="sidebar-link">
+                            <i class="lni lni-layers"></i>
+                            <span>Niveles</span>
+                        </a>
+                    </li>
+
+
+                    <li class="sidebar-item">
+                        <a href="alumnostotal.html" class="sidebar-link">
+                            <i class="lni lni-graduation"></i>
+                            <span>Alumnos</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="pagosdemensualidad.html" class="sidebar-link">
+                            <i class="lni lni-dollar"></i>
+                            <span>Pagos de mensualidad</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="inscripciones.html" class="sidebar-link">
+                            <i class="lni lni-book"></i>
+                            <span>Inscripciones</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="staff.html" class="sidebar-link">
+                            <i class="lni lni-certificate"></i>
+                            <span>Staff</span>
+                        </a>
+                    </li>
+
+
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                            data-bs-target="#auth23" aria-expanded="false" aria-controls="auth">
+                            <i class="lni lni-cogs"></i>
+                            <span>Opciones de usuario</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+            `);
+
+
+        } else {
+            location.href = 'index.html';
+        }
+    }
+}
