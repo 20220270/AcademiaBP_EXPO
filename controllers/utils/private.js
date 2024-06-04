@@ -124,7 +124,7 @@ const loadTemplate = async () => {
                             </li>
 
                             <li class="sidebar-item">
-                                <a href="/views/public/index.html" class="sidebar-link"><img
+                                <a href="../public/index.html" class="sidebar-link"><img
                                         src="../../resources/images/tienda.png" alt="..." width="20px" height="20px"
                                         class="me-2"></i>Ver sitio público</a>
                             </li>

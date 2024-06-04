@@ -7,7 +7,7 @@ HEADER.innerHTML = `
                 <div class="col-lg-4 col-md-3 col-sm-4 col-6 ">
                     <!-- Contenedor con un display flex para alinear elementos horizontalmente -->
                     <div class="d-flex align-items-center mt-2">
-                        <img src="/resources/images/soporte-tecnico-colorNegro.png" class="mt-4 me-1" alt="..."
+                        <img src="../../resources/images/soporte-tecnico-colorNegro.png" class="mt-4 me-1" alt="..."
                             height="40px" width="40px">
                         <div class="texto mt-4">
                             <span class="d-block texto1">Soporte técnico</span>
@@ -19,13 +19,13 @@ HEADER.innerHTML = `
                 </div>
                 <div class="col-lg-4 col-md-5 col-sm-5 col-6 align-self-center">
                     <a href="index.html">
-                        <img src="/resources/images/logoAcademiaBP.png" alt="..." height="120px" width="120px" id="imagenLogoA">
+                        <img src="../../resources/images/logoAcademiaBP.png" alt="..." height="120px" width="120px" id="imagenLogoA">
                     </a>
                 </div>
 
                 <div class="mt-5 text-end col-lg-2 col-md-1 col-sm-1 col-5">
                 <a href="perfil.html">
-                    <img src="/resources/images/userIcon.png" class="me-5 mt-2 imagenUser text-end" alt="..."
+                    <img src="../../resources/images/userIcon.png" class="me-5 mt-2 imagenUser text-end" alt="..."
                         width="30px" height="30px">
                 </a>
                 </div>
@@ -35,7 +35,7 @@ HEADER.innerHTML = `
                 <a href="carrito.html">
                     <button class="btn botonCarrito">
                     
-                        <img src="/resources/images/cesta2.png" alt="..." width="30px" height="30px"
+                        <img src="../../resources/images/cesta2.png" alt="..." width="30px" height="30px"
                             class="">
                             
                         <span class="text" id="textoCarrito">Carrito de compras()</span>
@@ -61,21 +61,21 @@ HEADER.innerHTML = `
                                 <ul class="navbar-nav me-auto">
 
                                     <li class="nav-item col-lg-3 col-md-12 text-start"><a class="nav-link me-2 text-white" href="index.html#categorias">
-                                            <img src="/resources/images/categorias.png" alt="..." width="20px"
+                                            <img src="../../resources/images/categorias.png" alt="..." width="20px"
                                                 height="20px" class="me-2">Categorías</a>
                                     </li>
 
                                     <li class="nav-item col-lg-5 col-md-12 text-start"><a class="nav-link me-3 text-white" href="pago_mensualidad.html">
-                                            <img src="/resources/images/mensualidad.png" alt="..." width="20px"
+                                            <img src="../../resources/images/mensualidad.png" alt="..." width="20px"
                                                 height="20px" class="me-1"> Pagos de mensualidad</a></li>
 
                                     <li class="nav-item col-lg-4 col-md-12 text-start"><a class="nav-link me-3 text-white" href="miscompras.html">
-                                            <img src="/resources/images/cesta.png" alt="..." width="25px"
+                                            <img src="../../resources/images/cesta.png" alt="..." width="25px"
                                                 height="25px" class="me-1"> Mis compras</a></li>
 
                                     <li class="nav-item col-lg-3 col-md-12 text-start">
                                         <a class="nav-link me-2 text-white" href="conocenos.html">
-                                            <img src="/resources/images/nosotros.png" class="me-1" alt="..."
+                                            <img src="../../resources/images/nosotros.png" class="me-1" alt="..."
                                                 height="25px" width="25px">
                                             Conócenos
                                         </a>

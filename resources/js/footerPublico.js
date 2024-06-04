@@ -8,14 +8,14 @@ FOOTER.innerHTML = `
             <div class="row">
                 <div class="col">
                     <a href="https://www.facebook.com/academiafcelsalvador" target="_blank" class="aa">
-                        <img src="../../../resources/images/logoFacebook.png" alt="Facebook" width="35px" height="35px">
+                        <img src="../../resources/images/logoFacebook.png" alt="Facebook" width="35px" height="35px">
 
                         <span>La Academia FC</span>
                     </a>
                 </div>
                 <div class="col">
                     <a href="https://www.instagram.com/academiafc.sv" target="_blank" class="aa">
-                        <img src="../../../resources/images/logoInsta.png" alt="Instagram" width="35px" height="35px">
+                        <img src="../../resources/images/logoInsta.png" alt="Instagram" width="35px" height="35px">
 
                         <span>academiafc.sv</span>
                     </a>
