@@ -25,7 +25,7 @@ const loadTemplate = async () => {
         if (DATA.status) {
             // Se agrega el encabezado de la página web antes del contenido principal.
             MAIN.insertAdjacentHTML('beforebegin', `
-            <div class="wrapper">
+
             <aside id="sidebar">
                 <div class="d-flex">
                     <button class="toggle-btn" type="button">
@@ -137,20 +137,6 @@ const loadTemplate = async () => {
                     </li>
                 </ul>
             </aside>
-
-            
-    
-            <div class="chartCard">
-                <div class="chartBox">
-                    <canvas id="myChart"></canvas>
-                </div>
-            </div>
-
-            <div class="chartCard2">
-                <div class="chartBox2">
-                    <canvas id="myChart2"></canvas>
-                </div>
-            </div>
             `);
 
         } else {

@@ -123,8 +123,7 @@ if (isset($_GET['action'])) {
                     !$administrador->setDUI($_POST['duiAdministrador']) or
                     !$administrador->setCorreo($_POST['correoAdministrador']) or
                     !$administrador->setTelefono($_POST['telefonoAdministrador']) or
-                    !$administrador->setAlias($_POST['aliasAdministrador']) or
-                    !$administrador->setImagen($_FILES['fotoAdministrador'], $administrador->getFilename())
+                    !$administrador->setAlias($_POST['aliasAdministrador'])
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($administrador->editProfile()) {
