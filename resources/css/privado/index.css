@@ -148,3 +148,19 @@ a.sidebar-link:hover {
     overflow-y: auto; /* Habilita el desplazamiento vertical */
 }
 
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    font-family: Arial, sans-serif;
+  }
+  
+  #sidebar {
+  
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  main {
+    margin-top: 50px;
+  }
+

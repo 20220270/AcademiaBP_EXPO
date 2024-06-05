@@ -18,7 +18,7 @@
     position: absolute;
     left: 50%;
     top: 46.5%;
-    transform: translate(-50%, -305%);
+    transform: translate(-100%, -265%);
     padding: 15px;
 }
 
@@ -71,3 +71,19 @@
 .btna:hover {
     background: #000000;
 }
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    font-family: Arial, sans-serif;
+  }
+  
+  #sidebar {
+  
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  main {
+    margin-top: 10px;
+  }
