@@ -155,3 +155,18 @@ a.sidebar-link:hover {
     background-color: #408840;
     width: 200px;
   }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    font-family: Arial, sans-serif;
+  }
+  
+  #sidebar {
+  
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  main {
+    margin-top: 50px;
+  }
