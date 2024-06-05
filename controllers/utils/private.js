@@ -42,39 +42,39 @@ const loadTemplate = async () => {
                             <span>inicio</span>
                         </a>
                     </li>
-
+    
                     <li class="sidebar-item">
                         <a href="categoriaProductos.html" class="sidebar-link">
                             <i class="lni lni-agenda"></i>
                             <span>Categorías de productos</span>
                         </a>
                     </li>
-
-
+    
+    
                     <li class="sidebar-item">
                         <a href="productos.html" class="sidebar-link">
                             <i class="lni lni-shopping-basket"></i>
                             <span>Productos</span>
                         </a>
                     </li>
-
-
+    
+    
                     <li class="sidebar-item">
                         <a href="entrenamientos.html" class="sidebar-link">
                             <i class="lni lni-basketball"></i>
                             <span>Entrenamientos</span>
                         </a>
                     </li>
-
-
+    
+    
                     <li class="sidebar-item">
                         <a href="nivelescategorias.html" class="sidebar-link">
                             <i class="lni lni-layers"></i>
                             <span>Niveles</span>
                         </a>
                     </li>
-
-
+    
+    
                     <li class="sidebar-item">
                         <a href="alumnostotal.html" class="sidebar-link">
                             <i class="lni lni-graduation"></i>
@@ -99,8 +99,20 @@ const loadTemplate = async () => {
                             <span>Staff</span>
                         </a>
                     </li>
-
-
+                    <li class="sidebar-item">
+                        <a href="clientes.html" class="sidebar-link">
+                        <i class="lni lni-customer"></i>
+                            <span>Clientes</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="valores.html" class="sidebar-link">
+                        <i class="lni lni-spellcheck"></i>
+                            <span>Valores</span>
+                        </a>
+                    </li>
+    
+    
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                             data-bs-target="#auth23" aria-expanded="false" aria-controls="auth">
@@ -108,30 +120,29 @@ const loadTemplate = async () => {
                             <span>Opciones de usuario</span>
                         </a>
                         <ul id="auth23" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-
+    
                             <li class="sidebar-item">
-
+    
                                 <a href="usuarios.html" class="sidebar-link "> <i class="lni lni-user"></i>
                                     Gestionar usuarios</a>
-
+    
                             </li>
-
+    
                             <li class="sidebar-item">
-
+    
                                 <a href="perfilusuario.html" class="sidebar-link "> <i class="lni lni-user"></i>
                                     Ver perfil</a>
-
+    
                             </li>
-
+    
                             <li class="sidebar-item">
                                 <a href="../public/index.html" class="sidebar-link"><img
                                         src="../../resources/images/tienda.png" alt="..." width="20px" height="20px"
                                         class="me-2"></i>Ver sitio público</a>
                             </li>
-
+    
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link" onclick="logOut()"> <i class="lni lni-exit"></i>Cerrar
-                                    sesión</a>
+                                <a class="sidebar-link" onclick="logOut()"> <i class="lni lni-exit" onclick="logOut()"></i>Cerrar sesión</a>
                             </li>
                         </ul>
                     </li>

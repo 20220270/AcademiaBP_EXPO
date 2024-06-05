@@ -20,7 +20,7 @@ const SAVE_FORM = document.getElementById('saveForm'),
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
-    //loadTemplate();
+    loadTemplate();
     // Se establece el título del contenido principal.
     //MAIN_TITLE.textContent = 'Gestionar categorías';
     // Llamada a la función para llenar la tabla con los registros existentes.

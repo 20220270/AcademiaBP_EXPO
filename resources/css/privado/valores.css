@@ -1,6 +1,6 @@
 #scroll{
     overflow: auto; 
-    max-height: 490px;
+    max-height: 420px;
 }
 
 .position-relative {
@@ -18,5 +18,24 @@
 
 #Search {
     padding-left: 35px;
-    width: 650px;
+    width: 680px;
 }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    font-family: Arial, sans-serif;
+  }
+  
+  #sidebar {
+  
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  main {
+    margin-top: 50px;
+  }
+
+  #contenedorPrin{
+    width: 65%;
+  }
