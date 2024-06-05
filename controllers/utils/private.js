@@ -17,6 +17,7 @@ MAIN.classList.add('container');
 *   Retorno: ninguno.
 */
 const loadTemplate = async () => {
+    
     // Petición para obtener en nombre del usuario que ha iniciado sesión.
     const DATA = await fetchData(USER_API, 'getUser');
     // Se verifica si el usuario está autenticado, de lo contrario se envía a iniciar sesión.
@@ -26,7 +27,7 @@ const loadTemplate = async () => {
             // Se agrega el encabezado de la página web antes del contenido principal.
             MAIN.insertAdjacentHTML('beforebegin', `
 
-            <aside id="sidebar">
+            <aside id="sidebar" class="vh-100">
                 <div class="d-flex">
                     <button class="toggle-btn" type="button">
                         <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
@@ -35,60 +36,130 @@ const loadTemplate = async () => {
                         <a href="menu.html">Menú</a>
                     </div>
                 </div>
+
                 <ul class="sidebar-nav">
                     <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
+                        <i class="lni lni-home"></i>
+                        </a>
+                        <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
                         <a href="menu.html" class="sidebar-link">
                             <i class="lni lni-home"></i>
-                            <span>inicio</span>
+                            Inicio
                         </a>
+                        </li>
+                        </ul>
+                    </li>
+
+                    
+
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
+                            <i class="lni lni-agenda icon-redirect"></i>
+                        </a>
+                        <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="categoriaProductos.html" class="sidebar-link">
+                                    <i class="lni lni-agenda"></i>
+                                    Categorías de productos
+                                </a>
+                            </li>
+                        </ul>
                     </li>
 
                     <li class="sidebar-item">
-                        <a href="categoriaProductos.html" class="sidebar-link">
-                            <i class="lni lni-agenda"></i>
-                            <span>Categorías de productos</span>
-                        </a>
-                    </li>
-
-
-                    <li class="sidebar-item">
-                        <a href="productos.html" class="sidebar-link">
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
                             <i class="lni lni-shopping-basket"></i>
-                            <span>Productos</span>
                         </a>
+                        <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            
+                                <li class="sidebar-item">
+                                    <a href="productos.html" class="sidebar-link">
+                                <i class="lni lni-shopping-basket"></i>
+                                    Productos
+                                    </a>
+                                </li>
+                        </ul>
                     </li>
 
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
+                        <i class="lni lni-graduation"></i>
+                        </a>
+                        <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            
+                               
+                            <li class="sidebar-item">
+                            <a href="alumnostotal.html" class="sidebar-link">
+                        <i class="lni lni-graduation"></i>
+                        Alumnos
+                        </a>
+                        </li>
+                        </ul>
+                    </li>
 
                     <li class="sidebar-item">
-                        <a href="alumnostotal.html" class="sidebar-link">
-                            <i class="lni lni-graduation"></i>
-                            <span>Alumnos</span>
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
+                        <i class="lni lni-dollar"></i>
                         </a>
-                    </li>
-                    <li class="sidebar-item">
+                        <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            
+                        <li class="sidebar-item">
                         <a href="pagosdemensualidad.html" class="sidebar-link">
-                            <i class="lni lni-dollar"></i>
-                            <span>Pagos de mensualidad</span>
+                        <i class="lni lni-dollar"></i>
+                            Pagos de mensualidad
                         </a>
                     </li>
+                        </ul>
+                    </li>
+
                     <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
+                        <i class="lni lni-book"></i>
+                        </a>
+                        <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            
+                        <li class="sidebar-item">
                         <a href="inscripciones.html" class="sidebar-link">
                             <i class="lni lni-book"></i>
-                            <span>Inscripciones</span>
+                            Inscripciones
                         </a>
                     </li>
-                    <li class="sidebar-item">
-                        <a href="staff.html" class="sidebar-link">
-                            <i class="lni lni-certificate"></i>
-                            <span>Staff</span>
-                        </a>
+                        </ul>
                     </li>
+
                     <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
+                    <i class="lni lni-certificate"></i>
+                    </a>
+                    <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        
+                    <li class="sidebar-item">
+                    <a href="staff.html" class="sidebar-link">
+                        <i class="lni lni-certificate"></i>
+                        Staff
+                    </a>
+                    </li>
+                    </ul>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
+                        <i class="lni lni-customer"></i>
+                        </a>
+                        <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
                         <a href="clientes.html" class="sidebar-link">
                             <i class="lni lni-customer"></i>
-                            <span>Clientes</span>
+                            Clientes
                         </a>
                     </li>
+                        </ul>
+                    </li>
+                    
+                    
+                    
 
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
@@ -272,3 +343,4 @@ const loadTemplate = async () => {
         }
     }
 }
+
