@@ -20,9 +20,25 @@ h1 {
     font-size: 1.5rem;
 }
 
+
 body {
     font-family: 'Poppins', sans-serif;
+    display: flex;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
 }
+
+#sidebar {
+
+    background-color: #f8f9fa;
+
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    flex-grow: 1;
+}
+
 
 .wrapper {
     display: flex;

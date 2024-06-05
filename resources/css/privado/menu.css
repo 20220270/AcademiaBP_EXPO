@@ -1,32 +1,44 @@
 .chartCard {
-    width: 100vw;
-    height: calc(100vh - 0px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .chartBox {
-    width: 80%;
-    height: 80%;
-    border-radius: 20px;
-    border: solid 3px #408840;
-    background: white;
-  }
+.chartBox {
+  width: 50%;
+  height: 40%;
+  border-radius: 20px;
+  border: solid 3px #408840;
+  background: white;
+}
 
 
-  .chartCard2 {
-    width: 100vw;
-    height: calc(100vh - 0px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.chartCard2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .chartBox2 {
-    width: 80%;
-    height: 80%;
-    border-radius: 20px;
-    border: solid 3px #408840;
-    background: white;
-  }
+.chartBox2 {
+  width: 50%;
+  height: 40%;
+  border-radius: 20px;
+  border: solid 3px #408840;
+  background: white;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  font-family: Arial, sans-serif;
+}
+
+#sidebar {
+
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+main {
+  margin-top: 50px;
+}
