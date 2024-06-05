@@ -83,8 +83,20 @@ const fillTable = async (form = null) => {
             <td>${row.id_valor}</td>
             <td>${row.nombre_valor}</td>
             <td>${row.descripcion_valor}</td>
-            <td><img src="${SERVER_URL}images/valores/${row.imagen_valor}" class="card-img-top" height="250px" width="250px"></td>
-          `;
+            <td><img src="${SERVER_URL}images/valores/${row.imagen_valor}" class="card-img-top" height="250px" width="150px"></td>
+            <td><button type="submit" class="btn mt-1 " id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_valor})">
+            <i class="bi bi-search"></i>
+            <img src="../../resources/images/eliminar.png" alt="" width="20px" height="20px"
+                class="mb-4">
+
+        </button>
+        <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_valor})">
+            <i class="bi bi-x-square-fill"></i>
+            <img src="../../resources/images/editarVerde.png" alt="" width="20px" height="20px"
+                class="mb-4">
+        </button></td>
+          
+            `;
       });
       // Se muestra un mensaje de acuerdo con el resultado.
       ROWS_FOUND.textContent = DATA.message;

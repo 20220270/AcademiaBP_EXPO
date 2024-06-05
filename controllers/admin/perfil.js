@@ -10,6 +10,7 @@ const PROFILE_FORM = document.getElementById('profileForm'),
     NIVEL_ADMINISTRADOR = document.getElementById('nivelAdministrador'),
     FECHA_REGISTRO = document.getElementById('fecharegistroAdmin'),
     ALIAS_ADMINISTRADOR = document.getElementById('aliasAdministrador');
+    FOTO_ADMINISTRADOR = document.getElementById('imagen');
 // Constante para establecer la modal de cambiar contraseña.
 const PASSWORD_MODAL = new bootstrap.Modal('#passwordModal');
 // Constante para establecer el formulario de cambiar contraseña.
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         FECHA_REGISTRO.value = ROW.fecha_registro;
         NIVEL_ADMINISTRADOR.value = ROW.nivel;
         ALIAS_ADMINISTRADOR.value = ROW.alias_administrador;
+        FOTO_ADMINISTRADOR.value = ROW.foto_administrador;
     } else {
         sweetAlert(2, DATA.error, null);
     }

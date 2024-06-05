@@ -65,7 +65,7 @@ if (isset($_GET['action'])) {
                     !$valores->setFilename() or
                     !$valores->setNombre($_POST['nombreValor']) or
                     !$valores->setDescripcion($_POST['descripcionValor']) or
-                    !$valores->setImagen($_FILES['imagenValor'], $categoria->getFilename())
+                    !$valores->setImagen($_FILES['imagenValor'], $valores->getFilename())
                 ) {
                     $result['error'] = $valores->getDataError();
                 } elseif ($valores->updateRow()) {
@@ -74,7 +74,7 @@ if (isset($_GET['action'])) {
                     // Se asigna el estado del archivo después de actualizar.
                     $result['fileStatus'] = Validator::changeFile($_FILES['imagenValor'], $valores::RUTA_IMAGEN, $valores->getFilename());
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar la categoría';
+                    $result['error'] = 'Ocurrió un problema al modificar el valor';
                 }
                 break;
             case 'deleteRow':
@@ -85,7 +85,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = $valores->getDataError();
                 } elseif ($valores->deleteRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Categoría eliminada correctamente';
+                    $result['message'] = 'Valor eliminado correctamente';
                     // Se asigna el estado del archivo después de eliminar.
                     $result['fileStatus'] = Validator::deleteFile($valores::RUTA_IMAGEN, $valores->getFilename());
                 } else {
