@@ -1,9 +1,8 @@
-.card-title{
+.card-title {
     color: #408840;
 }
 
-
-.btn-secondary{
+.btn-secondary {
     background-color: #408840;
     width: 200px;
 }
@@ -12,13 +11,12 @@
     max-height: 400px; /* Define la altura máxima del div scroll */
     overflow-y: auto; /* Habilita el desplazamiento vertical */
     overflow-x: hidden; /* Deshabilita el desplazamiento horizontal */
-  }
+}
 
 .buscador {
-    position: absolute;
-    left: 50%;
-    top: 46.5%;
-    transform: translate(-100%, -265%);
+    position: relative;
+    width: 80px; /* Ancho inicial del contenedor */
+    transition: width .7s ease; /* Transición para el cambio de ancho */
     padding: 15px;
 }
 
@@ -26,13 +24,14 @@
     outline: none;
     box-sizing: border-box;
     height: 60px;
-    width: 0;
+    width: 100%; /* Ancho inicial del input */
     padding: 0 20px;
     color: #000;
     border-radius: 20px;
     font-size: 20px;
     border: 1px solid #000000;
-    transition: all .7s ease;
+    opacity: 0; /* Hacer el input invisible inicialmente */
+    transition: opacity .7s ease; /* Transición para la visibilidad */
 }
 
 ::placeholder {
@@ -42,26 +41,32 @@
 .btna {
     position: absolute;
     right: 0;
-    top: 0;
-    width: 80px;
-    height: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
     background: #000000;
-    line-height: 80px;
+    line-height: 60px;
     border-radius: 50%;
     text-align: center;
     cursor: pointer;
     transition: .5s;
+    z-index: 1; /* Asegurar que el botón esté sobre el input */
 }
 
 .btna i {
     font-size: 20px;
     color: white;
-    line-height: 80px;
-    transition: all .1 ease;
+    line-height: 60px;
+    transition: all .1s ease;
 }
 
-.buscador:hover input {
-    width: 340px;
+.buscador:hover {
+    width: 340px; /* Ancho expandido del contenedor al hacer hover */
+}
+
+.buscador:hover .busc {
+    opacity: 1; /* Mostrar el input al hacer hover */
 }
 
 .buscador:hover i {
@@ -72,18 +77,22 @@
     background: #000000;
 }
 
-
 body {
     font-family: 'Poppins', sans-serif;
     display: flex;
     font-family: Arial, sans-serif;
-  }
-  
-  #sidebar {
-  
+}
+
+#sidebar {
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  main {
+}
+
+main {
     margin-top: 10px;
-  }
+}
+
+.rounded-circle{
+    width: 250px; 
+    height: 250px; 
+    object-fit: cover;
+}

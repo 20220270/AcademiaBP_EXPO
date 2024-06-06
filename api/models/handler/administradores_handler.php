@@ -4,6 +4,9 @@ require_once('../../helpers/database.php');
 /*
  *  Clase para manejar el comportamiento de los datos de la tabla administrador.
  */
+
+
+
 class AdministradorHandler
 {
     /*
@@ -90,26 +93,26 @@ class AdministradorHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador alias_administrador, clave_administrador, nivel, estado_adminstrador, fecha_registro
+        $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, nivel, estado_adminstrador, fecha_registro
                 FROM tb_administradores
                 INNER JOIN tb_niveles_administradores USING(id_nivel)
-                WHERE correo_administrador LIKE ? OR alias_administrador LIKE ? OR nivel LIKE ? OR estado_adminstrador LIKE ?
+                WHERE nombre_admistrador LIKE ? OR alias_administrador LIKE ? OR correo_administrador LIKE ? OR dui_administrador LIKE ? OR nivel LIKE ? OR estado_adminstrador LIKE ?
                 ORDER BY id_administrador';
-        $params = array($value, $value, $value, $value);
+        $params = array($value, $value, $value, $value, $value, $value);
         return Database::getRows($sql, $params);
     }
 
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_administradores(nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, estado_adminstrador, id_nivel)
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->apellido, $this->dui, $this->correo, $this->telefono, $this->alias, $this->clave, $this -> estado, $this -> nivel);
+        $sql = 'INSERT INTO tb_administradores(nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, estado_adminstrador, id_nivel, foto_administrador)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        $params = array($this->nombre, $this->apellido, $this->dui, $this->correo, $this->telefono, $this->alias, $this->clave, $this -> estado, $this -> nivel, $this->imagen);
         return Database::executeRow($sql, $params);
     }
 
     public function readAll()
     {
-        $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador alias_administrador, clave_administrador, nivel, estado_adminstrador, fecha_registro, foto_administrador
+        $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, nivel, estado_adminstrador, fecha_registro, foto_administrador
         FROM tb_administradores
         INNER JOIN tb_niveles_administradores USING(id_nivel)
                 ORDER BY id_administrador';
@@ -118,7 +121,7 @@ class AdministradorHandler
 
     public function readOne()
     {
-        $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador alias_administrador, clave_administrador, nivel, estado_adminstrador, fecha_registro, foto_administrador
+        $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, nivel, estado_adminstrador, fecha_registro, foto_administrador
         FROM tb_administradores
         INNER JOIN tb_niveles_administradores USING(id_nivel)
                 WHERE id_administrador = ?';

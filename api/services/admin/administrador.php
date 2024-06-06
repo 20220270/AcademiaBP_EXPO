@@ -35,8 +35,9 @@ if (isset($_GET['action'])) {
                     !$administrador->setTelefono($_POST['telefonoAdministrador']) or
                     !$administrador->setAlias($_POST['aliasAdministrador']) or
                     !$administrador->setClave($_POST['claveAdministrador']) or
-                    !$administrador->setEstado($_POST['selectEstadoUsuario']) or
-                    !$administrador->setNivel($_POST['selectNivelAdmin']) 
+                    !$administrador->setEstado($_POST['selectEstado']) or
+                    !$administrador->setNivel($_POST['selectNivelAdmin']) or
+                    !$administrador->setImagen($_FILES['fotoAdmin'], $administrador->getFilename())
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($_POST['claveAdministrador'] != $_POST['confirmarClave']) {
@@ -44,6 +45,7 @@ if (isset($_GET['action'])) {
                 } elseif ($administrador->createRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Administrador creado correctamente';
+                    $result['fileStatus'] = Validator::changeFile($_FILES['fotoAdmin'], $administrador::RUTA_IMAGEN, $administrador->getFilename());
                 } else {
                     $result['error'] = 'Ocurrió un problema al crear el administrador';
                 }
@@ -69,7 +71,7 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$administrador->setId($_POST['idAdministrador']) or
-                    !$administrador->setEstado($_POST['selectEstadoUsuario']) or
+                    !$administrador->setEstado($_POST['selectEstado']) or
                     !$administrador->setNivel($_POST['selectNivelAdmin'])
                 ) {
                     $result['error'] = $administrador->getDataError();
