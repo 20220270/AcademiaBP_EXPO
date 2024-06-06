@@ -17,25 +17,34 @@
     
     <main>
 
-
+        <div class="text-center">
+            <h1>
+                Gestion de valores
+            </h1>
+        </div>
         <div class="mx-auto" id="contenedorPrin">
 
             <div class="col">
-                <div class="container-sm mt-2">
-                    <form class="d-flex" id="searchForm">
-                        <div class="position-relative">
-                            <img class="search-icon" src="../../resources/images/lupa.png" alt="Lupa">
-                            <input class="form-control me-2" type="search" aria-label="Search" id="Search" name="search"
-                                placeholder="Busque por el nombre de la categoría o su descripción">
-                        </div>
-                    </form>
-                </div>
-            </div>
+                <div class="row">
+                    <div class="col-6 offset-3 d-flex justify-content-center">
+                        <!-- Añadimos una clase offset-3 para centrar el buscador -->
+                        <form class="d-flex flex-grow-1" id="searchForm">
+                            <div class="buscador mx-auto">
+                                <input class="busc light-table-filter" data-table="order-table" type="text" placeholder="Busque por correo o alias" id="Buscador" name="search">
+                                <div class="btna">
+                                    <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
 
-            <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-white me-md-2 mt-2" onclick="openCreate()">
-                    <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
-                </button>
+                    <div class="col-3 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
+                        <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate()">
+                            <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
+                        </button>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-12 col-sm-12 col-md-12 col-12">
                 <div id="scroll">
@@ -120,6 +129,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/051460de0f.js" crossorigin="anonymous"></script>
     <script src="../../controllers/utils/sweetalert.min.js"></script>
     <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/utils/private.js"></script>
