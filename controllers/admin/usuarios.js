@@ -88,7 +88,7 @@ SEARCH_FORM.addEventListener('submit', (event) => {
                     <div class="col-md-8">
                         <div class="card-body">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#actualizar_admin" data-bs-dismiss="modal" onclick="openUpdate(${row.id_administrador})">
+                                <button type="button" class="btn btn-dark btn-sm" onclick="openUpdate(${row.id_administrador})">
                                     <i class="bi bi-pencil-fill"></i>
                                 </button>
                                 <button type="button" class="btn btn-danger btn-sm" onclick="openDelete(${row.id_administrador})">

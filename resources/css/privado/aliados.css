@@ -1,0 +1,120 @@
+#scroll{
+    overflow: auto; 
+    max-height: 420px;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+}
+
+#Search {
+    padding-left: 35px;
+    width: 680px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    font-family: Arial, sans-serif;
+  }
+  
+  #sidebar {
+  
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  main {
+    margin-top: 50px;
+  }
+
+  #contenedorPrin{
+    width: 65%;
+  }
+
+  .card-title {
+    color: #408840;
+}
+
+.btn-secondary {
+    background-color: #408840;
+    width: 200px;
+}
+
+.scrollable-content {
+    max-height: 400px; /* Define la altura máxima del div scroll */
+    overflow-y: auto; /* Habilita el desplazamiento vertical */
+    overflow-x: hidden; /* Deshabilita el desplazamiento horizontal */
+}
+
+.buscador {
+    position: relative;
+    width: 80px; /* Ancho inicial del contenedor */
+    transition: width .7s ease; /* Transición para el cambio de ancho */
+    padding: 15px;
+}
+
+.busc {
+    outline: none;
+    box-sizing: border-box;
+    height: 60px;
+    width: 100%; /* Ancho inicial del input */
+    padding: 0 20px;
+    color: #000;
+    border-radius: 20px;
+    font-size: 20px;
+    border: 1px solid #000000;
+    opacity: 0; /* Hacer el input invisible inicialmente */
+    transition: opacity .7s ease; /* Transición para la visibilidad */
+}
+
+::placeholder {
+    color: grey;
+}
+
+.btna {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    background: #000000;
+    line-height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    transition: .5s;
+    z-index: 1; /* Asegurar que el botón esté sobre el input */
+}
+
+.btna i {
+    font-size: 20px;
+    color: white;
+    line-height: 60px;
+    transition: all .1s ease;
+}
+
+.buscador:hover {
+    width: 340px; /* Ancho expandido del contenedor al hacer hover */
+}
+
+.buscador:hover .busc {
+    opacity: 1; /* Mostrar el input al hacer hover */
+}
+
+.buscador:hover i {
+    transform: rotate(-360deg);
+}
+
+.btna:hover {
+    background: #000000;
+}

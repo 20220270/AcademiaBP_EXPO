@@ -71,7 +71,6 @@ const fillTable = async (form = null) => {
   const DATA = await fetchData(VALORES_API, action, form);
   // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
   if (DATA.status) {
-      console.log(DATA)
       // Se recorre el conjunto de registros fila por fila.
       DATA.dataset.forEach(row => {
           // Se crean y concatenan las filas de la tabla con los datos de cada registro.
@@ -80,21 +79,25 @@ const fillTable = async (form = null) => {
           TABLE_BODY.innerHTML += `
             
 
-            <td>${row.id_valor}</td>
-            <td>${row.nombre_valor}</td>
-            <td>${row.descripcion_valor}</td>
-            <td><img src="${SERVER_URL}images/valores/${row.imagen_valor}" class="card-img-top" height="250px" width="150px"></td>
-            <td><button type="submit" class="btn mt-1 " id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_valor})">
-            <i class="bi bi-search"></i>
-            <img src="../../resources/images/eliminar.png" alt="" width="20px" height="20px"
-                class="mb-4">
-
-        </button>
-        <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_valor})">
-            <i class="bi bi-x-square-fill"></i>
-            <img src="../../resources/images/editarVerde.png" alt="" width="20px" height="20px"
-                class="mb-4">
-        </button></td>
+          
+          <td>${row.id_valor}</td>
+          <td>${row.nombre_valor}</td>
+          <td>${row.descripcion_valor}</td>
+          <td><img src="${SERVER_URL}images/valores/${row.imagen_valor}" class="card-img-top"></td>
+          <td>
+            <div class="d-flex justify-content-center gap-2">
+                <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_valor})">
+                    <i class="bi bi-search"></i>
+                        <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                </button>
+                <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_valor})">
+                    <i class="bi bi-x-square-fill"></i>
+                        <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                </button>
+            </div>
+        </td>
+      
+      
           
             `;
       });
