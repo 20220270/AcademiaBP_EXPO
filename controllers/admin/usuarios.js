@@ -2,15 +2,22 @@ const ADMINISTRADOR_API = 'services/admin/administrador.php';
 const NIVELESUSUARIO_API = 'services/admin/nivelesusuario.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
-// Constantes para establecer los elementos de la tabla.
-//const TABLE_BODY = document.getElementById('tableBody'),
-//ROWS_FOUND = document.getElementById('rowsFound');
+const SEARCH_FORM2 = document.getElementById('searchForm2'); //Busqueda de niveles de administradores
+// Constantes para establecer los elementos de la tabla de niveles de usuario.
+const TABLE_BODY = document.getElementById('tableBody'),
+ROWS_FOUND = document.getElementById('rowsFound');
 // Constantes para establecer los elementos del componente Modal.
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
     CARD_ADMINS = document.getElementById('cardsAdmins');
+
+    const SAVE_MODAL2 = new bootstrap.Modal('#saveModal2'),
+    MODAL_TITLE2 = document.getElementById('modalTitle2');
+
 // Constantes para establecer los elementos del formulario de guardar.
-const SAVE_FORM = document.getElementById('saveForm'),
+const SAVE_FORM = document.getElementById('saveForm')
+const SAVE_FORM2 = document.getElementById('saveForm2'),
+
     ID_ADMINISTRADOR = document.getElementById('idAdministrador'),
     NOMBRE_ADMINISTRADOR = document.getElementById('nombreAdministrador'),
     APELLIDO_ADMINISTRADOR = document.getElementById('apellidoAdministrador'),
@@ -24,6 +31,10 @@ const SAVE_FORM = document.getElementById('saveForm'),
     FOTO_ADMINISTRADOR = document.getElementById('fotoAdmin'),
     ESTADO_ADMINISTRADOR = document.getElementById('selectEstadoUsuario');
 
+    //Constantes para los niveles de usuario
+    ID_NIVEL = document.getElementById('idNivel'),
+    NIVEL = document.getElementById('nombreNivel');
+
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -32,7 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
     //MAIN_TITLE.textContent = 'Gestionar categorías';
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
+    fillTable2();
 });
+
+
 
 SEARCH_FORM.addEventListener('submit', (event) => {
     // Se evita recargar la página web después de enviar el formulario.
@@ -42,6 +56,17 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
     fillTable(FORM);
   });
+
+  SEARCH_FORM2.addEventListener('submit', (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Constante tipo objeto con los datos del formulario.
+    const FORM = new FormData(SEARCH_FORM2);
+    // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
+    fillTable2(FORM);
+  });
+
+
 
   SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
@@ -64,6 +89,30 @@ SEARCH_FORM.addEventListener('submit', (event) => {
         sweetAlert(2, DATA.error, false);
     }
   });
+
+
+  SAVE_FORM2.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Se verifica la acción a realizar.
+    (ID_NIVEL.value) ? action = 'updateRow' : action = 'createRow';
+    // Constante tipo objeto con los datos del formulario.
+    const FORM = new FormData(SAVE_FORM2);
+    // Petición para guardar los datos del formulario.
+    const DATA = await fetchData(NIVELESUSUARIO_API, action, FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se cierra la caja de diálogo.
+        SAVE_MODAL2.hide();
+        // Se muestra un mensaje de éxito.
+        sweetAlert(1, DATA.message, true);
+        // Se carga nuevamente la tabla para visualizar los cambios.
+        fillTable2();
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
+  });
+
 
   const fillTable = async (form = null) => {
     // Se inicializa el contenido de la tabla.
@@ -117,6 +166,35 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     }
 }
 
+const fillTable2 = async (form = null) => {
+    // Se inicializa el contenido de la tabla.
+    TABLE_BODY.innerHTML = '';
+    ROWS_FOUND.innerHTML = '';
+    // Se verifica la acción a realizar.
+    const action = form ? 'searchRows' : 'readAll';
+    // Petición para obtener los registros disponibles.
+    const DATA2 = await fetchData(NIVELESUSUARIO_API, action, form);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA2.status) {
+        // Se recorre el conjunto de registros fila por fila.
+        DATA2.dataset.forEach(row => {
+            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+            TABLE_BODY.innerHTML += `
+            <td>${row.id_nivel}</td>
+            <td>${row.nivel}</td>
+            <td><button type="button" class="btn btn-dark btn-sm" onclick="openUpdate2(${row.id_nivel})">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm" onclick="openDelete2(${row.id_nivel})">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button></td>
+            `;
+        });
+    } else {
+        sweetAlert(4, DATA.error, true);
+    }
+}
+
 
   const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
@@ -136,6 +214,18 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     ALIAS_ADMINISTRADOR.readOnly = false;
     CLAVE_ADMINISTRADOR.readOnly = false;
   }
+
+
+
+  const openCreate2 = () => {
+    // Se muestra la caja de diálogo con su título.
+    SAVE_MODAL2.show();
+    MODAL_TITLE2.textContent = 'Crear nuevo nivel de administrador';
+    // Se prepara el formulario.
+    SAVE_FORM2.reset();
+  }
+
+
   
   /*
   *   Función asíncrona para preparar el formulario al momento de actualizar un registro.
@@ -185,6 +275,29 @@ SEARCH_FORM.addEventListener('submit', (event) => {
         sweetAlert(2, DATA.error, false);
     }
   }
+
+  const openUpdate2 = async (id) => {
+    // Se define una constante tipo objeto con los datos del registro seleccionado.
+    const FORM = new FormData();
+    FORM.append('idNivel', id);
+    // Petición para obtener los datos del registro solicitado.
+    const DATA = await fetchData(NIVELESUSUARIO_API, 'readOne', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        SAVE_MODAL2.show();
+        MODAL_TITLE2.textContent = 'Actualizar nivel de usuario';
+        // Se prepara el formulario.
+        SAVE_FORM2.reset();
+        // Se inicializan los campos con los datos.
+        const ROW = DATA.dataset;
+        ID_NIVEL.value = ROW.id_nivel;
+        NIVEL.value = ROW.nivel;
+        
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
+  }
   
   /*
   *   Función asíncrona para eliminar un registro.
@@ -212,4 +325,27 @@ SEARCH_FORM.addEventListener('submit', (event) => {
         }
     }
   }
+
+  const openDelete2 = async (id) => {
+    // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
+    const RESPONSE = await confirmAction('¿Desea eliminar este nivel de administrador de forma permanente?');
+    // Se verifica la respuesta del mensaje.
+    if (RESPONSE) {
+        // Se define una constante tipo objeto con los datos del registro seleccionado.
+        const FORM = new FormData();
+        FORM.append('idNivel', id);
+        // Petición para eliminar el registro seleccionado.
+        const DATA = await fetchData(NIVELESUSUARIO_API, 'deleteRow', FORM);
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            // Se muestra un mensaje de éxito.
+            await sweetAlert(1, DATA.message, true);
+            // Se carga nuevamente la tabla para visualizar los cambios.
+            fillTable2();
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    }
+  }
+  
   

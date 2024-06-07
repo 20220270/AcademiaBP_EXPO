@@ -16,215 +16,148 @@
 <body>
 
     <main>
-        <div class="main p-3">
+        <div class="main">
             <div class="text-center">
                 <h1>Niveles y categorías de entrenamiento</h1>
-                <div class="scrollable-content">
 
-                    <div class="container text-center">
+
+                <!-- Sección de tarjetas -->
+                <div class="row mt-4">
+                    <div class="col-lg-6 col-md-12">
+                        <!-- Buscador y botón de crear nuevo usuario -->
                         <div class="row">
-                            <div class="col">
-                                <h1 class="mt-5">Niveles de entrenamiento</h1>
-                                <button type="button" class="btn btn-white me-md-2 mt-2" data-bs-toggle="modal"
-                                    data-bs-target="#modalNivel"><img src="/resources/images/agregar.png"
-                                        alt="buttonpng" width="60rem" />
-                                </button>
-
-                                <!--Division 1, los niveles de entrenamiento-->
-                                <div class="card w-100 mt-2">
-
-                                    <div class="card-body">
-                                        <div class="text-center fs-3 mb-3">
-                                            <label>Nivel competitivo</label>
-                                        </div>
-                                        <div class="d-flex flex-column">
-                                            <div class="col imagenContenedor">
-                                                <img src="/resources/images/equipo.jpg" class="img-fluid rounded-1"
-                                                    alt="..." height="50px">
-                                            </div>
+                            <div class="col-12 d-flex justify-content-center">
+                                <form class="d-flex" id="searchForm">
+                                    <div class="buscador mx-auto position-relative">
+                                        <i class="fas fa-microphone search-icon microphone-button"
+                                            id="microphone-button"></i>
+                                        <input class="busc light-table-filter" data-table="order-table" type="text"
+                                            placeholder="Busque por alias, nombre, correo o DUI" id="Buscador"
+                                            name="search">
+                                        <div class="btna">
+                                            <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="card w-100 mt-2">
-
-                                    <div class="card-body">
-                                        <div class="text-center fs-3 mb-3">
-                                            <label>Nivel formativo</label>
-                                        </div>
-                                        <div class="d-flex flex-column">
-                                            <div class="col imagenContenedor">
-                                                <img src="/resources/images/equipo.jpg" class="img-fluid rounded-1"
-                                                    alt="..." height="50px">
-                                            </div>
-
-                                        </div>
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <button type="button" class="btn btn-white" onclick="openCreate()">
+                                            <img src="../../resources/images/agregar.png" alt="Agregar" width="60rem" />
+                                        </button>
                                     </div>
-                                </div>
-
-
-                                <!--Division 2, las categorías de cada nivel-->
+                                </form>
                             </div>
-                            <div class="col contenedorLugares">
-                                <h1 class="mt-5">Categorías de entrenamiento</h1>
-                                <button type="button" class="btn btn-white me-md-2 mt-2" data-bs-toggle="modal"
-                                    data-bs-target="#modalCategorias"><img src="/resources/images/agregar.png"
-                                        alt="buttonpng" width="60rem" />
-                                </button>
 
-                                <div class="card w-100 mb-2 mt-2">
-                                    <div class="container text-center ">
-                                        <div class="row">
-                                            <div class="col imagenContenedor">
-                                                <img src="/resources/images/primera.png"
-                                                    class="img-fluid rounded-1 imagenCategorias" alt="...">
-                                            </div>
-                                            <div class="col">
-                                                <div class="card-body">
-                                                    <label for="" id="nombreCate" class="fw-bold fs-4 mb-4">Primera
-                                                        Aficionado</label>
-                                                    <label for="" id="label1Edad" class="mb-4 fw-bold">Edad máxima:
-                                                    </label>
-                                                    <label for="" id="label2Edad" class="mb-4">23 años</label>
-                                                    <label for="" class="horario mb-3 fw-bold" id="horario">Horarios de
-                                                        entrenamiento:</label>
-                                                    <label for="" class="horario" id="horario1">Lunes 4:00 p.m - 6:00
-                                                        p.m.</label>
-                                                    <label for="" class="horario" id="horario2">Miércoles 4:00 p.m -
-                                                        6:00 p.m.</label>
-                                                    <label for="" class="horario" id="horario3">Sábado 10:30 a.m. -
-                                                        12:00 p.m.</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="container contendorBotones">
-                                                <div class="row gx-2 justify-content-center">
-                                                    <div class="col-auto">
-                                                        <button type="button" class="btn btn-white mt-2"
-                                                            data-bs-toggle="modal" data-bs-target="#modalHorarioos">
-                                                            <img src="/resources/images/agregarHorario.png"
-                                                                alt="buttonpng" width="60px" height="60px" />
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <button type="button" class="btn btn-white mt-2"
-                                                            data-bs-toggle="modal" data-bs-target="#modalHorarioos">
-                                                            <img src="/resources/images/editarVerde.png" alt="buttonpng"
-                                                                width="20px" height="20px" />
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <button type="button" class="btn btn-white mt-2"
-                                                            data-bs-toggle="modal" data-bs-target="#modalHorarioos">
-                                                            <img src="/resources/images/eliminar.png" alt="buttonpng"
-                                                                width="20px" height="20px" />
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
+                        </div>
+                        <!-- Área de tarjetas con scroll -->
+                        <div class="scrollable-cards">
+                            <div class="container">
+                                <div class="row" id="cardsNivelesEntrenamiento">
+                                    <!-- Aquí se insertarán las tarjetas -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Las otras tarjetas de categorías de entrenamiento -->
+                    <div class="col-lg-6">
+                        <div class="card w-100 mb-2 mt-2">
+                            <div class="container text-center">
+                                <div class="row">
+                                    <div class="col imagenContenedor">
+                                        <img src="/resources/images/primera.png"
+                                            class="img-fluid rounded-1 imagenCategorias" alt="...">
+                                    </div>
+                                    <div class="col">
+                                        <div class="card-body">
+                                            <label for="" id="nombreCate" class="fw-bold fs-4 mb-4">Primera
+                                                Aficionado</label>
+                                            <label for="" id="label1Edad" class="mb-4 fw-bold">Edad máxima:</label>
+                                            <label for="" id="label2Edad" class="mb-4">23 años</label>
+                                            <label for="" class="horario mb-3 fw-bold" id="horario">Horarios de
+                                                entrenamiento:</label>
+                                            <label for="" class="horario" id="horario1">Lunes 4:00 p.m - 6:00
+                                                p.m.</label>
+                                            <label for="" class="horario" id="horario2">Miércoles 4:00 p.m - 6:00
+                                                p.m.</label>
+                                            <label for="" class="horario" id="horario3">Sábado 10:30 a.m. - 12:00
+                                                p.m.</label>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="card w-100 mb-2 mt-2">
-                                    <div class="container text-center ">
-                                        <div class="row">
-                                            <div class="col imagenContenedor">
-                                                <img src="/resources/images/primera.png"
-                                                    class="img-fluid rounded-1 imagenCategorias" alt="...">
+                                    <div class="container contendorBotones">
+                                        <div class="row gx-2 justify-content-center">
+                                            <div class="col-auto">
+                                                <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal"
+                                                    data-bs-target="#modalHorarioos">
+                                                    <img src="/resources/images/agregarHorario.png" alt="buttonpng"
+                                                        width="60px" height="60px" />
+                                                </button>
                                             </div>
-                                            <div class="col">
-                                                <div class="card-body">
-                                                    <label for="" id="nombreCate" class="fw-bold fs-4 mb-4">Primera
-                                                        Aficionado</label>
-                                                    <label for="" id="label1Edad" class="mb-4 fw-bold">Edad máxima:
-                                                    </label>
-                                                    <label for="" id="label2Edad" class="mb-4">23 años</label>
-                                                    <label for="" class="horario mb-3 fw-bold" id="horario">Horarios de
-                                                        entrenamiento:</label>
-                                                    <label for="" class="horario" id="horario1">Lunes 4:00 p.m - 6:00
-                                                        p.m.</label>
-                                                    <label for="" class="horario" id="horario2">Miércoles 4:00 p.m -
-                                                        6:00 p.m.</label>
-                                                    <label for="" class="horario" id="horario3">Sábado 10:30 a.m. -
-                                                        12:00 p.m.</label>
-                                                </div>
+                                            <div class="col-auto">
+                                                <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal"
+                                                    data-bs-target="#modalHorarioos">
+                                                    <img src="/resources/images/editarVerde.png" alt="buttonpng"
+                                                        width="20px" height="20px" />
+                                                </button>
                                             </div>
-
-                                            <div class="container contendorBotones">
-                                                <div class="row gx-2 justify-content-center">
-                                                    <div class="col-auto">
-                                                        <button type="button" class="btn btn-white mt-2"
-                                                            data-bs-toggle="modal" data-bs-target="#modalHorarioos">
-                                                            <img src="/resources/images/agregarHorario.png"
-                                                                alt="buttonpng" width="60px" height="60px" />
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <button type="button" class="btn btn-white mt-2"
-                                                            data-bs-toggle="modal" data-bs-target="#modalHorarioos">
-                                                            <img src="/resources/images/editarVerde.png" alt="buttonpng"
-                                                                width="20px" height="20px" />
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <button type="button" class="btn btn-white mt-2"
-                                                            data-bs-toggle="modal" data-bs-target="#modalHorarioos">
-                                                            <img src="/resources/images/eliminar.png" alt="buttonpng"
-                                                                width="20px" height="20px" />
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                            <div class="col-auto">
+                                                <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal"
+                                                    data-bs-target="#modalHorarioos">
+                                                    <img src="/resources/images/eliminar.png" alt="buttonpng"
+                                                        width="20px" height="20px" />
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Añadir más tarjetas de niveles y categorías en el mismo formato -->
             </div>
         </div>
-
     </main>
 
-    <!-- Modal para agregar los niveles de competencia-->
-    <div class="modal fade" id="modalNivel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true" aria-hidden="true">
+
+
+    <div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <!-- header del modal -->
                 <div class="modal-header border-0">
-                    <h1 class="modal-title fs-3 w-100 text-center" id="exampleModalLabel">Agregar nuevo nivel de
-                        entrenamiento</h1>
+                    <h1 class="modal-title fs-3 w-100 text-center" id="modalTitle">
+                    </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <!-- cuerpo del modal -->
                 <div class="modal-body">
-                    <div class="container text-center">
-                        <div class="row">
-                            <div class="col col-lg-6 text-start">
-                                <input type="text" class="form-control" placeholder="Nombre del nivel"
-                                    aria-label="Nombre">
+                    <!-- Labels identificadores e inputs para ingresar la información de los administradores, separados por espacios -->
+                    <form id="saveForm">
+                        <div class="modal-body row g-3">
+                            <input type="hidden" id="idNivelEntrenamiento" name="idNivelEntrenamiento">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="mb-2">
+                                    <!-- Label e input para agregar el nombre del administrador -->
+                                    <label class="form-label">Nombre del nivel de entrenamiento:</label>
+                                    <input type="text" class="form-control mb-2" id="nombreNivelEntrenamiento"
+                                        name="nombreNivelEntrenamiento" required>
+
+                                    <label class="form-label">Descripción del nivel de entrenamiento:</label>
+                                    <input type="text" class="form-control mb-2" id="descripcionNivelEntrenamiento"
+                                        name="descripcionNivelEntrenamiento" required>
+
+                                    <label class="form-label">Imagen del nivel de entrenamiento:</label>
+                                    <input type="file" class="form-control mb-2" id="imagenNivelEntrenamiento"
+                                        name="imagenNivelEntrenamiento" required>
+                                </div>
+
                             </div>
-
-
-                            <div class="col col-lg-6 text-start">
-                                <input type="file" class="form-control" placeholder="Imagen del nivel"
-                                    aria-label="imagen">
-                            </div>
-
-
                         </div>
-                    </div>
-                </div>
-                <!-- footer del modal -->
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn" data-bs-dismiss="modal" id="agregarNivel">Agregar</button>
+                        <!-- Botón para registrar la información -->
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-dark mt-3" id="btnRegistrar">Registrar</button>
+                        </div>
+
+                    </form>
                 </div>
             </div>
         </div>
@@ -320,9 +253,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
-        <script src="../../controllers/utils/sweetalert.min.js"></script>
-        <script src="../../controllers/utils/components.js"></script>
-        <script src="../../controllers/utils/private.js"></script>
+    <script src="https://kit.fontawesome.com/051460de0f.js" crossorigin="anonymous"></script>
+    <script src="../../controllers/utils/sweetalert.min.js"></script>
+    <script src="../../controllers/utils/components.js"></script>
+    <script src="../../controllers/utils/private.js"></script>
     <script src="../../controllers/admin/niveles_categorias.js"></script>
 
 </body>

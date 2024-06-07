@@ -188,7 +188,7 @@ const loadTemplate = async () => {
                             <li class="sidebar-item">
                                 <a href="nivelescategorias.html" class="sidebar-link">
                                     <i class="lni lni-layers"></i>
-                                    Niveles
+                                    Niveles y categorías
                                 </a>
                             </li>
 
