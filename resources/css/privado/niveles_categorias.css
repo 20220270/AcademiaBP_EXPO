@@ -1,7 +1,7 @@
 .scrollable-cards {
     overflow: auto; 
-    max-height: 400px;
-
+    max-height: 420px;
+    width: 100%
 }
 
 .position-relative {
@@ -34,11 +34,14 @@ body {
     display: flex;
     font-family: Arial, sans-serif;
 }
-  
+
 #sidebar {
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
+main {
+    margin-top: 50px;
+}
 
 #contenedorPrin {
     width: 65%;
@@ -64,6 +67,8 @@ body {
     width: 85px; /* Ancho inicial del contenedor */
     transition: width .7s ease; /* Transición para el cambio de ancho */
     padding: 15px;
+    display: flex;
+    align-items: center;
 }
 
 .busc {
@@ -89,9 +94,10 @@ body {
     font-size: 14.5px;
 }
 
+/* Fixed position for the button */
 .btna {
-    position: absolute;
-    right: 0;
+    position: absolute; /* Absolute positioning within .buscador */
+    right: 15px; /* Keep it close to the right edge */
     top: 50%;
     transform: translateY(-50%);
     width: 60px;
@@ -112,6 +118,7 @@ body {
     transition: all .1s ease;
 }
 
+/* Expand .buscador on hover */
 .buscador:hover {
     width: 340px; /* Ancho expandido del contenedor al hacer hover */
 }

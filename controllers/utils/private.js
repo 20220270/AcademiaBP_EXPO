@@ -188,7 +188,7 @@ const loadTemplate = async () => {
                             <li class="sidebar-item">
                                 <a href="nivelescategorias.html" class="sidebar-link">
                                     <i class="lni lni-layers"></i>
-                                    Niveles y categorías
+                                    Niveles
                                 </a>
                             </li>
 
@@ -199,6 +199,14 @@ const loadTemplate = async () => {
                                     Entrenamientos
                                 </a>
                             </li>
+
+                            <li class="sidebar-item">
+                                <a href="categoriasalumnos.html" class="sidebar-link">
+                                    <i class="lni lni-layers"></i>
+                                    Categorías de alumnos
+                                </a>
+                            </li>
+
                         </ul>
                     </li>
 

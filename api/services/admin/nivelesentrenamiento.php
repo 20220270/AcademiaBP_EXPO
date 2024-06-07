@@ -34,7 +34,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = $nivelesentrenamiento->getDataError();
                 } elseif ($nivelesentrenamiento->createRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Valor agregado correctamente';
+                    $result['message'] = 'Nivel agregado correctamente';
                     // Se asigna el estado del archivo después de insertar.
                     $result['fileStatus'] = Validator::saveFile($_FILES['imagenNivelEntrenamiento'], $nivelesentrenamiento::RUTA_IMAGEN);
                 } else {
@@ -70,11 +70,11 @@ if (isset($_GET['action'])) {
                     $result['error'] = $nivelesentrenamiento->getDataError();
                 } elseif ($nivelesentrenamiento->updateRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Campo del valor modificado correctamente';
+                    $result['message'] = 'Campo del nivel modificado correctamente';
                     // Se asigna el estado del archivo después de actualizar.
                     $result['fileStatus'] = Validator::changeFile($_FILES['imagenNivelEntrenamiento'], $nivelesentrenamiento::RUTA_IMAGEN, $nivelesentrenamiento->getFilename());
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el valor';
+                    $result['error'] = 'Ocurrió un problema al modificar el nivel';
                 }
                 break;
             case 'deleteRow':
@@ -85,11 +85,11 @@ if (isset($_GET['action'])) {
                     $result['error'] = $nivelesentrenamiento->getDataError();
                 } elseif ($nivelesentrenamiento->deleteRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Valor eliminado correctamente';
+                    $result['message'] = 'Nivel eliminado correctamente';
                     // Se asigna el estado del archivo después de eliminar.
                     $result['fileStatus'] = Validator::deleteFile($nivelesentrenamiento::RUTA_IMAGEN, $nivelesentrenamiento->getFilename());
                 } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar este valor';
+                    $result['error'] = 'Ocurrió un problema al eliminar este nivel';
                 }
                 break;
             default:

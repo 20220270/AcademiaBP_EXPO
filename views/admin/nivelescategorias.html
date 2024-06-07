@@ -18,19 +18,18 @@
     <main>
         <div class="main">
             <div class="text-center">
-                <h1>Niveles y categorías de entrenamiento</h1>
+                <h1>Niveles de entrenamiento</h1>
 
 
                 <!-- Sección de tarjetas -->
                 <div class="row mt-4">
-                    <div class="col-lg-6 col-md-12">
+                    <div class="col-lg-12 col-md-12">
                         <!-- Buscador y botón de crear nuevo usuario -->
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center">
                                 <form class="d-flex" id="searchForm">
                                     <div class="buscador mx-auto position-relative">
-                                        <i class="fas fa-microphone search-icon microphone-button"
-                                            id="microphone-button"></i>
+                                        <i class="fas fa-microphone search-icon" id="microphone-button"></i>
                                         <input class="busc light-table-filter" data-table="order-table" type="text"
                                             placeholder="Busque por alias, nombre, correo o DUI" id="Buscador"
                                             name="search">
@@ -45,7 +44,6 @@
                                     </div>
                                 </form>
                             </div>
-
                         </div>
                         <!-- Área de tarjetas con scroll -->
                         <div class="scrollable-cards">
@@ -56,62 +54,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Las otras tarjetas de categorías de entrenamiento -->
-                    <div class="col-lg-6">
-                        <div class="card w-100 mb-2 mt-2">
-                            <div class="container text-center">
-                                <div class="row">
-                                    <div class="col imagenContenedor">
-                                        <img src="/resources/images/primera.png"
-                                            class="img-fluid rounded-1 imagenCategorias" alt="...">
-                                    </div>
-                                    <div class="col">
-                                        <div class="card-body">
-                                            <label for="" id="nombreCate" class="fw-bold fs-4 mb-4">Primera
-                                                Aficionado</label>
-                                            <label for="" id="label1Edad" class="mb-4 fw-bold">Edad máxima:</label>
-                                            <label for="" id="label2Edad" class="mb-4">23 años</label>
-                                            <label for="" class="horario mb-3 fw-bold" id="horario">Horarios de
-                                                entrenamiento:</label>
-                                            <label for="" class="horario" id="horario1">Lunes 4:00 p.m - 6:00
-                                                p.m.</label>
-                                            <label for="" class="horario" id="horario2">Miércoles 4:00 p.m - 6:00
-                                                p.m.</label>
-                                            <label for="" class="horario" id="horario3">Sábado 10:30 a.m. - 12:00
-                                                p.m.</label>
-                                        </div>
-                                    </div>
-                                    <div class="container contendorBotones">
-                                        <div class="row gx-2 justify-content-center">
-                                            <div class="col-auto">
-                                                <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal"
-                                                    data-bs-target="#modalHorarioos">
-                                                    <img src="/resources/images/agregarHorario.png" alt="buttonpng"
-                                                        width="60px" height="60px" />
-                                                </button>
-                                            </div>
-                                            <div class="col-auto">
-                                                <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal"
-                                                    data-bs-target="#modalHorarioos">
-                                                    <img src="/resources/images/editarVerde.png" alt="buttonpng"
-                                                        width="20px" height="20px" />
-                                                </button>
-                                            </div>
-                                            <div class="col-auto">
-                                                <button type="button" class="btn btn-white mt-2" data-bs-toggle="modal"
-                                                    data-bs-target="#modalHorarioos">
-                                                    <img src="/resources/images/eliminar.png" alt="buttonpng"
-                                                        width="20px" height="20px" />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
                 <!-- Añadir más tarjetas de niveles y categorías en el mismo formato -->
             </div>
         </div>
@@ -158,52 +101,6 @@
                         </div>
 
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!--Modal para agregar categorias-->
-    <div class="modal fade" id="modalCategorias" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <!-- header del modal -->
-                <div class="modal-header border-0">
-                    <h1 class="modal-title fs-3 w-100 text-center" id="exampleModalLabel">Agregar categoría de
-                        entrenamiento</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <!-- cuerpo del modal -->
-                <div class="modal-body">
-                    <div class="container text-center">
-                        <div class="row">
-                            <label for="idNivel" class="idNivel" id="idNivel" hidden></label>
-                            <div class="col mb-3">
-                                <input type="text" class="form-control" placeholder="Nombre de la categoría"
-                                    aria-label="nombre Categoría">
-                            </div>
-                            <div class="col">
-                                <input type="number" class="form-control" placeholder="Edad máxima" aria-label="Edad">
-                            </div>
-
-                        </div>
-
-                        <div class="row col-lg-12 mx-auto">
-                            <select class="form-select " aria-label="Default select example">
-                                <option selected>Selecciona el nivel al que se asignará la categoría</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- footer del modal -->
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn" data-bs-dismiss="modal" id="AgregarLugar">Agregar</button>
                 </div>
             </div>
         </div>
