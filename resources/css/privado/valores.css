@@ -1,4 +1,4 @@
-#scroll{
+#scroll {
     overflow: auto; 
     max-height: 420px;
     width: 750px;
@@ -11,37 +11,43 @@
 .search-icon {
     position: absolute;
     top: 50%;
-    left: 10px;
+    left: 24.1px; /* Ajustamos este valor para mover el icono a la derecha */
     transform: translateY(-50%);
     width: 20px;
     height: 20px;
+    color: #000;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 0.3s ease;
 }
 
-#Search {
-    padding-left: 35px;
-    width: 680px;
+.buscador:hover .search-icon {
+    opacity: 1; /* Mostrar icono al hacer hover */
+}
+
+#Buscador {
+    padding-left: 29px; /* Aumenta el padding para dejar espacio suficiente para el icono */
+    width: 100%; /* Ajusta el ancho del input según el contenedor */
 }
 
 body {
     font-family: 'Poppins', sans-serif;
     display: flex;
     font-family: Arial, sans-serif;
-  }
+}
   
-  #sidebar {
-  
+#sidebar {
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  main {
+}
+
+main {
     margin-top: 50px;
-  }
+}
 
-  #contenedorPrin{
+#contenedorPrin {
     width: 65%;
-  }
+}
 
-  .card-title {
+.card-title {
     color: #408840;
 }
 
@@ -58,7 +64,7 @@ body {
 
 .buscador {
     position: relative;
-    width: 80px; /* Ancho inicial del contenedor */
+    width: 85px; /* Ancho inicial del contenedor */
     transition: width .7s ease; /* Transición para el cambio de ancho */
     padding: 15px;
 }
@@ -77,8 +83,13 @@ body {
     transition: opacity .7s ease; /* Transición para la visibilidad */
 }
 
+.buscador:hover .busc {
+    opacity: 1; /* Mostrar el input al hacer hover */
+}
+
 ::placeholder {
     color: grey;
+    font-size: 14.5px;
 }
 
 .btna {
@@ -108,19 +119,11 @@ body {
     width: 340px; /* Ancho expandido del contenedor al hacer hover */
 }
 
-.buscador:hover .busc {
-    opacity: 1; /* Mostrar el input al hacer hover */
-}
-
-.buscador:hover i {
-    transform: rotate(-360deg);
-}
-
 .btna:hover {
     background: #000000;
 }
 
-.card-img-top{
+.card-img-top {
     height: 150px; 
     width: 150px; 
     object-fit: cover;
