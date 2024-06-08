@@ -39,7 +39,7 @@ class EntrenamientoHandler
     public function searchRows()
 {
     $value = '%' . Validator::getSearchValue() . '%';
-    $sql = 'SELECT id_horario_lugar, id_horario, nombre_lugar, dia_entrenamiento, hora_inicio, hor_fin 
+    $sql = 'SELECT id_horario_lugar, id_horario, nombre_lugar, direccion_lugar, imagen_lugar, dia_entrenamiento, hora_inicio, hor_fin 
             FROM tb_horarios_lugares
             INNER JOIN tb_horarios_entrenamientos USING(id_horario)
             INNER JOIN tb_lugares_entrenamientos USING(id_lugar)

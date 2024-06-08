@@ -1,5 +1,7 @@
 // Constante para completar la ruta de la API.
 const NIVELES_ENTRENAMIENTO_API = 'services/admin/nivelesentrenamiento.php';
+const CATEGORIA_ALUMNO_API = 'services/admin/categoriasalumnos.php';
+
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer los elementos de la tabla.
@@ -84,7 +86,7 @@ SAVE_FORM2.addEventListener('submit', async (event) => {
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM2);
     // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(NIVELES_ENTRENAMIENTO_API, action, FORM);
+    const DATA = await fetchData(CATEGORIA_ALUMNO_API, action, FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se cierra la caja de diálogo.
@@ -154,11 +156,11 @@ const fillTable2 = async (form = null) => {
     // Se verifica la acción a realizar.
     (form) ? action = 'searchRows' : action = 'readAllAlumno';
     // Petición para obtener los registros disponibles.
-    const DATA = await fetchData(NIVELES_ENTRENAMIENTO_API, action, form);
+    const DATA2 = await fetchData(CATEGORIA_ALUMNO_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
+    if (DATA2.status) {
         // Se recorre el conjunto de registros fila por fila.
-        DATA.dataset.forEach(row => {
+        DATA2.dataset.forEach(row => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             CARD_CATEGORIAS_ALUMNOS.innerHTML += `
                 <div class="col-lg-12">
@@ -174,7 +176,7 @@ const fillTable2 = async (form = null) => {
                             </div>
                             <div class="row align-items-center">
                                 <div class="col-md-4 d-flex justify-content-center">
-                                    <img src="${SERVER_URL}images/niveles/${row.imagen_categoria}" class="img-fluid rounded" width="100px" height="100px">
+                                    <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="img-fluid rounded" width="100px" height="100px">
                                 </div>
                                 <div class="col-md-8 ">
                                 
@@ -190,7 +192,7 @@ const fillTable2 = async (form = null) => {
             `;
         });
     } else {
-        sweetAlert(4, DATA.error, true);
+        sweetAlert(4, DATA2.error, true);
     }
 }
 
@@ -210,8 +212,8 @@ const openCreate2 = () => {
     // Se prepara el formulario.
     SAVE_FORM2.reset();
 
-    fillSelect(NIVELES_ENTRENAMIENTO_API, 'readNivelesAlumnos', 'selectNivelCompetencia');
-    fillSelect(NIVELES_ENTRENAMIENTO_API, 'readAllHorariosCombo', 'selectHorarioEntrenamiento');
+    fillSelect(CATEGORIA_ALUMNO_API, 'readNivelesAlumnos', 'selectNivelCompetencia');
+    fillSelect(CATEGORIA_ALUMNO_API, 'readAllHorariosCombo', 'selectHorarioEntrenamiento');
   }
 
 /*
@@ -247,7 +249,7 @@ const openUpdate2 = async (id) => {
     const FORM = new FormData();
     FORM.append('idCategoriaAlumno', id);
     // Petición para obtener los datos del registro solicitado.
-    const DATA = await fetchData(NIVELES_ENTRENAMIENTO_API, 'readOneAlumno', FORM);
+    const DATA = await fetchData(CATEGORIA_ALUMNO_API, 'readOneAlumno', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
@@ -261,8 +263,8 @@ const openUpdate2 = async (id) => {
         CATEGORIA_ALUMNO.value = ROW.categoria;
         EDAD_MAXIMA.value = ROW.edad_maxima;
 
-        fillSelect(NIVELES_ENTRENAMIENTO_API, 'readNivelesAlumnos', 'selectNivelCompetencia', ROW.nivel_entrenamiento);
-        fillSelect(NIVELES_ENTRENAMIENTO_API, 'readAllHorariosCombo', 'selectHorarioEntrenamiento', ROW.id_horario_lugar);
+        fillSelect(CATEGORIA_ALUMNO_API, 'readNivelesAlumnos', 'selectNivelCompetencia', ROW.nivel_entrenamiento);
+        fillSelect(CATEGORIA_ALUMNO_API, 'readAllHorariosCombo', 'selectHorarioEntrenamiento', ROW.id_horario_lugar);
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -304,7 +306,7 @@ const openDelete2 = async (id) => {
         const FORM = new FormData();
         FORM.append('idCategoriaAlumno', id);
         // Petición para eliminar el registro seleccionado.
-        const DATA = await fetchData(NIVELES_ENTRENAMIENTO_API, 'deleteRowAlumno', FORM);
+        const DATA = await fetchData(CATEGORIA_ALUMNO_API, 'deleteRowAlumno', FORM);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
             // Se muestra un mensaje de éxito.
