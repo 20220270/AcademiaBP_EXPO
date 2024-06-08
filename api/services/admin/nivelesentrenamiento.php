@@ -14,6 +14,8 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['idAdministrador'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
+
+                //Niveles de competencia
             case 'searchRows':
                 if (!Validator::validateSearch($_POST['search'])) {
                     $result['error'] = Validator::getSearchError();
@@ -90,6 +92,102 @@ if (isset($_GET['action'])) {
                     $result['fileStatus'] = Validator::deleteFile($nivelesentrenamiento::RUTA_IMAGEN, $nivelesentrenamiento->getFilename());
                 } else {
                     $result['error'] = 'Ocurrió un problema al eliminar este nivel';
+                }
+                break;
+
+                //Categorías de alumnos
+
+            case 'createRowAlumno':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$nivelesentrenamiento->setNombreCategoria($_POST['nombreCategoriaAlumno']) or
+                    !$nivelesentrenamiento->setEdadMaxima($_POST['edadMaximaAlumno']) or
+                    !$nivelesentrenamiento->setNivel($_POST['selectNivelCompetencia']) or
+                    !$nivelesentrenamiento->setIdHorarios($_POST['selectHorarioEntrenamiento']) or
+                    !$nivelesentrenamiento->setImagenCategoria($_FILES['imagenCategoriaEntrenamiento'], $nivelesentrenamiento->getFilename())
+                ) {
+                    $result['error'] = $nivelesentrenamiento->getDataError();
+                } elseif ($nivelesentrenamiento->createRowAlumno()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Categoría agregada correctamente';
+                    // Se asigna el estado del archivo después de insertar.
+                    $result['fileStatus'] = Validator::saveFile($_FILES['imagenCategoriaEntrenamiento'], $nivelesentrenamiento::RUTA_IMAGEN, $nivelesentrenamiento->getFilename());
+                } else {
+                    $result['error'] = 'Ocurrió un problema al crear la categoria';
+                }
+                break;
+            case 'readAllAlumno':
+                if ($result['dataset'] = $nivelesentrenamiento->readAllAlumno()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen categorias registrados';
+                }
+                break;
+
+            case 'readAllHorariosCombo':
+                if ($result['dataset'] = $nivelesentrenamiento->readAllHorariosCombo()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen categorias registrados';
+                }
+                break;
+
+            case 'readNivelesAlumnos':
+                if ($result['dataset'] = $nivelesentrenamiento->readNivelesAlumnos()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen categorias registrados';
+                }
+                break;
+
+            case 'readOneAlumno':
+                if (!$nivelesentrenamiento->setIdCategoria($_POST['idCategoriaAlumno'])) {
+                    $result['error'] = $nivelesentrenamiento->getDataError();
+                } elseif ($result['dataset'] = $nivelesentrenamiento->readOneAlumno()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Categoria inexistente';
+                }
+                break;
+
+            case 'updateRowAlumno':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$nivelesentrenamiento->setIdCategoria($_POST['idCategoriaAlumno']) or
+                    !$nivelesentrenamiento->setFilename2() or
+                    !$nivelesentrenamiento->setNombreCategoria($_POST['nombreCategoriaAlumno']) or
+                    !$nivelesentrenamiento->setEdadMaxima($_POST['edadMaximaAlumno']) or
+                    !$nivelesentrenamiento->setIdCategoria($_POST['selectNivelCompetencia']) or
+                    !$nivelesentrenamiento->setIdHorarios($_POST['selectHorarioEntrenamiento']) or
+                    !$nivelesentrenamiento->setImagenCategoria($_FILES['imagenCategoriaEntrenamiento'], $nivelesentrenamiento->getFilename())
+                ) {
+                    $result['error'] = $nivelesentrenamiento->getDataError();
+                } elseif ($nivelesentrenamiento->updateRowAlumno()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Campo de categoria modificado correctamente';
+                    // Se asigna el estado del archivo después de actualizar.
+                    $result['fileStatus'] = Validator::changeFile($_FILES['imagenCategoriaEntrenamiento'], $nivelesentrenamiento::RUTA_IMAGEN, $nivelesentrenamiento->getFilename());
+                } else {
+                    $result['error'] = 'Ocurrió un problema al modificar la categoria';
+                }
+                break;
+
+            case 'deleteRowAlumno':
+                if (
+                    $nivelesentrenamiento->setIdCategoria($_POST['idCategoriaAlumno']) or
+                    !$nivelesentrenamiento->setFilename2()
+                ) {
+                    $result['error'] = $nivelesentrenamiento->getDataError();
+                } elseif ($nivelesentrenamiento->deleteRowAlumno()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Nivel eliminado correctamente';
+                    // Se asigna el estado del archivo después de eliminar.
+                    $result['fileStatus'] = Validator::deleteFile($nivelesentrenamiento::RUTA_IMAGEN, $nivelesentrenamiento->getFilename());
+                } else {
+                    $result['error'] = 'Ocurrió un problema al eliminar esta categoria';
                 }
                 break;
             default:

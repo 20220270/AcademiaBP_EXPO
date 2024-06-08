@@ -25,6 +25,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
+                
             case 'createRowHorarios':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -48,6 +49,16 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen horarios registrados';
                 }
                 break;
+
+                case 'readAllHorariosCombo':
+                    if ($result['dataset'] = $entrenamiento->readAllHorariosCombo()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                    } else {
+                        $result['error'] = 'No existen horarios registrados';
+                    }
+                    break;
+
             case 'readOneHorarios':
                 if (!$entrenamiento->setIdHorario($_POST['idHorario'])) {
                     $result['error'] = $entrenamiento->getDataError();
@@ -185,7 +196,7 @@ if (isset($_GET['action'])) {
                         $result['status'] = 1;
                         $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                     } else {
-                        $result['error'] = 'No existen asignaciones de lugares y usuarios registradas';
+                        $result['error'] = 'No existen asignaciones de lugares y horarios registradas';
                     }
                     break;
                 case 'readOneLugaresHorarios':

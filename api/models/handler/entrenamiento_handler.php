@@ -37,16 +37,20 @@ class EntrenamientoHandler
 
     //Metodos para los horarios de entrenamiento
     public function searchRows()
-    {
-        $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_horario_lugar, nombre_lugar, dia_entrenamiento, hora_inicio, hor_fin FROM tb_horarios_lugares
-                INNER JOIN tb_horarios_entrenamientos USING(id_horario)
-                INNER JOIN tb_lugares_entrenamientos USING(id_lugar)
-                WHERE nombre_lugar LIKE ? OR dia_entrenamiento LIKE ? OR hora_inicio LIKE ? OR hor_fin LIKE ?
-                ORDER BY id_horario';
-        $params = array($value, $value, $value, $value);
-        return Database::getRows($sql, $params);
-    }
+{
+    $value = '%' . Validator::getSearchValue() . '%';
+    $sql = 'SELECT id_horario_lugar, id_horario, nombre_lugar, dia_entrenamiento, hora_inicio, hor_fin 
+            FROM tb_horarios_lugares
+            INNER JOIN tb_horarios_entrenamientos USING(id_horario)
+            INNER JOIN tb_lugares_entrenamientos USING(id_lugar)
+            WHERE nombre_lugar LIKE ? OR dia_entrenamiento LIKE ? OR hora_inicio LIKE ? OR hor_fin LIKE ?
+            ORDER BY id_horario';
+    $params = array($value, $value, $value, $value);
+    return Database::getRows($sql, $params);
+}
+
+
+
 
     public function createRowHorarios()
     {
@@ -61,6 +65,18 @@ class EntrenamientoHandler
         $sql = 'SELECT id_horario, dia_entrenamiento, hora_inicio, hor_fin
                 FROM tb_horarios_entrenamientos
                 ORDER BY id_horario';
+        return Database::getRows($sql);
+    }
+
+    public function readAllHorariosCombo()
+    {
+        $sql = "SELECT 
+        id_horario, 
+        CONCAT(dia_entrenamiento, ' ', TIME_FORMAT(hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(hor_fin, '%h:%i %p')) AS horario
+        FROM 
+        tb_horarios_entrenamientos
+        ORDER BY 
+        id_horario;";
         return Database::getRows($sql);
     }
 
@@ -159,16 +175,18 @@ class EntrenamientoHandler
 
     public function readAllLugaresHorarios()
     {
-        $sql = 'SELECT id_horario_lugar, id_horario, id_lugar
-                FROM tb_horarios_lugares
+        $sql = 'SELECT id_horario_lugar, nombre_lugar, dia_entrenamiento, hora_inicio, hor_fin FROM tb_horarios_lugares
+                INNER JOIN tb_horarios_entrenamientos USING(id_horario)
+                INNER JOIN tb_lugares_entrenamientos USING(id_lugar)
                 ORDER BY id_horario_lugar';
         return Database::getRows($sql);
     }
 
     public function readOneLugaresHorarios()
     {
-        $sql = 'SELECT id_horario_lugar, id_horario, id_lugar
-                FROM tb_horarios_lugares
+        $sql = 'SELECT id_horario_lugar, nombre_lugar, dia_entrenamiento, hora_inicio, hor_fin FROM tb_horarios_lugares
+                INNER JOIN tb_horarios_entrenamientos USING(id_horario)
+                INNER JOIN tb_lugares_entrenamientos USING(id_lugar)
                 WHERE id_horario_lugar = ?';
         $params = array($this->idlugarhorario);
         return Database::getRow($sql, $params);

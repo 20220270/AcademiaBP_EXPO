@@ -308,22 +308,21 @@ const fillTable3 = async (form = null) => {
                                                 <div class="col">
                                                     <div class="card-body">
                                                         <label for="" id="lugarentrenamiento"
-                                                            class="fw-bold mb-4">Monumental Estadio
-                                                            Cuscatlán</label>
+                                                            class="fw-bold mb-4">${row.nombre_lugar}</label>
 
                                                         <div class="text-start mb-3">
-                                                            <label>${row.id_horario_lugar}</label>
-                                                            <label>Martes</label>
+                                                            <label>Día de entrenamiento:</label>
+                                                            <label>${row.dia_entrenamiento}</label>
+                                                            
                                                         </div>
 
                                                         <div class="text-start mb-3">
-                                                            <label>${row.id_horario}</label>
-                                                            <label id="horainicioE">4:00 p.m.</label>
+                                                            <label>Hora de inicio:</label>
+                                                                <label>${formatHour(row.hora_inicio)}</label>
                                                         </div>
-
                                                         <div class="text-start mb-3">
-                                                            <label>${row.id_lugar}</label>
-                                                            <label id="horafinalizacionE">6:00 p.m.</label>
+                                                            <label>Hora de finalización:</label>
+                                                            <label>${formatHour(row.hor_fin)}</label>
                                                         </div>
 
                                                     </div>
@@ -388,7 +387,7 @@ const openCreate3 = () => {
     SAVE_FORM3.reset();
 
     fillSelect(ENTRENAMIENTO_API, 'readAllLugares', 'selectDiaLugar');
-    fillSelect(ENTRENAMIENTO_API, 'readAllHorarios', 'selectHorarioLugar');
+    fillSelect(ENTRENAMIENTO_API, 'readAllHorariosCombo', 'selectHorarioLugar');
 }
 
 
@@ -459,8 +458,8 @@ const openUpdate3 = async (id) => {
         ID_HORARIO_LUGAR.value = ROW.id_horario_lugar;
 
         
-    fillSelect(ENTRENAMIENTO_API, 'readAllLugares', 'selectDiaLugar', ROW.id_lugar);
-    fillSelect(ENTRENAMIENTO_API, 'readAllHorarios', 'selectHorarioLugar', ROW.id_horario);
+        fillSelect(ENTRENAMIENTO_API, 'readAllLugares', 'selectDiaLugar', ROW.id_lugar);
+        fillSelect(ENTRENAMIENTO_API, 'readAllHorariosCombo', 'selectHorarioLugar', ROW.id_horario);
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -536,3 +535,4 @@ const openDelete3 = async (id) => {
         }
     }
 }
+
