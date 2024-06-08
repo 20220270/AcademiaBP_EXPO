@@ -27,11 +27,29 @@ class CategoriasAlumnosHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_nivel_entrenamiento, nivel_entrenamiento, descripcion_nivel, imagen_nivel
-                FROM tb_niveles_entrenamientos
-                WHERE nivel_entrenamiento LIKE ? OR descripcion_nivel LIKE ?
-                ORDER BY id_nivel_entrenamiento';
-        $params = array($value, $value);
+        $sql = "SELECT 
+    ca.id_categoria_alumno, 
+    ca.categoria, 
+    ca.edad_maxima, 
+    ne.nivel_entrenamiento, 
+    ne.descripcion_nivel,
+    ne.imagen_nivel,
+    CONCAT(le.nombre_lugar, ' ', he.dia_entrenamiento, ' ', TIME_FORMAT(he.hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(he.hor_fin, '%h:%i %p')) AS id_horario_lugar, 
+    ca.imagen_categoria
+    FROM 
+    tb_categorias_alumnos ca
+    INNER JOIN 
+    tb_niveles_entrenamientos ne ON ca.id_nivel_entrenamiento = ne.id_nivel_entrenamiento
+    INNER JOIN 
+    tb_horarios_lugares hl ON ca.id_horario_lugar = hl.id_horario_lugar
+    INNER JOIN 
+    tb_lugares_entrenamientos le ON hl.id_lugar = le.id_lugar
+    INNER JOIN 
+    tb_horarios_entrenamientos he ON hl.id_horario = he.id_horario
+    ORDER BY 
+    ca.id_categoria_alumno;
+    " ;
+        $params = array();
         return Database::getRows($sql, $params);
     }
 
@@ -53,7 +71,7 @@ class CategoriasAlumnosHandler
         ca.categoria, 
         ca.edad_maxima, 
         ne.nivel_entrenamiento, 
-        CONCAT(le.nombre_lugar, ' ', he.dia_entrenamiento, ' ', TIME_FORMAT(he.hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(he.hor_fin, '%h:%i %p')) AS id_horario_lugar, 
+        CONCAT(le.nombre_lugar, ', ', he.dia_entrenamiento, ' ', TIME_FORMAT(he.hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(he.hor_fin, '%h:%i %p')) AS id_horario_lugar, 
         ca.imagen_categoria
         FROM 
         tb_categorias_alumnos ca
@@ -73,7 +91,7 @@ class CategoriasAlumnosHandler
 
     public function readOneAlumno()
     {
-        $sql = 'SELECT id_categoria_alumno, categoria, edad_maxima, nivel_entrenamiento, id_horario_lugar, imagen_categoria
+        $sql = 'SELECT id_categoria_alumno, categoria, edad_maxima, id_nivel_entrenamiento, id_horario_lugar, imagen_categoria
                 FROM tb_categorias_alumnos
                 INNER JOIN tb_niveles_entrenamientos USING(id_nivel_entrenamiento)
                 INNER JOIN tb_horarios_lugares USING(id_horario_lugar)
@@ -104,7 +122,7 @@ class CategoriasAlumnosHandler
     {
         $sql = "SELECT 
     hl.id_horario_lugar,
-    CONCAT(le.nombre_lugar, ' ', he.dia_entrenamiento, ' ', TIME_FORMAT(he.hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(he.hor_fin, '%h:%i %p')) AS horario
+    CONCAT(le.nombre_lugar, ', ', he.dia_entrenamiento, ' ', TIME_FORMAT(he.hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(he.hor_fin, '%h:%i %p')) AS horario
     FROM 
     tb_horarios_lugares hl
     JOIN 

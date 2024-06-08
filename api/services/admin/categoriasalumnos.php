@@ -1,6 +1,6 @@
 <?php
 // Se incluye la clase del modelo.
-require_once('../../models/data/catgeoriasalumnos_data.php');
+require_once('../../models/data/categoriasalumnos_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -101,7 +101,7 @@ if (isset($_GET['action'])) {
                 } elseif ($categoriasalumnos->updateRowAlumno()) {
                     $result['status'] = 1;
                     $result['message'] = 'Campo de categoria modificado correctamente';
-                    // Se asigna el estado del archivo después de actualizar.
+
                     $result['fileStatus'] = Validator::changeFile($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos::RUTA_IMAGEN, $categoriasalumnos->getFilename());
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar la categoria';

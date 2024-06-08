@@ -53,6 +53,7 @@ SEARCH_FORM.addEventListener('submit', (event) => {
   const FORM = new FormData(SEARCH_FORM);
   // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
   fillTable(FORM);
+  fillTable2(FORM);
 });
 
 // Método del evento para cuando se envía el formulario de guardar.
