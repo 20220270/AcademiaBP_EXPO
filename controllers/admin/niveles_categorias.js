@@ -120,26 +120,26 @@ const fillTable = async (form = null) => {
 
           CARD_NIVELES_ENTRENAMIENTO.innerHTML += `
           <div class="col-lg-12">
-    <div class="card w-100 mt-2">
-        <div class="card-body">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
-                <button type="button" class="btn btn-dark btn-sm" onclick="openUpdate(${row.id_nivel_entrenamiento})">
-                    <i class="bi bi-pencil-fill"></i>
-                </button>
-                <button type="button" class="btn btn-danger btn-sm" onclick="openDelete(${row.id_nivel_entrenamiento})">
-                    <i class="bi bi-trash-fill"></i>
-                </button>
-            </div>
-            <div class="d-flex align-items-center">
-                <div class="col-md-4 d-flex align-items-center justify-content-center">
-                    <img src="${SERVER_URL}images/niveles/${row.imagen_nivel}" class="" width="100px" height="100px">
-                </div>
-                <div class="col-md-8">
-                    <h5 class="card-title mb-2 fs-1">${row.nivel_entrenamiento}</h5>
-                </div>
-            </div>
+            <div class="card w-100 mt-2">
+                <div class="card-body">
+        
+                    <div class="d-flex align-items-center">
+                        <div class="col-md-4 d-flex align-items-center justify-content-center">
+                            <img src="${SERVER_URL}images/niveles/${row.imagen_nivel}" class="" width="100px" height="100px">
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="card-title mb-2 fs-1">${row.nivel_entrenamiento}</h5>
+                        </div>
+                    </div>
             <p class="card-text mt-2">${row.descripcion_nivel}</p>
-            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
+                <button type="button" class="btn btn-sm" onclick="openUpdate(${row.id_nivel_entrenamiento})">
+                    <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                </button>
+                <button type="button" class="btn btn-sm" onclick="openDelete(${row.id_nivel_entrenamiento})">
+                    <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -167,14 +167,7 @@ const fillTable2 = async (form = null) => {
                 <div class="col-lg-12">
                     <div class="card w-100 mt-2">
                         <div class="card-body">
-                            <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-dark btn-sm me-2" onclick="openUpdate2(${row.id_categoria_alumno})">
-                                    <i class="bi bi-pencil-fill"></i>
-                                </button>
-                                <button type="button" class="btn btn-danger btn-sm" onclick="openDelete2(${row.id_categoria_alumno})">
-                                    <i class="bi bi-trash-fill"></i>
-                                </button>
-                            </div>
+                            
                             <div class="row align-items-center">
                                 <div class="col-md-4 d-flex justify-content-center">
                                     <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="img-fluid rounded" width="100px" height="100px">
@@ -186,6 +179,14 @@ const fillTable2 = async (form = null) => {
                                     <h5 class="card-title mb-2 fs-6 text-dark text-start"><b>Nivel de competencia</b>: ${row.nivel_entrenamiento}</h5>
                                     <h5 class="card-title mb-2 fs-6 text-dark text-start"><b>Horario de entrenamiento</b>: ${row.id_horario_lugar}</h5>
                                 </div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-sm me-2" onclick="openUpdate2(${row.id_categoria_alumno})">
+                                    <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                                </button>
+                                <button type="button" class="btn btn-sm" onclick="openDelete2(${row.id_categoria_alumno})">
+                                    <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -303,13 +304,17 @@ const openDelete2 = async (id) => {
     const RESPONSE = await confirmAction('¿Desea eliminar esta categoria de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
+        
         // Se define una constante tipo objeto con los datos del registro seleccionado.
         const FORM = new FormData();
         FORM.append('idCategoriaAlumno', id);
+        
         // Petición para eliminar el registro seleccionado.
         const DATA = await fetchData(CATEGORIA_ALUMNO_API, 'deleteRowAlumno', FORM);
+        
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
+            
             // Se muestra un mensaje de éxito.
             await sweetAlert(1, DATA.message, true);
             // Se carga nuevamente la tabla para visualizar los cambios.

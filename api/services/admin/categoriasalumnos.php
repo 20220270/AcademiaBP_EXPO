@@ -23,7 +23,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
                 } else {
-                    $result['error'] = 'No hay coincidencias';
+                    $result['error'] = 'No hay coincidencias en una de las secciones';
                 }
                 break;
 
@@ -110,10 +110,11 @@ if (isset($_GET['action'])) {
 
             case 'deleteRowAlumno':
                 if (
-                    $categoriasalumnos->setIdCategoria($_POST['idCategoriaAlumno']) or
+                    !$categoriasalumnos->setIdCategoria($_POST['idCategoriaAlumno']) or
                     !$categoriasalumnos->setFilename()
                 ) {
                     $result['error'] = $categoriasalumnos->getDataError();
+                    
                 } elseif ($categoriasalumnos->deleteRowAlumno()) {
                     $result['status'] = 1;
                     $result['message'] = 'Nivel eliminado correctamente';
@@ -123,6 +124,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar esta categoria';
                 }
                 break;
+                
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

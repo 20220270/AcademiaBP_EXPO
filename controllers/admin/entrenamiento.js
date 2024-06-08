@@ -66,21 +66,6 @@ SEARCH_FORM.addEventListener('submit', (event) => {
 
 
 
-const convertTimeTo24HourFormat = (time12) => {
-    const [time, modifier] = time12.split(' ');
-    let [hours, minutes] = time.split(':');
-
-    if (hours === '12') {
-        hours = '00';
-    }
-
-    if (modifier === 'p.m.') {
-        hours = parseInt(hours, 10) + 12;
-    }
-
-    return `${hours}:${minutes}`;
-};
-
 
 
 // Método del evento para cuando se envía el formulario de guardar.
@@ -91,15 +76,6 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     // Get the form data
     const FORM = new FormData(SAVE_FORM);
 
-    // Convert the times to 24-hour format
-    const horaInicio12 = FORM.get('horainicio');
-    const horaFin12 = FORM.get('horafinalizacion');
-    const horaInicio24 = convertTimeTo24HourFormat(horaInicio12);
-    const horaFin24 = convertTimeTo24HourFormat(horaFin12);
-
-    // Update the form data with the converted times
-    FORM.set('horainicio', horaInicio24);
-    FORM.set('horafinalizacion', horaFin24);
 
     // Determine the action to perform (update or create)
     const action = ID_HORARIO.value ? 'updateRowHorarios' : 'createRowHorarios';
@@ -355,9 +331,17 @@ const fillTable3 = async (form = null) => {
 
 const formatHour = (time) => {
     const [hour, minute] = time.split(":");
-    const formattedHour = parseInt(hour) > 12 ? `${parseInt(hour) - 12}:${minute} p.m.` : `${hour}:${minute} a.m.`;
+    let formattedHour;
+    if (parseInt(hour) === 12) {
+        formattedHour = `12:${minute} p.m.`;
+    } else if (parseInt(hour) > 12) {
+        formattedHour = `${parseInt(hour) - 12}:${minute} p.m.`;
+    } else {
+        formattedHour = `${hour}:${minute} a.m.`;
+    }
     return formattedHour;
 };
+
 
 
 
