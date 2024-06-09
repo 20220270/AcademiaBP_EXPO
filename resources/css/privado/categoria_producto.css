@@ -209,6 +209,7 @@ border: radius 80px;
   background: #000000;
 }
 
+
 @media (min-width: 768px) and (max-width: 992px) {
   .fa-star {
     color: #ffd700;
