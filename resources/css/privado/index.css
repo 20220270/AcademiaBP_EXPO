@@ -144,7 +144,7 @@ a.sidebar-link:hover {
 
 
 .scrollable-content {
-    height: 400px; /* Altura fija del contenedor */
+    height: 450px; /* Altura fija del contenedor */
     overflow-y: auto; /* Habilita el desplazamiento vertical */
     overflow-x: hidden;
 }
