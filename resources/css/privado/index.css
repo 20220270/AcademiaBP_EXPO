@@ -84,10 +84,10 @@ body {
 }
 
 a.sidebar-link {
-    padding: .625rem 1.625rem;
+    padding: .685rem 1.625rem;
     color: #FFF;
     display: block;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     white-space: nowrap;
     border-left: 3px solid transparent;
 }
@@ -95,7 +95,7 @@ a.sidebar-link {
 
 .sidebar-link i {
     font-size: 1.1rem;
-    margin-right: .75rem;
+    margin-right: .35rem;
 }
 
 a.sidebar-link:hover {
@@ -144,8 +144,9 @@ a.sidebar-link:hover {
 
 
 .scrollable-content {
-    height: 500px; /* Altura fija del contenedor */
+    height: 400px; /* Altura fija del contenedor */
     overflow-y: auto; /* Habilita el desplazamiento vertical */
+    overflow-x: hidden;
 }
 
 
@@ -161,6 +162,6 @@ body {
   }
   
   main {
-    margin-top: 50px;
+    margin-top: 10px;
   }
 

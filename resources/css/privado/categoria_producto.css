@@ -110,12 +110,6 @@ border: radius 80px;
   margin-right: 10px;
 }
 
-.scroll {
-  
-  max-height: 300px; /* Define la altura máxima del div scroll */
-  overflow-y: auto; /* Habilita el desplazamiento vertical */
-  overflow-x: hidden; /* Deshabilita el desplazamiento horizontal */
-}
 
 .text1{
   transform: translate(100%, -150%);
