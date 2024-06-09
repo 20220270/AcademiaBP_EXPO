@@ -20,47 +20,67 @@
         <div class="main p-3">
             <div class="text-center">
                 <h1>Categorías, colores y tallas de productos</h1>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
-                </div>
+                <form class="d-flex flex-grow-1 mt-4" id="searchForm">
+                    <div class="buscador mx-auto position-relative">
+                        <i class="fas fa-microphone search-icon microphone-button" id="microphone-button"></i>
+                        <input class="busc light-table-filter" data-table="order-table" type="text"
+                            placeholder="Busque por nombre o descripción" id="Buscador" name="search">
+                        <div class="btna">
+                            <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
+                        </div>
+                    </div>
+
+                </form>
                 <div class="scrollable-content mt-5">
                     <div class="row justify-content-center">
                         <!-- Primera columna -->
                         <div class="col-md-4 py-2 px-5">
                             <h1>Categorías</h1>
                             <button type="button" class="btn btn-white me-md-2 mt-1" data-bs-toggle="modal"
-                                data-bs-target="#saveModal"><img src="../../resources/images/agregar.png"
-                                    alt="buttonpng" width="60rem" />
+                                data-bs-target="#saveModal">
+                                <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
                             </button>
-                            <div class="card border-0 card-clickable">
-                                <img src="../../resources/images/botellas.png" class="card-img-top" alt="...">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="../../resources/images/botellas.png" class="card-img-top" alt="...">
+                                    <p>Categoria 1</p>
+                                </div>
                             </div>
                         </div>
                         <!-- Segunda columna -->
                         <div class="col-md-4 py-2 px-5">
                             <h1>Colores</h1>
                             <button type="button" class="btn btn-white me-md-2 mt-1" data-bs-toggle="modal"
-                                data-bs-target="#saveModal2"><img src="../../resources/images/agregar.png"
-                                    alt="buttonpng" width="60rem" />
+                                data-bs-target="#saveModal2">
+                                <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
                             </button>
-                            <div class="card border-0 card-clickable">
-                                <img src="../../resources/images/pelotas.png" class="card-img-top" alt="...">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="../../resources/images/pelotas.png" class="card-img-top" alt="...">
+                                    <p>Color 1</p>
+                                    <p>#0000000</p>
+                                </div>
                             </div>
                         </div>
                         <!-- Tercera columna -->
                         <div class="col-md-4 py-2 px-5">
                             <h1>Tallas</h1>
                             <button type="button" class="btn btn-white me-md-2 mt-1" data-bs-toggle="modal"
-                                data-bs-target="#saveModal3"><img src="../../resources/images/agregar.png"
-                                    alt="buttonpng" width="60rem" />
+                                data-bs-target="#saveModal3">
+                                <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
                             </button>
-                            <div class="card border-0 card-clickable">
-                                <img src="../../resources/images/camisas.png" class="card-img-top" alt="...">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="../../resources/images/camisas.png" class="card-img-top" alt="...">
+                                    <p>Talla 1</p>
+                                    <p>XS</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
+
 
             </div>
         </div>
@@ -121,14 +141,19 @@
                     <div class="modal-body row g-3">
                         <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                         <input type="hidden" id="idColorProducto" name="idColorProducto">
-                        <div class="col-sm-12 col-md-6">
-                            <label for="nombreValor" class="col-sm-7 col-form-label">Color a registrar:</label>
-                            <input id="colorProducto" type="color" name="colorProducto" class="form-control" 
-                            required onchange="updateColorHex(this.value)">
-
-                                <input type="hidden" id="colorHex" name="colorHex">
-
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <label for="colorProducto" class="col-sm-7 col-form-label">Color a registrar:</label>
+                            <div class="d-flex align-items-center">
+                                <!-- Input de selección de color -->
+                                <input id="colorProducto" type="color" name="colorProducto"
+                                    class="form-control me-md-2 mb-2 mb-md-0" required
+                                    onchange="updateColorHex(this.value)">
+                                <!-- Input para mostrar el valor hexadecimal -->
+                                <input id="colorHex" name="colorHex" class="form-control" required readonly>
+                            </div>
                         </div>
+
+
 
                     </div>
                     <div class="modal-footer">
@@ -177,6 +202,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/051460de0f.js" crossorigin="anonymous"></script>
     <script src="../../controllers/utils/sweetalert.min.js"></script>
     <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/utils/private.js"></script>

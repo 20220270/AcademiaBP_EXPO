@@ -67,6 +67,7 @@ const loadTemplate = async () => {
                             </li>
                         </ul>
                     </li>
+                    
 
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
@@ -80,6 +81,27 @@ const loadTemplate = async () => {
                                     Productos
                                     </a>
                                 </li>
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
+                            <i class="lni lni-agenda icon-redirect"></i>
+                        </a>
+                        <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="ordenes.html" class="sidebar-link">
+                                    <i class="lni lni-agenda"></i>
+                                    Compras
+                                </a>
+                            </li>
+
+                            <li class="sidebar-item">
+                                <a href="valoraciones.html" class="sidebar-link">
+                                    <i class="lni lni-agenda"></i>
+                                    Valoraciones
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
