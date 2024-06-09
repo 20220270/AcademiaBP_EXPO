@@ -19,13 +19,38 @@ class TallasHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_talla, talla
-                FROM tb_tallas
-                WHERE talla LIKE ?
-                ORDER BY id_talla';
-        $params = array($value);
+        $sql = "SELECT DISTINCT
+            cat.id_categoria_producto,
+            cat.categoria_producto,
+            cat.imagen_categoria,
+            tal.id_talla,
+            tal.talla,
+            col.id_color,
+            col.color
+        FROM 
+            tb_categorias_productos AS cat
+        JOIN
+            tb_tallas AS tal ON 1=1
+        JOIN
+            tb_colores AS col ON 1=1
+        GROUP BY tal.id_talla
+        ORDER BY cat.id_categoria_producto, tal.id_talla, col.id_color";
+    
+        $params = array();
         return Database::getRows($sql, $params);
     }
+
+    /*Se ocupa select distinct para evitar datos repetidos
+
+    *Les asignamos un identificador a cada campo para relacionarlos a su respectiva tabla
+
+    Ocupamos JOIN (No inner join) para referencias varias tablas (en nuestro caso, colores y tallas) basándonos en una condicion, la cual es 1=1 y que siempre es verdadero,
+    lo que nos permite unir las tablas sin problemas. Esto lo hacemos ya que las tres tablas no cuentan con un campo en común.
+
+    Los agrupamos por elementos específicos
+     */
+    
+
 
     public function createRow()
     {
