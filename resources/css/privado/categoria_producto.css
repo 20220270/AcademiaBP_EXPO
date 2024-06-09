@@ -209,6 +209,19 @@ border: radius 80px;
   background: #000000;
 }
 
+.color-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.color-box {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  border: 1px solid #000;
+}
+
 
 @media (min-width: 768px) and (max-width: 992px) {
   .fa-star {

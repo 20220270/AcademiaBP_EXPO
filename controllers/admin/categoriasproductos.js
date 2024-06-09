@@ -1,5 +1,6 @@
 const CATEGORIA_API = 'services/admin/categoriasproductos.php';
 const COLORES_API = 'services/admin/colores.php';
+const TALLAS_API = 'services/admin/tallas.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer los elementos de la tabla.
@@ -8,6 +9,7 @@ const SEARCH_FORM = document.getElementById('searchForm');
 
 CARD_CATEGORIAS = document.getElementById('cardCategorias');
 CARD_COLOR = document.getElementById('cardColores');
+CARD_TALLAS = document.getElementById('cardTallas');
 // Constantes para establecer los elementos del componente Modal.
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
   MODAL_TITLE = document.getElementById('modalTitle');
@@ -15,8 +17,8 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
 const SAVE_MODAL2 = new bootstrap.Modal('#saveModal2'),
   MODAL_TITLE2 = document.getElementById('modalTitle2');
 
-//const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
-//MODAL_TITLE = document.getElementById('modalTitle');
+const SAVE_MODAL3 = new bootstrap.Modal('#saveModal3'),
+MODAL_TITLE3 = document.getElementById('modalTitle3');
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
   ID_CATEGORIA = document.getElementById('idCategoriaProducto'),
@@ -27,7 +29,9 @@ const SAVE_FORM2 = document.getElementById('saveForm2'),
   ID_COLOR = document.getElementById('idColorProducto'),
   NOMBRE_COLOR = document.getElementById('colorHex');
 
-
+  const SAVE_FORM3 = document.getElementById('saveForm3'),
+  ID_TALLA = document.getElementById('idTallaProducto'),
+  TALLA = document.getElementById('talla');
 
 
 
@@ -39,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Llamada a la función para llenar la tabla con los registros existentes.
   fillTable();
   fillTable2();
-  //fillTable3();
+  fillTable3();
 });
 
 
@@ -94,7 +98,29 @@ SAVE_FORM2.addEventListener('submit', async (event) => {
     // Se muestra un mensaje de éxito.
     sweetAlert(1, DATA.message, true);
     // Se carga nuevamente la tabla para visualizar los cambios.
-    fillTable();
+    fillTable2();
+  } else {
+    sweetAlert(2, DATA.error, false);
+  }
+});
+
+SAVE_FORM3.addEventListener('submit', async (event) => {
+  // Se evita recargar la página web después de enviar el formulario.
+  event.preventDefault();
+  // Se verifica la acción a realizar.
+  (ID_TALLA.value) ? action = 'updateRow' : action = 'createRow';
+  // Constante tipo objeto con los datos del formulario.
+  const FORM = new FormData(SAVE_FORM3);
+  // Petición para guardar los datos del formulario.
+  const DATA = await fetchData(TALLAS_API, action, FORM);
+  // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+  if (DATA.status) {
+    // Se cierra la caja de diálogo.
+    SAVE_MODAL3.hide();
+    // Se muestra un mensaje de éxito.
+    sweetAlert(1, DATA.message, true);
+    // Se carga nuevamente la tabla para visualizar los cambios.
+    fillTable3();
   } else {
     sweetAlert(2, DATA.error, false);
   }
@@ -117,7 +143,7 @@ const fillTable = async (form = null) => {
 
 
       CARD_CATEGORIAS.innerHTML += `
-            <div class="col-lg-12 col-md-12 col-sm-12 mb-4 mt-5 text-center" >
+            <div class="col-lg-12 col-md-12 col-sm-12 mb-4 mt-5 text-center">
                 <div class="card h-100" id="cards">
                     <img src="${SERVER_URL}images/categorias_productos/${row.imagen_categoria}" class="card-img-top" height="250px" width="250px">
                     <div class="card-body">
@@ -166,17 +192,66 @@ const fillTable2 = async (form = null) => {
                 <div class="card h-100" id="cards">
                     
                     <div class="card-body">
-                    <h5 class="card-title">ID: ${row.id_color}</h5>
-                        <h5 class="card-title">Color: #${row.color}</h5>
+              <h5 class="card-title">ID: ${row.id_color}</h5>
+              <div class="color-display">
+                <h5 class="card-title">Color: #${row.color}</h5>
+                <div class="color-box" style="background-color: #${row.color};"></div>
+              </div>
+            </div>
+
+                <div class="d-flex justify-content-center gap-2">
+                <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete2(${row.id_color})">
+                    <i class="bi bi-search"></i>
+                        <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                </button>
+                <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate2(${row.id_color})">
+                    <i class="bi bi-x-square-fill"></i>
+                        <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                </button>
+            </div>
+            </div>
+          `;
+    });
+    // Se muestra un mensaje de acuerdo con el resultado.
+    //ROWS_FOUND.textContent = DATA.message;
+  } else {
+    sweetAlert(4, DATA.error, true);
+  }
+}
+
+const fillTable3 = async (form = null) => {
+  // Se inicializa el contenido de la tabla.
+  //ROWS_FOUND.textContent = '';
+  //TABLE_BODY.innerHTML = '';
+  CARD_TALLAS.innerHTML = '';
+  // Se verifica la acción a realizar.
+  (form) ? action = 'searchRows' : action = 'readAll';
+  // Petición para obtener los registros disponibles.
+  const DATA = await fetchData(TALLAS_API, action, form);
+  // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+  if (DATA.status) {
+    // Se recorre el conjunto de registros fila por fila.
+    DATA.dataset.forEach(row => {
+      // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+
+
+      CARD_TALLAS.innerHTML += `
+            <div class="col-lg-12 col-md-12 col-sm-12 mb-4 mt-5 text-center">
+                <div class="card h-100" id="cards">
+                    
+                    <div class="card-body">
+                    
+                        <h5 class="card-title">ID: ${row.id_talla}</h5>
+                        <p>Talla: ${row.talla}</p>
                     </div>
                 </div>
 
                 <div class="d-flex justify-content-center gap-2">
-                <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_color})">
+                <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete3(${row.id_talla})">
                     <i class="bi bi-search"></i>
                         <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                 </button>
-                <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_color})">
+                <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate3(${row.id_talla})">
                     <i class="bi bi-x-square-fill"></i>
                         <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                 </button>
@@ -207,6 +282,14 @@ const openCreate2 = () => {
   SAVE_FORM2.reset();
 }
 
+const openCreate3 = () => {
+  // Se muestra la caja de diálogo con su título.
+  SAVE_MODAL3.show();
+  MODAL_TITLE3.textContent = 'Agregar talla';
+  // Se prepara el formulario.
+  SAVE_FORM3.reset();
+}
+
 /*
 *   Función asíncrona para preparar el formulario al momento de actualizar un registro.
 *   Parámetros: id (identificador del registro seleccionado).
@@ -234,6 +317,50 @@ const openUpdate = async (id) => {
   }
 }
 
+const openUpdate2 = async (id) => {
+  // Se define una constante tipo objeto con los datos del registro seleccionado.
+  const FORM = new FormData();
+  FORM.append('idColorProducto', id);
+  // Petición para obtener los datos del registro solicitado.
+  const DATA = await fetchData(COLORES_API, 'readOne', FORM);
+  // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+  if (DATA.status) {
+    // Se muestra la caja de diálogo con su título.
+    SAVE_MODAL2.show();
+    MODAL_TITLE2.textContent = 'Actualizar color';
+    // Se prepara el formulario.
+    SAVE_FORM2.reset();
+    // Se inicializan los campos con los datos.
+    const ROW = DATA.dataset;
+    ID_COLOR.value = ROW.id_color;
+    NOMBRE_COLOR.value = ROW.color;;
+  } else {
+    sweetAlert(2, DATA.error, false);
+  }
+}
+
+const openUpdate3 = async (id) => {
+  // Se define una constante tipo objeto con los datos del registro seleccionado.
+  const FORM = new FormData();
+  FORM.append('idTallaProducto', id);
+  // Petición para obtener los datos del registro solicitado.
+  const DATA = await fetchData(TALLAS_API, 'readOne', FORM);
+  // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+  if (DATA.status) {
+    // Se muestra la caja de diálogo con su título.
+    SAVE_MODAL3.show();
+    MODAL_TITLE3.textContent = 'Actualizar talla';
+    // Se prepara el formulario.
+    SAVE_FORM3.reset();
+    // Se inicializan los campos con los datos.
+    const ROW = DATA.dataset;
+    ID_TALLA.value = ROW.id_talla;
+    TALLA.value = ROW.talla;;
+  } else {
+    sweetAlert(2, DATA.error, false);
+  }
+}
+
 /*
 *   Función asíncrona para eliminar un registro.
 *   Parámetros: id (identificador del registro seleccionado).
@@ -255,6 +382,50 @@ const openDelete = async (id) => {
       await sweetAlert(1, DATA.message, true);
       // Se carga nuevamente la tabla para visualizar los cambios.
       fillTable();
+    } else {
+      sweetAlert(2, DATA.error, false);
+    }
+  }
+}
+
+const openDelete2 = async (id) => {
+  // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
+  const RESPONSE = await confirmAction('¿Desea eliminar la categoría de forma permanente?');
+  // Se verifica la respuesta del mensaje.
+  if (RESPONSE) {
+    // Se define una constante tipo objeto con los datos del registro seleccionado.
+    const FORM = new FormData();
+    FORM.append('idColorProducto', id);
+    // Petición para eliminar el registro seleccionado.
+    const DATA = await fetchData(COLORES_API, 'deleteRow', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+      // Se muestra un mensaje de éxito.
+      await sweetAlert(1, DATA.message, true);
+      // Se carga nuevamente la tabla para visualizar los cambios.
+      fillTable2();
+    } else {
+      sweetAlert(2, DATA.error, false);
+    }
+  }
+}
+
+const openDelete3 = async (id) => {
+  // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
+  const RESPONSE = await confirmAction('¿Desea eliminar la categoría de forma permanente?');
+  // Se verifica la respuesta del mensaje.
+  if (RESPONSE) {
+    // Se define una constante tipo objeto con los datos del registro seleccionado.
+    const FORM = new FormData();
+    FORM.append('idTallaProducto', id);
+    // Petición para eliminar el registro seleccionado.
+    const DATA = await fetchData(TALLAS_API, 'deleteRow', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+      // Se muestra un mensaje de éxito.
+      await sweetAlert(1, DATA.message, true);
+      // Se carga nuevamente la tabla para visualizar los cambios.
+      fillTable3();
     } else {
       sweetAlert(2, DATA.error, false);
     }

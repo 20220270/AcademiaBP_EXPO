@@ -62,15 +62,13 @@
                         <!-- Tercera columna -->
                         <div class="col-md-4 py-2 px-5">
                             <h1>Tallas</h1>
-                            <button type="button" class="btn btn-white me-md-2 mt-1" data-bs-toggle="modal"
-                                data-bs-target="#saveModal3">
+                            <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate3()">
                                 <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
                             </button>
-                            <div class="card">
-                                <div class="card-body">
-                                    <img src="../../resources/images/camisas.png" class="card-img-top" alt="...">
-                                    <p>Talla 1</p>
-                                    <p>XS</p>
+                            
+                            <div class="container">
+                                <div class="row" id="cardTallas">
+                    
                                 </div>
                             </div>
                         </div>
@@ -178,7 +176,7 @@
                         <input type="hidden" id="idTallaProducto" name="idTallaProducto">
                         <div class="col-sm-12 col-md-6">
                             <label for="nombreValor" class="col-sm-7 col-form-label">Talla a registrar:</label>
-                            <input id="nombreCategoriaProducto" type="text" name="nombreCategoriaProducto"
+                            <input id="talla" type="text" name="talla"
                                 class="form-control" required>
                         </div>
 
