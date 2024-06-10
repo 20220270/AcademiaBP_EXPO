@@ -84,7 +84,7 @@ body {
 }
 
 a.sidebar-link {
-    padding: .645rem 1.625rem;
+    padding: .744rem 1.625rem;
     color: #FFF;
     display: block;
     font-size: 0.8rem;
@@ -111,7 +111,7 @@ a.sidebar-link:hover {
     position: absolute;
     top: 0;
     left: 70px;
-    background-color: #0e2238;
+    background-color: #000000;
     padding: 0;
     min-width: 15rem;
     display: none;

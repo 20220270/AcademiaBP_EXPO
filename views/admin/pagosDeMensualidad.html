@@ -35,7 +35,6 @@
                                 </p>
                                 <div class="d-flex justify-content-start">
                                     <!-- Flexbox para alinear el botón a la izquierda -->
-                                    <a href="alumnostotal.html" class="button">Ver mas</a>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +47,6 @@
                                 </p>
                                 <div class="d-flex justify-content-start">
                                     <!-- Flexbox para alinear el botón a la izquierda -->
-                                    <a href="alumnosyacancelados.html" class="button">Ver mas</a>
                                 </div>
                             </div>
                         </div>
@@ -61,44 +59,15 @@
                                 </p>
                                 <div class="d-flex justify-content-start">
                                     <!-- Flexbox para alinear el botón a la izquierda -->
-                                    <a href="alumnosquenohancancelado.html" class="button">Ver mas</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-
-                    <div class="container mt-5 text-center">
-
-                        <h5>Alumnos y pagos</h5>
-
-
-                        <div class="scrollable-content mt-5">
-
-                            <div class="col-md-12">
-                                <div class="input-group mb-3 barra_busqueda_estudiantes mt-5">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-outline-light text-dark dropdown-toggle" type="button"
-                                            data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">Divisiòn</button>
-                                        <div class="dropdown-menu">
-                                            <h6>sub 17</h6>
-                                            <h6>sub 19</h6>
-                                        </div>
-                                    </div>
-
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="bi bi-search"></i></span>
-                                    </div>
-
-                                    <input type="text" class="form-control" placeholder="Buscar"
-                                        id="boton_buscar_estudiantes">
-
-                                </div>
-                            </div>
-
-
-
+                    <!-- Aquí comienza la fila que contiene la tabla y las cards -->
+                    <div class="row mt-5">
+                        <!-- Columna para la tabla -->
+                        <div class="col-md-12 col-lg-7">
                             <div class="container mt-5">
                                 <h2>Tabla de datos</h2>
                                 <table class="table table-striped">
@@ -115,14 +84,12 @@
                                     <tbody>
                                         <tr>
                                             <td>Ricardito guapo Leon</td>
-
                                             <td>Matutino</td>
                                             <td>Leonel Messi</td>
                                             <td>correo@gmail.com</td>
                                             <td class="text-success">Pagado</td>
                                             <td>222222</td>
                                         </tr>
-
                                         <tr>
                                             <td> Juan Pérez Leon</td>
                                             <td>Vespertino</td>
@@ -131,7 +98,6 @@
                                             <td class="estado-inactivo">Pendiente</td>
                                             <td>333333</td>
                                         </tr>
-
                                         <tr>
                                             <td> Ricardo de León</td>
                                             <td>Matutino</td>
@@ -148,22 +114,36 @@
                                             <td class="estado-inactivo">Pendiente</td>
                                             <td>333333</td>
                                         </tr>
-
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
-
+                        <!-- Columna para las cards -->
+                        <div class="col-md-12 col-lg-5">
+                            <h5>Registrar días de entrenamiento y cuotas</h5>
+                            <div class="col-3 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
+                                <button type="button" class="btn btn-white me-md-2 mt-1">
+                                    <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
+                                </button>
+                            </div>
+                            <div class="container mt-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Card title</h5>
+                                                <p class="card-text">Some quick example text to build on the card
+                                                    title and make up the bulk of the card's content.</p>
+                                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-
-
-
+                    <!-- Fin de la fila que contiene la tabla y las cards -->
                 </div>
-
-
-
             </div>
         </div>
     </main>

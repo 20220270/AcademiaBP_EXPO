@@ -105,6 +105,39 @@ const loadTemplate = async () => {
                         </ul>
                     </li>
 
+
+                    <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
+                    <i class="lni lni-certificate"></i>
+                    </a>
+                    <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        
+                    <li class="sidebar-item">
+                    <a href="staff.html" class="sidebar-link">
+                        <i class="lni lni-certificate"></i>
+                        Staff
+                    </a>
+                    </li>
+                    </ul>
+                    </li>
+
+                    
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
+                        <i class="lni lni-dollar"></i>
+                        </a>
+                        <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            
+                        <li class="sidebar-item">
+                        <a href="pagosdemensualidad.html" class="sidebar-link">
+                        <i class="lni lni-dollar"></i>
+                            Pagos de mensualidad
+                        </a>
+                    </li>
+                        </ul>
+                    </li>
+
+                    
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
                         <i class="lni lni-graduation"></i>
@@ -121,50 +154,6 @@ const loadTemplate = async () => {
                         </ul>
                     </li>
 
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
-                        <i class="lni lni-dollar"></i>
-                        </a>
-                        <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            
-                        <li class="sidebar-item">
-                        <a href="pagosdemensualidad.html" class="sidebar-link">
-                        <i class="lni lni-dollar"></i>
-                            Pagos de mensualidad
-                        </a>
-                    </li>
-                        </ul>
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
-                        <i class="lni lni-book"></i>
-                        </a>
-                        <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            
-                        <li class="sidebar-item">
-                        <a href="inscripciones.html" class="sidebar-link">
-                            <i class="lni lni-book"></i>
-                            Inscripciones
-                        </a>
-                    </li>
-                        </ul>
-                    </li>
-
-                    <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
-                    <i class="lni lni-certificate"></i>
-                    </a>
-                    <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        
-                    <li class="sidebar-item">
-                    <a href="staff.html" class="sidebar-link">
-                        <i class="lni lni-certificate"></i>
-                        Staff
-                    </a>
-                    </li>
-                    </ul>
-                    </li>
 
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
