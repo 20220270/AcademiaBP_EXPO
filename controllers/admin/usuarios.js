@@ -137,11 +137,11 @@ SEARCH_FORM.addEventListener('submit', (event) => {
                     <div class="col-md-8">
                         <div class="card-body">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="button" class="btn btn-dark btn-sm" onclick="openUpdate(${row.id_administrador})">
-                                    <i class="bi bi-pencil-fill"></i>
+                                <button type="button" class="btn btn-sm" onclick="openUpdate(${row.id_administrador})">
+                                     <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button>
-                                <button type="button" class="btn btn-danger btn-sm" onclick="openDelete(${row.id_administrador})">
-                                    <i class="bi bi-trash-fill"></i>
+                                <button type="button" class="btn  btn-sm" onclick="openDelete(${row.id_administrador})">
+                                    <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button>
                             </div>
                             <h5 class="card-title mb-2 fs-1">${row.alias_administrador}</h5>
@@ -182,11 +182,11 @@ const fillTable2 = async (form = null) => {
             TABLE_BODY.innerHTML += `
             <td>${row.id_nivel}</td>
             <td>${row.nivel}</td>
-            <td><button type="button" class="btn btn-dark btn-sm" onclick="openUpdate2(${row.id_nivel})">
-                                    <i class="bi bi-pencil-fill"></i>
+            <td><button type="button" class="btn btn-sm" onclick="openUpdate2(${row.id_nivel})">
+                                     <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button>
-                                <button type="button" class="btn btn-danger btn-sm" onclick="openDelete2(${row.id_nivel})">
-                                    <i class="bi bi-trash-fill"></i>
+                                <button type="button" class="btn btn-sm" onclick="openDelete2(${row.id_nivel})">
+                                    <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button></td>
             `;
         });

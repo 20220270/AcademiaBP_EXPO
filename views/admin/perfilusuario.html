@@ -27,12 +27,18 @@
                             <form class="row g-3 text-center" id="profileForm">
                                 <div class="container text-center">
                                     <div class="row">
-                                        <div class="col d-flex justify-content-center align-items-center">
-                                            <img src="../../resources/images/userIcon.png"
-                                                class="col-md-12 col-lg-9 mb-4" alt="..." height="300px" width="300px"
-                                                id="imagen">
+                                        <div class="col d-flex flex-column align-items-center">
+                                            <div class="position-relative">
+                                                <img src="../../resources/images/userIcon.png" class="col-md-12 col-lg-7 mb-1 rounded-circle" alt="..." id="imagen">
+                                                <input type="file" id="fotoInput" name="fotoInput" accept="image/*">
+                                                <button type="button" class="btn position-absolute bottom-0 end-0 translate-middle mt-5" id="botonCargarFoto" onclick="document.getElementById('fotoInput').click()">
+                                                    <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1 mt-4">
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                             
+                                        
+                                        <div class="col-sm-12 col-md-12 col-lg-12 mt-5">
                                             <label for="aliasAdministrador" class="form-label">Registrado desde:</label>
                                             <input id="fecharegistroAdmin" type="text" name="fecharegistroAdmin"
                                                 class="form-control text-center" required readonly>
@@ -47,7 +53,7 @@
 
                         </div>
 
-                        <div class="col mt-5 text-center" id="columnaPerfil">
+                        <div class="col mt-2 text-center" id="columnaPerfil">
                             <form class="row g-3">
                                 <div class="col-sm-12 col-md-12 col-lg-12 mt-2">
                                     <label for="nombreAdministrador" class="form-label">Nombre:</label>

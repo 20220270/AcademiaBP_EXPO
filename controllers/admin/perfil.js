@@ -18,16 +18,11 @@ const PASSWORD_FORM = document.getElementById('passwordForm');
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
-    // Llamada a la función para mostrar el encabezado y pie del documento.
-    loadTemplate();
-    // Se establece el título del contenido principal.
-    //MAIN_TITLE.textContent = 'Editar perfil';
-    // Petición para obtener los datos del usuario que ha iniciado sesión.
+    loadTemplate(); // Cargar encabezado y pie de página si es necesario
     const DATA = await fetchData(USER_API, 'readProfile');
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
-        // Se inicializan los campos del formulario con los datos del usuario que ha iniciado sesión.
         const ROW = DATA.dataset;
+        // Asignar los valores a los campos de entrada
         NOMBRE_ADMINISTRADOR.value = ROW.nombre_admistrador;
         APELLIDO_ADMINISTRADOR.value = ROW.apellido_administrador;
         DUI_ADMINISTRADOR.value = ROW.dui_administrador;
@@ -36,11 +31,30 @@ document.addEventListener('DOMContentLoaded', async () => {
         FECHA_REGISTRO.value = ROW.fecha_registro;
         NIVEL_ADMINISTRADOR.value = ROW.nivel;
         ALIAS_ADMINISTRADOR.value = ROW.alias_administrador;
-        FOTO_ADMINISTRADOR.value = ROW.foto_administrador;
+        FOTO_ADMINISTRADOR.src = `${SERVER_URL}images/administradores/${ROW.foto_administrador}`; //Mandamos a llamar la foto del administrador
     } else {
         sweetAlert(2, DATA.error, null);
     }
 });
+
+const fotoInput = document.getElementById('fotoInput');
+// Escuchar cambios en el elemento de entrada de archivo
+fotoInput.addEventListener('change', function() {
+    // Verificar si se seleccionó un archivo
+    if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // Mostrar la imagen cargada en el elemento de imagen
+            const imagen = document.getElementById('imagen');
+            imagen.src = e.target.result;
+        };
+        // Leer el archivo como una URL de datos
+        reader.readAsDataURL(this.files[0]);
+    }else{
+        FOTO_ADMINISTRADOR.src = `${SERVER_URL}images/administradores/userIcon.png`; //Mandamos a llamar la foto del administrador
+    }
+});
+
 
 
 

@@ -325,8 +325,6 @@ class Validator
             return false;
         }
     }
-    
-    
 
     /*
     *   Método para validar un archivo al momento de borrarlo del servidor.

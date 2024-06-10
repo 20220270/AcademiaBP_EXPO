@@ -72,12 +72,14 @@ if (isset($_GET['action'])) {
                 if (
                     !$administrador->setId($_POST['idAdministrador']) or
                     !$administrador->setEstado($_POST['selectEstado']) or
-                    !$administrador->setNivel($_POST['selectNivelAdmin'])
+                    !$administrador->setNivel($_POST['selectNivelAdmin']) or
+                    !$administrador->setImagen($_FILES['fotoAdmin'], $administrador->getFilename())
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($administrador->updateRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Administrador modificado correctamente';
+                    $result['fileStatus'] = Validator::changeFile($_FILES['fotoAdmin'], $administrador::RUTA_IMAGEN, $administrador->getFilename());
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar el administrador';
                 }
@@ -125,13 +127,15 @@ if (isset($_GET['action'])) {
                     !$administrador->setDUI($_POST['duiAdministrador']) or
                     !$administrador->setCorreo($_POST['correoAdministrador']) or
                     !$administrador->setTelefono($_POST['telefonoAdministrador']) or
-                    !$administrador->setAlias($_POST['aliasAdministrador'])
+                    !$administrador->setAlias($_POST['aliasAdministrador'])or
+                    !$administrador->setImagen($_FILES['fotoInput'], $administrador->getFilename())
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($administrador->editProfile()) {
                     $result['status'] = 1;
                     $result['message'] = 'Perfil modificado correctamente';
                     $_SESSION['aliasAdministrador'] = $_POST['aliasAdministrador'];
+                    $result['fileStatus'] = Validator::changeFile($_FILES['fotoInput'], $administrador::RUTA_IMAGEN, $administrador->getFilename());
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar el perfil';
                 }

@@ -70,7 +70,7 @@ class AdministradorHandler
 
     public function readProfile()
     {
-        $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, foto_administrador, nivel, fecha_registro
+        $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, foto_administrador, nivel, fecha_registro, estado_adminstrador
                 FROM tb_administradores
                 INNER JOIN tb_niveles_administradores USING(id_nivel)
                 WHERE id_administrador = ?';
@@ -81,9 +81,9 @@ class AdministradorHandler
     public function editProfile()
     {
         $sql = 'UPDATE tb_administradores
-                SET nombre_admistrador = ?, apellido_administrador = ?, dui_administrador = ?, correo_administrador = ?, telefono_administrador = ?, alias_administrador = ?
+                SET nombre_admistrador = ?, apellido_administrador = ?, dui_administrador = ?, correo_administrador = ?, telefono_administrador = ?, alias_administrador = ?, foto_administrador = ?
                 WHERE id_administrador = ?';
-        $params = array( $this->nombre, $this->apellido, $this->dui, $this->correo, $this->telefono, $this->alias, $_SESSION['idAdministrador']);
+        $params = array( $this->nombre, $this->apellido, $this->dui, $this->correo, $this->telefono, $this->alias, $this-> imagen, $_SESSION['idAdministrador']);
         return Database::executeRow($sql, $params);
     }
 
@@ -132,9 +132,9 @@ class AdministradorHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_administradores
-                SET estado_adminstrador = ?, id_nivel = ?
+                SET estado_adminstrador = ?, id_nivel = ?, foto_administrador = ?
                 WHERE id_administrador = ?';
-        $params = array($this->estado, $this->nivel, $this -> id);
+        $params = array($this->estado, $this->nivel, $this->imagen, $this -> id);
         return Database::executeRow($sql, $params);
     }
 
