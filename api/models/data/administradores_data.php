@@ -150,7 +150,7 @@ class AdministradorData extends AdministradorHandler
 
     public function setImagen($file, $filename = null)
     {
-        if (Validator::validateImageFile($file, 800, 800)) {
+        if (Validator::validateImageFile($file, 2000, 2000)) {
             $this->imagen = Validator::getFilename();
             return true;
         } elseif (Validator::getFileError()) {

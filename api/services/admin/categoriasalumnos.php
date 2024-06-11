@@ -34,6 +34,7 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$categoriasalumnos->setNombreCategoria($_POST['nombreCategoriaAlumno']) or
+                    !$categoriasalumnos->setEdadMinima($_POST['edadMinimaAlumno']) or
                     !$categoriasalumnos->setEdadMaxima($_POST['edadMaximaAlumno']) or
                     !$categoriasalumnos->setNivel($_POST['selectNivelCompetencia']) or
                     !$categoriasalumnos->setIdHorarios($_POST['selectHorarioEntrenamiento']) or
@@ -92,6 +93,7 @@ if (isset($_GET['action'])) {
                     !$categoriasalumnos->setIdCategoria($_POST['idCategoriaAlumno']) or
                     !$categoriasalumnos->setFilename() or
                     !$categoriasalumnos->setNombreCategoria($_POST['nombreCategoriaAlumno']) or
+                    !$categoriasalumnos->setEdadMinima($_POST['edadMinimaAlumno']) or
                     !$categoriasalumnos->setEdadMaxima($_POST['edadMaximaAlumno']) or
                     !$categoriasalumnos->setIdCategoria($_POST['selectNivelCompetencia']) or
                     !$categoriasalumnos->setIdHorarios($_POST['selectHorarioEntrenamiento']) or

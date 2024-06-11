@@ -37,17 +37,13 @@ body {
   
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   }
-  
-  main {
-    margin-top: 5px;
-  }
+
 
 .wrapper {
     display: flex;
 }
 
 .main {
-    min-height: 100vh;
     width: 100%;
     overflow: hidden;
     transition: all 0.35s ease-in-out;
@@ -160,10 +156,6 @@ a.sidebar-link:hover {
 }
 
 
-.scrollable-content {
-    height: 500px; /* Altura fija del contenedor */
-    overflow-y: auto; /* Habilita el desplazamiento vertical */
-}
 
 
   .estado-activo td{
@@ -215,7 +207,7 @@ a{
     overflow-y: auto; /* Agregar barra de desplazamiento vertical si es necesario */
 }
 
-.card {
+#cardDiasPagos {
     flex: 1; /* Distribuir el espacio de manera uniforme entre las tarjetas */
     min-width: 300px; /* Ancho mínimo de las tarjetas */
     max-width: 400px; /* Ancho máximo de las tarjetas */
@@ -237,6 +229,9 @@ a{
 .card-text {
     margin-top: 20px;
 }
+th{
+    font-size: 12px;
+}
 
 button {
     background-color: transparent;
@@ -249,4 +244,10 @@ button {
 
 button:hover {
     color: #0056b3; /* Color azul más oscuro al pasar el mouse */
+}
+
+#columna2 {
+    height: 300px; /* Altura fija del contenedor */
+    overflow-y: auto; /* Permitir desplazamiento vertical */
+    overflow-x: auto; /* Permitir desplazamiento vertical */
 }

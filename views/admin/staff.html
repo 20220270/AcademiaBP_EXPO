@@ -29,7 +29,7 @@
     <main>
         <div class="main p-3">
             <div class="text-center">
-                <h1>Staff</h1>
+                <h1>Staff y asignación de categorías</h1>
                 <div class="scrollable-content">
                     <div class="col">
                         <div class="row">
@@ -45,42 +45,80 @@
                                             <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
                                         </div>
                                     </div>
-
-                                    <div class="col-3 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
-                                        <button type="button" class="btn btn-white me-md-2 mt-1" data-bs-toggle="modal" data-bs-target="#saveModal">
-                                            <img src="../../resources/images/agregar.png" alt="buttonpng"
-                                                width="60rem" />
-                                        </button>
-                                    </div>
                                 </form>
                             </div>
-
-
                         </div>
                     </div>
 
                     <!--cards de alumnos que han cancelado-->
                     <div class="container px-5 py-5">
-                        <div class="card mb-3" style="background-color: #062E00;">
-                            <div class="card-body">
-                                <table class="table table-sm text-white table-borderless">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col"><img
-                                                    src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
-                                                    class="img-thumbnail" style="max-width: 90px;" alt="..."></th>
-                                            <th scope="col">Encargado de:</th>
-                                            <th scope="col">Descripción:</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">Anderson Figueroa</th>
-                                            <td>Sexto nivel</td>
-                                            <th>Trayectoria amplia</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div class="row">
+                            <!-- First card -->
+                            <div class="col-lg-6">
+                                <h1>Staff</h1>
+                                <div class="col-3 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
+                                    <button type="button" class="btn btn-white me-md-2 mt-1" data-bs-toggle="modal"
+                                        data-bs-target="#saveModal">
+                                        <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
+                                    </button>
+                                </div>
+                                <div class="card mb-3" style="background-color: #062E00;">
+                                    <div class="card-body">
+                                        <table class="table table-sm text-white table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col"><img
+                                                            src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
+                                                            class="img-thumbnail" style="max-width: 90px;" alt="...">
+                                                    </th>
+                                                    <th scope="col">Encargado de:</th>
+                                                    <th scope="col">Descripción:</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Anderson Figueroa</th>
+                                                    <td>Sexto nivel</td>
+                                                    <th>Trayectoria amplia</th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Second card -->
+                            <div class="col-lg-6">
+                                <h1>Asignar categorías</h1>
+                                <div class="col-3 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
+                                    <button type="button" class="btn btn-white me-md-2 mt-1" data-bs-toggle="modal"
+                                        data-bs-target="#saveModal2">
+                                        <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
+                                    </button>
+                                </div>
+                                <div class="card mb-3" style="background-color: #062E00;">
+                                    <div class="card-body">
+                                        <table class="table table-sm text-white table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col"><img
+                                                            src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
+                                                            class="img-thumbnail" style="max-width: 90px;" alt="...">
+                                                    </th>
+                                                    <th scope="col">Encargado de:</th>
+                                                    <th scope="col">Descripción:</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Maria Garcia</th>
+                                                    <td>Cuarto nivel</td>
+                                                    <th>Experiencia en pedagogía</th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -140,6 +178,45 @@
             </div>
         </div>
 
+        <div class="modal fade" id="saveModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Encabezado de la ventana modal -->
+                    <div class="modal-header">
+                        <h5 class="modal-title text-align-center" id="modalTitle2"></h5>
+                    </div>
+                    <!-- Contenido de la ventana modal -->
+                    <form id="saveForm2">
+                        <div class="modal-body row g-3">
+                            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                            <input type="hidden" id="idStaffCategoria" name="idStaffCategoria">
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="idStaffAsignar" class="col-sm-7 col-form-label">Miembro del staff:</label>
+                                <select class="form-select" id="idStaffAsignar" name="idStaffAsignar"
+                                    aria-label="Default select example">
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="idCategoriaAsignar" class="col-sm-7 col-form-label">Categoría a asignar:</label>
+                                <select class="form-select" id="idCategoriaAsignar" name="idCategoriaAsignar"
+                                    aria-label="Default select example">
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-dark" id="btnGuardar"
+                                name="btnGuardar">Guardar</button>
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal" id="btnCerrar"
+                                name="btnCerrar">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </main>
     <!-- Scripts -->
     <!-- Script de Bootstrap 5 -->
@@ -147,7 +224,7 @@
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
     <!-- Tu propio script para el sidebar -->
-    <!--<script src="/controllers/admin/controlador_sidebar.js"></script>-->
+    <script src="https://kit.fontawesome.com/051460de0f.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../../controllers/utils/sweetalert.min.js"></script>
     <script src="../../controllers/utils/components.js"></script>

@@ -12,6 +12,7 @@
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="../../resources/css/privado/pagosMensualidad.css">
     <link rel="stylesheet" href="../../resources/css/privado/index.css">
+    <link rel="stylesheet" href="../../resources/css/privado/valores.css">
 </head>
 
 <body>
@@ -23,7 +24,7 @@
                     Pagos de mensualidad
                 </h1>
 
-                <div class="scrollable-content mt-5">
+                <div class="scrollable-content mt-4">
 
                     <div class="card-container">
                         <div class="card">
@@ -34,7 +35,6 @@
                                 <img src="../../resources/images/barraAzul.png" alt="" width="200px" height="10px">
                                 </p>
                                 <div class="d-flex justify-content-start">
-                                    <!-- Flexbox para alinear el botón a la izquierda -->
                                 </div>
                             </div>
                         </div>
@@ -46,7 +46,6 @@
                                 <img src="../../resources/images/barraNaranja.png" alt="" width="200px" height="10px">
                                 </p>
                                 <div class="d-flex justify-content-start">
-                                    <!-- Flexbox para alinear el botón a la izquierda -->
                                 </div>
                             </div>
                         </div>
@@ -58,94 +57,252 @@
                                 <img src="../../resources/images/barra.png" alt="" width="200px" height="10px">
                                 </p>
                                 <div class="d-flex justify-content-start">
-                                    <!-- Flexbox para alinear el botón a la izquierda -->
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-6 offset-3 d-flex justify-content-center">
+                            <!-- Añadimos una clase offset-3 para centrar el buscador -->
+                            <form class="d-flex flex-grow-1" id="searchForm">
+                                <div class="buscador mx-auto position-relative">
+                                    <i class="fas fa-microphone search-icon microphone-button"
+                                        id="microphone-button"></i>
+                                    <input class="busc light-table-filter" data-table="order-table" type="text"
+                                        placeholder="Busque por nombre o descripción" id="Buscador" name="search">
+                                    <div class="btna">
+                                        <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+                    </div>
+
                     <!-- Aquí comienza la fila que contiene la tabla y las cards -->
-                    <div class="row mt-5">
+                    <div class="row mt-5" id="columna2">
 
                         <div class="col-md-12 col-lg-4">
-                            <h5>Registrar días de entrenamiento y cuotas</h5>
+                            <h6><b>Registrar días de entrenamiento y cuotas</b></h6>
                             <div class="col-3 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
-                                <button type="button" class="btn btn-white me-md-2 mt-1">
+                                <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate()">
                                     <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
                                 </button>
                             </div>
                             <div class="container mt-2">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card mb-3">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">Some quick example text to build on the card
-                                                    title and make up the bulk of the card's content.</p>
-                                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="row" id="cardDiasPago">
+
                                 </div>
                             </div>
+
                         </div>
+
+
                         <!-- Columna para la tabla -->
                         <div class="col-md-12 col-lg-8">
-                            <div class="container mt-5">
-                                <h2>Tabla de datos</h2>
+                            <div class="container">
+                                <h2>Tabla de pagos</h2>
+                                <div class="col-3 col-lg-9 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
+                                    <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate2()">
+                                        <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
+                                    </button>
+                                    <p class="mt-4"><b>Realice el pago de un alumno aquí</b></p>
+                                </div>
+                                
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Nombre</th>
-                                            <th>Horario</th>
+                                            <th>ID</th>
+                                            <th>Nombre del alumno</th>
                                             <th>Nombre del responsable</th>
-                                            <th>Correo</th>
-                                            <th>Estado</th>
                                             <th>Teléfono del responsable</th>
-                                        </tr>
+                                            <th>Días que entrena el alumno</th>
+                                            <th>Mensualidad a pagar</th>
+                                            <th>Estado de la mensualidad</th>
+                                            <th>Fecha del último pago</th>
+                                            <th>Acciones</th>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Ricardito guapo Leon</td>
-                                            <td>Matutino</td>
-                                            <td>Leonel Messi</td>
-                                            <td>correo@gmail.com</td>
-                                            <td class="text-success">Pagado</td>
-                                            <td>222222</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Juan Pérez Leon</td>
-                                            <td>Vespertino</td>
-                                            <td>Martín Perez</td>
-                                            <td>correo2@gmail.com</td>
-                                            <td class="estado-inactivo">Pendiente</td>
-                                            <td>333333</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Ricardo de León</td>
-                                            <td>Matutino</td>
-                                            <td>Leonel Messi</td>
-                                            <td>correo@gmail.com</td>
-                                            <td class="text-success">Pagado</td>
-                                            <td>222222</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Juan Pérez Leon</td>
-                                            <td>Vespertino</td>
-                                            <td>Martín Perez</td>
-                                            <td>correo2@gmail.com</td>
-                                            <td class="estado-inactivo">Pendiente</td>
-                                            <td>333333</td>
-                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        <!-- Columna para las cards -->
-                        
                     </div>
-                    <!-- Fin de la fila que contiene la tabla y las cards -->
+
+                    <div class="row mt-5">
+                        <!-- Columna para la tabla -->
+                        <div class="col-md-12 col-lg-12 mx-auto">
+                            <div class="container mt-5">
+                                <h6><b>Datos para boleta de pago</b></h6>
+                                    <div class="col-6 offset-3 d-flex justify-content-center">
+                                        <!-- Añadimos una clase offset-3 para centrar el buscador -->
+                                        <form class="d-flex flex-grow-1" id="searchForm">
+                                            <div class="buscador mx-auto position-relative">
+                                                <i class="fas fa-microphone search-icon microphone-button"
+                                                    id="microphone-button"></i>
+                                                <input class="busc light-table-filter" data-table="order-table" type="text"
+                                                    placeholder="Busque por nombre o descripción" id="Buscador" name="search">
+                                                <div class="btna">
+                                                    <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="col-3 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
+                                            <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate3()">
+                                                <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Pago número</th>
+                                            <th>Fecha del pago</th>
+                                            <th>Total pagado</th>
+                                            <th>Nombre del alumno</th>
+                                            <th>Mensualidad a pagar</th>
+                                            <th>Descripción del pago</th>
+                                            <th>Fecha de próximo pago</th>
+                                            <th>Acciones</th>
+                                    </thead>
+                                    <tbody>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Encabezado de la ventana modal -->
+                    <div class="modal-header">
+                        <h5 class="modal-title text-align-center" id="modalTitle"></h5>
+                    </div>
+                    <!-- Contenido de la ventana modal -->
+                    <form id="saveForm">
+                        <div class="modal-body row g-3">
+                            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                            <input type="hidden" id="idDiasPago" name="idDiasPago">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="nombreValor" class="col-sm-7 col-form-label">Ingresa el número de
+                                    días:</label>
+                                <input id="numeroDias" type="number" name="numeroDias" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="nombreValor" class="col-sm-7 col-form-label">Ingresa el precio por
+                                    día:</label>
+                                <input id="precioDia" type="number" name="precioDia" class="form-control" min="1"
+                                    step="0.01" required>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-dark" id="btnGuardar"
+                                name="btnGuardar">Guardar</button>
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal" id="btnCerrar"
+                                name="btnCerrar">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="saveModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Encabezado de la ventana modal -->
+                    <div class="modal-header">
+                        <h5 class="modal-title text-align-center" id="modalTitle2"></h5>
+                    </div>
+                    <!-- Contenido de la ventana modal -->
+                    <form id="saveForm2">
+                        <div class="modal-body row g-3">
+                            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                            <input type="hidden" id="idPagoARealizar" name="idPagoARealizar">
+                            
+                            <!--En este combobox, se cargarán: 
+
+                            El nombre del encargado que realizará el pago
+                            El nombre del alumno al que se le pagará la mensualidad
+                            Los días que entrena
+                            El total a cancelar-->
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="SelectDatosPago" class="col-sm-7 col-form-label">Datos del pago a realizar:</label>
+                                <select class="form-select" id="SelectDatosPago" name="SelectDatosPago"
+                                    aria-label="Default select example">
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-dark" id="btnGuardar"
+                                name="btnGuardar">Guardar</button>
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal" id="btnCerrar"
+                                name="btnCerrar">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="saveModal3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Encabezado de la ventana modal -->
+                    <div class="modal-header">
+                        <h5 class="modal-title text-align-center" id="modalTitle3"></h5>
+                    </div>
+                    <!-- Contenido de la ventana modal -->
+                    <form id="saveForm3">
+                        <div class="modal-body row g-3">
+                            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                            <input type="hidden" id="idDetallePagoMensualidad" name="idDetallePagoMensualidad">
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="idPagoRealizado" class="col-sm-7 col-form-label">Datos del pago:</label>
+                                <select class="form-select" id="idPagoRealizado" name="idPagoRealizado"
+                                    aria-label="Default select example">
+                                </select>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="descripcionPago" class="col-sm-7 col-form-label">Descripción del pago:</label>
+                                <input id="descripcionPago" type="text" name="descripcionPago" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="nombreValor" class="col-sm-7 col-form-label">Fecha del próximo pago:</label>
+                                <input id="precioDia" type="date" name="precioDia" class="form-control" required>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-dark" id="btnGuardar"
+                                name="btnGuardar">Guardar</button>
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal" id="btnCerrar"
+                                name="btnCerrar">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
     </main>
@@ -153,6 +310,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/051460de0f.js" crossorigin="anonymous"></script>
     <script src="../../controllers/utils/sweetalert.min.js"></script>
     <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/utils/private.js"></script>

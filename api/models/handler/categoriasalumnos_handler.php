@@ -12,6 +12,7 @@ class CategoriasAlumnosHandler
     protected $idcategoria = null;
     protected $nombrecategoria = null;
     protected $edadmaxima = null;
+    protected $edadminima = null;
     protected $idnivel = null;
     protected $idhorariolugar = null;
     protected $imagencategoria = null;
@@ -30,6 +31,7 @@ class CategoriasAlumnosHandler
         $sql = "SELECT 
     ca.id_categoria_alumno, 
     ca.categoria, 
+    ca.edad_minima,
     ca.edad_maxima, 
     ne.nivel_entrenamiento, 
     ne.descripcion_nivel,
@@ -58,9 +60,9 @@ class CategoriasAlumnosHandler
 
     public function createRowAlumno()
     {
-        $sql = 'INSERT INTO tb_categorias_alumnos(categoria, edad_maxima, id_nivel_entrenamiento, id_horario_lugar, imagen_categoria)
-                VALUES(?, ?, ?, ?, ?)';
-        $params = array($this->nombrecategoria, $this->edadmaxima, $this->idnivel, $this->idhorariolugar, $this->imagencategoria);
+        $sql = 'INSERT INTO tb_categorias_alumnos(categoria, edad_minima, edad_maxima, id_nivel_entrenamiento, id_horario_lugar, imagen_categoria)
+                VALUES(?, ?, ?, ?, ?, ?)';
+        $params = array($this->nombrecategoria, $this->edadminima, $this->edadmaxima, $this->idnivel, $this->idhorariolugar, $this->imagencategoria);
         return Database::executeRow($sql, $params);
     }
 
@@ -69,6 +71,7 @@ class CategoriasAlumnosHandler
         $sql = "SELECT 
         ca.id_categoria_alumno, 
         ca.categoria, 
+        ca.edad_minima,
         ca.edad_maxima, 
         ne.nivel_entrenamiento, 
         CONCAT(le.nombre_lugar, ', ', he.dia_entrenamiento, ' ', TIME_FORMAT(he.hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(he.hor_fin, '%h:%i %p')) AS id_horario_lugar, 
@@ -91,7 +94,7 @@ class CategoriasAlumnosHandler
 
     public function readOneAlumno()
     {
-        $sql = 'SELECT id_categoria_alumno, categoria, edad_maxima, id_nivel_entrenamiento, id_horario_lugar, imagen_categoria
+        $sql = 'SELECT id_categoria_alumno, categoria, edad_minima, edad_maxima, id_nivel_entrenamiento, id_horario_lugar, imagen_categoria
                 FROM tb_categorias_alumnos
                 INNER JOIN tb_niveles_entrenamientos USING(id_nivel_entrenamiento)
                 INNER JOIN tb_horarios_lugares USING(id_horario_lugar)
@@ -104,9 +107,9 @@ class CategoriasAlumnosHandler
     public function updateRowAlumno()
     {
         $sql = 'UPDATE tb_categorias_alumnos
-                SET imagen_categoria = ?, categoria = ?, edad_maxima = ?, id_nivel_entrenamiento = ?, id_horario_lugar = ?
+                SET imagen_categoria = ?, categoria = ?, edad_minima = ?, edad_maxima = ?, id_nivel_entrenamiento = ?, id_horario_lugar = ?
                 WHERE id_categoria_alumno = ?';
-        $params = array($this->imagencategoria, $this->nombrecategoria, $this->edadmaxima, $this->idnivel, $this->idhorariolugar, $this->idcategoria);
+        $params = array($this->imagencategoria, $this->nombrecategoria, $this->edadminima, $this->edadmaxima, $this->idnivel, $this->idhorariolugar, $this->idcategoria);
         return Database::executeRow($sql, $params);
     }
 

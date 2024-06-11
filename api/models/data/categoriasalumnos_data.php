@@ -47,6 +47,17 @@ class CategoriasAlunmosData extends CategoriasAlumnosHandler
         }
     }
 
+    public function setEdadMinima($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->edadminima = $value;
+            return true;
+        } else {
+            $this->data_error = 'La edad mínima es incorrecta';
+            return false;
+        }
+    }
+
     public function setEdadMaxima($value)
     {
         if (Validator::validateNaturalNumber($value)) {

@@ -29,6 +29,7 @@ const SAVE_FORM = document.getElementById('saveForm'),
     const SAVE_FORM2 = document.getElementById('saveForm2'),
     ID_CATEGORIA_ALUMNO = document.getElementById('idCategoriaAlumno'),
     CATEGORIA_ALUMNO = document.getElementById('nombreCategoriaAlumno'),
+    EDAD_MINIMA = document.getElementById('edadMinimaAlumno'),
     EDAD_MAXIMA = document.getElementById('edadMaximaAlumno'),
     NIVEL_COMPETENCIA = document.getElementById('selectNivelCompetencia'),
     HORARIO_ENTRENO = document.getElementById('selectHorarioEntrenamiento'),
@@ -175,6 +176,7 @@ const fillTable2 = async (form = null) => {
                                 <div class="col-md-8 ">
                                 
                                     <h5 class="card-title mb-2 fs-6 text-dark text-start"><b>Categoría</b>: ${row.categoria}</h5>
+                                    <h5 class="card-title mb-2 fs-6 text-dark text-start"><b>Edad mínima</b>: ${row.edad_minima}</h5>
                                     <h5 class="card-title mb-2 fs-6 text-dark text-start"><b>Edad máxima</b>: ${row.edad_maxima}</h5>
                                     <h5 class="card-title mb-2 fs-6 text-dark text-start"><b>Nivel de competencia</b>: ${row.nivel_entrenamiento}</h5>
                                     <h5 class="card-title mb-2 fs-6 text-dark text-start"><b>Horario de entrenamiento</b>: ${row.id_horario_lugar}</h5>
@@ -263,6 +265,7 @@ const openUpdate2 = async (id) => {
         const ROW = DATA.dataset;
         ID_CATEGORIA_ALUMNO.value = ROW.id_categoria_alumno;
         CATEGORIA_ALUMNO.value = ROW.categoria;
+        EDAD_MINIMA.value = ROW.edad_minima;
         EDAD_MAXIMA.value = ROW.edad_maxima;
 
         fillSelect(CATEGORIA_ALUMNO_API, 'readNivelesAlumnos', 'selectNivelCompetencia', ROW.nivel_entrenamiento);
