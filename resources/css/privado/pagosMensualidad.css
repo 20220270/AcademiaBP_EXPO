@@ -189,19 +189,13 @@ a{
 }
 
 
-
-.card{
-    margin: 7px;
-
-}
-
-
 .card-container {
     display: flex; /* Display flex para colocar las cards en línea */
     gap: 0px; /* Espacio entre las cards */
 }
 
 .card {
+    margin: 7px;
     flex: 1; /* Hace que las cards ocupen todo el espacio disponible */
     border: 2px solid rgba(171, 164, 164, 0.1); /* Borde borroso */
     border-radius: 17px; /* Borde redondeado */

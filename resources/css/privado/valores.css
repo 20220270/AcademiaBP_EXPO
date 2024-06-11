@@ -1,7 +1,6 @@
 #scroll {
     overflow: auto; 
     max-height: 420px;
-    width: 750px;
 }
 
 .position-relative {
@@ -44,7 +43,7 @@ main {
 }
 
 #contenedorPrin {
-    width: 65%;
+    width: 100%;
 }
 
 .card-title {
