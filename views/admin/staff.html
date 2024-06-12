@@ -57,37 +57,18 @@
                             <div class="col-lg-6">
                                 <h1>Staff</h1>
                                 <div class="col-3 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
-                                    <button type="button" class="btn btn-white me-md-2 mt-1" data-bs-toggle="modal"
-                                        data-bs-target="#saveModal">
-                                        <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
+                                    <button type="button" class="btn btn-white me-md-2 mt-1">
+                                        <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" onclick="openCreate()"/>
                                     </button>
                                 </div>
-                                <div class="card mb-3" style="background-color: #062E00;">
-                                    <div class="card-body">
-                                        <table class="table table-sm text-white table-borderless">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col"><img
-                                                            src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
-                                                            class="img-thumbnail" style="max-width: 90px;" alt="...">
-                                                    </th>
-                                                    <th scope="col">Encargado de:</th>
-                                                    <th scope="col">Descripción:</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">Anderson Figueroa</th>
-                                                    <td>Sexto nivel</td>
-                                                    <th>Trayectoria amplia</th>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                <div class="mt-2 mb-2">
+                                    <!-- Aquí se coloca la tarjeta de asignación de horarios a entrenamientos -->
+                                    <div class="w-100" id="CardStaff">
+
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Second card -->
                             <div class="col-lg-6">
                                 <h1>Asignar categorías</h1>
                                 <div class="col-3 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
@@ -96,35 +77,22 @@
                                         <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
                                     </button>
                                 </div>
-                                <div class="card mb-3" style="background-color: #062E00;">
-                                    <div class="card-body">
-                                        <table class="table table-sm text-white table-borderless">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col"><img
-                                                            src="https://i.pinimg.com/474x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
-                                                            class="img-thumbnail" style="max-width: 90px;" alt="...">
-                                                    </th>
-                                                    <th scope="col">Encargado de:</th>
-                                                    <th scope="col">Descripción:</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">Maria Garcia</th>
-                                                    <td>Cuarto nivel</td>
-                                                    <th>Experiencia en pedagogía</th>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                <div class="mt-2 mb-2">
+                                    <!-- Aquí se coloca la tarjeta de asignación de horarios a entrenamientos -->
+                                    <div class="w-100" id="cardsDetalles">
+    
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Second card -->
+                        
                     </div>
                 </div>
             </div>
         </div>
+
 
         <!-- Modal -->
         <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -199,7 +167,8 @@
                                 </select>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="idCategoriaAsignar" class="col-sm-7 col-form-label">Categoría a asignar:</label>
+                                <label for="idCategoriaAsignar" class="col-sm-7 col-form-label">Categoría a
+                                    asignar:</label>
                                 <select class="form-select" id="idCategoriaAsignar" name="idCategoriaAsignar"
                                     aria-label="Default select example">
                                 </select>
