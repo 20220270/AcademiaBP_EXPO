@@ -104,7 +104,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Campo de categoria modificado correctamente';
 
-                    $result['fileStatus'] = Validator::changeFile($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos::RUTA_IMAGEN, $categoriasalumnos->getFilename());
+                    $result['fileStatus'] = Validator::saveFile($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos::RUTA_IMAGEN, $categoriasalumnos->getFilename());
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar la categoria';
                 }
@@ -119,7 +119,7 @@ if (isset($_GET['action'])) {
                     
                 } elseif ($categoriasalumnos->deleteRowAlumno()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Nivel eliminado correctamente';
+                    $result['message'] = 'Categoría eliminada correctamente';
                     // Se asigna el estado del archivo después de eliminar.
                     $result['fileStatus'] = Validator::deleteFile($categoriasalumnos::RUTA_IMAGEN, $categoriasalumnos->getFilename());
                 } else {

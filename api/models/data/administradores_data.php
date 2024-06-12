@@ -160,7 +160,7 @@ class AdministradorData extends AdministradorHandler
             $this->imagen = $filename;
             return true;
         } else {
-            $this->imagen = 'default.png';
+            $this->imagen = '666923377299e.png';
             return true;
         }
     }

@@ -268,7 +268,7 @@ const openUpdate2 = async (id) => {
         EDAD_MINIMA.value = ROW.edad_minima;
         EDAD_MAXIMA.value = ROW.edad_maxima;
 
-        fillSelect(CATEGORIA_ALUMNO_API, 'readNivelesAlumnos', 'selectNivelCompetencia', ROW.nivel_entrenamiento);
+        fillSelect(CATEGORIA_ALUMNO_API, 'readNivelesAlumnos', 'selectNivelCompetencia', ROW.id_nivel_entrenamiento);
         fillSelect(CATEGORIA_ALUMNO_API, 'readAllHorariosCombo', 'selectHorarioEntrenamiento', ROW.id_horario_lugar);
     } else {
         sweetAlert(2, DATA.error, false);
