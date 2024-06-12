@@ -70,7 +70,7 @@ PROFILE_FORM.addEventListener('submit', async (event) => {
     if (DATA.status) {
         sweetAlert(1, DATA.message, true);
     } else {
-        sweetAlert(2, DATA.error, false);
+        sweetAlert(2, DATA.error, false); //
     }
 });
 
