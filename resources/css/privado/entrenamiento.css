@@ -140,8 +140,8 @@ a.sidebar-link:hover {
 }
 
 
-.scrollable-content {
-    height: 500px; /* Altura fija del contenedor */
+.scrollable-content1 {
+    height: 530px; /* Altura fija del contenedor */
     overflow-y: auto; /* Habilita el desplazamiento vertical */
 }
 

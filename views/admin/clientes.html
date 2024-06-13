@@ -22,6 +22,7 @@
 
     <link rel="stylesheet" href="../../resources/css/privado/index.css">
     <link rel="stylesheet" href="../../resources/css/privado/valores.css">
+    <link rel="stylesheet" href="../../resources/css/privado/clientes.css">
 
 </head>
 
@@ -40,10 +41,16 @@
                             <div class="buscador mx-auto position-relative">
                                 <i class="fas fa-microphone search-icon microphone-button" id="microphone-button"></i>
                                 <input class="busc light-table-filter" data-table="order-table" type="text"
-                                    placeholder="Busque por nombre o descripción" id="Buscador" name="search">
+                                    placeholder="Nombre, apellido, DUI, correo o estado" id="Buscador" name="search">
                                 <div class="btna">
                                     <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
                                 </div>
+                            </div>
+
+                            <div class="col-3 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
+                                <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate()">
+                                    <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -53,33 +60,136 @@
             </div>
 
             <div class="col-lg-11 col-sm-10 col-md-12 col-12 mx-auto" id="tabla">
-                <table class="table text-center">
-                    <thead>
-                        <tr>
-                            <td colspan="10" id="rowsFound"></td>
-                        </tr>
-                        <tr>
-                            <th class="bg-success text-white fw-bold">ID</th>
-                            <th class="bg-success text-white fw-bold">Imagen</th>
-                            <th class="bg-success text-white fw-bold">Nombre del cliente</th>
-                            <th class="bg-success text-white fw-bold">DUI</th>
-                            <th class="bg-success text-white fw-bold">Correo</th>
-                            <th class="bg-success text-white fw-bold">Teléfono</th>
-                            <th class="bg-success text-white fw-bold">Dirección</th>
-                            <th class="bg-success text-white fw-bold">Fecha de registro</th>
-                            <th class="bg-success text-white fw-bold">Estado</th>
-                            <th class="bg-success text-white fw-bold">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-    
-    
-                    </tbody>
-                </table>
+                <div class="scrollable-content1">
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <td colspan="10" id="rowsFound"></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-success text-white fw-bold">ID</th>
+                                <th class="bg-success text-white fw-bold">Imagen</th>
+                                <th class="bg-success text-white fw-bold">Nombre del cliente</th>
+                                <th class="bg-success text-white fw-bold">DUI</th>
+                                <th class="bg-success text-white fw-bold">Correo</th>
+                                <th class="bg-success text-white fw-bold">Teléfono</th>
+                                <th class="bg-success text-white fw-bold">Dirección</th>
+                                <th class="bg-success text-white fw-bold">Fecha de registro</th>
+                                <th class="bg-success text-white fw-bold">Estado</th>
+                                <th class="bg-success text-white fw-bold">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody" class="justify-content-center align-items-center">
+
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </main>
-    <!-- Scripts -->
+
+
+    <div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- header del modal -->
+                <div class="modal-header border-0">
+                    <h1 class="modal-title fs-3 w-100 text-center" id="modalTitle">
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- cuerpo del modal -->
+                <div class="modal-body">
+                    <!-- Labels identificadores e inputs para ingresar la información de los clientes, separados por espacios -->
+                    <form id="saveForm">
+                        <div class="modal-body row g-3">
+                            <input type="hidden" id="idCliente" name="idCliente">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="mb-2">
+                                    <!-- Label e input para agregar el nombre del cliente -->
+                                    <label class="form-label">Nombre del cliente:</label>
+                                    <input type="text" class="form-control mb-2" id="nombreCliente" name="nombreCliente"
+                                        required>
+                                </div>
+
+                                <div class="mb-2">
+                                    <!-- Label e input para agregar el apellido del cliente -->
+                                    <label class="form-label">Apellido del cliente:</label>
+                                    <input type="text" class="form-control mb-2" id="apellidoCliente"
+                                        name="apellidoCliente" required>
+                                </div>
+
+
+                                <div class="mb-2">
+                                    <!-- Label e input para agregar el DUI del cliente -->
+                                    <label class="form-label">Dui del cliente:</label>
+                                    <input type="text" class="form-control mb-2" id="duiCliente" name="duiCliente"
+                                        required>
+                                </div>
+
+                                <div class="mb-2">
+                                    <!-- Label e input para agregar el correo del cliente -->
+                                    <label class="form-label">Correo del cliente:</label>
+                                    <input type="email" class="form-control mb-2" id="correoClientes"
+                                        name="correoClientes" required>
+                                </div>
+
+                                <div class="mb-2">
+                                    <!-- Label e input para agregar el teléfono del cliente -->
+                                    <label class="form-label">Teléfono del cliente:</label>
+                                    <input type="text" class="form-control mb-2" id="telefonoCliente"
+                                        name="telefonoCliente" required>
+                                </div>
+
+
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="mb-2">
+                                    <!-- Label e input para agregar el teléfono del cliente -->
+                                    <label class="form-label">Dirección del cliente:</label>
+                                    <input type="text" class="form-control mb-2" id="direccionCliente"
+                                        name="direccionCliente" required>
+                                </div>
+                                <div class="mb-2">
+                                    <!-- Label e input para agregar la clave del cliente -->
+                                    <label class="form-label">Clave del cliente:</label>
+                                    <input type="password" class="form-control mb-2" id="claveCliente"
+                                        name="claveCliente" required>
+                                </div>
+                                <div class="mb-2">
+                                    <!-- Label e input para confirmar la clave del cliente -->
+                                    <label class="form-label">Confirmar clave:</label>
+                                    <input type="password" class="form-control mb-2" id="confirmarClave"
+                                        name="confirmarClave" required>
+                                </div>
+                                <div class="mb-2">
+                                    <!-- Dropdown para el estado del usuario -->
+                                    <label class="form-label">Estado del usuario:</label>
+                                    <select class="form-select mb-2" id="selectEstado" name="selectEstado" required>
+                                        <option value="Activo">Activo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-2">
+
+                                    <label class="form-label">Imagen para el cliente:</label>
+                                    <input type="file" class="form-control mb-2" id="fotoCliente" name="fotoCliente">
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- Botón para registrar la información -->
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-dark mt-3" id="btnRegistrar">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <!-- Script de Bootstrap 5 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
@@ -88,6 +198,7 @@
     <script src="../../controllers/utils/sweetalert.min.js"></script>
     <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/utils/private.js"></script>
+    <script src="../../controllers/utils/voicerecognition.js"></script>
     <script src="../../controllers/admin/clientes.js"></script>
 
 </body>
