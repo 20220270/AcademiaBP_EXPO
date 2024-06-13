@@ -24,9 +24,8 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     position: relative;
     overflow: hidden;
-    width: 770px;
-    max-width: 100%;
-    min-height: 575px;
+    width: 820px;
+    min-height: 685px;
 }
 
 .container p {
@@ -76,7 +75,33 @@ body {
     height: 100%;
 }
 
-.container input {
+.scrollable-content1{
+    max-height: 680px;
+    overflow-y: auto;
+    border-radius: 20px;
+}
+
+.form-check {
+    margin-top: 5px;
+}
+
+.form-check-input {
+    width: 13.5px;
+    height: 13.5px;
+    margin-right: 5px;
+}
+
+.form-check-input:checked {
+    background-color: #338121;
+    border-color: #338121;
+}
+
+.form-check-label {
+    margin: 0;
+}
+
+.container input.form-control,
+.container .form-control {
     border: none;
     margin: 8px 0;
     padding: 10px 0px;

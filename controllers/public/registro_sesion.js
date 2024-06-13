@@ -1,5 +1,101 @@
 
 
+
+
+// Constante para establecer el formulario de iniciar sesión.
+const SIGNUP_FORM = document.getElementById('signupForm');
+const MAIN_TITLE = document.getElementById('mainTitle');
+const USER_API = 'services/public/cliente.php';
+
+
+// Método del evento para cuando el documento ha cargado.
+document.addEventListener('DOMContentLoaded', () => {
+
+    MAIN_TITLE.textContent = 'Crear cuenta';
+    // LLamada a la función para asignar el token del reCAPTCHA al formulario.
+    reCAPTCHA();
+    // Constante tipo objeto para obtener la fecha y hora actual.
+    const TODAY = new Date();
+    // Se declara e inicializa una variable para guardar el día en formato de 2 dígitos.
+    let day = ('0' + TODAY.getDate()).slice(-2);
+    // Se declara e inicializa una variable para guardar el mes en formato de 2 dígitos.
+    let month = ('0' + (TODAY.getMonth() + 1)).slice(-2);
+    // Se declara e inicializa una variable para guardar el año con la mayoría de edad.
+    let year = TODAY.getFullYear() - 18;
+
+});
+
+// Método del evento para cuando se envía el formulario de registrar cliente.
+SIGNUP_FORM.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Constante tipo objeto con los datos del formulario.
+    const FORM = new FormData(SIGNUP_FORM);
+    // Petición para registrar un cliente.
+    const DATA = await fetchData(USER_API, 'signUp', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        sweetAlert(1, DATA.message, true, 'registro_sesion.html');
+    } else if (DATA.recaptcha) {
+        sweetAlert(2, DATA.error, false, 'index.html');
+    } else {
+        sweetAlert(2, DATA.error, false);
+        // Se genera un nuevo token cuando ocurre un problema.
+        reCAPTCHA();
+    }
+});
+
+/*
+*   Función para obtener un token del reCAPTCHA y asignarlo al formulario.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+function reCAPTCHA() {
+    // Método para generar el token del reCAPTCHA.
+    grecaptcha.ready(() => {
+        // Constante para establecer la llave pública del reCAPTCHA.
+        const PUBLIC_KEY = '6LdBzLQUAAAAAJvH-aCUUJgliLOjLcmrHN06RFXT';
+        // Se obtiene un token para la página web mediante la llave pública.
+        grecaptcha.execute(PUBLIC_KEY, { action: 'homepage' }).then((token) => {
+            // Se asigna el valor del token al campo oculto del formulario
+            document.getElementById('gRecaptchaResponse').value = token;
+        });
+    });
+}
+
+//Login
+
+// Constante para establecer el formulario de iniciar sesión.
+const SESSION_FORM = document.getElementById('sessionForm');
+const MAIN_TITLE2 = document.getElementById('mainTitle');
+const USERR_API = 'services/public/cliente.php';
+
+// Método del evento para cuando el documento ha cargado.
+document.addEventListener('DOMContentLoaded', async () => {
+    // Llamada a la función para mostrar el encabezado y pie del documento.
+    //loadTemplate();
+    // Se establece el título del contenido principal.
+    MAIN_TITLE.textContent = 'Iniciar sesión';
+});
+
+// Método del evento para cuando se envía el formulario de iniciar sesión.
+SESSION_FORM.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Constante tipo objeto con los datos del formulario.
+    const FORM = new FormData(SESSION_FORM);
+    // Petición para determinar si el cliente se encuentra registrado.
+    const DATA = await fetchData(USERR_API, 'logIn', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        sweetAlert(1, DATA.message, true, 'index.html');
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
+});
+
+
+  
 const container = document.getElementById('container');
 
 const registrarBtn = document.getElementById('registrarse');
@@ -12,79 +108,4 @@ registrarBtn.addEventListener('click', () => {
 
 iniciarBtn.addEventListener('click', () => {
     container.classList.remove("active");
-});
-
-
-//Codigo para generar una contraseña automaticamente y asignarla al input de la contraseña
-document.addEventListener('DOMContentLoaded', function () {
-    // Seleccionar el input de contraseña
-    var inputContrasena = document.getElementById('contraseña');
-    
-    // Variable para controlar si el popup ya se ha mostrado
-    var popupMostrado = false;
-
-    // Agregar evento 'click' al input de contraseña
-    inputContrasena.addEventListener('click', function (event) {
-        // Verificar si el popup ya se ha mostrado
-        if (!popupMostrado) {
-            // Generar contraseña segura
-            var contrasenaGenerada = generarContrasenaSegura();
-
-            // Crear un elemento div para el popup
-            var popup = document.createElement('div');
-            popup.classList.add('popup');
-            popup.textContent = 'Contraseña sugerida: ' + contrasenaGenerada + ' puedes usarla o ingresa tu contraseña propia';
-
-            // Posicionar el popup encima del input de contraseña
-            var rect = inputContrasena.getBoundingClientRect();//getBoundingClientRect nos devuelve un objeto de tipo DOMRect,
-            //que trae el tamaño del input de la contraseña para ubicar luego el popup
-            popup.style.top = rect.top - popup.offsetHeight - 10 + 'px'; // Posición arriba del input
-            popup.style.left = rect.left + 'px'; // Misma posición horizontal que el input
-
-            // Agregar el popup al cuerpo del documento
-            document.body.appendChild(popup);
-
-            // Cambiar el valor de la variable de control
-            popupMostrado = true;
-
-            // Colocar la contraseña generada en el input de contraseña al hacer clic en el popup
-            popup.addEventListener('click', function () {
-                inputContrasena.value = contrasenaGenerada;
-                // Eliminar el popup después de colocar la contraseña en el input
-                popup.remove();
-                // Restablecer el valor de la variable de control después de eliminar el popup
-                popupMostrado = false;
-            });
-
-            // Eliminar el popup después de 3 segundos si no se hace clic en él
-            setTimeout(function () {
-                if (popup.parentNode) {
-                    popup.remove();
-                    // Restablecer el valor de la variable de control después de eliminar el popup
-                    popupMostrado = false;
-                }
-            }, 3000);
-        }
-    });
-
-    
-
-    // Función para generar una contraseña segura
-    function generarContrasenaSegura() {
-        // Definir caracteres permitidos en la contraseña
-        var caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=';
-        var longitud = 20; // Longitud de la contraseña
-
-        var contrasena = ''; //Aquí se guardará la contraseña generada
-
-        for (var i = 0; i < longitud; i++) {
-            var caracterAleatorio = caracteres.charAt(Math.floor(Math.random() * caracteres.length)); 
-            //Math.floor se utiliza para una coincidencia mas exacta del caracter, ya que Math.Random puede devolver valores decimales, 
-            //lo que afecta la coincidencia de un caracter
-            //Se utiliza Math.random para generar un numero aleatorio y que ese sea el caracter que se colocara en la contraseña
-
-            contrasena += caracterAleatorio; //Agrega cada caracter a la contraseña hasta que el ciclo se detenga
-        }
-        return contrasena;
-    }
 });

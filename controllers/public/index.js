@@ -55,18 +55,12 @@ document.getElementById('botonCerrarCo2').addEventListener('mouseleave', functio
 
 
 
-const buscadorInput = document.getElementById('Buscador1');
+document.addEventListener('DOMContentLoaded', () => {
+    // Llamada a la función para mostrar el encabezado y pie del documento.
+    loadTemplate();
+    // Se establece el título del contenido principal.
+    //MAIN_TITLE.textContent = 'Gestionar categorías';
+    // Llamada a la función para llenar la tabla con los registros existentes.
 
-buscadorInput.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        const searchTerm = buscadorInput.value.trim();
-        if (searchTerm !== '') {
-            // Guardar el término de búsqueda en el almacenamiento local
-            localStorage.setItem('lastSearchTerm', searchTerm);
-            
-            // Redirigir a la página de categorías con el término de búsqueda
-            window.location.href = `categorias_productos.html`;
-        }
-    }
 });
 
