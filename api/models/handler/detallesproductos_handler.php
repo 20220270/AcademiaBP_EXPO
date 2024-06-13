@@ -21,15 +21,15 @@ class DetalleProductoHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_detalle_producto, id_producto, categoria_producto, nombre_producto, descripcion_producto, precio_producto, imagen_producto, estado_producto, descuento_producto, fecha_registro, talla, color, existencias_producto 
-        FROM tb_detalleProducto
+        $sql = 'SELECT id_detalle_producto, categoria_producto, nombre_producto, imagen_producto, talla, color, existencias_producto 
+                FROM tb_detalleProducto
         INNER JOIN tb_productos USING(id_producto)
         INNER JOIN tb_categorias_productos USING(id_categoria_producto)
         INNER JOIN tb_tallas USING(id_talla)
-        INNER JOIN tb_colores USING(id_color);
-                WHERE categoria_producto LIKE ? OR nombre_producto LIKE ?  OR precio_producto LIKE ? OR talla LIKE ? OR color LIKE ? OR descripcion_producto LIKE ? OR estado_producto LIKE ? OR fecha_registro LIKE ? OR descuento_producto LIKE ?
-                ORDER BY id_detalle_producto';
-        $params = array($value, $value, $value, $value, $value, $value, $value, $value, $value);
+        INNER JOIN tb_colores USING(id_color)
+        WHERE categoria_producto LIKE ? OR nombre_producto LIKE ? OR talla LIKE ? OR color LIKE ? OR existencias_producto LIKE ?
+        ORDER BY id_detalle_producto';
+        $params = array($value, $value, $value, $value, $value);
         return Database::getRows($sql, $params);
     }
 

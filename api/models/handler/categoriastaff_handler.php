@@ -21,12 +21,12 @@ class CategoriaStaffHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_staff_categorias, nombre_staff, apellido_staff, imagen_staff, categoria, imagen_categoria
+        $sql = "SELECT id_staff_categorias, CONCAT(nombre_staff, ' ', apellido_staff) AS nombre_completo, imagen_staff, categoria, imagen_categoria
                 FROM tb_staffs_categorias
                 INNER JOIN tb_staffs USING (id_staff)
                 INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
                 WHERE nombre_staff LIKE ? OR apellido_staff LIKE ? OR categoria LIKE ?
-                ORDER BY id_staff';
+                ORDER BY id_staff";
         $params = array($value, $value, $value);
         return Database::getRows($sql, $params);
     }
@@ -41,7 +41,7 @@ class CategoriaStaffHandler
 
     public function readAll()
 {
-    $sql = "SELECT id_staff_categorias, id_staff, nombre_staff, apellido_staff, imagen_staff, descripcion_extra, id_categoria_alumno, categoria, edad_minima, edad_maxima, imagen_categoria
+    $sql = "SELECT id_staff_categorias, id_staff, CONCAT(nombre_staff, ' ', apellido_staff) AS nombre_completo, imagen_staff, descripcion_extra, id_categoria_alumno, categoria, edad_minima, edad_maxima, imagen_categoria
                 FROM tb_staffs_categorias
                 INNER JOIN tb_staffs USING (id_staff)
                 INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)

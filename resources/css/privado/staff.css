@@ -142,7 +142,7 @@ a.sidebar-link:hover {
 }
 
 
-.scrollable-content {
+.scrollable-content1 {
     height: 500px; /* Altura fija del contenedor */
     overflow-y: auto; /* Habilita el desplazamiento vertical */
 }
@@ -187,7 +187,8 @@ a.sidebar-link:hover {
     opacity: 1; /* Mostrar icono al hacer hover */
 }
 
-#Buscador {
+#Buscador,
+#Buscador2 {
     padding-left: 29px; /* Aumenta el padding para dejar espacio suficiente para el icono */
     width: 100%; /* Ajusta el ancho del input según el contenedor */
 }
@@ -238,7 +239,7 @@ a.sidebar-link:hover {
 
 ::placeholder {
     color: grey;
-    font-size: 14.5px;
+    font-size: 12.5px;
 }
 
 .btna {

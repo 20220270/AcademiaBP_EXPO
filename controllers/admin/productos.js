@@ -5,6 +5,8 @@ const DETALLES_PRODUCTOS_API = 'services/admin/detallesproductos.php';
 
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
+const SEARCH_FORM2 = document.getElementById('searchForm2');
+
 const CARD_PRODUCTOS = document.getElementById('cardsProductos');
 const CARD_DETALLES = document.getElementById('cardsDetalles');
 
@@ -42,13 +44,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 SEARCH_FORM.addEventListener('submit', (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SEARCH_FORM);
-    // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
     fillTable(FORM);
-    fillTable2(FORM);
+});
+
+SEARCH_FORM2.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const FORM2 = new FormData(SEARCH_FORM2);
+    fillTable2(FORM2);
 });
 
 SAVE_FORM.addEventListener('submit', async (event) => {
@@ -225,7 +229,6 @@ const openUpdate = async (id) => {
         MODAL_TITLE.textContent = 'Actualizar producto';
         // Se prepara el formulario.
         SAVE_FORM.reset();
-        //ESTADO_PRODUCTO.disabled = false;
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
         ID_PRODUCTO.value = ROW.id_producto;
@@ -233,9 +236,9 @@ const openUpdate = async (id) => {
         DESCRIPCION_PRODUCTO.value = ROW.descripcion_producto;
         PRECIO_PRODUCTO.value = ROW.precio_producto;
         DESCUENTO_PRODUCTO.value = ROW.descuento_producto;
-        
-        
-        fillSelect(CATEGORIA_API, 'readAll', 'selectCategoria', ROW.id_categoria);
+        ESTADO_PRODUCTO.value = ROW.estado_producto;
+
+        fillSelect(CATEGORIA_API, 'readAll', 'selectCategoria', ROW.id_categoria_producto);
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -259,7 +262,7 @@ const openUpdate2 = async (id) => {
         const ROW = DATA.dataset;
         ID_DETALLE.value = ROW.id_detalle_producto;
         EXISTENCIAS_PRODUCTO.value = ROW.existencias_producto;
-        
+
         fillSelect(DETALLES_PRODUCTOS_API, 'readProductosCombobox', 'selectproducto', ROW.id_producto);
         fillSelect(DETALLES_PRODUCTOS_API, 'readTallasCombobox', 'selectTalla', ROW.id_talla);
         fillSelect(DETALLES_PRODUCTOS_API, 'readColoresCombobox', 'selectColor', ROW.id_color);

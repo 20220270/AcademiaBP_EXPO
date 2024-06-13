@@ -24,26 +24,25 @@
                 <div class="row mt-4">
                     <div class="col-lg-12 col-md-12">
                         <!-- Buscador y botón de crear nuevo usuario -->
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-center">
-                                <form class="d-flex" id="searchForm">
-                                    <div class="buscador mx-auto position-relative">
-                                        <i class="fas fa-microphone search-icon" id="microphone-button"></i>
-                                        <input class="busc light-table-filter" data-table="order-table" type="text"
-                                            placeholder="Busque por alias, nombre, correo o DUI" id="Buscador"
-                                            name="search">
-                                        <div class="btna">
-                                            <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
-                                        </div>
-                                    </div>
-                                    
-                                </form>
-                            </div>
-                        </div>
+                        
                         <!-- Área de tarjetas con scroll -->
-                        <div class="scrollable-cards row">
+                        <div class="scrollable-cards1 row">
                             <div class="col-lg-6">
                                 <h3>Niveles de entrenamiento</h3>
+                                <div class="col-12 d-flex justify-content-center">
+                                    <form class="d-flex" id="searchForm">
+                                        <div class="buscador mx-auto position-relative">
+                                            <i class="fas fa-microphone search-icon" id="microphone-button"></i>
+                                            <input class="busc light-table-filter" data-table="order-table" type="text"
+                                                placeholder="Busque por el nombre del nivel" id="Buscador"
+                                                name="search">
+                                            <div class="btna">
+                                                <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
                                 <div class="col-12 d-flex justify-content-end">
                                     <button type="button" class="btn btn-white" onclick="openCreate()">
                                         <img src="../../resources/images/agregar.png" alt="Agregar" width="60rem" />
@@ -57,6 +56,20 @@
                             </div>
                             <div class="col-lg-6">
                                 <h1>Categorías de entrenamiento</h1>
+                                <div class="col-12 d-flex justify-content-center">
+                                    <form class="d-flex" id="searchForm2">
+                                        <div class="buscador mx-auto position-relative">
+                                            <i class="fas fa-microphone search-icon" id="microphone-button2"></i>
+                                            <input class="busc light-table-filter" data-table="order-table" type="text"
+                                                placeholder="Busque por categoría o nivel" id="Buscador2"
+                                                name="search2">
+                                            <div class="btna">
+                                                <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
                                 <div class="col-12 d-flex justify-content-end">
                                     <button type="button" class="btn btn-white" onclick="openCreate2()">
                                         <img src="../../resources/images/agregar.png" alt="Agregar" width="60rem" />
@@ -104,7 +117,7 @@
 
                                     <label class="form-label">Imagen del nivel de entrenamiento:</label>
                                     <input type="file" class="form-control mb-2" id="imagenNivelEntrenamiento"
-                                        name="imagenNivelEntrenamiento" required>
+                                        name="imagenNivelEntrenamiento">
                                 </div>
                             </div>
                         </div>
@@ -140,7 +153,7 @@
                                     <input type="text" class="form-control mb-2" id="nombreCategoriaAlumno"
                                         name="nombreCategoriaAlumno" required>
 
-                                        <label class="form-label">Edad mínima:</label>
+                                    <label class="form-label">Edad mínima:</label>
                                     <input type="number" class="form-control mb-2" id="edadMinimaAlumno"
                                         name="edadMinimaAlumno" min="1" max="40" step="1" required>
 
@@ -148,24 +161,24 @@
                                     <input type="number" class="form-control mb-2" id="edadMaximaAlumno"
                                         name="edadMaximaAlumno" min="1" max="40" step="1" required>
 
-                                    <div class="col col-lg-6 text-start">
+                                    <div class="col col-lg-6 text-start mt-3">
                                         <!-- campo del nombre producto -->
                                         <label for="DiaEntreno" id="DiaEntreno">Nivel de competencia:</label>
-                                        <select class="form-select mb-2" aria-label="Default select example"
+                                        <select class="form-select" aria-label="Default select example"
                                             name="selectNivelCompetencia" id="selectNivelCompetencia" required>
                                         </select>
                                     </div>
-                                    <div class="col col-lg-6 text-start">
+                                    <div class="col col-lg-6 text-start mt-3 mb-3">
                                         <!-- campo del nombre producto -->
                                         <label for="DiaEntreno" id="DiaEntreno">Horario de entrenamiento:</label>
-                                        <select class="form-select mb-2" aria-label="Default select example"
+                                        <select class="form-select" aria-label="Default select example"
                                             name="selectHorarioEntrenamiento" id="selectHorarioEntrenamiento" required>
                                         </select>
                                     </div>
 
                                     <label class="form-label">Imagen del nivel de entrenamiento:</label>
                                     <input type="file" class="form-control mb-2" id="imagenCategoriaEntrenamiento"
-                                        name="imagenCategoriaEntrenamiento" required>
+                                        name="imagenCategoriaEntrenamiento">
                                 </div>
                             </div>
                         </div>
@@ -187,6 +200,7 @@
     <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/utils/private.js"></script>
     <script src="../../controllers/utils/voicerecognition.js"></script>
+    <script src="../../controllers/utils/voicerecognitionn.js"></script>
     <script src="../../controllers/admin/niveles_categorias.js"></script>
 
 </body>

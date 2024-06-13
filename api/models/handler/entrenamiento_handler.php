@@ -36,18 +36,38 @@ class EntrenamientoHandler
 
 
     //Metodos para los horarios de entrenamiento
-    public function searchRows()
-{
+    public function searchRowsHorarios()
+    {
+    $value = '%' . Validator::getSearchValue() . '%';
+    $sql = 'SELECT id_horario, dia_entrenamiento, hora_inicio, hor_fin FROM tb_horarios_entrenamientos
+            WHERE dia_entrenamiento LIKE ?
+            ORDER BY id_horario';
+    $params = array($value);
+    return Database::getRows($sql, $params);
+    }
+
+    public function searchRowsLugares()
+    {
+    $value = '%' . Validator::getSearchValue() . '%';
+    $sql = 'SELECT id_lugar, nombre_lugar, imagen_lugar, direccion_lugar, URL_lugar FROM tb_lugares_entrenamientos
+            WHERE nombre_lugar LIKE ?
+            ORDER BY id_lugar';
+    $params = array($value);
+    return Database::getRows($sql, $params);
+    }
+
+    public function searchRowsHorariosLugares()
+    {
     $value = '%' . Validator::getSearchValue() . '%';
     $sql = 'SELECT id_horario_lugar, id_horario, nombre_lugar, direccion_lugar, imagen_lugar, dia_entrenamiento, hora_inicio, hor_fin 
             FROM tb_horarios_lugares
             INNER JOIN tb_horarios_entrenamientos USING(id_horario)
             INNER JOIN tb_lugares_entrenamientos USING(id_lugar)
-            WHERE nombre_lugar LIKE ? OR dia_entrenamiento LIKE ? OR hora_inicio LIKE ? OR hor_fin LIKE ?
+            WHERE nombre_lugar LIKE ? OR dia_entrenamiento LIKE ?
             ORDER BY id_horario';
-    $params = array($value, $value, $value, $value);
+    $params = array($value, $value);
     return Database::getRows($sql, $params);
-}
+    }
 
 
 
@@ -184,9 +204,7 @@ class EntrenamientoHandler
 
     public function readOneLugaresHorarios()
     {
-        $sql = 'SELECT id_horario_lugar, nombre_lugar, dia_entrenamiento, hora_inicio, hor_fin FROM tb_horarios_lugares
-                INNER JOIN tb_horarios_entrenamientos USING(id_horario)
-                INNER JOIN tb_lugares_entrenamientos USING(id_lugar)
+        $sql = 'SELECT id_horario_lugar, id_lugar, id_horario FROM tb_horarios_lugares
                 WHERE id_horario_lugar = ?';
         $params = array($this->idlugarhorario);
         return Database::getRow($sql, $params);

@@ -15,17 +15,39 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
                 //Sección de horarios
-            case 'searchRows':
+            case 'searchRowsHorarios':
                 if (!Validator::validateSearch($_POST['search'])) {
                     $result['error'] = Validator::getSearchError();
-                } elseif ($result['dataset'] = $entrenamiento->searchRows()) {
+                } elseif ($result['dataset'] = $entrenamiento->searchRowsHorarios()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
                 } else {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
-                
+
+            case 'searchRowsLugares':
+                if (!Validator::validateSearch($_POST['search2'])) {
+                    $result['error'] = Validator::getSearchError();
+                } elseif ($result['dataset'] = $entrenamiento->searchRowsLugares()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
+                } else {
+                    $result['error'] = 'No hay coincidencias';
+                }
+                break;
+
+            case 'searchRowsHorariosLugares':
+                if (!Validator::validateSearch($_POST['search3'])) {
+                    $result['error'] = Validator::getSearchError();
+                } elseif ($result['dataset'] = $entrenamiento->searchRowsHorariosLugares()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
+                } else {
+                    $result['error'] = 'No hay coincidencias';
+                }
+                break;
+
             case 'createRowHorarios':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -50,14 +72,14 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                case 'readAllHorariosCombo':
-                    if ($result['dataset'] = $entrenamiento->readAllHorariosCombo()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-                    } else {
-                        $result['error'] = 'No existen horarios registrados';
-                    }
-                    break;
+            case 'readAllHorariosCombo':
+                if ($result['dataset'] = $entrenamiento->readAllHorariosCombo()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen horarios registrados';
+                }
+                break;
 
             case 'readOneHorarios':
                 if (!$entrenamiento->setIdHorario($_POST['idHorario'])) {
@@ -127,7 +149,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readOneLugares':
-                if ( !$entrenamiento->setIdLugar($_POST['idLugar'])) {
+                if (!$entrenamiento->setIdLugar($_POST['idLugar'])) {
                     $result['error'] = 'Entrenamiento incorrecto';
                 } elseif ($result['dataset'] = $entrenamiento->readOneLugares()) {
                     $result['status'] = 1;
@@ -180,7 +202,7 @@ if (isset($_GET['action'])) {
                 if (
                     !$entrenamiento->setIdLugarr($_POST['selectDiaLugar']) or
                     !$entrenamiento->setIdHorarioo($_POST['selectHorarioLugar'])
-                    
+
                 ) {
                     $result['error'] = $entrenamiento->getDataError();
                 } elseif ($entrenamiento->createRowLugaresHorarios()) {
@@ -191,51 +213,50 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                case 'readAllLugaresHorarios':
-                    if ($result['dataset'] = $entrenamiento->readAllLugaresHorarios()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-                    } else {
-                        $result['error'] = 'No existen asignaciones de lugares y horarios registradas';
-                    }
-                    break;
-                case 'readOneLugaresHorarios':
-                    if (!$entrenamiento->setIdLugarHorario($_POST['idHorarioLugar'])) {
-                        $result['error'] = $entrenamiento->getDataError();
-                    } elseif ($result['dataset'] = $entrenamiento->readOneLugaresHorarios()) {
-                        $result['status'] = 1;
-                    } else {
-                        $result['error'] = 'Asignaciones inexistentes';
-                    }
-                    break;
-                case 'updateRowLugaresHorarios':
-                    $_POST = Validator::validateForm($_POST);
-                    if (!$entrenamiento->setIdLugarHorario($_POST['idHorarioLugar']) or
-                        !$entrenamiento->setIdLugarr($_POST['selectDiaLugar'])or
-                        !$entrenamiento->setIdHorarioo($_POST['selectHorarioLugar'])
-                    ) {
-                        $result['error'] = $entrenamiento->getDataError();
-                    } elseif ($entrenamiento->updateRowLugaresHorarios()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Asignación modificado correctamente';
-                        
-                    } else {
-                        $result['error'] = 'Ocurrió un problema al modificar el nivel de usuario';
-                    }
-                    break;
-                case 'deleteRowLugaresHorarios':
-                    if (
-                        !$entrenamiento->setIdLugarHorario($_POST['idHorarioLugar'])
-                    ) {
-                        $result['error'] = $entrenamiento->getDataError();
-                    } elseif ($entrenamiento->deleteRowLugaresHorarios()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Asignación eliminada correctamente';
-                        
-                    } else {
-                        $result['error'] = 'Ocurrió un problema al eliminar esta asignación';
-                    }
-                    break;
+            case 'readAllLugaresHorarios':
+                if ($result['dataset'] = $entrenamiento->readAllLugaresHorarios()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen asignaciones de lugares y horarios registradas';
+                }
+                break;
+            case 'readOneLugaresHorarios':
+                if (!$entrenamiento->setIdLugarHorario($_POST['idHorarioLugar'])) {
+                    $result['error'] = $entrenamiento->getDataError();
+                } elseif ($result['dataset'] = $entrenamiento->readOneLugaresHorarios()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Asignaciones inexistentes';
+                }
+                break;
+            case 'updateRowLugaresHorarios':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$entrenamiento->setIdLugarHorario($_POST['idHorarioLugar']) or
+                    !$entrenamiento->setIdLugarr($_POST['selectDiaLugar']) or
+                    !$entrenamiento->setIdHorarioo($_POST['selectHorarioLugar'])
+                ) {
+                    $result['error'] = $entrenamiento->getDataError();
+                } elseif ($entrenamiento->updateRowLugaresHorarios()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Asignación modificado correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al modificar el nivel de usuario';
+                }
+                break;
+            case 'deleteRowLugaresHorarios':
+                if (
+                    !$entrenamiento->setIdLugarHorario($_POST['idHorarioLugar'])
+                ) {
+                    $result['error'] = $entrenamiento->getDataError();
+                } elseif ($entrenamiento->deleteRowLugaresHorarios()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Asignación eliminada correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al eliminar esta asignación';
+                }
+                break;
 
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';

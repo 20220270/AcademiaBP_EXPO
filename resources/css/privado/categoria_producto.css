@@ -123,13 +123,19 @@ border: radius 80px;
   background-color: #080752;
 }
 
-#Buscador {
+#Buscador,
+#Buscador2 {
   padding-left: 29px; /* Aumenta el padding para dejar espacio suficiente para el icono */
   width: 100%; /* Ajusta el ancho del input según el contenedor */
 }
 
 .position-relative {
   position: relative;
+}
+
+.scrollable-content{
+  max-height: 590px;
+  overflow-y: auto;
 }
 
 .search-icon {
@@ -175,7 +181,7 @@ border: radius 80px;
 
 ::placeholder {
   color: grey;
-  font-size: 14.5px;
+  font-size: 11.5px;
 }
 
 .btna {

@@ -1,7 +1,10 @@
 const ENTRENAMIENTO_API = 'services/admin/entrenamiento.php';
 // Constante para establecer el formulario de buscar.
 
+
 const SEARCH_FORM = document.getElementById('searchForm');
+const SEARCH_FORM2 = document.getElementById('searchForm2');
+const SEARCH_FORM3 = document.getElementById('searchForm3');
 
 // Constantes para establecer los elementos de la tabla.
 const TABLE_BODY = document.getElementById('tableBody'),
@@ -54,15 +57,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 SEARCH_FORM.addEventListener('submit', (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SEARCH_FORM);
-    // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
     fillTable(FORM);
-    fillTable2(FORM);
-    fillTable3(FORM);
-});
+  });
+  
+  SEARCH_FORM2.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const FORM2 = new FormData(SEARCH_FORM2);
+    fillTable2(FORM2);
+  });
+  
+  SEARCH_FORM3.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const FORM3 = new FormData(SEARCH_FORM3);
+    fillTable3(FORM3);
+  });
 
 
 
@@ -148,7 +158,7 @@ const fillTable = async (form = null) => {
     // Initialize the content of the table.
     CARDS_HORARIOS.innerHTML = '';
     // Determine the action to perform.
-    const action = form ? 'searchRows' : 'readAllHorarios';
+    const action = form ? 'searchRowsHorarios' : 'readAllHorarios';
     // Request to obtain the available records.
     const DATA = await fetchData(ENTRENAMIENTO_API, action, form);
     // Check if the response is satisfactory; otherwise, show a message with the exception.
@@ -203,7 +213,7 @@ const fillTable2 = async (form = null) => {
     // Initialize the content of the table.
     CARDS_LUGARES.innerHTML = '';
     // Determine the action to perform.
-    const action = form ? 'searchRows' : 'readAllLugares';
+    const action = form ? 'searchRowsLugares' : 'readAllLugares';
     // Request to obtain the available records.
     const DATA = await fetchData(ENTRENAMIENTO_API, action, form);
     // Check if the response is satisfactory; otherwise, show a message with the exception.
@@ -270,7 +280,7 @@ const fillTable3 = async (form = null) => {
     // Initialize the content of the table.
     CARDS_LUGARES_HORARIOS.innerHTML = '';
     // Determine the action to perform.
-    const action = form ? 'searchRows' : 'readAllLugaresHorarios';
+    const action = form ? 'searchRowsHorariosLugares' : 'readAllLugaresHorarios';
     // Request to obtain the available records.
     const DATA = await fetchData(ENTRENAMIENTO_API, action, form);
     // Check if the response is satisfactory; otherwise, show a message with the exception.

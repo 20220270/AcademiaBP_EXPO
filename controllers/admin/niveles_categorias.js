@@ -4,6 +4,7 @@ const CATEGORIA_ALUMNO_API = 'services/admin/categoriasalumnos.php';
 
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
+const SEARCH_FORM2 = document.getElementById('searchForm2');
 // Constantes para establecer los elementos de la tabla.
 const TABLE_BODY = document.getElementById('tableBody'),
 ROWS_FOUND = document.getElementById('rowsFound');
@@ -46,16 +47,17 @@ document.addEventListener('DOMContentLoaded', () => {
     fillTable2();
 });
 
-// Método del evento para cuando se envía el formulario de buscar.
 SEARCH_FORM.addEventListener('submit', (event) => {
-  // Se evita recargar la página web después de enviar el formulario.
-  event.preventDefault();
-  // Constante tipo objeto con los datos del formulario.
-  const FORM = new FormData(SEARCH_FORM);
-  // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
-  fillTable(FORM);
-  fillTable2(FORM);
-});
+    event.preventDefault();
+    const FORM = new FormData(SEARCH_FORM);
+    fillTable(FORM);
+  });
+  
+  SEARCH_FORM2.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const FORM2 = new FormData(SEARCH_FORM2);
+    fillTable2(FORM2);
+  });
 
 // Método del evento para cuando se envía el formulario de guardar.
 SAVE_FORM.addEventListener('submit', async (event) => {
@@ -132,8 +134,8 @@ const fillTable = async (form = null) => {
                             <h5 class="card-title mb-2 fs-1">${row.nivel_entrenamiento}</h5>
                         </div>
                     </div>
-            <p class="card-text mt-2">${row.descripcion_nivel}</p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
+                <p class="card-text mt-2">${row.descripcion_nivel}</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
                 <button type="button" class="btn btn-sm" onclick="openUpdate(${row.id_nivel_entrenamiento})">
                     <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                 </button>

@@ -14,14 +14,6 @@ class NivelesEntrenamientoHandler
     protected $descripcion = null;
     protected $imagen = null;
 
-    //variables para las categorías de alumnos
-    protected $idcategoria = null;
-    protected $nombrecategoria = null;
-    protected $edadmaxima = null;
-    protected $idnivel = null;
-    protected $idhorariolugar = null;
-    protected $imagencategoria = null;
-
 
     // Constante para establecer la ruta de las imágenes, tanto de niveles como de categorías.
     const RUTA_IMAGEN = '../../images/niveles/';
@@ -35,9 +27,9 @@ class NivelesEntrenamientoHandler
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = 'SELECT id_nivel_entrenamiento, nivel_entrenamiento, descripcion_nivel, imagen_nivel
                 FROM tb_niveles_entrenamientos
-                WHERE nivel_entrenamiento LIKE ? OR descripcion_nivel LIKE ?
+                WHERE nivel_entrenamiento LIKE ?
                 ORDER BY id_nivel_entrenamiento';
-        $params = array($value, $value);
+        $params = array($value);
         return Database::getRows($sql, $params);
     }
 

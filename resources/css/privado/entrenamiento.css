@@ -299,7 +299,8 @@ a.sidebar-link:hover {
 }
 
 #Buscador,
-#Buscador2 {
+#Buscador2,
+#Buscador3 {
     padding-left: 29px; /* Aumenta el padding para dejar espacio suficiente para el icono */
     width: 100%; /* Ajusta el ancho del input según el contenedor */
 }

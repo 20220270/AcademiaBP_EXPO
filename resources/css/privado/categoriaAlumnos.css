@@ -229,8 +229,8 @@ a.sidebar-link:hover {
     width: 200px;
 }
 
-.scrollable-content {
-    max-height: 490px; /* Define la altura máxima del div scroll */
+.scrollable-content1 {
+    max-height: 580px; /* Define la altura máxima del div scroll */
     overflow-y: auto; /* Habilita el desplazamiento vertical */
     overflow-x: hidden; /* Deshabilita el desplazamiento horizontal */
 }
@@ -295,7 +295,7 @@ a.sidebar-link:hover {
 }
 
 .buscador:hover {
-    width: 340px; /* Ancho expandido del contenedor al hacer hover */
+    width: 380px; /* Ancho expandido del contenedor al hacer hover */
 }
 
 .btna:hover {

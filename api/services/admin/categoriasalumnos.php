@@ -17,7 +17,7 @@ if (isset($_GET['action'])) {
 
                 //Niveles de competencia
             case 'searchRows':
-                if (!Validator::validateSearch($_POST['search'])) {
+                if (!Validator::validateSearch($_POST['search2'])) {
                     $result['error'] = Validator::getSearchError();
                 } elseif ($result['dataset'] = $categoriasalumnos->searchRows()) {
                     $result['status'] = 1;
@@ -104,7 +104,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Campo de categoria modificado correctamente';
 
-                    $result['fileStatus'] = Validator::saveFile($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos::RUTA_IMAGEN, $categoriasalumnos->getFilename());
+                    $result['fileStatus'] = Validator::changeFile($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos::RUTA_IMAGEN, $categoriasalumnos->getFilename());
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar la categoria';
                 }

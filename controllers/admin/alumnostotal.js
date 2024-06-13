@@ -81,7 +81,7 @@ const fillTable = async (form = null) => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             CARD_ALUMNOS.innerHTML += `
             <div class="col-md-12 mb-3" id="cardDiasPagos">
-                <div class="card">
+                <div class="card h-100">
                     <div class="card-body text-start position-relative">
                         <!-- Círculo indicador del estado -->
                         <div class="status-circle ${row.estado_alumno === 'Activo' ? 'activo' : 'inactivo'}"></div>
@@ -94,7 +94,7 @@ const fillTable = async (form = null) => {
                         <p class="card-text"><b>Número de días que entrena: </b>${row.numero_dias}</p>
                         <p class="card-text"><b>Mensualidad que paga: </b>$${row.mensualidad_pagar}</p>
                         <div class="d-flex justify-content-center gap-2">
-                            <button type="button" class="btnr mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_alumno})">
+                            <button type="button" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_alumno})">
                                 <img src="../../resources/images/btnEliminarIMG.png" alt="Eliminar" width="30px" height="30px" class="mb-1">
                             </button>
                             <button type="button" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_alumno})">

@@ -17,7 +17,7 @@ if (isset($_GET['action'])) {
 
                 //Niveles de competencia
             case 'searchRows':
-                if (!Validator::validateSearch($_POST['search'])) {
+                if (!Validator::validateSearch($_POST['search2'])) {
                     $result['error'] = Validator::getSearchError();
                 } elseif ($result['dataset'] = $detalleproducto->searchRows()) {
                     $result['status'] = 1;

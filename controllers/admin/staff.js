@@ -132,7 +132,7 @@ SEARCH_FORM.addEventListener('submit', (event) => {
                         <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top">
                         <div class="card-body text-start">
                             <h5 class="card-title fs-2 mb-2">${row.id_staff}</h5>
-                            <p class="card-text"><b>Nombre completo: </b>${row.nombre_staff} ${row.apellido_staff} </p>
+                            <p class="card-text"><b>Nombre completo: </b>${row.nombre_completo} </p>
                             <p class="card-text"><b>Descripción: </b> ${row.descripcion_extra}</p>
                             
                             <div class="d-flex justify-content-center gap-1">
@@ -181,7 +181,7 @@ const fillTable2 = async (form = null) => {
         <div class="card-body text-start">
             <h5 class="card-title fs-2 mb-2">ID: ${row.id_staff_categorias}</h5>
             <p class="card-text"><b>Categoría: </b> ${row.categoria}</p>
-            <p class="card-text"><b>Encargado de la categoría: </b>${row.nombre_staff} ${row.apellido_staff}</p>
+            <p class="card-text"><b>Encargado de la categoría: </b>${row.nombre_completo}</p>
             
             <div class="d-flex justify-content-center gap-1">
                 <button type="submit" class="btn" id="btnEliminar" name="btnEliminar" onclick="openDelete2(${row.id_staff_categorias})">

@@ -24,9 +24,9 @@ class StaffHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_staff, nombre_staff, apellido_staff, descripcion_extra, imagen_staff FROM tb_staffs
+        $sql = "SELECT id_staff, CONCAT(nombre_staff, ' ', apellido_staff) AS nombre_completo, descripcion_extra, imagen_staff FROM tb_staffs
                 WHERE nombre_staff LIKE ? OR apellido_staff LIKE ?
-                ORDER BY id_staff';
+                ORDER BY id_staff";
         $params = array($value, $value);
         return Database::getRows($sql, $params);
     }
@@ -41,9 +41,9 @@ class StaffHandler
 
     public function readAll()
     {
-        $sql = 'SELECT id_staff, nombre_staff, apellido_staff, imagen_staff, descripcion_extra
+        $sql = "SELECT id_staff, CONCAT(nombre_staff, ' ', apellido_staff) AS nombre_completo, imagen_staff, descripcion_extra
                 FROM tb_staffs
-                ORDER BY id_staff';
+                ORDER BY id_staff";
         return Database::getRows($sql);
     }
 
