@@ -24,9 +24,11 @@ class StaffHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_staff, nombre_staff, apellido_staff, imagen_staff, descripcion_extra
-                FROM tb_staffs
-                WHERE nombre_staff LIKE ? OR apellido_staff LIKE ? OR descripcion_extra LIKE ?
+        $sql = 'SELECT id_staff_categorias, id_staff, nombre_staff, apellido_staff, imagen_staff, descripcion_extra, id_categoria_alumno, categoria, edad_minima, edad_maxima, imagen_categoria
+                FROM tb_staffs_categorias
+                INNER JOIN tb_staffs USING (id_staff)
+                INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno);
+                WHERE nombre_staff LIKE ? OR apellido_staff LIKE ? OR categoria LIKE ?
                 ORDER BY id_staff';
         $params = array($value, $value, $value);
         return Database::getRows($sql, $params);

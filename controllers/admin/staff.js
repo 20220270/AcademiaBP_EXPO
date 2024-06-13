@@ -169,16 +169,17 @@ const fillTable2 = async (form = null) => {
     <div class="card mb-3">
         <div class="row g-0"> <!-- Utilizar la clase 'row' de Bootstrap para crear una fila -->
             <div class="col-lg-6">
-                <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top">
+                <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top img-fluid same-height">
             </div>
             <div class="col-lg-6">
-                <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="card-img-top">
+                <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="card-img-top img-fluid same-height">
             </div>
         </div>
         <div class="card-body text-start">
-            <h5 class="card-title fs-2 mb-2">${row.id_staff_categorias}</h5>
-            <p class="card-text"><b>Nombre completo: </b>${row.Nombre_completo}</p>
+            <h5 class="card-title fs-2 mb-2">ID: ${row.id_staff_categorias}</h5>
             <p class="card-text"><b>Categoría: </b> ${row.categoria}</p>
+            <p class="card-text"><b>Encargado de la categoría: </b>${row.nombre_staff} ${row.apellido_staff}</p>
+            
             <div class="d-flex justify-content-center gap-1">
                 <button type="submit" class="btn" id="btnEliminar" name="btnEliminar" onclick="openDelete2(${row.id_staff_categorias})">
                     <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">

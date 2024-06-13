@@ -271,3 +271,8 @@ a.sidebar-link:hover {
 .btna:hover {
     background: #000000;
 }
+
+.same-height {
+    height: 260px;
+    object-fit: cover; /* Asegura que la imagen se recorte y mantenga su proporción */
+}
