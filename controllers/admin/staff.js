@@ -3,6 +3,7 @@ const STAFF_API = 'services/admin/staff.php';
 const STAFFCATEGORIA_API = 'services/admin/categoriastaff.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
+const SEARCH_FORM2 = document.getElementById('searchForm2');
 // Constantes para establecer los elementos de la tabla.
 //const TABLE_BODY = document.getElementById('tableBody'),
 //ROWS_FOUND = document.getElementById('rowsFound');
@@ -40,13 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 SEARCH_FORM.addEventListener('submit', (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SEARCH_FORM);
-    // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
     fillTable(FORM);
-    fillTable2(FORM);
+  });
+  
+  SEARCH_FORM2.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const FORM2 = new FormData(SEARCH_FORM2);
+    fillTable2(FORM2);
   });
 
   SAVE_FORM.addEventListener('submit', async (event) => {

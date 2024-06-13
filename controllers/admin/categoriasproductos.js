@@ -3,6 +3,8 @@ const COLORES_API = 'services/admin/colores.php';
 const TALLAS_API = 'services/admin/tallas.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
+const SEARCH_FORM2 = document.getElementById('searchForm2');
+const SEARCH_FORM3 = document.getElementById('searchForm3');
 // Constantes para establecer los elementos de la tabla.
 //const TABLE_BODY = document.getElementById('tableBody'),
 //ROWS_FOUND = document.getElementById('rowsFound');
@@ -49,15 +51,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Método del evento para cuando se envía el formulario de buscar.
 SEARCH_FORM.addEventListener('submit', (event) => {
-  // Se evita recargar la página web después de enviar el formulario.
   event.preventDefault();
-  // Constante tipo objeto con los datos del formulario.
   const FORM = new FormData(SEARCH_FORM);
-  // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
   fillTable(FORM);
-  fillTable2(FORM);
-  fillTable3(FORM);
 });
+
+SEARCH_FORM2.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const FORM2 = new FormData(SEARCH_FORM2);
+  fillTable2(FORM2);
+});
+
+SEARCH_FORM3.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const FORM3 = new FormData(SEARCH_FORM3);
+  fillTable3(FORM3);
+});
+
 
 // Método del evento para cuando se envía el formulario de guardar.
 SAVE_FORM.addEventListener('submit', async (event) => {
@@ -127,140 +137,98 @@ SAVE_FORM3.addEventListener('submit', async (event) => {
 });
 
 const fillTable = async (form = null) => {
-  // Se inicializa el contenido de la tabla.
-  //ROWS_FOUND.textContent = '';
-  //TABLE_BODY.innerHTML = '';
   CARD_CATEGORIAS.innerHTML = '';
-  // Se verifica la acción a realizar.
-  (form) ? action = 'searchRows' : action = 'readAll';
-  // Petición para obtener los registros disponibles.
+  const action = (form) ? 'searchRows' : 'readAll';
   const DATA = await fetchData(CATEGORIA_API, action, form);
-  // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
   if (DATA.status) {
-    // Se recorre el conjunto de registros fila por fila.
     DATA.dataset.forEach(row => {
-      // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-
-
       CARD_CATEGORIAS.innerHTML += `
-            <div class="col-lg-12 col-md-12 col-sm-12 mb-4 mt-5 text-center">
-                <div class="card h-100" id="cards">
-                    <img src="${SERVER_URL}images/categorias_productos/${row.imagen_categoria}" class="card-img-top" height="250px" width="250px">
-                    <div class="card-body">
-                        <h5 class="card-title">${row.categoria_producto}</h5>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-center gap-2">
-                <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_categoria_producto})">
-                    <i class="bi bi-search"></i>
-                        <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
-                </button>
-                <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_categoria_producto})">
-                    <i class="bi bi-x-square-fill"></i>
-                        <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
-                </button>
+        <div class="col-lg-12 col-md-12 col-sm-12 mb-4 mt-5 text-center">
+          <div class="card h-100" id="cards">
+            <img src="${SERVER_URL}images/categorias_productos/${row.imagen_categoria}" class="card-img-top" height="250px" width="250px">
+            <div class="card-body">
+              <h5 class="card-title">${row.categoria_producto}</h5>
             </div>
-            </div>
-          `;
+          </div>
+          <div class="d-flex justify-content-center gap-2">
+            <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_categoria_producto})">
+              <i class="bi bi-search"></i>
+              <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+            </button>
+            <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_categoria_producto})">
+              <i class="bi bi-x-square-fill"></i>
+              <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+            </button>
+          </div>
+        </div>
+      `;
     });
-    // Se muestra un mensaje de acuerdo con el resultado.
-    //ROWS_FOUND.textContent = DATA.message;
   } else {
     sweetAlert(4, DATA.error, true);
   }
 }
 
 const fillTable2 = async (form = null) => {
-  // Se inicializa el contenido de la tabla.
-  //ROWS_FOUND.textContent = '';
-  //TABLE_BODY.innerHTML = '';
   CARD_COLOR.innerHTML = '';
-  // Se verifica la acción a realizar.
-  (form) ? action = 'searchRows' : action = 'readAll';
-  // Petición para obtener los registros disponibles.
+  const action = (form) ? 'searchRows' : 'readAll';
   const DATA = await fetchData(COLORES_API, action, form);
-  // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
   if (DATA.status) {
-    // Se recorre el conjunto de registros fila por fila.
     DATA.dataset.forEach(row => {
-      // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-
-
       CARD_COLOR.innerHTML += `
-            <div class="col-lg-12 col-md-12 col-sm-12 mb-4 mt-5 text-center" >
-                <div class="card h-100" id="cards">
-                    
-                    <div class="card-body">
+        <div class="col-lg-12 col-md-12 col-sm-12 mb-4 mt-5 text-center">
+          <div class="card h-100" id="cards">
+            <div class="card-body">
               <h5 class="card-title">ID: ${row.id_color}</h5>
               <div class="color-display">
                 <h5 class="card-title">Color: #${row.color}</h5>
                 <div class="color-box" style="background-color: #${row.color};"></div>
               </div>
             </div>
-
-                <div class="d-flex justify-content-center gap-2">
-                <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete2(${row.id_color})">
-                    <i class="bi bi-search"></i>
-                        <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
-                </button>
-                <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate2(${row.id_color})">
-                    <i class="bi bi-x-square-fill"></i>
-                        <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
-                </button>
-            </div>
-            </div>
-          `;
+          <div class="d-flex justify-content-center gap-2">
+            <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete2(${row.id_color})">
+              <i class="bi bi-search"></i>
+              <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+            </button>
+            <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate2(${row.id_color})">
+              <i class="bi bi-x-square-fill"></i>
+              <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+            </button>
+          </div>
+        </div>
+      `;
     });
-    // Se muestra un mensaje de acuerdo con el resultado.
-    //ROWS_FOUND.textContent = DATA.message;
   } else {
     sweetAlert(4, DATA.error, true);
   }
 }
 
 const fillTable3 = async (form = null) => {
-  // Se inicializa el contenido de la tabla.
-  //ROWS_FOUND.textContent = '';
-  //TABLE_BODY.innerHTML = '';
   CARD_TALLAS.innerHTML = '';
-  // Se verifica la acción a realizar.
-  (form) ? action = 'searchRows' : action = 'readAll';
-  // Petición para obtener los registros disponibles.
+  const action = (form) ? 'searchRows' : 'readAll';
   const DATA = await fetchData(TALLAS_API, action, form);
-  // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
   if (DATA.status) {
-    // Se recorre el conjunto de registros fila por fila.
     DATA.dataset.forEach(row => {
-      // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-
-
       CARD_TALLAS.innerHTML += `
-            <div class="col-lg-12 col-md-12 col-sm-12 mb-4 mt-5 text-center">
-                <div class="card h-100" id="cards">
-                    
-                    <div class="card-body">
-                    
-                        <h5 class="card-title">ID: ${row.id_talla}</h5>
-                        <p>Talla: ${row.talla}</p>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-center gap-2">
-                <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete3(${row.id_talla})">
-                    <i class="bi bi-search"></i>
-                        <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
-                </button>
-                <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate3(${row.id_talla})">
-                    <i class="bi bi-x-square-fill"></i>
-                        <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
-                </button>
+        <div class="col-lg-12 col-md-12 col-sm-12 mb-4 mt-5 text-center">
+          <div class="card h-100" id="cards">
+            <div class="card-body">
+              <h5 class="card-title">ID: ${row.id_talla}</h5>
+              <p>Talla: ${row.talla}</p>
             </div>
-            </div>
-          `;
+          </div>
+          <div class="d-flex justify-content-center gap-2">
+            <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete3(${row.id_talla})">
+              <i class="bi bi-search"></i>
+              <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+            </button>
+            <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate3(${row.id_talla})">
+              <i class="bi bi-x-square-fill"></i>
+              <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+            </button>
+          </div>
+        </div>
+      `;
     });
-    // Se muestra un mensaje de acuerdo con el resultado.
-    //ROWS_FOUND.textContent = DATA.message;
   } else {
     sweetAlert(4, DATA.error, true);
   }

@@ -15,7 +15,7 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'searchRows':
-                if (!Validator::validateSearch($_POST['search'])) {
+                if (!Validator::validateSearch($_POST['search2'])) {
                     $result['error'] = Validator::getSearchError();
                 } elseif ($result['dataset'] = $colores->searchRows()) {
                     $result['status'] = 1;

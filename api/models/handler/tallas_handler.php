@@ -19,24 +19,11 @@ class TallasHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = "SELECT DISTINCT
-            cat.id_categoria_producto,
-            cat.categoria_producto,
-            cat.imagen_categoria,
-            tal.id_talla,
-            tal.talla,
-            col.id_color,
-            col.color
-        FROM 
-            tb_categorias_productos AS cat
-        JOIN
-            tb_tallas AS tal ON 1=1
-        JOIN
-            tb_colores AS col ON 1=1
-        GROUP BY tal.id_talla
-        ORDER BY cat.id_categoria_producto, tal.id_talla, col.id_color";
+        $sql = "SELECT id_talla, talla
+                FROM tb_tallas
+                WHERE talla LIKE ?";
     
-        $params = array();
+        $params = array($value);
         return Database::getRows($sql, $params);
     }
 
