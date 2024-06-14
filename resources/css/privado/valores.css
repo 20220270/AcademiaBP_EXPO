@@ -1,6 +1,6 @@
 #scroll {
     overflow: auto; 
-    max-height: 420px;
+    max-height: 520px;
 }
 
 .position-relative {
@@ -54,7 +54,7 @@ body {
 }
 
 .scrollable-content {
-    max-height: 400px; /* Define la altura máxima del div scroll */
+    max-height: 610px; /* Define la altura máxima del div scroll */
     overflow-y: auto; /* Habilita el desplazamiento vertical */
     overflow-x: auto; 
 }
@@ -86,7 +86,7 @@ body {
 
 ::placeholder {
     color: grey;
-    font-size: 14.5px;
+    font-size: 12.5px;
 }
 
 .btna {

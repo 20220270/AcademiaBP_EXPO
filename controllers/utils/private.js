@@ -104,7 +104,7 @@ const loadTemplate = async () => {
                         </a>
                         <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <a href="ordenes.html" class="sidebar-link">
+                                <a href="compras.html" class="sidebar-link">
                                     <i class="lni lni-cart"></i>
                                     Compras
                                 </a>
