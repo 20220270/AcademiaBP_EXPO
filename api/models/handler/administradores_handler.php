@@ -1,6 +1,6 @@
 <?php
 // Se incluye la clase para trabajar con la base de datos.
-require_once('../../helpers/database.php'); 
+require_once('../../helpers/database.php');
 /*
  *  Clase para manejar el comportamiento de los datos de la tabla administrador.
  */
@@ -35,7 +35,7 @@ class AdministradorHandler
         $params = array($username);
         if (!($data = Database::getRow($sql, $params))) {
             return false;
-        }elseif (password_verify($password, $data['clave_administrador'])) {
+        } elseif (password_verify($password, $data['clave_administrador'])) {
             $_SESSION['idAdministrador'] = $data['id_administrador'];
             $_SESSION['aliasAdministrador'] = $data['alias_administrador'];
             return true;
@@ -83,7 +83,7 @@ class AdministradorHandler
         $sql = 'UPDATE tb_administradores
                 SET nombre_admistrador = ?, apellido_administrador = ?, dui_administrador = ?, correo_administrador = ?, telefono_administrador = ?, alias_administrador = ?, foto_administrador = ?
                 WHERE id_administrador = ?';
-        $params = array( $this->nombre, $this->apellido, $this->dui, $this->correo, $this->telefono, $this->alias, $this-> imagen, $_SESSION['idAdministrador']);
+        $params = array($this->nombre, $this->apellido, $this->dui, $this->correo, $this->telefono, $this->alias, $this->imagen, $_SESSION['idAdministrador']);
         return Database::executeRow($sql, $params);
     }
 
@@ -106,7 +106,7 @@ class AdministradorHandler
     {
         $sql = 'INSERT INTO tb_administradores(nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, estado_adminstrador, id_nivel, foto_administrador)
                 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->apellido, $this->dui, $this->correo, $this->telefono, $this->alias, $this->clave, $this -> estado, $this -> nivel, $this->imagen);
+        $params = array($this->nombre, $this->apellido, $this->dui, $this->correo, $this->telefono, $this->alias, $this->clave, $this->estado, $this->nivel, $this->imagen);
         return Database::executeRow($sql, $params);
     }
 
@@ -134,7 +134,7 @@ class AdministradorHandler
         $sql = 'UPDATE tb_administradores
                 SET estado_adminstrador = ?, id_nivel = ?
                 WHERE id_administrador = ?';
-        $params = array($this->estado, $this->nivel, $this -> id);
+        $params = array($this->estado, $this->nivel, $this->id);
         return Database::executeRow($sql, $params);
     }
 
@@ -165,4 +165,13 @@ class AdministradorHandler
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
+
+    //Método para la recuperación de contraseña
+    public function checkEmailExists($email)
+{
+    $sql = 'SELECT COUNT(*) AS count FROM tb_administradores WHERE correo_administrador = ?';
+    $params = array($email);
+    $data = Database::getRow($sql, $params);
+    return $data['count'] > 0;
+}
 }

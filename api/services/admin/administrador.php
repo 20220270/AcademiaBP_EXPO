@@ -127,7 +127,7 @@ if (isset($_GET['action'])) {
                     !$administrador->setDUI($_POST['duiAdministrador']) or
                     !$administrador->setCorreo($_POST['correoAdministrador']) or
                     !$administrador->setTelefono($_POST['telefonoAdministrador']) or
-                    !$administrador->setAlias($_POST['aliasAdministrador'])or
+                    !$administrador->setAlias($_POST['aliasAdministrador']) or
                     !$administrador->setImagen($_FILES['fotoInput'], $administrador->getFilename())
                 ) {
                     $result['error'] = $administrador->getDataError();
@@ -201,6 +201,25 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Credenciales incorrectas';
                 }
                 break;
+
+                case 'checkEmail':
+                    // Verificar si se proporcionó un correo electrónico en la solicitud
+                    if (isset($_POST['email'])) {
+                        // Se verifica si el correo electrónico existe en la base de datos
+                        $emailExists = $administrador->checkEmailExists($_POST['inputCorreo']);
+                        // Se prepara la respuesta
+                        $response = array(
+                            'status' => 1,
+                            'emailExists' => $emailExists
+                        );
+                        // Se imprime la respuesta en formato JSON
+                        echo json_encode($response);
+                    } else {
+                        // Si no se proporcionó un correo electrónico, se devuelve un error
+                        echo json_encode(array('status' => 0, 'message' => 'No se proporcionó un correo electrónico.'));
+                    }
+                    break;
+                
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
         }
