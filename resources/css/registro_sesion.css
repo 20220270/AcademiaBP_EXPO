@@ -269,8 +269,7 @@ body {
     position: absolute;
     top: 50px;
     left: 53%;
-    /* Centrar horizontalmente */
-    transform: translateX(-50%);
+    transform: translate(-55%, 20%);
     /* Ajustar para centrar completamente */
 }
 
