@@ -132,6 +132,7 @@ const openCreate = () => {
         DIRECCION_CLIENTE.value = ROW.direccion_cliente;
         CLAVE_CLIENTE.value = ROW.clave_cliente;
         CONFIRMAR_CLAVE.value = ROW.clave_cliente;
+        ESTADO_CLIENTE.value = ROW.estado_cliente;
         
         
     } else {

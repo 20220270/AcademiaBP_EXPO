@@ -71,12 +71,16 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$cliente->setId($_POST['idCliente']) or
-                    !$cliente->setEstado($_POST['selectEstado'])
+                    !$cliente->setFilename() or
+                    !$cliente->setEstado($_POST['selectEstado']) or
+                    !$cliente->setFotoCliente($_FILES['fotoCliente'], $cliente->getFilename())
                 ) {
                     $result['error'] = $cliente->getDataError();
                 } elseif ($cliente->updateRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Cliente modificado correctamente';
+
+                    $result['fileStatus'] = Validator::changeFile($_FILES['fotoCliente'], $cliente::RUTA_IMAGEN, $cliente->getFilename());
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar al cliente';
                 }
