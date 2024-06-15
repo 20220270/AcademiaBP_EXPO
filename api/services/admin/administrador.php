@@ -124,6 +124,7 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$administrador->setNombre($_POST['nombreAdministrador']) or
+                    
                     !$administrador->setApellido($_POST['apellidoAdministrador']) or
                     !$administrador->setDUI($_POST['duiAdministrador']) or
                     !$administrador->setCorreo($_POST['correoAdministrador']) or
