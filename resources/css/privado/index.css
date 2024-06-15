@@ -79,12 +79,12 @@ body {
 }
 
 .sidebar-nav {
-    padding: 0.7rem 0;
+    padding: 0.9rem 0;
     flex: 1 1 auto;
 }
 
 a.sidebar-link {
-    padding: .744rem 1.625rem;
+    padding: .764rem 1.625rem;
     color: #FFF;
     display: block;
     font-size: 0.8rem;
