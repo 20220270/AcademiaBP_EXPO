@@ -1,0 +1,5 @@
+.rounded-circle{
+    width: 120px; 
+    height: 120px; 
+    object-fit: cover;
+}

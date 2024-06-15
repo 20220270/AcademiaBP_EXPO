@@ -226,7 +226,7 @@ const loadTemplate = async () => {
                     </li>
 
 
-                    <li class="sidebar-item">
+                    <li class="sidebar-item mt-2">
                         <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                             data-bs-target="#auth23" aria-expanded="false" aria-controls="auth">
                             <i class="lni lni-cogs"></i>

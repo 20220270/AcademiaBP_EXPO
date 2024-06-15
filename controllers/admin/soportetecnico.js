@@ -72,28 +72,40 @@ const fillTable = async (form = null) => {
             // Crea y concatena las cards con los datos de cada registro.
             CARD_MENSAJES.innerHTML += `
                 <div class="col-12 col-md-3 col-lg-6 mt-3 mb-3">
-                    <div class="card h-100">
-                        <img src="${SERVER_URL}images/clientes/${row.foto_cliente}" class="card-img-top">
-                        <div class="card-body text-start">
-                            <h5 class="card-title fs-2 mb-2">ID: ${row.id_soporte}</h5>
-                            <p class="card-text"><b>Mensaje:</b> ${row.mensaje}</p>
-                            <p class="card-text"><b>Cliente que envió el mensaje:</b> ${row.cliente}</p>
-                            <p class="card-text"><b>Estado del mensaje:</b> ${row.estado_mensaje}</p>
-                            <p class="card-text"><small class="text-muted">Mensaje enviado en la fecha: ${row.fecha_envio}</small></p>
-                            
-                            <div class="d-flex justify-content-center gap-1">
-                            <button type="submit" class="btn" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_soporte})">
-                            
+    <div class="card h-100">
+        <div class="row no-gutters">
+            <div class="col-4">
+                <div class="mt-4"><img src="${SERVER_URL}images/clientes/${row.foto_cliente}" class="card-img-top rounded-circle"></div>
+            </div>
+            <div class="col-8 mt-3">
+                <div class="card-body text-start">
+                    <h5 class="card-title fs-2 mb-2">ID: ${row.id_soporte}</h5>
+                    <p class="card-text"><b>Mensaje:</b> ${row.mensaje}</p>
+                    <p class="card-text"><b>Cliente que envió el mensaje:</b> ${row.cliente}</p>
+                    <p class="card-text"><b>Estado del mensaje:</b> 
+                        <span class="estado-mensaje">
+                            ${row.estado_mensaje === "Pendiente" ? '<i class="far fa-check-circle"></i>' :
+                              row.estado_mensaje === "Visto" ? '<i class="far fa-check-circle"></i><i class="far fa-check-circle"></i>' :
+                              row.estado_mensaje === "Atendido" ? '<i class="fas fa-check-circle" style="color: green;"></i><i class="fas fa-check-circle" style="color: green;"></i>' : ''}
+                        </span>${row.estado_mensaje}
+                    </p>
+                    <p class="card-text"><small class="text-muted">Mensaje enviado en la fecha: ${row.fecha_envio}</small></p>
+                    
+                    <div class="d-flex justify-content-center gap-1">
+                        <button type="submit" class="btn" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_soporte})">
                             <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
-                            </button>
-                            <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_soporte})">
-                            
+                        </button>
+                        <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_soporte})">
                             <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
-                            </button>
-                            </div>
-                        </div>
+                        </button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
             `;
         });
     } else {
