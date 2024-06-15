@@ -106,4 +106,34 @@ class PagosMensualidadHandler
             INNER JOIN tb_dias_pagos USING(id_dia_pago);";
         return Database::getRows($sql);
     }
+
+    //Métodos para el conteo de alumnos
+
+    public function readAlumnosTotal()
+    {
+        $sql = "SELECT COUNT(*) AS total_alumnos_registrados FROM tb_alumnos;";
+        return Database::getRows($sql);
+    }
+
+    public function readAlumnosSolventes()
+    {
+        $sql = "SELECT 'Alumnos solventes con el pago.' AS descripcion, 
+                COUNT(CONCAT(nombre_alumno, ' ', apellido_alumno)) AS total_alumnos_registradoss 
+                FROM tb_pagos
+                INNER JOIN tb_alumnos_clientes USING(id_alumno_cliente)
+                INNER JOIN tb_alumnos USING(id_alumno)
+                WHERE estado_pago = 'Pagado';";
+        return Database::getRows($sql);
+    }
+
+    public function readAlumnosSinPagar()
+    {
+        $sql = "SELECT 'Alumnos solventes con el pago.' AS descripcion, 
+                COUNT(CONCAT(nombre_alumno, ' ', apellido_alumno)) AS total_alumnos_registradosss 
+                FROM tb_pagos
+                INNER JOIN tb_alumnos_clientes USING(id_alumno_cliente)
+                INNER JOIN tb_alumnos USING(id_alumno)
+                WHERE estado_pago = 'Pendiente de pago';";
+        return Database::getRows($sql);
+    }
 }

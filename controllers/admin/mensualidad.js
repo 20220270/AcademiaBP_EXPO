@@ -10,6 +10,10 @@ const SEARCH_FORM3 = document.getElementById('searchForm3');
 
 const CARD_DIASPAGOS = document.getElementById('cardDiasPago');
 
+const CARD_ALUMNOSTOTAL = document.getElementById('alumnototal');
+const CARD_ALUMNOSPAGADOS = document.getElementById('alumnospagados');
+const CARD_ALUMNOSSINPAGAR = document.getElementById('alumnospendientes');
+
 // Constantes para establecer los elementos de la tabla.
 const TABLE_BODY = document.getElementById('tableBody'),
     ROWS_FOUND = document.getElementById('rowsFound');
@@ -56,7 +60,12 @@ document.addEventListener('DOMContentLoaded', () => {
     fillTable();
     fillTable2();
     fillTable3();
+    fillTable4();
+    fillTable5();
+    fillTable6();
 });
+
+
 
 SEARCH_FORM.addEventListener('submit', (event) => {
     // Se evita recargar la página web después de enviar el formulario.
@@ -281,7 +290,92 @@ const fillTable3 = async (form = null) => {
     }
 }
 
+//Cards que contienen el conteo de alumnos
+const fillTable4 = async (form = null) => {
+    // Se inicializa el contenido de la tabla.
+    CARD_ALUMNOSTOTAL.innerHTML = '';
+    // Se verifica la acción a realizar.
+    const action = form ? 'searchRows' : 'readAlumnosTotal';
+    // Petición para obtener los registros disponibles.
+    const DATA = await fetchData(MENSUALIDAD_API, action, form);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se recorre el conjunto de registros fila por fila.
+        DATA.dataset.forEach(row => {
+            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+                CARD_ALUMNOSTOTAL.innerHTML += `
+                            <div class="card-body">
+                                <h1 class="card-title titulo-card">Total de estudiantes registrados.</h1>
+                                <p class="card-text mt-5">
+                                    <h3 id="totalStudents">${row.total_alumnos_registrados}</h3>
+                                    <input type="range" value="${row.total_alumnos_registrados}" max="${row.total_alumnos_registrados}" readonly class="barra-azul">
+                                </p>
+                                <div class="d-flex justify-content-start"></div>
+                            </div>
+            `;
+        });
+    } else {
+        sweetAlert(4, DATA.error, true);
+    }
+}
 
+const fillTable5 = async (form = null) => {
+    // Se inicializa el contenido de la tabla.
+    CARD_ALUMNOSPAGADOS.innerHTML = '';
+    // Se verifica la acción a realizar.
+    const action = form ? 'searchRows' : 'readAlumnosSolventes';
+    // Petición para obtener los registros disponibles.
+    const DATA = await fetchData(MENSUALIDAD_API, action, form);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se recorre el conjunto de registros fila por fila.
+        DATA.dataset.forEach(row => {
+            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+            CARD_ALUMNOSPAGADOS.innerHTML += `
+                            <div class="card-body">
+                                <h1 class="card-title titulo-card">Alumnos solventes con el pago.</h1>
+                                <p class="card-text mt-5">
+                                    <h3 id="solventStudents">${row.total_alumnos_registradoss}</h3>
+                                    <input type="range" value="${row.total_alumnos_registradoss}" max="${row.total_alumnos_registrados}" readonly class="barra-naranja">
+                                </p>
+                                <div class="d-flex justify-content-start"></div>
+                            </div>
+            `;
+        });
+    } else {
+        sweetAlert(4, DATA.error, true);
+    }
+}
+
+const fillTable6 = async (form = null) => {
+    // Se inicializa el contenido de la tabla.
+    CARD_ALUMNOSSINPAGAR.innerHTML = '';
+    // Se verifica la acción a realizar.
+    const action = form ? 'searchRows' : 'readAlumnosSinPagar';
+    // Petición para obtener los registros disponibles.
+    const DATA = await fetchData(MENSUALIDAD_API, action, form);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se recorre el conjunto de registros fila por fila.
+        DATA.dataset.forEach(row => {
+            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+            CARD_ALUMNOSSINPAGAR.innerHTML += `
+                            <div class="card-body">
+                                <h1 class="card-title titulo-card">Alumnos sin pagar.</h1>
+                                <p class="card-text mt-5">
+                                    <h3 id="solventStudents">${row.total_alumnos_registradosss}</h3>
+                                    <input type="range" value="${row.total_alumnos_registradosss}" max="${row.total_alumnos_registrados}" readonly class="barra-roja">
+                                </p>
+                                <div class="d-flex justify-content-start"></div>
+                            </div>
+            `;
+        });
+    } else {
+        sweetAlert(4, DATA.error, true);
+    }
+}
+
+//Fin de las cards que tienen el conteo de alumnos
 
 const openCreate = () => {
     // Se muestra la caja de diálogo con su título.

@@ -249,7 +249,7 @@ button:hover {
 }
 
 #columna2 {
-    height: 300px; /* Altura fija del contenedor */
+    height: 360px; /* Altura fija del contenedor */
     overflow-y: auto; /* Permitir desplazamiento vertical */
     overflow-x: auto; /* Permitir desplazamiento vertical */
 }
@@ -266,4 +266,44 @@ button:hover {
     color: red;
 }
 
+.barra-azul {
+    width: 200px;
+    height: 10px;
+    appearance: none;
+    -webkit-appearance: none;
+    background: rgb(0, 0, 0);
+}
+
+.barra-naranja {
+    width: 200px;
+    height: 10px;
+    appearance: none;
+    -webkit-appearance: none;
+    background: rgb(7, 1, 127);
+}
+
+.barra-roja {
+    width: 200px;
+    height: 10px;
+    appearance: none;
+    -webkit-appearance: none;
+    background: rgb(29, 108, 5);
+}
+
+/* Estilo adicional para eliminar el borde y manejar el grosor de la barra */
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0;
+    height: 0;
+}
+
+input[type=range]::-moz-range-thumb {
+    width: 0;
+    height: 0;
+}
+
+.titulo-card {
+    font-size: 1.4rem;
+}
 

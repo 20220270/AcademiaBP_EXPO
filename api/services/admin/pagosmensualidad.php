@@ -101,14 +101,39 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                case 'readAllAlumnosCliente':
-                    if ($result['dataset'] = $pagos->readAllAlumnosCliente()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-                    } else {
-                        $result['error'] = 'No existen pagos registradas';
-                    }
-                    break;
+            case 'readAllAlumnosCliente':
+                if ($result['dataset'] = $pagos->readAllAlumnosCliente()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen pagos registradas';
+                }
+                break;
+
+            case 'readAlumnosTotal':
+                if ($result['dataset'] = $pagos->readAlumnosTotal()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen pagos registradas';
+                }
+                break;
+            case 'readAlumnosSolventes':
+                if ($result['dataset'] = $pagos->readAlumnosSolventes()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen pagos registradas';
+                }
+                break;
+            case 'readAlumnosSinPagar':
+                if ($result['dataset'] = $pagos->readAlumnosSinPagar()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen pagos registradas';
+                }
+                break;
 
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
