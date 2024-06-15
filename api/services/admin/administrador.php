@@ -71,6 +71,7 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$administrador->setId($_POST['idAdministrador']) or
+                    !$categoria->setFilename() or
                     !$administrador->setEstado($_POST['selectEstado']) or
                     !$administrador->setNivel($_POST['selectNivelAdmin']) or
                     !$administrador->setImagen($_FILES['fotoAdmin'], $administrador->getFilename())

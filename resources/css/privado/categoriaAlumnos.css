@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-body{
+body {
     background-color: white;
 }
 
@@ -29,16 +29,16 @@ body {
     font-family: 'Poppins', sans-serif;
     display: flex;
     font-family: Arial, sans-serif;
-  }
-  
-  #sidebar {
-  
+}
+
+#sidebar {
+
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  main {
+}
+
+main {
     margin-top: 20px;
-  }
+}
 
 .wrapper {
     display: flex;
@@ -159,59 +159,64 @@ a.sidebar-link:hover {
 
 .estado-activo {
     color: green;
-  }
+}
 
-  .btn-secondary{
+.btn-secondary {
     background-color: #408840;
     width: 200px;
-  }
-  
+}
 
-  @media only screen and (max-width:6000px) {
+
+@media only screen and (max-width:6000px) {
     #horario {
         color: black;
         background-color: white;
     }
-  }
-  
-  @media (max-width: 800px) {
-    .card {
-      width: 550px;
-      height: 220px; 
-    }
-  }
+}
 
-  @media (max-width: 800px) {
+@media (max-width: 800px) {
+    .card {
+        width: 550px;
+        height: 220px;
+    }
+}
+
+@media (max-width: 800px) {
     .btn.btn-sm {
         margin-left: auto;
         width: 45px;
-        height: 30px; 
+        height: 30px;
     }
-  }
-  
-  .search-icon {
+}
+
+.search-icon {
     position: absolute;
     top: 50%;
-    left: 24.1px; /* Ajustamos este valor para mover el icono a la derecha */
+    left: 24.1px;
+    /* Ajustamos este valor para mover el icono a la derecha */
     transform: translateY(-50%);
     width: 20px;
     height: 20px;
     color: #000;
-    opacity: 0; /* Inicialmente invisible */
+    opacity: 0;
+    /* Inicialmente invisible */
     transition: opacity 0.3s ease;
 }
 
 .buscador:hover .search-icon {
-    opacity: 1; /* Mostrar icono al hacer hover */
+    opacity: 1;
+    /* Mostrar icono al hacer hover */
 }
 
 #Buscador,
 #Buscador2 {
-    padding-left: 29px; /* Aumenta el padding para dejar espacio suficiente para el icono */
-    width: 100%; /* Ajusta el ancho del input según el contenedor */
+    padding-left: 29px;
+    /* Aumenta el padding para dejar espacio suficiente para el icono */
+    width: 100%;
+    /* Ajusta el ancho del input según el contenedor */
 }
 
-  
+
 #sidebar {
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
@@ -231,21 +236,29 @@ a.sidebar-link:hover {
 }
 
 .scrollable-content1 {
-    max-height: 580px; /* Define la altura máxima del div scroll */
-    overflow-y: auto; /* Habilita el desplazamiento vertical */
-    overflow-x: hidden; /* Deshabilita el desplazamiento horizontal */
+    max-height: 580px;
+    /* Define la altura máxima del div scroll */
+    overflow-y: auto;
+    /* Habilita el desplazamiento vertical */
+    overflow-x: hidden;
+    /* Deshabilita el desplazamiento horizontal */
 }
 
 .scrollable-cards {
-    max-height: 400px; /* Define la altura máxima del div scroll */
-    overflow-y: auto; /* Habilita el desplazamiento vertical */
-    overflow-x: hidden; /* Deshabilita el desplazamiento horizontal */
+    max-height: 400px;
+    /* Define la altura máxima del div scroll */
+    overflow-y: auto;
+    /* Habilita el desplazamiento vertical */
+    overflow-x: hidden;
+    /* Deshabilita el desplazamiento horizontal */
 }
 
 .buscador {
     position: relative;
-    width: 85px; /* Ancho inicial del contenedor */
-    transition: width .7s ease; /* Transición para el cambio de ancho */
+    width: 85px;
+    /* Ancho inicial del contenedor */
+    transition: width .7s ease;
+    /* Transición para el cambio de ancho */
     padding: 15px;
 }
 
@@ -253,18 +266,22 @@ a.sidebar-link:hover {
     outline: none;
     box-sizing: border-box;
     height: 60px;
-    width: 100%; /* Ancho inicial del input */
+    width: 100%;
+    /* Ancho inicial del input */
     padding: 0 20px;
     color: #000;
     border-radius: 20px;
     font-size: 20px;
     border: 1px solid #000000;
-    opacity: 0; /* Hacer el input invisible inicialmente */
-    transition: opacity .7s ease; /* Transición para la visibilidad */
+    opacity: 0;
+    /* Hacer el input invisible inicialmente */
+    transition: opacity .7s ease;
+    /* Transición para la visibilidad */
 }
 
 .buscador:hover .busc {
-    opacity: 1; /* Mostrar el input al hacer hover */
+    opacity: 1;
+    /* Mostrar el input al hacer hover */
 }
 
 ::placeholder {
@@ -285,7 +302,8 @@ a.sidebar-link:hover {
     text-align: center;
     cursor: pointer;
     transition: .5s;
-    z-index: 1; /* Asegurar que el botón esté sobre el input */
+    z-index: 1;
+    /* Asegurar que el botón esté sobre el input */
 }
 
 .btna i {
@@ -296,7 +314,8 @@ a.sidebar-link:hover {
 }
 
 .buscador:hover {
-    width: 380px; /* Ancho expandido del contenedor al hacer hover */
+    width: 380px;
+    /* Ancho expandido del contenedor al hacer hover */
 }
 
 .btna:hover {
@@ -305,16 +324,33 @@ a.sidebar-link:hover {
 
 
 .status-circle {
-    width: 50px;
-    height: 50px;
+    width: 3vw;
+    height: 3vw;
     border-radius: 50%;
-    position: absolute;
+    display: inline-block;
+    position: absolute; 
     top: 10px;
     right: 10px;
 }
+
 .activo {
     background-color: rgb(7, 173, 7);
 }
+
 .inactivo {
     background-color: rgb(191, 5, 5);
+}
+
+@media (max-width: 768px) {
+    .status-circle {
+        width: 5vw;
+        height: 5vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .status-circle {
+        width: 7vw;
+        height: 7vw;
+    }
 }

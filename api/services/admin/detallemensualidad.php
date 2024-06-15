@@ -1,13 +1,13 @@
 <?php
 // Se incluye la clase del modelo.
-require_once('../../models/data/pagosmensualidad_data.php');
+require_once('../../models/data/detallemensualidad_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
     // Se instancia la clase correspondiente.
-    $pagos = new PagosMensualidadData;
+    $detallemensualidad = new DetallePagosMensualidadData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'fileStatus' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
@@ -15,101 +15,83 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'searchRows':
-                if (!Validator::validateSearch($_POST['search2'])) {
+                if (!Validator::validateSearch($_POST['search3'])) {
                     $result['error'] = Validator::getSearchError();
-                } elseif ($result['dataset'] = $pagos->searchRows()) {
+                } elseif ($result['dataset'] = $detallemensualidad->searchRows()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
                 } else {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
-
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$pagos->setCuotasAnuales($_POST['cuotasApagar']) or
-                    !$pagos->setIdAlumnoCliente($_POST['SelectDatosPago']) or
-                    !$pagos->setEstado($_POST['selectEstado'])
+                    !$detallemensualidad->setIdPago($_POST['idPagoRealizado']) or
+                    !$detallemensualidad->setDescripcion($_POST['descripcionPago']) or
+                    !$detallemensualidad->setFechaProximoPago($_POST['proximoPago'])
                 ) {
-                    $result['error'] = $pagos->getDataError();
-                } elseif ($pagos->createRow()) {
+                    $result['error'] = $detallemensualidad->getDataError();
+                } elseif ($detallemensualidad->createRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Pago registrado correctamente';
+                    $result['message'] = 'Detalle de pago registrado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al registrar el pago';
+                    $result['error'] = 'Ocurrió un problema al registrar este detalle';
                 }
                 break;
-
             case 'readAll':
-                if ($result['dataset'] = $pagos->readAll()) {
+                if ($result['dataset'] = $detallemensualidad->readAll()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen pagos registradas';
+                    $result['error'] = 'No existen detalles de pagos registrados';
                 }
                 break;
-
             case 'readOne':
-                if (!$pagos->setIdPago($_POST['idPagoARealizar'])) {
-                    $result['error'] = $pagos->getDataError();
-                } elseif ($result['dataset'] = $pagos->readOne()) {
+                if (!$detallemensualidad->setIdDetalle($_POST['idDetallePagoMensualidad'])) {
+                    $result['error'] = $detallemensualidad->getDataError();
+                } elseif ($result['dataset'] = $detallemensualidad->readOne()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'Orden inexistente';
+                    $result['error'] = 'Detalle de pago inexistente';
                 }
                 break;
-
-                /*case 'readDetails':
-                if (!$pagos->setIdOrden($_POST['idOrden'])) {
-                    $result['error'] = $pagos->getDataError();
-                } elseif ($result['dataset'] = $pagos->readDetails()) {
-                    $result['status'] = 1;
-                } else {
-                    $result['error'] = 'Detalle de orden inexistente';
-                }
-                break;*/
-
-
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$pagos->setIdPago($_POST['idPagoARealizar']) or
-                    !$pagos->setCuotasAnuales($_POST['cuotasApagar']) or
-                    !$pagos->setIdAlumnoCliente($_POST['SelectDatosPago']) or
-                    !$pagos->setEstado($_POST['selectEstado'])
+                    !$detallemensualidad->setIdDetalle($_POST['idDetallePagoMensualidad']) or
+                    !$detallemensualidad->setIdPago($_POST['idPagoRealizado']) or
+                    !$detallemensualidad->setDescripcion($_POST['descripcionPago']) or
+                    !$detallemensualidad->setFechaProximoPago($_POST['proximoPago'])
                 ) {
-                    $result['error'] = $pagos->getDataError();
-                } elseif ($pagos->updateRow()) {
+                    $result['error'] = $detallemensualidad->getDataError();
+                } elseif ($detallemensualidad->updateRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Datos actualizados correctamente';
+                    $result['message'] = 'Detalle de pago modificado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar este dato';
+                    $result['error'] = 'Ocurrió un problema al modificar el detalle';
                 }
                 break;
-
             case 'deleteRow':
                 if (
-                    !$pagos->setIdPago($_POST['idPagoARealizar'])
+                    !$detallemensualidad->setIdDetalle($_POST['idDetallePagoMensualidad'])
                 ) {
-                    $result['error'] = $pagos->getDataError();
-                } elseif ($pagos->deleteRow()) {
+                    $result['error'] = $detallemensualidad->getDataError();
+                } elseif ($detallemensualidad->deleteRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Datos del pago eliminados correctamente';
+                    $result['message'] = 'Detalle de pago eliminado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar los datos del pago';
+                    $result['error'] = 'Ocurrió un problema al eliminar a este detalle';
                 }
                 break;
-
-                case 'readAllAlumnosCliente':
-                    if ($result['dataset'] = $pagos->readAllAlumnosCliente()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-                    } else {
-                        $result['error'] = 'No existen pagos registradas';
-                    }
-                    break;
-
+            case 'readAllPagos':
+                if ($result['dataset'] = $detallemensualidad->readAllPagos()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen detalles de pagos registrados';
+                }
+                break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

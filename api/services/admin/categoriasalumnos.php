@@ -95,7 +95,7 @@ if (isset($_GET['action'])) {
                     !$categoriasalumnos->setNombreCategoria($_POST['nombreCategoriaAlumno']) or
                     !$categoriasalumnos->setEdadMinima($_POST['edadMinimaAlumno']) or
                     !$categoriasalumnos->setEdadMaxima($_POST['edadMaximaAlumno']) or
-                    !$categoriasalumnos->setIdCategoria($_POST['selectNivelCompetencia']) or
+                    !$categoriasalumnos->setNivel($_POST['selectNivelCompetencia']) or
                     !$categoriasalumnos->setIdHorarios($_POST['selectHorarioEntrenamiento']) or
                     !$categoriasalumnos->setImagenCategoria($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos->getFilename())
                 ) {
@@ -103,7 +103,7 @@ if (isset($_GET['action'])) {
                 } elseif ($categoriasalumnos->updateRowAlumno()) {
                     $result['status'] = 1;
                     $result['message'] = 'Campo de categoria modificado correctamente';
-
+               
                     $result['fileStatus'] = Validator::changeFile($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos::RUTA_IMAGEN, $categoriasalumnos->getFilename());
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar la categoria';

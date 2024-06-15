@@ -229,8 +229,10 @@ a{
 .card-text {
     margin-top: 20px;
 }
-th{
-    font-size: 12px;
+th,
+#tableBody,
+#tableBody2{
+    font-size: 10px;
 }
 
 button {
@@ -251,3 +253,17 @@ button:hover {
     overflow-y: auto; /* Permitir desplazamiento vertical */
     overflow-x: auto; /* Permitir desplazamiento vertical */
 }
+
+/* Clase para el estado de pago "Pagado" */
+.pagado {
+    background-color: green;
+    color: green;
+}
+
+/* Clase para el estado de pago "Pendiente de pago" */
+.pendiente {
+    background-color: red;
+    color: red;
+}
+
+
