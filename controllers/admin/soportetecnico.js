@@ -5,5 +5,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Se establece el título del contenido principal.
     //MAIN_TITLE.textContent = 'Gestionar categorías';
     // Llamada a la función para llenar la tabla con los registros existentes.
-    //fillTable();
+    fillTable();
 });
