@@ -81,6 +81,7 @@ class ComprasHandler
         tb_productos.descuento_producto
         FROM tb_detalles_compras
         INNER JOIN tb_compras USING(id_compra)
+        INNER JOIN tb_detalleProducto USING(id_detalle_producto)
         INNER JOIN tb_productos USING(id_producto) WHERE id_compra = ?';
         $params = array($this->idcompra);
         return Database::getRows($sql, $params);
@@ -93,6 +94,7 @@ class ComprasHandler
     {
         $sql = 'SELECT imagen_producto
                  FROM tb_detalles_compras
+                         INNER JOIN tb_detalleProducto USING(id_detalle_producto)
                 INNER JOIN tb_productos USING(id_producto)
                 WHERE id_detalle_compra = ?';
         $params = array($this->iddetalle);
@@ -138,7 +140,7 @@ class ComprasHandler
     public function createDetail()
     {
         // Se realiza una subconsulta para obtener el precio del producto.
-        $sql = 'INSERT INTO tb_detalles_compras(id_producto, cantidad_producto, id_orden)
+        $sql = 'INSERT INTO tb_detalles_compras(id_detalle_producto, cantidad_producto, id_orden)
                 VALUES(?, ?, ?)';
         $params = array($this->producto, $this->cantidad, $_SESSION['idCompra']);
        
@@ -160,6 +162,7 @@ class ComprasHandler
         tb_detalles_compras
     INNER JOIN 
         tb_compras USING(id_compra)
+                INNER JOIN tb_detalleProducto USING(id_detalle_producto)
     INNER JOIN 
         tb_productos USING(id_producto)
                 WHERE id_compra = ?';
@@ -215,7 +218,8 @@ class ComprasHandler
      FROM 
          tb_detalles_compras
      INNER JOIN 
-         tb_compras USING(id_compras)
+         tb_compras USING(id_compra)
+                 INNER JOIN tb_detalleProducto USING(id_detalle_producto)
      INNER JOIN 
          tb_productos USING(id_producto) 
                 WHERE id_cliente = ? AND (nombre_producto LIKE ? OR tb_compras.fecha_registro LIKE ? OR id_compra LIKE ? or id_detalle_compra LIKE ?)
@@ -243,6 +247,7 @@ class ComprasHandler
          tb_detalles_compras
         INNER JOIN 
         tb_compras USING(id_compra)
+                INNER JOIN tb_detalleProducto USING(id_detalle_producto)
         INNER JOIN 
          tb_productos USING(id_producto)  WHERE id_cliente = ?
          ORDER BY id_compra';

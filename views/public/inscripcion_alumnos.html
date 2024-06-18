@@ -24,15 +24,23 @@
                 <input type="text" placeholder="Ingresar nombres" class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <input type="text" placeholder="Ingresa apellidos" class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <input type="date" class="col-lg-12 col-md-12 col-sm-12 col-12 col-12">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                    <select id="posicion" class="form-select mb-4 mt-3 rounded-0" required>
-                        <option value="" disabled selected>Posición en la que se inscribirá tu hijo</option>
-                        <option value="categoria1">Portero</option>
-                        <option value="categoria2">Jugador de campo</option>
+                <div class="col-sm-12 col-md-12">
+                    <label for="selectPosicion" class="col-sm-7 col-form-label">Posición en la que se
+                        inscribirá:</label>
+                    <select class="form-select" id="selectPosicion" name="selectPosicion"
+                        aria-label="Default select example">
+                        <option>Portero</option>
+                        <option>Jugador de campo</option>
                     </select>
                 </div>
-                <input type="text" placeholder="Tu hijo será inscrito en la categoría:" readonly
-                    class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                <div class="col-sm-12 col-md-12">
+                    <label for="Categoria" class="col-sm-7 col-form-label">Número de días que entrenará:</label>
+                    <select class="form-select" id="selectCategoria" name="selectCategoria"
+                        aria-label="Default select example">
+                        
+                    </select>
+                </div>
 
                 <button>Enviar datos</button>
             </form>
@@ -41,8 +49,7 @@
                 <div class="toggle">
                     <div class="toggle-panel toggle-left justify-content-center align-self-center mt-5">
                         <div class="toggle-image mt-5">
-                            <img src="../../resources/images/logoAcademiaBP.png" alt="logoAcademiaBP"
-                                class="mt-5 mx-5">
+                            <img src="../../resources/images/logoAcademiaBP.png" alt="logoAcademiaBP" class="mt-5 mx-5">
                         </div>
                     </div>
                 </div>
