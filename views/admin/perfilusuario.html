@@ -24,82 +24,80 @@
                 <div class="container mt-4" id="conte">
                     <div class="row ">
                         <div class="col mt-5">
-                            <form class="row g-3 text-center" id="profileForm">
-                                <div class="container text-center">
-                                    <div class="row">
-                                        <div class="col d-flex flex-column align-items-center">
-                                            <div class="position-relative">
-                                                <img src="../../resources/images/userIcon.png" class="col-md-12 col-lg-7 mb-1 rounded-circle" alt="..." id="imagen">
-                                                <input type="file" id="fotoInput" name="fotoInput" accept="image/*">
-                                                <button type="button" class="btn position-absolute bottom-0 end-0 translate-middle mt-5" id="botonCargarFoto" onclick="document.getElementById('fotoInput').click()">
-                                                    <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1 mt-4">
-                                                </button>
-                                            </div>
-                                        </div>
-                                                                             
-                                        
-                                        <div class="col-sm-12 col-md-12 col-lg-12 mt-5">
-                                            <label for="aliasAdministrador" class="form-label">Registrado desde:</label>
-                                            <input id="fecharegistroAdmin" type="text" name="fecharegistroAdmin"
-                                                class="form-control text-center" required readonly>
-                                        </div>
-                                        <div class="col-sm-12 col-md-12 col-lg-12 mt-2">
-                                            <label for="aliasAdministrador" class="form-label">Alias:</label>
-                                            <input id="aliasAdministrador" type="text" name="aliasAdministrador"
-                                                class="form-control text-center" required>
-                                        </div>
+                            <form class="row g-3" id="profileForm">
+                                <div class="col-md-5 d-flex flex-column align-items-center">
+                                    <div class="position-relative mb-4">
+                                        <img src="../../resources/images/userIcon.png"
+                                            class="col-md-12 col-lg-7 mb-1 rounded-circle" alt="..."
+                                            id="imagen">
+                                        <input type="file" id="fotoInput" name="fotoInput" accept="image/*" class="d-none">
+                                        <button type="button"
+                                            class="btn position-absolute bottom-0 end-0 translate-middle mt-5"
+                                            id="botonCargarFoto"
+                                            onclick="document.getElementById('fotoInput').click()">
+                                            <img src="../../resources/images/btnActualizarIMG.png" alt=""
+                                                width="30px" height="30px" class="mb-1 mt-4">
+                                        </button>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="fecharegistroAdmin" class="form-label">Registrado desde:</label>
+                                        <input id="fecharegistroAdmin" type="text" name="fecharegistroAdmin"
+                                            class="form-control text-center" required readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="aliasAdministrador" class="form-label">Alias:</label>
+                                        <input id="aliasAdministrador" type="text" name="aliasAdministrador"
+                                            class="form-control text-center" required>
                                     </div>
                                 </div>
-
-                        </div>
-
-                        <div class="col mt-2 text-center" id="columnaPerfil">
-                            <form class="row g-3">
-                                <div class="col-sm-12 col-md-12 col-lg-12 mt-2">
-                                    <label for="nombreAdministrador" class="form-label">Nombre:</label>
-                                    <input id="nombreAdministrador" type="text" name="nombreAdministrador"
-                                        class="form-control " required>
-                                </div>
-                                <div class="col-sm-12 col-md-12 col-lg-12 mt-2">
-                                    <label for="apellidoAdministrador" class="form-label">Apellido:</label>
-                                    <input id="apellidoAdministrador" type="text" name="apellidoAdministrador"
-                                        class="form-control " required>
-                                </div>
-                                <div class="col-sm-12 col-md-12 col-lg-12 mt-2">
-                                    <label for="aliasAdministrador" class="form-label">Dui:</label>
-                                    <input id="duiAdministrador" type="text" name="duiAdministrador"
-                                        class="form-control " required>
-                                </div>
-                                <div class="col-sm-12 col-md-12 col-lg-12 mt-2">
-                                    <label for="correoAdministrador" class="form-label">Correo:</label>
-                                    <input id="correoAdministrador" type="email" name="correoAdministrador"
-                                        class="form-control " required>
-                                </div>
-                                <div class="col-sm-12 col-md-12 col-lg-12 mt-2">
-                                    <label for="aliasAdministrador" class="form-label">Teléfono:</label>
-                                    <input id="telefonoAdministrador" type="text" name="telefonoAdministrador"
-                                        class="form-control " required>
-                                </div>
-                                <div class="col-sm-12 col-md-12 col-lg-12 mt-2">
-                                    <label for="aliasAdministrador" class="form-label">Nivel de usuario:</label>
-                                    <input id="nivelAdministrador" type="text" name="nivelAdministrador"
-                                        class="form-control " required readonly>
-                                </div>
-                                <div class="text-center mb-4 mt-3">
-                                    <button type="submit" class="btn btn-dark mt-1">
-                                        <img src="../../resources/images/editarVerde.png" alt="Editar" width="20px"
-                                            height="20px"> Guardar
-                                    </button>
-                                    <button type="button" class="btn btn-dark rounded-2 mt-1" id="btnContraseniaNueva"
-                                        onclick="openPassword()">
-                                        <img src="../../resources/images/editarVerde.png" alt="Editar" width="20px"
-                                            height="20px"> Actualizar contraseña
-                                    </button>
+                                <div class="col-md-7">
+                                    <div class="row g-3">
+                                        <div class="col-sm-12 col-md-10">
+                                            <label for="nombreAdministrador" class="form-label">Nombre:</label>
+                                            <input id="nombreAdministrador" type="text" name="nombreAdministrador"
+                                                class="form-control" required>
+                                        </div>
+                                        <div class="col-sm-12 col-md-10">
+                                            <label for="apellidoAdministrador" class="form-label">Apellido:</label>
+                                            <input id="apellidoAdministrador" type="text" name="apellidoAdministrador"
+                                                class="form-control" required>
+                                        </div>
+                                        <div class="col-sm-12 col-md-10">
+                                            <label for="duiAdministrador" class="form-label">Dui:</label>
+                                            <input id="duiAdministrador" type="text" name="duiAdministrador"
+                                                class="form-control" required>
+                                        </div>
+                                        <div class="col-sm-12 col-md-10">
+                                            <label for="correoAdministrador" class="form-label">Correo:</label>
+                                            <input id="correoAdministrador" type="email" name="correoAdministrador"
+                                                class="form-control" required>
+                                        </div>
+                                        <div class="col-sm-12 col-md-10">
+                                            <label for="telefonoAdministrador" class="form-label">Teléfono:</label>
+                                            <input id="telefonoAdministrador" type="text" name="telefonoAdministrador"
+                                                class="form-control" required>
+                                        </div>
+                                        <div class="col-sm-12 col-md-10">
+                                            <label for="nivelAdministrador" class="form-label">Nivel de usuario:</label>
+                                            <input id="nivelAdministrador" type="text" name="nivelAdministrador"
+                                                class="form-control" required readonly>
+                                        </div>
+                                    </div>
+                                    <div class="text-center mb-4 mt-3">
+                                        <button type="submit" class="btn btn-dark mt-1">
+                                            <img src="../../resources/images/editarVerde.png" alt="Editar"
+                                                width="20px" height="20px"> Guardar
+                                        </button>
+                                        <button type="button" class="btn btn-dark rounded-2 mt-1"
+                                            id="btnContraseniaNueva" onclick="openPassword()">
+                                            <img src="../../resources/images/editarVerde.png" alt="Editar"
+                                                width="20px" height="20px"> Actualizar contraseña
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>

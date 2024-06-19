@@ -74,7 +74,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                
+
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
@@ -125,28 +125,50 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                case 'logIn':
-                    $_POST = Validator::validateForm($_POST);
-                    if (!$cliente->checkUser($_POST['correoCliente'], $_POST['claveCliente'])) {
-                        $result['error'] = 'Datos incorrectos';
+            case 'logIn':
+                $_POST = Validator::validateForm($_POST);
+                if (!$cliente->checkUser($_POST['correoCliente'], $_POST['claveCliente'])) {
+                    $result['error'] = 'Datos incorrectos';
+                } else {
+                    // Establece el ID del cliente antes de verificar el estado.
+                    $cliente->setId($cliente->getIdByEmail($_POST['correoCliente'])); // Suponiendo que getIdByEmail obtiene el ID del cliente usando el correo.
+
+                    // Ahora verificamos el estado del cliente.
+                    if ($cliente->checkStatus()) {
+                        // Configura la sesión ya que el estado es activo.
+                        $_SESSION['idCliente'] = $cliente->getIdByEmail($_POST['correoCliente']);
+                        $_SESSION['correoCliente'] = $_POST['correoCliente'];
+                        $result['status'] = 1;
+                        $result['message'] = 'Autenticación correcta';
                     } else {
-                        // Establece el ID del cliente antes de verificar el estado.
-                        $cliente->setId($cliente->getIdByEmail($_POST['correoCliente'])); // Suponiendo que getIdByEmail obtiene el ID del cliente usando el correo.
-                
-                        // Ahora verificamos el estado del cliente.
-                        if ($cliente->checkStatus()) {
-                            // Configura la sesión ya que el estado es activo.
-                            $_SESSION['idCliente'] = $cliente->getIdByEmail($_POST['correoCliente']);
-                            $_SESSION['correoCliente'] = $_POST['correoCliente'];
-                            $result['status'] = 1;
-                            $result['message'] = 'Autenticación correcta';
-                        } else {
-                            $result['error'] = 'La cuenta ha sido desactivada';
-                        }
+                        $result['error'] = 'La cuenta ha sido desactivada';
                     }
-                    break;
-                
-            
+                }
+                break;
+
+            case 'signUpMovil':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$cliente->setNombre($_POST['nombreCliente']) or
+                    !$cliente->setApellido($_POST['apellidoCliente']) or
+                    !$cliente->setCorreo($_POST['correoCliente']) or
+                    !$cliente->setDireccion($_POST['direccionCliente']) or
+                    !$cliente->setDUI($_POST['duiCliente']) or
+                    !$cliente->setTelefono($_POST['telefonoCliente']) or
+                    !$cliente->setClave($_POST['claveCliente'])
+                ) {
+                    $result['error'] = $cliente->getDataError();
+                } elseif ($_POST['claveCliente'] != $_POST['confirmarClave']) {
+                    $result['error'] = 'Contraseñas diferentes';
+                } elseif ($cliente->createRow()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Cuenta registrada correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al registrar la cuenta';
+                }
+                break;
+
+
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
         }
