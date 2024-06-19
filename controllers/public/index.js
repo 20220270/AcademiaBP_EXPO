@@ -26,8 +26,7 @@ const SOPORTETECNICO_API = 'services/public/soportetecnico.php';
             // Se recorre el conjunto de registros fila por fila a través del objeto row.
             DATA.dataset.forEach((row) => {
                 // Se establece la página web de destino con los parámetros.
-                let url = `categoriasproductos.html?id=${row.id_categoria_producto}&nombre=${row.categoria_producto}`;
-                // Se crea la tarjeta con los datos de cada categoría.
+                let url = `categoriasproductos.html?id=${row.id_categoria_producto}&nombre=${row.categoria_producto}`;                // Se crea la tarjeta con los datos de cada categoría.
                 let card = `
                     <div class="col-lg-4 col-md-6">
                         <div class="position-relative">
@@ -82,10 +81,7 @@ SAVE_FORM.addEventListener('submit', async (event) => {
   }
 
 
-
-
-
-
+//////////////////////////////////
 
 
 
@@ -145,6 +141,3 @@ document.getElementById('botonCerrarCo3').addEventListener('mouseleave', functio
         popover.hide();
     }
 });
-
-
-
