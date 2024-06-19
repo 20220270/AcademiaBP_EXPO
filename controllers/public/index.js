@@ -44,6 +44,7 @@ const SOPORTETECNICO_API = 'services/public/soportetecnico.php';
             // Se asigna al título del contenido de la excepción cuando no existen datos para mostrar.
             MAIN_TITLE.textContent = DATA.error;
         }
+        
     });
 
 

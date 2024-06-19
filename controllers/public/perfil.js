@@ -3,6 +3,9 @@
 //Metodo para habilitar y deshabilitar los inputs
 
 document.addEventListener("DOMContentLoaded", function() {
+
+    loadTemplate();
+    
     const botonActualizarDatos = document.getElementById("botonActualizarDatos");
 
     botonActualizarDatos.addEventListener("click", function() {

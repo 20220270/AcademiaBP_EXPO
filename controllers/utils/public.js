@@ -10,7 +10,7 @@ const USER_API = 'services/public/cliente.php';
 const MAIN = document.querySelector('main');
 
 
-MAIN.classList.add('container');
+MAIN.classList.add('container-fluid');
 
 /*  Función asíncrona para cargar el encabezado y pie del documento.
 *   Parámetros: ninguno.
@@ -24,7 +24,7 @@ const loadTemplate = async () => {
     // Se comprueba si el usuario está autenticado para establecer el encabezado respectivo.
     if (DATA.session) {
         // Se verifica si la página web no es el inicio de sesión, de lo contrario se direcciona a la página web principal.
-        if (!location.pathname.endsWith('registro_sesion.html')) {
+        if (!location.pathname.endsWith('registrosesion.html')) {
             // Se agrega el encabezado de la página web antes del contenido principal.
             MAIN.insertAdjacentHTML('beforebegin', `
                 <header>
@@ -43,31 +43,19 @@ const loadTemplate = async () => {
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-5 col-sm-5 col-6 align-self-center">
+                <div class="col-lg-4 col-md-7 col-sm-5 col-6 align-self-center">
                     <a href="index.html">
                         <img src="../../resources/images/logoAcademiaBP.png" alt="..." height="120px" width="120px" id="imagenLogoA">
                     </a>
                 </div>
 
-                <div class="mt-5 text-end col-lg-2 col-md-1 col-sm-1 col-5">
+                <div class="mt-5 text-end col-lg-4 col-md-2 col-sm-3 col-8">
                 <a href="perfil.html">
                     <img src="../../resources/images/userIcon.png" class="me-5 mt-2 imagenUser text-end" alt="..."
                         width="30px" height="30px">
                 </a>
                 </div>
-                
-               
-                <div class="mt-5 text-start col-lg-2 col-md-2 col-sm-2 col-6">
-                <a href="carrito.html">
-                    <button class="btn botonCarrito">
-                    
-                        <img src="../../resources/images/cesta2.png" alt="..." width="30px" height="30px"
-                            class="">
-                            
-                        <span class="text" id="textoCarrito">Carrito de compras()</span>
-                    </button>
-                    </a>
-                </div>
+
                 
             </div>
         </div>
@@ -83,7 +71,7 @@ const loadTemplate = async () => {
                                 aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <div class="collapse navbar-collapse " id="navbarSupportedContent">
                                 <ul class="navbar-nav me-auto">
 
                                     <li class="nav-item col-lg-3 col-md-12 text-start"><a class="nav-link me-2 text-white" href="index.html#categorias">
@@ -91,7 +79,7 @@ const loadTemplate = async () => {
                                                 height="20px" class="me-2">Categorías</a>
                                     </li>
 
-                                    <li class="nav-item col-lg-5 col-md-12 text-start"><a class="nav-link me-3 text-white" href="pago_mensualidad.html">
+                                    <li class="nav-item col-lg-5 col-md-12 text-start"><a class="nav-link me-3 text-white" href="pagomensualidad.html">
                                             <img src="../../resources/images/mensualidad.png" alt="..." width="20px"
                                                 height="20px" class="me-1"> Pagos de mensualidad</a></li>
 
@@ -106,6 +94,8 @@ const loadTemplate = async () => {
                                             Conócenos
                                         </a>
                                     </li>
+
+                                    
 
                                 </ul>
 
@@ -187,7 +177,7 @@ const loadTemplate = async () => {
                                     </li>
 
                                     <li class="nav-item col-lg-5 col-md-12 text-start">
-                                        <a class="nav-link me-2 text-white" href="registro_sesion.html">
+                                        <a class="nav-link me-2 text-white" href="registrosesion.html">
                                             <img src="../../resources/images/nosotros.png" class="me-1" alt="..."
                                                 height="25px" width="25px">
                                             Iniciar sesión
