@@ -11,7 +11,7 @@ class PagosMensualidadHandler
      */
     protected $idpago = null;
     protected $fecha = null;
-    protected $idalumnocliente = null;
+    protected $idalumno= null;
     protected $cuotasanuales = null;
     protected $cuotaspendiente = null;
     protected $estado = null;
@@ -24,11 +24,10 @@ class PagosMensualidadHandler
     {
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = "SELECT id_pago, CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
-        CONCAT(nombre_cliente, ' ', apellido_cliente) as 'Encargado',   telefono_cliente, numero_dias, mensualidad_pagar, estado_pago, fecha_pago from tb_pagos
-        INNER JOIN tb_alumnos_clientes USING (id_alumno_cliente)
-        INNER JOIN tb_alumnos USING(id_alumno)
-        INNER JOIN tb_clientes USING(id_cliente)
-        INNER JOIN tb_dias_pagos USING(id_dia_pago)
+            CONCAT(nombre_cliente, ' ', apellido_cliente) as 'Encargado',   telefono_cliente, numero_dias, mensualidad_pagar, estado_pago, fecha_pago from tb_pagos
+            INNER JOIN tb_alumnos USING(id_alumno)
+            INNER JOIN tb_clientes USING(id_cliente)
+            INNER JOIN tb_dias_pagos USING(id_dia_pago)
         WHERE nombre_cliente LIKE ? OR nombre_alumno LIKE ? OR apellido_alumno LIKE ? OR apellido_cliente LIKE ? OR estado_pago LIKE ? OR fecha_pago LIKE ?
         ORDER BY id_pago;";
         $params = array($value, $value, $value, $value , $value , $value);
@@ -37,17 +36,16 @@ class PagosMensualidadHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_pagos(cuotas_anuales, id_alumno_cliente, estado_pago)
+        $sql = 'INSERT INTO tb_pagos(cuotas_anuales, id_alumno, estado_pago)
                 VALUES(?, ?, ?)';
-        $params = array($this->cuotasanuales, $this->idalumnocliente, $this->estado);
+        $params = array($this->cuotasanuales, $this->idalumno, $this->estado);
         return Database::executeRow($sql, $params);
     }
 
     public function readAll()
     {
         $sql = "SELECT id_pago, CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
-        CONCAT(nombre_cliente, ' ', apellido_cliente) as 'Encargado', telefono_cliente, numero_dias, mensualidad_pagar, estado_pago, fecha_pago from tb_pagos
-        INNER JOIN tb_alumnos_clientes USING (id_alumno_cliente)
+        CONCAT(nombre_cliente, ' ', apellido_cliente) as 'Encargado',   telefono_cliente, numero_dias, mensualidad_pagar, estado_pago, fecha_pago from tb_pagos
         INNER JOIN tb_alumnos USING(id_alumno)
         INNER JOIN tb_clientes USING(id_cliente)
         INNER JOIN tb_dias_pagos USING(id_dia_pago)
@@ -57,8 +55,7 @@ class PagosMensualidadHandler
 
     public function readOne()
     {
-        $sql = "SELECT id_pago, id_alumno_cliente, cuotas_anuales, estado_pago from tb_pagos
-        INNER JOIN tb_alumnos_clientes USING (id_alumno_cliente)
+        $sql = "SELECT id_pago, id_alumno, cuotas_anuales, estado_pago from tb_pagos
         INNER JOIN tb_alumnos USING(id_alumno)
         INNER JOIN tb_clientes USING(id_cliente)
         INNER JOIN tb_dias_pagos USING(id_dia_pago)
@@ -70,9 +67,9 @@ class PagosMensualidadHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_pagos
-                SET estado_pago = ?, id_alumno_cliente = ?, cuotas_anuales = ?
+                SET estado_pago = ?, id_alumno = ?, cuotas_anuales = ?
                 WHERE id_pago = ?';
-        $params = array($this->estado, $this->idalumnocliente, $this->cuotasanuales, $this->idpago);
+        $params = array($this->estado, $this->idalumno, $this->cuotasanuales, $this->idpago);
         return Database::executeRow($sql, $params);
     }
 
@@ -89,7 +86,7 @@ class PagosMensualidadHandler
     public function readAllAlumnosCliente()
     {
         $sql = "SELECT 
-                id_alumno_cliente, 
+                id_alumno, 
                 CONCAT(
                 nombre_alumno, ' ', apellido_alumno, ' - ', 
                 nombre_cliente, ' ', apellido_cliente, ' - ', 
@@ -100,10 +97,9 @@ class PagosMensualidadHandler
                 END, ' - $ ', 
                 mensualidad_pagar
                 ) AS Detalles
-            FROM tb_alumnos_clientes
-            INNER JOIN tb_alumnos USING(id_alumno)
+            FROM tb_alumnos
             INNER JOIN tb_clientes USING(id_cliente)
-            INNER JOIN tb_dias_pagos USING(id_dia_pago);";
+            INNER JOIN tb_dias_pagos USING(id_dia_pago)";
         return Database::getRows($sql);
     }
 
@@ -120,7 +116,6 @@ class PagosMensualidadHandler
         $sql = "SELECT 'Alumnos solventes con el pago.' AS descripcion, 
                 COUNT(CONCAT(nombre_alumno, ' ', apellido_alumno)) AS total_alumnos_registradoss 
                 FROM tb_pagos
-                INNER JOIN tb_alumnos_clientes USING(id_alumno_cliente)
                 INNER JOIN tb_alumnos USING(id_alumno)
                 WHERE estado_pago = 'Pagado';";
         return Database::getRows($sql);
@@ -131,7 +126,6 @@ class PagosMensualidadHandler
         $sql = "SELECT 'Alumnos solventes con el pago.' AS descripcion, 
                 COUNT(CONCAT(nombre_alumno, ' ', apellido_alumno)) AS total_alumnos_registradosss 
                 FROM tb_pagos
-                INNER JOIN tb_alumnos_clientes USING(id_alumno_cliente)
                 INNER JOIN tb_alumnos USING(id_alumno)
                 WHERE estado_pago = 'Pendiente de pago';";
         return Database::getRows($sql);

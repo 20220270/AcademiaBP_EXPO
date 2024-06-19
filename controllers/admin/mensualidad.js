@@ -263,7 +263,7 @@ const fillTable3 = async (form = null) => {
             TABLE_BODY2.innerHTML += `
             <tr>
                 <td>${row.id_detalle_pago}</td>
-                <td>ACBP${row.id_pago}</td>
+                <td>${row.id_pago}</td>
                 <td>${row.Alumno}</td>
                 <td>${row.fecha_pago}</td>
                 <td>$${row.mensualidad_pagar}</td>
@@ -448,7 +448,7 @@ const openUpdate2 = async (id) => {
         CUOTAS_A_PAGAR.value = ROW.cuotas_anuales;
         ESTADO_PAGO.value = ROW.estado_pago;
 
-        fillSelect(MENSUALIDAD_API, 'readAllAlumnosCliente', 'SelectDatosPago', ROW.id_alumno_cliente);
+        fillSelect(MENSUALIDAD_API, 'readAllAlumnosCliente', 'SelectDatosPago', ROW.id_alumno);
 
     } else {
         sweetAlert(2, DATA.error, false);

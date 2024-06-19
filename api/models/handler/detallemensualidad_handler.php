@@ -21,12 +21,11 @@ class DetallesPagosMensualidadHandler
     {
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar,  CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
-                descripcion_pago, fecha_proximo_pago from tb_detalles_pagos
-                INNER JOIN tb_pagos USING (id_pago)
-                INNER JOIN tb_alumnos_clientes USING(id_alumno_cliente)
-                INNER JOIN tb_alumnos USING (id_alumno)
-                INNER JOIN tb_dias_pagos USING (id_dia_pago)
-                INNER JOIN tb_clientes USING(id_cliente)
+            descripcion_pago, fecha_proximo_pago from tb_detalles_pagos
+            INNER JOIN tb_pagos USING (id_pago)
+            INNER JOIN tb_alumnos USING (id_alumno)
+            INNER JOIN tb_dias_pagos USING (id_dia_pago)
+            INNER JOIN tb_clientes USING(id_cliente)
                 WHERE fecha_pago LIKE ? OR nombre_alumno LIKE ? OR apellido_alumno LIKE ? OR fecha_proximo_pago LIKE ?
                 ORDER BY id_detalle_pago";
         $params = array($value, $value , $value, $value);
@@ -46,7 +45,6 @@ class DetallesPagosMensualidadHandler
         $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar,  CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
                 descripcion_pago, fecha_proximo_pago from tb_detalles_pagos
                 INNER JOIN tb_pagos USING (id_pago)
-                INNER JOIN tb_alumnos_clientes USING(id_alumno_cliente)
                 INNER JOIN tb_alumnos USING (id_alumno)
                 INNER JOIN tb_dias_pagos USING (id_dia_pago)
                 INNER JOIN tb_clientes USING(id_cliente)
@@ -89,7 +87,6 @@ class DetallesPagosMensualidadHandler
                 mensualidad_pagar
                 ) AS Detalles
                 FROM tb_pagos
-                INNER JOIN tb_alumnos_clientes USING (id_alumno_cliente)
                 INNER JOIN tb_alumnos USING (id_alumno)
                 INNER JOIN tb_dias_pagos USING (id_dia_pago)    
                 ORDER BY id_pago";

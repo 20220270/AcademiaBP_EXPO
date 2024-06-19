@@ -116,6 +116,17 @@ class AlumnosData extends AlumnosHandler
         }
     }
 
+    public function setIdCliente($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->idcliente = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del cliente/encargado es incorrecto';
+            return false;
+        }
+    }
+
     /*
      *  Métodos para obtener los atributos adicionales.
      */

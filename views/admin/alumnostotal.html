@@ -42,7 +42,7 @@
 
                             <div class="row">
                                 <!-- Primera sección de tarjetas -->
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <h1>Alumnos</h1>
                                     <div class="col-6 offset-3 d-flex justify-content-center">
                                         <!-- Añadimos una clase offset-3 para centrar el buscador -->
@@ -74,40 +74,7 @@
                                         <!-- Aquí se insertarán las tarjetas -->
                                     </div>
                                 </div>
-
-                                <!-- Segunda sección de tarjetas -->
-                                <div class="col-lg-6">
-                                    <h1>Clientes encargados</h1>
-                                    <div class="col-6 offset-3 d-flex justify-content-center">
-                                        <!-- Añadimos una clase offset-3 para centrar el buscador -->
-                                        <form class="d-flex flex-grow-1" id="searchForm2">
-                                            <div class="buscador mx-auto position-relative">
-                                                <i class="fas fa-microphone search-icon microphone-button"
-                                                    id="microphone-button2"></i>
-                                                <input class="busc light-table-filter" data-table="order-table"
-                                                    type="text" placeholder="Nombre del alumno o cliente encargado"
-                                                    id="Buscador2" name="search2">
-                                                <div class="btna">
-                                                    <i class="fa fa-search"><ion-icon
-                                                            name="search-outline"></ion-icon></i>
-                                                </div>
-                                            </div>
-
-
-                                        </form>
-
-
-                                    </div>
-                                    <div class="col-3 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
-                                        <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate2()">
-                                            <img src="../../resources/images/agregar.png" alt="buttonpng"
-                                                width="60rem" />
-                                        </button>
-                                    </div>
-                                    <div class="row" id="cardAlumnosClientes">
-                                        <!-- Aquí se insertarán las tarjetas -->
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -157,6 +124,14 @@
                         </div>
 
                         <div class="col-sm-12 col-md-6">
+                            <label for="selectCategoriaEncargado" class="col-sm-7 col-form-label">Encargado del alumno:</label>
+                            <select class="form-select" id="selectEncargado" name="selectEncargado"
+                                aria-label="Default select example" required>
+
+                            </select>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6">
                             <label for="selectCategoriaEncargado" class="col-sm-7 col-form-label">Categoría y su
                                 encargado:</label>
                             <select class="form-select" id="selectCategoriaEncargado" name="selectCategoriaEncargado"
@@ -194,45 +169,6 @@
         </div>
     </div>
 
-    <div class="modal fade" id="saveModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="modalTitle" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <!-- Encabezado de la ventana modal -->
-                    <div class="modal-header">
-                        <h5 class="modal-title text-align-center" id="modalTitle2"></h5>
-                    </div>
-                    <!-- Contenido de la ventana modal -->
-                    <form id="saveForm2">
-                        <div class="modal-body row g-3">
-                            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                            <input type="hidden" id="idAlumnoCliente" name="idAlumnoCliente">
-
-                            <div class="col-sm-12 col-md-6">
-                                <label for="idCliente" class="col-sm-7 col-form-label">Cliente registrado:</label>
-                                <select class="form-select" id="idCliente" name="idCliente"
-                                    aria-label="Default select example">
-                                </select>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="idAlumnoAsignar" class="col-sm-7 col-form-label">Alumno a asignar:</label>
-                                <select class="form-select" id="idAlumnoAsignar" name="idAlumnoAsignar"
-                                    aria-label="Default select example">
-                                </select>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-dark" id="btnGuardar"
-                                name="btnGuardar">Guardar</button>
-                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal" id="btnCerrar"
-                                name="btnCerrar">Cerrar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
 
 
     <!-- Scripts -->
@@ -245,7 +181,6 @@
     <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/utils/private.js"></script>
     <script src="../../controllers/utils/voicerecognition.js"></script>
-    <script src="../../controllers/utils/voicerecognitionn.js"></script>
     <script src="../../controllers/admin/alumnostotal.js"></script>
 </body>
 

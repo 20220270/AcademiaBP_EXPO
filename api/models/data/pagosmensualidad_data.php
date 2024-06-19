@@ -29,10 +29,10 @@ class PagosMensualidadData extends PagosMensualidadHandler
     public function setIdAlumnoCliente($value) //id de la relación entre clientes y alumnos
     {
         if (Validator::validateNaturalNumber($value)) {
-            $this->idalumnocliente = $value;
+            $this->idalumno = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador de alumnos y clientes es incorrecto';
+            $this->data_error = 'El identificador del alumno es incorrecto';
             return false;
         }
     }

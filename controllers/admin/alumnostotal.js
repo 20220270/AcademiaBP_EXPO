@@ -1,16 +1,15 @@
 // Constante para completar la ruta de la API.
 const ALUMNOS_API = 'services/admin/alumnos.php';
-const ALUMNOSCLIENTES_API = 'services/admin/alumnosclientes.php';
+
+const CLIENTES_API = 'services/admin/clientes.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
-const SEARCH_FORM2 = document.getElementById('searchForm2');
 
 // Constantes para establecer los elementos de la tabla.
 //const TABLE_BODY = document.getElementById('tableBody'),
 //ROWS_FOUND = document.getElementById('rowsFound');
 
 const CARD_ALUMNOS = document.getElementById('cardsAlumnos');
-const CARD_ALUMNOSCLIENTES = document.getElementById('cardAlumnosClientes');
 
 //CARD_CATEGORIAS = document.getElementById('cardCategorias');
 // Constantes para establecer los elementos del componente Modal.
@@ -18,8 +17,6 @@ const CARD_ALUMNOSCLIENTES = document.getElementById('cardAlumnosClientes');
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
 
-    const SAVE_MODAL2 = new bootstrap.Modal('#saveModal2'),
-    MODAL_TITLE2 = document.getElementById('modalTitle2');
 
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
@@ -30,12 +27,9 @@ const SAVE_FORM = document.getElementById('saveForm'),
     POSICION_ALUMNO = document.getElementById('selectPosicion'),
     ID_STAFFCATEGORIA = document.getElementById('selectCategoriaEncargado'),
     ID_DIASPAGO = document.getElementById('selectDias'),
-    ESTADO_ALUMNO = document.getElementById('selectEstado');
+    ESTADO_ALUMNO = document.getElementById('selectEstado'),
+    ENCARGADO_ALUMNO = document.getElementById('selectEncargado');
 
-    const SAVE_FORM2 = document.getElementById('saveForm2'),
-    ID_ALUMNOCLIENTE = document.getElementById('idAlumnoCliente'),
-    ID_ALUMNOO = document.getElementById('idAlumnoAsignar'),
-    ID_CLIENTE = document.getElementById('idCliente');
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -44,19 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
     //MAIN_TITLE.textContent = 'Gestionar categorías';
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
-    fillTable2();
 });
 
 SEARCH_FORM.addEventListener('submit', (event) => {
     event.preventDefault();
     const FORM = new FormData(SEARCH_FORM);
     fillTable(FORM);
-  });
-  
-  SEARCH_FORM2.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const FORM2 = new FormData(SEARCH_FORM2);
-    fillTable2(FORM2);
   });
 
 SAVE_FORM.addEventListener('submit', async (event) => {
@@ -81,27 +68,7 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     }
 });
 
-SAVE_FORM2.addEventListener('submit', async (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
-    event.preventDefault();
-    // Se verifica la acción a realizar.
-    (ID_ALUMNOCLIENTE.value) ? action = 'updateRow' : action = 'createRow';
-    // Constante tipo objeto con los datos del formulario.
-    const FORM = new FormData(SAVE_FORM2);
-    // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(ALUMNOSCLIENTES_API, action, FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        // Se cierra la caja de diálogo.
-        SAVE_MODAL.hide();
-        // Se muestra un mensaje de éxito.
-        sweetAlert(1, DATA.message, true);
-        // Se carga nuevamente la tabla para visualizar los cambios.
-        fillTable2();
-    } else {
-        sweetAlert(2, DATA.error, false);
-    }
-});
+
 
 const fillTable = async (form = null) => {
     // Se inicializa el contenido de la tabla.
@@ -123,6 +90,7 @@ const fillTable = async (form = null) => {
                         <div class="status-circle ${row.estado_alumno === 'Activo' ? 'activo' : 'inactivo'}"></div>
                         <h5 class="card-title"><b>ID: </b>${row.id_alumno}</h5>
                         <p class="card-text"><b>Nombre del alumno: </b>${row.nombre_alumno} ${row.apellido_alumno}</p>
+                        <p class="card-text"><b>Encargado del alumno: </b>${row.Encargado}</p>
                         <p class="card-text"><b>Fecha de nacimiento: </b>${row.fecha_nacimiento}</p>
                         <p class="card-text"><b>Posición del alumno: </b>${row.posicion_alumno}</p>
                         <p class="card-text"><b>Categoría: </b>${row.categoria}</p>
@@ -147,42 +115,7 @@ const fillTable = async (form = null) => {
     }
 }
 
-const fillTable2 = async (form = null) => {
-    // Se inicializa el contenido de la tabla.
-    CARD_ALUMNOSCLIENTES.innerHTML = '';
-    // Se verifica la acción a realizar.
-    const action = form ? 'searchRows' : 'readAll';
-    // Petición para obtener los registros disponibles.
-    const DATA = await fetchData(ALUMNOSCLIENTES_API, action, form);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        // Se recorre el conjunto de registros fila por fila.
-        DATA.dataset.forEach(row => {
-            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-            CARD_ALUMNOSCLIENTES.innerHTML += `
-            <div class="col-md-12 mb-3" id="cardDiasPagos">
-                <div class="card h-100">
-                    <div class="card-body text-start position-relative">
-                        <h5 class="card-title"><b>ID: </b>${row.id_alumno_cliente}</h5>
-                        <p class="card-text"><b>Cliente: </b>${row.Cliente}</p>
-                        <p class="card-text"><b>Alumno asignado: </b>${row.Alumno}</p>
-                        <div class="d-flex justify-content-center gap-2">
-                            <button type="button" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete2(${row.id_alumno_cliente})">
-                                <img src="../../resources/images/btnEliminarIMG.png" alt="Eliminar" width="30px" height="30px" class="mb-1">
-                            </button>
-                            <button type="button" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate2(${row.id_alumno_cliente})">
-                                <img src="../../resources/images/btnActualizarIMG.png" alt="Actualizar" width="30px" height="30px" class="mb-1">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `;
-        });
-    } else {
-        sweetAlert(4, DATA.error, true);
-    }
-}
+
 
 const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
@@ -193,18 +126,9 @@ const openCreate = () => {
 
     fillSelect(ALUMNOS_API, 'readAllStaffCategorias', 'selectCategoriaEncargado');
     fillSelect(ALUMNOS_API, 'readAllDiasPago', 'selectDias');
+    fillSelect(CLIENTES_API, 'readAll', 'selectEncargado');
 }
 
-const openCreate2 = () => {
-    // Se muestra la caja de diálogo con su título.
-    SAVE_MODAL2.show();
-    MODAL_TITLE2.textContent = 'Asignar clientes y alumnos';
-    // Se prepara el formulario.
-    SAVE_FORM2.reset();
-
-    fillSelect(ALUMNOSCLIENTES_API, 'readAllAlumnos', 'idAlumnoAsignar');
-    fillSelect(ALUMNOSCLIENTES_API, 'readAllClientes', 'idCliente');
-}
 
 const openUpdate = async (id) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
@@ -229,37 +153,14 @@ const openUpdate = async (id) => {
         fillSelect(ALUMNOS_API, 'readAllStaffCategorias', 'selectCategoriaEncargado', ROW.id_staff_categorias);
         fillSelect(ALUMNOS_API, 'readAllDiasPago', 'selectDias', ROW.id_dia_pago);
         ESTADO_ALUMNO.value = ROW.estado_alumno;
-
-
-    } else {
-        sweetAlert(2, DATA.error, false);
-    }
-}
-
-const openUpdate2 = async (id) => {
-    // Se define una constante tipo objeto con los datos del registro seleccionado.
-    const FORM = new FormData();
-    FORM.append('idAlumnoCliente', id);
-    // Petición para obtener los datos del registro solicitado.
-    const DATA = await fetchData(ALUMNOSCLIENTES_API, 'readOne', FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        // Se muestra la caja de diálogo con su título.
-        SAVE_MODAL2.show();
-        MODAL_TITLE2.textContent = 'Actualizar asignación de alumno y cliente';
-        // Se prepara el formulario.
-        SAVE_FORM2.reset();
-        // Se inicializan los campos con los datos.
-        const ROW = DATA.dataset;
-        ID_ALUMNOCLIENTE.value = ROW.id_alumno_cliente;
-        fillSelect(ALUMNOSCLIENTES_API, 'readAllAlumnos', 'idAlumnoAsignar', ROW.id_alumno);
-        fillSelect(ALUMNOSCLIENTES_API, 'readAllClientes', 'idCliente', ROW.id_cliente);
-
+        fillSelect(CLIENTES_API, 'readAll', 'selectEncargado', ROW.id_cliente);
 
     } else {
         sweetAlert(2, DATA.error, false);
     }
 }
+
+
 
 const openDelete = async (id) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
@@ -283,24 +184,3 @@ const openDelete = async (id) => {
     }
 }
 
-const openDelete2 = async (id) => {
-    // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar esta asiganción de forma permanente?');
-    // Se verifica la respuesta del mensaje.
-    if (RESPONSE) {
-        // Se define una constante tipo objeto con los datos del registro seleccionado.
-        const FORM = new FormData();
-        FORM.append('idAlumnoCliente', id);
-        // Petición para eliminar el registro seleccionado.
-        const DATA = await fetchData(ALUMNOSCLIENTES_API, 'deleteRow', FORM);
-        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-        if (DATA.status) {
-            // Se muestra un mensaje de éxito.
-            await sweetAlert(1, DATA.message, true);
-            // Se carga nuevamente la tabla para visualizar los cambios.
-            fillTable2();
-        } else {
-            sweetAlert(2, DATA.error, false);
-        }
-    }
-}

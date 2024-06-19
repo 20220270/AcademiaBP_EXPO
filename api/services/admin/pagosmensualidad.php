@@ -60,15 +60,6 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                /*case 'readDetails':
-                if (!$pagos->setIdOrden($_POST['idOrden'])) {
-                    $result['error'] = $pagos->getDataError();
-                } elseif ($result['dataset'] = $pagos->readDetails()) {
-                    $result['status'] = 1;
-                } else {
-                    $result['error'] = 'Detalle de orden inexistente';
-                }
-                break;*/
 
 
             case 'updateRow':
