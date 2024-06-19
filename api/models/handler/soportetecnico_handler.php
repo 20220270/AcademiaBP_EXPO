@@ -79,9 +79,9 @@ class SoporteTecnicoHandler
     //Publico
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_soporte_tecnico(mensaje, estado_mensaje, id_cliente)
-                VALUES(?, ?, ?)';
-        $params = array($this->mensaje, $this->estado, $_SESSION['idCliente']);
+        $sql = 'INSERT INTO tb_soporte_tecnico(mensaje, id_cliente)
+                VALUES(?, ?)';
+        $params = array($this->mensaje, $_SESSION['idCliente']);
         return Database::executeRow($sql, $params);
     }
 }

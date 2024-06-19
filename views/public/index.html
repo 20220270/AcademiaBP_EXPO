@@ -42,7 +42,7 @@
             <div class="tituloCategorias">
                 <h2 class="fw-bold" id="mainTitle"></h2>
             </div>
-        
+
             <div class="container text-center mt-5">
                 <div class="row" id="categorias">
                     <!-- Las categorías se insertarán aquí desde el archivo .js -->
@@ -355,26 +355,51 @@
                 <h2 class="fw-bold">¿Necesitas ayuda?</h2>
             </div>
 
-            <div class="container text-center mt-5">
-                <div class="row">
-                    <div class="col col-lg-7">
-                        <div class="form-floating mb-3 col-12">
-                            <textarea class="form-control text-dark" placeholder="Escribe tus consulta"
-                                id="EspacioConsultas"></textarea>
-                            <label for="EspacioConsultas" class="text-secondary">Escribe tus consultas</label>
-                            <button class="submit rounded-3 w-50 mt-3" id="btnEnviarConsulta" name="btnEnviarConsulta">
-                                <div class="textoboton">Enviar consulta</div>
-                            </button>
+
+            <div class="container text-center mt-5 mb-5">
+                <form action="" id="consultasForm">
+                    <div class="row">
+                        <button class="submit rounded-3 w-50 mt-3 btnEnviarConsulta" type="button" id="botonEnviar" onclick="openCreate()">
+                            <div class="textoboton">Envíanos tu consulta</div>
+                        </button>
+                        <div class="col col-lg-5 col-12 mt-4">
+                            <h6>
+                                O puedes comunicarte al número de teléfono que se encuentra en
+                                la barra de navegación.
+                            </h6>
                         </div>
                     </div>
-                    <div class="col col-lg-5 mt-5 col-12">
-                        <h6>
-                            O puedes comunicarte al número de teléfono que se encuentra en
-                            la barra de navegación.
-                        </h6>
+                </form>
+            </div>
+
+            <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex align-items-center justify-content-between">
+                            <h5 class="modal-title mx-5" id="modalTitle"></h5>
+                            <img src="../../resources/images/logoAcademiaBP.png" alt="..." width="70px" height="70px" class="mx-auto" data-bs-dismiss="modal" id="botonCerrarCo3">
+                        </div>
+                        <div class="modal-body">
+                            <form id="saveForm">
+                                <div class="modal-body row g-3">
+                                    <input type="hidden" id="idSoporte" name="idSoporte">
+                                    <div class="col col-lg-12">
+                                        <div class="form-floating mb-3 col-12">
+                                            <input type="text" name="idSoporte" id="idSoporte" hidden>
+                                            <textarea class="form-control text-dark" placeholder="Escribe tus consulta" id="EspacioConsultas" name="EspacioConsultas"></textarea>
+                                            <label for="EspacioConsultas" class="text-secondary">Escribe tus consultas</label>
+                                            <button class="submit rounded-3 w-50 mt-3 btnEnviarConsulta" type="submit">
+                                                <div class="textoboton">Enviar consulta</div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
+            
 
             <!--Modal para los comentarios-->
             <div class="modal fade" id="modalComentarios" data-bs-backdrop="static" data-bs-keyboard="false"

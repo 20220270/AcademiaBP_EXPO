@@ -31,7 +31,7 @@ class SoporteTecnicoData extends SoporteTecnicoHandler
     public function setMensaje($value, $min = 2, $max = 2000)
     {
         if (!Validator::validateString($value)) {
-            $this->data_error = 'El mensaje no debe contener caracteres especiales';
+            $this->data_error = 'El mensaje no debe contener caracteres especiales ni espacios vacíos';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
             $this->mensaje = $value;

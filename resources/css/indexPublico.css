@@ -245,7 +245,7 @@ main {
   height: 150px;
 }
 
-#btnEnviarConsulta {
+.btnEnviarConsulta {
   background-image: linear-gradient(to right, #59B459, #274E27);
   /*Gradiente para el botón*/
   color: white;
