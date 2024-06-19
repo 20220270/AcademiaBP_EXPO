@@ -76,7 +76,7 @@ class SoporteTecnicoHandler
         return Database::getRow($sql, $params);
     }
 
-    //Publico
+    //Agregar las consultas al sitio público
     public function createRow()
     {
         $sql = 'INSERT INTO tb_soporte_tecnico(mensaje, id_cliente)
