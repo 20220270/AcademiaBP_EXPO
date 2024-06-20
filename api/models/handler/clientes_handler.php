@@ -78,7 +78,7 @@ class ClienteHandler
 
     public function readProfile()
     {
-        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, telefono_cliente, dui_cliente, direccion_cliente, foto_cliente
+        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, telefono_cliente, dui_cliente, direccion_cliente, foto_cliente, fecha_registro
             FROM tb_clientes
             WHERE id_cliente = ?';
         $params = array($_SESSION['idCliente']);

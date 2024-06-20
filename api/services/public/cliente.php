@@ -48,12 +48,14 @@ if (isset($_GET['action'])) {
                     !$cliente->setCorreo($_POST['correoCliente']) or
                     !$cliente->setDireccion($_POST['direccionCliente']) or
                     !$cliente->setDUI($_POST['duiCliente']) or
-                    !$cliente->setTelefono($_POST['telefonoCliente'])
+                    !$cliente->setTelefono($_POST['telefonoCliente']) or
+                    !$cliente->setFotoCliente($_FILES['fotoInput'], $cliente->getFilename())
                 ) {
                     $result['error'] = $cliente->getDataError();
                 } elseif ($cliente->editProfile()) {
                     $result['status'] = 1;
                     $result['message'] = 'Perfil modificado correctamente';
+                    $result['fileStatus'] = Validator::changeFile($_FILES['fotoInput'], $cliente::RUTA_IMAGEN, $cliente->getFilename());
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar el perfil';
                 }
