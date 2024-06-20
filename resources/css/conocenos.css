@@ -13,6 +13,13 @@
 
   }
 
+  /* Estilos para cambiar el color de los iconos de prev y next a negro */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(100%); /* Invierte el color del icono */
+}
+
+
   .conteNav {
     background-color: #408840;
   }
@@ -38,6 +45,8 @@
     border: 2px solid #408840;
     border-radius: 15px;
   }
+
+
 
   /*Ajustamos el cuerpo de la card para que no tenga ni un espacio, para que la imagen abarque toda la parte de arriba y los costados*/
   .card-body {

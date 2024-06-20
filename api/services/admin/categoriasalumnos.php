@@ -103,7 +103,7 @@ if (isset($_GET['action'])) {
                 } elseif ($categoriasalumnos->updateRowAlumno()) {
                     $result['status'] = 1;
                     $result['message'] = 'Campo de categoria modificado correctamente';
-               
+
                     $result['fileStatus'] = Validator::changeFile($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos::RUTA_IMAGEN, $categoriasalumnos->getFilename());
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar la categoria';
@@ -116,7 +116,6 @@ if (isset($_GET['action'])) {
                     !$categoriasalumnos->setFilename()
                 ) {
                     $result['error'] = $categoriasalumnos->getDataError();
-                    
                 } elseif ($categoriasalumnos->deleteRowAlumno()) {
                     $result['status'] = 1;
                     $result['message'] = 'Categoría eliminada correctamente';
@@ -126,7 +125,25 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar esta categoria';
                 }
                 break;
-                
+
+            case 'readAllAlumnosFormativo':
+                if ($result['dataset'] = $categoriasalumnos->readAllAlumnosFormativo()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen niveles registrados';
+                }
+                break;
+
+            case 'readAllAlumnosCompetitivo':
+                if ($result['dataset'] = $categoriasalumnos->readAllAlumnosCompetitivo()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen niveles registrados';
+                }
+                break;
+
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

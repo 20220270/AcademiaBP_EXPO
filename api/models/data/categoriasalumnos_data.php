@@ -95,7 +95,7 @@ class CategoriasAlunmosData extends CategoriasAlumnosHandler
 
     public function setImagenCategoria($file, $filename = null)
     {
-        if (Validator::validateImageFile($file, 1200, 1200)) {
+        if (Validator::validateImageFile($file, 4500, 4000)) {
             $this->imagencategoria = Validator::getFilename();
             return true;
         } elseif (Validator::getFileError()) {

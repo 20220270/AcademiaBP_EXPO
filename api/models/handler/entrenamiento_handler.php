@@ -226,4 +226,19 @@ class EntrenamientoHandler
         $params = array($this->idlugarhorario);
         return Database::executeRow($sql, $params);
     }
+
+    //Mostrar lugares y horarios de entrenamiento en el sitio publico
+    //Esta consulta nos devuelve todos los horarios de entrenamiento separados por un enter, esto por cada lugar de entrenamiento
+    //ya que están agrupados
+    public function readAllHorariosLugares()
+    {
+        $sql = "SELECT le.id_lugar, le.nombre_lugar, le.imagen_lugar, le.URL_lugar,
+                REPLACE(GROUP_CONCAT(CONCAT(he.dia_entrenamiento, ' ', he.hora_inicio, ' - ', he.hor_fin) ORDER BY he.dia_entrenamiento SEPARATOR ', '), ',', CHAR(10)) AS horarios
+                FROM tb_horarios_lugares hl
+                INNER JOIN tb_horarios_entrenamientos he ON hl.id_horario = he.id_horario
+                INNER JOIN tb_lugares_entrenamientos le ON hl.id_lugar = le.id_lugar
+                GROUP BY le.id_lugar, le.nombre_lugar
+                ORDER BY le.id_lugar;";
+        return Database::getRows($sql);
+    }
 }

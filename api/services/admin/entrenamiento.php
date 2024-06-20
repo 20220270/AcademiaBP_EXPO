@@ -258,6 +258,15 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+                case 'readAllHorariosLugares':
+                    if ($result['dataset'] = $entrenamiento->readAllHorariosLugares()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                    } else {
+                        $result['error'] = 'No existen horarios registrados';
+                    }
+                    break;
+
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
