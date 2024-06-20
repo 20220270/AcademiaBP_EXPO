@@ -6,10 +6,13 @@
   box-sizing: border-box;
 }
 
-body,
-input {
+body {
   font-family: "Poppins", sans-serif;
   background: linear-gradient(to right, #1a8d00 20%, #000000 20%);
+}
+input {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(to right, #ffffff 20%, #ffffff 20%);
 }
 
 
@@ -453,6 +456,7 @@ img.logo {
   #sign-up-btn {
     height: 50px;
   }
+
 }
 
 
