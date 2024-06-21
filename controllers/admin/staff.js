@@ -128,8 +128,8 @@ const fillTable = async (form = null) => {
             // Crea y concatena las cards con los datos de cada registro.
             CARD_STAFF.innerHTML += `
                 <div class="col">
-                    <div class="card mb-3">
-                        <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top" height="400px" width="350px">
+                    <div class="card text-bg-dark mb-3">
+                        <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top">
                         <div class="card-body text-start">
                             <h5 class="card-title fs-2 mb-2">${row.id_staff}</h5>
                             <p class="card-text"><b>Nombre completo: </b>${row.nombre_completo} </p>
@@ -169,10 +169,10 @@ const fillTable2 = async (form = null) => {
             // Crea y concatena las cards con los datos de cada registro.
             CARD_STAFFCATEGORIA.innerHTML += `
                 <div class="col">
-                  <div class="card mb-3">
+                  <div class="card text-bg-dark mb-3">
                     <div class="row g-0"> <!-- Utilizar la clase 'row' de Bootstrap para crear una fila -->
                       <div class="col-lg-6">
-                      <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top img-fluid same-height">
+                      <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top img-fluid same-height" height="280px" width="190px">
                        </div>
                          <div class="col-lg-6">
                          <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="card-img-top img-fluid same-height">
