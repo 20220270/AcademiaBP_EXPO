@@ -124,11 +124,11 @@ const fillTable = async (form = null) => {
           CARD_NIVELES_ENTRENAMIENTO.innerHTML += `
           <div class="col-lg-12">
             <div class="card w-100 mt-2">
-                <div class="card-body">
+                <div class="card-body shadow-lg bg-body-tertiary rounded">
         
                     <div class="d-flex align-items-center">
                         <div class="col-md-4 d-flex align-items-center justify-content-center">
-                            <img src="${SERVER_URL}images/niveles/${row.imagen_nivel}" class="" width="100px" height="100px">
+                            <img src="${SERVER_URL}images/niveles/${row.imagen_nivel}" class="" width="500px" height="98px">
                         </div>
                         <div class="col-md-8">
                             <h5 class="card-title mb-2 fs-1">${row.nivel_entrenamiento}</h5>
@@ -169,11 +169,11 @@ const fillTable2 = async (form = null) => {
             CARD_CATEGORIAS_ALUMNOS.innerHTML += `
                 <div class="col-lg-12">
                     <div class="card w-100 mt-2">
-                        <div class="card-body">
+                        <div class="card-body shadow-lg bg-body-tertiary rounded text-bg-dark">
                             
                             <div class="row align-items-center">
                                 <div class="col-md-4 d-flex justify-content-center">
-                                    <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="img-fluid rounded" width="100px" height="100px">
+                                    <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="img-fluid rounded">
                                 </div>
                                 <div class="col-md-8 ">
                                 
