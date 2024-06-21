@@ -146,7 +146,7 @@ const fillTable = async (form = null) => {
         <div class="col-lg-12 col-md-12 col-sm-12 mb-4 mt-5 text-center">
           <div class="card h-100" id="cards">
             <img src="${SERVER_URL}images/categorias_productos/${row.imagen_categoria}" class="card-img-top" height="200px" width="200px">
-            <div class="card-body">
+            <div class="card-body ">
               <h5 class="card-title">${row.categoria_producto}</h5>
                  <div class="d-flex justify-content-center gap-2">
             <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_categoria_producto})">
@@ -181,8 +181,8 @@ const fillTable2 = async (form = null) => {
               <h5 class="card-title">ID: ${row.id_color}</h5>
               <div class="color-display">
                 <h5 class="card-title">Color: #${row.color}</h5>
-                <div class="color-box" style="background-color: #${row.color};"></div>
               </div>
+               <div class="color-box" width="100%" height="20%" style="background-color: #${row.color};"></div>
             </div>
           <div class="d-flex justify-content-center gap-2">
             <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete2(${row.id_color})">
