@@ -169,7 +169,7 @@ const fillTable2 = async (form = null) => {
             
             <div class="d-flex align-items-center">
                 <h5 class="card-title me-3"><b>Color:</b> #${row.color}</h5>
-                <div class="color-box" style="background-color: #${row.color};"></div>
+                <div class="color-box2" width="100%" height="20%"  style="background-color: #${row.color};"></div>
             </div>
             
             <p class="card-text mt-2"><b>Existencias: </b> ${row.existencias_producto}</p>
