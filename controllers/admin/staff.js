@@ -8,13 +8,13 @@ const SEARCH_FORM2 = document.getElementById('searchForm2');
 //const TABLE_BODY = document.getElementById('tableBody'),
 //ROWS_FOUND = document.getElementById('rowsFound');
 
-    CARD_STAFF = document.getElementById('CardStaff');
-    CARD_STAFFCATEGORIA = document.getElementById('cardsStaffCategorias');
+CARD_STAFF = document.getElementById('CardStaff');
+CARD_STAFFCATEGORIA = document.getElementById('cardsStaffCategorias');
 // Constantes para establecer los elementos del componente Modal.
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
 
-    const SAVE_MODAL2 = new bootstrap.Modal('#saveModal2'),
+const SAVE_MODAL2 = new bootstrap.Modal('#saveModal2'),
     MODAL_TITLE2 = document.getElementById('modalTitle2');
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
@@ -24,11 +24,11 @@ const SAVE_FORM = document.getElementById('saveForm'),
     DESCRIPCION_STAFF = document.getElementById('descripcionStaff'),
     IMAGEN_STAFF = document.getElementById('imagenStaff');
 
-    const SAVE_FORM2 = document.getElementById('saveForm2'),
+const SAVE_FORM2 = document.getElementById('saveForm2'),
     ID_STAFFCATEGORIA = document.getElementById('idStaffCategoria'),
     ID_STAFFF = document.getElementById('idStaffAsignar'),
     ID_CATEGORIA = document.getElementById('idCategoriaAsignar');
-   
+
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -44,15 +44,15 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     event.preventDefault();
     const FORM = new FormData(SEARCH_FORM);
     fillTable(FORM);
-  });
-  
-  SEARCH_FORM2.addEventListener('submit', (event) => {
+});
+
+SEARCH_FORM2.addEventListener('submit', (event) => {
     event.preventDefault();
     const FORM2 = new FormData(SEARCH_FORM2);
     fillTable2(FORM2);
-  });
+});
 
-  SAVE_FORM.addEventListener('submit', async (event) => {
+SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
@@ -72,9 +72,9 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     } else {
         sweetAlert(2, DATA.error, false);
     }
-  });
+});
 
-  SAVE_FORM2.addEventListener('submit', async (event) => {
+SAVE_FORM2.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
@@ -94,17 +94,17 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     } else {
         sweetAlert(2, DATA.error, false);
     }
-  });
+});
 
-  const openCreate = () => {
+const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
     MODAL_TITLE.textContent = 'Agregar staff';
     // Se prepara el formulario.
     SAVE_FORM.reset();
-  }
+}
 
-  const openCreate2 = () => {
+const openCreate2 = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL2.show();
     MODAL_TITLE2.textContent = 'Asignar staff y categoría';
@@ -112,9 +112,9 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     SAVE_FORM2.reset();
     fillSelect(STAFFCATEGORIA_API, 'readAllStaffs', 'idStaffAsignar');
     fillSelect(STAFFCATEGORIA_API, 'readAllCategorias', 'idCategoriaAsignar');
-  }
+}
 
-  const fillTable = async (form = null) => {
+const fillTable = async (form = null) => {
     // Inicializa el contenido de las cards.
     CARD_STAFF.innerHTML = '';
     // Verifica la acción a realizar.
@@ -129,7 +129,7 @@ SEARCH_FORM.addEventListener('submit', (event) => {
             CARD_STAFF.innerHTML += `
                 <div class="col">
                     <div class="card mb-3">
-                        <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top" height="350px" width="200px">
+                        <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top" height="400px" width="350px">
                         <div class="card-body text-start">
                             <h5 class="card-title fs-2 mb-2">${row.id_staff}</h5>
                             <p class="card-text"><b>Nombre completo: </b>${row.nombre_completo} </p>
@@ -169,15 +169,15 @@ const fillTable2 = async (form = null) => {
             // Crea y concatena las cards con los datos de cada registro.
             CARD_STAFFCATEGORIA.innerHTML += `
                 <div class="col">
-    <div class="card mb-3">
-        <div class="row g-0"> <!-- Utilizar la clase 'row' de Bootstrap para crear una fila -->
-            <div class="col-lg-6">
-                <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top img-fluid same-height">
-            </div>
-            <div class="col-lg-6">
-                <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="card-img-top img-fluid same-height">
-            </div>
-        </div>
+                  <div class="card mb-3">
+                    <div class="row g-0"> <!-- Utilizar la clase 'row' de Bootstrap para crear una fila -->
+                      <div class="col-lg-6">
+                      <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top img-fluid same-height">
+                       </div>
+                         <div class="col-lg-6">
+                         <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="card-img-top img-fluid same-height">
+                         </div>
+                        </div>
         <div class="card-body text-start">
             <h5 class="card-title fs-2 mb-2">ID: ${row.id_staff_categorias}</h5>
             <p class="card-text"><b>Categoría: </b> ${row.categoria}</p>
@@ -224,14 +224,14 @@ const openUpdate = async (id) => {
     } else {
         sweetAlert(2, DATA.error, false);
     }
-  }
-  
-  /*
-  *   Función asíncrona para eliminar un registro.
-  *   Parámetros: id (identificador del registro seleccionado).
-  *   Retorno: ninguno.
-  */
-  const openDelete = async (id) => {
+}
+
+/*
+*   Función asíncrona para eliminar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openDelete = async (id) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
     const RESPONSE = await confirmAction('¿Desea eliminar este dato de forma permanente?');
     // Se verifica la respuesta del mensaje.
@@ -251,9 +251,9 @@ const openUpdate = async (id) => {
             sweetAlert(2, DATA.error, false);
         }
     }
-  }
+}
 
-  const openUpdate2 = async (id) => {
+const openUpdate2 = async (id) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idStaffCategoria', id);
@@ -270,18 +270,18 @@ const openUpdate = async (id) => {
         const ROW = DATA.dataset;
         ID_STAFFCATEGORIA.value = ROW.id_staff_categorias;
         fillSelect(STAFFCATEGORIA_API, 'readAllStaffs', 'idStaffAsignar', ROW.id_staff);
-        fillSelect(STAFFCATEGORIA_API, 'readAllCategorias', 'idCategoriaAsignar' , ROW.id_categoria_alumno);
+        fillSelect(STAFFCATEGORIA_API, 'readAllCategorias', 'idCategoriaAsignar', ROW.id_categoria_alumno);
     } else {
         sweetAlert(2, DATA.error, false);
     }
-  }
-  
-  /*
-  *   Función asíncrona para eliminar un registro.
-  *   Parámetros: id (identificador del registro seleccionado).
-  *   Retorno: ninguno.
-  */
-  const openDelete2 = async (id) => {
+}
+
+/*
+*   Función asíncrona para eliminar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openDelete2 = async (id) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
     const RESPONSE = await confirmAction('¿Desea eliminar este dato de forma permanente?');
     // Se verifica la respuesta del mensaje.
@@ -301,4 +301,4 @@ const openUpdate = async (id) => {
             sweetAlert(2, DATA.error, false);
         }
     }
-  }
+}

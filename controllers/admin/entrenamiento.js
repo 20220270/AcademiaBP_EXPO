@@ -169,7 +169,7 @@ const fillTable = async (form = null) => {
             CARDS_HORARIOS.innerHTML += `
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">Horario ${row.id_horario}</h5>
+                        <h5 class="card-title fw-bold mb-4"> Horario ${row.id_horario}</h5>
                         <div class="d-flex flex-column">
                             <div class="text-start mb-3">
                                 <label>Día de entrenamiento:</label>
@@ -225,7 +225,7 @@ const fillTable2 = async (form = null) => {
                 <div class="card container text-center mb-3">
                     <div class="row">
                         <div class="col col-lg-12 col-sm-12 col-md-12 imagenContenedor">
-                            <img src="${SERVER_URL}images/lugares_entreno/${row.imagen_lugar}" class="card-img-top">
+                            <img src="${SERVER_URL}images/lugares_entreno/${row.imagen_lugar}" class="card-img-top" width="35 0" height="300">
                                 </div>
                                     <div class="col">
                                         <div class="card-body">
