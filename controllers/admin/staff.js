@@ -129,7 +129,7 @@ SEARCH_FORM.addEventListener('submit', (event) => {
             CARD_STAFF.innerHTML += `
                 <div class="col">
                     <div class="card mb-3">
-                        <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top">
+                        <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top" height="350px" width="200px">
                         <div class="card-body text-start">
                             <h5 class="card-title fs-2 mb-2">${row.id_staff}</h5>
                             <p class="card-text"><b>Nombre completo: </b>${row.nombre_completo} </p>

@@ -20,7 +20,7 @@ const SAVE_MODAL2 = new bootstrap.Modal('#saveModal2'),
   MODAL_TITLE2 = document.getElementById('modalTitle2');
 
 const SAVE_MODAL3 = new bootstrap.Modal('#saveModal3'),
-MODAL_TITLE3 = document.getElementById('modalTitle3');
+  MODAL_TITLE3 = document.getElementById('modalTitle3');
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
   ID_CATEGORIA = document.getElementById('idCategoriaProducto'),
@@ -31,7 +31,7 @@ const SAVE_FORM2 = document.getElementById('saveForm2'),
   ID_COLOR = document.getElementById('idColorProducto'),
   NOMBRE_COLOR = document.getElementById('colorHex');
 
-  const SAVE_FORM3 = document.getElementById('saveForm3'),
+const SAVE_FORM3 = document.getElementById('saveForm3'),
   ID_TALLA = document.getElementById('idTallaProducto'),
   TALLA = document.getElementById('talla');
 
@@ -145,12 +145,10 @@ const fillTable = async (form = null) => {
       CARD_CATEGORIAS.innerHTML += `
         <div class="col-lg-12 col-md-12 col-sm-12 mb-4 mt-5 text-center">
           <div class="card h-100" id="cards">
-            <img src="${SERVER_URL}images/categorias_productos/${row.imagen_categoria}" class="card-img-top" height="250px" width="250px">
+            <img src="${SERVER_URL}images/categorias_productos/${row.imagen_categoria}" class="card-img-top" height="200px" width="200px">
             <div class="card-body">
               <h5 class="card-title">${row.categoria_producto}</h5>
-            </div>
-          </div>
-          <div class="d-flex justify-content-center gap-2">
+                 <div class="d-flex justify-content-center gap-2">
             <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_categoria_producto})">
               <i class="bi bi-search"></i>
               <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
@@ -159,6 +157,8 @@ const fillTable = async (form = null) => {
               <i class="bi bi-x-square-fill"></i>
               <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
             </button>
+          </div>
+            </div>
           </div>
         </div>
       `;
@@ -214,9 +214,7 @@ const fillTable3 = async (form = null) => {
             <div class="card-body">
               <h5 class="card-title">ID: ${row.id_talla}</h5>
               <p>Talla: ${row.talla}</p>
-            </div>
-          </div>
-          <div class="d-flex justify-content-center gap-2">
+              <div class="d-flex justify-content-center gap-2">
             <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete3(${row.id_talla})">
               <i class="bi bi-search"></i>
               <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
@@ -225,6 +223,8 @@ const fillTable3 = async (form = null) => {
               <i class="bi bi-x-square-fill"></i>
               <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
             </button>
+          </div>
+            </div>
           </div>
         </div>
       `;
