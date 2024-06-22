@@ -85,10 +85,10 @@ const fillTable = async (form = null) => {
             CARD_ALUMNOS.innerHTML += `
             <div class="col-md-8 mb-3" id="cardDiasPagos">
                 <div class="card h-100">
-                    <div class="card-body text-center position-relative">
+                    <div class="card-body">
                         <!-- Círculo indicador del estado -->
                         <div class="status-circle ${row.estado_alumno === 'Activo' ? 'activo' : 'inactivo'}"></div>
-                        <h5 class="card-title text-dark"><b>ID: </b>${row.id_alumno}</h5>
+                        <h5 class="card-title"><b>ID: </b>${row.id_alumno}</h5>
                         <p class="card-text"><b>Nombre del alumno: </b>${row.nombre_alumno} ${row.apellido_alumno}</p>
                         <p class="card-text"><b>Encargado del alumno: </b>${row.Encargado}</p>
                         <p class="card-text"><b>Fecha de nacimiento: </b>${row.fecha_nacimiento}</p>
