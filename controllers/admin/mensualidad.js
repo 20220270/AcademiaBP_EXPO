@@ -173,7 +173,7 @@ const fillTable = async (form = null) => {
         DATA.dataset.forEach(row => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             CARD_DIASPAGOS.innerHTML += `
-            <div class="col-md-4 mb-3" id="cardDiasPagos">
+            <div class="col-md-12 mb-3" id="cardDiasPagos">
                 <div class="card">
                     <div class="card-body text-start">
                         <h5 class="card-title">ID: ${row.id_dia_pago}</h5>

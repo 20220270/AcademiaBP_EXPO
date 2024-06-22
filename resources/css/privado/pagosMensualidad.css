@@ -213,9 +213,10 @@ a{
     max-width: 400px; /* Ancho máximo de las tarjetas */
     padding: 20px;
     background-color: #f9f9f9;
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 
 .card-body {
     text-align: center;
@@ -249,7 +250,8 @@ button:hover {
 }
 
 #columna2 {
-    height: 360px; /* Altura fija del contenedor */
+    align-items: center;
+    height: 500px; /* Altura fija del contenedor */
     overflow-y: auto; /* Permitir desplazamiento vertical */
     overflow-x: auto; /* Permitir desplazamiento vertical */
 }
