@@ -225,7 +225,7 @@ const fillTable2 = async (form = null) => {
                 <div class="card container text-center mb-3">
                     <div class="row">
                         <div class="col col-lg-12 col-sm-12 col-md-12 imagenContenedor">
-                            <img src="${SERVER_URL}images/lugares_entreno/${row.imagen_lugar}" class="card-img-top" width="35 0" height="300">
+                            <img src="${SERVER_URL}images/lugares_entreno/${row.imagen_lugar}" class="card-img-top" width="200" height="200">
                                 </div>
                                     <div class="col">
                                         <div class="card-body">
