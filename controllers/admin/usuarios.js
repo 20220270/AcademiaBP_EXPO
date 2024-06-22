@@ -140,11 +140,11 @@ SEARCH_FORM.addEventListener('submit', (event) => {
                                 <button type="button" class="btn btn-sm" onclick="openUpdate(${row.id_administrador})">
                                      <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button>
-                                <button type="button" class="btn  btn-sm" onclick="openDelete(${row.id_administrador})">
+                                <button type="button" class="btn btn-sm" onclick="openDelete(${row.id_administrador})">
                                     <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button>
                             </div>
-                            <h5 class="card-title mb-2 fs-1">${row.alias_administrador}</h5>
+                            <h5 class="card-title text-dark mb-5 fs-1"><b>${row.alias_administrador}</b></h5>
                             <p class="card-text">Nombre: ${row.nombre_admistrador}</p>
                             <p class="card-text">Apellido: ${row.apellido_administrador}</p>
                             <p class="card-text">Dui: ${row.dui_administrador}</p>
