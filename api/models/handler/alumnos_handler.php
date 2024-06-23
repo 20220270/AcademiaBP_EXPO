@@ -34,28 +34,46 @@ class AlumnosHandler
         INNER JOIN tb_clientes using(id_cliente)
         WHERE nombre_alumno LIKE ? OR apellido_alumno LIKE ? OR categoria LIKE ? OR nombre_staff LIKE ? OR apellido_staff LIKE ? OR numero_dias LIKE ? OR estado_alumno LIKE ?
         ORDER BY id_alumno";
-        $params = array($value, $value, $value , $value , $value , $value, $value);
+        $params = array($value, $value, $value, $value, $value, $value, $value);
         return Database::getRows($sql, $params);
     }
 
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_alumnos(nombre_alumno, apellido_alumno, fecha_nacimiento, posicion_alumno, id_staff_categorias, id_dia_pago, estado_alumno, id_cliente)
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->apellido, $this->fechanacimiento, $this->posicion, $this->idstaffcategoria, $this->ididaspago, $this->estado, $this->idcliente);
+        // Llamada al procedimiento almacenado
+        $sql = 'CALL sp_insert_alumno(?, ?, ?, ?, ?, ?)';
+
+        $params = array($this->nombre, $this->apellido, $this->fechanacimiento, $this->posicion, $this->ididaspago, $this->idcliente);
         return Database::executeRow($sql, $params);
     }
 
+
     public function readAll()
     {
-        $sql = "SELECT id_alumno, nombre_alumno, apellido_alumno, fecha_nacimiento, posicion_alumno, estado_alumno, categoria, nombre_staff, apellido_staff, numero_dias, mensualidad_pagar,
-        CONCAT(nombre_cliente, ' ', apellido_cliente) as 'Encargado' FROM tb_alumnos
-        INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
-        INNER JOIN tb_categorias_alumnos USING(id_categoria_alumno)
-        INNER JOIN tb_staffs USING (id_staff)
-        INNER JOIN tb_dias_pagos USING (id_dia_pago)
-        INNER JOIN tb_clientes using(id_cliente)
-                ORDER BY id_alumno";
+        $sql = "SELECT id_alumno, nombre_alumno, apellido_alumno, fecha_nacimiento, 
+    TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad,
+    posicion_alumno, 
+    estado_alumno, 
+    categoria, 
+    nombre_staff, 
+    apellido_staff, 
+    numero_dias, 
+    mensualidad_pagar,
+    CONCAT(nombre_cliente, ' ', apellido_cliente) AS 'Encargado' 
+FROM 
+    tb_alumnos
+INNER JOIN 
+    tb_staffs_categorias USING (id_staff_categorias)
+INNER JOIN 
+    tb_categorias_alumnos USING(id_categoria_alumno)
+INNER JOIN 
+    tb_staffs USING (id_staff)
+INNER JOIN 
+    tb_dias_pagos USING (id_dia_pago)
+INNER JOIN 
+    tb_clientes USING(id_cliente)
+ORDER BY 
+    id_alumno;";
         return Database::getRows($sql);
     }
 

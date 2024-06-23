@@ -74,20 +74,16 @@ const loadTemplate = async () => {
                             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                                 <ul class="navbar-nav me-auto">
 
-                                    <li class="nav-item col-lg-3 col-md-12 text-start"><a class="nav-link me-2 text-white" href="index.html#categorias">
+                                    <li class="nav-item col-lg-5 col-md-12 text-start"><a class="nav-link me-2 text-white" href="index.html#categorias">
                                             <img src="../../resources/images/categorias.png" alt="..." width="20px"
                                                 height="20px" class="me-2">Categorías</a>
                                     </li>
 
-                                    <li class="nav-item col-lg-5 col-md-12 text-start"><a class="nav-link me-3 text-white" href="pagomensualidad.html">
-                                            <img src="../../resources/images/mensualidad.png" alt="..." width="20px"
-                                                height="20px" class="me-1"> Pagos de mensualidad</a></li>
-
-                                    <li class="nav-item col-lg-4 col-md-12 text-start"><a class="nav-link me-3 text-white" href="miscompras.html">
+                                    <li class="nav-item col-lg-6 col-md-12 text-start"><a class="nav-link me-3 text-white" href="miscompras.html">
                                             <img src="../../resources/images/cesta.png" alt="..." width="25px"
                                                 height="25px" class="me-1"> Mis compras</a></li>
 
-                                    <li class="nav-item col-lg-3 col-md-12 text-start">
+                                    <li class="nav-item col-lg-5 col-md-12 text-start">
                                         <a class="nav-link me-2 text-white" href="conocenos.html">
                                             <img src="../../resources/images/nosotros.png" class="me-1" alt="..."
                                                 height="25px" width="25px">

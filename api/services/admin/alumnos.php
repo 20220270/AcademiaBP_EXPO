@@ -31,9 +31,7 @@ if (isset($_GET['action'])) {
                     !$alumno->setApellido($_POST['apellidoAlumno']) or
                     !$alumno->setNacimiento($_POST['fechaNacimiento']) or
                     !$alumno->setPosicion($_POST['selectPosicion']) or
-                    !$alumno->setIdStaffCategoria($_POST['selectCategoriaEncargado']) or
                     !$alumno->setIdDiasPago($_POST['selectDias']) or
-                    !$alumno->setEstado($_POST['selectEstado']) or
                     !$alumno->setIdCliente($_POST['selectEncargado'])
                 ) {
                     $result['error'] = $alumno->getDataError();

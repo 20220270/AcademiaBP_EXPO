@@ -91,7 +91,7 @@ const fillTable = async (form = null) => {
                         <h5 class="card-title"><b>ID: </b>${row.id_alumno}</h5>
                         <p class="card-text"><b>Nombre del alumno: </b>${row.nombre_alumno} ${row.apellido_alumno}</p>
                         <p class="card-text"><b>Encargado del alumno: </b>${row.Encargado}</p>
-                        <p class="card-text"><b>Fecha de nacimiento: </b>${row.fecha_nacimiento}</p>
+                        <p class="card-text"><b>Fecha de nacimiento: </b>${row.fecha_nacimiento} Edad: ${row.edad}</p>
                         <p class="card-text"><b>Posición del alumno: </b>${row.posicion_alumno}</p>
                         <p class="card-text"><b>Categoría: </b>${row.categoria}</p>
                         <p class="card-text"><b>Encargado de la categoría: </b>${row.nombre_staff} ${row.apellido_staff}</p>
@@ -127,6 +127,8 @@ const openCreate = () => {
     fillSelect(ALUMNOS_API, 'readAllStaffCategorias', 'selectCategoriaEncargado');
     fillSelect(ALUMNOS_API, 'readAllDiasPago', 'selectDias');
     fillSelect(CLIENTES_API, 'readAll', 'selectEncargado');
+
+    
 }
 
 
