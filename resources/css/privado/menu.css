@@ -1,4 +1,4 @@
-.chartCard {
+/*.chartCard {
   width: 100vw;
   display: flex;
   align-items: center;
@@ -41,4 +41,38 @@ body {
 
 main {
   margin-top: 50px;
+}*/
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#calendar {
+  border: 3px solid #000;
+     
+    flex: 1;
+    overflow-y: auto;
+    max-height: 90%;
+}
+
+#columaCards{
+  display: none;
+}
+
+
+.fc-daygrid-day-number,
+.fc-col-header-cell-cushion {
+  color: #408840;
+  background-color: transparent !important;
+}
+
