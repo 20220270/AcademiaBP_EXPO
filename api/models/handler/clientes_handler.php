@@ -100,7 +100,6 @@ class ClienteHandler
         }
     }
 
-   
 
     public function editProfile()
     {
@@ -110,6 +109,9 @@ class ClienteHandler
         $params = array($this->imagen, $this->nombre, $this->apellido, $this->correo, $this->dui, $this->telefono, $this->direccion, $_SESSION['idCliente']);
         return Database::executeRow($sql, $params);
     }
+
+
+
 
     /* funcion para cambiar el estado del cliente 
     
@@ -167,9 +169,9 @@ class ClienteHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_clientes(nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, direccion_cliente, clave_cliente, foto_cliente)
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->apellido, $this->correo, $this->dui, $this->telefono, $this->direccion, $this->clave , $this->imagen);
+        $sql = 'INSERT INTO tb_clientes(nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, direccion_cliente, clave_cliente, foto_cliente, estado_cliente)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        $params = array($this->nombre, $this->apellido, $this->correo, $this->dui, $this->telefono, $this->direccion, $this->clave , $this->imagen, $this->estado);
         return Database::executeRow($sql, $params);
     }
 
@@ -205,6 +207,24 @@ class ClienteHandler
                 FROM tb_clientes
                 WHERE id_cliente = ?';
         $params = array($this->id);
+        return Database::getRow($sql, $params);
+    }
+
+    
+    
+    public function readAlumnos()
+    {
+        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ', apellido_alumno) as nombre,
+                TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) as edad,
+                categoria,
+                numero_dias
+                FROM tb_alumnos
+                INNER JOIN tb_clientes USING (id_cliente)
+                INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
+                INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
+                INNER JOIN tb_dias_pagos USING (id_dia_pago)
+                WHERE correo_cliente = ?";
+        $params = array($this->correo);
         return Database::getRow($sql, $params);
     }
 }

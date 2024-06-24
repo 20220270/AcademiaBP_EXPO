@@ -181,10 +181,6 @@ a{
 }
 
 
-.card-container {
-    display: flex; /* Display flex para colocar las cards en línea */
-    gap: 0px; /* Espacio entre las cards */
-}
 
 .card {
     margin: 7px;
@@ -202,7 +198,7 @@ a{
 .card-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Espacio entre las tarjetas */
+    gap: 10px; /* Espacio entre las tarjetas */
     max-width: 100%; /* Ancho máximo del contenedor */
     overflow-y: auto; /* Agregar barra de desplazamiento vertical si es necesario */
 }
@@ -249,12 +245,6 @@ button:hover {
     color: #0056b3; /* Color azul más oscuro al pasar el mouse */
 }
 
-#columna2 {
-    align-items: center;
-    height: 500px; /* Altura fija del contenedor */
-    overflow-y: auto; /* Permitir desplazamiento vertical */
-    overflow-x: auto; /* Permitir desplazamiento vertical */
-}
 
 /* Clase para el estado de pago "Pagado" */
 .pagado {
@@ -307,5 +297,15 @@ input[type=range]::-moz-range-thumb {
 
 .titulo-card {
     font-size: 1.4rem;
+}
+
+#contenedor1{
+    max-height: 190px;
+    overflow-x: auto;
+}
+
+#contenedor2{
+    max-height: 210px;
+    overflow-y: auto;
 }
 

@@ -15,15 +15,19 @@
 
     <div class="container" id="container">
         <div class="form-container inscripcion">
-            <form>
+            <form class="row" id="alumnoForm">
                 <!--Formulario de inscripción-->
-                <h1 class="mb-4">¡Inscribe a tu hijo!</h1>
+                <h1 class="mb-4" id="mainTitle"></h1>
                 <span class="mb-4">Completa los siguientes campos para que puedas inscribir a tu hijo en La Academia BP:
                     Ingresa el nombre, apellido, fecha de nacimiento y posición en la que se inscribirá tu hijo.
                     ¡Automáticamente asignaremos la categoría para tu hijo! </span>
-                <input type="text" placeholder="Ingresar nombres" class="col-lg-12 col-md-12 col-sm-12 col-12">
-                <input type="text" placeholder="Ingresa apellidos" class="col-lg-12 col-md-12 col-sm-12 col-12">
-                <input type="date" class="col-lg-12 col-md-12 col-sm-12 col-12 col-12">
+                    <input type="text" id="idAlumno" name="idAlumno" hidden>
+                <input type="text" id="nombreAlumno" name="nombreAlumno" placeholder="Ingresar nombres"
+                    class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <input type="text" id="apellidoAlumno" name="apellidoAlumno" placeholder="Ingresa apellidos"
+                    class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento"
+                    class="col-lg-12 col-md-12 col-sm-12 col-12 col-12">
                 <div class="col-sm-12 col-md-12">
                     <label for="selectPosicion" class="col-sm-7 col-form-label">Posición en la que se
                         inscribirá:</label>
@@ -36,13 +40,12 @@
 
                 <div class="col-sm-12 col-md-12">
                     <label for="Categoria" class="col-sm-7 col-form-label">Número de días que entrenará:</label>
-                    <select class="form-select" id="selectCategoria" name="selectCategoria"
-                        aria-label="Default select example">
-                        
+                    <select class="form-select" id="selectDias" name="selectDias" aria-label="Default select example">
+
                     </select>
                 </div>
 
-                <button>Enviar datos</button>
+                <button type="submit">Enviar datos</button>
             </form>
             <!--Contenedor con el logo de la Academia-->
             <div class="toggle-container ">
@@ -57,7 +60,12 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
 
+    <script src="../../controllers/utils/sweetalert.min.js"></script>
+    <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/public/inscripcion.js"></script>
 </body>
 

@@ -244,6 +244,14 @@ a.sidebar-link:hover {
     /* Deshabilita el desplazamiento horizontal */
 }
 
+#content1{
+    max-height: 660px;
+    /* Define la altura máxima del div scroll */
+    overflow-y: auto;
+    /* Habilita el desplazamiento vertical */
+    overflow-x: hidden;
+}
+
 .scrollable-cards {
     max-height: 400px;
     /* Define la altura máxima del div scroll */

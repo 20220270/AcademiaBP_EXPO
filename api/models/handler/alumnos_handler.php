@@ -121,9 +121,11 @@ ORDER BY
 
     public function createRowAlumno()
     {
-        $sql = 'INSERT INTO tb_alumnos(nombre_alumno, apellido_alumno, fecha_nacimiento, posicion_alumno, id_staff_categorias, id_dia_pago, estado_alumno, id_cliente)
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->apellido, $this->fechanacimiento, $this->posicion, $this->idstaffcategoria, $this->ididaspago, $this->estado, $_SESSION['idCliente']);
+        // Llamada al procedimiento almacenado
+        $sql = 'CALL sp_insert_alumno(?, ?, ?, ?, ?, ?)';
+
+        $params = array($this->nombre, $this->apellido, $this->fechanacimiento, $this->posicion, $this->ididaspago, $_SESSION['idCliente']);
         return Database::executeRow($sql, $params);
     }
+
 }

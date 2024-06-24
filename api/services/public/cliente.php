@@ -76,6 +76,16 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+                case 'readAlumnos':
+                    if (!$cliente->setCorreo($_POST['correoCliente'])) {
+                        $result['error'] = $cliente->getDataError();
+                    } elseif ($result['dataset'] = $cliente->readAlumnos()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Cliente inexistente';
+                    }
+                    break;
+
 
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';

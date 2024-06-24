@@ -33,12 +33,17 @@ class DetallesPagosMensualidadHandler
     }
 
     public function createRow()
-    {
-        $sql = 'INSERT INTO tb_detalles_pagos(id_pago, descripcion_pago, fecha_proximo_pago)
-                VALUES(?, ?, ?)';
-        $params = array($this->idpago,  $this->descripcionpago, $this->fechaproximopago);
-        return Database::executeRow($sql, $params);
-    }
+{
+    // Llamar al procedimiento almacenado que inserta el detalle de pago y calcula fecha_proximo_pago
+    $sql = 'CALL insertar_detalle_pago(?, ?, @id_detalle_pago)';
+    $params = array($this->idpago, $this->descripcionpago);
+    
+    // Ejecutar la consulta
+    return Database::executeRow($sql, $params);
+}
+
+
+    
 
     public function readAll()
     {

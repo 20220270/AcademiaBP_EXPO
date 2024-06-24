@@ -36,9 +36,8 @@ class PagosMensualidadHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_pagos(cuotas_anuales, id_alumno, estado_pago)
-                VALUES(?, ?, ?)';
-        $params = array($this->cuotasanuales, $this->idalumno, $this->estado);
+        $sql = 'CALL insertar_pago(?)';
+        $params = array($this->idalumno);
         return Database::executeRow($sql, $params);
     }
 
@@ -67,9 +66,9 @@ class PagosMensualidadHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_pagos
-                SET estado_pago = ?, id_alumno = ?, cuotas_anuales = ?
+                SET estado_pago = ?, id_alumno = ?
                 WHERE id_pago = ?';
-        $params = array($this->estado, $this->idalumno, $this->cuotasanuales, $this->idpago);
+        $params = array($this->estado, $this->idalumno, $this->idpago);
         return Database::executeRow($sql, $params);
     }
 

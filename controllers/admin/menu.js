@@ -78,9 +78,9 @@ const fillTable = async (form = null) => {
                 title: `${row.nombre_alumno} ${row.apellido_alumno}`,
                 start: new Date(new Date().getFullYear(), mes, dia), // Fecha de cumpleaños de este año
                 allDay: true,
-                 backgroundColor: 'green',
-                 image: imageUrl
-                //Por defecto, el calendario muestra el nombre del alumno con fondo azul
+                 backgroundColor: 'green', //Por defecto, el calendario muestra el nombre del alumno con fondo azul
+                 
+                
             };
             
             // Agregamos evento de cumpleaños al array

@@ -37,7 +37,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = $alumno->getDataError();
                 } elseif ($alumno->createRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Alumno registrada correctamente';
+                    $result['message'] = 'Alumno registrado correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al registrar el alumno';
                 }
@@ -75,7 +75,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = $alumno->getDataError();
                 } elseif ($alumno->updateRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Alumno modificada correctamente';
+                    $result['message'] = 'Alumno modificado correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar datos del alumno';
                 }

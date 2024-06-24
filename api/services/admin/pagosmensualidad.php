@@ -28,9 +28,8 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$pagos->setCuotasAnuales($_POST['cuotasApagar']) or
-                    !$pagos->setIdAlumnoCliente($_POST['SelectDatosPago']) or
-                    !$pagos->setEstado($_POST['selectEstado'])
+                    
+                    !$pagos->setIdAlumnoCliente($_POST['SelectDatosPago'])
                 ) {
                     $result['error'] = $pagos->getDataError();
                 } elseif ($pagos->createRow()) {
@@ -66,7 +65,6 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$pagos->setIdPago($_POST['idPagoARealizar']) or
-                    !$pagos->setCuotasAnuales($_POST['cuotasApagar']) or
                     !$pagos->setIdAlumnoCliente($_POST['SelectDatosPago']) or
                     !$pagos->setEstado($_POST['selectEstado'])
                 ) {

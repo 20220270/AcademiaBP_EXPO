@@ -28,8 +28,7 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$detallemensualidad->setIdPago($_POST['idPagoRealizado']) or
-                    !$detallemensualidad->setDescripcion($_POST['descripcionPago']) or
-                    !$detallemensualidad->setFechaProximoPago($_POST['proximoPago'])
+                    !$detallemensualidad->setDescripcion($_POST['descripcionPago'])
                 ) {
                     $result['error'] = $detallemensualidad->getDataError();
                 } elseif ($detallemensualidad->createRow()) {
@@ -39,6 +38,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al registrar este detalle';
                 }
                 break;
+
             case 'readAll':
                 if ($result['dataset'] = $detallemensualidad->readAll()) {
                     $result['status'] = 1;

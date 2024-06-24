@@ -445,7 +445,6 @@ const openUpdate2 = async (id) => {
         const ROW = DATA.dataset;
 
         ID_PAGO.value = ROW.id_pago;
-        CUOTAS_A_PAGAR.value = ROW.cuotas_anuales;
         ESTADO_PAGO.value = ROW.estado_pago;
 
         fillSelect(MENSUALIDAD_API, 'readAllAlumnosCliente', 'SelectDatosPago', ROW.id_alumno);
@@ -535,7 +534,7 @@ const openDelete3 = async (id) => {
         const FORM = new FormData();
         FORM.append('idDetallePagoMensualidad', id);
         // Petición para eliminar el registro seleccionado.
-        const DATA = await fetchData(MENSUALIDAD_API, 'deleteRow', FORM);
+        const DATA = await fetchData(DETALLESMENSUALIDAD_API, 'deleteRow', FORM);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
             // Se muestra un mensaje de éxito.

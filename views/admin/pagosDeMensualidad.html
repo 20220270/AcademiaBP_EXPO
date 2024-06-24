@@ -39,13 +39,13 @@
                 </div>
 
 
-                <div class="row mt-5" id="columna2">
-                    <div class="col-md-12 mt-5">
-                        <div class="row">
-                            <div class="col-md-12">
+                <div class="row" id="columna2">
+                    <div class="col-md-12">
+                        <div class="row" id="contenedor1">
+                            <div class="col-md-4">
                                 <div class="row">
-                                    <div class="container mt-5 col-md-3 col-lg-4">
-                                        <h4><b>Registrar días de entrenamiento y cuotas</b></h4>
+                                    <div class="container col-md-12">
+                                        <h5><b>Registrar días de entrenamiento y cuotas</b></h5>
                                         <div class="col-6 offset-3 d-flex justify-content-center">
                                             <!-- Añadimos una clase offset-3 para centrar el buscador -->
                                             <form class="d-flex flex-grow-1" id="searchForm">
@@ -79,12 +79,10 @@
                                 </div>
 
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-8">
                                 <!-- Columna para la tabla -->
-                                <div class="col-md-12 col-lg-8 container mt-5">
+                                <div class="col-md-12 col-lg-12 container">
                                     <div class="container">
                                         <h4><b>Tabla de pagos</b></h4>
                                         <div class="col-6 offset-3 d-flex justify-content-center">
@@ -141,13 +139,15 @@
                                 </div>
 
                             </div>
+
                         </div>
-                        <div class="row">
+
+                        <div class="row mt-2" id="contenedor2">
                             <div class="col-md-12">
-                                <div class="row mt-5">
+                                <div class="row">
                                     <!-- Columna para la tabla -->
                                     <div class="col-md-12 col-lg-12 mx-auto">
-                                        <div class="container mt-5">
+                                        <div class="container">
                                             <h4><b>Datos para boleta de pago</b></h4>
                                             <div class="col-6 offset-3 d-flex justify-content-center">
                                                 <!-- Añadimos una clase offset-3 para centrar el buscador -->
@@ -275,21 +275,6 @@
                                 </select>
                             </div>
 
-                            <div class="col-sm-12 col-md-6">
-                                <label for="cuotasApagar" class="col-sm-7 col-form-label">Cuotas a pagar:</label>
-                                <input id="cuotasApagar" type="number" name="cuotasApagar" class="form-control" min="1"
-                                    max="12" step="1" required>
-                            </div>
-
-                            <div class="col-sm-12 col-md-6 mt-4">
-                                <!-- Dropdown para el estado del usuario -->
-                                <label class="form-label">Estado del pago:</label>
-                                <select class="form-select mb-2" id="selectEstado" name="selectEstado" required>
-                                    <option>Pagado</option>
-                                    <option>Pendiente de pago</option>
-                                </select>
-                            </div>
-
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-dark" id="btnGuardar"
@@ -329,10 +314,6 @@
                                     pago:</label>
                                 <input id="descripcionPago" type="text" name="descripcionPago" class="form-control"
                                     required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="nombreValor" class="col-sm-7 col-form-label">Fecha del próximo pago:</label>
-                                <input id="proximoPago" type="date" name="proximoPago" class="form-control" required>
                             </div>
 
 
