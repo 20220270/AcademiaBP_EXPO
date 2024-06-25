@@ -1,0 +1,30 @@
+body {
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+
+#productos .card {
+    height: 100%; /* Asegura que todas las cards tengan la misma altura */
+}
+
+.card-body {
+    flex-direction: column;
+}
+.card-img-top {
+    object-fit: cover; 
+    width: 90%;
+    margin: auto;
+
+}
+
+#mainTitle{
+    margin-top: 4rem;
+}
+
+#btnVermas{
+    background-color: #408840;
+    color: #fff;
+}

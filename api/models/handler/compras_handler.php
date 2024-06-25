@@ -124,7 +124,7 @@ class ComprasHandler
         if ($this->getOrder()) {
             return true;
         } else {
-            $sql = 'INSERT INTO tb_compras(direccion_orden, id_cliente, estado_compra)
+            $sql = 'INSERT INTO tb_compras(direccion_compra, id_cliente, estado_compra)
                     VALUES((SELECT direccion_cliente FROM tb_clientes WHERE id_cliente = ?), ?, ?)'; //Se manda la direccion dependiendo el ID del cliente
             $params = array($_SESSION['idCliente'], $_SESSION['idCliente'], $this->estadocompra);
             // Se obtiene el ultimo valor insertado de la llave primaria en la tabla pedido.
@@ -140,7 +140,7 @@ class ComprasHandler
     public function createDetail()
     {
         // Se realiza una subconsulta para obtener el precio del producto.
-        $sql = 'INSERT INTO tb_detalles_compras(id_detalle_producto, cantidad_producto, id_orden)
+        $sql = 'INSERT INTO tb_detalles_compras(id_detalle_producto, cantidad_producto, id_compra)
                 VALUES(?, ?, ?)';
         $params = array($this->producto, $this->cantidad, $_SESSION['idCompra']);
        

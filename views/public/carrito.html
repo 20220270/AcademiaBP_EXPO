@@ -24,75 +24,6 @@
         <h3 class="text-center">Carrito de compras</h3>
 
 
-        <!--Cometario-->
-        <!--Card con la informacion de la compra-->
-        <div class="d-flex justify-content-center text-center mt-4 " id="carrito-container">
-            <div class="card col-lg-8 col-md-10 col-sm-10 col-10">
-                <div class="container text-center">
-                    <div class="row">
-                        <div class="col col-lg-3 col-md-6 col-sm-12 col-12 ">
-                            <img src="../../resources/images/imagenTmochilas.png" class="card-img mt-4 mb-4" alt="..."
-                                height="220px">
-                        </div>
-                        <div class="col col-lg-8 col-md-6 col-12">
-                            <div class="card-body">
-                                <div class="container text-center">
-                                    <div class="row">
-                                        <div
-                                            class="col col-lg-6 col-md-6 col-sm-7 d-flex justify-content-center align-items-center mt-4 datosProducto">
-                                            <div class="d-flex flex-column align-items-center ">
-
-                                                <label for="nombreProducto" class="form-label fw-bold">Nombre del
-                                                    producto:</label>
-                                                <label id="nombreProducto">Mochila</label>
-
-                                                <label for="cantidadProducto"
-                                                    class="form-label fw-bold mt-4 col-sm-12">Cantidad
-                                                    del producto:</label>
-                                                <div class="input-group spinner mt-2">
-                                                    <button class="btn decrementBtn" type="button"
-                                                        id="decrementBtn">-</button>
-                                                    <input type="text" class="form-control cantidadProducto" value="1"
-                                                        readonly>
-                                                    <button class="btn incrementBtn" type="button"
-                                                        id="incrementBtn">+</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="col col-lg-4 col-md-4 col-sm-5 d-flex justify-content-center align-items-center mt-4 datosProducto">
-                                            <div class="d-flex flex-column align-items-center">
-                                                <label for="PrecioProducto" class="form-label fw-bold">Precio del
-                                                    producto:</label>
-                                                <label for="PrecioProducto" class="form-label precioProducto"
-                                                    id="precioProducto" data-precio-original="$50.00">$50.00</label>
-                                                <label for="descuento" class="form-label fw-bold mt-2">Descuento del
-                                                    producto:</label>
-                                                <label for="descuentoProducto" class="form-label descuentoP"
-                                                    id="descuentoP">$10.00</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Botón para valorar la compra dentro de la tarjeta -->
-                        <div class="col col-lg-1 col-md-8 col-sm-8 col-9 d-flex justify-content-end align-items-center">
-                            <div class="d-flex flex-column align-items-center">
-                                <h6 class="mx-5 tituloValoracion">Quitar</h6>
-                                <button type="button" class="btn botonQuitarProducto" data-bs-toggle="modal"
-                                    data-bs-target="#modalValorar">
-                                    <img src="../../resources/images/quitarproducto.png" alt="..." width="40px" height="40px"
-                                        class="mt-1">
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
         <div class="d-flex justify-content-center text-center mt-4 " id="carrito-container">
             <div class="card col-lg-8 col-md-10 col-sm-10 col-10">
@@ -161,71 +92,63 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-center text-center mt-4 " id="carrito-container">
-            <div class="card col-lg-8 col-md-10 col-sm-10 col-10">
-                <div class="container text-center">
-                    <div class="row">
-                        <div class="col col-lg-3 col-md-6 col-sm-12 col-12">
-                            <img src="../../resources/images/imagenTmochilas.png" class="card-img mt-4 mb-4" alt="..."
-                                height="220px">
+        <div class="col-sm-8 col-lg-12 col-md-12 col-sm-12 col-12 px-5" id="contenedorPedido">
+
+            <h4 id="mainTitle"></h4>
+            <!-- Tabla para mostrar el detalle de los productos agregados al carrito de compras -->
+
+
+            <div class="container">
+                <div class="row" id="cardProductosCarrito">
+
+                </div>
+            </div>
+
+            <p class="text-end">TOTAL A PAGAR (US$) <b id="pago"></b></p>
+            <!-- Párrafo para mostrar un botón que finaliza el pedido -->
+            <p class="text-end">
+                <button type="button" class="btn btn-dark" onclick="finishOrder()">
+                    <img src="../../resources/Imagenes/finich.png" alt="..." width="30px" height="30px"> Finalizar
+                    pedido
+                </button>
+            </p>
+            <!-- Párrafo para mostrar un enlace a la página web principal -->
+            <p class="text-end">
+                <a href="index.html" class="btn btn-dark">
+                    <img src="../../resources/Imagenes/carrito.png" alt="..." width="30px" height="30px"> Seguir
+                    comprando
+                </a>
+            </p>
+            <!-- Componente Modal para mostrar una caja de diálogo -->
+            <div class="modal fade" id="itemModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="modalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <!-- Contenido del componente Modal -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="modalTitle">Cambiar cantidad</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="col col-lg-8 col-md-6 col-12">
-                            <div class="card-body">
-                                <div class="container text-center">
-                                    <div class="row">
-                                        <div
-                                            class="col col-lg-6 col-md-6 col-sm-7 d-flex justify-content-center align-items-center mt-1 datosProducto">
-                                            <div class="d-flex flex-column align-items-center ">
-
-                                                <label for="nombreProducto" class="form-label fw-bold">Nombre del
-                                                    producto:</label>
-                                                <label id="nombreProducto">Mochila</label>
-
-                                                <label for="cantidadProducto"
-                                                    class="form-label fw-bold mt-4 col-sm-12">Cantidad
-                                                    del producto:</label>
-                                                <div class="input-group spinner mt-2">
-                                                    <button class="btn decrementBtn" type="button"
-                                                        id="decrementBtn">-</button>
-                                                    <input type="text" class="form-control cantidadProducto" value="1"
-                                                        readonly>
-                                                    <button class="btn incrementBtn" type="button"
-                                                        id="incrementBtn">+</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="col col-lg-4 col-md-4 col-sm-5 d-flex justify-content-center align-items-center mt-1 datosProducto">
-                                            <div class="d-flex flex-column align-items-center">
-                                                <label for="PrecioProducto" class="form-label fw-bold">Precio del
-                                                    producto:</label>
-                                                <label for="PrecioProducto" class="form-label precioProducto"
-                                                    id="precioProducto" data-precio-original="$50.00">$50.00</label>
-                                                <label for="descuento" class="form-label fw-bold mt-2">Descuento del
-                                                    producto:</label>
-                                                <label for="descuentoProducto" class="form-label descuentoP"
-                                                    id="descuentoP">$10.00</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                        <!-- Formulario para actualizar cantidad -->
+                        <form id="itemForm">
+                            <div class="modal-body row">
+                                <input type="hidden" id="idDetalle" name="idDetalle">
+                                <div class="col-sm-12">
+                                    <label for="cantidadProducto" class="form-label">Cantidad</label>
+                                    <input id="cantidadProducto" type="number" name="cantidadProducto" min="1"
+                                        class="form-control" required>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Botón para valorar la compra dentro de la tarjeta -->
-                        <div class="col col-lg-1 col-md-8 col-sm-8 col-9 d-flex justify-content-end align-items-center">
-                            <div class="d-flex flex-column align-items-center">
-                                <h6 class="mx-5 tituloValoracion">Quitar</h6>
-                                <button type="button" class="btn botonQuitarProducto" data-bs-toggle="modal"
-                                    data-bs-target="#modalValorar">
-                                    <img src="../../resources/images/quitarproducto.png" alt="..." width="40px" height="40px"
-                                        class="mt-1">
-                                </button>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-dark"> <img
+                                        src="../../resources/Imagenes/LapizBlancoEditar.png" alt="..." width="30px"
+                                        height="30px"> Guardar</button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <div class="container text-start w-100 mt-2 contenedorTotal">
@@ -300,19 +223,16 @@
     </footer>
 
     <!--Scripts de bootstrap-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
     <script src="https://kit.fontawesome.com/22fd8b70d9.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!--Carrusel-->
+    <script src="../../controllers/utils/sweetalert.min.js"></script>
+    <script src="../../controllers/utils/components.js"></script>
+    <script src="../../controllers/utils/public.js"></script>
+    <script src="../../controllers/public/carrito.js"></script>
 
-    <!--Plantillas para header y footer-->
-    <script src="../../resources/js/headerPublico.js"></script>
-    <script src="../../resources/js/footerPublico.js"></script>
-    <script src="/controllers/public/carrito.js"></script>
-    <!--Buscador general de productos-->
-    <script src="../../resources/js/buscador_productos.js"></script>
 </body>
 
 </html>

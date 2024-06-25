@@ -3,7 +3,7 @@ const MENSUALIDAD_API = 'services/admin/pagosmensualidad.php';
 
 // Constantes para establecer los elementos del formulario de editar perfil.
 const PROFILE_FORM = document.getElementById('profileForm'),
-    ID_CLIENTE = document.getElementById('idCliente');
+    ID_CLIENTE = document.getElementById('idCliente'),
     NOMBRE_CLIENTE = document.getElementById('nombreCliente'),
     APELLIDO_CLIENTE = document.getElementById('apellidoCliente'),
     DUI_CLIENTE = document.getElementById('duiCliente'),
@@ -13,8 +13,7 @@ const PROFILE_FORM = document.getElementById('profileForm'),
     FECHA_REGISTRO = document.getElementById('fecharegistroCliente'),
     FOTO_CLIENTE = document.getElementById('imagen');
 
-    const PROFILE_FORM2 = document.getElementById('profileForm2'),
-
+const PROFILE_FORM2 = document.getElementById('profileForm2'),
     CARDS_ALUMNOSREG = document.getElementById('cardAlumnos');
 
 // Constante para establecer la modal de cambiar contraseña.
@@ -61,7 +60,7 @@ fotoInput.addEventListener('change', function() {
         };
         // Leer el archivo como una URL de datos
         reader.readAsDataURL(this.files[0]);
-    }else{
+    } else {
         FOTO_CLIENTE.src = `${SERVER_URL}images/clientes/${ROW.foto_cliente}`; //Mandamos a llamar la foto del administrador
     }
 });
@@ -82,23 +81,23 @@ const fillTable = async (correo) => {
         if (DATA.status) {
             // Convertir el conjunto de datos a un array si no lo es ya
             const rows = Array.isArray(DATA.dataset) ? DATA.dataset : [DATA.dataset];
+            console.log(rows);
+            console.log(DATA);
+            
 
             // Iterar sobre cada fila de datos para construir las tarjetas de los alumnos
             rows.forEach(row => {
                 CARDS_ALUMNOSREG.innerHTML += `
-                    
-                        <div class="card-body">
-                        <input id="SelectDatosPago" type="text" name="SelectDatosPago"
-                                            class="form-control" value="${row.id_alumno}" hidden>
-                            <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
-                            <p class="card-text"><b>Edad: </b>${row.edad}</p>
-                            <p class="card-text"><b>Categoria: </b>${row.categoria}</p>
-                            <p class="card-text"><b>Numero de dias que entrena: </b>${row.numero_dias}</p>
-                            <button type="submit" class="btn" id="btnPagar">
-                                <img src="../../resources/images/mensualidad.png" height="25px" width="25px" class="me-2"> Pagar mensualidad
-                            </button>
-                        </div>
-                    
+                    <div class="card-body">
+                        <input id="SelectDatosPago" type="text" name="SelectDatosPago" class="form-control" value="${row.id_alumno}" hidden>
+                        <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
+                        <p class="card-text"><b>Edad: </b>${row.edad}</p>
+                        <p class="card-text"><b>Categoria: </b>${row.categoria}</p>
+                        <p class="card-text"><b>Numero de dias que entrena: </b>${row.numero_dias}</p>
+                        <button type="button" class="btn btn-pagar"id="btnPagar">
+                            <img src="../../resources/images/mensualidad.png" height="25px" width="25px" class="me-2"> Pagar mensualidad
+                        </button>
+                    </div>
                 `;
             });
         } else {
@@ -111,9 +110,6 @@ const fillTable = async (correo) => {
         sweetAlert(4, 'Error al obtener los datos', true);
     }
 };
-
-
-
 
 // Método del evento para cuando se envía el formulario de editar perfil.
 PROFILE_FORM.addEventListener('submit', async (event) => {
@@ -131,18 +127,37 @@ PROFILE_FORM.addEventListener('submit', async (event) => {
     }
 });
 
-PROFILE_FORM2.addEventListener('submit', async (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
-    event.preventDefault();
-    // Constante tipo objeto con los datos del formulario.
-    const FORM = new FormData(PROFILE_FORM2);
-    // Petición para actualizar los datos personales del usuario.
-    const DATA = await fetchData(MENSUALIDAD_API, 'createRow', FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        sweetAlert(1, DATA.message, true);
-    } else {
-        sweetAlert(2, DATA.error, false); //
+// Función para manejar el envío del formulario con confirmación
+async function submitForm(event) {
+    // Evitar recargar la página después de enviar el formulario si es un evento de formulario
+    if (event) {
+        event.preventDefault();
+    }
+
+    // Mostrar un mensaje de confirmación y capturar la respuesta
+    const RESPONSE = await confirmAction('¿Está seguro de enviar este formulario?');
+    // Verificar la respuesta del mensaje
+    if (RESPONSE) {
+        // Constante tipo objeto con los datos del formulario
+        const FORM = new FormData(PROFILE_FORM2);
+        // Petición para actualizar los datos personales del usuario
+        const DATA = await fetchData(MENSUALIDAD_API, 'createRow', FORM);
+        // Comprobar si la respuesta es satisfactoria, de lo contrario mostrar un mensaje con la excepción
+        if (DATA.status) {
+            sweetAlert(1, DATA.message, true);
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    }
+}
+
+// Agregamos el event listener al formulario
+PROFILE_FORM2.addEventListener('submit', submitForm);
+
+
+document.addEventListener('click', function(event) {
+    if (event.target && event.target.closest('.btn-pagar')) {
+        submitForm(event);
     }
 });
 
@@ -215,7 +230,6 @@ document.getElementById('botonActualizarContrasena').addEventListener('mouseleav
     }
 });
 
-
 //popup del boton para cerrar ventana - imagen de comentarios
 document.getElementById('botonCerrarCon').addEventListener('mouseenter', function () {
     var popover = new bootstrap.Popover(this, {
@@ -253,7 +267,6 @@ document.getElementById('botonCerrarCon2').addEventListener('mouseleave', functi
         popover.hide();
     }
 });
-
 
 //Barra de busqueda de productos
 const buscadorInput = document.getElementById('Buscador1');

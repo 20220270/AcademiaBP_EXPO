@@ -1,0 +1,36 @@
+/* Asegurar que las imágenes no se desborden */
+.card img {
+    object-fit: cover; /* Asegura que la imagen cubra el área del contenedor */
+
+}
+
+/* Ajustar el margen superior del título principal */
+#mainTitle {
+    margin-top: 5rem; /* Ajusta este valor según tus necesidades */
+}
+
+/* Asegurar que el contenido de las cards no se desborde */
+.card-body {
+    overflow: hidden; /* Asegura que el contenido no se desborde */
+}
+
+/* Asegurar que las cards tengan un tamaño consistente */
+.card {
+    flex: 1 1 auto; /* Permite que las cards se ajusten en tamaño */
+    max-width: 100%; /* Asegura que las cards no se extiendan más allá de su contenedor */
+    height: auto;
+}
+
+#mainTitle{
+    margin-top: 4rem;
+}
+
+#borde{
+    border: 2px solid #408840;
+    border-radius: 15px;
+}
+
+#btnVerDetalle {
+    background-color: #408840;
+    color: #fff;
+}

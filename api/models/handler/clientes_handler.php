@@ -223,8 +223,8 @@ class ClienteHandler
                 INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
                 INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
                 INNER JOIN tb_dias_pagos USING (id_dia_pago)
-                WHERE correo_cliente = ?";
-        $params = array($this->correo);
+                WHERE id_cliente = ?";
+        $params = array($_SESSION['idCliente']);
         return Database::getRow($sql, $params);
     }
 }

@@ -62,6 +62,16 @@ class ProductoHandler
         return Database::getRow($sql, $params);
     }
 
+    public function readOnee()
+    {
+        $sql = 'SELECT id_producto, id_categoria_producto, nombre_producto, descripcion_producto, precio_producto, imagen_producto, estado_producto, descuento_producto, existencias_producto FROM tb_detalleproducto
+                INNER JOIN tb_productos USING(id_producto)
+                INNER JOIN tb_categorias_productos USING(id_categoria_producto)
+                WHERE id_producto = ?';
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
+    }
+
     public function readFilename()
     {
         $sql = 'SELECT imagen_producto
@@ -90,8 +100,9 @@ class ProductoHandler
 
     public function readProductosCategoria()
     {
-        $sql = 'SELECT id_producto, id_categoria_producto, nombre_producto, descripcion_producto, precio_producto, imagen_producto, estado_producto, descuento_producto FROM tb_productos
-        INNER JOIN tb_categorias_productos USING(id_categoria_producto)
+        $sql = 'SELECT id_producto, id_categoria_producto, nombre_producto, descripcion_producto, precio_producto, imagen_producto, estado_producto, descuento_producto, existencias_producto FROM tb_detalleproducto
+                INNER JOIN tb_productos USING(id_producto)
+                INNER JOIN tb_categorias_productos USING(id_categoria_producto)
                 WHERE id_categoria_producto = ? AND estado_producto = "En venta"
                 ORDER BY nombre_producto';
         $params = array($this->categoria);
@@ -123,14 +134,14 @@ class ProductoHandler
     
     public function commentsProduct()
     {
-        $sql = 'SELECT id_valoracion, nombre_producto, comentario_producto, calificacion_producto, nombre_cliente, apellido_cliente, fecha_valoracion from tb_valoraciones
-        INNER JOIN tb_detallesordenes USING(id_detalle)
-        INNER JOIN tb_ordenes USING(id_orden)
-       INNER JOIN tb_productos USING(id_producto) 
-       INNER JOIN tb_clientes USING(id_cliente)
-        where id_producto = ? AND estado_comentario = "Habilitado"';
+        $sql = "SELECT id_valoracion, nombre_producto, comentario_producto, calificacion_producto, foto_cliente, nombre_cliente, apellido_cliente, fecha_valoracion from tb_valoraciones
+                INNER JOIN tb_detalles_compras USING(id_detalle_compra)
+                INNER JOIN tb_compras USING(id_compra)
+                INNER JOIN tb_detalleProducto USING(id_detalle_producto) 
+                INNER JOIN tb_productos USING(id_producto)
+                INNER JOIN tb_clientes USING(id_cliente)
+        where id_producto = ? AND estado_comentario = 'Habilitado'";
         $params = array($this->id);
-        //return Database::getRows($sql);
         return Database::getRows($sql, $params);
     }
 
