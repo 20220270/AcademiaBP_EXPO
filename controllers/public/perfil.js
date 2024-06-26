@@ -98,7 +98,7 @@ const fillTable = async (correo) => {
                             <p class="card-text"><b>Categoria: </b>${row.categoria}</p>
                             <p class="card-text"><b>Numero de dias que entrena: </b>${row.numero_dias}</p>
                             <button type="button" class="btn btn-pagar" id="btnPagar">
-                                <img src="../../resources/images/mensualidad.png" height="25px" width="25px" class="me-2"> Pagar mensualidad
+                                <img src="../../resources/images/mensualidadp.png" height="25px" width="25px" class="me-2"> Pagar mensualidad
                             </button>
                         </div>
                     </div>

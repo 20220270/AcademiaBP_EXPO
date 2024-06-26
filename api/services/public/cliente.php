@@ -47,7 +47,6 @@ if (isset($_GET['action'])) {
                     !$cliente->setId($_SESSION['idCliente']) or
                     !$cliente->setFilename() or
                     !$cliente->setNombre($_POST['nombreCliente']) or
-                    
                     !$cliente->setApellido($_POST['apellidoCliente']) or
                     !$cliente->setCorreo($_POST['correoCliente']) or
                     !$cliente->setDireccion($_POST['direccionCliente']) or

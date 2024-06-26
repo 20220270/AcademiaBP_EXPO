@@ -142,7 +142,7 @@ class ComprasHandler
         // Se realiza una subconsulta para obtener el precio del producto.
         $sql = 'INSERT INTO tb_detalles_compras(id_detalle_producto, cantidad_producto, id_compra)
                 VALUES(?, ?, ?)';
-        $params = array($this->producto, $this->cantidad, $_SESSION['idCompra']);
+        $params = array($this->iddetalle, $this->cantidad, $_SESSION['idCompra']);
        
         return Database::executeRow($sql, $params);
     }

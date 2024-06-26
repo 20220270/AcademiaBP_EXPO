@@ -34,7 +34,7 @@ class ProductoData extends ProductoHandler
             $this->iddetalle = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador del producto es incorrecto';
+            $this->data_error = 'El identificador del detalle es incorrecto';
             return false;
         }
     }

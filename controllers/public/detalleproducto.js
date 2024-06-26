@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('descuentoProducto').textContent = DATA.dataset.descuento_producto;
         document.getElementById('talla').textContent = DATA.dataset.talla;
         document.getElementById('idProducto').value = DATA.dataset.id_producto;
+        document.getElementById('idDetalle').value = DATA.dataset.id_detalle_producto;
 
     } else {
         // Se presenta un mensaje de error cuando no existen datos para mostrar.
@@ -77,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Se limpia el contenido cuando no hay datos para mostrar.
         document.getElementById('cardComentarios').innerHTML = `
         <div class="center-content">
-            <img src="../../resources/Imagenes/nocomments.png" alt="No comments available" height="100px" width="110px">
+            <img src="../../resources/images/nocomments.png" alt="No comments available" height="100px" width="110px">
             <b>No hay comentarios disponibles</b>
         </div>
         `;

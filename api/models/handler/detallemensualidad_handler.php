@@ -97,4 +97,19 @@ class DetallesPagosMensualidadHandler
                 ORDER BY id_pago";
         return Database::getRows($sql);
     }
+
+    public function readAllVerPagos()
+    {
+        $sql = "SELECT CONCAT(nombre_alumno, ' ', apellido_alumno) as alumno,
+                mensualidad_pagar,
+                fecha_pago,
+                descripcion_pago from tb_detalles_pagos
+                INNER JOIN tb_pagos USING(id_pago)
+                INNER JOIN tb_alumnos USING(id_alumno)
+                INNER JOIN tb_clientes USING(id_cliente)
+                INNER JOIN tb_dias_pagos USING(id_dia_pago)
+                where id_cliente = ? ";
+        $params = array($_SESSION['idCliente']);
+        return Database::getRows($sql, $params);
+    }
 }
