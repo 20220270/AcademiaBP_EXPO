@@ -107,35 +107,41 @@ footer {
 
 
 #Actualizar,
-#ModalContraseña{
+#ModalContraseña {
   background-color: #408840;
   width: 250px;
 }
 
-.rounded-circle{
-  width: 190px; 
-  height: 190px; 
+.rounded-circle {
+  width: 190px;
+  height: 190px;
   object-fit: cover;
 }
 
-#cerrarS{
+#cerrarS {
   cursor: pointer;
 }
 
-#fotoInput{
+#fotoInput {
   display: none;
 }
 
-#botonCargarFoto{
-  width: 40px; 
+#botonCargarFoto {
+  width: 40px;
   height: 40px;
 }
 
-#cardAlumnos{
+#cardAlumnos {
+  border: none;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+#borderAlumnos {
   border: 2px solid #04B704;
 }
 
-#btnPagar{
+#btnPagar {
   background-color: #408340;
   width: 100%;
   color: #fff;

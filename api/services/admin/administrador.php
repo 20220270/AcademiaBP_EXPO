@@ -123,6 +123,8 @@ if (isset($_GET['action'])) {
             case 'editProfile':
                 $_POST = Validator::validateForm($_POST);
                 if (
+                    !$administrador->setId($_SESSION['idAdministrador']) or
+                    !$administrador->setFilename() or
                     !$administrador->setNombre($_POST['nombreAdministrador']) or
                     
                     !$administrador->setApellido($_POST['apellidoAdministrador']) or

@@ -110,6 +110,15 @@ class ClienteHandler
         return Database::executeRow($sql, $params);
     }
 
+    public function editProfile2()
+    {
+        $sql = 'UPDATE tb_clientes
+            SET nombre_cliente = ?, apellido_cliente = ?, correo_cliente = ?, dui_cliente = ?, telefono_cliente = ?, direccion_cliente = ?
+            WHERE id_cliente = ?';
+        $params = array($this->imagen, $this->nombre, $this->apellido, $this->correo, $this->dui, $this->telefono, $this->direccion, $_SESSION['idCliente']);
+        return Database::executeRow($sql, $params);
+    }
+
 
 
 
@@ -225,6 +234,6 @@ class ClienteHandler
                 INNER JOIN tb_dias_pagos USING (id_dia_pago)
                 WHERE id_cliente = ?";
         $params = array($_SESSION['idCliente']);
-        return Database::getRow($sql, $params);
+        return Database::getRows($sql, $params); //Se manda rows, para que traiga todos los datos
     }
 }

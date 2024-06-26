@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         DIRECCION_CLIENTE.value = ROW.direccion_cliente;
         
         FOTO_CLIENTE.src = `${SERVER_URL}images/clientes/${ROW.foto_cliente}`;
+        console.log(ROW.foto_cliente);
         
         // Llamar fillTable con el correo del cliente
         fillTable(ROW.correo_cliente);
@@ -50,6 +51,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 const fotoInput = document.getElementById('fotoInput');
 // Escuchar cambios en el elemento de entrada de archivo
 fotoInput.addEventListener('change', function() {
+
+
+
     // Verificar si se seleccionó un archivo
     if (this.files && this.files[0]) {
         const reader = new FileReader();
@@ -81,22 +85,22 @@ const fillTable = async (correo) => {
         if (DATA.status) {
             // Convertir el conjunto de datos a un array si no lo es ya
             const rows = Array.isArray(DATA.dataset) ? DATA.dataset : [DATA.dataset];
-            console.log(rows);
-            console.log(DATA);
             
 
             // Iterar sobre cada fila de datos para construir las tarjetas de los alumnos
             rows.forEach(row => {
                 CARDS_ALUMNOSREG.innerHTML += `
-                    <div class="card-body">
-                        <input id="SelectDatosPago" type="text" name="SelectDatosPago" class="form-control" value="${row.id_alumno}" hidden>
-                        <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
-                        <p class="card-text"><b>Edad: </b>${row.edad}</p>
-                        <p class="card-text"><b>Categoria: </b>${row.categoria}</p>
-                        <p class="card-text"><b>Numero de dias que entrena: </b>${row.numero_dias}</p>
-                        <button type="button" class="btn btn-pagar"id="btnPagar">
-                            <img src="../../resources/images/mensualidad.png" height="25px" width="25px" class="me-2"> Pagar mensualidad
-                        </button>
+                    <div class="card mb-4 mt-4" id="borderAlumnos">
+                        <div class="card-body">
+                            <input id="SelectDatosPago" type="text" name="SelectDatosPago" class="form-control" value="${row.id_alumno}" hidden>
+                            <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
+                            <p class="card-text"><b>Edad: </b>${row.edad}</p>
+                            <p class="card-text"><b>Categoria: </b>${row.categoria}</p>
+                            <p class="card-text"><b>Numero de dias que entrena: </b>${row.numero_dias}</p>
+                            <button type="button" class="btn btn-pagar" id="btnPagar">
+                                <img src="../../resources/images/mensualidad.png" height="25px" width="25px" class="me-2"> Pagar mensualidad
+                            </button>
+                        </div>
                     </div>
                 `;
             });
@@ -135,7 +139,7 @@ async function submitForm(event) {
     }
 
     // Mostrar un mensaje de confirmación y capturar la respuesta
-    const RESPONSE = await confirmAction('¿Está seguro de enviar este formulario?');
+    const RESPONSE = await confirmAction('¿Está seguro de realizar el pago de mensualidad del alumno?');
     // Verificar la respuesta del mensaje
     if (RESPONSE) {
         // Constante tipo objeto con los datos del formulario

@@ -415,7 +415,7 @@ async function loadCategoriasCompetitivo() {
             });
         } else {
             // Si no hay datos, muestra un mensaje de error en el título principal
-            MAIN_TITLE.textContent = DATA.error;
+            TITULO_SECCION6.textContent = DATA.error;
         }
     } catch (error) {
         console.error('Error al cargar los valores:', error);

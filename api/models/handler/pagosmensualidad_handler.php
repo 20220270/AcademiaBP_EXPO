@@ -54,7 +54,7 @@ class PagosMensualidadHandler
 
     public function readOne()
     {
-        $sql = "SELECT id_pago, id_alumno, cuotas_anuales, estado_pago from tb_pagos
+        $sql = "SELECT id_pago, id_alumno, estado_pago from tb_pagos
         INNER JOIN tb_alumnos USING(id_alumno)
         INNER JOIN tb_clientes USING(id_cliente)
         INNER JOIN tb_dias_pagos USING(id_dia_pago)

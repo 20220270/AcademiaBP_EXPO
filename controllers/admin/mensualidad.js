@@ -43,6 +43,7 @@ const SAVE_FORM2 = document.getElementById('saveForm2'),
     DATOS_PAGO = document.getElementById('SelectDatosPago'),
     CUOTAS_A_PAGAR = document.getElementById('cuotasApagar'),
     ESTADO_PAGO = document.getElementById('selectEstado');
+    COLUMNA_ESTADO = document.getElementById('columnaEstado');
 
 const SAVE_FORM3 = document.getElementById('saveForm3'),
     ID_DETALLEPAGO = document.getElementById('idDetallePagoMensualidad'),
@@ -432,6 +433,8 @@ const openUpdate2 = async (id) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idPagoARealizar', id);
+    COLUMNA_ESTADO.hidden = false;
+    
     // Petición para obtener los datos del registro solicitado.
     const DATA = await fetchData(MENSUALIDAD_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -443,9 +446,11 @@ const openUpdate2 = async (id) => {
         SAVE_FORM2.reset();
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
-
-        ID_PAGO.value = ROW.id_pago;
         ESTADO_PAGO.value = ROW.estado_pago;
+        ID_PAGO.value = ROW.id_pago;
+        
+
+        
 
         fillSelect(MENSUALIDAD_API, 'readAllAlumnosCliente', 'SelectDatosPago', ROW.id_alumno);
 
