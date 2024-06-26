@@ -56,11 +56,16 @@ main {
 }
 
 .botonpagar,
+.but,
 .botonpagar:hover,
-.botonpagar:focus {
+.botonpagar:focus,
+.but:hover,
+.but:focus {
   background-color: #408840;
   color: #fff;
 }
+
+
 
 footer {
   background-color: #408840;

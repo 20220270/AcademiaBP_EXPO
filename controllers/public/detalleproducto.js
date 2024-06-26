@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Constante tipo objeto con los datos del producto seleccionado.
     CARD.innerHTML = '';
     const FORM = new FormData();
-    FORM.append('idProducto', PARAMS.get('id'));
+    FORM.append('idDetalle', PARAMS.get('id'));
     // Petición para solicitar los datos del producto seleccionado.
     const DATA = await fetchData(PRODUCTO_API, 'readOnee', FORM);
     const DATA2 = await fetchData(PRODUCTO_API, 'commentsProduct', FORM);
@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('precioProducto').textContent = DATA.dataset.precio_producto;
         document.getElementById('existenciasProducto').textContent = DATA.dataset.existencias_producto;
         document.getElementById('descuentoProducto').textContent = DATA.dataset.descuento_producto;
+        document.getElementById('talla').textContent = DATA.dataset.talla;
         document.getElementById('idProducto').value = DATA.dataset.id_producto;
 
     } else {

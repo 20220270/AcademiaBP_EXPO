@@ -17,7 +17,7 @@
 
     <main>
         <!-- Título del contenido principal -->
-        <h4 id="mainTitle" class="text-center mb-3">Visualizar detalle del producto</h4>
+        <h4 id="mainTitle" class="text-center mb-3"></h4>
 
         <div class="d-flex justify-content-center flex-wrap">
 
@@ -34,8 +34,10 @@
                                     class="fw-bold"></span></p>
                             <p class="card-text">Existencias: <b id="existenciasProducto"></b></p>
                             <p class="card-text">Descuento: <b id="descuentoProducto"></b>%</p>
+                            <p class="card-text">Talla adquirida: <b id="talla"></b></p>
                             <form class="row" id="shoppingForm">
                                 <input type="hidden" id="idProducto" name="idProducto">
+                                <input type="hidden" id="idDetalle" name="idDetalle">
                                 <div class="col-6 col-lg-6">
                                     <input type="number" id="cantidadProducto" name="cantidadProducto" min="1"
                                         class="form-control" placeholder="Cantidad" required>

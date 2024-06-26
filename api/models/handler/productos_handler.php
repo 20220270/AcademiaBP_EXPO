@@ -17,6 +17,7 @@ class ProductoHandler
     protected $imagen = null;
     protected $estado = null;
     protected $descuento = null;
+    protected $iddetalle = null;
 
     // Constante para establecer la ruta de las imágenes.
     const RUTA_IMAGEN = '../../images/productos/';
@@ -64,11 +65,13 @@ class ProductoHandler
 
     public function readOnee()
     {
-        $sql = 'SELECT id_producto, id_categoria_producto, nombre_producto, descripcion_producto, precio_producto, imagen_producto, estado_producto, descuento_producto, existencias_producto FROM tb_detalleproducto
+        $sql = 'SELECT id_producto, id_categoria_producto, id_detalle_producto, nombre_producto, descripcion_producto, precio_producto, imagen_producto, estado_producto, descuento_producto, existencias_producto, talla, color FROM tb_detalleproducto
                 INNER JOIN tb_productos USING(id_producto)
                 INNER JOIN tb_categorias_productos USING(id_categoria_producto)
-                WHERE id_producto = ?';
-        $params = array($this->id);
+                INNER JOIN tb_tallas USING(id_talla)
+                INNER JOIN tb_colores USING(id_color)
+                WHERE id_detalle_producto = ?';
+        $params = array($this->iddetalle);
         return Database::getRow($sql, $params);
     }
 
@@ -100,9 +103,13 @@ class ProductoHandler
 
     public function readProductosCategoria()
     {
-        $sql = 'SELECT id_producto, id_categoria_producto, nombre_producto, descripcion_producto, precio_producto, imagen_producto, estado_producto, descuento_producto, existencias_producto FROM tb_detalleproducto
+        $sql = 'SELECT id_producto, id_categoria_producto, id_detalle_producto, nombre_producto, descripcion_producto, precio_producto, imagen_producto, 
+        estado_producto, descuento_producto, existencias_producto,
+        talla, color FROM tb_detalleproducto
                 INNER JOIN tb_productos USING(id_producto)
                 INNER JOIN tb_categorias_productos USING(id_categoria_producto)
+                INNER JOIN tb_tallas USING(id_talla)
+                INNER JOIN tb_colores USING(id_color)
                 WHERE id_categoria_producto = ? AND estado_producto = "En venta"
                 ORDER BY nombre_producto';
         $params = array($this->categoria);
@@ -140,8 +147,8 @@ class ProductoHandler
                 INNER JOIN tb_detalleProducto USING(id_detalle_producto) 
                 INNER JOIN tb_productos USING(id_producto)
                 INNER JOIN tb_clientes USING(id_cliente)
-        where id_producto = ? AND estado_comentario = 'Habilitado'";
-        $params = array($this->id);
+        where id_detalle_producto = ? AND estado_comentario = 'Habilitado'";
+        $params = array($this->iddetalle);
         return Database::getRows($sql, $params);
     }
 

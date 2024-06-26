@@ -152,7 +152,10 @@ class ComprasHandler
     {
         $sql = 'SELECT 
         id_detalle_compra, 
+        imagen_producto,
         nombre_producto, 
+        talla,
+        color,
         tb_detalles_compras.precio_producto, 
         cantidad_producto, 
         (tb_productos.precio_producto * cantidad_producto) AS Subtotal,
@@ -165,6 +168,10 @@ class ComprasHandler
                 INNER JOIN tb_detalleProducto USING(id_detalle_producto)
     INNER JOIN 
         tb_productos USING(id_producto)
+        INNER JOIN 
+        tb_colores USING(id_color)
+        INNER JOIN 
+        tb_tallas USING(id_talla)
                 WHERE id_compra = ?';
         $params = array($_SESSION['idCompra']);
         return Database::getRows($sql, $params);

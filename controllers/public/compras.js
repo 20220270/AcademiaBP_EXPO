@@ -1,169 +1,203 @@
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Obtenemos todas las cards
-    const cards = document.querySelectorAll(".card");
+const ORDENES_API = 'services/public/compras.php';
+const PRODUCTOS_API = 'services/public/productos.php';
+const VALORACION_API = 'services/public/valoracion.php';
 
-    // Verificamos el estado de la compra en cada card
-    cards.forEach(function(card) {
-        // Obtenemos el label de estado dentro de la tarjeta actual
-        const estadoOrdenLabel = card.querySelector(".estadoOrdenD");
-        // Obtenemos el botón de mostrar modal dentro de la tarjeta actual
-        const modalValorarButton = card.querySelector(".btnMostrarModalVa");
-        // Obtenemos el título de valoración dentro de la tarjeta actual
-        const tituloValoracion = card.querySelector(".tituloValoracion");
-        // Obtenemos el botón de devolución dentro de la tarjeta actual
-        const btnDevolucion = card.querySelector(".btnDevolucion");
-        // Obtenemos el título de devolución dentro de la tarjeta actual
-        const tituloDevolucion = card.querySelector(".tituloDevolucion");
+const SEARCH_FORM = document.getElementById('searchForm');
+// Constantes para establecer los elementos de la tabla.
+const TABLE_BODY = document.getElementById('tableBody'),
+    ROWS_FOUND = document.getElementById('rowsFound');
+    const SAVE_MODAL = new bootstrap.Modal('#modalValorar');
+    const MODAL_TITLE = document.getElementById('modalTitle');
+    const SAVE_FORM = document.getElementById('formularioValoracion'),
+    VALORACION_PRODUCTO = document.getElementById('calificacion'),
+    COMENTARIO_PRODUCTO = document.getElementById('comentario'),
+    ID_DETALLE = document.getElementById('idDetalle');
 
-        // Verificamos si el estado de la compra es "Entregada"
-        if (estadoOrdenLabel && estadoOrdenLabel.textContent.trim().toLowerCase() === "entregada") {
-            // Si es "Entregada", mostrar el botón y el título de valoración
-            modalValorarButton.style.display = "block";
-            tituloValoracion.style.display = "block";
-        }
 
-        // Verificamos si el estado de la compra es "Pendiente"
-        if (estadoOrdenLabel && estadoOrdenLabel.textContent.trim().toLowerCase() === "pendiente") {
-            // Si es "Pendiente", mostrar el botón y el título de devolución
-            btnDevolucion.style.display = "block";
-            tituloDevolucion.style.display = "block";
-        }
+    CARD_ORDENES = document.getElementById('ordenes');
 
-        // Verificamos si el estado de la compra es "Finalizada"
-        if (estadoOrdenLabel && estadoOrdenLabel.textContent.trim().toLowerCase() === "finalizada") {
-            // Si es "Pendiente", mostrar el botón y el título de devolución
-            modalValorarButton.style.display = "block";
-            modalValorarButton.disabled = "true";
-            tituloValoracion.style.display = "block";
-        }
-    });
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // Llamada a la función para mostrar el encabezado y pie del documento.
+    loadTemplate();
+    // Se establece el título del contenido principal.
+    //MAIN_TITLE.textContent = 'Editar perfil';
+    // Petición para obtener los datos del usuario que ha iniciado sesión.
+    fillTable();
 });
 
+SEARCH_FORM.addEventListener('submit', (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Constante tipo objeto con los datos del formulario.
+    const FORM = new FormData(SEARCH_FORM);
+    // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
+    fillTable(FORM);
+  });
 
+const fillTable = async (form = null) => {
+    ROWS_FOUND.textContent = '';
+    TABLE_BODY.innerHTML = '';
+    CARD_ORDENES.innerHTML = '';
 
-//Busqueda de datos
-document.addEventListener("DOMContentLoaded", function () {
-    const input = document.getElementById("Buscador");
-    const cardContainer = document.getElementById("cardContainer");
-    const noResultsMessage = document.getElementById("noResultsMessage");
-    const cards = document.querySelectorAll(".card");
+    const action = form ? 'searchOrders' : 'myOrders';
+    const DATA = await fetchData(ORDENES_API, action, form);
 
-    input.addEventListener("input", function () {
-        const searchTerm = input.value.trim().toLowerCase();
-        let hasResults = false;
+    if (DATA.status) {
+        const rows = DATA.dataset.map(row => `
+            <div class="col-lg-10 col-md-12 col-sm-12 mt-2 mx-auto" id="orden">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 mb-3">
+                                <div class="row mb-2">
+                                    <div class="col-12">
+                                        <strong>Orden número:</strong>
+                                        <p>${row.id_compra}</p>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-12">
+                                        <strong>Detalle número:</strong>
+                                        <p>${row.id_detalle_compra}</p>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-12 text-center">
+                                        <img src="${SERVER_URL}images/productos/${row.imagen_producto}" alt="Producto" height="180px" width="200px">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="row mb-2">
+                                    <div class="col-6">
+                                        <strong>Nombre del producto:</strong>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="nombreProducto">${row.nombre_producto}</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-6">
+                                        <strong>Precio del producto:</strong>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="precioProducto">$${row.precio_producto}</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-6">
+                                        <strong>Cantidad adquirida:</strong>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="cantidadCompra">${row.cantidad_producto}</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-6">
+                                        <strong>Descuento aplicado:</strong>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="cantidadCompra">${row.descuento_producto}%</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-6">
+                                        <strong>Precio de la compra:</strong>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="precioCompra">$${row.SubtotalConDescuento}</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-6">
+                                        <strong>Fecha de la compra:</strong>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="fechaCompra">${row.fecha_registro}</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-6">
+                                        <strong>Estado de la compra:</strong>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="estadoCompra">${row.estado_compra}</span>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <strong>Valorar compra:</strong>
+                                    <button type="submit" class="btn mt-1 mostrarModalValoracion" id="mostrarModalValoracion" name="mostrarModalValoracion" onclick="openRating(${row.id_detalle_compra})">
+                                    
+                                    <img src="../../resources/images/valorarP.png" alt="" width="60px" height="60px" class="mb-1">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join(''); //Utilizamos join para que toda la cadena del arreglo de datos se vea mas ordenada, 
+        //y se utilizan las porpiedades de bootstrap para crear columnas dentro de la card.
 
-        //Mostramos las cards en caso de que se encuentren coincidencias
-        cards.forEach(card => {
-            const cardText = card.textContent.toLowerCase();
-            if (cardText.includes(searchTerm)) {
-                card.style.display = "block";
-                hasResults = true;
-                //Sino, no se mostrarán
-            } else {
-                card.style.display = "none";
-            }
-        });
-
-        // Ocultamos el título y el botón de valoración si no hay resultados
-        if (hasResults) {
-            noResultsMessage.style.display = "none";
-            cardContainer.style.display = "block";
-        } else {
-            noResultsMessage.style.display = "block";
-            cardContainer.style.display = "none";
-        }
-    });
-});
-
-//Funcion para el spinner
-document.addEventListener("DOMContentLoaded", function () {
-    // Función para incrementar y decrementar el valor del spinner
-    function handleSpinner(btn, input) {
-        // Obtenemos el botón de incremento y decremento
-        const incrementBtn = btn.querySelector(".incrementBtn");
-        const decrementBtn = btn.querySelector(".decrementBtn");
-
-        // Agregamos evento de clic al botón de incremento
-        incrementBtn.addEventListener("click", function () {
-            // Incrementar el valor en el input
-            input.value = parseInt(input.value) + 1;
-        });
-
-        // Agregamos evento de clic al botón de decremento
-        decrementBtn.addEventListener("click", function () {
-            // Obtener el valor actual del input
-            let value = parseInt(input.value);
-            // Decrementar el valor solo si es mayor que 0
-            if (value > 1) {
-                input.value = value - 1;
-            }
-        });
+        CARD_ORDENES.innerHTML = rows;
+        ROWS_FOUND.textContent = DATA.message;
+    } else {
+        sweetAlert(4, DATA.error, true);
     }
+};
 
-    // Obtenemos todos los spinners en la página
-    const spinners = document.querySelectorAll(".spinner");
+SAVE_FORM.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Se verifica la acción a realizar.
+    //(ID_ADMINISTRADOR.value) ? action = 'updateRow' : action = 'createRow';
+    // Constante tipo objeto con los datos del formulario.
+    const FORM = new FormData(SAVE_FORM);
+    // Petición para guardar los datos del formulario.
+    const DATA = await fetchData(VALORACION_API, 'createRating', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se cierra la caja de diálogo.
+        SAVE_MODAL.hide();
+        // Se muestra un mensaje de éxito.
+        sweetAlert(1, DATA.message, true);
+        // Se carga nuevamente la tabla para visualizar los cambios.
+        fillTable();
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
+  });
 
-    // Iterar sobre cada spinner y llamar a la función handleSpinner
-    spinners.forEach(function(spinner) {
-        const input = spinner.querySelector(".cantidadAdevolver");
-        handleSpinner(spinner, input);
-    });
-});
+const openRating = async (id) => {
+    // Se define una constante tipo objeto con los datos del registro seleccionado.
+    //const FORM = new FormData();
+    //FORM.append('iddetalle', id);
+    // Petición para obtener los datos del registro solicitado.
+    //const DATA = await fetchData(VALORACION_API, 'createRating', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    //if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        SAVE_MODAL.show();
+        MODAL_TITLE.textContent = 'Valora esta compra';
+        // Se prepara el formulario.
+        SAVE_FORM.reset();
+        // Se inicializan los campos con los datos.
+  
 
+        ID_DETALLE.value = id;
+    //} else {
+      //  sweetAlert(2, DATA.error, false);
+    //}
+  }
 
+  //Popups
 
-//Estrellas
-
-//Almacenamos todos los objetos que tienen la clase star
-const stars = document.querySelectorAll('.star');
-
-//Variable para almacenar la cantidad de estrellas seleccionadas
-const ratingText = document.getElementById('texto');
-
-//Función para pintar y despintar las estrellas a las que se les de click
-stars.forEach(function (star, index) {
-    star.addEventListener('click', function () {
-        //Aquí las pinta dependiendo el index de la estrella
-        for (let i = 0; i <= index; i++) {
-            stars[i].classList.add('checked');
-        }
-        //Aquí las despinta dependiendo el index de la estrella
-        for (let i = index + 1; i < stars.length; i++) {
-            stars[i].classList.remove('checked');
-        }
-        //Se almacena la cantidad de estrellas seleccionadas
-        ratingText.value = (index + 1).toString();
-    })
-});
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Obtenemos todas las tarjetas
-    const cards = document.querySelectorAll(".card");
-
-    // Verificamos si la card contiene un label con estado "Pendiente"
-    cards.forEach(function(card) {
-        // Obtenemos el label de estado dentro de la tarjeta actual
-        const estadoOrdenLabel = card.querySelector("#estadoOrdenD");
-        // Obtenemos el botón de mostrar modal dentro de la tarjeta actual
-        const modalValorarButton = card.querySelector(".btnMostrarModalVa");
-
-        // Verificamos si el label de estado es "Pendiente"
-        if (estadoOrdenLabel && estadoOrdenLabel.textContent.trim().toLowerCase() === "pendiente") {
-            // Si es "Pendiente", deshabilitamos el botón de mostrar modal
-            modalValorarButton.disabled = true;
-        }
-    });
-});
-
-//Popups
-
-//Popup para la imagen 1
-document.getElementById('botonCerrar').addEventListener('mouseenter', function () {
+document.getElementById('botonCerrarCo').addEventListener('mouseenter', function () {
     var popover = new bootstrap.Popover(this, {
         title: 'Cerrar ventana',
-        content: 'Haz clic aquí para cerrar esta ventana, o haz clic en la imagen de nuestro logo para cerrar.',
+        content: 'Haz clic aquí para cerrar este ventana. Puedes dar clic en nuestro logo para cerrar la ventana de igual forma',
         placement: 'top',
         trigger: 'manual',
         boundary: 'viewport'
@@ -171,18 +205,18 @@ document.getElementById('botonCerrar').addEventListener('mouseenter', function (
     popover.show();
 });
 
-document.getElementById('botonCerrar').addEventListener('mouseleave', function () {
+document.getElementById('botonCerrarCo').addEventListener('mouseleave', function () {
     var popover = bootstrap.Popover.getInstance(this);
     if (popover) {
         popover.hide();
     }
 });
 
-//Popup para la imagen 2
-document.getElementById('botonCerrar2').addEventListener('mouseenter', function () {
+//popup del boton para cerrar ventana - logo de La Academia
+document.getElementById('botonCerrarCo2').addEventListener('mouseenter', function () {
     var popover = new bootstrap.Popover(this, {
         title: 'Cerrar ventana',
-        content: 'Haz clic aquí para cerrar esta ventana, o haz clic en la imagen de comentarios para cerrar.',
+        content: 'Haz clic aquí para cerrar este ventana. Puedes dar clic en la imagen de comentarios para cerrar la ventana de igual forma',
         placement: 'top',
         trigger: 'manual',
         boundary: 'viewport'
@@ -190,18 +224,17 @@ document.getElementById('botonCerrar2').addEventListener('mouseenter', function 
     popover.show();
 });
 
-document.getElementById('botonCerrar2').addEventListener('mouseleave', function () {
+document.getElementById('botonCerrarCo2').addEventListener('mouseleave', function () {
     var popover = bootstrap.Popover.getInstance(this);
     if (popover) {
         popover.hide();
     }
 });
 
-//Popup para la imagen 1 - modal devolucion
-document.getElementById('botonCerrarDevo').addEventListener('mouseenter', function () {
+document.getElementById('botonCerrarCo3').addEventListener('mouseenter', function () {
     var popover = new bootstrap.Popover(this, {
         title: 'Cerrar ventana',
-        content: 'Haz clic aquí para cerrar esta ventana, o haz clic en la imagen de nuestro logo para cerrar.',
+        content: 'Haz clic aquí para cerrar este ventana',
         placement: 'top',
         trigger: 'manual',
         boundary: 'viewport'
@@ -209,26 +242,7 @@ document.getElementById('botonCerrarDevo').addEventListener('mouseenter', functi
     popover.show();
 });
 
-document.getElementById('botonCerrarDevo').addEventListener('mouseleave', function () {
-    var popover = bootstrap.Popover.getInstance(this);
-    if (popover) {
-        popover.hide();
-    }
-});
-
-//Popup para la imagen 2 - modal devolucion
-document.getElementById('botonCerrarDevo2').addEventListener('mouseenter', function () {
-    var popover = new bootstrap.Popover(this, {
-        title: 'Cerrar ventana',
-        content: 'Haz clic aquí para cerrar esta ventana, o haz clic en la imagen de devolución para cerrar.',
-        placement: 'top',
-        trigger: 'manual',
-        boundary: 'viewport'
-    });
-    popover.show();
-});
-
-document.getElementById('botonCerrarDevo2').addEventListener('mouseleave', function () {
+document.getElementById('botonCerrarCo3').addEventListener('mouseleave', function () {
     var popover = bootstrap.Popover.getInstance(this);
     if (popover) {
         popover.hide();
@@ -236,31 +250,5 @@ document.getElementById('botonCerrarDevo2').addEventListener('mouseleave', funct
 });
 
 
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Función para mostrar el popover sobre el botón deshabilitado
-    function showPopoverOnDisabledButton(button) {
-        var popover = new bootstrap.Popover(button, {
-            title: '¡Pronto podrás valorar esta compra!',
-            content: 'El botón para valorar esta compra estará disponible una vez que la compra se haya entregado.',
-            placement: 'top',
-            trigger: 'manual',
-            boundary: 'viewport'
-        });
-        popover.show();
-    }
-
-    // Obtenemos todos los botones de mostrar modal en la página
-    const modalValorarButtons = document.querySelectorAll(".btnMostrarModalVa");
-
-    // Iteramos sobre cada botón y verificamos si está deshabilitado
-    modalValorarButtons.forEach(function(button) {
-        // Verificamos si el botón está deshabilitado
-        if (button.disabled) {
-            // Si está deshabilitado, mostramos el popover
-            showPopoverOnDisabledButton(button);
-        }
-    });
-});
 
 

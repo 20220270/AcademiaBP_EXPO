@@ -20,7 +20,7 @@ if (isset($_GET['action'])) {
             }
             break;
         case 'readOnee':
-            if (!$producto->setId($_POST['idProducto'])) {
+            if (!$producto->setIdDeta($_POST['idDetalle'])) {
                 $result['error'] = $producto->getDataError();
             } elseif ($result['dataset'] = $producto->readOnee()) {
                 $result['status'] = 1;
@@ -30,7 +30,7 @@ if (isset($_GET['action'])) {
             break;
 
         case 'commentsProduct':
-            if (!$producto->setId($_POST['idProducto'])) {
+            if (!$producto->setIdDeta($_POST['idDetalle'])) {
                 $result['error'] = $producto->getDataError();
             } elseif ($result['dataset'] = $producto->commentsProduct()) {
                 $result['status'] = 1;

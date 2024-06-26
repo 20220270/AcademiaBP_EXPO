@@ -24,7 +24,6 @@
 }
 
 .btna1 {
-    display: flex;
     justify-content: center;
     /* Centra horizontalmente */
     align-items: center;
@@ -57,6 +56,12 @@
 
 .btna1:hover {
     background: #4fa34f;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    z-index: 1;
 }
 
 @media (min-width: 768px) and (max-width: 992px) {

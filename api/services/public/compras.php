@@ -30,7 +30,7 @@ if (isset($_GET['action'])) {
             case 'createDetail':
                 $_POST = Validator::validateForm($_POST);
                 if (!$pedido->startOrder()) {
-                    $result['error'] = 'Ocurrió un problema al iniciar el pedido';
+                    $result['error'] = 'Ocurrió un problema al iniciar la compra';
                 } elseif (
                     !$pedido->setProducto($_POST['idProducto']) or
                     !$pedido->setCantidad($_POST['cantidadProducto'])
@@ -60,7 +60,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen ordenes registradas';
+                    $result['error'] = 'No existen compras registradas';
                 }
                 break;
                 // Acción para actualizar la cantidad de un producto en el carrito de compras.
@@ -93,9 +93,9 @@ if (isset($_GET['action'])) {
             case 'finishOrder':
                 if ($pedido->finishOrder()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Pedido finalizado correctamente';
+                    $result['message'] = 'Compra finalizada correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al finalizar el pedido';
+                    $result['error'] = 'Ocurrió un problema al finalizar la compra';
                 }
                 break;
             default:

@@ -75,6 +75,14 @@ class ValoracionHandler
         return Database::executeRow($sql, $params);
     }
 
+    public function deleteRow()
+    {
+        $sql = 'DELETE FROM tb_valoraciones
+                WHERE id_valoracion = ?';
+        $params = array( $this->idvaloracion);
+        return Database::executeRow($sql, $params);
+    }
+
     public function createRating()
     {
        

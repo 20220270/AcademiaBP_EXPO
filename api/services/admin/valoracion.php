@@ -56,6 +56,19 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al modificar la valoracion';
                 }
                 break;
+
+                case 'deleteRow':
+                    if (
+                        !$valoracion->setIdValoracion($_POST['idValoracion'])
+                    ) {
+                        $result['error'] = $valoracion->getDataError();
+                    } elseif ($valoracion->deleteRow()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Valoración eliminada correctamente';
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al eliminar la valoración';
+                    }
+                    break;
                     
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';

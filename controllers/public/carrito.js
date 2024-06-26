@@ -59,42 +59,48 @@ async function readDetail() {
         let total = 0;
         // Se recorre el conjunto de registros fila por fila a través del objeto row.
         DATA.dataset.forEach(row => {
-            subtotal = row.precio_producto * row.cantidad_producto; //Calculo del subtotal
-            subtotalcondescuento = subtotal - (subtotal * row.descuento_producto)/100; //Calculo del subtotal aplicando el descuento
-            total += subtotalcondescuento;//Ahora asignamos la nueva variable de subtotal con descuento para que se muestre en el total de la compra
+            subtotal = row.precio_producto * row.cantidad_producto; // Calculo del subtotal
+            subtotalcondescuento = subtotal - (subtotal * row.descuento_producto) / 100; // Calculo del subtotal aplicando el descuento
+            total += subtotalcondescuento; // Ahora asignamos la nueva variable de subtotal con descuento para que se muestre en el total de la compra
 
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             CARD_CARRITO.innerHTML += `
-                
-
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-4 mt-5 text-center" >
-                <div class="card h-100" id="cards">
-                    
-                    <div class="card-body">
-                        <h5 class="card-title">${row.nombre_producto}</h5>
-                        <label class="fw-bold mt-4">Precio:</label>
-                        <p>${row.precio_producto}</p>
-                        <label class="fw-bold mt-4">Cantidad:</label>
-                        <p>${row.cantidad_producto}</p>
-                        <label class="fw-bold mt-4">Sub total:</label>
-                        <p>${subtotal.toFixed(2)}</p>
-                        <label class="fw-bold mt-4">Sub total con descuento:</label>
-                        <p>${subtotalcondescuento.toFixed(2)}</p>
+                <div class="col-lg-6 col-md-10 col-sm-12 mb-4 mt-5 text-center mx-auto">
+                    <div class="card h-100" id="cards">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="${SERVER_URL}images/productos/${row.imagen_producto}" class="img-fluid rounded-end h-50 mt-5" alt="${row.nombre_producto}">
+                            <h5 class="card-title">${row.nombre_producto}</h5>
+                            <p class="mt-3">Talla adquirida: ${row.talla}</p>
+                            <p class="mt-3">Color del producto: ${row.color}</p>
+                                </div>
+                            
+                            <div class="col-md-8 card-body">
+                            
+                                
+                                <label class="fw-bold mt-4">Precio del producto:</label>
+                                <p>$${row.precio_producto}</p>
+                                <label class="fw-bold mt-4">Cantidad:</label>
+                                <p>${row.cantidad_producto}</p>
+                                <label class="fw-bold mt-4">Sub total:</label>
+                                <p>$${subtotal.toFixed(2)}</p>
+                                <label class="fw-bold mt-4">Sub total con descuento:</label>
+                                <p>$${subtotalcondescuento.toFixed(2)}</p>
+                            </div>
+                            
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_detalle_compra})">
+                               
+                                <img src="../../resources/images/quitarproducto.png" alt="" width="40px" height="40px" class="mb-4">
+                            </button>
+                            <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_detalle_compra}, ${row.cantidad_producto})">
+                                
+                                <img src="../../resources/images/editardatos.png" alt="" width="40px" height="40px" class="mb-4">
+                            </button>
+                        </div>
                     </div>
                 </div>
-
-                <button type="submit" class="btn mt-1 " id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_detalle_compra})">
-                        <i class="bi bi-search"></i>
-                        <img src="../../resources/Imagenes/btnEliminarIMG.png" alt="" width="40px" height="40px"
-                            class="mb-4">
-
-                    </button>
-                    <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_detalle_compra}, ${row.cantidad_producto})">
-                        <i class="bi bi-x-square-fill"></i>
-                        <img src="../../resources/Imagenes/btnActualizarIMG.png" alt="" width="40px" height="40px"
-                            class="mb-4">
-                    </button>
-            </div>
             `;
         });
         // Se muestra el total a pagar con dos decimales.
@@ -103,6 +109,7 @@ async function readDetail() {
         sweetAlert(4, DATA.error, false, 'index.html');
     }
 }
+
 
 /*
 *   Función para abrir la caja de diálogo con el formulario de cambiar cantidad de producto.
@@ -124,7 +131,7 @@ function openUpdate(id, quantity) {
 */
 async function finishOrder() {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Está seguro de finalizar el pedido?');
+    const RESPONSE = await confirmAction('¿Está seguro de finalizar la compra?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Petición para finalizar el pedido en proceso.
@@ -145,7 +152,7 @@ async function finishOrder() {
 */
 async function openDelete(id) {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Está seguro de remover el producto?');
+    const RESPONSE = await confirmAction('¿Está seguro de remover el producto del carrito?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define un objeto con los datos del producto seleccionado.
