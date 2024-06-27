@@ -120,21 +120,48 @@ class ProductoHandler
        /*
     *   Métodos para generar gráficos.
     */
-    public function cantidadProductosCategoria()
+    public function productosMasVendids()
     {
-        $sql = 'SELECT nombre_categoria, COUNT(id_producto) cantidad_producto
-                FROM tb_productos
-                INNER JOIN tb_categorias USING(id_categoria)
-                GROUP BY nombre_categoria ORDER BY cantidad_producto DESC LIMIT 5';
+        $sql = 'SELECT 
+                p.nombre_producto,
+                SUM(dc.cantidad_producto) AS total_vendido
+                FROM 
+                tb_detalles_compras dc
+                INNER JOIN 
+                tb_detalleProducto dp ON dc.id_detalle_producto = dp.id_detalle_producto
+                INNER JOIN 
+                tb_productos p ON dp.id_producto = p.id_producto
+                GROUP BY 
+                p.id_producto
+                ORDER BY 
+                total_vendido DESC
+                LIMIT 5;';
         return Database::getRows($sql);
     }
 
     public function porcentajeProductosCategoria()
     {
-        $sql = 'SELECT nombre_categoria, ROUND((COUNT(id_producto) * 100.0 / (SELECT COUNT(id_producto) FROM tb_productos)), 2) porcentaje
+        $sql = 'SELECT categoria_producto, ROUND((COUNT(id_producto) * 100.0 / (SELECT COUNT(id_producto) FROM tb_productos)), 2) porcentaje
         FROM tb_productos
-        INNER JOIN tb_categorias USING(id_categoria)
-        GROUP BY nombre_categoria ORDER BY porcentaje DESC';
+        INNER JOIN tb_categorias_productos USING(id_categoria_producto)
+        GROUP BY categoria_producto ORDER BY porcentaje DESC';
+        return Database::getRows($sql);
+    }
+
+    public function clientesConMasCompras()
+    {
+        $sql = "SELECT 
+	            CONCAT(nombre_cliente, ' ', apellido_cliente) as nombre,
+                COUNT(co.id_compra) AS total_compras
+                FROM 
+                tb_clientes c
+                INNER JOIN 
+                tb_compras co ON c.id_cliente = co.id_cliente
+                GROUP BY 
+                c.id_cliente, c.nombre_cliente, c.apellido_cliente
+                ORDER BY 
+                total_compras DESC
+                LIMIT 7;";
         return Database::getRows($sql);
     }
 
@@ -159,8 +186,8 @@ class ProductoHandler
     {
         $sql = 'SELECT nombre_producto, precio_producto, estado_producto
                 FROM tb_productos
-                INNER JOIN tb_categorias USING(id_categoria)
-                WHERE id_categoria = ?
+                INNER JOIN tb_categorias_productos USING(id_categoria_producto)
+                WHERE id_categoria_producto = ?
                 ORDER BY nombre_producto';
         $params = array($this->categoria);
         return Database::getRows($sql, $params);

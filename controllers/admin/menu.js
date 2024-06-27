@@ -1,12 +1,143 @@
 const ALUMNOS_API = 'services/admin/alumnos.php';
-
+const PRODUCTOS_API = 'services/admin/productos.php';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
     loadTemplate();
     fillTable();
     loadBirthdayEvents();
+    graficoBarrasProductos();
+    graficoPastelClientes();
 });
+
+
+const graficoBarrasProductos = async () => {
+    try {
+        // Hacer la petición para obtener los datos del gráfico desde la API
+        const response = await fetch(`http://localhost/AcademiaBP_EXPO/api/${PRODUCTOS_API}?action=productosMasVendids`);
+        const data = await response.json();
+
+        console.log(data);
+
+        if (data.status === 1) {
+            // Inicializar arreglos para guardar los datos del gráfico
+            let categorias = [];
+            let cantidades = [];
+
+            // Iterar sobre los datos recibidos
+            data.dataset.forEach(row => {
+                categorias.push(row.nombre_producto); // Nombre del producto
+                cantidades.push(row.total_vendido); // Cantidad de productos
+            });
+
+            // Configurar y mostrar el gráfico de barras
+            const barCtx = document.getElementById('myBarChart').getContext('2d'); // Usamos el mismo canvas
+            const myBarChart = new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: categorias,
+                    datasets: [{
+                        label: 'Productos más vendidos',
+                        data: cantidades,
+                        backgroundColor: [
+                            'rgba(64, 136, 64, 0.9)',
+                            'rgba(64, 136, 64, 0.9)',
+                            'rgba(64, 136, 64, 0.9)',
+                            'rgba(64, 136, 64, 0.9)',
+                            'rgba(64, 136, 64, 0.9)',
+                            'rgba(64, 136, 64, 0.9)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 0, 0, 100%)',
+                            'rgba(0, 0, 0, 100%)',
+                            'rgba(0, 0, 0, 100%)',
+                            'rgba(0, 0, 0, 100%)',
+                            'rgba(0, 0, 0, 100%)',
+                            'rgba(0, 0, 0, 100%)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        } else {
+            console.error(data.error); // Manejo de errores si la respuesta no es satisfactoria
+        }
+    } catch (error) {
+        console.error('Error al obtener datos del gráfico:', error);
+    }
+};
+
+const graficoPastelClientes = async () => {
+    try {
+        // Hacer la petición para obtener los datos del gráfico desde la API
+        const response = await fetch(`http://localhost/AcademiaBP_EXPO/api/${PRODUCTOS_API}?action=clientesConMasCompras`);
+        const data = await response.json();
+
+        console.log(data);
+
+        if (data.status === 1) {
+            // Inicializar arreglos para guardar los datos del gráfico
+            let clientes = [];
+            let numcompras = [];
+
+            // Iterar sobre los datos recibidos
+            data.dataset.forEach(row => {
+                clientes.push(row.nombre);
+                numcompras.push(row.total_compras);
+            });
+
+            // Configurar y mostrar el gráfico de barras
+            const pieCtx = document.getElementById('myPieChart').getContext('2d'); // Usamos el mismo canvas
+            const myPieChart = new Chart(pieCtx, {
+                type: 'pie',
+                data: {
+                    labels: clientes,
+                    datasets: [{
+                        label: 'Clientes con más compras',
+                        data: numcompras,
+                        backgroundColor: [
+                            'rgba(64, 136, 64, 0.9)',
+                            'rgba(64, 136, 64, 0.9)',
+                            'rgba(64, 136, 64, 0.9)',
+                            'rgba(64, 136, 64, 0.9)',
+                            'rgba(64, 136, 64, 0.9)',
+                            'rgba(64, 136, 64, 0.9)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 0, 0, 100%)',
+                            'rgba(0, 0, 0, 100%)',
+                            'rgba(0, 0, 0, 100%)',
+                            'rgba(0, 0, 0, 100%)',
+                            'rgba(0, 0, 0, 100%)',
+                            'rgba(0, 0, 0, 100%)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        } else {
+            console.error(data.error); // Manejo de errores si la respuesta no es satisfactoria
+        }
+    } catch (error) {
+        console.error('Error al obtener datos del gráfico:', error);
+    }
+};
+
+
 
 const loadBirthdayEvents = (birthdayEvents) => {
     // Cargamos el calendario mostrado
@@ -18,25 +149,23 @@ const loadBirthdayEvents = (birthdayEvents) => {
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
-        locale: 'es',//Idioma del calendario
-        events: birthdayEvents, // Cargamos los eventos de cumpleaños en el calendario
-
-        //Método que, al darle clic a una casilla de un día del calendario, trae los 
-        //alumnos que cumplen años ese día
+        locale: 'es',
+        buttonText: {
+            today: 'Hoy',
+            month: 'Mes',
+            week: 'Semana',
+            day: 'Día'
+        },
+        events: birthdayEvents,
         dateClick: function(info) {
             var fechaSeleccionada = info.date;
-            
-
-            // Filtramos eventos de cumpleaños para obtener los que coinciden con la fecha seleccionada
             var eventosCumpleanios = birthdayEvents.filter(function(evento) {
-                // Convertimos start del evento a objeto Date para comparar
                 var startEvento = new Date(evento.start);
                 return startEvento.getFullYear() === fechaSeleccionada.getFullYear() &&
                        startEvento.getMonth() === fechaSeleccionada.getMonth() &&
                        startEvento.getDate() === fechaSeleccionada.getDate();
             });
 
-            // Declaramos un mensaje mensaje de alerta con los alumnos que cumplen años en la fecha seleccionada
             var mensajeAlerta = `Alumnos que cumplen años el ${fechaSeleccionada.toLocaleDateString()}:\n`;
             if (eventosCumpleanios.length > 0) {
                 eventosCumpleanios.forEach(function(evento) {
@@ -45,50 +174,32 @@ const loadBirthdayEvents = (birthdayEvents) => {
             } else {
                 mensajeAlerta += "No hay alumnos que cumplan años en esta fecha.";
             }
-
-            // Mostrar alerta con los alumnos que cumplen años
             alert(mensajeAlerta);
         }
     });
     calendar.render();
 }
 
-// Función para llenar las cards de alumnos (que serán invisibles) y asignar fechas de cumpleaños en el calendario
 const fillTable = async (form = null) => {
-    
-    
     const action = form ? 'searchRows' : 'readAll';
     const DATA = await fetchData(ALUMNOS_API, action, form);
 
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
-        // Array para almacenar los eventos de cumpleaños
         let birthdayEvents = [];
-        
-        // Recorremos el conjunto de registros fila por fila.
         DATA.dataset.forEach(row => {
-            // Tomamos la fecha de nacimiento del alumno
             const fechaNacimiento = new Date(row.fecha_nacimiento);
-            const mes = fechaNacimiento.getMonth(); // Mes (0 - 11)
-            const dia = fechaNacimiento.getDate(); // Día del mes
-            
-            
-            // Creamos el evento para el cumpleaños de los alumnos en el calendario
+            const mes = fechaNacimiento.getMonth();
+            const dia = fechaNacimiento.getDate();
+
             const eventoCumpleaños = {
                 title: `${row.nombre_alumno} ${row.apellido_alumno}`,
-                start: new Date(new Date().getFullYear(), mes, dia), // Fecha de cumpleaños de este año
+                start: new Date(new Date().getFullYear(), mes, dia),
                 allDay: true,
-                 backgroundColor: 'green', //Por defecto, el calendario muestra el nombre del alumno con fondo azul
-                 
-                
+                backgroundColor: 'green'
             };
-            
-            // Agregamos evento de cumpleaños al array
+
             birthdayEvents.push(eventoCumpleaños);
-          
         });
-        
-        // Llamar función para cargar los eventos de cumpleaños en el calendario
         loadBirthdayEvents(birthdayEvents);
     } else {
         sweetAlert(4, DATA.error, true);
