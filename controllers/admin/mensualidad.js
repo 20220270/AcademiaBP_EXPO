@@ -309,7 +309,7 @@ const fillTable4 = async (form = null) => {
                                 <h1 class="card-title titulo-card">Total de estudiantes registrados.</h1>
                                 <p class="card-text mt-5">
                                     <h3 id="totalStudents">${row.total_alumnos_registrados}</h3>
-                                    <input type="range" value="${row.total_alumnos_registrados}" max="${row.total_alumnos_registrados}" readonly class="barra-azul">
+                                    <input type="range" value="${row.total_alumnos_registrados}" max="${row.total_alumnos_registrados}" readonly class="barra-azul form-control" style="max-width: 100%;">
                                 </p>
                                 <div class="d-flex justify-content-start"></div>
                             </div>
@@ -337,7 +337,7 @@ const fillTable5 = async (form = null) => {
                                 <h1 class="card-title titulo-card">Alumnos solventes con el pago.</h1>
                                 <p class="card-text mt-5">
                                     <h3 id="solventStudents">${row.total_alumnos_registradoss}</h3>
-                                    <input type="range" value="${row.total_alumnos_registradoss}" max="${row.total_alumnos_registrados}" readonly class="barra-naranja">
+                                    <input type="range" value="${row.total_alumnos_registradoss}" max="${row.total_alumnos_registrados}" readonly class="barra-naranja form-control" style="max-width: 100%;">
                                 </p>
                                 <div class="d-flex justify-content-start"></div>
                             </div>
@@ -365,7 +365,7 @@ const fillTable6 = async (form = null) => {
                                 <h1 class="card-title titulo-card">Alumnos sin pagar.</h1>
                                 <p class="card-text mt-5">
                                     <h3 id="solventStudents">${row.total_alumnos_registradosss}</h3>
-                                    <input type="range" value="${row.total_alumnos_registradosss}" max="${row.total_alumnos_registrados}" readonly class="barra-roja">
+                                    <input type="range" value="${row.total_alumnos_registradosss}" max="${row.total_alumnos_registrados}" readonly class="barra-roja form-control" style="max-width: 100%;">
                                 </p>
                                 <div class="d-flex justify-content-start"></div>
                             </div>
