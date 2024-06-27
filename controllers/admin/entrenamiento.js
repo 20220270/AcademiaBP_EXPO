@@ -530,3 +530,24 @@ const openDelete3 = async (id) => {
     }
 }
 
+function openMap() {
+    // Mostrar el mapa
+    document.getElementById("map").style.display = "block";
+}
+
+function initMap() {
+    const map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 13.6808, lng: -89.2222 },
+        zoom: 8,
+    });
+
+    map.addListener("click", (event) => {
+        const lat = event.latLng.lat();
+        const lng = event.latLng.lng();
+        const wazeUrl = `https://waze.com/ul?ll=${lat},${lng}&navigate=yes`;
+        document.getElementById("URLLugar").value = wazeUrl;
+    });
+}
+
+// Asegúrate de llamar a initMap como callback
+window.initMap = initMap;
