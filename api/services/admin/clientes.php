@@ -35,7 +35,6 @@ if (isset($_GET['action'])) {
                     !$cliente->setTelefono($_POST['telefonoCliente']) or
                     !$cliente->setDireccion($_POST['direccionCliente']) or
                     !$cliente->setClave($_POST['claveCliente']) or
-                    !$cliente->setEstado($_POST['selectEstado']) or
                     !$cliente->setFotoCliente($_FILES['fotoCliente'], $cliente->getFilename())
                 ) {
                     $result['error'] = $cliente->getDataError();

@@ -110,6 +110,15 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen días y pagos registrados';
                 }
                 break;
+
+            case 'categoriasConMasAlumnos':
+                if ($result['dataset'] = $alumno->categoriasConMasAlumnos()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No hay datos disponibles';
+                }
+                break;
+
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

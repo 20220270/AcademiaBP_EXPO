@@ -25,7 +25,7 @@ class AlumnosHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = "SELECT id_alumno, nombre_alumno, apellido_alumno, fecha_nacimiento, posicion_alumno, estado_alumno, categoria, nombre_staff, apellido_staff, numero_dias, mensualidad_pagar,
+        $sql = "SELECT id_alumno, nombre_alumno, apellido_alumno, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad, fecha_nacimiento, posicion_alumno, estado_alumno, categoria, nombre_staff, apellido_staff, numero_dias, mensualidad_pagar,
         CONCAT(nombre_cliente, ' ', apellido_cliente) as 'Encargado' FROM tb_alumnos
         INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
         INNER JOIN tb_categorias_alumnos USING(id_categoria_alumno)
@@ -60,19 +60,19 @@ class AlumnosHandler
     numero_dias, 
     mensualidad_pagar,
     CONCAT(nombre_cliente, ' ', apellido_cliente) AS 'Encargado' 
-FROM 
+    FROM 
     tb_alumnos
-INNER JOIN 
+    LEFT JOIN 
     tb_staffs_categorias USING (id_staff_categorias)
-INNER JOIN 
+    LEFT JOIN 
     tb_categorias_alumnos USING(id_categoria_alumno)
-INNER JOIN 
+    LEFT JOIN 
     tb_staffs USING (id_staff)
-INNER JOIN 
+    LEFT JOIN 
     tb_dias_pagos USING (id_dia_pago)
-INNER JOIN 
+    LEFT JOIN
     tb_clientes USING(id_cliente)
-ORDER BY 
+    ORDER BY 
     id_alumno;";
         return Database::getRows($sql);
     }
@@ -117,6 +117,26 @@ ORDER BY
         return Database::getRows($sql);
     }
 
+    //Gráfico para saber las categorías con más alumnos
+
+    public function categoriasConMasAlumnos()
+    {
+        $sql = "SELECT 
+                ca.categoria,
+                COUNT(a.id_alumno) AS cantidad_alumnos
+                FROM 
+                tb_categorias_alumnos ca
+                JOIN 
+                tb_staffs_categorias sc ON ca.id_categoria_alumno = sc.id_categoria_alumno
+                JOIN 
+                tb_alumnos a ON sc.id_staff_categorias = a.id_staff_categorias
+                GROUP BY 
+                ca.categoria
+                ORDER BY 
+                cantidad_alumnos DESC LIMIT 5";
+                return Database::getRows($sql);
+    }
+
     //Sitio publico
 
     public function createRowAlumno()
@@ -127,5 +147,4 @@ ORDER BY
         $params = array($this->nombre, $this->apellido, $this->fechanacimiento, $this->posicion, $this->ididaspago, $_SESSION['idCliente']);
         return Database::executeRow($sql, $params);
     }
-
 }

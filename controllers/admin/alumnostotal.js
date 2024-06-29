@@ -83,15 +83,15 @@ const fillTable = async (form = null) => {
         DATA.dataset.forEach(row => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             CARD_ALUMNOS.innerHTML += `
-            <div class="col-md-8 mb-3" id="cardDiasPagos">
+            <div class="col-md-6 mb-3" id="cardDiasPagos">
                 <div class="card h-100">
-                    <div class="card-body">
+                    <div class="card-body text-start">
                         <!-- Círculo indicador del estado -->
                         <div class="status-circle ${row.estado_alumno === 'Activo' ? 'activo' : 'inactivo'}"></div>
                         <h5 class="card-title"><b>ID: </b>${row.id_alumno}</h5>
                         <p class="card-text"><b>Nombre del alumno: </b>${row.nombre_alumno} ${row.apellido_alumno}</p>
                         <p class="card-text"><b>Encargado del alumno: </b>${row.Encargado}</p>
-                        <p class="card-text"><b>Fecha de nacimiento: </b>${row.fecha_nacimiento} Edad: ${row.edad}</p>
+                        <p class="card-text"><b>Fecha de nacimiento: </b>${row.fecha_nacimiento}<b> -- </b>${row.edad} años</p>
                         <p class="card-text"><b>Posición del alumno: </b>${row.posicion_alumno}</p>
                         <p class="card-text"><b>Categoría: </b>${row.categoria}</p>
                         <p class="card-text"><b>Encargado de la categoría: </b>${row.nombre_staff} ${row.apellido_staff}</p>

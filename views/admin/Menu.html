@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,23 +15,47 @@
 
 <body>
     <main>
+        <!--Secciones con gráficos variados y un calendario-->
         <div class="container">
             <div class="row">
+                <!--Calendario gigente, abarcando la mitad de la pantalla-->
                 <div class="col-md-6 mt-4">
                     <h4>Fechas de nacimiento de cada alumno</h4>
                     <div id="calendar" class="mt-5"></div>
+                    <!--Debajo del calendario, dos gráficos-->
+                    <div class="row mt-5">
+                        <div class="col-md-10 mt-4">
+                            <!--Gráfico con las categorías que contienen la mayor cantidad de alumnos registrados-->
+                            <h4 class="text-center">Categorías con más alumnos</h4>
+                            <div class="chart-container2">
+                                <canvas id="myBarChart1" class="mt-1"></canvas>
+                            </div>
+                            <!--Gráfico con los cliente con más compras realizadas-->
+                            <div class="chart-container2">
+                                <h4 class="text-center mt-4">Clientes con más compras</h4>
+                                <canvas id="myPieChart" class="mt-1"></canvas>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 mt-4">
+
+                
+                <div class="col-md-5 mt-4">
+                    <!--Gráfico con los productos más vendidos-->
                     <h4 class="text-center">Productos más vendidos</h4>
                     <div class="chart-container">
                         <canvas id="myBarChart" class="mt-5"></canvas>
                     </div>
+
+                    <!--Gráfico con los productos con mejor calificación-->
                     <div class="chart-container2">
-                        <h4 class="text-center">Clientes con más compras</h4>
-                        <canvas id="myPieChart" class="mt-5"></canvas>
+                        <h5 class="text-center mt-3">Productos con mejor calificación</h5>
+                        <canvas id="myPieChart1" class="mt-5"></canvas>
                     </div>
                 </div>
             </div>
+
         </div>
         <script src="../../controllers/utils/chart.umd.min.js"></script>
     </main>
@@ -39,7 +64,7 @@
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
+
     <script src="../../controllers/utils/sweetalert.min.js"></script>
     <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/utils/private.js"></script>
@@ -51,4 +76,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.8/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.8/index.global.min.js"></script>
 </body>
+
 </html>

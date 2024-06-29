@@ -85,7 +85,7 @@ if (isset($_GET['action'])) {
                     } elseif ($result['dataset'] = $cliente->readAlumnos()) {
                         $result['status'] = 1;
                     } else {
-                        $result['error'] = 'Cliente inexistente';
+                        $result['error'] = 'No tienes ningún alumno registrado';
                     }
                     break;
 

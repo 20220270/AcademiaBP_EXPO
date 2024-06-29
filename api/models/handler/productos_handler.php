@@ -165,6 +165,29 @@ class ProductoHandler
         return Database::getRows($sql);
     }
 
+    public function productosConMejorRating()
+    {
+        $sql = "SELECT 
+                p.nombre_producto, 
+                ROUND(AVG(v.calificacion_producto), 1) AS promedio_calificacion
+                FROM 
+                tb_productos p
+                INNER JOIN 
+                tb_detalleProducto dp ON p.id_producto = dp.id_producto
+                INNER JOIN 
+                tb_detalles_compras dc ON dp.id_detalle_producto = dc.id_detalle_producto
+                INNER JOIN 
+                tb_valoraciones v ON dc.id_detalle_compra = v.id_detalle_compra
+                WHERE 
+                v.calificacion_producto IS NOT NULL
+                GROUP BY 
+                p.nombre_producto
+                ORDER BY 
+                promedio_calificacion DESC
+                LIMIT 5;";
+        return Database::getRows($sql);
+    }
+
     
     public function commentsProduct()
     {
