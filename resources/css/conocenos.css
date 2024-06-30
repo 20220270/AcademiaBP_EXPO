@@ -1,289 +1,278 @@
-  /* Estilo para el encabezado fijo */
-  header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  main {
-    margin-top: 220px;
-
-  }
-
-  /* Estilos para cambiar el color de los iconos de prev y next a negro */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    filter: invert(100%); /* Invierte el color del icono */
+/* Estilos para el header fijo en la parte superior */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilos para el margen superior del main */
+main {
+  margin-top: 220px;
+}
 
-  .conteNav {
-    background-color: #408840;
+/* Estilos para cambiar el color de los iconos de prev y next a negro */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(100%); /* Invierte el color del icono */
+}
+
+/* Estilos para el fondo del contenedor de navegación */
+.conteNav {
+  background-color: #408840;
+}
+
+/* Estilos para elementos de navegación */
+.nav-item {
+  font-size: 12.5px;
+}
+
+/* Estilos para las imágenes de aliados en el carrusel */
+.carruselAliados .img-fluid {
+  width: 220px;
+  height: 220px;
+  object-fit: cover; /* Ajusta la imagen para que cubra todo el contenedor */
+  border-radius: 55%; /* Borde redondeado */
+  margin-left: 55px;
+}
+
+/* Estilos para las cards */
+.card {
+  height: 490px;
+  border: 2px solid #408840;
+  border-radius: 15px;
+}
+
+/* Estilos para el cuerpo de las cards */
+.card-body {
+  padding: 0; /* Elimina el padding para que la imagen ocupe toda la parte superior */
+}
+
+/* Estilos para las imágenes dentro de las cards */
+.imagenProfe {
+  width: 100%;
+  border-radius: 10px 10px 0 0; /* Borde redondeado solo arriba */
+}
+
+/* Estilos para el texto dentro de las imágenes de los equipos en el carrusel */
+.carousel-caption-text {
+  max-width: 700px; /* Ancho máximo del texto */
+  margin: 0 auto; /* Centra horizontalmente */
+}
+
+/* Estilos para el footer */
+footer {
+  background-color: #408840;
+  color: #fff;
+}
+
+/* Estilos para la fila de copia con borde superior */
+.filaCopy {
+  border-top: 1px solid #fff;
+}
+
+/* Estilos para la imagen de marcas */
+.imagenMarcas {
+  border: 4px solid #000;
+}
+
+/* Estilos para el enlace AA */
+.aa {
+  text-decoration: none;
+  color: #fff;
+}
+
+/* Estilos para el texto del carrito y su estado hover */
+#textoCarrito,
+#textoCarrito:hover {
+  text-decoration: none;
+  color: #000;
+  font-size: 12px;
+}
+
+/* Ajustes responsivos para pantallas medianas */
+@media (min-width: 992px) and (max-width: 1200px) {
+  .nav-item {
+    font-size: 10.5px;
   }
 
-
-  .nav-item {
-    font-size: 12.5px;
+  .carruselAliados {
+    width: 100%; /* Ajusta el ancho completo */
   }
 
   .carruselAliados .img-fluid {
-    width: 220px;
-    height: 220px;
-    object-fit: cover;
-    /* Ajusta la imagen para que cubra todo el contenedor */
-    border-radius: 55%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover; /* Ajusta la imagen para que cubra todo el contenedor */
+    border-radius: 55%; /* Borde redondeado */
     margin-left: 55px;
-
   }
 
+  .spanMarca {
+    margin-left: 25px;
+  }
+}
+
+/* Ajustes responsivos para pantallas pequeñas a medianas */
+@media (min-width: 768px) and (max-width: 992px) {
+  main {
+    margin-top: 250px;
+  }
+
+  .navbar {
+    text-align: start; /* Alinea el texto de la barra de navegación a la izquierda */
+  }
 
   .card {
-    height: 490px;
-    border: 2px solid #408840;
-    border-radius: 15px;
+    height: 530px;
+    margin-top: 20px;
   }
 
+  .carruselAliados {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+}
 
-
-  /*Ajustamos el cuerpo de la card para que no tenga ni un espacio, para que la imagen abarque toda la parte de arriba y los costados*/
-  .card-body {
-    padding: 0;
+/* Ajustes responsivos para pantallas pequeñas */
+@media (min-width: 576px) and (max-width: 768px) {
+  main {
+    margin-top: 250px;
   }
 
-  .imagenProfe {
-    width: 100%;
-    border-radius: 10px 10px 0 0;
+  .navbar {
+    text-align: start; /* Alinea el texto de la barra de navegación a la izquierda */
   }
 
-
-  .imagenesE {
-    width: 100%;
+  .card {
+    height: 700px;
+    margin-top: 20px;
   }
+}
 
-  /*Texto dentro de las imagenes de los equipos*/
-  .carousel-caption-text {
-    max-width: 700px;
-    /* Ajusta el ancho máximo del contenedor del texto */
-    margin: 0 auto;
-    /* Centra horizontalmente el contenedor del texto */
-  }
-
-  footer {
-    background-color: #408840;
-    color: #fff;
-  }
-
-  .filaCopy {
-    border-top: 1px solid #fff;
-  }
-
-  .imagenMarcas {
-    border: 4px solid #000;
-  }
-
-  .aa {
-    text-decoration: none;
-    color: #fff;
-  }
-
-  #textoCarrito,
-  #textoCarrito:hover {
-    text-decoration: none;
-    color: #000;
+/* Ajustes responsivos para pantallas muy pequeñas */
+@media (min-width: 380px) and (max-width: 576px) {
+  /* Ajustes generales de tamaño y alineación */
+  .texto1,
+  .texto2 {
     font-size: 12px;
   }
 
-  @media (min-width: 992px) and (max-width: 1200px) {
-    .nav-item {
-      font-size: 10.5px;
-    }
-
-    .carruselAliados {
-      width: 100%;
-    }
-
-    .carruselAliados .img-fluid {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      /* Ajusta la imagen para que cubra todo el contenedor */
-      border-radius: 55%;
-      margin-left: 55px;
-
-    }
-
-    .spanMarca {
-      margin-left: 25px;
-    }
-
-
+  main {
+    margin-top: 350px;
   }
 
-
-
-  @media (min-width: 768px) and (max-width: 992px) {
-    main {
-      margin-top: 250px;
-    }
-
-    .navbar {
-      text-align: start;
-    }
-
-    .card {
-      height: 530px;
-      margin-top: 20px;
-    }
-
-    .carruselAliados {
-      margin-left: 40px;
-      margin-right: 40px;
-    }
+  .card {
+    height: 710px;
+    margin-top: 10px;
   }
 
-  @media (min-width: 576px) and (max-width: 768px) {
-    main {
-      margin-top: 250px;
-    }
-
-    .navbar {
-      text-align: start;
-    }
-
-    .card {
-      height: 700px;
-      margin-top: 20px;
-    }
+  .navbar {
+    text-align: start; /* Alinea el texto de la barra de navegación a la izquierda */
   }
 
-
-  @media (min-width: 380px) and (max-width: 576px) {
-
-    .texto1,
-    .texto2 {
-      font-size: 12px;
-    }
-
-    main {
-      margin-top: 350px;
-    }
-
-    .card {
-      height: 710px;
-      margin-top: 10px;
-    }
-
-    .navbar {
-      text-align: start;
-    }
-
-    .carruselAliados {
-      margin-left: 10px;
-      margin-right: 10px;
-    }
-
-    .imaegenesForma,
-    .imaegenesCompe {
-      width: 350px;
-    }
-
-    .carruselAliados .img-fluid {
-      width: 205px;
-      height: 200px;
-      object-fit: cover;
-      /* Ajusta la imagen para que cubra todo el contenedor */
-      border-radius: 55%;
-      margin-left: 75px;
-
-    }
-
-    .imagenValores {
-      width: 330px;
-      height: 290px;
-    }
-
-    .botonPrevio,
-    .botonLuego {
-      width: 15px;
-      height: 20px;
-    }
-
-    #competitivo,
-    #formacion {
-      font-size: 17px;
-    }
-
-    footer span {
-      font-size: 13px;
-    }
-
-    footer h6 {
-      font-size: 16px;
-      margin-top: 10px;
-    }
+  .carruselAliados {
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
-
-  @media (min-width: 260px) and (max-width: 380px) {
-
-    .texto1,
-    .texto2 {
-      font-size: 12px;
-    }
-
-    main {
-      margin-top: 350px;
-    }
-
-    .card {
-      height: 710px;
-      margin-top: 10px;
-    }
-
-    .navbar {
-      text-align: start;
-    }
-
-    .imaegenesForma,
-    .imaegenesCompe {
-      width: 280px;
-    }
-
-    .carruselAliados .img-fluid {
-      width: 205px;
-      height: 200px;
-      object-fit: cover;
-      /* Ajusta la imagen para que cubra todo el contenedor */
-      border-radius: 55%;
-      margin-left: 50px;
-
-    }
-
-    .botonPrevio,
-    .botonLuego {
-      width: 15px;
-      height: 20px;
-    }
-
-    .imagenValores {
-      width: 260px;
-      height: 250px;
-    }
-
-    #competitivo,
-    #formacion {
-      font-size: 17px;
-    }
-
-    footer span {
-      font-size: 13px;
-    }
-
-    footer h6 {
-      font-size: 16px;
-      margin-top: 10px;
-    }
+  .imaegenesForma,
+  .imaegenesCompe {
+    width: 350px;
   }
+
+  .carruselAliados .img-fluid {
+    width: 205px;
+    height: 200px;
+    object-fit: cover; /* Ajusta la imagen para que cubra todo el contenedor */
+    border-radius: 55%; /* Borde redondeado */
+    margin-left: 75px;
+  }
+
+  .imagenValores {
+    width: 330px;
+    height: 290px;
+  }
+
+  .botonPrevio,
+  .botonLuego {
+    width: 15px;
+    height: 20px;
+  }
+
+  #competitivo,
+  #formacion {
+    font-size: 17px;
+  }
+
+  footer span {
+    font-size: 13px;
+  }
+
+  footer h6 {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+}
+
+/* Ajustes responsivos para pantallas muy pequeñas */
+@media (min-width: 260px) and (max-width: 380px) {
+  /* Ajustes generales de tamaño y alineación */
+  .texto1,
+  .texto2 {
+    font-size: 12px;
+  }
+
+  main {
+    margin-top: 350px;
+  }
+
+  .card {
+    height: 710px;
+    margin-top: 10px;
+  }
+
+  .navbar {
+    text-align: start; /* Alinea el texto de la barra de navegación a la izquierda */
+  }
+
+  .imaegenesForma,
+  .imaegenesCompe {
+    width: 280px;
+  }
+
+  .carruselAliados .img-fluid {
+    width: 205px;
+    height: 200px;
+    object-fit: cover; /* Ajusta la imagen para que cubra todo el contenedor */
+    border-radius: 55%; /* Borde redondeado */
+    margin-left: 50px;
+  }
+
+  .botonPrevio,
+  .botonLuego {
+    width: 15px;
+    height: 20px;
+  }
+
+  .imagenValores {
+    width: 260px;
+    height: 250px;
+  }
+
+  #competitivo,
+  #formacion {
+    font-size: 17px;
+  }
+
+  footer span {
+    font-size: 13px;
+  }
+
+  footer h6 {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+}

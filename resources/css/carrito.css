@@ -1,3 +1,4 @@
+/* Estilos para el header fijo en la parte superior */
 header {
   position: fixed;
   top: 0;
@@ -7,11 +8,12 @@ header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
+/* Estilos para una clase que parece estar asociada a una imagen de usuario */
 .imagenUser {
   cursor: pointer;
 }
 
+/* Estilos para clases de posicionamiento relativo y absoluto */
 .position-relative {
   position: relative;
 }
@@ -20,10 +22,12 @@ header {
   position: absolute;
 }
 
+/* Clase para alinear a la derecha */
 .end-0 {
   right: 0;
 }
 
+/* Estilos para enlaces de texto del carrito */
 #textoCarrito,
 #textoCarrito:hover {
   text-decoration: none;
@@ -31,30 +35,34 @@ header {
   font-size: 12px;
 }
 
+/* Estilos para una clase de lupa (icono de búsqueda) */
 .lupa {
   transform: translate(-120%, 10%);
 }
 
+/* Estilos para el campo de texto de búsqueda */
 .textoBuscar {
   width: 350px;
 }
 
+/* Estilos para el contenedor de navegación */
 .conteNav {
   background-color: #408840;
   font-size: 13px;
 }
 
+/* Estilos para el margen superior del main */
 main {
   margin-top: 220px;
-
 }
 
-
+/* Estilos para un contenedor total con borde y borde redondeado */
 .contenedorTotal {
   border-radius: 15px;
   border: 2px solid #408840;
 }
 
+/* Estilos para botones de pago y botones similares */
 .botonpagar,
 .but,
 .botonpagar:hover,
@@ -65,44 +73,41 @@ main {
   color: #fff;
 }
 
-
-
+/* Estilos para el footer */
 footer {
   background-color: #408840;
   color: #fff;
 }
 
+/* Estilos para enlaces de color blanco sin decoración */
 .aa {
   text-decoration: none;
   color: #fff;
 }
 
+/* Estilos para una fila de copia con borde superior */
 .filaCopy {
   border-top: 1px solid #fff;
 }
 
+/* Estilos para botones de incremento y decremento */
 .incrementBtn,
 .decrementBtn {
   background-color: #408840;
   color: #fff;
 }
 
+/* Estilos para el encabezado modal */
 .modal-header {
   background-color: #408840;
 }
 
+/* Estilos para una clase que parece mover texto hacia arriba */
 .LetraO {
   transform: translateY(-110px);
 }
 
-.botonPago,
-.botonCerrar,
-.botonCerrar:hover,
-.botonPago:hover {
-  background-color: #408840;
-  color: #fff;
-}
-
+/* Estilos responsivos para pantallas medianas */
 @media (min-width:768px) and (max-width: 992px) {
   .LetraO {
     transform: translateY(-175px);
@@ -113,13 +118,14 @@ footer {
   }
 }
 
+/* Estilos responsivos para pantallas pequeñas */
 @media (min-width:576px) and (max-width: 706px) {
   main {
     margin-top: 250px;
   }
 }
 
-
+/* Estilos para pantallas más pequeñas */
 @media (min-width:426px) and (max-width: 576px) {
   main {
     margin-top: 300px;
@@ -134,6 +140,7 @@ footer {
   }
 }
 
+/* Estilos para pantallas muy pequeñas */
 @media (min-width:279px) and (max-width: 426px) {
   main {
     margin-top: 350px;
