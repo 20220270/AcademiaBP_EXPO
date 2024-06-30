@@ -1,3 +1,4 @@
+/* Estilos para el header fijo en la parte superior */
 header {
     position: fixed;
     top: 0;
@@ -7,32 +8,39 @@ header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilos para el margen superior del main */
 main {
     margin-top: 220px;
 }
 
+/* Estilos para el fondo del contenedor de navegación */
 .conteNav {
     background-color: #408840;
 }
 
+/* Estilos para elementos de navegación */
 .nav-item {
     font-size: 13px;
 }
 
+/* Estilos para mensajes de error y elementos ocultos */
 #noResultsMessage,
 #imageError {
     display: none;
 }
 
+/* Estilos específicos para el mensaje de error de imagen */
 #imageError {
     vertical-align: middle;
     margin-right: 10px;
 }
 
+/* Estilos para el placeholder en inputs */
 ::placeholder {
     font-size: 13px;
 }
 
+/* Estilos para botones y elementos de modal ocultos */
 .btnMostrarModalVa,
 .tituloValoracion,
 .tituloDevolucion,
@@ -41,6 +49,7 @@ main {
     border: none;
 }
 
+/* Estilos para el footer y botones increment/decrement */
 footer,
 .incrementBtn,
 .incrementBtn:hover,
@@ -56,16 +65,19 @@ footer,
     color: #fff;
 }
 
+/* Estilos para el encabezado del modal con gradiente */
 .modal-header {
     background: linear-gradient(to right, #04B704, #408340);
     height: 160px;
 }
 
+/* Estilos para el contenedor de estrellas y su disposición */
 .rating {
     display: flex;
     justify-content: space-between;
 }
 
+/* Estilos para las estrellas de valoración */
 .star {
     font-size: 32px;
     color: gray;
@@ -73,16 +85,13 @@ footer,
     cursor: pointer;
 }
 
-#texto {
-    border: none;
-    text-align: center;
-}
-
+/* Estilos para las estrellas al pasar el ratón o seleccionadas */
 .star:hover,
 .star.checked {
     color: #408840;
 }
 
+/* Estilos para el popover y cuerpos de modal */
 .popover-header,
 .modal-header,
 .modal-footer {
@@ -95,26 +104,25 @@ footer,
     color: #fff;
 }
 
+/* Estilos para el botón de enviar valoración */
 .btnEnviarValoracion {
     background: linear-gradient(to right, #04B704, #408340);
     border-radius: 10px;
     width: 70px;
 }
 
+/* Estilos para la fila de copia con borde superior */
 .filaCopy {
     border-top: 1px solid #fff;
 }
 
-.nu {
-    border: 4px solid #000;
-}
-
+/* Estilos para el enlace AA */
 .aa {
     text-decoration: none;
     color: #fff;
 }
 
-/* Buscador propio de compras */
+/* Estilos para un buscador personalizado */
 .buscador {
     position: relative;
     display: flex;
@@ -125,6 +133,7 @@ footer,
     margin: auto;
 }
 
+/* Estilos para el campo de búsqueda */
 .busc {
     flex-grow: 1;
     padding: 10px 40px; /* Ajusta el padding para dejar espacio para el ícono */
@@ -133,6 +142,7 @@ footer,
     font-size: 20px;
 }
 
+/* Estilos para el ícono de búsqueda */
 .search-icon {
     position: absolute;
     left: 10px;
@@ -140,6 +150,7 @@ footer,
     cursor: pointer;
 }
 
+/* Estilos para el botón de búsqueda */
 .btna {
     position: absolute;
     right: 10px;
@@ -153,7 +164,7 @@ footer,
     color: white;
 }
 
-/* Ajustes responsivos */
+/* Ajustes responsivos para tamaños de pantalla específicos */
 @media (min-width: 992px) and (max-width: 1281px) {
     footer {
         height: 25vh;
