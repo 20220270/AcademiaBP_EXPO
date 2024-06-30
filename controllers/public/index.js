@@ -1,7 +1,9 @@
 const CATEGORIA_API = 'services/public/categorias.php';
+const PRODUCTOS_API = 'services/public/productos.php';
 const SOPORTETECNICO_API = 'services/public/soportetecnico.php';
 
     const CATEGORIAS = document.getElementById('categorias');
+    const PRODUCTOS = document.getElementById('productos');
     const MAIN_TITLE = document.getElementById('mainTitle');
 
     const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
@@ -19,6 +21,7 @@ const SOPORTETECNICO_API = 'services/public/soportetecnico.php';
         MAIN_TITLE.textContent = 'Nuestras categorías';
         // Petición para obtener las categorías disponibles.
         const DATA = await fetchData(CATEGORIA_API, 'readAll');
+        const DATA2 = await fetchData(PRODUCTOS_API, 'productosMasVendi2');
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
             // Se inicializa el contenedor de categorías.
@@ -44,6 +47,54 @@ const SOPORTETECNICO_API = 'services/public/soportetecnico.php';
             // Se asigna al título del contenido de la excepción cuando no existen datos para mostrar.
             MAIN_TITLE.textContent = DATA.error;
         }
+
+        if (DATA2.status) {
+            // Se inicializa el contenedor de categorías.
+            PRODUCTOS.innerHTML = '';
+            // Se recorre el conjunto de registros fila por fila a través del objeto row.
+            DATA2.dataset.forEach((row) => {
+                // Se crea la tarjeta con los datos de cada categoría.
+                let card = `
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <span class="discount-badge">20% de descuento</span>
+                            <img src="${SERVER_URL}/images/productos/${row.imagen_producto}" alt="${row.nombre_producto}" class="img-fluid mt-5" height="200px" width="200px">
+                            
+        
+                            <!-- Nombre del producto destacado -->
+                            <h5 class="card-title mt-3">${row.nombre_producto}</h5>
+        
+                            <!-- Estado y existencias del producto -->
+                            <div class="row mt-3">
+                                <div class="col-6 text-end">
+                                    <span id="estado">Estado:</span>
+                                </div>
+                                <div class="col-6 text-start">
+                                    <span id="disponible">${row.estado_producto}</span>
+                                </div>
+                            </div>
+        
+                            <!-- Agregar al carrito, precio del producto y ver comentarios -->
+                            <div class="container mt-4">
+                                <div class="row mx-auto">
+                                    <div class="col-12 mx-2">
+                                        <!-- Precio del producto -->
+                                        <span class="fw-bold textoPrecio">$${row.precio_producto}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+                // Agrega la tarjeta al contenedor de categorías.
+                PRODUCTOS.innerHTML += card;
+            });
+        } else {
+            // Manejar el caso donde no hay datos o ha ocurrido un error.
+        }
+        
         
     });
 

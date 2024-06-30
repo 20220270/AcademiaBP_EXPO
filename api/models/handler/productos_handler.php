@@ -139,6 +139,28 @@ class ProductoHandler
         return Database::getRows($sql);
     }
 
+    public function productosMasVendi2()
+    {
+        $sql = 'SELECT 	
+                p.nombre_producto,
+                p.imagen_producto,
+                p.estado_producto,
+                p.precio_producto,
+                SUM(dc.cantidad_producto) AS total_vendido
+                FROM 
+                tb_detalles_compras dc
+                INNER JOIN 
+                tb_detalleProducto dp ON dc.id_detalle_producto = dp.id_detalle_producto
+                INNER JOIN 
+                tb_productos p ON dp.id_producto = p.id_producto
+                GROUP BY 
+                p.id_producto
+                ORDER BY 
+                total_vendido DESC
+                LIMIT 4;';
+        return Database::getRows($sql);
+    }
+
     public function porcentajeProductosCategoria()
     {
         $sql = 'SELECT categoria_producto, ROUND((COUNT(id_producto) * 100.0 / (SELECT COUNT(id_producto) FROM tb_productos)), 2) porcentaje
