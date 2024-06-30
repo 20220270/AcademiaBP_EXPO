@@ -5,9 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil del cliente</title>
+    <!--Link de recursos bootstrap css-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!--Link de recursos css de la pantalla perfil-->
     <link rel="stylesheet" href="../../resources/css/perfilCliente.css">
+    <!--Link de recursos css del buscador-->
     <link rel="stylesheet" href="../../resources/css/buscador.css">
 </head>
 
@@ -24,10 +27,12 @@
                 </div>
             </div>
 
+            <!--contenedor donde se mostraran los datos del perfil del usuario-->
             <div class="container mt-4" id="conte">
                 <div class="row ">
                     <div class="col-lg-8">
-                        
+
+                        <!--contenedor para la edicion de datos del perfil-->
                         <form class="row g-3" id="profileForm">
                             <div class="col-md-5 mt-5 d-flex flex-column align-items-center">
                                 <div class="position-relative mb-4">
@@ -57,14 +62,14 @@
                                 </div>
                             </div>
 
+                            <!-- Contenedor para el ingreso y edicion de datos para el perfil -->
                             <div class="col-md-7">
                                 <div class="row g-3">
-                                    <input id="idCliente" type="text" name="idCliente"
-                                            class="form-control" hidden>
+                                    <input id="idCliente" type="text" name="idCliente" class="form-control" hidden>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="nombreCliente" class="form-label">Nombre:</label>
-                                        <input id="nombreCliente" type="text" name="nombreCliente"
-                                            class="form-control" required>
+                                        <input id="nombreCliente" type="text" name="nombreCliente" class="form-control"
+                                            required>
                                     </div>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="apellidoCliente" class="form-label">Apellido:</label>
@@ -73,13 +78,13 @@
                                     </div>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="duiCliente" class="form-label">Dui:</label>
-                                        <input id="duiCliente" type="text" name="duiCliente"
-                                            class="form-control" required>
+                                        <input id="duiCliente" type="text" name="duiCliente" class="form-control"
+                                            required>
                                     </div>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="correoCliente" class="form-label">Correo:</label>
-                                        <input id="correoCliente" type="email" name="correoCliente"
-                                            class="form-control" required>
+                                        <input id="correoCliente" type="email" name="correoCliente" class="form-control"
+                                            required>
                                     </div>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="telefonoCliente" class="form-label">Teléfono:</label>
@@ -92,6 +97,8 @@
                                             class="form-control" required>
                                     </div>
                                 </div>
+
+                                <!-- Contenedor para los botones de edicion y actualizacion de datos del perfil del usuario -->
                                 <div class="text-center mb-4 mt-3">
 
                                     <button type="submit" class="btn mt-1" id="botonActualizarDatos">
@@ -107,25 +114,31 @@
                                     </button>
                                 </div>
                             </div>
-                            
+
                         </form>
                     </div>
+
+                    <!-- Contenedor para el boton para la revision de alumnos registrados en el sistema -->
                     <div class="col-lg-4">
-                        
+
                         <form class="row g-3" id="profileForm2">
-                            
-                            <h3 class="card-title text-center">Alumnos registrados <a href="verpagosrealizados.html"><img src="../../resources/images/verhistroialpagos.png" alt="..." width="50px" height="40px" class="mx-4 mt-2"></a></h3>
-                            
+
+                            <h3 class="card-title text-center">Alumnos registrados <a
+                                    href="verpagosrealizados.html"><img
+                                        src="../../resources/images/verhistroialpagos.png" alt="..." width="50px"
+                                        height="40px" class="mx-4 mt-2"></a></h3>
+
                             <div class="card mb-4 h-100" id="cardAlumnos">
-                                
+
                             </div>
-                            
+
                         </form>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- modal para el cambio de contraseña del usuario -->
         <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="modalTitle" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -170,7 +183,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../../controllers/utils/sweetalert.min.js"></script>
     <script src="../../controllers/utils/components.js"></script>
 
