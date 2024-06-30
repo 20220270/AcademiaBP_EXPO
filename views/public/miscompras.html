@@ -5,17 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis compras</title>
+    <!--Link de recursos bootstrap css-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!--Link para las estrellitas en la valoración de productos-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!--Link de recursos css de la pantalla miscompras-->
     <link rel="stylesheet" href="../../resources/css/compras.css">
+    <!--Link de recursos css del buscador-->
     <link rel="stylesheet" href="../../resources/css/buscador.css">
 </head>
 
 <body>
 
     <main>
+        <!--contenedor donde se mostrara el buscador de productos-->
         <div class="contennn mt-5">
             <div class="container mt-5">
                 <div class="text-center">
@@ -39,7 +43,7 @@
                 </div>
             </div>
 
-
+            <!--contenedor donde se mostraran los productos dentro de una tabla-->
             <div class="col-lg-11 col-sm-10 col-md-12 col-12 mx-auto">
                 <table class="table text-center">
                     <thead>
@@ -78,6 +82,7 @@
                         adquirir este producto. </p>
                     <div class="container text-center">
                         <div class="row">
+                            <!--Formulario donde se ingresara la valoracion-->
                             <form id="formularioValoracion">
                                 <div class="col col-lg-12">
                                     <input type="hidden" id="idDetalle" name="idDetalle">
@@ -92,6 +97,7 @@
                                     </div>
                                     <input class="mt-3" type="text" name="calificacion" id="calificacion" readonly>
                                 </div>
+                                <!--texto que informa que se agrega el comentario de la valoracion-->
                                 <div class="col col-lg-12 mt-2 mb-4">
                                     <div class="form-floating">
                                         <textarea class="form-control" placeholder="Leave a comment here"
@@ -99,7 +105,7 @@
                                         <label for="floatingTextarea2">Agrega tu comentario</label>
                                     </div>
                                 </div>
-
+                                <!--Boton donde se ingresara la valoracion-->
                                 <div class="d-flex justify-content-center align-items-center">
                                     <button type="submit" class="btn btnEnviarValoracion">
                                         <img src="../../resources/images/enviarValoracion.png" alt="..." width="40px"
