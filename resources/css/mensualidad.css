@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
+/* Estilo predeterminado la pantalla pagomensualidad*/
 * {
     margin: 0;
     padding: 0;
@@ -8,6 +9,7 @@
     font-size: 11px;
 }
 
+/* Estilo para el body de la pantalla pagomensualidad*/
 body {
     background-color: #c9d6ff;
     background: linear-gradient(to right, #e2e2e2, #9ed392);
@@ -18,6 +20,7 @@ body {
     height: 100vh;
 }
 
+/* Estilo asociado a la clase container de la pantalla pagomensualidad*/
 .container {
     background-color: #fff;
     border-radius: 30px;
@@ -29,6 +32,7 @@ body {
     min-height: 600px;
 }
 
+/* Estilo asociado a la clase container de la pantalla pagomensualidad*/
 .container p {
     font-size: 14px;
     line-height: 20px;
@@ -36,13 +40,14 @@ body {
     margin: 20px 0;
 }
 
+/* Estilo asociado a la clase container de la pantalla pagomensualidad*/
 .container span {
     font-size: 12px;
     letter-spacing: 0.5px;
 }
 
 
-
+/* Estilo asociado a la clase container de la pantalla pagomensualidad*/
 .container button {
     background-color: #338121;
     color: #fff;
@@ -57,7 +62,7 @@ body {
     cursor: pointer;
 }
 
-
+/* Estilo asociado a la clase container de la pantalla pagomensualidad*/
 .container form {
     background-color: #fff;
     display: flex;
@@ -68,6 +73,7 @@ body {
     height: 100%;
 }
 
+/* Estilo asociado al input dentro de la clase container de la pantalla pagomensualidad*/
 .container input {
     border: none;
     margin: 8px 0;
@@ -80,6 +86,7 @@ body {
     box-shadow: none;
 }
 
+/* Estilo asociado al id categoria de la pantalla pagomensualidad*/
 #categoria {
     border: none;
     margin: 8px 0;
@@ -93,6 +100,7 @@ body {
 }
 
 
+/* Estilo asociado a la clase form-container de la pantalla pagomensualidad*/
 .form-container {
     top: 0;
     height: 100%;
@@ -100,18 +108,19 @@ body {
 }
 
 
-
+/* Estilo asociado a la clase inscripcion de la pantalla pagomensualidad*/
 .inscripcion {
     left: 0;
     width: 50%;
     z-index: 2;
 }
 
+/* Estilo asociado a la clase container de la pantalla pagomensualidad*/
 .container.active .inscripcion {
     transform: translateX(-200%);
 }
 
-
+/* Estilo asociado a la clase toggle-container de la pantalla pagomensualidad*/
 .toggle-container {
     position: absolute;
     top: 0;
@@ -124,7 +133,7 @@ body {
 }
 
 
-
+/* Estilo asociado a la clase toggle de la pantalla pagomensualidad*/
 .toggle {
     background-color: #338121;
     height: 100%;
@@ -139,7 +148,7 @@ body {
 }
 
 
-
+/* Estilo asociado a la clase toggle-panel de la pantalla pagomensualidad*/
 .toggle-panel {
     position: absolute;
     width: 50%;
@@ -152,13 +161,14 @@ body {
 
 
 
-
+/* Estilo asociado a la clase toggle de la pantalla pagomensualidad*/
 .toggle {
     display: flex;
     align-items: center;
     position: relative;
 }
 
+/* Estilo asociado a la clase toggle-image de la pantalla pagomensualidad*/
 .toggle-image {
     position: absolute;
     top: 165px;
@@ -168,11 +178,13 @@ body {
     /* Ajustar para centrar completamente */
 }
 
+/* Estilo asociado a la clase toggle img de la pantalla pagomensualidad*/
 .toggle img {
     width: 250px;
     height: auto;
 }
 
+/* Estilos responsivos para pantallas pequeñas */
 @media (min-width: 220px) and (max-width:268px) {
     body {
         background-color: #c9d6ff;
@@ -225,7 +237,7 @@ body {
     }
 }
 
-
+/* Estilos responsivos para pantallas medianas */
 @media (min-width: 268px) and (max-width:500px) {
     body {
         background-color: #c9d6ff;
@@ -273,8 +285,7 @@ body {
     }
 }
 
-
-
+/* Estilos responsivos para pantallas grandes */
 @media (min-width: 501px) and (max-width:790px) {
     body {
         background-color: #c9d6ff;
@@ -319,6 +330,8 @@ body {
     }
 }
 
+
+/* Estilos responsivos para pantallas mas grandes */
 @media (min-width: 790px) and (max-width:900px) {
     body {
         background-color: #c9d6ff;
