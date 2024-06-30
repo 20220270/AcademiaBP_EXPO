@@ -122,6 +122,12 @@ margin-top: 230px;
   display: inline-block;
 }
 
+.descuento{
+  background-color: #408840;
+  color: #fff;
+  padding: 4px;
+}
+
 .contenedorComentario{
   border: 2px solid #408840;
   border-radius: 10px;

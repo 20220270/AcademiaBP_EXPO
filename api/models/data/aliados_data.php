@@ -44,7 +44,7 @@ class AliadosData extends AliadosHandler
 
     public function setLogo($file, $filename = null)
     {
-        if (Validator::validateImageFile($file, 800, 800)) {
+        if (Validator::validateImageFile($file, 1700, 1700)) {
             $this->logo = Validator::getFilename();
             return true;
         } elseif (Validator::getFileError()) {

@@ -35,3 +35,30 @@
     color: #fff;
 }
 
+#product-card .position-relative {
+    overflow: hidden;
+}
+
+#product-card img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+}
+
+
+.discount-label {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 10;
+}
+
+.btn.selected {
+    border-width: 3px;
+    border-color: #408840; /* Color verde */
+}
+

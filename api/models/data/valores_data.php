@@ -44,7 +44,7 @@ class ValoresData extends ValoresHandler
 
     public function setImagen($file, $filename = null)
     {
-        if (Validator::validateImageFile($file, 1200, 1200)) {
+        if (Validator::validateImageFile($file, 1500, 1500)) {
             $this->imagen = Validator::getFilename();
             return true;
         } elseif (Validator::getFileError()) {
@@ -60,20 +60,18 @@ class ValoresData extends ValoresHandler
     }
 
     public function setDescripcion($value, $min = 2, $max = 250)
-    {
-        if (!$value) {
-            return true;
-        } elseif (!Validator::validateString($value)) {
-            $this->data_error = 'La descripción contiene caracteres prohibidos';
-            return false;
-        } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->descripcion = $value;
-            return true;
-        } else {
-            $this->data_error = 'La descripción debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
-        }
+{
+    if (!$value) {
+        return true; // Permitir que la descripción sea opcional
+    } elseif (Validator::validateLength($value, $min, $max)) {
+        $this->descripcion = $value;
+        return true;
+    } else {
+        $this->data_error = 'La descripción debe tener una longitud entre ' . $min . ' y ' . $max;
+        return false;
     }
+}
+
 
     public function setFilename()
     {

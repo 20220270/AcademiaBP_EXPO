@@ -21,39 +21,34 @@
 
         <div class="d-flex justify-content-center flex-wrap">
 
-            <div class="card mb-3 mt-2 col-lg-4 mx-2">
-                <div class="row g-0">
-                    <div class="col-md-4 col-lg-12">
-                        <img id="imagenProducto" class="img-fluid rounded-start h-100" alt="Imagen del Producto">
-                    </div>
-                    <div class="col-md-8 mx-auto">
-                        <div class="card-body">
-                            <h5 class="card-title" id="nombreProducto"></h5>
-                            <p class="card-text" id="descripcionProducto"></p>
-                            <p class="card-text">Precio unitario (US$): <span id="precioProducto" name="precioProducto"
-                                    class="fw-bold"></span></p>
-                            <p class="card-text">Existencias: <b id="existenciasProducto"></b></p>
-                            <p class="card-text">Descuento: <b id="descuentoProducto"></b>%</p>
-                            <p class="card-text">Talla adquirida: <b id="talla"></b></p>
-                            <form class="row" id="shoppingForm">
-                                <input type="hidden" id="idProducto" name="idProducto">
-                                <input type="hidden" id="idDetalle" name="idDetalle">
-                                <div class="col-6 col-lg-6">
-                                    <input type="number" id="cantidadProducto" name="cantidadProducto" min="1"
-                                        class="form-control" placeholder="Cantidad" required>
-                                </div>
-                                <div class="col-6 align-self-end">
-                                    <button type="submit" class="btn" id="btnVerDetalle">
-                                        <i class="bi bi-cart-plus-fill"></i> Comprar
-                                    </button>
-                                </div>
-                            </form>
+            <div class="card mb-3 mt-2 col-lg-4 mx-2" id="product-card">
+                <div class="position-relative">
+                    <img id="imagenProducto" class="img-fluid rounded-top" alt="Imagen del Producto">
+                   
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center" id="nombreProducto"></h5>
+                    <p class="card-text  text-start" id="descripcionProducto"></p>
+                    <p class="card-text  text-start">Precio unitario (US$): <span id="precioProducto" name="precioProducto"
+                            class="fw-bold"></span></p>
+                    <p class="card-text  text-start">Existencias: <b id="existenciasProducto"></b></p>
+                    <p class="card-text  text-start">Descuento: <b id="descuentoProducto"></b>%</p>
+
+                    <form class="row" id="shoppingForm">
+                        <input type="hidden" id="idProducto" name="idProducto">
+                        <input type="hidden" id="idDetalle" name="idDetalle">
+                        <div class="col-6 col-lg-6">
+                            <input type="number" id="cantidadProducto" name="cantidadProducto" min="1"
+                                class="form-control" placeholder="Cantidad" required>
                         </div>
-                    </div>
+                        <div class="col-6 align-self-end">
+                            <button type="submit" class="btn btn-primary" id="btnVerDetalle">
+                                <i class="bi bi-cart-plus-fill"></i> Comprar
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
-
-
 
             <div class="card mb-3 mt-2 col-lg-5 mx-2" id="coments">
                 <h5 class="card-title mx-auto mt-2" id="titulo">Comentarios y valoraciones</h5>
@@ -69,13 +64,11 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../../controllers/utils/sweetalert.min.js"></script>
     <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/utils/public.js"></script>
     <script type="text/javascript" src="../../controllers/public/detalleproducto.js"></script>
-
 
 </body>
 

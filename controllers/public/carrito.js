@@ -70,9 +70,12 @@ async function readDetail() {
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <img src="${SERVER_URL}images/productos/${row.imagen_producto}" class="img-fluid rounded-end h-50 mt-5" alt="${row.nombre_producto}">
-                            <h5 class="card-title">${row.nombre_producto}</h5>
+                            <h5 class="card-title mt-4">${row.nombre_producto}</h5>
                             <p class="mt-3">Talla adquirida: ${row.talla}</p>
-                            <p class="mt-3">Color del producto: ${row.color}</p>
+                            <li class="list-group-item">
+                                    Color: 
+                                    <div class="color-box ms-2" style="background-color: #${row.color}; color: #${row.color}">${row.color}</div>
+                                </li>
                                 </div>
                             
                             <div class="col-md-8 card-body">

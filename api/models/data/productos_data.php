@@ -145,6 +145,27 @@ class ProductoData extends ProductoHandler
         }
     }
 
+    public function setIdTalla($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->idtalla = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador de la talla es incorrecto';
+            return false;
+        }
+    }
+    public function setIdColor($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->idcolor = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del color es incorrecto';
+            return false;
+        }
+    }
+
     /*
      *  Métodos para obtener los atributos adicionales.
      */

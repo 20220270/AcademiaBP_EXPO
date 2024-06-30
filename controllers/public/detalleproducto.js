@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('precioProducto').textContent = DATA.dataset.precio_producto;
         document.getElementById('existenciasProducto').textContent = DATA.dataset.existencias_producto;
         document.getElementById('descuentoProducto').textContent = DATA.dataset.descuento_producto;
-        document.getElementById('talla').textContent = DATA.dataset.talla;
+
         document.getElementById('idProducto').value = DATA.dataset.id_producto;
         document.getElementById('idDetalle').value = DATA.dataset.id_detalle_producto;
 
