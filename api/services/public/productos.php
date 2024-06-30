@@ -28,6 +28,14 @@ if (isset($_GET['action'])) {
                 $result['error'] = 'Producto inexistente';
             }
             break;
+            case 'productosMasVendi2':
+                if ($result['dataset'] = $producto->productosMasVendi2()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen productos registrados';
+                }
+                break;
 
         case 'commentsProduct':
             if (!$producto->setIdDeta($_POST['idDetalle'])) {
