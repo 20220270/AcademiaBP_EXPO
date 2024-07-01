@@ -72,12 +72,12 @@ input:disabled {
 }
 
 .modal-header {
-  background: linear-gradient(to right, #04B704, #408340);
+  background: linear-gradient(to right, #067a06, #408340);
   height: 160px;
 }
 
 .modal-footer {
-  background: linear-gradient(to right, #04B704, #408340);
+  background: linear-gradient(to right,#067a06, #408340);
 }
 
 a {
