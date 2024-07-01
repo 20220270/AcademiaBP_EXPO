@@ -69,17 +69,17 @@
                                     <div class="col-sm-12 col-md-10">
                                         <label for="nombreCliente" class="form-label">Nombre:</label>
                                         <input id="nombreCliente" type="text" name="nombreCliente" class="form-control"
-                                            required>
+                                            required oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                     </div>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="apellidoCliente" class="form-label">Apellido:</label>
                                         <input id="apellidoCliente" type="text" name="apellidoCliente"
-                                            class="form-control" required>
+                                            class="form-control" required oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                     </div>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="duiCliente" class="form-label">Dui:</label>
                                         <input id="duiCliente" type="text" name="duiCliente" class="form-control"
-                                            required>
+                                            required oninput="this.value = this.value.replace(/[^0-9-]/g, '')" pattern="[0-9-]+" maxlength="10">
                                     </div>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="correoCliente" class="form-label">Correo:</label>
@@ -89,7 +89,8 @@
                                     <div class="col-sm-12 col-md-10">
                                         <label for="telefonoCliente" class="form-label">Teléfono:</label>
                                         <input id="telefonoCliente" type="text" name="telefonoCliente"
-                                            class="form-control" required>
+                                            class="form-control" required maxlength="9" pattern="[0-9\-]*"  
+                                            oninput="this.value = this.value.replace(/[^\d-]/g, '');">
                                     </div>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="direccionCliente" class="form-label">Dirección:</label>
@@ -150,19 +151,16 @@
                     <form id="passwordForm">
                         <div class="modal-body row g-3">
                             <div class="col-sm-12 col-md-6 offset-md-3">
-                                <label for="claveActual" class="form-label col-12 text-center fw-bold">Clave actual</label>
+                                <label for="claveActual" class="form-label col-12 text-center">Clave actual</label>
                                 <input id="claveActual" type="password" name="claveActual" class="form-control"
                                     required>
                             </div>
-                            <div class="col-12 text-center fw-bold">
-                                <span>Clave nueva</span>
-                            </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="claveNueva" class="form-label fw-bold">Nueva clave</label>
+                                <label for="claveNueva" class="form-label">Nueva clave</label>
                                 <input id="claveNueva" type="password" name="claveNueva" class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="confirmarClave" class="form-label fw-bold">Confirmar clave</label>
+                                <label for="confirmarClave" class="form-label">Confirmar clave</label>
                                 <input id="confirmarClave" type="password" name="confirmarClave" class="form-control"
                                     required>
                             </div>

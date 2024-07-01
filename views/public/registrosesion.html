@@ -33,12 +33,12 @@
                         <input type="hidden" id="gRecaptchaResponse" name="gRecaptchaResponse">
                         <div class="col-12 mx-auto">
                             <label for="nombreCliente" class="form-label">Nombre</label>
-                            <input type="text" id="nombreCliente" name="nombreCliente" class="form-control" required>
+                            <input type="text" id="nombreCliente" name="nombreCliente" class="form-control" required oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                         </div>
                         <div class="col-12 mt-2 mx-auto">
                             <label for="apellidoCliente" class="form-label">Apellido</label>
                             <input type="text" id="apellidoCliente" name="apellidoCliente" class="form-control"
-                                required>
+                                required oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                         </div>
                         <div class="col-12 mt-2 mx-auto">
                             <label for="correoCliente" class="form-label">Correo electrónico</label>
@@ -48,12 +48,13 @@
                         <div class="col-12 mt-2 mx-auto">
                             <label for="duiCliente" class="form-label">DUI</label>
                             <input type="text" id="duiCliente" name="duiCliente" placeholder="00000000-0"
-                                class="form-control" required>
+                                class="form-control" required oninput="this.value = this.value.replace(/[^0-9-]/g, '')" pattern="[0-9-]+" maxlength="10">
                         </div>
                         <div class="col-12 mt-2 mx-auto">
                             <label for="telefonoCliente" class="form-label">Teléfono</label>
                             <input type="text" id="telefonoCliente" name="telefonoCliente" placeholder="0000-0000"
-                                class="form-control" required>
+                                class="form-control" required  required maxlength="9" pattern="[0-9\-]*"  
+                                oninput="this.value = this.value.replace(/[^\d-]/g, '');">
                         </div>
                         <div class="col-12 mt-2 mx-auto">
                             <label for="direccionCliente" class="form-label">Dirección</label>

@@ -23,8 +23,8 @@
                 <!--Se tomará el id del usuario que quiere realizar el pago para verificar que los datos sean correctos-->
                 <h2 class="mb-4">Pago de mensualidad</h2>
                 <span>Completa los siguientes campos para que puedas realizar el pago de mensualidad de tu hijo.</span>
-                <input type="text" placeholder="Ingresar nombres">
-                <input type="text" placeholder="Ingresa apellidos">
+                <input type="text" placeholder="Ingresar nombres" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
+                <input type="text" placeholder="Ingresa apellidos" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                 <input type="date" placeholder="Ingresa su fecha de nacimiento">
                 <div class="col-lg-12 col-12 mt-3">
                     <select id="categoria" class="form-select rounded-0" required>
