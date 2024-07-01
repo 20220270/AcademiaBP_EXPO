@@ -144,32 +144,31 @@
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modalTitle">Cambiar contraseña</h1>
+                        <h1 class="modal-title fs-5 col-12 text-center fw-bold" id="modalTitle">Cambiar contraseña</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form id="passwordForm">
                         <div class="modal-body row g-3">
                             <div class="col-sm-12 col-md-6 offset-md-3">
-                                <label for="claveActual" class="form-label">Clave actual</label>
+                                <label for="claveActual" class="form-label col-12 text-center fw-bold">Clave actual</label>
                                 <input id="claveActual" type="password" name="claveActual" class="form-control"
                                     required>
                             </div>
-                            <div class="col-12 text-center">
-                                <span>CLAVE NUEVA</span>
+                            <div class="col-12 text-center fw-bold">
+                                <span>Clave nueva</span>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="claveNueva" class="form-label">Nueva clave</label>
+                                <label for="claveNueva" class="form-label fw-bold">Nueva clave</label>
                                 <input id="claveNueva" type="password" name="claveNueva" class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="confirmarClave" class="form-label">Confirmar clave</label>
+                                <label for="confirmarClave" class="form-label fw-bold">Confirmar clave</label>
                                 <input id="confirmarClave" type="password" name="confirmarClave" class="form-control"
                                     required>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-dark">Guardar</button>
-                            <button type="reset" class="btn btn-dark">Cancelar</button>
                         </div>
                     </form>
                 </div>
