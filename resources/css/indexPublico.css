@@ -311,7 +311,7 @@ footer {
   .primerTextoImagen1 {
     color: rgb(132, 132, 132);
     top: 35%;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .primerTextoImagen2 {
@@ -516,6 +516,15 @@ footer {
 
   #stars2 {
     transform: translate(-10%, -160%);
+  }
+
+  .primerTextoImagen1,
+  .primerTextoImagen2 {
+    position: absolute;
+    z-index: 3;
+    /* Asegura que esté encima del overlay */
+    font-weight: bold;
+    font-size: 23px;
   }
 
   .fechacomentario {

@@ -28,9 +28,12 @@
 </head>
 
 <body>
+    
+    <button class="toggle-btn1 d-md-none d-flex" type="button" onclick="toggleSidebar()">
+        <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
+    </button>
     <!-- Codigo de html -->
     <main>
-
         <div class="main p-3">
             <div class="text-center">
                 <h1>Soporte técnico</h1>
@@ -39,7 +42,7 @@
 
                     <!--cards de para el soporte técnico-->
                     <div class="container px-5 col-lg-12">
-                        <div class="container">
+                        <div class="container" >
 
                             <div class="row">
                                 <!-- Primera sección de tarjetas -->
@@ -52,7 +55,7 @@
                                                     id="microphone-button"></i>
                                                 <input class="busc light-table-filter" data-table="order-table"
                                                     type="text"
-                                                    placeholder="Nombre, categoría, staff, estado, número de días"
+                                                    placeholder="Cliente, fecha de envío o estado del mensaje"
                                                     id="Buscador" name="search">
                                                 <div class="btna">
                                                     <i class="fa fa-search"><ion-icon
@@ -129,6 +132,7 @@
     <script src="../../controllers/utils/voicerecognition.js"></script>
     <script src="../../controllers/utils/voicerecognitionn.js"></script>
     <script src="../../controllers/admin/soportetecnico.js"></script>
+    <script src="../../controllers/utils/toggle.js"></script>
 </body>
 
 </html>

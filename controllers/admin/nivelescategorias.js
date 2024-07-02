@@ -128,7 +128,7 @@ const fillTable = async (form = null) => {
         
                     <div class="d-flex align-items-center">
                         <div class="col-md-4 d-flex align-items-center justify-content-center">
-                            <img src="${SERVER_URL}images/niveles/${row.imagen_nivel}" class="" width="500px" height="98px">
+                            <img src="${SERVER_URL}images/niveles/${row.imagen_nivel}" class="img-fluid" width="600px" height="98px">
                         </div>
                         <div class="col-md-8">
                             <h5 class="card-title mb-2 fs-1">${row.nivel_entrenamiento}</h5>

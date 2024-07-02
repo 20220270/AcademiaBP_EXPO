@@ -16,35 +16,39 @@
 
 <body>
 
+    <button class="toggle-btn1 d-md-none d-flex" type="button" onclick="toggleSidebar()">
+        <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
+    </button>
     <main>
         <div class="main p-3">
             <div class="text-center">
                 <h1 class="mt-5">Categorías, colores y tallas de productos</h1>
 
-                
+
                 <div class="scrollable-content mt-4">
                     <div class="row justify-content-center">
                         <!-- Primera columna -->
-                        <div class="col-md-4 py-2 px-5">
+                        <div class="col-md-4 col-12 py-2 px-5">
                             <h5>Categorías</h5>
                             <form class="d-flex flex-grow-1 mt-4" id="searchForm">
                                 <div class="buscador mx-auto position-relative">
-                                    <i class="fas fa-microphone search-icon microphone-button" id="microphone-button"></i>
+                                    <i class="fas fa-microphone search-icon microphone-button"
+                                        id="microphone-button"></i>
                                     <input class="busc light-table-filter" data-table="order-table" type="text"
                                         placeholder="Busque por nombre de la categoría" id="Buscador" name="search">
                                     <div class="btna">
                                         <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
                                     </div>
                                 </div>
-            
+
                             </form>
                             <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate()">
                                 <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
                             </button>
-                            
+
                             <div class="container">
                                 <div class="row shadow-lg bg-body-tertiary rounded " id="cardCategorias">
-                    
+
                                 </div>
                             </div>
                         </div>
@@ -53,14 +57,15 @@
                             <h5>Colores</h5>
                             <form class="d-flex flex-grow-1 mt-4" id="searchForm2">
                                 <div class="buscador mx-auto position-relative">
-                                    <i class="fas fa-microphone search-icon microphone-button" id="microphone-button"></i>
+                                    <i class="fas fa-microphone search-icon microphone-button"
+                                        id="microphone-button"></i>
                                     <input class="busc light-table-filter" data-table="order-table" type="text"
                                         placeholder="Busque por el hexadecimal del color" id="Buscador" name="search2">
                                     <div class="btna">
                                         <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
                                     </div>
                                 </div>
-            
+
                             </form>
                             <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate2()">
                                 <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
@@ -68,7 +73,7 @@
 
                             <div class="container">
                                 <div class="row shadow-lg bg-body-tertiary rounded" id="cardColores">
-                    
+
                                 </div>
                             </div>
                         </div>
@@ -77,22 +82,23 @@
                             <h5>Tallas</h5>
                             <form class="d-flex flex-grow-1 mt-4" id="searchForm3">
                                 <div class="buscador mx-auto position-relative">
-                                    <i class="fas fa-microphone search-icon microphone-button" id="microphone-button"></i>
+                                    <i class="fas fa-microphone search-icon microphone-button"
+                                        id="microphone-button"></i>
                                     <input class="busc light-table-filter" data-table="order-table" type="text"
                                         placeholder="Busque por tallas" id="Buscador" name="search3">
                                     <div class="btna">
                                         <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
                                     </div>
                                 </div>
-            
+
                             </form>
                             <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate3()">
                                 <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
                             </button>
-                            
+
                             <div class="container">
                                 <div class="row shadow-lg bg-body-tertiary rounded" id="cardTallas">
-                    
+
                                 </div>
                             </div>
                         </div>
@@ -200,8 +206,7 @@
                         <input type="hidden" id="idTallaProducto" name="idTallaProducto">
                         <div class="col-sm-12 col-md-12">
                             <label for="nombreValor" class="col-sm-7 col-form-label">Talla a registrar:</label>
-                            <input id="talla" type="text" name="talla"
-                                class="form-control" required>
+                            <input id="talla" type="text" name="talla" class="form-control" required>
                         </div>
 
 
@@ -220,11 +225,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/051460de0f.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/051460de0f.js" crossorigin="anonymous"></script>
     <script src="../../controllers/utils/sweetalert.min.js"></script>
     <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/utils/private.js"></script>
     <script src="../../controllers/admin/categoriasproductos.js"></script>
+    <script src="../../controllers/utils/toggle.js"></script>
 </body>
 
 </html>

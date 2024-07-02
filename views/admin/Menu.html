@@ -14,10 +14,17 @@
 </head>
 
 <body>
+    
+                
+    <button class="toggle-btn1 d-md-none d-flex" type="button" onclick="toggleSidebar()">
+        <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
+    </button>
     <main>
         <!--Secciones con gráficos variados y un calendario-->
         <div class="container">
             <div class="row">
+
+
                 <!--Calendario gigente, abarcando la mitad de la pantalla-->
                 <div class="col-md-6 mt-4">
                     <h4>Fechas de nacimiento de cada alumno</h4>
@@ -41,7 +48,7 @@
                 </div>
 
                 
-                <div class="col-md-5 mt-4">
+                <div class="col-md-6 mt-4">
                     <!--Gráfico con los productos más vendidos-->
                     <h4 class="text-center">Productos más vendidos</h4>
                     <div class="chart-container">
@@ -69,6 +76,7 @@
     <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/utils/private.js"></script>
     <script src="../../controllers/admin/menu.js"></script>
+    <script src="../../controllers/utils/toggle.js"></script>
 
     <!-- Cargar FullCalendar -->
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js"></script>

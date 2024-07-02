@@ -17,7 +17,9 @@
 
 <body>
     <main>
-
+        <button class="toggle-btn1 d-md-none d-flex" type="button" onclick="toggleSidebar()">
+            <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
+        </button>
         <div class="main p-3">
             <div class="text-center">
                 <h1>
@@ -53,7 +55,7 @@
                                                     <i class="fas fa-microphone search-icon microphone-button"
                                                         id="microphone-button"></i>
                                                     <input class="busc light-table-filter" data-table="order-table"
-                                                        type="text" placeholder="Busque por nombre o descripción"
+                                                        type="text" placeholder="Busque número de días o mensualidad"
                                                         id="Buscador" name="search">
                                                     <div class="btna">
                                                         <i class="fa fa-search"><ion-icon
@@ -92,7 +94,7 @@
                                                     <i class="fas fa-microphone search-icon microphone-button"
                                                         id="microphone-button2"></i>
                                                     <input class="busc light-table-filter" data-table="order-table"
-                                                        type="text" placeholder="Busque por nombre o descripción"
+                                                        type="text" placeholder="Busque por cliente, alumno o fechas"
                                                         id="Buscador2" name="search2">
                                                     <div class="btna">
                                                         <i class="fa fa-search"><ion-icon
@@ -156,7 +158,7 @@
                                                         <i class="fas fa-microphone search-icon microphone-button"
                                                             id="microphone-button3"></i>
                                                         <input class="busc light-table-filter" data-table="order-table"
-                                                            type="text" placeholder="Busque por nombre o descripción"
+                                                            type="text" placeholder="Busque por alumno, cliente o fechas"
                                                             id="Buscador3" name="search3">
                                                         <div class="btna">
                                                             <i class="fa fa-search"><ion-icon
@@ -349,6 +351,7 @@
     <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/utils/private.js"></script>
     <script src="../../controllers/admin/mensualidad.js"></script>
+    <script src="../../controllers/utils/toggle.js"></script>
 </body>
 
 </html>

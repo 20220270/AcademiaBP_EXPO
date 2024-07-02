@@ -38,7 +38,7 @@ if (isset($_GET['action'])) {
                 break;
 
         case 'commentsProduct':
-            if (!$producto->setIdDeta($_POST['idDetalle'])) {
+            if (!$producto->setId($_POST['idProducto'])) {
                 $result['error'] = $producto->getDataError();
             } elseif ($result['dataset'] = $producto->commentsProduct()) {
                 $result['status'] = 1;

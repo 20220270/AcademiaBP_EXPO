@@ -219,8 +219,8 @@ class ProductoHandler
                 INNER JOIN tb_detalleProducto USING(id_detalle_producto) 
                 INNER JOIN tb_productos USING(id_producto)
                 INNER JOIN tb_clientes USING(id_cliente)
-        where id_detalle_producto = ? AND estado_comentario = 'Habilitado'";
-        $params = array($this->iddetalle);
+        where id_producto = ? AND estado_comentario = 'Habilitado'";
+        $params = array($this->id);
         return Database::getRows($sql, $params);
     }
 

@@ -18,9 +18,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     CARD.innerHTML = '';
     const FORM = new FormData();
     FORM.append('idDetalle', PARAMS.get('id'));
+
+    const FORM2 = new FormData();
+    FORM2.append('idProducto', PARAMS.get('id'));
+    
     // Petición para solicitar los datos del producto seleccionado.
     const DATA = await fetchData(PRODUCTO_API, 'readOnee', FORM);
-    const DATA2 = await fetchData(PRODUCTO_API, 'commentsProduct', FORM);
+    const DATA2 = await fetchData(PRODUCTO_API, 'commentsProduct', FORM2);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se colocan los datos en la página web de acuerdo con el producto seleccionado previamente.

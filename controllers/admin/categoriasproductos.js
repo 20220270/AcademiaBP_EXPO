@@ -143,7 +143,7 @@ const fillTable = async (form = null) => {
   if (DATA.status) {
     DATA.dataset.forEach(row => {
       CARD_CATEGORIAS.innerHTML += `
-        <div class="col-lg-12 col-md-12 col-sm-12 mb-4 mt-5 text-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4 mt-5 text-center">
           <div class="card h-100" id="cards">
             <img src="${SERVER_URL}images/categorias_productos/${row.imagen_categoria}" class="card-img-top" height="200px" width="200px">
             <div class="card-body ">
@@ -175,7 +175,7 @@ const fillTable2 = async (form = null) => {
   if (DATA.status) {
     DATA.dataset.forEach(row => {
       CARD_COLOR.innerHTML += `
-        <div class="col-lg-12 col-md-12 col-sm-12 mb-4 mt-5 text-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4 mt-5 text-center">
           <div class="card h-100" id="cards">
             <div class="card-body">
               <h5 class="card-title">ID: ${row.id_color}</h5>
@@ -209,7 +209,7 @@ const fillTable3 = async (form = null) => {
   if (DATA.status) {
     DATA.dataset.forEach(row => {
       CARD_TALLAS.innerHTML += `
-        <div class="col-lg-12 col-md-12 col-sm-12 mb-4 mt-5 text-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4 mt-5 text-center">
           <div class="card h-100" id="cards">
             <div class="card-body">
               <h5 class="card-title">ID: ${row.id_talla}</h5>

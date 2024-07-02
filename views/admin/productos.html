@@ -17,6 +17,10 @@
 </head>
 
 <body>
+    
+    <button class="toggle-btn1 d-md-none d-flex" type="button" onclick="toggleSidebar()">
+        <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
+    </button>
     <main>
         <div class="main p-3">
             <div class="text-center">
@@ -34,18 +38,20 @@
                                             <div class="buscador mx-auto position-relative">
                                                 <i class="fas fa-microphone search-icon microphone-button"
                                                     id="microphone-button"></i>
-                                                <input class="busc light-table-filter" data-table="order-table" type="text"
-                                                    placeholder="Nombre y categoría del producto" id="Buscador" name="search">
+                                                <input class="busc light-table-filter" data-table="order-table"
+                                                    type="text" placeholder="Nombre y categoría del producto"
+                                                    id="Buscador" name="search">
                                                 <div class="btna">
-                                                    <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
+                                                    <i class="fa fa-search"><ion-icon
+                                                            name="search-outline"></ion-icon></i>
                                                 </div>
                                             </div>
-        
-        
+
+
                                         </form>
                                     </div>
-        
-        
+
+
                                 </div>
                                 <div class="col-3 d-flex justify-content-center"> <!-- Botón alineado a la derecha -->
                                     <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate()">
@@ -56,7 +62,7 @@
                                 <div class="mt-2 mb-2">
                                     <!-- Aquí se coloca la tarjeta de asignación de horarios a entrenamientos -->
                                     <div class="w-100 shadow p-3 mb-5 bg-body-tertiary rounded" id="cardsProductos">
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -72,18 +78,21 @@
                                             <div class="buscador mx-auto position-relative">
                                                 <i class="fas fa-microphone search-icon microphone-button"
                                                     id="microphone-button2"></i>
-                                                <input class="busc light-table-filter" data-table="order-table" type="text"
-                                                    placeholder="Nombre, categoría, talla, color y existencias" id="Buscador2" name="search2">
+                                                <input class="busc light-table-filter" data-table="order-table"
+                                                    type="text"
+                                                    placeholder="Nombre, categoría, talla, color y existencias"
+                                                    id="Buscador2" name="search2">
                                                 <div class="btna">
-                                                    <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
+                                                    <i class="fa fa-search"><ion-icon
+                                                            name="search-outline"></ion-icon></i>
                                                 </div>
                                             </div>
-        
-        
+
+
                                         </form>
                                     </div>
-        
-        
+
+
                                 </div>
                                 <div class="col-3 d-flex justify-content-center"> <!-- Botón alineado a la derecha -->
                                     <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate2()">
@@ -94,7 +103,7 @@
                                 <div class="mt-2 mb-2">
                                     <!-- Aquí se coloca la tarjeta de asignación de horarios a entrenamientos -->
                                     <div class="w-100 shadow p-3 mb-5 bg-body-tertiary rounded" id="cardsDetalles">
-                                        
+
                                     </div>
                                 </div>
 
@@ -230,11 +239,11 @@
                             </select>
                         </div>
 
-                        
+
                         <div class="col-sm-12 col-md-6">
                             <label for="descripcionCategoria" class="form-label">Existencias:</label>
-                            <input id="existenciasProducto" type="number" name="existenciasProducto" class="form-control"
-                             min="1" step="1" required>
+                            <input id="existenciasProducto" type="number" name="existenciasProducto"
+                                class="form-control" min="1" step="1" required>
                         </div>
 
 
@@ -263,6 +272,7 @@
     <script src="../../controllers/utils/voicerecognition.js"></script>
     <script src="../../controllers/utils/voicerecognitionn.js"></script>
     <script src="../../controllers/admin/productos.js"></script>
+    <script src="../../controllers/utils/toggle.js"></script>
 </body>
 
 </html>

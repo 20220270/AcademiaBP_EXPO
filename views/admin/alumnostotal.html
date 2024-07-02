@@ -27,9 +27,12 @@
 </head>
 
 <body>
+    
+    <button class="toggle-btn1 d-md-none d-flex" type="button" onclick="toggleSidebar()">
+        <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
+    </button>
     <!-- Codigo de html -->
     <main>
-
         <div class="main p-3">
             <div class="text-center">
                 <div class="" id="content1">
@@ -69,7 +72,7 @@
                                                 width="60rem" />
                                         </button>
                                     </div>
-                                    <div class="row d-flex justify-content-center p-3 bg-body-tertiary rounded" id="cardsAlumnos">
+                                    <div class="row justify-content-center p-3 bg-body-tertiary rounded" id="cardsAlumnos">
                                         <!-- Aquí se insertarán las tarjetas -->
                                     </div>
                                 </div>
@@ -181,6 +184,7 @@
     <script src="../../controllers/utils/private.js"></script>
     <script src="../../controllers/utils/voicerecognition.js"></script>
     <script src="../../controllers/admin/alumnostotal.js"></script>
+    <script src="../../controllers/utils/toggle.js"></script>
 </body>
 
 </html>

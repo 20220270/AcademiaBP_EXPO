@@ -1,6 +1,12 @@
 const ALUMNOS_API = 'services/admin/alumnos.php';
 const PRODUCTOS_API = 'services/admin/productos.php';
 
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
     loadTemplate();

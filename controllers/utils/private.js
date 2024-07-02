@@ -10,6 +10,10 @@ const MAIN = document.querySelector('main');
 
 MAIN.classList.add('container');
 
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+}
 
 
 /*  Función asíncrona para cargar el encabezado y pie del documento.
@@ -29,7 +33,7 @@ const loadTemplate = async () => {
 
             <aside id="sidebar" class="vh-100">
                 <div class="d-flex">
-                    <button class="toggle-btn" type="button">
+                    <button class="toggle-btn" type="button" onclick="toggleSidebar()">
                         <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
                     </button>
                     <div class="sidebar-logo">

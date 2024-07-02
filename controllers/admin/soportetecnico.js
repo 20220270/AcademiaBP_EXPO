@@ -71,9 +71,9 @@ const fillTable = async (form = null) => {
             const icon = (row.estado_producto) ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill';
             // Crea y concatena las cards con los datos de cada registro.
             CARD_MENSAJES.innerHTML += `
-                <div class="col-12 col-md-3 col-lg-6 mt-3 mb-3">
-    <div class="card h-100">
-        <div class="row no-gutters">
+                <div class="col-12 col-md-6 col-lg-6 mt-3 mb-3" >
+    <div class="card h-100" >
+        <div class="row no-gutters" id="cont">
             <div class="col-4">
                 <div class="mt-4"><img src="${SERVER_URL}images/clientes/${row.foto_cliente}" class="card-img-top rounded-circle"></div>
             </div>
