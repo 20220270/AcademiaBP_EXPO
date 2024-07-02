@@ -122,47 +122,8 @@ footer,
     color: #fff;
 }
 
-/* Estilos para un buscador personalizado */
-.buscador {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 110%;
-    max-width: 500px;
-    margin: auto;
-}
+  
 
-/* Estilos para el campo de búsqueda */
-.busc {
-    flex-grow: 1;
-    padding: 10px 40px; /* Ajusta el padding para dejar espacio para el ícono */
-    border: 1px solid #000;
-    border-radius: 20px;
-    font-size: 20px;
-}
-
-/* Estilos para el ícono de búsqueda */
-.search-icon {
-    position: absolute;
-    left: 10px;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-/* Estilos para el botón de búsqueda */
-.btna {
-    position: absolute;
-    right: 10px;
-    font-size: 20px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-.btna i {
-    color: white;
-}
 
 /* Ajustes responsivos para tamaños de pantalla específicos */
 @media (min-width: 992px) and (max-width: 1281px) {
@@ -202,3 +163,4 @@ footer,
         margin-top: 330px;
     }
 }
+

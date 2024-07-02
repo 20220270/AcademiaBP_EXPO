@@ -1,68 +1,90 @@
-.buscador1 {
-    position: absolute;
-    left: 85%;
-    top: 47.8%;
-    transform: translate(-50%, -50%);
-    padding: 15px;
+#Buscador,
+#Buscador2 {
+  padding-left: 29px; /* Aumenta el padding para dejar espacio suficiente para el icono */
+  width: 100%; /* Ajusta el ancho del input según el contenedor */
 }
 
-.busc1 {
-    outline: none;
-    box-sizing: border-box;
-    height: 30px;
-    width: 0;
-    padding: 0 20px;
-    color: #000;
-    border-radius: 20px;
-    font-size: 18px;
-    border: 1px solid #408340;
-    transition: all .7s ease;
+.position-relative {
+  position: relative;
 }
 
-::placeholder {
-    color: grey;
+.scrollable-content{
+  max-height: 590px;
+  overflow-y: auto;
 }
 
-.btna1 {
-    justify-content: center;
-    /* Centra horizontalmente */
-    align-items: center;
-    /* Centra verticalmente */
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 24.1px; /* Ajustamos este valor para mover el icono a la derecha */
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #000;
+  opacity: 0; /* Inicialmente invisible */
+  transition: opacity 0.3s ease;
+}
+
+.buscador:hover .search-icon {
+  opacity: 1; /* Mostrar icono al hacer hover */
+}
+
+.buscador {
+  position: relative;
+  width: 85px; /* Ancho inicial del contenedor */
+  transition: width .7s ease; /* Transición para el cambio de ancho */
+  padding: 15px;
+}
+
+.busc {
+  outline: none;
+  box-sizing: border-box;
+  height: 60px;
+  width: 100%; /* Ancho inicial del input */
+  padding: 0 20px;
+  color: #000;
+  border-radius: 20px;
+  font-size: 20px;
+  border: 1px solid #000000;
+  opacity: 0; /* Hacer el input invisible inicialmente */
+  transition: opacity .7s ease; /* Transición para la visibilidad */
+}
+
+.buscador:hover .busc {
+  opacity: 1; /* Mostrar el input al hacer hover */
+}
+
+.buscador:hover {
+    width: 340px; /* Ancho expandido del contenedor al hacer hover */
+  }
+  
+  .btna {
     position: absolute;
     right: 0;
-    top: 2.8px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 60px;
-    height: 56px;
-    background: #408340;
+    height: 60px;
+    background: #000000;
+    line-height: 60px;
     border-radius: 50%;
     text-align: center;
     cursor: pointer;
     transition: .5s;
-}
-
-.btna1 i {
+    z-index: 1; /* Asegurar que el botón esté sobre el input */
+  }
+  
+  .btna i {
     font-size: 20px;
     color: white;
-    transition: all .1 ease;
-}
-
-.buscador1:hover input {
-    width: 260px;
-}
-
-.buscador1:hover i {
-    transform: rotate(-360deg);
-}
-
-.btna1:hover {
-    background: #4fa34f;
-}
-
-.search-icon {
-    position: absolute;
-    left: 10px;
-    z-index: 1;
-}
+    line-height: 60px;
+    transition: all .1s ease;
+  }
+  
+  
+  .btna:hover {
+    background: #000000;
+  }
 
 @media (min-width: 768px) and (max-width: 992px) {
     .buscador1 {
