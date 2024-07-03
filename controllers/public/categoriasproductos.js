@@ -8,7 +8,8 @@ const PRODUCTOS1 = document.getElementById('productos1');
 const MAIN_TITLE = document.getElementById('mainTitle');
 const SEARCH_FORM = document.getElementById('searchForm');
 const SAVE_MODAL = new bootstrap.Modal(document.getElementById('saveModal'));
-const SAVE_FORM = document.getElementById('saveForm');
+const SAVE_FORM = document.getElementById('saveForm'),
+MODAL_TITLE = document.getElementById('modalTitle');
 
 // Método manejador de eventos para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
@@ -39,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <div class="card-body">
                                 <h5 class="card-title text-center">${row.nombre_producto}</h5>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Precio del producto: $${row.precio_producto}</li>
+                                    
                                     <button type="button" class="btn mt-1" id="btnDetalles" name="btnDetalles" onclick="fillTable(${row.id_producto})">
                                         <img src="../../resources/images/btnDetalles.png" alt="" width="30px" height="30px" class="mb-1">
                                     </button>
@@ -111,6 +112,7 @@ const fillTable = async (id) => {
             });
             // Mostrar la modal después de llenar los detalles del producto.
             SAVE_MODAL.show();
+            MODAL_TITLE.textContent = 'Productos';
         } else {
             sweetAlert(4, DATA.error, true);
         }

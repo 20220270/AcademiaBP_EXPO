@@ -200,6 +200,23 @@ margin-top: 230px;
   background-color: #555;
 }
 
+#productos1 {
+  display: flex; /* Para mostrar las tarjetas en una fila */
+  flex-wrap: nowrap; /* Para evitar que las tarjetas se envuelvan */
+  overflow-x: auto; /* Habilitar el desplazamiento horizontal */
+  overflow-y: auto; /* Deshabilitar el desplazamiento vertical si no es necesario */
+  gap: 1rem; /* Espacio entre las tarjetas */
+}
+
+#colll {
+  max-height: 40%; /* Ajusta el ancho según tus necesidades */
+}
+
+#productos1 .card {
+  max-width: 300px; /* Ancho mínimo de cada tarjeta */
+  flex: 0 0 auto; /* Evita que las tarjetas se ajusten automáticamente */
+}
+
 
 
   @media (max-width: 360px) {
