@@ -1,9 +1,9 @@
-const VALORES_API = 'services/admin/valores.php';
-const ALIADOS_API = 'services/admin/aliados.php';
-const STAFF_API = 'services/admin/staff.php';
-const ENTRENAMIENTO_API = 'services/admin/entrenamiento.php';
-const NIVELES_ENTRENAMIENTO_API = 'services/admin/nivelesentrenamiento.php';
-const CATEGORIA_ALUMNO_API = 'services/admin/categoriasalumnos.php';
+const VALORES_API = 'services/public/valores.php';
+const ALIADOS_API = 'services/public/aliados.php';
+const STAFF_API = 'services/public/staff.php';
+const ENTRENAMIENTO_API = 'services/public/entrenamiento.php';
+const NIVELES_ENTRENAMIENTO_API = 'services/public/nivelesentrenamiento.php';
+const CATEGORIA_ALUMNO_API = 'services/public/categoriasalumnos.php';
 
 const TITULO_SECCION1 = document.getElementById('sectionTitle');
 const TITULO_SECCION2 = document.getElementById('sectionTitle2');

@@ -1,22 +1,22 @@
 <?php
 // Se incluye la clase del modelo.
-require_once('../../models/data/entrenamiento_data.php');
+require_once('../../models/data/aliados_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se instancia la clase correspondiente.
-    $entrenamiento = new EntrenamientoData;
+    $aliados = new AliadosData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null);
     // Se compara la acción a realizar según la petición del controlador.
     switch ($_GET['action']) {
-
-        case 'readAllHorariosLugares':
-            if ($result['dataset'] = $entrenamiento->readAllHorariosLugares()) {
+        
+        case 'readAll':
+            if ($result['dataset'] = $aliados->readAll()) {
                 $result['status'] = 1;
                 $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
             } else {
-                $result['error'] = 'No existen horarios registrados';
+                $result['error'] = 'No existen aliados registrados';
             }
             break;
             
