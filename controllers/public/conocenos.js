@@ -52,9 +52,9 @@ async function loadValoresData() {
             DATA.dataset.forEach((row, index) => {
                 // Crea la estructura de cada tarjeta de valor
                 let card = `
-                    <div class="col-sm-12 col-md-6 col-lg-3 mb-4 mx-auto">
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-4 mx-auto">
                         <div class="card h-100">
-                            <img src="${SERVER_URL}images/valores/${row.imagen_valor}" class="card-img-top" alt="${row.nombre_valor}">
+                            <img src="${SERVER_URL}images/valores/${row.imagen_valor}" class="card-img-top rounded-4" alt="${row.nombre_valor}">
                             <div class="card-body">
                                 <h5 class="card-title">${row.nombre_valor}</h5>
                                 <p class="card-text">${row.descripcion_valor}</p>
@@ -68,7 +68,7 @@ async function loadValoresData() {
                 counter++;
 
                 // Cada 4 tarjetas, crea un nuevo item del carrusel
-                if (counter === 4 || index === DATA.dataset.length - 1) {
+                if (counter === 3 || index === DATA.dataset.length - 1) {
                     CARD_VALORES.innerHTML += `
                         <div class="carousel-item ${isActive}">
                             <div class="row">
@@ -177,7 +177,7 @@ async function loadStaffData() {
                 let card = `
                      <div class="col-sm-6 col-md-3 col-lg-3 mb-4 mx-auto text-center">
                         <div class="card h-100 ">
-                            <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top" alt="${row.nombre_completo}"  height="350px">
+                            <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top rounded-4" alt="${row.nombre_completo}"  height="350px">
                             <div class="card-body">
                                 <h5 class="card-title">${row.nombre_completo}</h5>
                                 <p>${row.descripcion_extra}</p>
@@ -316,9 +316,9 @@ async function loadCategoriasFormativo() {
             DATA.dataset.forEach((row, index) => {
                 // Crea la estructura de cada tarjeta de valor
                 let card = `
-                     <div class="col-sm-6 col-md-3 col-lg-5 mb-4 mx-auto text-center">
+                     <div class="col-sm-6 col-md-3 col-lg-3 mb-4 mx-auto text-center">
                         <div class="card h-100">
-                            <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="card-img-top" alt="${row.categoria}"  height="350px">
+                            <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="card-img-top rounded-4" alt="${row.categoria}"  height="350px">
                             <div class="carousel-caption d-none d-md-block">
                             <div class="carousel-caption-text">
                                 <h5>${row.categoria}</h5>
@@ -335,7 +335,7 @@ async function loadCategoriasFormativo() {
                 counter++;
 
                 // Cada 4 tarjetas, crea un nuevo item del carrusel
-                if (counter === 2 || index === DATA.dataset.length - 1) {
+                if (counter === 4 || index === DATA.dataset.length - 1) {
                     CARD_NIVELES_ENTRENAMIENTO.innerHTML += `
                         <div class="carousel-item ${isActive}">
                             <div class="row">
@@ -380,9 +380,9 @@ async function loadCategoriasCompetitivo() {
             DATA.dataset.forEach((row, index) => {
                 // Crea la estructura de cada tarjeta de valor
                 let card = `
-                     <div class="col-sm-6 col-md-3 col-lg-5 mb-4 mx-auto text-center">
+                     <div class="col-sm-6 col-md-3 col-lg-4 mb-4 mx-auto text-center">
                         <div class="card h-100">
-                            <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="card-img-top" alt="${row.categoria}"  height="350px">
+                            <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="card-img-top rounded-4" alt="${row.categoria}"  height="350px">
                             <div class="carousel-caption d-none d-md-block">
                             <div class="carousel-caption-text">
                                 <h5>${row.categoria}</h5>
@@ -399,7 +399,7 @@ async function loadCategoriasCompetitivo() {
                 counter++;
 
                 // Cada 4 tarjetas, crea un nuevo item del carrusel
-                if (counter === 4 || index === DATA.dataset.length - 1) {
+                if (counter === 3 || index === DATA.dataset.length - 1) {
                     CARD_NIVELES_ENTRENAMIENTO2.innerHTML += `
                         <div class="carousel-item ${isActive}">
                             <div class="row">

@@ -31,9 +31,16 @@ ALUMNO_FORM.addEventListener('submit', async (event) => {
     }
 });
 
+function validarFechaNacimiento() {
+    var fechaActual = new Date().toISOString().slice(0, 10);
+    FECHA_NACIMIENTO.setAttribute('max', fechaActual);
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     
     // Se establece el título del contenido principal.
     MAIN_TITLE.textContent = '¡Inscribe a tu hijo!';
     fillSelect(ALUMNOS_API, 'readAllDiasPago', 'selectDias');
+
+    validarFechaNacimiento();
 });

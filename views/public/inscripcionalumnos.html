@@ -24,12 +24,12 @@
                 <h1 class="mb-4" id="mainTitle"></h1>
                 <span class="mb-4">Completa los siguientes campos para que puedas inscribir a tu hijo en La Academia BP: Ingresa el nombre, apellido, fecha de nacimiento y posición en la que se inscribirá tu hijo. ¡Automáticamente asignaremos la categoría para tu hijo!</span>
                 <input type="text" id="idAlumno" name="idAlumno" hidden>
-                <input type="text" id="nombreAlumno" name="nombreAlumno" placeholder="Ingresar nombres" class="col-lg-12 col-md-12 col-sm-12 col-12" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
-                <input type="text" id="apellidoAlumno" name="apellidoAlumno" placeholder="Ingresa apellidos" class="col-lg-12 col-md-12 col-sm-12 col-12" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
-                <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="col-lg-12 col-md-12 col-sm-12 col-12 col-12">
+                <input type="text" id="nombreAlumno" name="nombreAlumno" placeholder="Ingresar nombres" class="col-lg-12 col-md-12 col-sm-12 col-12" required>
+                <input type="text" id="apellidoAlumno" name="apellidoAlumno" placeholder="Ingresa apellidos" class="col-lg-12 col-md-12 col-sm-12 col-12" required>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="col-lg-12 col-md-12 col-sm-12 col-12 col-12" required onchange="validarFechaNacimiento()">
                 <div class="col-sm-12 col-md-12">
                     <label for="selectPosicion" class="col-sm-7 col-form-label">Posición en la que se inscribirá:</label>
-                    <select class="form-select" id="selectPosicion" name="selectPosicion" aria-label="Default select example">
+                    <select class="form-select" id="selectPosicion" name="selectPosicion" aria-label="Default select example" required>
                         <option>Portero</option>
                         <option>Jugador de campo</option>
                     </select>
@@ -37,7 +37,7 @@
 
                 <div class="col-sm-12 col-md-12">
                     <label for="Categoria" class="col-sm-7 col-form-label">Número de días que entrenará:</label>
-                    <select class="form-select" id="selectDias" name="selectDias" aria-label="Default select example">
+                    <select class="form-select" id="selectDias" name="selectDias" aria-label="Default select example" required>
                     </select>
                 </div>
 

@@ -12,6 +12,12 @@ const MAIN = document.querySelector('main');
 
 MAIN.classList.add('container-fluid');
 
+//Agregamos estilos para eliminar todo el margen que nos genera el contenedor fluid
+MAIN.style.marginLeft = '0';
+MAIN.style.marginRight = '0';
+MAIN.style.paddingLeft = '0';
+MAIN.style.paddingRight = '0';
+
 /*  Función asíncrona para cargar el encabezado y pie del documento.
 *   Parámetros: ninguno.
 *   Retorno: ninguno.
@@ -132,13 +138,6 @@ const loadTemplate = async () => {
                     <a href="index.html">
                         <img src="../../resources/images/logoAcademiaBP.png" alt="..." height="120px" width="120px" id="imagenLogoA">
                     </a>
-                </div>
-
-                <div class="mt-5 text-end col-lg-4 col-md-1 col-sm-1 col-5">
-                <a href="perfil.html">
-                    <img src="../../resources/images/userIcon.png" class="me-5 mt-2 imagenUser text-end" alt="..."
-                        width="30px" height="30px">
-                </a>
                 </div>
                 
                 

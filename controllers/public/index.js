@@ -31,7 +31,7 @@ const SOPORTETECNICO_API = 'services/public/soportetecnico.php';
                 // Se establece la página web de destino con los parámetros.
                 let url = `categoriasproductos.html?id=${row.id_categoria_producto}&nombre=${row.categoria_producto}`;                // Se crea la tarjeta con los datos de cada categoría.
                 let card = `
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="position-relative">
                             <a href="${url}"><img src="${SERVER_URL}images/categorias_productos/${row.imagen_categoria}" class="imagenn rounded-4 mb-3" alt="${row.categoria_producto}" width="340px" height="250px" /></a>
                             <span class="span-overlay text-white span-texto-gorras fs-3">${row.categoria_producto}</span>

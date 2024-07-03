@@ -124,11 +124,19 @@ const openCreate = () => {
     // Se prepara el formulario.
     SAVE_FORM.reset();
 
-    fillSelect(ALUMNOS_API, 'readAllStaffCategorias', 'selectCategoriaEncargado');
+    // Ocultar selectores
+    document.getElementById('selectEstadopo').style.display = 'none';
+    document.getElementById('selectCategoriaEncargadopo').style.display = 'none';
+
     fillSelect(ALUMNOS_API, 'readAllDiasPago', 'selectDias');
     fillSelect(CLIENTES_API, 'readAll', 'selectEncargado');
-
+    validarFechaNacimiento();
     
+}
+
+function validarFechaNacimiento() {
+    var fechaActual = new Date().toISOString().slice(0, 10);
+    FECHA_NACIMIENTO.setAttribute('max', fechaActual);
 }
 
 
@@ -152,10 +160,15 @@ const openUpdate = async (id) => {
         APELLIDO_ALUMNO.value = ROW.apellido_alumno;
         FECHA_NACIMIENTO.value = ROW.fecha_nacimiento;
         POSICION_ALUMNO.value = ROW.posicion_alumno;
+
+        document.getElementById('selectEstadopo').style.display = 'block';
+    document.getElementById('selectCategoriaEncargadopo').style.display = 'block';
+
         fillSelect(ALUMNOS_API, 'readAllStaffCategorias', 'selectCategoriaEncargado', ROW.id_staff_categorias);
         fillSelect(ALUMNOS_API, 'readAllDiasPago', 'selectDias', ROW.id_dia_pago);
         ESTADO_ALUMNO.value = ROW.estado_alumno;
         fillSelect(CLIENTES_API, 'readAll', 'selectEncargado', ROW.id_cliente);
+        validarFechaNacimiento();
 
     } else {
         sweetAlert(2, DATA.error, false);

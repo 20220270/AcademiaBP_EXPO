@@ -31,18 +31,16 @@ class NivelesEntrenamientoData extends NivelesEntrenamientoHandler
     }
 
     public function setNombre($value, $min = 2, $max = 50)
-    {
-        if (!Validator::validateString($value)) {
-            $this->data_error = 'El nombre debe ser un valor alfanumérico';
-            return false;
-        } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->nombre = $value;
-            return true;
-        } else {
-            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
-        }
+{
+    if (Validator::validateLength($value, $min, $max)) {
+        $this->nombre = $value;
+        return true;
+    } else {
+        $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
+        return false;
     }
+}
+
 
     public function setImagen($file, $filename = null)
     {

@@ -152,7 +152,6 @@ main {
 
 
 
-
 /*texto dentro de las imagenes*/
 .span-uniforme,
 .span-texto-mochilas,
@@ -359,7 +358,7 @@ footer {
 @media (min-width: 360px) and (max-width: 400px) {
 
   .imagenPrincipal {
-    margin-top: 25px;
+    margin-top: 1px;
   }
 
   .overlay {
@@ -367,8 +366,8 @@ footer {
     top: 0;
     left: 0;
     width: 100%;
-    margin-top: 26px;
-    height: 89%;
+    margin-top: 1px;
+    height: 101.4%;
     background-color: rgba(0, 0, 0, 0.7);
     /*El último valor del rgba define la intensidad del color negro del overlay, o la capa
       que se encuentra sobre la imagen que le da una tonalidad oscura*/

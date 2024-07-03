@@ -56,15 +56,31 @@ class AlumnosData extends AlumnosHandler
     }
 
     public function setNacimiento($value)
-    {
-        if (Validator::validateDate($value)) {
-            $this->fechanacimiento = $value;
-            return true;
-        } else {
-            $this->data_error = 'La fecha de nacimiento es incorrecta';
+{
+    // Validar si es una fecha válida
+    if (Validator::validateDate($value)) {
+        // Obtener la fecha actual y la fecha hace un año en formato Y-m-d
+        $fechaActual = date('Y-m-d');
+        $fechaUnAnioAtras = date('Y-m-d', strtotime('-1 year'));
+
+        // Comparar la fecha de nacimiento con la fecha actual y un año antes
+        if ($value >= $fechaActual || $value <= $fechaUnAnioAtras) {
+            $this->data_error = 'La fecha de nacimiento debe ser anterior a la fecha actual y no puede ser más de un año antes de la fecha actual';
             return false;
         }
+
+        // Asignar la fecha de nacimiento si pasa la validación
+        $this->fechanacimiento = $value;
+        return true;
+    } else {
+        $this->data_error = 'La fecha de nacimiento es incorrecta';
+        return false;
     }
+}
+
+
+    
+
 
     public function setPosicion($value, $min = 1, $max = 50)
     {
