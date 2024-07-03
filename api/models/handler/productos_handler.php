@@ -101,6 +101,17 @@ class ProductoHandler
         return Database::executeRow($sql, $params);
     }
 
+    public function readProductosCategorias()
+    {
+        $sql = 'SELECT id_producto, id_categoria_producto, nombre_producto, descripcion_producto, precio_producto, imagen_producto, 
+        estado_producto, descuento_producto FROM tb_productos 
+                INNER JOIN tb_categorias_productos USING(id_categoria_producto)
+                WHERE id_categoria_producto = ? AND estado_producto = "En venta"
+                ORDER BY nombre_producto';
+        $params = array($this->categoria);
+        return Database::getRows($sql, $params);
+    }
+
     public function readProductosCategoria()
     {
         $sql = 'SELECT id_producto, id_categoria_producto, id_detalle_producto, nombre_producto, descripcion_producto, precio_producto, imagen_producto, 
@@ -110,9 +121,9 @@ class ProductoHandler
                 INNER JOIN tb_categorias_productos USING(id_categoria_producto)
                 INNER JOIN tb_tallas USING(id_talla)
                 INNER JOIN tb_colores USING(id_color)
-                WHERE id_categoria_producto = ? AND estado_producto = "En venta"
+                WHERE id_categoria_producto = ?  AND id_producto = ? AND estado_producto = "En venta"
                 ORDER BY nombre_producto';
-        $params = array($this->categoria);
+        $params = array($this->categoria , $this->id);
         return Database::getRows($sql, $params);
     }
 

@@ -10,8 +10,8 @@ const SEARCH_FORM3 = document.getElementById('searchForm3');
 const TABLE_BODY = document.getElementById('tableBody'),
     ROWS_FOUND = document.getElementById('rowsFound'),
     CARDS_HORARIOS = document.getElementById('cardsHorarios');
-    CARDS_LUGARES = document.getElementById('cardsLugares');
-    CARDS_LUGARES_HORARIOS = document.getElementById('cradsHorariosLugares');
+CARDS_LUGARES = document.getElementById('cardsLugares');
+CARDS_LUGARES_HORARIOS = document.getElementById('cradsHorariosLugares');
 // Constantes para establecer los elementos del componente Modal.
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
@@ -20,7 +20,7 @@ const SAVE_MODAL2 = new bootstrap.Modal('#saveModal2'),
     MODAL_TITLE2 = document.getElementById('modalTitle2');
 
 const SAVE_MODAL3 = new bootstrap.Modal('#saveModal3'),
-MODAL_TITLE3 = document.getElementById('modalTitle3');
+    MODAL_TITLE3 = document.getElementById('modalTitle3');
 
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
@@ -60,19 +60,19 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     event.preventDefault();
     const FORM = new FormData(SEARCH_FORM);
     fillTable(FORM);
-  });
-  
-  SEARCH_FORM2.addEventListener('submit', (event) => {
+});
+
+SEARCH_FORM2.addEventListener('submit', (event) => {
     event.preventDefault();
     const FORM2 = new FormData(SEARCH_FORM2);
     fillTable2(FORM2);
-  });
-  
-  SEARCH_FORM3.addEventListener('submit', (event) => {
+});
+
+SEARCH_FORM3.addEventListener('submit', (event) => {
     event.preventDefault();
     const FORM3 = new FormData(SEARCH_FORM3);
     fillTable3(FORM3);
-  });
+});
 
 
 
@@ -80,26 +80,26 @@ SEARCH_FORM.addEventListener('submit', (event) => {
 
 // Método del evento para cuando se envía el formulario de guardar.
 SAVE_FORM.addEventListener('submit', async (event) => {
-    // Prevent the page from reloading after submitting the form.
+
     event.preventDefault();
 
-    // Get the form data
+
     const FORM = new FormData(SAVE_FORM);
 
 
-    // Determine the action to perform (update or create)
+
     const action = ID_HORARIO.value ? 'updateRowHorarios' : 'createRowHorarios';
 
-    // Send the form data to the server
+
     const DATA = await fetchData(ENTRENAMIENTO_API, action, FORM);
 
-    // Check if the response is satisfactory; otherwise, show a message with the exception.
+
     if (DATA.status) {
-        // Close the dialog box.
+
         SAVE_MODAL.hide();
-        // Show a success message.
+
         sweetAlert(1, DATA.message, true);
-        // Reload the table to visualize the changes.
+
         fillTable();
     } else {
         sweetAlert(2, DATA.error, false);
@@ -155,17 +155,17 @@ SAVE_FORM3.addEventListener('submit', async (event) => {
 
 
 const fillTable = async (form = null) => {
-    // Initialize the content of the table.
+
     CARDS_HORARIOS.innerHTML = '';
-    // Determine the action to perform.
+
     const action = form ? 'searchRowsHorarios' : 'readAllHorarios';
-    // Request to obtain the available records.
+
     const DATA = await fetchData(ENTRENAMIENTO_API, action, form);
-    // Check if the response is satisfactory; otherwise, show a message with the exception.
+
     if (DATA.status) {
-        // Loop through the set of records row by row.
+
         DATA.dataset.forEach(row => {
-            // Create and concatenate table rows with the data of each record.
+
             CARDS_HORARIOS.innerHTML += `
                 <div class="card mb-3">
                     <div class="card-body">
@@ -210,17 +210,17 @@ const fillTable = async (form = null) => {
 };
 
 const fillTable2 = async (form = null) => {
-    // Initialize the content of the table.
+
     CARDS_LUGARES.innerHTML = '';
-    // Determine the action to perform.
+
     const action = form ? 'searchRowsLugares' : 'readAllLugares';
-    // Request to obtain the available records.
+
     const DATA = await fetchData(ENTRENAMIENTO_API, action, form);
-    // Check if the response is satisfactory; otherwise, show a message with the exception.
+
     if (DATA.status) {
-        // Loop through the set of records row by row.
+
         DATA.dataset.forEach(row => {
-            // Create and concatenate table rows with the data of each record.
+
             CARDS_LUGARES.innerHTML += `
                 <div class="card container text-center mb-3">
                     <div class="row">
@@ -277,17 +277,17 @@ const fillTable2 = async (form = null) => {
 };
 
 const fillTable3 = async (form = null) => {
-    // Initialize the content of the table.
+
     CARDS_LUGARES_HORARIOS.innerHTML = '';
-    // Determine the action to perform.
+
     const action = form ? 'searchRowsHorariosLugares' : 'readAllLugaresHorarios';
-    // Request to obtain the available records.
+
     const DATA = await fetchData(ENTRENAMIENTO_API, action, form);
-    // Check if the response is satisfactory; otherwise, show a message with the exception.
+
     if (DATA.status) {
-        // Loop through the set of records row by row.
+
         DATA.dataset.forEach(row => {
-            // Create and concatenate table rows with the data of each record.
+
             CARDS_LUGARES_HORARIOS.innerHTML += `
                                  <div class="card container text-center mb-3">
                                             <div class="row">
@@ -451,7 +451,7 @@ const openUpdate3 = async (id) => {
         const ROW = DATA.dataset;
         ID_HORARIO_LUGAR.value = ROW.id_horario_lugar;
 
-        
+
         fillSelect(ENTRENAMIENTO_API, 'readAllLugares', 'selectDiaLugar', ROW.id_lugar);
         fillSelect(ENTRENAMIENTO_API, 'readAllHorariosCombo', 'selectHorarioLugar', ROW.id_horario);
     } else {
@@ -530,24 +530,70 @@ const openDelete3 = async (id) => {
     }
 }
 
-function openMap() {
-    // Mostrar el mapa
-    document.getElementById("map").style.display = "block";
-}
+var map;
+var marker;
 
 function initMap() {
-    const map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 13.6808, lng: -89.2222 },
+    var elSalvadorBounds = {
+        north: 14.445,
+        south: 13.041,
+        west: -90.118,
+        east: -87.686
+    };
+
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 13.794185, lng: -88.89653 },
         zoom: 8,
+        restriction: {
+            latLngBounds: elSalvadorBounds,
+            strictBounds: true,
+        },
     });
 
-    map.addListener("click", (event) => {
-        const lat = event.latLng.lat();
-        const lng = event.latLng.lng();
-        const wazeUrl = `https://waze.com/ul?ll=${lat},${lng}&navigate=yes`;
-        document.getElementById("URLLugar").value = wazeUrl;
+    google.maps.event.addListener(map, 'click', function(event) {
+        var clickedLocation = event.latLng;
+        
+        if (isLocationInElSalvador(clickedLocation)) {
+            if (marker) {
+                marker.setPosition(clickedLocation);
+            } else {
+                marker = new google.maps.Marker({
+                    position: clickedLocation,
+                    map: map,
+                    draggable: true
+                });
+            }
+
+            var wazeUrl = `https://waze.com/ul?ll=${clickedLocation.lat()},${clickedLocation.lng()}&navigate=yes`;
+            document.getElementById('URLLugar').value = wazeUrl;
+
+            google.maps.event.addListener(marker, 'dragend', function(event) {
+                if (isLocationInElSalvador(event.latLng)) {
+                    var newWazeUrl = `https://waze.com/ul?ll=${event.latLng.lat()},${event.latLng.lng()}&navigate=yes`;
+                    document.getElementById('URLLugar').value = newWazeUrl;
+                } else {
+                    marker.setPosition(clickedLocation);
+                    alert("La ubicación debe estar dentro de los límites de El Salvador.");
+                }
+            });
+        } else {
+            alert("La ubicación debe estar dentro de los límites de El Salvador.");
+        }
     });
 }
 
-// Asegúrate de llamar a initMap como callback
-window.initMap = initMap;
+function isLocationInElSalvador(location) {
+    var elSalvadorBounds = {
+        north: 14.445,
+        south: 13.041,
+        west: -90.118,
+        east: -87.686
+    };
+
+    return (
+        location.lat() >= elSalvadorBounds.south &&
+        location.lat() <= elSalvadorBounds.north &&
+        location.lng() >= elSalvadorBounds.west &&
+        location.lng() <= elSalvadorBounds.east
+    );
+}
