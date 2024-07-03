@@ -7,6 +7,25 @@ header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.modal-header .logo-academia {
+  width: 50px;
+  height: auto;
+  margin-left: 10px; /* Espacio entre el texto y la imagen */
+}
+.modal-header .modal-title {
+  margin-bottom: 0;
+}
+.modal-header .title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.modal-header .btn-close {
+  position: absolute;
+  right: 10px;
+}
+
 .imagenUser {
   cursor: pointer;
 }

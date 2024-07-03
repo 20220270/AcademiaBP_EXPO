@@ -272,6 +272,24 @@ document.getElementById('botonCerrarCon2').addEventListener('mouseleave', functi
     }
 });
 
+document.getElementById('botonCerrarModalContra').addEventListener('mouseenter', function () {
+    var popover = new bootstrap.Popover(this, {
+        title: 'Cerrar ventana',
+        content: 'Haz clic aquí para cerrar este ventana. Puedes dar clic en la imagen de comentarios para cerrar la ventana de igual forma',
+        placement: 'top',
+        trigger: 'manual',
+        boundary: 'viewport'
+    });
+    popover.show();
+});
+
+document.getElementById('botonCerrarModalContra').addEventListener('mouseleave', function () {
+    var popover = bootstrap.Popover.getInstance(this);
+    if (popover) {
+        popover.hide();
+    }
+});
+
 //Barra de busqueda de productos
 const buscadorInput = document.getElementById('Buscador1');
 
