@@ -27,17 +27,23 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$categoria->setNombre($_POST['nombreCategoriaProducto']) or
+                    !$categoria->setNombre($_POST['nombreCategoriaProducto']) ||
                     !$categoria->setImagen($_FILES['imagenCategoriaProducto'])
                 ) {
                     $result['error'] = $categoria->getDataError();
-                } elseif ($categoria->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Categoría creada correctamente';
-                    // Se asigna el estado del archivo después de insertar.
-                    $result['fileStatus'] = Validator::saveFile($_FILES['imagenCategoriaProducto'], $categoria::RUTA_IMAGEN);
                 } else {
-                    $result['error'] = 'Ocurrió un problema al crear la categoría';
+                    try {
+                        if ($categoria->createRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Categoría creada correctamente';
+                            // Se asigna el estado del archivo después de insertar.
+                            $result['fileStatus'] = Validator::saveFile($_FILES['imagenCategoriaProducto'], $categoria::RUTA_IMAGEN);
+                        } else {
+                            $result['error'] = 'No se pudo crear la categoría, puede que ya exista un registro con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al crear la categoría: ' . $e->getMessage();
+                    }
                 }
                 break;
             case 'readAll':
@@ -57,24 +63,30 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Categoría inexistente';
                 }
                 break;
-            case 'updateRow':
-                $_POST = Validator::validateForm($_POST);
-                if (
-                    !$categoria->setId($_POST['idCategoriaProducto']) or
-                    !$categoria->setFilename() or
-                    !$categoria->setNombre($_POST['nombreCategoriaProducto']) or
-                    !$categoria->setImagen($_FILES['imagenCategoriaProducto'], $categoria->getFilename())
-                ) {
-                    $result['error'] = $categoria->getDataError();
-                } elseif ($categoria->updateRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Categoría modificada correctamente';
-                    // Se asigna el estado del archivo después de actualizar.
-                    $result['fileStatus'] = Validator::changeFile($_FILES['imagenCategoriaProducto'], $categoria::RUTA_IMAGEN, $categoria->getFilename());
-                } else {
-                    $result['error'] = 'Ocurrió un problema al modificar la categoría';
-                }
-                break;
+                case 'updateRow':
+                    $_POST = Validator::validateForm($_POST);
+                    if (
+                        !$categoria->setId($_POST['idCategoriaProducto']) ||
+                        !$categoria->setFilename() ||
+                        !$categoria->setNombre($_POST['nombreCategoriaProducto']) ||
+                        !$categoria->setImagen($_FILES['imagenCategoriaProducto'], $categoria->getFilename())
+                    ) {
+                        $result['error'] = $categoria->getDataError();
+                    } else {
+                        try {
+                            if ($categoria->updateRow()) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Categoría modificada correctamente';
+                                // Se asigna el estado del archivo después de actualizar.
+                                $result['fileStatus'] = Validator::changeFile($_FILES['imagenCategoriaProducto'], $categoria::RUTA_IMAGEN, $categoria->getFilename());
+                            } else {
+                                $result['error'] = 'No se pudo modificar la categoría, puede que ya exista un registro con el mismo nombre';
+                            }
+                        } catch (Exception $e) {
+                            $result['error'] = 'Error al modificar la categoría: ' . $e->getMessage();
+                        }
+                    }
+                    break;
             case 'deleteRow':
                 if (
                     !$categoria->setId($_POST['idCategoriaProducto']) or

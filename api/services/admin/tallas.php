@@ -30,13 +30,20 @@ if (isset($_GET['action'])) {
                     !$tallas->setTalla($_POST['talla'])
                 ) {
                     $result['error'] = $tallas->getDataError();
-                } elseif ($tallas->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Talla registrada correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al registrar el Talla';
+                    try {
+                        if ($tallas->createRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Talla registrada correctamente';
+                        } else {
+                            $result['error'] = 'No se pudo crear la talla, puede que ya exista una talla con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al registrar la talla: ' . $e->getMessage();
+                    }
                 }
                 break;
+
             case 'readAll':
                 if ($result['dataset'] = $tallas->readAll()) {
                     $result['status'] = 1;
@@ -57,18 +64,24 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$tallas->setId($_POST['idTallaProducto']) or
+                    !$tallas->setId($_POST['idTallaProducto']) ||
                     !$tallas->setTalla($_POST['talla'])
                 ) {
                     $result['error'] = $tallas->getDataError();
-                } elseif ($tallas->updateRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Talla modificada correctamente';
-                    
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar la talla';
+                    try {
+                        if ($tallas->updateRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Talla modificada correctamente';
+                        } else {
+                            $result['error'] = 'No se pudo modificar la talla, puede que ya exista una talla con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al modificar la talla: ' . $e->getMessage();
+                    }
                 }
                 break;
+
             case 'deleteRow':
                 if (
                     !$tallas->setId($_POST['idTallaProducto'])

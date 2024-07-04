@@ -27,25 +27,31 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$producto->setCategoria($_POST['selectCategoria']) or
-                    !$producto->setNombre($_POST['nombreProducto']) or
-                    !$producto->setDescripcion($_POST['descripcionProducto']) or
-                    !$producto->setPrecio($_POST['PrecioProducto']) or
-                    !$producto->setImagen($_FILES['inputImgProducto']) or
-                    !$producto->setEstado(isset($_POST['selectEstado'])) or
-                    !$producto->setDescuento(($_POST['descuentoProducto']))
-
+                    !$producto->setCategoria($_POST['selectCategoria']) ||
+                    !$producto->setNombre($_POST['nombreProducto']) ||
+                    !$producto->setDescripcion($_POST['descripcionProducto']) ||
+                    !$producto->setPrecio($_POST['PrecioProducto']) ||
+                    !$producto->setImagen($_FILES['inputImgProducto']) ||
+                    !$producto->setEstado(isset($_POST['selectEstado'])) ||
+                    !$producto->setDescuento($_POST['descuentoProducto'])
                 ) {
                     $result['error'] = $producto->getDataError();
-                } elseif ($producto->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Producto creado correctamente';
-                    // Se asigna el estado del archivo después de insertar.
-                    $result['fileStatus'] = Validator::saveFile($_FILES['inputImgProducto'], $producto::RUTA_IMAGEN);
                 } else {
-                    $result['error'] = 'Ocurrió un problema al crear el producto';
+                    try {
+                        if ($producto->createRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Producto creado correctamente';
+                            // Asigna el estado del archivo después de insertar.
+                            $result['fileStatus'] = Validator::saveFile($_FILES['inputImgProducto'], $producto::RUTA_IMAGEN);
+                        } else {
+                            $result['error'] = 'No se pudo crear el producto, puede que ya exista un producto con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al crear el producto: ' . $e->getMessage();
+                    }
                 }
                 break;
+
             case 'readAll':
                 if ($result['dataset'] = $producto->readAll()) {
                     $result['status'] = 1;
@@ -55,15 +61,15 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                case 'productosMasVendi2':
-                    if ($result['dataset'] = $producto->productosMasVendi2()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-                    } else {
-                        $result['error'] = 'No existen productos registrados';
-                    }
-                    break;
-                    
+            case 'productosMasVendi2':
+                if ($result['dataset'] = $producto->productosMasVendi2()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen productos registrados';
+                }
+                break;
+
             case 'readOne':
                 if (!$producto->setId($_POST['idProducto'])) {
                     $result['error'] = $producto->getDataError();
@@ -76,26 +82,33 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$producto->setId($_POST['idProducto']) or
-                    !$producto->setFilename() or
-                    !$producto->setCategoria($_POST['selectCategoria']) or
-                    !$producto->setNombre($_POST['nombreProducto']) or
-                    !$producto->setDescripcion($_POST['descripcionProducto']) or
-                    !$producto->setPrecio($_POST['PrecioProducto']) or
-                    !$producto->setEstado(($_POST['selectEstado'])) or
-                    !$producto->setDescuento(($_POST['descuentoProducto'])) or
+                    !$producto->setId($_POST['idProducto']) ||
+                    !$producto->setFilename() ||
+                    !$producto->setCategoria($_POST['selectCategoria']) ||
+                    !$producto->setNombre($_POST['nombreProducto']) ||
+                    !$producto->setDescripcion($_POST['descripcionProducto']) ||
+                    !$producto->setPrecio($_POST['PrecioProducto']) ||
+                    !$producto->setEstado($_POST['selectEstado']) ||
+                    !$producto->setDescuento($_POST['descuentoProducto']) ||
                     !$producto->setImagen($_FILES['inputImgProducto'], $producto->getFilename())
                 ) {
                     $result['error'] = $producto->getDataError();
-                } elseif ($producto->updateRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Producto modificado correctamente';
-                    // Se asigna el estado del archivo después de actualizar.
-                    $result['fileStatus'] = Validator::changeFile($_FILES['inputImgProducto'], $producto::RUTA_IMAGEN, $producto->getFilename());
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el producto';
+                    try {
+                        if ($producto->updateRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Producto modificado correctamente';
+                            // Asigna el estado del archivo después de actualizar.
+                            $result['fileStatus'] = Validator::changeFile($_FILES['inputImgProducto'], $producto::RUTA_IMAGEN, $producto->getFilename());
+                        } else {
+                            $result['error'] = 'No se pudo modificar el producto, puede que ya exista un producto con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al modificar el producto: ' . $e->getMessage();
+                    }
                 }
                 break;
+
             case 'deleteRow':
                 if (
                     !$producto->setId($_POST['idProducto']) or

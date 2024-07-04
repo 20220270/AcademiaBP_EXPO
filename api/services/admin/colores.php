@@ -30,13 +30,20 @@ if (isset($_GET['action'])) {
                     !$colores->setNombre($_POST['colorHex'])
                 ) {
                     $result['error'] = $colores->getDataError();
-                } elseif ($colores->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Color registrada correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al registrar el Color';
+                    try {
+                        if ($colores->createRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Color registrado correctamente';
+                        } else {
+                            $result['error'] = 'No se pudo crear el color, puede que ya exista un color con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al registrar el color: ' . $e->getMessage();
+                    }
                 }
                 break;
+
             case 'readAll':
                 if ($result['dataset'] = $colores->readAll()) {
                     $result['status'] = 1;
@@ -57,18 +64,24 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$colores->setId($_POST['idColorProducto']) or
+                    !$colores->setId($_POST['idColorProducto']) ||
                     !$colores->setNombre($_POST['colorHex'])
                 ) {
                     $result['error'] = $colores->getDataError();
-                } elseif ($colores->updateRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Color modificada correctamente';
-                    
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el Color';
+                    try {
+                        if ($colores->updateRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Color modificado correctamente';
+                        } else {
+                            $result['error'] = 'No se pudo modificar el color, puede que ya exista un color con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al modificar el color: ' . $e->getMessage();
+                    }
                 }
                 break;
+
             case 'deleteRow':
                 if (
                     !$colores->setId($_POST['idColorProducto'])
