@@ -61,6 +61,8 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Nivel de usuario inexistente';
                 }
                 break;
+
+
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -68,13 +70,20 @@ if (isset($_GET['action'])) {
                     !$nivel->setNivel($_POST['nombreNivel'])
                 ) {
                     $result['error'] = $nivel->getDataError();
-                } elseif ($nivel->updateRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Nivel de usuario modificado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el nivel de usuario';
+                    try {
+                        if ($nivel->updateRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Nivel de usuario modificada correctamente';
+                        } else {
+                            $result['error'] = 'No se pudo modificar el nivel de usuario, puede que ya exista un registro con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al modificar la categoría: ' . $e->getMessage();
+                    }
                 }
                 break;
+
             case 'deleteRow':
                 if (
                     !$nivel->setId($_POST['idNivel'])
