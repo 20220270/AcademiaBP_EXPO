@@ -28,8 +28,6 @@ if (isset($_GET['action'])) {
                 break;
 
 
-                //Categorías de alumnos
-
             case 'createRowAlumno':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -41,13 +39,19 @@ if (isset($_GET['action'])) {
                     !$categoriasalumnos->setImagenCategoria($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos->getFilename())
                 ) {
                     $result['error'] = $categoriasalumnos->getDataError();
-                } elseif ($categoriasalumnos->createRowAlumno()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Categoría agregada correctamente';
-                    // Se asigna el estado del archivo después de insertar.
-                    $result['fileStatus'] = Validator::saveFile($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos::RUTA_IMAGEN, $categoriasalumnos->getFilename());
                 } else {
-                    $result['error'] = 'Ocurrió un problema al crear la categoria';
+                    try {
+                        if ($categoriasalumnos->createRowAlumno()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Categoria registrada correctamente';
+                            // Asigna el estado del archivo después de insertar.
+                            $result['fileStatus'] = Validator::saveFile($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos::RUTA_IMAGEN);
+                        } else {
+                            $result['error'] = 'No se pudo crear la categoría, puede que ya exista una categoría con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al crear la categoría: ' . $e->getMessage();
+                    }
                 }
                 break;
             case 'readAllAlumno':
@@ -87,10 +91,10 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-            case 'updateRowAlumno':
-                $_POST = Validator::validateForm($_POST);
-                if (
-                    !$categoriasalumnos->setIdCategoria($_POST['idCategoriaAlumno']) or
+                case 'updateRowAlumno':
+                    $_POST = Validator::validateForm($_POST);
+                    if (
+                        !$categoriasalumnos->setIdCategoria($_POST['idCategoriaAlumno']) or
                     !$categoriasalumnos->setFilename() or
                     !$categoriasalumnos->setNombreCategoria($_POST['nombreCategoriaAlumno']) or
                     !$categoriasalumnos->setEdadMinima($_POST['edadMinimaAlumno']) or
@@ -98,17 +102,23 @@ if (isset($_GET['action'])) {
                     !$categoriasalumnos->setNivel($_POST['selectNivelCompetencia']) or
                     !$categoriasalumnos->setIdHorarios($_POST['selectHorarioEntrenamiento']) or
                     !$categoriasalumnos->setImagenCategoria($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos->getFilename())
-                ) {
-                    $result['error'] = $categoriasalumnos->getDataError();
-                } elseif ($categoriasalumnos->updateRowAlumno()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Campo de categoria modificado correctamente';
-
-                    $result['fileStatus'] = Validator::changeFile($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos::RUTA_IMAGEN, $categoriasalumnos->getFilename());
-                } else {
-                    $result['error'] = 'Ocurrió un problema al modificar la categoria';
-                }
-                break;
+                    ) {
+                        $result['error'] = $categoriasalumnos->getDataError();
+                    } else {
+                        try {
+                            if ($categoriasalumnos->updateRowAlumno()) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Categoría modificada correctamente';
+                                // Se asigna el estado del archivo después de actualizar.
+                                $result['fileStatus'] = Validator::changeFile($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos::RUTA_IMAGEN, $categoriasalumnos->getFilename());
+                            } else {
+                                $result['error'] = 'No se pudo modificar la categoría, puede que ya exista un registro con el mismo nombre';
+                            }
+                        } catch (Exception $e) {
+                            $result['error'] = 'Error al modificar la categoría: ' . $e->getMessage();
+                        }
+                    }
+                    break;
 
             case 'deleteRowAlumno':
                 if (
