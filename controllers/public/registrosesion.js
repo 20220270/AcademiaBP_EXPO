@@ -109,3 +109,19 @@ registrarBtn.addEventListener('click', () => {
 iniciarBtn.addEventListener('click', () => {
     container.classList.remove("active");
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const registerButton = document.getElementById('registrarse');
+    const signupForm = document.getElementById('signupForm');
+
+    // Hide signupForm initially on small and medium screens
+    if (window.innerWidth <= 768) {
+        signupForm.style.display = 'none';
+    }
+
+    registerButton.addEventListener('click', function() {
+        if (window.innerWidth <= 768) {
+            signupForm.style.display = signupForm.style.display === 'none' ? 'block' : 'none';
+        }
+    });
+});
