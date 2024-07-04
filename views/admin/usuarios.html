@@ -23,7 +23,7 @@
     <main>
         <div class="main p-3">
             <div class="text-center">
-                <h1>Gestion de usuarios y niveles de usuario</h1>
+                <h1>Gestión de usuarios y niveles de usuario</h1>
             </div>
 
             <!-- Contenido principal: tarjetas y tabla -->
@@ -131,13 +131,13 @@
                                     <!-- Label e input para agregar el nombre del administrador -->
                                     <label class="form-label">Nombre del administrador:</label>
                                     <input type="text" class="form-control mb-2" id="nombreAdministrador"
-                                        name="nombreAdministrador" required>
+                                        name="nombreAdministrador" required oninput="this.value = this.value.replace(/[0-9]/g, '')">
                                 </div>
                                 <div class="mb-2">
                                     <!-- Label e input para agregar el apellido del administrador -->
                                     <label class="form-label">Apellido del administrador:</label>
                                     <input type="text" class="form-control mb-2" id="apellidoAdministrador"
-                                        name="apellidoAdministrador" required>
+                                        name="apellidoAdministrador" required oninput="this.value = this.value.replace(/[0-9]/g, '')">
                                 </div>
                                 <div class="mb-2">
                                     <!-- Label e input para agregar el correo del administrador -->
@@ -149,20 +149,20 @@
                                     <!-- Label e input para agregar el DUI del administrador -->
                                     <label class="form-label">Dui del administrador:</label>
                                     <input type="text" class="form-control mb-2" id="duiAdministrador"
-                                        name="duiAdministrador" required>
+                                        name="duiAdministrador" required maxlength="10" oninput="this.value = this.value.replace(/[^0-9-]/g, '')" pattern="[0-9-]+">
                                 </div>
                                 <div class="mb-2">
                                     <!-- Label e input para agregar el teléfono del administrador -->
                                     <label class="form-label">Teléfono del administrador:</label>
                                     <input type="text" class="form-control mb-2" id="telefonoAdministrador"
-                                        name="telefonoAdministrador" required>
+                                        name="telefonoAdministrador" required maxlength="9" pattern="[0-9\-]*"  
+                                        oninput="this.value = this.value.replace(/[^\d-]/g, '');">
                                 </div>
 
                                 <div class="mb-2">
                                     <!-- Label e input para confirmar la clave del administrador -->
                                     <label class="form-label">Imagen para el administrador:</label>
-                                    <input type="file" class="form-control mb-2" id="fotoAdmin" name="fotoAdmin"
-                                        required>
+                                    <input type="file" class="form-control mb-2" id="fotoAdmin" name="fotoAdmin">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12">

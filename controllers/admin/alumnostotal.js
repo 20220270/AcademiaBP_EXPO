@@ -136,8 +136,12 @@ const openCreate = () => {
 
 function validarFechaNacimiento() {
     var fechaActual = new Date().toISOString().slice(0, 10);
+    var fechaMinima = '1990-01-01'; // Fecha mínima permitida (1980-01-01)
+    
+    FECHA_NACIMIENTO.setAttribute('min', fechaMinima);
     FECHA_NACIMIENTO.setAttribute('max', fechaActual);
 }
+
 
 
 const openUpdate = async (id) => {

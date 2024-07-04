@@ -306,7 +306,7 @@ const fillTable4 = async (form = null) => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
                 CARD_ALUMNOSTOTAL.innerHTML += `
                             <div class="card-body">
-                                <h1 class="card-title titulo-card">Total de estudiantes registrados.</h1>
+                                <h1 class="card-title titulo-card">Total de alumnos registrados.</h1>
                                 <p class="card-text mt-5">
                                     <h3 id="totalStudents">${row.total_alumnos_registrados}</h3>
                                     <input type="range" value="${row.total_alumnos_registrados}" max="${row.total_alumnos_registrados}" readonly class="barra-azul form-control" style="max-width: 100%;">

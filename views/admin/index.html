@@ -83,14 +83,14 @@
                                             <label class="form-label">Nombre del administrador:</label>
 
                                             <input type="text" class="form-control mb-5" id="nombreAdministrador"
-                                                name="nombreAdministrador" class="form-control" required>
+                                                name="nombreAdministrador" class="form-control" required  oninput="this.value = this.value.replace(/[0-9]/g, '')">
                                         </div>
                                         <div class="col-md-6">
                                             <!--Label e input para agregar el apellido del administrador-->
                                             <label class="form-label">Apellido del administrador:</label>
 
                                             <input type="text" class="form-control mb-5" id="apellidoAdministrador"
-                                                name="apellidoAdministrador" required>
+                                                name="apellidoAdministrador" required  oninput="this.value = this.value.replace(/[0-9]/g, '')">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -106,7 +106,7 @@
                                             <label class="form-label2 mb-2">Dui del administrador:</label>
 
                                             <input type="text" class="form-control mb-5" id="duiAdministrador"
-                                                name="duiAdministrador"  placeholder="00000000-0" required>
+                                                name="duiAdministrador"  placeholder="00000000-0" required maxlength="10" oninput="this.value = this.value.replace(/[^0-9-]/g, '')" pattern="[0-9-]+">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -115,7 +115,8 @@
                                             <label class="form-label2 mb-2">Teléfono del administrador:</label>
 
                                             <input type="text" placeholder="0000-0000" class="form-control mb-5" id="telefonoAdministrador"
-                                                name="telefonoAdministrador" required>
+                                                name="telefonoAdministrador" required maxlength="9" pattern="[0-9\-]*"  
+                                                oninput="this.value = this.value.replace(/[^\d-]/g, '');">
                                         </div>
                                         <div class="col-md-6">
                                             <!--Label e input para agregar el alias del administrador-->
