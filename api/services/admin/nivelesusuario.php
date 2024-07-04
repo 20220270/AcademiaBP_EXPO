@@ -24,18 +24,24 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
+
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$nivel->setNivel($_POST['nombreNivel'])
                 ) {
                     $result['error'] = $nivel->getDataError();
-                } elseif ($nivel->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Nivel de usuario creado correctamente';
-                    
                 } else {
-                    $result['error'] = 'Ocurrió un problema al crear el nivel de usuario';
+                    try {
+                        if ($nivel->createRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Nivel de usuario registrado correctamente';
+                        } else {
+                            $result['error'] = 'No se pudo crear el nivel de usuario, puede que ya exista un dato con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al crear el valor: ' . $e->getMessage();
+                    }
                 }
                 break;
             case 'readAll':
@@ -65,7 +71,6 @@ if (isset($_GET['action'])) {
                 } elseif ($nivel->updateRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Nivel de usuario modificado correctamente';
-                    
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar el nivel de usuario';
                 }
@@ -78,7 +83,6 @@ if (isset($_GET['action'])) {
                 } elseif ($nivel->deleteRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Nivel de usuario eliminado correctamente';
-                    
                 } else {
                     $result['error'] = 'Ocurrió un problema al eliminar el nivel de usuario';
                 }
