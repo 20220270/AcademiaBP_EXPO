@@ -37,27 +37,122 @@ document.addEventListener('DOMContentLoaded', async () => {
         TELEFONO_CLIENTE.value = ROW.telefono_cliente;
         FECHA_REGISTRO.value = ROW.fecha_registro;
         DIRECCION_CLIENTE.value = ROW.direccion_cliente;
-        
+
         FOTO_CLIENTE.src = `${SERVER_URL}images/clientes/${ROW.foto_cliente}`;
         console.log(ROW.foto_cliente);
-        
+
         // Llamar fillTable con el correo del cliente
         fillTable(ROW.correo_cliente);
     } else {
         sweetAlert(2, DATA.error, null);
     }
+
+    //popup del boton para actualizar datos
+    document.getElementById('botonActualizarDatos').addEventListener('mouseenter', function () {
+        var popover = new bootstrap.Popover(this, {
+            title: 'Editar datos',
+            content: 'Haz clic aquí para editar o guardar tus datos. La contraseña no puedes editarla aquí',
+            placement: 'top',
+            trigger: 'manual',
+            boundary: 'viewport'
+        });
+        popover.show();
+    });
+
+    document.getElementById('botonActualizarDatos').addEventListener('mouseleave', function () {
+        var popover = bootstrap.Popover.getInstance(this);
+        if (popover) {
+            popover.hide();
+        }
+    });
+
+    //popup del boton para actualizar la contraseña
+    document.getElementById('botonActualizarContrasena').addEventListener('mouseenter', function () {
+        var popover = new bootstrap.Popover(this, {
+            title: 'Editar contraseña',
+            content: 'Haz clic aquí para editar tu contraseña.',
+            placement: 'top',
+            trigger: 'manual',
+            boundary: 'viewport'
+        });
+        popover.show();
+    });
+
+    document.getElementById('botonActualizarContrasena').addEventListener('mouseleave', function () {
+        var popover = bootstrap.Popover.getInstance(this);
+        if (popover) {
+            popover.hide();
+        }
+    });
+
+    //popup del boton para cerrar ventana - imagen de comentarios
+    document.getElementById('botonCerrarCon').addEventListener('mouseenter', function () {
+        var popover = new bootstrap.Popover(this, {
+            title: 'Cerrar ventana',
+            content: 'Haz clic aquí para cerrar este ventana. Puedes dar clic en nuestro logo para cerrar la ventana de igual forma',
+            placement: 'top',
+            trigger: 'manual',
+            boundary: 'viewport'
+        });
+        popover.show();
+    });
+
+    document.getElementById('botonCerrarCon').addEventListener('mouseleave', function () {
+        var popover = bootstrap.Popover.getInstance(this);
+        if (popover) {
+            popover.hide();
+        }
+    });
+
+    //popup del boton para cerrar ventana - logo de La Academia
+    document.getElementById('botonCerrarCon2').addEventListener('mouseenter', function () {
+        var popover = new bootstrap.Popover(this, {
+            title: 'Cerrar ventana',
+            content: 'Haz clic aquí para cerrar este ventana. Puedes dar clic en la imagen de comentarios para cerrar la ventana de igual forma',
+            placement: 'top',
+            trigger: 'manual',
+            boundary: 'viewport'
+        });
+        popover.show();
+    });
+
+    document.getElementById('botonCerrarCon2').addEventListener('mouseleave', function () {
+        var popover = bootstrap.Popover.getInstance(this);
+        if (popover) {
+            popover.hide();
+        }
+    });
+
+    document.getElementById('botonCerrarModalContra').addEventListener('mouseenter', function () {
+        var popover = new bootstrap.Popover(this, {
+            title: 'Cerrar ventana',
+            content: 'Haz clic aquí para cerrar este ventana. Puedes dar clic en la imagen de comentarios para cerrar la ventana de igual forma',
+            placement: 'top',
+            trigger: 'manual',
+            boundary: 'viewport'
+        });
+        popover.show();
+    });
+
+    document.getElementById('botonCerrarModalContra').addEventListener('mouseleave', function () {
+        var popover = bootstrap.Popover.getInstance(this);
+        if (popover) {
+            popover.hide();
+        }
+    });
+
 });
 
 const fotoInput = document.getElementById('fotoInput');
 // Escuchar cambios en el elemento de entrada de archivo
-fotoInput.addEventListener('change', function() {
+fotoInput.addEventListener('change', function () {
 
 
 
     // Verificar si se seleccionó un archivo
     if (this.files && this.files[0]) {
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             // Mostrar la imagen cargada en el elemento de imagen
             const imagen = document.getElementById('imagen');
             imagen.src = e.target.result;
@@ -85,7 +180,7 @@ const fillTable = async (correo) => {
         if (DATA.status) {
             // Convertir el conjunto de datos a un array si no lo es ya
             const rows = Array.isArray(DATA.dataset) ? DATA.dataset : [DATA.dataset];
-            
+
 
             // Iterar sobre cada fila de datos para construir las tarjetas de los alumnos
             rows.forEach(row => {
@@ -159,7 +254,7 @@ async function submitForm(event) {
 PROFILE_FORM2.addEventListener('submit', submitForm);
 
 
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     if (event.target && event.target.closest('.btn-pagar')) {
         submitForm(event);
     }
@@ -196,110 +291,17 @@ const openPassword = () => {
     PASSWORD_FORM.reset();
 }
 
-//popup del boton para actualizar datos
-document.getElementById('botonActualizarDatos').addEventListener('mouseenter', function () {
-    var popover = new bootstrap.Popover(this, {
-        title: 'Editar datos',
-        content: 'Haz clic aquí para editar o guardar tus datos. La contraseña no puedes editarla aquí',
-        placement: 'top',
-        trigger: 'manual',
-        boundary: 'viewport'
-    });
-    popover.show();
-});
-
-document.getElementById('botonActualizarDatos').addEventListener('mouseleave', function () {
-    var popover = bootstrap.Popover.getInstance(this);
-    if (popover) {
-        popover.hide();
-    }
-});
-
-//popup del boton para actualizar la contraseña
-document.getElementById('botonActualizarContrasena').addEventListener('mouseenter', function () {
-    var popover = new bootstrap.Popover(this, {
-        title: 'Editar contraseña',
-        content: 'Haz clic aquí para editar tu contraseña.',
-        placement: 'top',
-        trigger: 'manual',
-        boundary: 'viewport'
-    });
-    popover.show();
-});
-
-document.getElementById('botonActualizarContrasena').addEventListener('mouseleave', function () {
-    var popover = bootstrap.Popover.getInstance(this);
-    if (popover) {
-        popover.hide();
-    }
-});
-
-//popup del boton para cerrar ventana - imagen de comentarios
-document.getElementById('botonCerrarCon').addEventListener('mouseenter', function () {
-    var popover = new bootstrap.Popover(this, {
-        title: 'Cerrar ventana',
-        content: 'Haz clic aquí para cerrar este ventana. Puedes dar clic en nuestro logo para cerrar la ventana de igual forma',
-        placement: 'top',
-        trigger: 'manual',
-        boundary: 'viewport'
-    });
-    popover.show();
-});
-
-document.getElementById('botonCerrarCon').addEventListener('mouseleave', function () {
-    var popover = bootstrap.Popover.getInstance(this);
-    if (popover) {
-        popover.hide();
-    }
-});
-
-//popup del boton para cerrar ventana - logo de La Academia
-document.getElementById('botonCerrarCon2').addEventListener('mouseenter', function () {
-    var popover = new bootstrap.Popover(this, {
-        title: 'Cerrar ventana',
-        content: 'Haz clic aquí para cerrar este ventana. Puedes dar clic en la imagen de comentarios para cerrar la ventana de igual forma',
-        placement: 'top',
-        trigger: 'manual',
-        boundary: 'viewport'
-    });
-    popover.show();
-});
-
-document.getElementById('botonCerrarCon2').addEventListener('mouseleave', function () {
-    var popover = bootstrap.Popover.getInstance(this);
-    if (popover) {
-        popover.hide();
-    }
-});
-
-document.getElementById('botonCerrarModalContra').addEventListener('mouseenter', function () {
-    var popover = new bootstrap.Popover(this, {
-        title: 'Cerrar ventana',
-        content: 'Haz clic aquí para cerrar este ventana. Puedes dar clic en la imagen de comentarios para cerrar la ventana de igual forma',
-        placement: 'top',
-        trigger: 'manual',
-        boundary: 'viewport'
-    });
-    popover.show();
-});
-
-document.getElementById('botonCerrarModalContra').addEventListener('mouseleave', function () {
-    var popover = bootstrap.Popover.getInstance(this);
-    if (popover) {
-        popover.hide();
-    }
-});
 
 //Barra de busqueda de productos
 const buscadorInput = document.getElementById('Buscador1');
 
-buscadorInput.addEventListener('keydown', function(event) {
+buscadorInput.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
         const searchTerm = buscadorInput.value.trim();
         if (searchTerm !== '') {
             // Guardar el término de búsqueda en el almacenamiento local
             localStorage.setItem('lastSearchTerm', searchTerm);
-            
+
             // Redirigir a la página de categorías con el término de búsqueda
             window.location.href = `categorias_productos.html`;
         }

@@ -42,8 +42,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 <ul class="list-group list-group-flush">
                                     
                                     <button type="button" class="btn mt-1" id="btnDetalles" name="btnDetalles" onclick="fillTable(${row.id_producto})">
-                                        <img src="../../resources/images/btnDetalles.png" alt="" width="30px" height="30px" class="mb-1">
+                                        <img src="../../resources/images/verdetalles.png" alt="" width="30px" height="30px" class="mb-1">
                                     </button>
+
                                 </ul>
                             </div>
                         </div>
@@ -58,7 +59,45 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error al cargar productos:', error);
         sweetAlert(4, 'Error al cargar productos', true);
     }
+
+    document.getElementById('btnDetalles').addEventListener('mouseenter', function () {
+        var popover = new bootstrap.Popover(this, {
+            title: 'Mira nuestras tallas y colores',
+            content: 'Aquí puedes ver detalles como las tallas disponibles y los colores de nuestros productos.',
+            placement: 'top',
+            trigger: 'manual',
+            boundary: 'viewport'
+        });
+        popover.show();
+    });
+
+    document.getElementById('btnDetalles').addEventListener('mouseleave', function () {
+        var popover = bootstrap.Popover.getInstance(this);
+        if (popover) {
+            popover.dispose(); // Dispose el popover para eliminarlo completamente
+        }
+    });
+
+    document.getElementById('btnDismiss').addEventListener('mouseenter', function () {
+        var popover = new bootstrap.Popover(this, {
+            title: 'Cerra ventana',
+            content: 'Haz clic aquí para cerrar la ventana.',
+            placement: 'top',
+            trigger: 'manual',
+            boundary: 'viewport'
+        });
+        popover.show();
+    });
+
+    document.getElementById('btnDismiss').addEventListener('mouseleave', function () {
+        var popover = bootstrap.Popover.getInstance(this);
+        if (popover) {
+            popover.dispose(); // Dispose el popover para eliminarlo completamente
+        }
+    });
 });
+
+
 
 // Función para llenar la tabla de detalles del producto
 const fillTable = async (id) => {
@@ -104,7 +143,7 @@ const fillTable = async (id) => {
                                 </ul>
                             </div>
                             <div class="card-body text-center">
-                                <a href="detallesproductos.html?id=${row.id_detalle_producto}" class="btn" id="btnVermas">Ver más</a>
+                                <a href="detallesproductos.html?id=${row.id_detalle_producto}" class="btn" id="btnVermas">Comenzar compra</a>
                             </div>
                         </div>
                     </div>
