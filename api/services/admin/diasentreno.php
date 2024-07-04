@@ -24,6 +24,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
+
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -31,11 +32,17 @@ if (isset($_GET['action'])) {
                     !$diasentreno->setPago($_POST['precioDia'])
                 ) {
                     $result['error'] = $diasentreno->getDataError();
-                } elseif ($diasentreno->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Dia y pago registrados correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al registrar el día y el pago';
+                    try {
+                        if ($diasentreno->createRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Número de día de pago registrado correctamente';
+                        } else {
+                            $result['error'] = 'No se pudo crear el día de pago, puede que ya exista un registro con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al crear el valor: ' . $e->getMessage();
+                    }
                 }
                 break;
             case 'readAll':
@@ -55,6 +62,8 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Día y pago inexistente';
                 }
                 break;
+
+                
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -63,12 +72,18 @@ if (isset($_GET['action'])) {
                     !$diasentreno->setPago($_POST['precioDia'])
                 ) {
                     $result['error'] = $diasentreno->getDataError();
-                } elseif ($diasentreno->updateRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Día y pago modificados correctamente';
-                    
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el día y pago';
+                    try {
+                        if ($diasentreno->updateRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Dato modificado correctamente';
+                            
+                        } else {
+                            $result['error'] = 'No se pudo modificar el día de pago, puede que ya exista un registro con el mismo número de día';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al modificar el dato: ' . $e->getMessage();
+                    }
                 }
                 break;
             case 'deleteRow':
