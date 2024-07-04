@@ -24,24 +24,42 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
-            case 'createRow':
-                $_POST = Validator::validateForm($_POST);
-                if (
-                    !$alumno->setNombre($_POST['nombreAlumno']) or
-                    !$alumno->setApellido($_POST['apellidoAlumno']) or
-                    !$alumno->setNacimiento($_POST['fechaNacimiento']) or
-                    !$alumno->setPosicion($_POST['selectPosicion']) or
-                    !$alumno->setIdDiasPago($_POST['selectDias']) or
-                    !$alumno->setIdCliente($_POST['selectEncargado'])
-                ) {
-                    $result['error'] = $alumno->getDataError();
-                } elseif ($alumno->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Alumno registrado correctamente';
-                } else {
-                    $result['error'] = 'Ocurrió un problema al registrar el alumno';
-                }
-                break;
+                case 'createRow':
+                    $_POST = Validator::validateForm($_POST);
+                
+                    // Validar edad del alumno
+                    $fechaNacimiento = $_POST['fechaNacimiento'];
+                    $fechaActual = new DateTime();
+                    $fechaNacimiento = new DateTime($fechaNacimiento);
+                    $edad = $fechaNacimiento->diff($fechaActual)->y;
+                
+                    if ($edad < 2) {
+                        $result['error'] = 'El alumno no puede ser menor a dos años';
+                    } else {
+                        try {
+                            if (
+                                !$alumno->setNombre($_POST['nombreAlumno']) ||
+                                !$alumno->setApellido($_POST['apellidoAlumno']) ||
+                                !$alumno->setNacimiento($_POST['fechaNacimiento']) ||
+                                !$alumno->setPosicion($_POST['selectPosicion']) ||
+                                !$alumno->setIdDiasPago($_POST['selectDias']) ||
+                                !$alumno->setIdCliente($_POST['selectEncargado'])
+                            ) {
+                                $result['error'] = $alumno->getDataError();
+                            } elseif ($alumno->createRow()) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Alumno registrado correctamente';
+                            } else {
+                                $result['error'] = 'Ocurrió un problema al registrar el alumno';
+                            }
+                        } catch (Exception $e) {
+                            $result['error'] = 'Error al registrar el alumno: ' . $e->getMessage();
+                        }
+                    }
+                    break;
+                
+                
+                
             case 'readAll':
                 if ($result['dataset'] = $alumno->readAll()) {
                     $result['status'] = 1;
@@ -59,27 +77,47 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Alumno inexistente';
                 }
                 break;
-            case 'updateRow':
-                $_POST = Validator::validateForm($_POST);
-                if (
-                    !$alumno->setId($_POST['idAlumno']) or
-                    !$alumno->setNombre($_POST['nombreAlumno']) or
-                    !$alumno->setApellido($_POST['apellidoAlumno']) or
-                    !$alumno->setNacimiento($_POST['fechaNacimiento']) or
-                    !$alumno->setPosicion($_POST['selectPosicion']) or
-                    !$alumno->setIdStaffCategoria($_POST['selectCategoriaEncargado']) or
-                    !$alumno->setIdDiasPago($_POST['selectDias']) or
-                    !$alumno->setEstado($_POST['selectEstado']) or
-                    !$alumno->setIdCliente($_POST['selectEncargado'])
-                ) {
-                    $result['error'] = $alumno->getDataError();
-                } elseif ($alumno->updateRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Alumno modificado correctamente';
-                } else {
-                    $result['error'] = 'Ocurrió un problema al modificar datos del alumno';
-                }
-                break;
+                case 'updateRow':
+                    $_POST = Validator::validateForm($_POST);
+                
+                    // Validar edad del alumno
+                    $fechaNacimiento = $_POST['fechaNacimiento'];
+                    $fechaActual = new DateTime();
+                    $fechaNacimiento = new DateTime($fechaNacimiento);
+                    $edad = $fechaNacimiento->diff($fechaActual)->y;
+                
+                    if ($edad < 2) {
+                        $result['error'] = 'El alumno no puede ser menor a dos años';
+                    } else {
+                        try {
+                            if (
+                                !$alumno->setId($_POST['idAlumno']) ||
+                                !$alumno->setNombre($_POST['nombreAlumno']) ||
+                                !$alumno->setApellido($_POST['apellidoAlumno']) ||
+                                !$alumno->setNacimiento($_POST['fechaNacimiento']) ||
+                                !$alumno->setPosicion($_POST['selectPosicion']) ||
+                                !$alumno->setIdStaffCategoria($_POST['selectCategoriaEncargado']) ||
+                                !$alumno->setIdDiasPago($_POST['selectDias']) ||
+                                !$alumno->setEstado($_POST['selectEstado']) ||
+                                !$alumno->setIdCliente($_POST['selectEncargado'])
+                            ) {
+                                $result['error'] = $alumno->getDataError();
+                            } elseif ($alumno->updateRow()) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Alumno modificado correctamente';
+                            } else {
+                                $result['error'] = 'Ocurrió un problema al modificar datos del alumno';
+                            }
+                        } catch (Exception $e) {
+                            if (strpos($e->getMessage(), 'TLa fecha de nacimiento del alumno indica que debe tener al menos dos años de edad.') !== false) {
+                                $result['error'] = 'El alumno no puede ser menor a dos años';
+                            } else {
+                                $result['error'] = 'Error al modificar datos del alumno: ' . $e->getMessage();
+                            }
+                        }
+                    }
+                    break;
+                
             case 'deleteRow':
                 if (
                     !$alumno->setId($_POST['idAlumno'])

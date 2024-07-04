@@ -129,7 +129,7 @@ const fillTable = async (form = null) => {
             CARD_STAFF.innerHTML += `
                 <div class="col">
                     <div class="card mb-3">
-                        <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top width="255px" height="255px"">
+                        <img src="${SERVER_URL}images/staff/${row.imagen_staff}" class="card-img-top width="255px" height="375px"">
                         <div class="card-body text-start">
                             <h5 class="card-title fs-2 mb-2">${row.id_staff}</h5>
                             <p class="card-text"><b>Nombre completo: </b>${row.nombre_completo} </p>

@@ -24,6 +24,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
+
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -32,15 +33,22 @@ if (isset($_GET['action'])) {
                     !$valores->setImagen($_FILES['imagenValor'])
                 ) {
                     $result['error'] = $valores->getDataError();
-                } elseif ($valores->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Valor agregado correctamente';
-                    // Se asigna el estado del archivo después de insertar.
-                    $result['fileStatus'] = Validator::saveFile($_FILES['imagenValor'], $valores::RUTA_IMAGEN);
                 } else {
-                    $result['error'] = 'Ocurrió un problema al crear la categoría';
+                    try {
+                        if ($valores->createRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Valor registrado correctamente';
+                            // Asigna el estado del archivo después de insertar.
+                            $result['fileStatus'] = Validator::saveFile($_FILES['imagenValor'], $valores::RUTA_IMAGEN);
+                        } else {
+                            $result['error'] = 'No se pudo crear el valor, puede que ya exista un valor con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al crear el valor: ' . $e->getMessage();
+                    }
                 }
                 break;
+
             case 'readAll':
                 if ($result['dataset'] = $valores->readAll()) {
                     $result['status'] = 1;
@@ -58,6 +66,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Valor inexistente';
                 }
                 break;
+
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -68,15 +77,22 @@ if (isset($_GET['action'])) {
                     !$valores->setImagen($_FILES['imagenValor'], $valores->getFilename())
                 ) {
                     $result['error'] = $valores->getDataError();
-                } elseif ($valores->updateRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Campo del valor modificado correctamente';
-                    // Se asigna el estado del archivo después de actualizar.
-                    $result['fileStatus'] = Validator::changeFile($_FILES['imagenValor'], $valores::RUTA_IMAGEN, $valores->getFilename());
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el valor';
+                    try {
+                        if ($valores->updateRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Valor modificada correctamente';
+                            // Se asigna el estado del archivo después de actualizar.
+                            $result['fileStatus'] = Validator::changeFile($_FILES['imagenValor'], $valores::RUTA_IMAGEN, $valores->getFilename());
+                        } else {
+                            $result['error'] = 'No se pudo modificar el valor, puede que ya exista un registro con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al modificar la categoría: ' . $e->getMessage();
+                    }
                 }
                 break;
+
             case 'deleteRow':
                 if (
                     !$valores->setId($_POST['idValor']) or

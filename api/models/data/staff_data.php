@@ -30,7 +30,7 @@ class StaffData extends StaffHandler
 
     public function setNombre($value, $min = 2, $max = 50)
     {
-        if (!Validator::validateString($value)) {
+        if (!Validator::validateAlphaNumeric($value)) {
             $this->data_error = 'El nombre debe ser un valor alfanumérico';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
@@ -44,7 +44,7 @@ class StaffData extends StaffHandler
 
     public function setApellido($value, $min = 2, $max = 50)
     {
-        if (!Validator::validateString($value)) {
+        if (!Validator::validateAlphaNumeric($value)) {
             $this->data_error = 'El apellido debe ser un valor alfanumérico';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
@@ -75,20 +75,18 @@ class StaffData extends StaffHandler
     }
 
     public function setDescripcion($value, $min = 2, $max = 250)
-    {
-        if (!$value) {
-            return true;
-        } elseif (!Validator::validateString($value)) {
-            $this->data_error = 'La descripción contiene caracteres prohibidos';
-            return false;
-        } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->descripcion = $value;
-            return true;
-        } else {
-            $this->data_error = 'La descripción debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
-        }
+{
+    if (!$value) {
+        return true;
+    } elseif (Validator::validateLength($value, $min, $max)) {
+        $this->descripcion = $value;
+        return true;
+    } else {
+        $this->data_error = 'La descripción debe tener una longitud entre ' . $min . ' y ' . $max;
+        return false;
     }
+}
+
 
     public function setFilename()
     {

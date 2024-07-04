@@ -60,17 +60,17 @@ class ValoresData extends ValoresHandler
     }
 
     public function setDescripcion($value, $min = 2, $max = 250)
-{
-    if (!$value) {
-        return true; // Permitir que la descripción sea opcional
-    } elseif (Validator::validateLength($value, $min, $max)) {
-        $this->descripcion = $value;
-        return true;
-    } else {
-        $this->data_error = 'La descripción debe tener una longitud entre ' . $min . ' y ' . $max;
-        return false;
+    {
+        if (!$value) {
+            return true; // Permitir que la descripción sea opcional
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->descripcion = $value;
+            return true;
+        } else {
+            $this->data_error = 'La descripción debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
     }
-}
 
 
     public function setFilename()

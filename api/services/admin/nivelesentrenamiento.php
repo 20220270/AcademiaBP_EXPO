@@ -26,6 +26,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
+
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -34,13 +35,19 @@ if (isset($_GET['action'])) {
                     !$nivelesentrenamiento->setImagen($_FILES['imagenNivelEntrenamiento'])
                 ) {
                     $result['error'] = $nivelesentrenamiento->getDataError();
-                } elseif ($nivelesentrenamiento->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Nivel agregado correctamente';
-                    // Se asigna el estado del archivo después de insertar.
-                    $result['fileStatus'] = Validator::saveFile($_FILES['imagenNivelEntrenamiento'], $nivelesentrenamiento::RUTA_IMAGEN);
                 } else {
-                    $result['error'] = 'Ocurrió un problema al crear el nivel';
+                    try {
+                        if ($nivelesentrenamiento->createRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Nivel registrado correctamente';
+                            // Asigna el estado del archivo después de insertar.
+                            $result['fileStatus'] = Validator::saveFile($_FILES['imagenNivelEntrenamiento'], $nivelesentrenamiento::RUTA_IMAGEN);
+                        } else {
+                            $result['error'] = 'No se pudo crear el nivel, puede que ya exista un nivel con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al crear el valor: ' . $e->getMessage();
+                    }
                 }
                 break;
             case 'readAll':
@@ -60,6 +67,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Nivel inexistente';
                 }
                 break;
+
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -69,16 +77,23 @@ if (isset($_GET['action'])) {
                     !$nivelesentrenamiento->setDescripcion($_POST['descripcionNivelEntrenamiento']) or
                     !$nivelesentrenamiento->setImagen($_FILES['imagenNivelEntrenamiento'], $nivelesentrenamiento->getFilename())
                 ) {
-                    $result['error'] = $nivelesentrenamiento->getDataError();
-                } elseif ($nivelesentrenamiento->updateRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Campo del nivel modificado correctamente';
-                    // Se asigna el estado del archivo después de actualizar.
-                    $result['fileStatus'] = Validator::changeFile($_FILES['imagenNivelEntrenamiento'], $nivelesentrenamiento::RUTA_IMAGEN, $nivelesentrenamiento->getFilename());
+                    $result['error'] = $valores->getDataError();
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el nivel';
+                    try {
+                        if ($nivelesentrenamiento->updateRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Nivel modificado correctamente';
+                            // Se asigna el estado del archivo después de actualizar.
+                            $result['fileStatus'] = Validator::changeFile($_FILES['imagenNivelEntrenamiento'], $nivelesentrenamiento::RUTA_IMAGEN, $nivelesentrenamiento->getFilename());
+                        } else {
+                            $result['error'] = 'No se pudo modificar el nivel, puede que ya exista un registro con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al modificar la categoría: ' . $e->getMessage();
+                    }
                 }
                 break;
+                
             case 'deleteRow':
                 if (
                     !$nivelesentrenamiento->setId($_POST['idNivelEntrenamiento']) or

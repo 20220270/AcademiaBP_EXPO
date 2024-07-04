@@ -24,6 +24,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
+
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -31,13 +32,19 @@ if (isset($_GET['action'])) {
                     !$aliados->setLogo($_FILES['imagenAliado'])
                 ) {
                     $result['error'] = $aliados->getDataError();
-                } elseif ($aliados->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Aliado registrado correctamente';
-                    // Se asigna el estado del archivo después de insertar.
-                    $result['fileStatus'] = Validator::saveFile($_FILES['imagenAliado'], $aliados::RUTA_IMAGEN);
                 } else {
-                    $result['error'] = 'Ocurrió un problema al registrar a este aliado';
+                    try {
+                        if ($aliados->createRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Aliado registrado correctamente';
+                            // Asigna el estado del archivo después de insertar.
+                            $result['fileStatus'] = Validator::saveFile($_FILES['imagenAliado'], $aliados::RUTA_IMAGEN);
+                        } else {
+                            $result['error'] = 'No se pudo crear el aliado, puede que ya exista un aliado con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al crear el aliado: ' . $e->getMessage();
+                    }
                 }
                 break;
             case 'readAll':
@@ -57,6 +64,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Aliado inexistente';
                 }
                 break;
+
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -66,13 +74,19 @@ if (isset($_GET['action'])) {
                     !$aliados->setLogo($_FILES['imagenAliado'], $aliados->getFilename())
                 ) {
                     $result['error'] = $aliados->getDataError();
-                } elseif ($aliados->updateRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Aliado modificado correctamente';
-                    // Se asigna el estado del archivo después de actualizar.
-                    $result['fileStatus'] = Validator::changeFile($_FILES['imagenAliado'], $aliados::RUTA_IMAGEN, $aliados->getFilename());
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar a este aliado';
+                    try {
+                        if ($aliados->updateRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Aliado modificado correctamente';
+                            // Se asigna el estado del archivo después de actualizar.
+                            $result['fileStatus'] = Validator::changeFile($_FILES['imagenAliado'], $aliados::RUTA_IMAGEN, $aliados->getFilename());
+                        } else {
+                            $result['error'] = 'No se pudo modificar el aliado, puede que ya exista un registro con el mismo nombre';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al modificar el aliado: ' . $e->getMessage();
+                    }
                 }
                 break;
             case 'deleteRow':
