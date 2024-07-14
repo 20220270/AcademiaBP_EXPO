@@ -1,6 +1,5 @@
 
 const ORDENES_API = 'services/public/compras.php';
-const PRODUCTOS_API = 'services/public/productos.php';
 const VALORACION_API = 'services/public/valoracion.php';
 
 const SEARCH_FORM = document.getElementById('searchForm');
@@ -50,27 +49,46 @@ const fillTable = async (form = null) => {
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-6 col-md-12 mb-3">
+                            <div class="col-lg-6 col-md-12 mb-3 mt-5">
                                 <div class="row mb-2">
                                     <div class="col-12">
-                                        <strong>Orden número:</strong>
-                                        <p>${row.id_compra}</p>
+                                        <strong>Orden número: ${row.id_compra}</strong>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-6">
+                                        <strong>Precio de la compra:</strong>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="precioCompra">$${row.SubtotalConDescuento}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-2">
-                                    <div class="col-12">
-                                        <strong>Detalle número:</strong>
-                                        <p>${row.id_detalle_compra}</p>
+                                    <div class="col-6">
+                                        <strong>Fecha de la compra:</strong>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="fechaCompra">${row.fecha_registro}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-2">
-                                    <div class="col-12 text-center">
-                                        <img src="${SERVER_URL}images/productos/${row.imagen_producto}" alt="Producto" height="180px" width="200px">
+                                    <div class="col-6">
+                                        <strong>Estado de la compra:</strong>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="estadoCompra">${row.estado_compra}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12">
                                 <div class="row mb-2">
+                                
+                                <div class="row mb-2">
+                                    <div class="col-12 text-center">
+                                        <img src="${SERVER_URL}images/productos/${row.imagen_producto}" alt="Producto" height="180px" width="200px">
+                                    </div>
+                                </div>
                                     <div class="col-6">
                                         <strong>Nombre del producto:</strong>
                                     </div>
@@ -102,32 +120,9 @@ const fillTable = async (form = null) => {
                                         <span class="cantidadCompra">${row.descuento_producto}%</span>
                                     </div>
                                 </div>
-                                <div class="row mb-2">
-                                    <div class="col-6">
-                                        <strong>Precio de la compra:</strong>
-                                    </div>
-                                    <div class="col-6">
-                                        <span class="precioCompra">$${row.SubtotalConDescuento}</span>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-6">
-                                        <strong>Fecha de la compra:</strong>
-                                    </div>
-                                    <div class="col-6">
-                                        <span class="fechaCompra">${row.fecha_registro}</span>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-6">
-                                        <strong>Estado de la compra:</strong>
-                                    </div>
-                                    <div class="col-6">
-                                        <span class="estadoCompra">${row.estado_compra}</span>
-                                    </div>
-                                </div>
+                                
                                 <div class="text-center mt-3">
-                                    <strong>Valorar compra:</strong>
+                                    <strong>Valorar producto:</strong>
                                     <button type="submit" class="btn mt-1 mostrarModalValoracion" id="mostrarModalValoracion" name="mostrarModalValoracion" onclick="openRating(${row.id_detalle_compra})">
                                     
                                     <img src="../../resources/images/valorarP.png" alt="" width="60px" height="60px" class="mb-1">
