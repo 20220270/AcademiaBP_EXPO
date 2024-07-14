@@ -126,7 +126,7 @@ if (isset($_GET['action'])) {
                     !$administrador->setId($_SESSION['idAdministrador']) or
                     !$administrador->setFilename() or
                     !$administrador->setNombre($_POST['nombreAdministrador']) or
-                    
+
                     !$administrador->setApellido($_POST['apellidoAdministrador']) or
                     !$administrador->setDUI($_POST['duiAdministrador']) or
                     !$administrador->setCorreo($_POST['correoAdministrador']) or
@@ -173,27 +173,34 @@ if (isset($_GET['action'])) {
                     $resul7t['error'] = 'Debe crear un administrador para comenzar';
                 }
                 break;
+
             case 'signUp':
                 $_POST = Validator::validateForm($_POST);
-                if (
-                    !$administrador->setNombre($_POST['nombreAdministrador']) or
-                    !$administrador->setApellido($_POST['apellidoAdministrador']) or
-                    !$administrador->setDUI($_POST['duiAdministrador']) or
-                    !$administrador->setCorreo($_POST['correoAdministrador']) or
-                    !$administrador->setTelefono($_POST['telefonoAdministrador']) or
-                    !$administrador->setAlias($_POST['aliasAdministrador']) or
-                    !$administrador->setClave($_POST['claveAdministrador']) or
-                    !$administrador->setEstado($_POST['selectEstado']) or
-                    !$administrador->setNivel($_POST['selectNivelAdmin'])
-                ) {
-                    $result['error'] = $administrador->getDataError();
-                } elseif ($_POST['claveAdministrador'] != $_POST['confirmarClave']) {
-                    $result['error'] = 'Contraseñas diferentes';
-                } elseif ($administrador->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Administrador registrado correctamente';
+
+                // Verificar si ya existe un usuario registrado
+                if ($administrador->countUsers() > 0) {
+                    $result['error'] = 'Ya existe un administrador registrado';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al registrar el administrador';
+                    if (
+                        !$administrador->setNombre($_POST['nombreAdministrador']) or
+                        !$administrador->setApellido($_POST['apellidoAdministrador']) or
+                        !$administrador->setDUI($_POST['duiAdministrador']) or
+                        !$administrador->setCorreo($_POST['correoAdministrador']) or
+                        !$administrador->setTelefono($_POST['telefonoAdministrador']) or
+                        !$administrador->setAlias($_POST['aliasAdministrador']) or
+                        !$administrador->setClave($_POST['claveAdministrador']) or
+                        !$administrador->setEstado($_POST['selectEstado']) or
+                        !$administrador->setNivel($_POST['selectNivelAdmin'])
+                    ) {
+                        $result['error'] = $administrador->getDataError();
+                    } elseif ($_POST['claveAdministrador'] != $_POST['confirmarClave']) {
+                        $result['error'] = 'Contraseñas diferentes';
+                    } elseif ($administrador->createRow()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Administrador registrado correctamente';
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al registrar el administrador';
+                    }
                 }
                 break;
             case 'logIn':
@@ -206,24 +213,24 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                case 'checkEmail':
-                    // Verificar si se proporcionó un correo electrónico en la solicitud
-                    if (isset($_POST['email'])) {
-                        // Se verifica si el correo electrónico existe en la base de datos
-                        $emailExists = $administrador->checkEmailExists($_POST['inputCorreo']);
-                        // Se prepara la respuesta
-                        $response = array(
-                            'status' => 1,
-                            'emailExists' => $emailExists
-                        );
-                        // Se imprime la respuesta en formato JSON
-                        echo json_encode($response);
-                    } else {
-                        // Si no se proporcionó un correo electrónico, se devuelve un error
-                        echo json_encode(array('status' => 0, 'message' => 'No se proporcionó un correo electrónico.'));
-                    }
-                    break;
-                
+            case 'checkEmail':
+                // Verificar si se proporcionó un correo electrónico en la solicitud
+                if (isset($_POST['email'])) {
+                    // Se verifica si el correo electrónico existe en la base de datos
+                    $emailExists = $administrador->checkEmailExists($_POST['inputCorreo']);
+                    // Se prepara la respuesta
+                    $response = array(
+                        'status' => 1,
+                        'emailExists' => $emailExists
+                    );
+                    // Se imprime la respuesta en formato JSON
+                    echo json_encode($response);
+                } else {
+                    // Si no se proporcionó un correo electrónico, se devuelve un error
+                    echo json_encode(array('status' => 0, 'message' => 'No se proporcionó un correo electrónico.'));
+                }
+                break;
+
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
         }

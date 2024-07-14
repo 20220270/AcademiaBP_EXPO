@@ -59,6 +59,13 @@ class AdministradorHandler
         }
     }
 
+    public function countUsers()
+    {
+        $sql = 'SELECT COUNT(*) as total FROM tb_administradores';
+        $data = Database::getRow($sql);
+        return $data['total'];
+    }
+
     public function changePassword()
     {
         $sql = 'UPDATE tb_administradores
