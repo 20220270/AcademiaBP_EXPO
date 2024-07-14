@@ -40,7 +40,7 @@ const fillTable = async (form = null) => {
     TABLE_BODY.innerHTML = '';
     CARD_ORDENES.innerHTML = '';
 
-    const action = form ? 'searchOrders' : 'myOrders';
+    const action = form ? 'searchOrders' : 'myOrders'; //
     const DATA = await fetchData(ORDENES_API, action, form);
 
     if (DATA.status) {
