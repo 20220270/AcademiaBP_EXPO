@@ -124,6 +124,14 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el producto';
                 }
                 break;
+
+                case 'cantidadProductosCategoria':
+                    if ($result['dataset'] = $producto->cantidadProductosCategoria()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'No hay datos disponibles';
+                    }
+                    break;
             case 'productosMasVendids':
                 if ($result['dataset'] = $producto->productosMasVendids()) {
                     $result['status'] = 1;

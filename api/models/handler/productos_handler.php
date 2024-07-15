@@ -198,6 +198,15 @@ class ProductoHandler
         return Database::getRows($sql);
     }
 
+    public function cantidadProductosCategoria()
+    {
+        $sql = 'SELECT categoria_producto, COUNT(id_producto) cantidad_producto
+                FROM tb_productos
+                INNER JOIN tb_categorias_productos USING(id_categoria_producto)
+                GROUP BY categoria_producto ORDER BY cantidad_producto DESC LIMIT 5';
+        return Database::getRows($sql);
+    }
+
     public function productosConMejorRating()
     {
         $sql = "SELECT 

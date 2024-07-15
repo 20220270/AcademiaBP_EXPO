@@ -12,264 +12,134 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTemplate();
     fillTable();
     loadBirthdayEvents();
-    graficoBarrasProductos();
-    graficoPastelClientes();
-    graficoDonaAlumnos();
-    graficoBarraClien();
+    graficoBarrasCategorias();
+    graficoPastelProductos();
+    graficoPastelProductoss();
+    graficoBarrasClientes();
+    graficoBarrasExistencias();
 });
 
 
-const graficoBarrasProductos = async () => {
-    try {
-        // Hacer la petición para obtener los datos del gráfico desde la API
-        const response = await fetch(`http://localhost/AcademiaBP_EXPO/api/${PRODUCTOS_API}?action=productosMasVendids`);
-        const data = await response.json();
-
-        console.log(data);
-
-        if (data.status === 1) {
-            // Inicializar arreglos para guardar los datos del gráfico
-            let categorias = [];
-            let cantidades = [];
-
-            // Iterar sobre los datos recibidos
-            data.dataset.forEach(row => {
-                categorias.push(row.nombre_producto); // Nombre del producto
-                cantidades.push(row.total_vendido); // Cantidad de productos
-            });
-
-            // Configurar y mostrar el gráfico de barras
-            const barCtx = document.getElementById('myBarChart').getContext('2d'); // Usamos el mismo canvas
-            const myBarChart = new Chart(barCtx, {
-                type: 'bar',
-                data: {
-                    labels: categorias,
-                    datasets: [{
-                        label: 'Productos más vendidos',
-                        data: cantidades,
-                        backgroundColor: [
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)'
-                        ],
-                        borderColor: [
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        } else {
-            console.error(data.error); // Manejo de errores si la respuesta no es satisfactoria
-        }
-    } catch (error) {
-        console.error('Error al obtener datos del gráfico:', error);
+const graficoBarrasExistencias = async () => {
+    // Petición para obtener los datos del gráfico.
+    const DATA = await fetchData(ALUMNOS_API, 'categoriasConMasAlumnos');
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+    if (DATA.status) {
+        // Se declaran los arreglos para guardar los datos a graficar.
+        let producto = [];
+        let existencias = [];
+        // Se recorre el conjunto de registros fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Se agregan los datos a los arreglos.
+            producto.push(row.categoria);
+            existencias.push(row.cantidad_alumnos);
+        });
+        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
+        barGraph('chart1', producto, existencias, 'Existencias', 'Categorías con más alumnos');
+    } else {
+        document.getElementById('chart1').remove();
+        console.log(DATA.error);
     }
-};
+}
 
-const graficoPastelClientes = async () => {
-    try {
-        // Hacer la petición para obtener los datos del gráfico desde la API
-        const response = await fetch(`http://localhost/AcademiaBP_EXPO/api/${PRODUCTOS_API}?action=clientesConMasCompras`);
-        const data = await response.json();
 
-        console.log(data);
 
-        if (data.status === 1) {
-            // Inicializar arreglos para guardar los datos del gráfico
-            let clientes = [];
-            let numcompras = [];
-
-            // Iterar sobre los datos recibidos
-            data.dataset.forEach(row => {
-                clientes.push(row.nombre);
-                numcompras.push(row.total_compras);
-            });
-
-            // Configurar y mostrar el gráfico de barras
-            const pieCtx = document.getElementById('myPieChart').getContext('2d'); // Usamos el mismo canvas
-            const myPieChart = new Chart(pieCtx, {
-                type: 'pie',
-                data: {
-                    labels: clientes,
-                    datasets: [{
-                        label: 'Clientes con más compras',
-                        data: numcompras,
-                        backgroundColor: [
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)'
-                        ],
-                        borderColor: [
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        } else {
-            console.error(data.error); // Manejo de errores si la respuesta no es satisfactoria
-        }
-    } catch (error) {
-        console.error('Error al obtener datos del gráfico:', error);
+const graficoBarrasClientes = async () => {
+    // Petición para obtener los datos del gráfico.
+    const DATA = await fetchData(PRODUCTOS_API, 'clientesConMasCompras');
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+    if (DATA.status) {
+        // Se declaran los arreglos para guardar los datos a graficar.
+        let clientes = [];
+        let compras = [];
+        // Se recorre el conjunto de registros fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Se agregan los datos a los arreglos.
+            clientes.push(row.nombre);
+            compras.push(row.total_compras);
+        });
+        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
+        barGraph('chart2', clientes, compras, 'Total de compras', 'Clientes con más compras realizadas');
+    } else {
+        document.getElementById('chart2').remove();
+        console.log(DATA.error);
     }
-};
+}
 
-const graficoDonaAlumnos = async () => {
-    try {
-        // Hacer la petición para obtener los datos del gráfico desde la API
-        const response = await fetch(`http://localhost/AcademiaBP_EXPO/api/${ALUMNOS_API}?action=categoriasConMasAlumnos`);
-        const data = await response.json();
 
-        console.log(data);
 
-        if (data.status === 1) {
-            // Inicializar arreglos para guardar los datos del gráfico
-            let categorias = [];
-            let numalumnos = [];
-
-            // Iterar sobre los datos recibidos
-            data.dataset.forEach(row => {
-                categorias.push(row.categoria);
-                numalumnos.push(row.cantidad_alumnos);
-            });
-
-            // Configurar y mostrar el gráfico de barras
-            const pieCtx1 = document.getElementById('myBarChart1').getContext('2d'); // Usamos el mismo canvas
-            const myBarChart1 = new Chart(pieCtx1, {
-                type: 'pie',
-                data: {
-                    labels: categorias,
-                    datasets: [{
-                        label: 'Categorías con más alumnos',
-                        data: numalumnos,
-                        backgroundColor: [
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)'
-                        ],
-                        borderColor: [
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        } else {
-            console.error(data.error); // Manejo de errores si la respuesta no es satisfactoria
-        }
-    } catch (error) {
-        console.error('Error al obtener datos del gráfico:', error);
+const graficoPastelProductoss = async () => {
+    // Petición para obtener los datos del gráfico.
+    const DATA = await fetchData(PRODUCTOS_API, 'productosMasVendids');
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+    if (DATA.status) {
+        // Se declaran los arreglos para guardar los datos a gráficar.
+        let productos = [];
+        let ventas = [];
+        // Se recorre el conjunto de registros fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Se agregan los datos a los arreglos.
+            productos.push(row.nombre_producto);
+            ventas.push(row.total_vendido);
+        });
+        // Llamada a la función para generar y mostrar un gráfico de pastel. Se encuentra en el archivo components.js
+        pieGraph('chart3', productos, ventas, 'Productos más vendidos');
+    } else {
+        document.getElementById('chart3').remove();
+        console.log(DATA.error);
     }
-};
+}
 
-const graficoBarraClien = async () => {
-    try {
-        // Hacer la petición para obtener los datos del gráfico desde la API
-        const response = await fetch(`http://localhost/AcademiaBP_EXPO/api/${PRODUCTOS_API}?action=productosConMejorRating`);
-        const data = await response.json();
 
-        console.log(data);
-
-        if (data.status === 1) {
-            // Inicializar arreglos para guardar los datos del gráfico
-            let productos = [];
-            let promedio = [];
-
-            // Iterar sobre los datos recibidos
-            data.dataset.forEach(row => {
-                productos.push(row.nombre_producto);
-                promedio.push(row.promedio_calificacion);
-            });
-
-            // Configurar y mostrar el gráfico de barras
-            const pieCtx2 = document.getElementById('myPieChart1').getContext('2d'); // Usamos el mismo canvas
-            const myPieChart2 = new Chart(pieCtx2, {
-                type: 'pie',
-                data: {
-                    labels: productos,
-                    datasets: [{
-                        label: 'Calificación promedio: ',
-                        data: promedio,
-                        backgroundColor: [
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)',
-                            'rgba(64, 136, 64, 0.9)'
-                        ],
-                        borderColor: [
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)',
-                            'rgba(0, 0, 0, 100%)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        } else {
-            console.error(data.error); // Manejo de errores si la respuesta no es satisfactoria
-        }
-    } catch (error) {
-        console.error('Error al obtener datos del gráfico:', error);
+/*
+*   Función asíncrona para mostrar un gráfico de pastel con el porcentaje de productos por categoría.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const graficoPastelProductos = async () => {
+    // Petición para obtener los datos del gráfico.
+    const DATA = await fetchData(PRODUCTOS_API, 'productosConMejorRating');
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+    if (DATA.status) {
+        // Se declaran los arreglos para guardar los datos a gráficar.
+        let productos = [];
+        let promedios = [];
+        // Se recorre el conjunto de registros fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Se agregan los datos a los arreglos.
+            productos.push(row.nombre_producto);
+            promedios.push(row.promedio_calificacion);
+        });
+        // Llamada a la función para generar y mostrar un gráfico de pastel. Se encuentra en el archivo components.js
+        pieGraph('chart4', productos, promedios, 'Productos con mejor calificación');
+    } else {
+        document.getElementById('chart4').remove();
+        console.log(DATA.error);
     }
-};
+}
+
+
+const graficoBarrasCategorias = async () => {
+    // Petición para obtener los datos del gráfico.
+    const DATA = await fetchData(PRODUCTOS_API, 'cantidadProductosCategoria');
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+    if (DATA.status) {
+        // Se declaran los arreglos para guardar los datos a graficar.
+        let categorias = [];
+        let cantidades = [];
+        // Se recorre el conjunto de registros fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Se agregan los datos a los arreglos.
+            categorias.push(row.categoria_producto);
+            cantidades.push(row.cantidad_producto);
+        });
+        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
+        barGraph('chart5', categorias, cantidades, 'Cantidad de productos', 'Cantidad de productos por categoría');
+    } else {
+        document.getElementById('chart5').remove();
+        console.log(DATA.error);
+    }
+}
 
 
 
