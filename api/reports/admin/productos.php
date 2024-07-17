@@ -2,7 +2,7 @@
 // Se incluye la clase con las plantillas para generar reportes.
 require_once('../../helpers/report.php');
 // Se incluyen las clases para la transferencia y acceso a datos.
-require_once('../../models/data/producto_data.php');
+require_once('../../models/data/productos_data.php');
 
 // Se instancia la clase para crear el reporte.
 $pdf = new Report;
@@ -18,7 +18,7 @@ if ($dataProductos = $producto->readAll()) {
     $pdf->setFont('Arial', 'B', 11);
     // Se imprimen las celdas con los encabezados.
     $pdf->cell(126, 10, 'Nombre', 1, 0, 'C', 1);
-    $pdf->cell(30, 10, 'Precio (US$)', 1, 0, 'C', 1);
+    $pdf->cell(30, 10, 'Precio', 1, 0, 'C', 1);
     $pdf->cell(30, 10, 'Estado', 1, 1, 'C', 1);
 
     // Se establece un color de relleno para mostrar el nombre de la categoría.
@@ -29,8 +29,8 @@ if ($dataProductos = $producto->readAll()) {
     foreach ($dataProductos as $rowProducto) {
         ($rowProducto['estado_producto']) ? $estado = 'Activo' : $estado = 'Inactivo';
         // Se imprimen las celdas con los datos de los productos.
-        $pdf->cell(126, 10, $pdf->encodeString($rowProducto['nombre_producto']), 1, 0);
-        $pdf->cell(30, 10, $rowProducto['precio_producto'], 1, 0);
+        $pdf->cell(126, 10, $pdf->encodeString( $rowProducto['nombre_producto']), 1, 0);
+        $pdf->cell(30, 10, '$' . $rowProducto['precio_producto'], 1, 0);
         $pdf->cell(30, 10, $estado, 1, 1);
     }
 } else {
