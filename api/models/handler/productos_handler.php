@@ -121,7 +121,7 @@ class ProductoHandler
                 INNER JOIN tb_categorias_productos USING(id_categoria_producto)
                 INNER JOIN tb_tallas USING(id_talla)
                 INNER JOIN tb_colores USING(id_color)
-                WHERE id_categoria_producto = ?  AND id_producto = ? AND estado_producto = "En venta"
+                WHERE id_categoria_producto = ?  AND id_producto = ? AND estado_producto = "En venta" AND existencias_producto > 0
                 ORDER BY nombre_producto';
         $params = array($this->categoria , $this->id);
         return Database::getRows($sql, $params);
