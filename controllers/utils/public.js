@@ -210,10 +210,17 @@ const loadTemplate = async () => {
                     </a>
                 </div>
                 <div class="col">
-                    <a href="https://www.instagram.com/academiafc.sv" target="_blank" class="aa">
+                    <a href="https://www.instagram.com/academiabp.sv/" target="_blank" class="aa">
                         <img src="../../resources/images/logoInsta.png" alt="Instagram" width="35px" height="35px">
 
                         <span>academiafc.sv</span>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="https://www.instagram.com/adacademiabp/" target="_blank" class="aa">
+                        <img src="../../resources/images/logoInsta.png" alt="Instagram" width="35px" height="35px">
+
+                        <span>adacademiabp</span>
                     </a>
                 </div>
                 <div class="col">
