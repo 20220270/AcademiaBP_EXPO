@@ -136,23 +136,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-            case 'readAllAlumnosFormativo':
-                if ($result['dataset'] = $categoriasalumnos->readAllAlumnosFormativo()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-                } else {
-                    $result['error'] = 'No existen niveles registrados';
-                }
-                break;
 
-            case 'readAllAlumnosCompetitivo':
-                if ($result['dataset'] = $categoriasalumnos->readAllAlumnosCompetitivo()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-                } else {
-                    $result['error'] = 'No existen niveles registrados';
-                }
-                break;
 
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';

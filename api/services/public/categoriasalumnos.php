@@ -11,23 +11,16 @@ if (isset($_GET['action'])) {
     // Se compara la acción a realizar según la petición del controlador.
     switch ($_GET['action']) {
         
-        case 'readAllAlumnosFormativo':
-            if ($result['dataset'] = $categoriasniveles->readAllAlumnosFormativo()) {
+        
+        case 'readAllAlumnosCategs':
+            if (!$categoriasniveles->setNivel($_POST['idNivel'])) {
+                $result['error'] = $categoriasniveles->getDataError();
+            } elseif ($result['dataset'] = $categoriasniveles->readAllAlumnosCategs()) {
                 $result['status'] = 1;
-                $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
             } else {
-                $result['error'] = 'No existen valores registrados';
+                $result['error'] = 'Categoria inexistente';
             }
             break;
-
-            case 'readAllAlumnosCompetitivo':
-                if ($result['dataset'] = $categoriasniveles->readAllAlumnosCompetitivo()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-                } else {
-                    $result['error'] = 'No existen valores registrados';
-                }
-                break;
             
         default:
             $result['error'] = 'Acción no disponible';

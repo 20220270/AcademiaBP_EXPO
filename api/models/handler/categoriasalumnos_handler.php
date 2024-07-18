@@ -152,7 +152,7 @@ class CategoriasAlumnosHandler
         return Database::getRow($sql, $params);
     }
 
-    public function readAllAlumnosFormativo()
+    public function readAllAlumnosCategs()
     {
         $sql = "SELECT 
         ca.id_categoria_alumno, 
@@ -172,35 +172,11 @@ class CategoriasAlumnosHandler
         tb_lugares_entrenamientos le ON hl.id_lugar = le.id_lugar
         INNER JOIN 
         tb_horarios_entrenamientos he ON hl.id_horario = he.id_horario
-        WHERE ne.nivel_entrenamiento LIKE 'Nivel formativo'
+        WHERE ne.id_nivel_entrenamiento = ?
         ORDER BY 
-        ca.id_categoria_alumno;";
-        return Database::getRows($sql);
+        ca.categoria;";
+        $params = array($this->idnivel);
+        return Database::getRows($sql, $params);
     }
 
-    public function readAllAlumnosCompetitivo()
-    {
-        $sql = "SELECT 
-        ca.id_categoria_alumno, 
-        ca.categoria, 
-        ca.edad_minima,
-        ca.edad_maxima, 
-        ne.nivel_entrenamiento, 
-        CONCAT(le.nombre_lugar, ', ', he.dia_entrenamiento, ' ', TIME_FORMAT(he.hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(he.hor_fin, '%h:%i %p')) AS id_horario_lugar, 
-        ca.imagen_categoria
-        FROM 
-        tb_categorias_alumnos ca
-        INNER JOIN 
-        tb_niveles_entrenamientos ne ON ca.id_nivel_entrenamiento = ne.id_nivel_entrenamiento
-        INNER JOIN 
-        tb_horarios_lugares hl ON ca.id_horario_lugar = hl.id_horario_lugar
-        INNER JOIN 
-        tb_lugares_entrenamientos le ON hl.id_lugar = le.id_lugar
-        INNER JOIN 
-        tb_horarios_entrenamientos he ON hl.id_horario = he.id_horario
-        WHERE ne.nivel_entrenamiento LIKE 'Nivel competitivo'
-        ORDER BY 
-        ca.id_categoria_alumno;";
-        return Database::getRows($sql);
-    }
 }

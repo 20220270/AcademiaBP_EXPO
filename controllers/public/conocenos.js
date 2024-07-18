@@ -10,14 +10,16 @@ const TITULO_SECCION2 = document.getElementById('sectionTitle2');
 const TITULO_SECCION3 = document.getElementById('sectionTitle3');
 const TITULO_SECCION4 = document.getElementById('sectionTitle4');
 const TITULO_SECCION5 = document.getElementById('sectionTitle5');
-const TITULO_SECCION6 = document.getElementById('sectionTitle6');
+
+const DETALLE_FORM = new bootstrap.Modal('#saveModal'),
+    DETAIL_FORM = document.getElementById('saveForm'),
 
 CARD_VALORES = document.getElementById('cardValores');
 CARD_ALIADOS = document.getElementById('cardAliados');
 CARD_STAFF = document.getElementById('cardStaff');
 CARD_LUGARESHORARIOS = document.getElementById('cardLugaresHorarios');
 CARD_NIVELES_ENTRENAMIENTO = document.getElementById('cardImgsNiveles');
-CARD_NIVELES_ENTRENAMIENTO2 = document.getElementById('cardImgsNiveles2');
+CARD_CATEGORIAS = document.getElementById('cardCategorias');
 
 document.addEventListener("DOMContentLoaded", async () => {
     loadTemplate();
@@ -25,8 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadAliadosData();
     await loadStaffData();
     await loadLugaresHorariosData();
-    await loadCategoriasFormativo();
-    await loadCategoriasCompetitivo();
+    await loadCategorias();
 });
 
 //Funcion para traer los valores
@@ -294,13 +295,13 @@ async function loadLugaresHorariosData() {
     }
 }
 
-async function loadCategoriasFormativo() {
+async function loadCategorias() {
     try {
         // Cambia el título de la sección
-        TITULO_SECCION5.textContent = 'Nuestros niveles formativos';
+        TITULO_SECCION5.textContent = 'Nuestros niveles de entrenamiento';
 
         // Realiza la petición para obtener los valores
-        const DATA = await fetchData(CATEGORIA_ALUMNO_API, 'readAllAlumnosFormativo');
+        const DATA = await fetchData(NIVELES_ENTRENAMIENTO_API, 'readAll');
 
         // Verifica si la respuesta es satisfactoria
         if (DATA.status) {
@@ -318,15 +319,20 @@ async function loadCategoriasFormativo() {
                 let card = `
                      <div class="col-sm-6 col-md-3 col-lg-3 mb-4 mx-auto text-center">
                         <div class="card h-100">
-                            <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="card-img-top rounded-4" alt="${row.categoria}"  height="350px">
-                            <div class="carousel-caption d-none d-md-block">
-                            <div class="carousel-caption-text">
-                                <h5>${row.categoria}</h5>
-                                
-                                </p>
-                            </div>
+                            <img src="${SERVER_URL}images/niveles/${row.imagen_nivel}" class="card-img-top rounded-4" alt="${row.nivel_entrenamiento}"  height="400px">
+                            
+                                    <h5>${row.nivel_entrenamiento}</h5>
+                                  
+
+                            
+                        <div>
+                            <button type="button" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openModal(${row.id_nivel_entrenamiento})">
+                            <i class="bi bi-x-square-fill"></i>
+                            <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                            </button>
                         </div>
-                        </div>
+
+                        </div>  
                     </div>
                 `;
 
@@ -358,31 +364,28 @@ async function loadCategoriasFormativo() {
     }
 }
 
-async function loadCategoriasCompetitivo() {
-    try {
-        // Cambia el título de la sección
-        TITULO_SECCION6.textContent = 'Nuestros niveles competitivos';
 
-        // Realiza la petición para obtener los valores
-        const DATA = await fetchData(CATEGORIA_ALUMNO_API, 'readAllAlumnosCompetitivo');
 
-        // Verifica si la respuesta es satisfactoria
-        if (DATA.status) {
-            // Inicializa el contenedor de valores
-            CARD_NIVELES_ENTRENAMIENTO2.innerHTML = '';
+const openModal = async (id) => {
+    CARD_CATEGORIAS.innerHTML = '';
+    // Se define una constante tipo objeto con los datos del registro seleccionado.
+    const FORM = new FormData();
+    FORM.append('idNivel', id);
+    // Petición para obtener los datos del registro solicitado.
+    const DATA = await fetchData(CATEGORIA_ALUMNO_API, 'readAllAlumnosCategs', FORM);
 
-            // Variables para controlar el carrusel
-            let isActive = 'active';
-            let rowContent = '';
-            let counter = 0;
+    console.log(DATA)
 
-            // Itera sobre cada valor en el conjunto de datos
-            DATA.dataset.forEach((row, index) => {
-                // Crea la estructura de cada tarjeta de valor
-                let card = `
-                     <div class="col-sm-6 col-md-3 col-lg-4 mb-4 mx-auto text-center">
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        if (Array.isArray(DATA.dataset)) {
+            // Se recorre el conjunto de registros fila por fila.
+            DATA.dataset.forEach(row => {
+                // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+                CARD_CATEGORIAS.innerHTML += `
+                  <div class="col-sm-6 col-md-3 col-lg-4 mb-4 mx-auto text-center">
                         <div class="card h-100">
-                            <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="card-img-top rounded-4" alt="${row.categoria}"  height="350px">
+                            <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="card-img-top rounded-4" alt="${row.categoria}" height="350px">
                             <div class="carousel-caption d-none d-md-block">
                             <div class="carousel-caption-text">
                                 <h5>${row.categoria}</h5>
@@ -393,35 +396,19 @@ async function loadCategoriasCompetitivo() {
                         </div>
                     </div>
                 `;
-
-                // Agrega la tarjeta al contenido de la fila actual
-                rowContent += card;
-                counter++;
-
-                // Cada 4 tarjetas, crea un nuevo item del carrusel
-                if (counter === 3 || index === DATA.dataset.length - 1) {
-                    CARD_NIVELES_ENTRENAMIENTO2.innerHTML += `
-                        <div class="carousel-item ${isActive}">
-                            <div class="row">
-                                ${rowContent}
-                            </div>
-                        </div>
-                    `;
-                    // Reinicia las variables para la próxima fila
-                    rowContent = '';
-                    counter = 0;
-                    isActive = ''; // Solo el primer item debe tener la clase "active"
-                }
             });
         } else {
-            // Si no hay datos, muestra un mensaje de error en el título principal
-            TITULO_SECCION6.textContent = DATA.error;
+            sweetAlert(4, "No se encontraron registros.", true);
+           
         }
-    } catch (error) {
-        console.error('Error al cargar los valores:', error);
+        
+        // Se muestra la caja de diálogo con su título.
+        DETALLE_FORM.show();
+        
+        // Se prepara el formulario.
+        DETAIL_FORM.reset();
+        
+    } else {
+        sweetAlert(2, DATA.error, false);
     }
 }
-
-
-
-

@@ -19,6 +19,17 @@ if (isset($_GET['action'])) {
                 $result['error'] = 'No existen niveles registrados';
             }
             break;
+
+            
+            case 'readAllAlumnosCategs':
+                if (!$categoriasalumnos->setNivel($_POST['idCategoriaAlumno'])) {
+                    $result['error'] = $categoriasalumnos->getDataError();
+                } elseif ($result['dataset'] = $categoriasalumnos->readAllAlumnosCategs()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Categoria inexistente';
+                }
+                break;
             
         default:
             $result['error'] = 'Acción no disponible';
