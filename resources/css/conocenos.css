@@ -92,6 +92,11 @@ footer {
   font-size: 12px;
 }
 
+#cardCategorias{
+  max-height: 450px;
+  overflow-y: auto;
+}
+
 /* Ajustes responsivos para pantallas medianas */
 @media (min-width: 992px) and (max-width: 1200px) {
   .nav-item {

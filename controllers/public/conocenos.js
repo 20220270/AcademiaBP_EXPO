@@ -10,6 +10,7 @@ const TITULO_SECCION2 = document.getElementById('sectionTitle2');
 const TITULO_SECCION3 = document.getElementById('sectionTitle3');
 const TITULO_SECCION4 = document.getElementById('sectionTitle4');
 const TITULO_SECCION5 = document.getElementById('sectionTitle5');
+const TITULO_SECCION6 = document.getElementById('modalTitleD');
 
 const DETALLE_FORM = new bootstrap.Modal('#saveModal'),
     DETAIL_FORM = document.getElementById('saveForm'),
@@ -383,7 +384,7 @@ const openModal = async (id) => {
             DATA.dataset.forEach(row => {
                 // Se crean y concatenan las filas de la tabla con los datos de cada registro.
                 CARD_CATEGORIAS.innerHTML += `
-                  <div class="col-sm-6 col-md-3 col-lg-4 mb-4 mx-auto text-center">
+                  <div class="col-sm-12 col-md-6 col-lg-6 mb-4 mx-auto text-center">
                         <div class="card h-100">
                             <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="card-img-top rounded-4" alt="${row.categoria}" height="350px">
                             <div class="carousel-caption d-none d-md-block">
@@ -404,7 +405,7 @@ const openModal = async (id) => {
         
         // Se muestra la caja de diálogo con su título.
         DETALLE_FORM.show();
-        
+        TITULO_SECCION6.textContent = 'Categorías de entrenamiento';
         // Se prepara el formulario.
         DETAIL_FORM.reset();
         
