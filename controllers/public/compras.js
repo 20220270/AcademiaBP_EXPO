@@ -189,6 +189,24 @@ const openRating = async (id) => {
 
   //Popups
 
+  document.getElementById('microphone-button').addEventListener('mouseenter', function () {
+    var popover = new bootstrap.Popover(this, {
+        title: '¡Habla para buscar!',
+        content: 'Haz clic aquí, habla al micrófono y realiza tus búsquedas de compras.',
+        placement: 'top',
+        trigger: 'manual',
+        boundary: 'viewport'
+    });
+    popover.show();
+});
+
+document.getElementById('microphone-button').addEventListener('mouseleave', function () {
+    var popover = bootstrap.Popover.getInstance(this);
+    if (popover) {
+        popover.hide();
+    }
+});
+
 document.getElementById('botonCerrarCo').addEventListener('mouseenter', function () {
     var popover = new bootstrap.Popover(this, {
         title: 'Cerrar ventana',
@@ -226,23 +244,7 @@ document.getElementById('botonCerrarCo2').addEventListener('mouseleave', functio
     }
 });
 
-document.getElementById('botonCerrarCo3').addEventListener('mouseenter', function () {
-    var popover = new bootstrap.Popover(this, {
-        title: 'Cerrar ventana',
-        content: 'Haz clic aquí para cerrar este ventana',
-        placement: 'top',
-        trigger: 'manual',
-        boundary: 'viewport'
-    });
-    popover.show();
-});
 
-document.getElementById('botonCerrarCo3').addEventListener('mouseleave', function () {
-    var popover = bootstrap.Popover.getInstance(this);
-    if (popover) {
-        popover.hide();
-    }
-});
 
 
 
