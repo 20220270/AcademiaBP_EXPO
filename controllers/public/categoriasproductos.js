@@ -143,7 +143,7 @@ const fillTable = async (id) => {
                                 </ul>
                             </div>
                             <div class="card-body text-center">
-                                <a href="detallesproductos.html?id=${row.id_detalle_producto}" class="btn" id="btnVermas">Comenzar compra</a>
+                                <a href="detallesproductos.html?idDetalle=${row.id_detalle_producto}&idProducto=${row.id_producto}" class="btn" id="btnVermas">Comenzar compra</a>
                             </div>
                         </div>
                     </div>

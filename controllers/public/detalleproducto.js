@@ -3,6 +3,9 @@ const PRODUCTO_API = 'services/public/productos.php';
 const ORDEN_API = 'services/public/compras.php';
 // Constante tipo objeto para obtener los parámetros disponibles en la URL.
 const PARAMS = new URLSearchParams(location.search);
+const idDetalle = PARAMS.get('idDetalle');
+const idProducto = PARAMS.get('idProducto');
+
 // Constante para establecer el formulario de agregar un producto al carrito de compras.
 const SHOPPING_FORM = document.getElementById('shoppingForm');
 const CANTIDAD = document.getElementById('cantidadProducto');
@@ -17,10 +20,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Constante tipo objeto con los datos del producto seleccionado.
     CARD.innerHTML = '';
     const FORM = new FormData();
-    FORM.append('idDetalle', PARAMS.get('id'));
+    FORM.append('idDetalle', idDetalle);
 
     const FORM2 = new FormData();
-    FORM2.append('idProducto', PARAMS.get('id'));
+    FORM2.append('idProducto', idProducto);
     
     // Petición para solicitar los datos del producto seleccionado.
     const DATA = await fetchData(PRODUCTO_API, 'readOnee', FORM);
@@ -37,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('talla').textContent = DATA.dataset.talla;
         const colorBox = document.createElement('div');
         colorBox.classList.add('color-box');
-        colorBox.style.backgroundColor = `#${DATA.dataset.color}`
+        colorBox.style.backgroundColor = `#${DATA.dataset.color}`;
         colorBox.style.color = `#${DATA.dataset.color}`;
         colorBox.textContent = DATA.dataset.color;
         document.getElementById('color').appendChild(colorBox);
@@ -53,8 +56,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div class="card-body" id="borde">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div class="d-flex align-items-center">
-                            <img src="${SERVER_URL}images/clientes/${row.foto_cliente}" alt="..." height="40px" width="40px" class="mr-2  rounded-circle">
-                            <span class="card-text>${row.nombre_cliente} ${row.apellido_cliente}</span>
+                            <img src="${SERVER_URL}images/clientes/${row.foto_cliente}" alt="..." height="40px" width="40px" class="mr-2 rounded-circle">
+                            <span class="card-text">${row.nombre_cliente} ${row.apellido_cliente}</span>
                         </div>
                         <span class="card-text">${row.fecha_valoracion}</span>
                     </div>
@@ -95,6 +98,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         `;
     }
 });
+
 
 
 // Método del evento para cuando se envía el formulario de agregar un producto al carrito.
