@@ -27,11 +27,11 @@ if ($dataProductos = $producto->readAll()) {
     $pdf->setFont('Arial', '', 11);
 
     foreach ($dataProductos as $rowProducto) {
-        ($rowProducto['estado_producto']) ? $estado = 'Activo' : $estado = 'Inactivo';
+        
         // Se imprimen las celdas con los datos de los productos.
         $pdf->cell(126, 10, $pdf->encodeString( $rowProducto['nombre_producto']), 1, 0);
         $pdf->cell(30, 10, '$' . $rowProducto['precio_producto'], 1, 0);
-        $pdf->cell(30, 10, $estado, 1, 1);
+        $pdf->cell(30, 10, $rowProducto['estado_producto'], 1, 1);
     }
 } else {
     $pdf->cell(0, 10, $pdf->encodeString('No hay productos para mostrar'), 1, 1);
