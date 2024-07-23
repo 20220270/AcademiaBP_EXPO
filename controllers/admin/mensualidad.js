@@ -259,6 +259,7 @@ const fillTable3 = async (form = null) => {
     if (DATA.status) {
         // Se recorre el conjunto de registros fila por fila.
         DATA.dataset.forEach(row => {
+            const statusClass = (row.estado_proximo_pago === 'Pagado') ? 'pagado' : 'pendiente';
             
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY2.innerHTML += `
@@ -270,6 +271,7 @@ const fillTable3 = async (form = null) => {
                 <td>$${row.mensualidad_pagar}</td>
                 <td>${row.descripcion_pago}</td>
                 <td>${row.fecha_proximo_pago}</td>
+                <td class="${statusClass}"><b>${row.estado_proximo_pago}</b></td>
                 <td>
                     <div class="d-flex justify-content-center gap-2">
                         <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete3(${row.id_detalle_pago})">

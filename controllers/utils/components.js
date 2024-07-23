@@ -177,6 +177,128 @@ const pieGraph = (canvas, legends, values, title) => {
     });
 }
 
+const horizontalBarGraph = (canvas, xAxis, yAxis, legend, title) => {
+    // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
+    let colors = [];
+    // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar y se agregan al arreglo.
+    yAxis.forEach(() => {
+        colors.push('#' + (Math.random().toString(16)).substring(2, 8));
+    });
+    // Se crea una instancia para generar el gráfico con los datos recibidos.
+    new Chart(document.getElementById(canvas), {
+        type: 'bar', // Cambiar a 'horizontalBar' en versiones anteriores de Chart.js
+        data: {
+            labels: xAxis,
+            datasets: [{
+                label: legend,
+                data: yAxis,
+                backgroundColor: colors
+            }]
+        },
+        options: {
+            indexAxis: 'y', // Para gráficos horizontales
+            plugins: {
+                title: {
+                    display: true,
+                    text: title
+                },
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+const doughnutGraph = (canvas, legends, values, title) => {
+    // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
+    let colors = [];
+    // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar y se agregan al arreglo.
+    values.forEach(() => {
+        colors.push('#' + (Math.random().toString(16)).substring(2, 8));
+    });
+    // Se crea una instancia para generar el gráfico con los datos recibidos.
+    new Chart(document.getElementById(canvas), {
+        type: 'doughnut',
+        data: {
+            labels: legends,
+            datasets: [{
+                data: values,
+                backgroundColor: colors
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: title
+                }
+            }
+        }
+    });
+}
+
+const lineGraph = (canvas, xAxis, yAxis1, yAxis2, legend1, legend2) => {
+    new Chart(document.getElementById(canvas), {
+        type: 'line', // Tipo de gráfico: línea
+        data: {
+            labels: xAxis,
+            datasets: [
+                {
+                    label: legend1,
+                    data: yAxis1,
+                    borderColor: '#007bff', // Color de la línea para ganancias
+                    backgroundColor: 'rgba(0, 123, 255, 0.2)', // Color de fondo para ganancias
+                    fill: false, // No rellenar el área bajo la línea
+                    tension: 0.1 // Suavizar la línea (opcional)
+                },
+                {
+                    label: legend2,
+                    data: yAxis2,
+                    borderColor: '#dc3545', // Color de la línea para pérdidas
+                    backgroundColor: 'rgba(220, 53, 69, 0.2)', // Color de fondo para pérdidas
+                    fill: false, // No rellenar el área bajo la línea
+                    tension: 0.1 // Suavizar la línea (opcional)
+                }
+            ]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Ganancias y Pérdidas por mes'
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Meses'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Monto'
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return '$' + value; // Agregar el símbolo de dólar
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+
+
 /*
 *   Función asíncrona para cerrar la sesión del usuario.
 *   Parámetros: ninguno.

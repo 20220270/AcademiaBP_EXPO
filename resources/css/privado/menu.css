@@ -39,8 +39,8 @@ body {
 }
 
 .chart-container2 {
-  width: 90%;
-  max-width: 330px;
+  width: 100%;
+  max-width: 500px;
   margin: auto;
 }
 

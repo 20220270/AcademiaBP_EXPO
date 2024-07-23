@@ -48,7 +48,7 @@ class DetallesPagosMensualidadHandler
     public function readAll()
     {
         $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar,  CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
-                descripcion_pago, fecha_proximo_pago from tb_detalles_pagos
+                descripcion_pago, fecha_proximo_pago, estado_proximo_pago from tb_detalles_pagos
                 INNER JOIN tb_pagos USING (id_pago)
                 INNER JOIN tb_alumnos USING (id_alumno)
                 INNER JOIN tb_dias_pagos USING (id_dia_pago)

@@ -48,7 +48,7 @@ class PagosMensualidadHandler
         INNER JOIN tb_alumnos USING(id_alumno)
         INNER JOIN tb_clientes USING(id_cliente)
         INNER JOIN tb_dias_pagos USING(id_dia_pago)
-        ORDER BY id_pago;";
+        ORDER BY fecha_pago DESC;";
         return Database::getRows($sql);
     }
 
