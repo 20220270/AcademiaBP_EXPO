@@ -25,7 +25,7 @@ class StaffHandler
     {
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = "SELECT id_staff, CONCAT(nombre_staff, ' ', apellido_staff) AS nombre_completo, descripcion_extra, imagen_staff FROM tb_staffs
-                WHERE nombre_staff LIKE ? OR apellido_staff LIKE ?
+                WHERE CONCAT(nombre_staff, ' ', apellido_staff) LIKE ? OR apellido_staff LIKE ?
                 ORDER BY id_staff";
         $params = array($value, $value);
         return Database::getRows($sql, $params);

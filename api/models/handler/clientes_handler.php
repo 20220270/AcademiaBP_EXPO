@@ -147,7 +147,7 @@ class ClienteHandler
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = "SELECT id_cliente, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, dui_cliente, correo_cliente, telefono_cliente, direccion_cliente, estado_cliente, fecha_registro, foto_cliente
                 FROM tb_clientes
-                WHERE nombre_cliente LIKE ? OR apellido_cliente LIKE ? OR dui_cliente LIKE ? OR correo_cliente LIKE ? OR estado_cliente LIKE ?
+                WHERE CONCAT(nombre_cliente, ' ', apellido_cliente) LIKE ? OR apellido_cliente LIKE ? OR dui_cliente LIKE ? OR correo_cliente LIKE ? OR estado_cliente LIKE ?
                 ORDER BY id_cliente";
         $params = array($value, $value, $value, $value, $value);
         return Database::getRows($sql, $params);
