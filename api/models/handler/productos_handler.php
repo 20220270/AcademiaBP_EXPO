@@ -65,12 +65,13 @@ class ProductoHandler
 
     public function readOnee()
     {
-        $sql = 'SELECT id_producto, id_categoria_producto, id_detalle_producto, nombre_producto, descripcion_producto, precio_producto, imagen_producto, estado_producto, descuento_producto, existencias_producto, talla, color FROM tb_detalleproducto
+        $sql = 'SELECT id_producto, id_categoria_producto, id_detalle_producto, nombre_producto, descripcion_producto, precio_producto, imagen_producto, estado_producto, descuento_producto, existencias_producto, id_talla, id_color, talla, color FROM tb_detalleproducto
                 INNER JOIN tb_productos USING(id_producto)
                 INNER JOIN tb_categorias_productos USING(id_categoria_producto)
                 INNER JOIN tb_tallas USING(id_talla)
                 INNER JOIN tb_colores USING(id_color)
-                WHERE id_detalle_producto = ?';
+                WHERE id_detalle_producto = ?
+                GROUP BY talla, color';
         $params = array($this->iddetalle);
         return Database::getRow($sql, $params);
     }
@@ -115,7 +116,7 @@ class ProductoHandler
     public function readProductosCategoria()
     {
         $sql = 'SELECT id_producto, id_categoria_producto, id_detalle_producto, nombre_producto, descripcion_producto, precio_producto, imagen_producto, 
-        estado_producto, descuento_producto, existencias_producto,
+        estado_producto, descuento_producto, existencias_producto, id_talla, id_color,
         talla, color FROM tb_detalleproducto
                 INNER JOIN tb_productos USING(id_producto)
                 INNER JOIN tb_categorias_productos USING(id_categoria_producto)

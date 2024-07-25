@@ -98,7 +98,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-
 // Función para llenar la tabla de detalles del producto
 const fillTable = async (id) => {
     // Inicializa el contenido de las cards de detalles.
@@ -126,24 +125,16 @@ const fillTable = async (id) => {
                 }
                 // Crea y concatena las cards con los datos de cada registro.
                 PRODUCTOS1.innerHTML += `
-                    <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                    <div class="col-6 col-sm-7 col-md-6 col-lg-4 mb-3">
                         <div class="card h-100">
-                            <img src="${SERVER_URL}images/productos/${row.imagen_producto}" class="card-img-top img-fluid mt-5" alt="${row.nombre_producto}">
                             <div class="card-body">
-                                <h5 class="card-title text-center">${row.nombre_producto}</h5>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Precio del producto: $${row.precio_producto}</li>
-                                    <li class="list-group-item">Existencias: ${row.existencias_producto}</li>
-                                    <li class="list-group-item">Talla: ${row.talla}</li>
-                                    <li class="list-group-item d-flex align-items-center">
-                                        Color: 
-                                        <div class="color-box ms-2" style="background-color: #${row.color}; color: #${row.color}">${row.color}</div>
-                                    </li>
-                                    <li class="list-group-item mt-4 mb-4 text-center">${descuento}</li>
-                                </ul>
+                                <div class="d-flex flex-wrap justify-content-center gap-4">
+                                    <div class="talla-rect col-auto">${row.talla}</div>
+                                    <div class="color-rect col-auto" style="background-color: #${row.color};">${row.color}</div>
+                                </div>
                             </div>
                             <div class="card-body text-center">
-                                <a href="detallesproductos.html?idDetalle=${row.id_detalle_producto}&idProducto=${row.id_producto}" class="btn" id="btnVermas">Comenzar compra</a>
+                                <a href="detallesproductos.html?idDetalle=${row.id_detalle_producto}&idProducto=${row.id_producto}&idTalla=${row.id_talla}&idColor=${row.id_color}" class="btn" id="btnVermas">Comenzar compra</a>
                             </div>
                         </div>
                     </div>
@@ -160,3 +151,5 @@ const fillTable = async (id) => {
         sweetAlert(4, 'Error al cargar detalles del producto', true);
     }
 }
+
+

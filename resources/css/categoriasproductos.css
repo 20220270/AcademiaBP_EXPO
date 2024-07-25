@@ -217,6 +217,19 @@ margin-top: 230px;
   flex: 0 0 auto; /* Evita que las tarjetas se ajusten automáticamente */
 }
 
+.talla-rect, .color-rect {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.color-rect {
+  color: white;
+}
 
 
   @media (max-width: 360px) {
