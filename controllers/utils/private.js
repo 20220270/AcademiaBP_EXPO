@@ -88,6 +88,41 @@ const loadTemplate = async () => {
                         </ul>
                     </li>
 
+                    
+
+                    <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
+                    <i class="lni lni-certificate"></i>
+                    </a>
+                    <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    
+                    <li class="sidebar-item">
+                        <a href="entrenamientos.html" class="sidebar-link">
+                            <i class="lni lni-basketball"></i>
+                                Entrenamientos
+                        </a>
+                    </li>
+
+                    
+
+                    <li class="sidebar-item">
+                         <a href="nivelescategorias.html" class="sidebar-link">
+                            <i class="lni lni-layers"></i>
+                                Niveles y categorías
+                        </a>
+                    </li>
+                        
+                    <li class="sidebar-item">
+                    <a href="staff.html" class="sidebar-link">
+                        <i class="lni lni-certificate"></i>
+                        Staff
+                    </a>
+                    </li>
+
+
+                    </ul>
+                    </li>
+
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
                         <i class="lni lni-customer"></i>
@@ -123,21 +158,6 @@ const loadTemplate = async () => {
                         </ul>
                     </li>
 
-
-                    <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
-                    <i class="lni lni-certificate"></i>
-                    </a>
-                    <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        
-                    <li class="sidebar-item">
-                    <a href="staff.html" class="sidebar-link">
-                        <i class="lni lni-certificate"></i>
-                        Staff
-                    </a>
-                    </li>
-                    </ul>
-                    </li>
 
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
@@ -210,22 +230,6 @@ const loadTemplate = async () => {
                             </li>
 
 
-
-                            <li class="sidebar-item">
-                                <a href="nivelescategorias.html" class="sidebar-link">
-                                    <i class="lni lni-layers"></i>
-                                    Niveles y categorías
-                                </a>
-                            </li>
-
-
-                            <li class="sidebar-item">
-                                <a href="entrenamientos.html" class="sidebar-link">
-                                    <i class="lni lni-basketball"></i>
-                                    Entrenamientos
-                                </a>
-                            </li>
-
                         </ul>
                     </li>
 
@@ -257,6 +261,16 @@ const loadTemplate = async () => {
                                         src="../../resources/images/tienda.png" alt="..." width="20px" height="20px"
                                         class="me-2"></i>Ver sitio público</a>
                             </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item mt-2">
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                            data-bs-target="#auth23" aria-expanded="false" aria-controls="auth">
+                            <i class="lni lni-exit"></i>
+                            <span>Opciones de usuario</span>
+                        </a>
+                        <ul id="auth23" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+
 
                             <li class="sidebar-item">
                                 <a class="sidebar-link" onclick="logOut()"> <i class="lni lni-exit"

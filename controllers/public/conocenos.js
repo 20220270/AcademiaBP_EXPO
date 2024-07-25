@@ -327,9 +327,9 @@ async function loadCategorias() {
 
                             
                         <div>
-                            <button type="button" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openModal(${row.id_nivel_entrenamiento})">
+                            <button type="button" class="btn mt-1" id="btnVerNiveles" name="btnVerNiveles" onclick="openModal(${row.id_nivel_entrenamiento})">
                             <i class="bi bi-x-square-fill"></i>
-                            <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                            <img src="../../resources/images/vercatgorias.png" alt="" width="50px" height="50px" class="mb-1">
                             </button>
                         </div>
 
