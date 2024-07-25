@@ -87,7 +87,7 @@ class ComprasHandler
         return Database::getRows($sql, $params);
     }
 
-    
+
 
 
     public function readFilename()
@@ -143,7 +143,7 @@ class ComprasHandler
         $sql = 'INSERT INTO tb_detalles_compras(id_detalle_producto, cantidad_producto, id_compra)
                 VALUES(?, ?, ?)';
         $params = array($this->iddetalle, $this->cantidad, $_SESSION['idCompra']);
-       
+
         return Database::executeRow($sql, $params);
     }
 
@@ -231,14 +231,14 @@ class ComprasHandler
          tb_productos USING(id_producto) 
                 WHERE id_cliente = ? AND (nombre_producto LIKE ? OR tb_compras.fecha_registro LIKE ? OR id_compra LIKE ? or id_detalle_compra LIKE ?)
                 ORDER BY id_producto';
-        $params = array( $_SESSION['idCliente'], $value, $value, $value, $value);
+        $params = array($_SESSION['idCliente'], $value, $value, $value, $value);
         return Database::getRows($sql, $params);
     }
 
-     //Funcion para el sitio publico: Leer los detalles de cada compra
-     public function myOrders()
-     {
-         $sql = 'SELECT 
+    //Funcion para el sitio publico: Leer los detalles de cada compra
+    public function myOrders()
+    {
+        $sql = 'SELECT 
          id_detalle_compra, 
          id_compra,  
          nombre_producto, 
@@ -258,10 +258,37 @@ class ComprasHandler
         INNER JOIN 
          tb_productos USING(id_producto)  WHERE id_cliente = ?
          ORDER BY id_compra';
-         $params = array($_SESSION['idCliente']);
-         return Database::getRows($sql, $params);
-     }
+        $params = array($_SESSION['idCliente']);
+        return Database::getRows($sql, $params);
+    }
 
-
-
+    //Funcion para el sitio publico: Generar un documento con los datos del cliente y la compra realizada
+    public function myOrdersReport()
+    {
+        $sql = "SELECT CONCAT(nombre_cliente, ' ', apellido_cliente) as Cliente,
+                correo_cliente,
+                telefono_cliente,
+                id_detalle_compra, 
+                id_compra,
+                tb_compras.fecha_registro, 
+                nombre_producto, 
+                tb_productos.precio_producto, 
+                cantidad_producto, 
+                tb_productos.descuento_producto, 
+                (tb_productos.precio_producto * cantidad_producto) AS Subtotal, 
+                ROUND((tb_productos.precio_producto * cantidad_producto) - (tb_productos.precio_producto * cantidad_producto * tb_productos.descuento_producto / 100), 2) AS SubtotalConDescuento
+                FROM 
+                tb_detalles_compras
+                INNER JOIN 
+                tb_compras USING(id_compra)
+                INNER JOIN 
+                tb_clientes USING(id_cliente)
+                INNER JOIN 
+                tb_detalleProducto USING(id_detalle_producto)
+                INNER JOIN 
+                tb_productos USING(id_producto)  WHERE id_cliente = ? AND id_compra = ?
+                ORDER BY id_compra";
+        $params = array($_SESSION['idCliente'], $this->idcompra);
+        return Database::getRows($sql, $params);
+    }
 }

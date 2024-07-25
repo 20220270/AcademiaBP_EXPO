@@ -78,14 +78,26 @@ const loadTemplate = async () => {
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                                <ul class="navbar-nav me-auto">
+                                <ul class="navbar-nav">
 
-                                    <li class="nav-item col-lg-5 col-md-12 text-start"><a class="nav-link me-2 text-white" href="index.html#categorias">
+                                    <li class="nav-item col-lg-3 col-md-12 text-start"><a class="nav-link me-1 text-white" href="index.html#categorias">
                                             <img src="../../resources/images/categorias.png" alt="..." width="20px"
                                                 height="20px" class="me-2">Categorías</a>
                                     </li>
 
-                                    <li class="nav-item col-lg-6 col-md-12 text-start"><a class="nav-link me-3 text-white" href="miscompras.html">
+                                    <li class="nav-item col-lg-3 col-md-12 text-start"><a class="nav-link me-4 text-white" href="index.html#familia">
+                                            <img src="../../resources/images/camera.png" alt="..." width="22px"
+                                                height="20px" class="me-2">Familia Academia</a>
+                                    </li>  
+
+                                    <li class="nav-item col-lg-3 col-md-12 text-start"><a class="nav-link me-4 text-white" href="index.html#ayuda">
+                                            <img src="../../resources/images/help.png" alt="..." width="20px"
+                                                height="20px" class="me-2">¿Necesitas ayuda?</a>
+                                    </li>
+
+                                        
+
+                                    <li class="nav-item col-lg-3 col-md-12 text-start"><a class="nav-link me-4 text-white" href="miscompras.html">
                                             <img src="../../resources/images/cesta.png" alt="..." width="25px"
                                                 height="25px" class="me-1"> Mis compras</a></li>
 
@@ -96,8 +108,6 @@ const loadTemplate = async () => {
                                             Conócenos
                                         </a>
                                     </li>
-
-                                    
 
                                 </ul>
 

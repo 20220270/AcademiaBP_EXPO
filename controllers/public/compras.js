@@ -128,6 +128,14 @@ const fillTable = async (form = null) => {
                                     <img src="../../resources/images/valorarP.png" alt="" width="60px" height="60px" class="mb-1">
                                     </button>
                                 </div>
+
+                                <div class="text-center mt-3">
+                                    <strong>Generar factura:</strong>
+                                    <button type="submit" class="btn mt-1 mostrarModalValoracion" id="mostrarReporte" name="mostrarReporte" onclick="openReport(${row.id_compra})">
+                                    
+                                    <img src="../../resources/images/report.png" alt="" width="45px" height="60px" class="mb-1">
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -166,26 +174,23 @@ SAVE_FORM.addEventListener('submit', async (event) => {
   });
 
 const openRating = async (id) => {
-    // Se define una constante tipo objeto con los datos del registro seleccionado.
-    //const FORM = new FormData();
-    //FORM.append('iddetalle', id);
-    // Petición para obtener los datos del registro solicitado.
-    //const DATA = await fetchData(VALORACION_API, 'createRating', FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    //if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
         MODAL_TITLE.textContent = 'Valora esta compra';
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
-  
-
         ID_DETALLE.value = id;
-    //} else {
-      //  sweetAlert(2, DATA.error, false);
-    //}
   }
+
+  const openReport = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/public/ordenes.php`);
+    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
+    PATH.searchParams.append('idCompra', id);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
 
   //Popups
 

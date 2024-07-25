@@ -23,8 +23,7 @@ ALUMNO_FORM.addEventListener('submit', async (event) => {
     if (DATA.status) {
         
         // Se muestra un mensaje de éxito.
-        sweetAlert(1, DATA.message, true);
-        // Se carga nuevamente la tabla para visualizar los cambios.
+        sweetAlert(1, DATA.message, true, 'index.html');
         
     } else {
         sweetAlert(2, DATA.error, false);

@@ -26,15 +26,18 @@ class Report extends FPDF
         // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en los reportes.
         session_start();
         // Se verifica si un administrador ha iniciado sesión para generar el documento, de lo contrario se direcciona a la página web principal.
-        if (isset($_SESSION['idAdministrador'])) {
+        if (isset($_SESSION['aliasAdministrador'])) {
+
+            $nombreAdministrador = $_SESSION['aliasAdministrador'] ?? 'Usuario';
             // Se asigna el título del documento a la propiedad de la clase.
             $this->title = $title;
             // Se establece el título del documento (true = utf-8).
-            $this->setTitle('Academia BP - Reporte', true);
+            $this->setTitle('AcademiaBP - Reporte', true);
             // Se establecen los margenes del documento (izquierdo, superior y derecho).
             $this->setMargins(15, 15, 15);
             // Se añade una nueva página al documento con orientación vertical y formato carta, llamando implícitamente al método header()
             $this->addPage('p', 'letter');
+            $this->Cell(0, 10, 'Reporte generado por: ' . $nombreAdministrador, 0, 1, 'R');
             // Se define un alias para el número total de páginas que se muestra en el pie del documento.
             $this->aliasNbPages();
         } else {
@@ -48,10 +51,9 @@ class Report extends FPDF
         session_start();
         // Se verifica si un administrador ha iniciado sesión para generar el documento, de lo contrario se direcciona a la página web principal.
         if (isset($_SESSION['idCliente'])) {
-            // Se asigna el título del documento a la propiedad de la clase.
             $this->title = $title;
             // Se establece el título del documento (true = utf-8).
-            $this->setTitle('Academia BP - Reporte', true);
+            $this->setTitle('AcademiaBP - Reporte', true);
             // Se establecen los margenes del documento (izquierdo, superior y derecho).
             $this->setMargins(15, 15, 15);
             // Se añade una nueva página al documento con orientación vertical y formato carta, llamando implícitamente al método header()
@@ -60,6 +62,31 @@ class Report extends FPDF
             $this->aliasNbPages();
         } else {
             header('location:' . self::CLIENT_URL2);
+        }
+    }
+
+    //Reporte horizontal
+    public function startReportHorizontal($title)
+    {
+        // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en los reportes.
+        session_start();
+        // Se verifica si un administrador ha iniciado sesión para generar el documento, de lo contrario se direcciona a la página web principal.
+        if (isset($_SESSION['aliasAdministrador'])) {
+
+            $nombreAdministrador = $_SESSION['aliasAdministrador'] ?? 'Administrador'; //Traemos el alias del usuario que ha generado el reporte. Lo traemos de las variables de sesión que se crean al iniciar sesión
+            // Se asigna el título del documento a la propiedad de la clase.
+            $this->title = $title;
+            // Se establece el título del documento (true = utf-8).
+            $this->setTitle('AcademiaBP - Reporte', true);
+            // Se establecen los margenes del documento (izquierdo, superior y derecho).
+            $this->setMargins(15, 15, 15);
+            // Se añade una nueva página al documento con orientación horizontal y formato carta, llamando implícitamente al método header()
+            $this->addPage('l', 'letter');
+            $this->Cell(0, 10, 'Reporte generado por: ' . $nombreAdministrador, 0, 1, 'R'); //Mostramos el usuario que ha generado el reporte
+            // Se define un alias para el número total de páginas que se muestra en el pie del documento.
+            $this->aliasNbPages();
+        } else {
+            header('location:' . self::CLIENT_URL);
         }
     }
 
@@ -79,16 +106,18 @@ class Report extends FPDF
     */
     public function header()
     {
+        // Se obtiene el ancho actual de la página.
+        $pageWidth = $this->getPageWidth() - 30; // Resta los márgenes (15+15)
         // Se establece el logo.
         $this->image('../../images/logoAcademiaBP.png', 15, 15, 20);
         // Se ubica el título.
         $this->cell(20);
         $this->setFont('Arial', 'B', 15);
-        $this->cell(166, 10, $this->encodeString($this->title), 0, 1, 'C');
+        $this->cell($pageWidth, 10, $this->encodeString($this->title), 0, 1, 'C');
         // Se ubica la fecha y hora del servidor.
         $this->cell(20);
         $this->setFont('Arial', '', 10);
-        $this->cell(166, 10, 'Fecha/Hora: ' . date('d-m-Y H:i:s'), 0, 1, 'C');
+        $this->cell($pageWidth, 10, 'Fecha/Hora: ' . date('d-m-Y H:i:s'), 0, 1, 'C');
         // Se agrega un salto de línea para mostrar el contenido principal del documento.
         $this->ln(10);
     }

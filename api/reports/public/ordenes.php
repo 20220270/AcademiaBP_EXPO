@@ -3,22 +3,22 @@
 require_once('../../helpers/report.php');
 // Se incluyen las clases para la transferencia y acceso a datos.
 
-require_once('../../models/data/ordenes_data.php');
+require_once('../../models/data/compras_data.php');
 
 // Se instancia la clase para crear el reporte.
 $pdf = new Report;
 
-if (isset($_GET['idOrden'])) {
+if (isset($_GET['idCompra'])) {
     // Se inicia el reporte con el encabezado del documento.
     $pdf->startReportClient('Detalle de compra');
     // Se instancia el módelo Ordenes para obtener los datos.
-    $ordenes = new OrdenesData;
+    $ordenes = new ComprasData;
 
-    if ($ordenes->setIdOrden($_GET['idOrden'])) {
+    if ($ordenes->setIdOrden($_GET['idCompra'])) {
         // Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
         if ($dataOrdenes = $ordenes->myOrdersReport()) {
             // Se establece un color de relleno para los encabezados.
-            $pdf->setFillColor(132, 6, 6);
+            $pdf->setFillColor(80, 193, 80);
             // Se establece la fuente para los encabezados.
             $pdf->setFont('Arial', 'B', 11);
             $pdf->setTextColor(255, 255, 255);
@@ -32,8 +32,9 @@ if (isset($_GET['idOrden'])) {
             Definimos si llevará borde o no llevará (0 no lleva, 1 si lleva),
             Definimos si lleva o no Salto de linea, Alineación del contenido, Si la fila llevará relleno o no*/
 
-            $pdf->cell(0, 10, $pdf->encodeString('Orden número: ' . $dataOrdenes[0]['id_orden']), 1, 1, 'L', 1);
-            $pdf->cell(0, 10, $pdf->encodeString('Cliente: ' . $dataOrdenes[0]['Cliente']), 1, 1, 'L', 1);
+            $pdf->cell(0, 10, $pdf->encodeString('Compra número: ' . $dataOrdenes[0]['id_compra']), 1, 1, 'L', 1);
+            $pdf->cell(93, 10, $pdf->encodeString('Cliente: ' . $dataOrdenes[0]['Cliente']), 1, 0, 'L', 1);
+            $pdf->cell(92.9, 10, $pdf->encodeString('Correo: ' . $dataOrdenes[0]['correo_cliente']), 1, 1, 'L', 1);
             $pdf->cell(0, 10, $pdf->encodeString('Fecha de la compra: ' . $dataOrdenes[0]['fecha_registro']), 1, 1, 'R', 1);
 
             //Salto de linea para separar los datos de la compra y los datos del producto
@@ -41,7 +42,7 @@ if (isset($_GET['idOrden'])) {
 
             $pdf->setFont('Arial', 'B', 11);
             $pdf->setTextColor(255, 255, 255);
-            $pdf->setFillColor(110, 6, 6);
+            $pdf->setFillColor(64, 136, 64);
 
             // Se imprimen las celdas con los encabezados.
             $pdf->cell(63, 10, 'Productos', 1, 0, 'C', 1);
@@ -72,7 +73,7 @@ if (isset($_GET['idOrden'])) {
 
             $pdf->setFont('Arial', 'B', 11);
             $pdf->setTextColor(255, 255, 255);
-            $pdf->setFillColor(110, 6, 6);
+            $pdf->setFillColor(64, 136, 64);
             //Obtendremos el total de la compra
             //Le damos un formato de dólar y redondeado a dos cifras decimales
             $pdf->cell(153, 10, 'Total de la compra: ', 1, 0, 'L', 1);
@@ -80,13 +81,13 @@ if (isset($_GET['idOrden'])) {
 
 
         } else {
-            $pdf->cell(0, 10, $pdf->encodeString('No hay ordenes para mostrar'), 1, 1);
+            $pdf->cell(0, 10, $pdf->encodeString('No hay compras para mostrar'), 1, 1);
         }
     } else {
-        $pdf->cell(0, 10, $pdf->encodeString('Orden incorrecta'), 1, 1);
+        $pdf->cell(0, 10, $pdf->encodeString('Compra incorrecta'), 1, 1);
     }
 } else {
-    $pdf->cell(0, 10, $pdf->encodeString('Debe seleccionar una orden'), 1, 1);
+    $pdf->cell(0, 10, $pdf->encodeString('Debe seleccionar una compra'), 1, 1);
 }
 // Se llama implícitamente al método footer() y se envía el documento al navegador web.
-$pdf->output('I', 'ordenes.pdf');
+$pdf->output('I', 'compras.pdf');
