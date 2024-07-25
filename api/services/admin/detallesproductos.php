@@ -40,13 +40,17 @@ if (isset($_GET['action'])) {
 
                 ) {
                     $result['error'] = $detalleproducto->getDataError();
-                } elseif ($detalleproducto->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Detalle creado correctamente';
-                    // Se asigna el estado del archivo después de insertar.
-
                 } else {
-                    $result['error'] = 'Ocurrió un problema al asignar el detalle';
+                    try {
+                        if ($detalleproducto->createRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Detalle asignado al producto correctamente';
+                        } else {
+                            $result['error'] = 'No se pudo crear el detalle del producto, puede que ya exista un producto con el mismo detalle';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al crear el producto: ' . $e->getMessage();
+                    }
                 }
                 break;
             case 'readAll':
@@ -105,11 +109,18 @@ if (isset($_GET['action'])) {
                     !$detalleproducto->setExistencias($_POST['existenciasProducto'])
                 ) {
                     $result['error'] = $detalleproducto->getDataError();
-                } elseif ($detalleproducto->updateRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Campos del detalle modificado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar este detalle';
+                    try {
+                        if ($detalleproducto->updateRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Detalle de producto modificado correctamente';
+                            
+                        } else {
+                            $result['error'] = 'No se pudo modificar el detalle del producto, puede que ya exista un producto con el mismo detalle';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al modificar el producto: ' . $e->getMessage();
+                    }
                 }
                 break;
 

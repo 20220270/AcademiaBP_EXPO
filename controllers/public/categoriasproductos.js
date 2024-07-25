@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 PRODUCTOS.innerHTML += `
                     <div class="col-sm-12 col-md-6 col-lg-3 mb-3">
                         <div class="card h-100">
-                            <img src="${SERVER_URL}images/productos/${row.imagen_producto}" class="card-img-top img-fluid mt-5" alt="${row.nombre_producto}">
+                            <img src="${SERVER_URL}images/productos/${row.imagen_producto}" class="card-img-top img-fluid mt-3" alt="${row.nombre_producto}">
                             <div class="card-body">
                                 <h5 class="card-title text-center">${row.nombre_producto}</h5>
                                 <ul class="list-group list-group-flush">
@@ -114,23 +114,16 @@ const fillTable = async (id) => {
         if (DATA.status) {
             // Recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
             DATA.dataset.forEach(row => {
-                // Establece un icono para el estado del producto.
-                const icon = (row.estado_producto) ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill';
-
-                let descuento;
-                if (parseFloat(row.descuento_producto) > 0.00) {
-                    descuento = `<span class="descuento">${row.descuento_producto}% de descuento</span>`;
-                } else {
-                    descuento = `<span class="sin-descuento">Sin descuento</span>`;
-                }
+                
                 // Crea y concatena las cards con los datos de cada registro.
                 PRODUCTOS1.innerHTML += `
-                    <div class="col-6 col-sm-7 col-md-6 col-lg-4 mb-3">
+                    <div class="col-6 col-sm-7 col-md-6 col-lg-4 mb-3 mx-auto">
                         <div class="card h-100">
+                        <img src="${SERVER_URL}images/productos/${row.imagen_producto}" class="card-img-top img-fluid mb-3 mt-3 mx-auto" alt="${row.nombre_producto}">
                             <div class="card-body">
                                 <div class="d-flex flex-wrap justify-content-center gap-4">
                                     <div class="talla-rect col-auto">${row.talla}</div>
-                                    <div class="color-rect col-auto" style="background-color: #${row.color};">${row.color}</div>
+                                    <div class="color-rect col-auto" style="background-color: #${row.color}; color: #${row.color}">${row.color}</div>
                                 </div>
                             </div>
                             <div class="card-body text-center">
