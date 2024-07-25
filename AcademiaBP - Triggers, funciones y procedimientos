@@ -1,105 +1,192 @@
--- triggers
+-- Trigger y procedimientos
 
--- trigger para actualizar las existencias de los productos
+-- Triggers para asignar el precio del producto, y actualizar las existencias del producto
 DELIMITER //
-CREATE TRIGGER actualizar_existencias_detalle
+
+CREATE TRIGGER before_insert_detalles_compras
+BEFORE INSERT ON tb_detalles_compras
+FOR EACH ROW
+BEGIN
+    DECLARE v_precio_producto DECIMAL(8,2);
+
+    -- Obtener el precio del producto desde tb_productos
+    SELECT precio_producto 
+    INTO v_precio_producto
+    FROM tb_productos
+    WHERE id_producto = (SELECT id_producto FROM tb_detalleProducto WHERE id_detalle_producto = NEW.id_detalle_producto);
+
+    -- Asignar el precio del producto al nuevo registro de tb_detalles_compras
+    SET NEW.precio_producto = v_precio_producto;
+END
+//
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE TRIGGER after_insert_detalles_compras
 AFTER INSERT ON tb_detalles_compras
 FOR EACH ROW
 BEGIN
-UPDATE tb_productos SET existencias_producto = existencias_producto - NEW.cantidad_producto
-WHERE id_producto = NEW.id_producto;
+    DECLARE v_existencias_producto INT;
+
+    -- Obtener las existencias del producto desde tb_detalleProducto
+    SELECT existencias_producto 
+    INTO v_existencias_producto
+    FROM tb_detalleProducto
+    WHERE id_detalle_producto = NEW.id_detalle_producto;
+
+    -- Validar que no se haya reducido a un número negativo
+    IF (v_existencias_producto - NEW.cantidad_producto) < 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No hay suficientes existencias para el producto con ID ';
+    ELSE
+        -- Actualizar las existencias del producto en tb_detalleProducto
+        UPDATE tb_detalleProducto
+        SET existencias_producto = v_existencias_producto - NEW.cantidad_producto
+        WHERE id_detalle_producto = NEW.id_detalle_producto;
+    END IF;
 END
 //
+
 DELIMITER ;
 
--- trigger para actualizar las cuotas pendientes de la mensualidad
+-- Triggers para asignar una categoria a un alumno a partir de su edad
 DELIMITER //
 
-CREATE TRIGGER actualizar_cuotas_pendientes
-AFTER INSERT ON tb_detalles_pagos
+CREATE PROCEDURE sp_insert_alumno(
+    IN p_nombre_alumno VARCHAR(100),
+    IN p_apellido_alumno VARCHAR(100),
+    IN p_fecha_nacimiento DATE,
+    IN p_posicion_alumno ENUM('Portero', 'Jugador de campo'),
+    IN p_id_dia_pago INT,
+    IN p_id_cliente INT
+)
+BEGIN
+    DECLARE edad INT;
+    DECLARE id_categoria INT;
+    DECLARE new_id_alumno INT;
+
+    -- Insertar el nuevo alumno
+    INSERT INTO tb_alumnos(nombre_alumno, apellido_alumno, fecha_nacimiento, posicion_alumno, id_dia_pago, id_cliente)
+    VALUES(p_nombre_alumno, p_apellido_alumno, p_fecha_nacimiento, p_posicion_alumno, p_id_dia_pago, p_id_cliente);
+
+    -- Obtener el ID del nuevo alumno insertado
+    SET new_id_alumno = LAST_INSERT_ID();
+
+    -- Calcular la edad del alumno
+    SET edad = TIMESTAMPDIFF(YEAR, p_fecha_nacimiento, CURDATE());
+
+    -- Buscar el id_categoria que contenga la edad del alumno
+    SELECT sc.id_staff_categorias INTO id_categoria
+    FROM tb_staffs_categorias sc
+    JOIN tb_categorias_alumnos ca ON sc.id_categoria_alumno = ca.id_categoria_alumno
+    WHERE edad >= ca.edad_minima AND edad <= ca.edad_maxima
+    LIMIT 1;
+
+    -- Actualizar el registro del alumno con el id_categoria encontrado
+    UPDATE tb_alumnos
+    SET id_staff_categorias = id_categoria
+    WHERE id_alumno = new_id_alumno;
+END//
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE PROCEDURE insertar_pago(
+    IN p_id_alumno INT
+)
+BEGIN
+    -- Definir variables locales
+    DECLARE v_fecha_actual DATE;
+    DECLARE v_mes_anterior DATE;
+    DECLARE v_cuotas_anuales INT;
+
+    -- Obtener la fecha actual
+    SET v_fecha_actual = CURDATE();
+
+    -- Calcular el mes anterior
+    SET v_mes_anterior = DATE_SUB(v_fecha_actual, INTERVAL 12 MONTH);
+
+    -- Calcular las cuotas anuales
+    SET v_cuotas_anuales = MONTH(v_mes_anterior);
+
+    -- Iniciar la transacción
+    START TRANSACTION;
+
+    -- Insertar el pago en la tabla tb_pagos
+    INSERT INTO tb_pagos (fecha_pago, cuotas_anuales, cuotas_pendientes, id_alumno)
+    VALUES (v_fecha_actual, v_cuotas_anuales, v_cuotas_anuales, p_id_alumno);
+
+    -- Confirmar la transacción
+    COMMIT;
+END //
+
+DELIMITER ;
+
+-- Procedimiento para calcular la fecha del proximo pago automaticamente
+
+DELIMITER //
+
+CREATE PROCEDURE insertar_detalle_pago(
+    IN id_pago_param INT,
+    IN descripcion_pago_param VARCHAR(200),
+    OUT id_detalle_pago_result INT
+)
+BEGIN
+    DECLARE fecha_pago_actual DATE;
+    DECLARE fecha_proximo_pago_calculada DATE;
+
+    -- Obtener la fecha_pago actual del pago correspondiente
+    SELECT fecha_pago INTO fecha_pago_actual
+    FROM tb_pagos
+    WHERE id_pago = id_pago_param;
+
+    -- Calcular la fecha_proximo_pago un mes después de fecha_pago_actual
+    SET fecha_proximo_pago_calculada = DATE_ADD(fecha_pago_actual, INTERVAL 1 MONTH);
+
+    -- Insertar el detalle de pago en tb_detalles_pagos
+    INSERT INTO tb_detalles_pagos (id_pago, descripcion_pago, fecha_proximo_pago)
+    VALUES (id_pago_param, descripcion_pago_param, fecha_proximo_pago_calculada);
+
+    -- Obtener el ID del detalle de pago recién insertado
+    SELECT LAST_INSERT_ID() INTO id_detalle_pago_result;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE TRIGGER validar_edad_alumno
+BEFORE INSERT ON tb_alumnos
 FOR EACH ROW
 BEGIN
-    -- Actualizar las cuotas pendientes
-    UPDATE tb_pagos
-    SET cuotas_pendientes = cuotas_pendientes - 1
-    WHERE id_pago = NEW.id_pago;
-END;
-//
+    DECLARE edad_alumno INT;
+    SET edad_alumno = TIMESTAMPDIFF(YEAR, NEW.fecha_nacimiento, CURDATE());
+    
+    IF edad_alumno < 2 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'La fecha de nacimiento del alumno indica que debe tener al menos dos años de edad.';
+    END IF;
+END //
+
 DELIMITER ;
-
-
-
-
-------------------------------------------------------------------------------------------------
-
--- Procedimiento almacenado para el manejo de devoluciones de productos
-DELIMITER //
-
-CREATE PROCEDURE devolucion_producto( -- se crea el procedimiento, mandando dos parametros, el detalle del producto y la cantidad a devolver
-    IN id_detalle_in INT,
-    IN nueva_cantidad INT
-)
-BEGIN
-    DECLARE producto_id INT; -- declaramos las variables para cada elemento, el producto, la cantidad devuelta, el precio que tiene ese producto devuelto, el total que se iba 
-    -- a pagar y el total a pagar nuevamente calculado
-    DECLARE cantidad_devuelta INT;
-    DECLARE precio_unitario DECIMAL(8,2);
-    DECLARE total_anterior DECIMAL(10,2);
-    DECLARE nuevo_total DECIMAL(10,2);
-    
-    -- Obtenemos el ID del producto, la cantidad devuelta y el precio unitario del detalle del pedido
-    SELECT id_producto, cantidad_producto, total_a_pagar INTO producto_id, cantidad_devuelta, precio_unitario
-    FROM tb_detalles_compras
-    WHERE id_detalle_compra = id_detalle_in;
-    
-    -- Obtenemos el total anterior de la compra
-    SELECT calcular_total_compra(id_compra) INTO total_anterior
-    FROM tb_detalles_compras
-    WHERE id_detalle_compra = id_detalle_in;
-    
-    -- Actualizamos la cantidad en la tabla de productos
-    UPDATE tb_productos
-    SET existencias_producto = existencias_producto + (cantidad_devuelta - nueva_cantidad)
-    WHERE id_producto = producto_id;
-    
-    -- Actualizamos la cantidad en el detalle del pedido
-    UPDATE tb_detalles_compras
-    SET cantidad_producto = nueva_cantidad
-    WHERE id_detalle_compra = id_detalle_in;
-    
-    -- Recalculamos el nuevo total de la compra
-    SET nuevo_total = total_anterior - (cantidad_devuelta - nueva_cantidad) * precio_unitario;
-    
-    -- Actualizamos el nuevo total en la tabla de compras
-    UPDATE tb_compras
-    SET total_a_pagar = nuevo_total
-    WHERE id_compra = (SELECT id_compra FROM tb_detalles_compras WHERE id_detalle_compra = id_detalle_in);
-    
-END
-//
-DELIMITER ;
-
-
-
------------------------------------------------------------------------------------------------------------------
--- funcion
-
--- funcion para calcular el total a pagar en una compra
 
 DELIMITER //
 
-CREATE FUNCTION calcular_total_compra(
-    orden_id INT
-)
-RETURNS DECIMAL(10, 2)
+CREATE TRIGGER after_insert_pago
+AFTER INSERT ON tb_pagos
+FOR EACH ROW
 BEGIN
-    DECLARE total DECIMAL(10, 2);
-    
-    SELECT SUM(total_a_pagar) INTO total -- Calcula la suma de total_a_pagar para todas las filas en tb_detalles_ordenes con el orden_id dado
-    FROM tb_detalles_compras
-    WHERE id_orden = orden_id;
-    
-    RETURN COALESCE(total, 0); -- Devuelve el total calculado. Se utiliza COALESCE para manejar el caso donde no se encuentran filas, devolviendo 0 en ese caso
-END
-//
+    -- Actualizar el estado del próximo pago a 'Pagado' si la fecha coincide con la fecha de pago actual
+    UPDATE tb_detalles_pagos dp
+    JOIN tb_pagos p ON dp.id_pago = p.id_pago
+    SET dp.estado_proximo_pago = 'Pagado'
+    WHERE p.id_alumno = NEW.id_alumno
+      AND dp.fecha_proximo_pago = NEW.fecha_pago;
+END//
+
 DELIMITER ;
+
