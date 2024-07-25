@@ -135,7 +135,7 @@ border: radius 80px;
 }
 
 .scrollable-content{
-  max-height: 590px;
+  max-height: 620px;
   overflow-y: auto;
 }
 
