@@ -1,5 +1,6 @@
 const ALUMNOS_API = 'services/admin/alumnos.php';
 const PRODUCTOS_API = 'services/admin/productos.php';
+const COMPRAS_API = 'services/admin/compras.php';
 
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     graficoPastelProductoss();
     graficoBarrasClientes();
     graficoBarrasExistencias();
+    graficoPredictivo();
 });
 
 
@@ -59,7 +61,7 @@ const graficoBarrasClientes = async () => {
             compras.push(row.total_compras);
         });
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        horizontalBarGraph('chart2', clientes, compras, 'Total de compras', 'Clientes con más compras realizadas');
+        horizontalBarGraph('chart2', clientes, compras, 'Total de compras', 'Clientes con más compras');
     } else {
         document.getElementById('chart2').remove();
         console.log(DATA.error);
@@ -134,7 +136,7 @@ const graficoBarrasCategorias = async () => {
             cantidades.push(row.cantidad_producto);
         });
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart5', categorias, cantidades, 'Cantidad de productos', 'Cantidad de productos por categoría');
+        barGraph('chart5', categorias, cantidades, 'Cantidad de productos', 'Categoría con más productos');
     } else {
         document.getElementById('chart5').remove();
         console.log(DATA.error);
@@ -207,5 +209,64 @@ const fillTable = async (form = null) => {
         loadBirthdayEvents(birthdayEvents);
     } else {
         sweetAlert(4, DATA.error, true);
+    }
+}
+
+const graficoPredictivo = async () => {
+    try {
+        // Peticiones para obtener los datos de ganancias y pérdidas.
+        const [dataGanancias, dataPerdidas] = await Promise.all([
+            fetchData(COMPRAS_API, 'predictGraph'),
+            fetchData(COMPRAS_API, 'perdidasPredictGraph')
+        ]);
+
+        if (dataGanancias.status && dataPerdidas.status) {
+            // Arreglos para guardar los datos a graficar.
+            let mesventas = [];
+            let ganancias = Array(12).fill(0); // Inicializar con ceros para todos los meses
+            let perdidas = Array(12).fill(0); // Inicializar con ceros para todos los meses
+
+            // Arreglo de nombres de meses.
+            const meses = [
+                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+            ];
+
+            // Procesar datos de ganancias
+            dataGanancias.dataset.forEach(row => {
+                mesventas.push(meses[row.mes - 1]);
+                ganancias[row.mes - 1] = parseFloat(row.ganancias_mensuales);
+            });
+
+            // Procesar datos de pérdidas
+            dataPerdidas.dataset.forEach(row => {
+                perdidas[row.mes - 1] = parseFloat(row.perdidas_mensuales);
+            });
+
+            // Calcular las ganancias totales del año.
+            const totalGanancias = parseFloat(dataGanancias.dataset[0].ganancias_totales_proyectadas);
+            const totalPerdidas = parseFloat(dataPerdidas.dataset[0].perdidas_totales_proyectadas);
+
+            // Añadir registros de depuración
+            console.log('Ganancias Mensuales:', ganancias);
+            console.log('Pérdidas Mensuales:', perdidas);
+            console.log('Ganancias Totales Proyectadas:', totalGanancias);
+            console.log('Pérdidas Totales Proyectadas:', totalPerdidas);
+
+            // Llamada a la función para generar y mostrar un gráfico de líneas.
+            lineGraph('chartPrediction', meses, ganancias, perdidas, 'Ganancias por mes (USD $)', 'Pérdidas por mes (USD $)');
+
+            // Mostrar el total de ganancias y pérdidas del año en el label.
+            document.getElementById('totalGanancias').textContent =
+                `Ganancias totales estimadas para el año: $${totalGanancias.toFixed(2)}`;
+            document.getElementById('totalPerdidas').textContent =
+                `Pérdidas totales estimadas para el año: $${totalPerdidas.toFixed(2)}`;
+
+        } else {
+            document.getElementById('chartPrediction').remove();
+            console.log(dataGanancias.error || dataPerdidas.error);
+        }
+    } catch (error) {
+        console.error('Error en la petición de datos:', error);
     }
 }

@@ -1,5 +1,5 @@
 const CLIENTE_API = 'services/public/cliente.php';
-const MENSUALIDAD_API = 'services/admin/pagosmensualidad.php';
+const MENSUALIDAD_API = 'services/public/pagosmensualidad.php';
 
 // Constantes para establecer los elementos del formulario de editar perfil.
 const PROFILE_FORM = document.getElementById('profileForm'),
@@ -181,18 +181,17 @@ const fillTable = async (correo) => {
             // Convertir el conjunto de datos a un array si no lo es ya
             const rows = Array.isArray(DATA.dataset) ? DATA.dataset : [DATA.dataset];
 
-
             // Iterar sobre cada fila de datos para construir las tarjetas de los alumnos
             rows.forEach(row => {
                 CARDS_ALUMNOSREG.innerHTML += `
                     <div class="card mb-4 mt-4" id="borderAlumnos">
                         <div class="card-body">
-                            <input id="SelectDatosPago" type="text" name="SelectDatosPago" class="form-control" value="${row.id_alumno}" hidden>
+                            <input id="SelectDatosPago-${row.id_alumno}" type="text" name="SelectDatosPago" class="form-control" value="${row.id_alumno}" hidden>
                             <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
                             <p class="card-text"><b>Edad: </b>${row.edad}</p>
                             <p class="card-text"><b>Categoria: </b>${row.categoria}</p>
                             <p class="card-text"><b>Numero de dias que entrena: </b>${row.numero_dias}</p>
-                            <button type="button" class="btn btn-pagar" id="btnPagar">
+                            <button type="button" class="btn btn-pagar btnPagar" data-id="${row.id_alumno}">
                                 <img src="../../resources/images/mensualidadp.png" height="25px" width="25px" class="me-2"> Pagar mensualidad
                             </button>
                         </div>
@@ -210,28 +209,14 @@ const fillTable = async (correo) => {
     }
 };
 
-// Método del evento para cuando se envía el formulario de editar perfil.
-PROFILE_FORM.addEventListener('submit', async (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
-    event.preventDefault();
-    // Constante tipo objeto con los datos del formulario.
-    const FORM = new FormData(PROFILE_FORM);
-    // Petición para actualizar los datos personales del usuario.
-    const DATA = await fetchData(USER_API, 'editProfile', FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        sweetAlert(1, DATA.message, true);
-    } else {
-        sweetAlert(2, DATA.error, false); //
-    }
-});
-
-// Función para manejar el envío del formulario con confirmación
 async function submitForm(event) {
     // Evitar recargar la página después de enviar el formulario si es un evento de formulario
     if (event) {
         event.preventDefault();
     }
+
+    // Obtener el ID del alumno desde el botón
+    const alumnoId = event.target.closest('.btn-pagar').dataset.id;
 
     // Mostrar un mensaje de confirmación y capturar la respuesta
     const RESPONSE = await confirmAction('¿Está seguro de realizar el pago de mensualidad del alumno?');
@@ -239,6 +224,9 @@ async function submitForm(event) {
     if (RESPONSE) {
         // Constante tipo objeto con los datos del formulario
         const FORM = new FormData(PROFILE_FORM2);
+        // Añadir el ID del alumno al formulario
+        FORM.append('SelectDatosPago', alumnoId);
+        
         // Petición para actualizar los datos personales del usuario
         const DATA = await fetchData(MENSUALIDAD_API, 'createRow', FORM);
         // Comprobar si la respuesta es satisfactoria, de lo contrario mostrar un mensaje con la excepción
@@ -253,10 +241,27 @@ async function submitForm(event) {
 // Agregamos el event listener al formulario
 PROFILE_FORM2.addEventListener('submit', submitForm);
 
-
 document.addEventListener('click', function (event) {
     if (event.target && event.target.closest('.btn-pagar')) {
         submitForm(event);
+    }
+});
+
+
+
+// Método del evento para cuando se envía el formulario de editar perfil.
+PROFILE_FORM.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Constante tipo objeto con los datos del formulario.
+    const FORM = new FormData(PROFILE_FORM);
+    // Petición para actualizar los datos personales del usuario.
+    const DATA = await fetchData(USER_API, 'editProfile', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        sweetAlert(1, DATA.message, true);
+    } else {
+        sweetAlert(2, DATA.error, false); //
     }
 });
 
@@ -290,20 +295,3 @@ const openPassword = () => {
     // Se restauran los elementos del formulario.
     PASSWORD_FORM.reset();
 }
-
-
-//Barra de busqueda de productos
-const buscadorInput = document.getElementById('Buscador1');
-
-buscadorInput.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
-        const searchTerm = buscadorInput.value.trim();
-        if (searchTerm !== '') {
-            // Guardar el término de búsqueda en el almacenamiento local
-            localStorage.setItem('lastSearchTerm', searchTerm);
-
-            // Redirigir a la página de categorías con el término de búsqueda
-            window.location.href = `categorias_productos.html`;
-        }
-    }
-});

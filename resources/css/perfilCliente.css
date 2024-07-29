@@ -160,7 +160,9 @@ footer {
   border: 2px solid #04B704;
 }
 
-#btnPagar {
+.btnPagar,
+.btnPagar:hover,
+.btnPagar:focus {
   background-color: #408340;
   width: 100%;
   color: #fff;

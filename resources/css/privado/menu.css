@@ -19,7 +19,6 @@ body {
     border: 3px solid #000;
     flex: 1;
     overflow-y: auto;
-    max-height: 100%;
 }
 
 #columaCards {
@@ -34,13 +33,11 @@ body {
 
 .chart-container {
     width: 100%;
-    max-width: 410px;
     margin: auto;
 }
 
 .chart-container2 {
   width: 100%;
-  max-width: 500px;
   margin: auto;
 }
 

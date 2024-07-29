@@ -185,7 +185,7 @@ const openRating = async (id) => {
 
   const openReport = (id) => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/public/ordenes.php`);
+    const PATH = new URL(`${SERVER_URL}reports/public/compras_cliente.php`);
     // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
     PATH.searchParams.append('idCompra', id);
     // Se abre el reporte en una nueva pestaña.

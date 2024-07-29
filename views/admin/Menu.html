@@ -15,53 +15,72 @@
 
 <body>
     
-                
     <button class="toggle-btn1 d-md-none d-flex" type="button" onclick="toggleSidebar()">
         <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
     </button>
     <main>
-        <!--Secciones con gráficos variados y un calendario-->
         <div class="container">
-            <div class="row">
+            <!-- Botones de navegación -->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active text-success" id="calendar-tab" data-bs-toggle="tab" data-bs-target="#calendar-section" type="button" role="tab" aria-controls="calendar-section" aria-selected="true">Calendario</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link text-success" id="chartPrediction-tab" data-bs-toggle="tab" data-bs-target="#chartPrediction-section" type="button" role="tab" aria-controls="chartPrediction-section" aria-selected="false">Predicciones</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link text-success" id="chart1-tab" data-bs-toggle="tab" data-bs-target="#chart1-section" type="button" role="tab" aria-controls="chart1-section" aria-selected="false">Categorías con más alumnos</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link text-success" id="chart2-tab" data-bs-toggle="tab" data-bs-target="#chart2-section" type="button" role="tab" aria-controls="chart2-section" aria-selected="false">Clientes con más compras</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link text-success" id="chart3-tab" data-bs-toggle="tab" data-bs-target="#chart3-section" type="button" role="tab" aria-controls="chart3-section" aria-selected="false">Productos más vendidos</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link text-success" id="chart4-tab" data-bs-toggle="tab" data-bs-target="#chart4-section" type="button" role="tab" aria-controls="chart4-section" aria-selected="false">Productos mejor valorados</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link text-success" id="chart5-tab" data-bs-toggle="tab" data-bs-target="#chart5-section" type="button" role="tab" aria-controls="chart5-section" aria-selected="false">Categorías con más productos</button>
+                </li>
+            </ul>
 
-
-                <!--Calendario gigente, abarcando la mitad de la pantalla-->
-                <div class="col-md-6 mt-4">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="calendar-section" role="tabpanel" aria-labelledby="calendar-tab">
                     <h4>Fechas de nacimiento de cada alumno</h4>
-                    <div id="calendar" class="mt-5"></div>
-                    <!--Debajo del calendario, dos gráficos-->
-                    <div class="row mt-5">
-                        <div class="col-md-12 mt-4">
-                            <div class="chart-container2">
-                                <canvas id="chart1" class="mt-1"></canvas>
-                            </div>
-                            <!--Gráfico con los cliente con más compras realizadas-->
-                            <div class="chart-container2">
-                                <canvas id="chart2" class="mt-1"></canvas>
-                            </div>
-
-                        </div>
+                    <div id="calendar" class="mt-1"></div>
+                </div>
+                <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chartPrediction-section" role="tabpanel" aria-labelledby="chartPrediction-tab">
+                    <canvas id="chartPrediction"></canvas>
+                    <label id="totalGanancias" class="d-block"></label>
+                    <label id="totalPerdidas"></label>
+                </div>
+                <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chart1-section" role="tabpanel" aria-labelledby="chart1-tab">
+                    <div class="chart-container2 mt-4">
+                        <canvas id="chart1" class="mt-1 mb-4"></canvas>
                     </div>
                 </div>
-
-                
-                <div class="col-md-6 mt-4">
-                    <div class="chart-container">
+                <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chart2-section" role="tabpanel" aria-labelledby="chart2-tab">
+                    <div class="chart-container2 mt-4">
+                        <canvas id="chart2" class="mt-1"></canvas>
+                    </div>
+                </div>
+                <div class="tab-pane fade col-lg-8 col-md-12 col-sm-12 mx-auto" id="chart3-section" role="tabpanel" aria-labelledby="chart3-tab">
+                    <div class="chart-container mt-4">
                         <canvas id="chart3" class="mt-5"></canvas>
                     </div>
-
-                    <!--Gráfico con los productos con mejor calificación-->
-                    <div class="chart-container2">
+                </div>
+                <div class="tab-pane fade col-lg-8 col-md-12 col-sm-12 mx-auto" id="chart4-section" role="tabpanel" aria-labelledby="chart4-tab">
+                    <div class="chart-container2 mt-4">
                         <canvas id="chart4" class="mt-5"></canvas>
                     </div>
-
-                    <div class="chart-container2">
-                        <canvas id="chart5" class="mt-5"></canvas>
+                </div>
+                <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chart5-section" role="tabpanel" aria-labelledby="chart5-tab">
+                    <div class="chart-container2 mt-4">
+                        <canvas id="chart5" class="mt-5 "></canvas>
                     </div>
-                    
                 </div>
             </div>
-
         </div>
         <script src="../../controllers/utils/chart.umd.min.js"></script>
     </main>
@@ -70,7 +89,6 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <script src="../../controllers/utils/sweetalert.min.js"></script>
     <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/utils/private.js"></script>

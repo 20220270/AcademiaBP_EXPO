@@ -83,6 +83,23 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+            case 'predictGraph':
+                if ($result['dataset'] = $ordenes->predictGraph()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen ordenes registradas';
+                }
+                break;
+            case 'perdidasPredictGraph':
+                if ($result['dataset'] = $ordenes->perdidasPredictGraph()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen ordenes registradas';
+                }
+                break;
+
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
