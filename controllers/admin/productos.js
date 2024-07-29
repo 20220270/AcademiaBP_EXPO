@@ -320,9 +320,16 @@ const openDelete2 = async (id) => {
     }
 }
 
-const openReport = (id) => {
+const openReport = () => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
     const PATH = new URL(`${SERVER_URL}reports/admin/productos.php`);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
+
+const openReport2 = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/detalles_productos.php`);
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }
