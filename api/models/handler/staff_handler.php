@@ -81,4 +81,22 @@ class StaffHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    //Métodos para los reportes del staff
+
+    //Reporte de todos los miembros del staff
+
+
+    //Reporte de todos los alumnos a cargo del miembro del staff seleccionado.
+
+    public function readAllAlumnosStaff()
+    {
+        $sql = "SELECT CONCAT(nombre_alumno, ' ', apellido_alumno) AS nombre_alumnos
+                FROM tb_alumnos INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
+                INNER JOIN tb_staffs USING (id_staff) where id_staff = ?
+                GROUP BY nombre_alumnos
+                ORDER BY id_staff;";
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
 }

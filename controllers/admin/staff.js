@@ -144,6 +144,12 @@ const fillTable = async (form = null) => {
                             
                             <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                             </button>
+
+                            <button type="submit" class="btn" id="btnEliminar" name="btnEliminar" onclick="openReport(${row.id_staff})">
+                            
+                            <img src="../../resources/images/reporte.png" alt="" width="30px" height="30px" class="mb-1">
+                            </button>
+
                             </div>
                         </div>
                     </div>
@@ -301,4 +307,13 @@ const openDelete2 = async (id) => {
             sweetAlert(2, DATA.error, false);
         }
     }
+}
+
+const openReport = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/staff_alumnos.php`);
+    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
+    PATH.searchParams.append('idStaff', id);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
 }
