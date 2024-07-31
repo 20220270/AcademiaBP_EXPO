@@ -41,9 +41,11 @@ class CategoriaStaffHandler
 
     public function readAll()
 {
-    $sql = "SELECT id_staff_categorias, id_staff, CONCAT(nombre_staff, ' ', apellido_staff) AS nombre_completo, imagen_staff, descripcion_extra, id_categoria_alumno, categoria, edad_minima, edad_maxima, imagen_categoria
+    $sql = "SELECT id_staff_categorias, id_staff, CONCAT(nombre_staff, ' ', apellido_staff) AS nombre_completo, 
+    imagen_staff, descripcion_extra, id_categoria_alumno, categoria, edad_minima, edad_maxima, imagen_categoria
                 FROM tb_staffs_categorias
                 INNER JOIN tb_staffs USING (id_staff)
+                INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
                 INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
             ORDER BY id_staff_categorias";
     return Database::getRows($sql);
@@ -55,6 +57,7 @@ class CategoriaStaffHandler
         $sql = 'SELECT id_staff_categorias, id_staff, id_categoria_horario, categoria
                 FROM tb_staffs_categorias
                 INNER JOIN tb_staffs USING (id_staff)
+                INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
                 INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
                 WHERE id_staff_categorias = ?';
 
@@ -87,9 +90,21 @@ class CategoriaStaffHandler
         return Database::getRows($sql);
     }
 
-    public function readAllCategorias()
+    public function readAllCategoriasHorarios()
     {
-        $sql = "SELECT id_categoria_alumno, categoria FROM tb_categorias_alumnos;";
+        $sql = "SELECT 
+    id_categoria_horario,
+    CONCAT(categoria, ', ', nombre_lugar, ', ', dia_entrenamiento, ' ', TIME_FORMAT(hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(hor_fin, '%h:%i %p')) AS horario
+    FROM 
+    tb_categorias_horarios
+    INNER JOIN 
+    tb_categorias_alumnos USING (id_categoria_alumno)
+     INNER JOIN 
+    tb_horarios_lugares USING (id_horario_lugar)
+    INNER JOIN 
+    tb_lugares_entrenamientos USING (id_lugar)
+   INNER JOIN 
+    tb_horarios_entrenamientos USING (id_horario)";
         return Database::getRows($sql);
     }
 

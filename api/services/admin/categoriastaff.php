@@ -90,8 +90,8 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen datos registrados';
                 }
                 break;
-            case 'readAllCategorias':
-                if ($result['dataset'] = $categoriastaff->readAllCategorias()) {
+            case 'readAllCategoriasHorarios':
+                if ($result['dataset'] = $categoriastaff->readAllCategoriasHorarios()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {

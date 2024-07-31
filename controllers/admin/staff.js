@@ -111,7 +111,7 @@ const openCreate2 = () => {
     // Se prepara el formulario.
     SAVE_FORM2.reset();
     fillSelect(STAFFCATEGORIA_API, 'readAllStaffs', 'idStaffAsignar');
-    fillSelect(STAFFCATEGORIA_API, 'readAllCategorias', 'idCategoriaAsignar');
+    fillSelect(STAFFCATEGORIA_API, 'readAllCategoriasHorarios', 'idCategoriaAsignar');
 }
 
 const fillTable = async (form = null) => {
@@ -275,7 +275,7 @@ const openUpdate2 = async (id) => {
         const ROW = DATA.dataset;
         ID_STAFFCATEGORIA.value = ROW.id_staff_categorias;
         fillSelect(STAFFCATEGORIA_API, 'readAllStaffs', 'idStaffAsignar', ROW.id_staff);
-        fillSelect(STAFFCATEGORIA_API, 'readAllCategorias', 'idCategoriaAsignar', ROW.id_categoria_alumno);
+        fillSelect(STAFFCATEGORIA_API, 'readAllCategoriasHorarios', 'idCategoriaAsignar', ROW.id_categoria_horario);
     } else {
         sweetAlert(2, DATA.error, false);
     }

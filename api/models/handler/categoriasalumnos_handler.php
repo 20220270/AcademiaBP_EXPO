@@ -303,9 +303,9 @@ class CategoriasAlumnosHandler
     CONCAT(le.nombre_lugar, ', ', he.dia_entrenamiento, ' ', TIME_FORMAT(he.hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(he.hor_fin, '%h:%i %p')) AS horario
     FROM 
     tb_horarios_lugares hl
-    JOIN 
+    INNER JOIN 
     tb_lugares_entrenamientos le ON hl.id_lugar = le.id_lugar
-    JOIN 
+   INNER JOIN 
     tb_horarios_entrenamientos he ON hl.id_horario = he.id_horario;";
         return Database::getRows($sql);
     }

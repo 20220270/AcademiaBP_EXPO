@@ -41,7 +41,7 @@ class CategoriaStaffData extends CategoriaStaffHandler
     public function setidCategorias($value)
     {
         if (Validator::validateNaturalNumber($value)) {
-            $this->idcategorialumno = $value;
+            $this->idcategorialumnohorario = $value;
             return true;
         } else {
             $this->data_error = 'El identificador de la categoría es incorrecto';
