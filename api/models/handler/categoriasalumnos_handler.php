@@ -179,4 +179,54 @@ class CategoriasAlumnosHandler
         return Database::getRows($sql, $params);
     }
 
+    //Reporte general de las categorías de alumnos
+
+    public function readAllCategoriasReport()
+    {
+        $sql = "SELECT 
+        id_categoria_alumno, 
+        categoria, 
+        CONCAT(edad_minima, '-' ,edad_maxima) as 'rango_edades', 
+        nivel_entrenamiento, 
+        CONCAT(nombre_lugar, ', ', dia_entrenamiento, ' ', TIME_FORMAT(hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(hor_fin, '%h:%i %p')) AS id_horario_lugar, 
+        imagen_categoria
+        FROM 
+        tb_categorias_alumnos
+       INNER JOIN 
+        tb_niveles_entrenamientos USING (id_nivel_entrenamiento)
+        INNER JOIN 
+        tb_horarios_lugares USING (id_horario_lugar)
+        INNER JOIN 
+        tb_lugares_entrenamientos USING (id_lugar)
+        INNER JOIN 
+        tb_horarios_entrenamientos USING (id_horario)
+        ORDER BY 
+        categoria;";
+        return Database::getRows($sql);
+    }
+
+    public function readAllCategoriasAlumnosReport()
+    {
+        $sql = "SELECT CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Nombre', TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS 'edad', nivel_entrenamiento
+        FROM 
+        tb_alumnos
+		INNER JOIN 
+        tb_staffs_categorias USING (id_staff_categorias)
+        INNER JOIN 
+        tb_categorias_alumnos USING (id_categoria_alumno)
+        INNER JOIN 
+        tb_niveles_entrenamientos USING (id_nivel_entrenamiento)
+        INNER JOIN 
+        tb_horarios_lugares USING (id_horario_lugar)
+        INNER JOIN 
+        tb_lugares_entrenamientos USING (id_lugar)
+        INNER JOIN 
+        tb_horarios_entrenamientos USING (id_horario)
+        WHERE id_categoria_alumno = ?
+        GROUP BY id_categoria_alumno
+		ORDER BY id_categoria_alumno";
+        $params = array($this->idcategoria);
+        return Database::getRows($sql, $params);
+    }
+
 }
