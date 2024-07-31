@@ -250,7 +250,7 @@ class ProductoHandler
     */
     public function productosCategoria()
     {
-        $sql = 'SELECT categoria_producto, nombre_producto, descuento_producto, precio_producto, descuento_producto, estado_producto, talla, color from tb_detalleProducto
+        $sql = 'SELECT categoria_producto, nombre_producto, descuento_producto, precio_producto, descuento_producto, estado_producto, talla, color, existencias_producto from tb_detalleProducto
                 INNER JOIN tb_tallas USING(id_talla)
                 INNER JOIN tb_colores USING(id_color)
                 INNER JOIN tb_productos USING(id_producto)

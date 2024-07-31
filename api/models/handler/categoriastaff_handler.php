@@ -11,7 +11,7 @@ class CategoriaStaffHandler
      */
     protected $idstaffcategoria = null;
     protected $idstaff = null;
-    protected $idcategorialumno = null;
+    protected $idcategorialumnohorario = null;
 
 
 
@@ -33,9 +33,9 @@ class CategoriaStaffHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_staffs_categorias (id_staff, id_categoria_alumno)
+        $sql = 'INSERT INTO tb_staffs_categorias (id_staff, id_categoria_horario)
                 VALUES(?, ?)';
-        $params = array($this->idstaff, $this->idcategorialumno);
+        $params = array($this->idstaff, $this->idcategorialumnohorario);
         return Database::executeRow($sql, $params);
     }
 
@@ -52,7 +52,7 @@ class CategoriaStaffHandler
 
     public function readOne()
     {
-        $sql = 'SELECT id_staff_categorias, id_staff, id_categoria_alumno
+        $sql = 'SELECT id_staff_categorias, id_staff, id_categoria_horario, categoria
                 FROM tb_staffs_categorias
                 INNER JOIN tb_staffs USING (id_staff)
                 INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
@@ -67,9 +67,9 @@ class CategoriaStaffHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_staffs_categorias
-                SET id_staff = ?, id_categoria_alumno = ?
+                SET id_staff = ?, id_categoria_horario = ?
                 WHERE id_staff_categorias = ?';
-        $params = array($this->idstaff, $this->idcategorialumno, $this->idstaffcategoria);
+        $params = array($this->idstaff, $this->idcategorialumnohorario, $this->idstaffcategoria);
         return Database::executeRow($sql, $params);
     }
 
@@ -92,4 +92,5 @@ class CategoriaStaffHandler
         $sql = "SELECT id_categoria_alumno, categoria FROM tb_categorias_alumnos;";
         return Database::getRows($sql);
     }
+
 }

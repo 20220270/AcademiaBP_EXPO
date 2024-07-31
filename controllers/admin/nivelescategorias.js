@@ -16,9 +16,13 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
 
     const SAVE_MODAL2 = new bootstrap.Modal('#saveModal2'),
     MODAL_TITLE2 = document.getElementById('modalTitle2');
+
+    const SAVE_MODAL3 = new bootstrap.Modal('#saveModal3'),
+    MODAL_TITLE3 = document.getElementById('modalTitle3');
     
     CARD_NIVELES_ENTRENAMIENTO = document.getElementById('cardsNivelesEntrenamiento');
     CARD_CATEGORIAS_ALUMNOS = document.getElementById('cardsCategoriasAlumnos');
+    CARD_CATEGORIAS_ALUMNOS_HORARIOS = document.getElementById('cardsCategoriasAlumnosHorarios');
 
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
@@ -36,6 +40,11 @@ const SAVE_FORM = document.getElementById('saveForm'),
     HORARIO_ENTRENO = document.getElementById('selectHorarioEntrenamiento'),
     IMAGEN_CATEGORIA = document.getElementById('imagenCategoriaEntrenamiento');
 
+    const SAVE_FORM3 = document.getElementById('saveForm3'),
+    ID_CATEGORIA_ALUMNO_HORARIO = document.getElementById('idCategoriaHorario'),
+    ID_CATEGORIA_ALUMNOO = document.getElementById('selectCategoria'),
+    ID_CATEGORIA_HORARIO = document.getElementById('selectHorarioCategoria');
+
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -45,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
     fillTable2();
+    fillTable3();
 });
 
 SEARCH_FORM.addEventListener('submit', (event) => {
@@ -104,6 +114,28 @@ SAVE_FORM2.addEventListener('submit', async (event) => {
     }
   });
 
+  SAVE_FORM3.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Se verifica la acción a realizar.
+    (ID_CATEGORIA_ALUMNO_HORARIO.value) ? action = 'updateRowAlumnosHorario' : action = 'createRowAlumnosHorario';
+    // Constante tipo objeto con los datos del formulario.
+    const FORM = new FormData(SAVE_FORM3);
+    // Petición para guardar los datos del formulario.
+    const DATA = await fetchData(CATEGORIA_ALUMNO_API, action, FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se cierra la caja de diálogo.
+        SAVE_MODAL3.hide();
+        // Se muestra un mensaje de éxito.
+        sweetAlert(1, DATA.message, true);
+        // Se carga nuevamente la tabla para visualizar los cambios.
+        fillTable3();
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
+  });
+
 const fillTable = async (form = null) => {
   // Se inicializa el contenido de la tabla.
   //ROWS_FOUND.textContent = '';
@@ -127,13 +159,14 @@ const fillTable = async (form = null) => {
                 <div class="card-body shadow-lg bg-body-tertiary rounded">
         
                     <div class="d-flex align-items-center">
-                        <div class="col-md-4 d-flex align-items-center justify-content-center">
+                        <div class="col-md-12 d-flex align-items-center justify-content-center">
                             <img src="${SERVER_URL}images/niveles/${row.imagen_nivel}" class="img-fluid" width="600px" height="98px">
                         </div>
-                        <div class="col-md-8">
+                    </div>
+                    
+                        <div class="col-md-12">
                             <h5 class="card-title mb-2 fs-1">${row.nivel_entrenamiento}</h5>
                         </div>
-                    </div>
                 <p class="card-text mt-2">${row.descripcion_nivel}</p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
                 <button type="button" class="btn btn-sm" onclick="openUpdate(${row.id_nivel_entrenamiento})">
@@ -172,16 +205,16 @@ const fillTable2 = async (form = null) => {
                         <div class="card-body shadow-lg bg-body-tertiary rounded text-bg-dark">
                             
                             <div class="row align-items-center">
-                                <div class="col-md-4 d-flex justify-content-center">
+                                <div class="col-md-12 mb-2 d-flex justify-content-center">
                                     <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="img-fluid rounded">
                                 </div>
-                                <div class="col-md-8 ">
+                                <div class="col-md-12 mt-3 ">
                                 
                                     <h5 class="card-title mb-2 fs-6 text-dark text-start"><b>Categoría</b>: ${row.categoria}</h5>
                                     <h5 class="card-title mb-2 fs-6 text-dark text-start"><b>Edad mínima</b>: ${row.edad_minima}</h5>
                                     <h5 class="card-title mb-2 fs-6 text-dark text-start"><b>Edad máxima</b>: ${row.edad_maxima}</h5>
                                     <h5 class="card-title mb-2 fs-6 text-dark text-start"><b>Nivel de competencia</b>: ${row.nivel_entrenamiento}</h5>
-                                    <h5 class="card-title mb-2 fs-6 text-dark text-start"><b>Horario de entrenamiento</b>: ${row.id_horario_lugar}</h5>
+                                    
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
@@ -192,9 +225,53 @@ const fillTable2 = async (form = null) => {
                                     <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button>
                                 
-                                <button type="button" class="btn btn-sm" onclick="openReport(${row.id_categoria_alumno})">
-                                    <img src="../../resources/images/reporte.png" alt="" width="30px" height="30px" class="mb-1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    } else {
+        sweetAlert(4, DATA2.error, true);
+    }
+}
+
+const fillTable3 = async (form = null) => {
+    // Se inicializa el contenido de la tabla.
+    CARD_CATEGORIAS_ALUMNOS_HORARIOS.innerHTML = '';
+    // Se verifica la acción a realizar.
+    (form) ? action = 'searchRowsAlumnosHorario' : action = 'readAllAlumnosHorario';
+    // Petición para obtener los registros disponibles.
+    const DATA2 = await fetchData(CATEGORIA_ALUMNO_API, action, form);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA2.status) {
+        // Se recorre el conjunto de registros fila por fila.
+        DATA2.dataset.forEach(row => {
+            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+            CARD_CATEGORIAS_ALUMNOS_HORARIOS.innerHTML += `
+                <div class="col-lg-12">
+                    <div class="card w-100 mt-2">
+                        <div class="card-body shadow-lg bg-body-tertiary rounded text-bg-dark">
+                            
+                            <div class="row align-items-center">
+                                <div class="col-md-12 mb-2 d-flex justify-content-center">
+                                    <img src="${SERVER_URL}images/alumnos_categorias/${row.imagen_categoria}" class="img-fluid rounded">
+                                </div>
+                                <div class="col-md-12 mt-3 ">
+                                
+                                    <h5 class="card-title mb-2 fs-6 text-dark text-start"><b>Categoría</b>: ${row.categoria}</h5>
+                                    <h5 class="card-title mb-2 fs-6 text-dark text-start"><b>Entrenamiento</b>: ${row.id_horario_lugar}</h5>
+                                    
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-sm me-2" onclick="openUpdate3(${row.id_categoria_horario})">
+                                    <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button>
+                                <button type="button" class="btn btn-sm" onclick="openDelete3(${row.id_categoria_horario})">
+                                    <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                                </button>
+                                
                             </div>
                         </div>
                     </div>
@@ -223,7 +300,17 @@ const openCreate2 = () => {
     SAVE_FORM2.reset();
 
     fillSelect(CATEGORIA_ALUMNO_API, 'readNivelesAlumnos', 'selectNivelCompetencia');
-    fillSelect(CATEGORIA_ALUMNO_API, 'readAllHorariosCombo', 'selectHorarioEntrenamiento');
+  }
+
+  const openCreate3 = () => {
+    // Se muestra la caja de diálogo con su título.
+    SAVE_MODAL3.show();
+    MODAL_TITLE3.textContent = 'Asignar horarios de entrenamiento a las categorías';
+    // Se prepara el formulario.
+    SAVE_FORM3.reset();
+
+    fillSelect(CATEGORIA_ALUMNO_API, 'readCategoriasAlumnos', 'selectCategoria');
+    fillSelect(CATEGORIA_ALUMNO_API, 'readAllHorariosCombo', 'selectHorarioCategoria');
   }
 
 /*
@@ -275,7 +362,30 @@ const openUpdate2 = async (id) => {
         EDAD_MAXIMA.value = ROW.edad_maxima;
 
         fillSelect(CATEGORIA_ALUMNO_API, 'readNivelesAlumnos', 'selectNivelCompetencia', ROW.id_nivel_entrenamiento);
-        fillSelect(CATEGORIA_ALUMNO_API, 'readAllHorariosCombo', 'selectHorarioEntrenamiento', ROW.id_horario_lugar);
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
+  }
+
+  const openUpdate3 = async (id) => {
+    // Se define una constante tipo objeto con los datos del registro seleccionado.
+    const FORM = new FormData();
+    FORM.append('idCategoriaHorario', id);
+    // Petición para obtener los datos del registro solicitado.
+    const DATA = await fetchData(CATEGORIA_ALUMNO_API, 'readOneAlumnosHorario', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        SAVE_MODAL3.show();
+        MODAL_TITLE3.textContent = 'Actualizar asignación';
+        // Se prepara el formulario.
+        SAVE_FORM3.reset();
+        // Se inicializan los campos con los datos.
+        const ROW = DATA.dataset;
+        ID_CATEGORIA_ALUMNO_HORARIO.value = ROW.id_categoria_horario;
+
+        fillSelect(CATEGORIA_ALUMNO_API, 'readCategoriasAlumnos', 'selectCategoria', ROW.id_categoria_alumno);
+        fillSelect(CATEGORIA_ALUMNO_API, 'readAllHorariosCombo', 'selectHorarioCategoria', ROW.id_horario_lugar);
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -334,11 +444,36 @@ const openDelete2 = async (id) => {
     }
   }
 
-  const openReport = (id) => {
+  
+const openDelete3 = async (id) => {
+    // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
+    const RESPONSE = await confirmAction('¿Desea eliminar esta categoria de forma permanente?');
+    // Se verifica la respuesta del mensaje.
+    if (RESPONSE) {
+        
+        // Se define una constante tipo objeto con los datos del registro seleccionado.
+        const FORM = new FormData();
+        FORM.append('idCategoriaAlumno', id);
+        
+        // Petición para eliminar el registro seleccionado.
+        const DATA = await fetchData(CATEGORIA_ALUMNO_API, 'deleteRowAlumnosHorario', FORM);
+        
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            
+            // Se muestra un mensaje de éxito.
+            await sweetAlert(1, DATA.message, true);
+            // Se carga nuevamente la tabla para visualizar los cambios.
+            fillTable2();
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    }
+  }
+
+  const openReport = () => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/admin/categorias_de_alumnos.php`);
-    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
-    PATH.searchParams.append('idCategoriaAlumno', id);
+    const PATH = new URL(`${SERVER_URL}reports/admin/categoria_alumnos.php`);
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }

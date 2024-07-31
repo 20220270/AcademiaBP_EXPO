@@ -80,10 +80,31 @@ class CategoriasAlunmosData extends CategoriasAlumnosHandler
         }
     }
 
-    public function setIdHorarios($value)
+    public function setIdCategoriasHorarios($value)
     {
         if (Validator::validateNaturalNumber($value)) {
-            $this->idhorariolugar = $value;
+            $this->idcategoriahorario = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador de la asiganción horario-categoría es incorrecto';
+            return false;
+        }
+    }
+
+    public function CategoriasHorarios($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->idcategoriaa = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador de la categoría a asignar es incorrecto';
+            return false;
+        }
+    }
+    public function Horarios($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->idhorario = $value;
             return true;
         } else {
             $this->data_error = 'El identificador del horario a asignar es incorrecto';

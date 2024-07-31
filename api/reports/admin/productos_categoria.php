@@ -27,19 +27,20 @@ if (isset($_GET['idCategoriaProducto'])) {
                 $pdf->setTextColor(255, 255, 255);
                 // Se imprimen las celdas con los encabezados.
                 $pdf->cell(51, 10, 'Nombre del producto', 1, 0, 'C', 1);
-                $pdf->cell(20, 10, 'Talla', 1, 0, 'C', 1);
+                $pdf->cell(18, 10, 'Talla', 1, 0, 'C', 1);
                 $pdf->cell(25, 10, 'Color', 1, 0, 'C', 1);
-                $pdf->cell(30, 10, 'Precio', 1, 0, 'C', 1);
-                $pdf->cell(30, 10, 'Descuento', 1, 0, 'C', 1);
-                $pdf->cell(30, 10, 'Estado', 1, 1, 'C', 1);
+                $pdf->cell(23, 10, 'Precio', 1, 0, 'C', 1);
+                $pdf->cell(23, 10, 'Existencias', 1, 0, 'C', 1);
+                $pdf->cell(25, 10, 'Descuento', 1, 0, 'C', 1);
+                $pdf->cell(25, 10, 'Estado', 1, 1, 'C', 1);
                 // Se establece la fuente para los datos de los productos.
-                $pdf->setFont('Arial', '', 10);
+                $pdf->setFont('Arial', '', 9);
                 $pdf->setTextColor(0, 0, 0);
                 // Se recorren los registros fila por fila.
                 foreach ($dataProductos as $rowProducto) {
                     // Se imprimen las celdas con los datos de los productos.
                     $pdf->cell(51, 10, $pdf->encodeString($rowProducto['nombre_producto']), 1, 0, 'C');
-                    $pdf->cell(20, 10, $rowProducto['talla'], 1, 0, 'C');
+                    $pdf->cell(18, 10, $rowProducto['talla'], 1, 0, 'C');
 
                     // Convertir el color hexadecimal a RGB
                     list($r, $g, $b) = sscanf($rowProducto['color'], "%02x%02x%02x");
@@ -58,9 +59,10 @@ if (isset($_GET['idCategoriaProducto'])) {
                     $pdf->setXY($x + 25, $y);
 
                     // Continuar con las demás celdas
-                    $pdf->cell(30, 10, '$' . $rowProducto['precio_producto'], 1, 0, 'C');
-                    $pdf->cell(30, 10, $rowProducto['descuento_producto'] . '%', 1, 0, 'C');
-                    $pdf->cell(30, 10, $rowProducto['estado_producto'], 1, 1, 'C');
+                    $pdf->cell(23, 10, '$' . $rowProducto['precio_producto'], 1, 0, 'C');
+                    $pdf->cell(23, 10, $rowProducto['existencias_producto'], 1, 0, 'C');
+                    $pdf->cell(25, 10, $rowProducto['descuento_producto'] . '%', 1, 0, 'C');
+                    $pdf->cell(25, 10, $rowProducto['estado_producto'], 1, 1, 'C');
                 }
             } else {
                 $pdf->cell(0, 10, $pdf->encodeString('No hay productos para la categoría'), 1, 1);

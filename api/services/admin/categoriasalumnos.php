@@ -35,7 +35,6 @@ if (isset($_GET['action'])) {
                     !$categoriasalumnos->setEdadMinima($_POST['edadMinimaAlumno']) or
                     !$categoriasalumnos->setEdadMaxima($_POST['edadMaximaAlumno']) or
                     !$categoriasalumnos->setNivel($_POST['selectNivelCompetencia']) or
-                    !$categoriasalumnos->setIdHorarios($_POST['selectHorarioEntrenamiento']) or
                     !$categoriasalumnos->setImagenCategoria($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos->getFilename())
                 ) {
                     $result['error'] = $categoriasalumnos->getDataError();
@@ -63,15 +62,6 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-            case 'readAllHorariosCombo':
-                if ($result['dataset'] = $categoriasalumnos->readAllHorariosCombo()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-                } else {
-                    $result['error'] = 'No existen categorias registrados';
-                }
-                break;
-
             case 'readNivelesAlumnos':
                 if ($result['dataset'] = $categoriasalumnos->readNivelesAlumnos()) {
                     $result['status'] = 1;
@@ -91,34 +81,33 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                case 'updateRowAlumno':
-                    $_POST = Validator::validateForm($_POST);
-                    if (
-                        !$categoriasalumnos->setIdCategoria($_POST['idCategoriaAlumno']) or
+            case 'updateRowAlumno':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$categoriasalumnos->setIdCategoria($_POST['idCategoriaAlumno']) or
                     !$categoriasalumnos->setFilename() or
                     !$categoriasalumnos->setNombreCategoria($_POST['nombreCategoriaAlumno']) or
                     !$categoriasalumnos->setEdadMinima($_POST['edadMinimaAlumno']) or
                     !$categoriasalumnos->setEdadMaxima($_POST['edadMaximaAlumno']) or
                     !$categoriasalumnos->setNivel($_POST['selectNivelCompetencia']) or
-                    !$categoriasalumnos->setIdHorarios($_POST['selectHorarioEntrenamiento']) or
                     !$categoriasalumnos->setImagenCategoria($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos->getFilename())
-                    ) {
-                        $result['error'] = $categoriasalumnos->getDataError();
-                    } else {
-                        try {
-                            if ($categoriasalumnos->updateRowAlumno()) {
-                                $result['status'] = 1;
-                                $result['message'] = 'Categoría modificada correctamente';
-                                // Se asigna el estado del archivo después de actualizar.
-                                $result['fileStatus'] = Validator::changeFile($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos::RUTA_IMAGEN, $categoriasalumnos->getFilename());
-                            } else {
-                                $result['error'] = 'No se pudo modificar la categoría, puede que ya exista un registro con el mismo nombre';
-                            }
-                        } catch (Exception $e) {
-                            $result['error'] = 'Error al modificar la categoría: ' . $e->getMessage();
+                ) {
+                    $result['error'] = $categoriasalumnos->getDataError();
+                } else {
+                    try {
+                        if ($categoriasalumnos->updateRowAlumno()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Categoría modificada correctamente';
+                            // Se asigna el estado del archivo después de actualizar.
+                            $result['fileStatus'] = Validator::changeFile($_FILES['imagenCategoriaEntrenamiento'], $categoriasalumnos::RUTA_IMAGEN, $categoriasalumnos->getFilename());
+                        } else {
+                            $result['error'] = 'No se pudo modificar la categoría, puede que ya exista un registro con el mismo nombre';
                         }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al modificar la categoría: ' . $e->getMessage();
                     }
-                    break;
+                }
+                break;
 
             case 'deleteRowAlumno':
                 if (
@@ -136,6 +125,111 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+
+                /////(/)
+            case 'searchRowsAlumnosHorario':
+                if (!Validator::validateSearch($_POST['search2'])) {
+                    $result['error'] = Validator::getSearchError();
+                } elseif ($result['dataset'] = $categoriasalumnos->searchRowsAlumnosHorario()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
+                } else {
+                    $result['error'] = 'No hay coincidencias en una de las secciones';
+                }
+                break;
+
+
+            case 'createRowAlumnosHorario':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$categoriasalumnos->CategoriasHorarios($_POST['selectCategoria']) or
+                    !$categoriasalumnos->Horarios($_POST['selectHorarioCategoria'])
+                ) {
+                    $result['error'] = $categoriasalumnos->getDataError();
+                } else {
+                    try {
+                        if ($categoriasalumnos->createRowAlumnosHorario()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Categoria asignada a horario y lugar correctamente';
+                        } else {
+                            $result['error'] = 'No se pudo asignar la categoría al entrenamiento, puede que ya exista una categoría con el mismo data';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al crear la categoría: ' . $e->getMessage();
+                    }
+                }
+                break;
+            case 'readAllAlumnosHorario':
+                if ($result['dataset'] = $categoriasalumnos->readAllAlumnosHorario()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen categorias registrados';
+                }
+                break;
+
+            case 'readCategoriasAlumnos':
+                if ($result['dataset'] = $categoriasalumnos->readCategoriasAlumnos()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen categorias registrados';
+                }
+                break;
+
+            case 'readAllHorariosCombo':
+                if ($result['dataset'] = $categoriasalumnos->readAllHorariosCombo()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen categorias registrados';
+                }
+                break;
+
+            case 'readOneAlumnosHorario':
+                if (!$categoriasalumnos->setIdCategoriasHorarios($_POST['idCategoriaHorario'])) {
+                    $result['error'] = $categoriasalumnos->getDataError();
+                } elseif ($result['dataset'] = $categoriasalumnos->readOneAlumnosHorario()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Categoria inexistente';
+                }
+                break;
+
+            case 'updateRowAlumnosHorario':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$categoriasalumnos->setIdCategoriasHorarios($_POST['idCategoriaHorario']) or
+                    !$categoriasalumnos->CategoriasHorarios($_POST['selectCategoria']) or
+                    !$categoriasalumnos->Horarios($_POST['selectHorarioCategoria'])
+                ) {
+                    $result['error'] = $categoriasalumnos->getDataError();
+                } else {
+                    try {
+                        if ($categoriasalumnos->updateRowAlumnosHorario()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Asignación modificada correctamente';
+                        } else {
+                            $result['error'] = 'No se pudo modificar la asignación, puede que ya exista un registro con el mismo dato';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al modificar la categoría: ' . $e->getMessage();
+                    }
+                }
+                break;
+
+            case 'deleteRowAlumnosHorario':
+                if (
+                    !$categoriasalumnos->setIdCategoriasHorarios($_POST['idCategoriaHorario'])
+                ) {
+                    $result['error'] = $categoriasalumnos->getDataError();
+                } elseif ($categoriasalumnos->deleteRowAlumnosHorario()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Asinación eliminada correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al eliminar esta asignación';
+                }
+                break;
 
 
             default:
