@@ -28,11 +28,9 @@ if (isset($_GET['idCategoriaProducto'])) {
                 $pdf->setTextColor(255, 255, 255);
                 // Se imprimen las celdas con los encabezados.
                 $pdf->cell(51, 10, 'Nombre del producto', 1, 0, 'C', 1);
-                $pdf->cell(20, 10, 'Talla', 1, 0, 'C', 1);
-                $pdf->cell(25, 10, 'Color', 1, 0, 'C', 1);
-                $pdf->cell(30, 10, 'Precio', 1, 0, 'C', 1);
-                $pdf->cell(30, 10, 'Descuento', 1, 0, 'C', 1);
-                $pdf->cell(30, 10, 'Estado', 1, 1, 'C', 1);
+                $pdf->cell(20, 10, 'Edad maxima', 1, 0, 'C', 1);
+                $pdf->cell(25, 10, 'Nivel de entrenamiento', 1, 0, 'C', 1);
+                $pdf->cell(30, 10, 'Descripcion', 1, 0, 'C', 1);
                 // Se establece la fuente para los datos de los productos.
                 $pdf->setFont('Arial', '', 10);
                 $pdf->setTextColor(0, 0, 0);
