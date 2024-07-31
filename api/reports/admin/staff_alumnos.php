@@ -16,7 +16,7 @@ if (isset($_GET['idStaff'])) {
         // Se verifica si la categoría existe, de lo contrario se muestra un mensaje.
         if ($rowStaff = $staff->readOne()) {
             // Se inicia el reporte con el encabezado del documento.
-            $pdf->startReport('Alumnos a cargo de ' . $rowStaff['nombre_staff']);
+            $pdf->startReport('Alumnos a cargo de ' . $rowStaff['Nombre']);
             // Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
             if ($dataAlumnos = $staff->readAllAlumnosStaff()) {
                 // Se establece un color de relleno para los encabezados.
@@ -25,17 +25,19 @@ if (isset($_GET['idStaff'])) {
                 $pdf->setFont('Arial', 'B', 9);
                 $pdf->setTextColor(255, 255, 255);
                 // Se imprimen las celdas con los encabezados.
-                $pdf->cell(0, 10, 'Nombre del alumno', 1, 1, 'C', 1);
+                $pdf->cell(140, 10, 'Nombre del alumno', 1, 0, 'C', 1);
+                $pdf->cell(40, 10, 'Edad', 1, 1, 'C', 1);
                 // Se establece la fuente para los datos de los productos.
                 $pdf->setFont('Arial', '', 10);
                 $pdf->setTextColor(0, 0, 0);
                 // Se recorren los registros fila por fila.
                 foreach ($dataAlumnos as $rowAlumnos) {
                     // Se imprimen las celdas con los datos de los productos.
-                    $pdf->cell(0, 10, $pdf->encodeString($rowAlumnos['nombre_alumnos']), 1, 1, 'C');
+                    $pdf->cell(140, 10, $pdf->encodeString($rowAlumnos['nombre_alumnos']), 1, 0, 'C');
+                    $pdf->cell(40, 10, $pdf->encodeString($rowAlumnos['edad'] . ' años'), 1, 1, 'C');
                 }
             } else {
-                $pdf->cell(0, 10, $pdf->encodeString('No hay alumnos a cargo del personal seleccionado'), 1, 1);
+                $pdf->cell(0, 10, $pdf->encodeString('No hay alumnos a cargo de ') . $pdf->encodeString($rowStaff['Nombre']), 1, 1);
             }
             // Se llama implícitamente al método footer() y se envía el documento al navegador web.
             $pdf->output('I', 'alumnos_staff.pdf');

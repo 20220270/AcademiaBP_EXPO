@@ -49,9 +49,9 @@ class StaffHandler
 
     public function readOne()
     {
-        $sql = 'SELECT id_staff, nombre_staff, apellido_staff, imagen_staff, descripcion_extra
+        $sql = "SELECT id_staff, nombre_staff, apellido_staff, imagen_staff, descripcion_extra, CONCAT(nombre_staff, ' ' ,apellido_staff) as 'Nombre'
                 FROM tb_staffs
-                WHERE id_staff = ?';
+                WHERE id_staff = ?";
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
@@ -91,7 +91,7 @@ class StaffHandler
 
     public function readAllAlumnosStaff()
     {
-        $sql = "SELECT CONCAT(nombre_alumno, ' ', apellido_alumno) AS nombre_alumnos
+        $sql = "SELECT CONCAT(nombre_alumno, ' ', apellido_alumno) AS nombre_alumnos, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS 'edad'
                 FROM tb_alumnos INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
                 INNER JOIN tb_staffs USING (id_staff) where id_staff = ?
                 GROUP BY nombre_alumnos
