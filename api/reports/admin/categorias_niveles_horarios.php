@@ -15,27 +15,27 @@ if ($dataCategorias = $categorias->readAllCategoriasReport()) {
     // Se establece un color de relleno para los encabezados.
     $pdf->setFillColor(64, 136, 64);
     // Se establece la fuente para los encabezados.
-    $pdf->setFont('Arial', 'B', 9);
+    $pdf->setFont('Arial', 'B', 8);
     $pdf->setTextColor(255, 255, 255);
     // Se imprimen las celdas con los encabezados.
-    $pdf->cell(22, 10, 'Nombre', 1, 0, 'C', 1);
+    $pdf->cell(30, 10, 'Nombre', 1, 0, 'C', 1);
     $pdf->cell(30, 10, 'Rango de edades', 1, 0, 'C', 1);
-    $pdf->cell(30, 10, 'Nivel', 1, 0, 'C', 1);
-    $pdf->cell(105, 10, 'Horario de entrenamiento', 1, 1, 'C', 1);
+    $pdf->cell(28, 10, 'Nivel', 1, 0, 'C', 1);
+    $pdf->cell(98, 10, 'Horario de entrenamiento', 1, 1, 'C', 1);
 
     // Se establece un color de relleno para mostrar el nombre de la categoría.
     $pdf->setFillColor(240);
     // Se establece la fuente para los datos de los productos.
-    $pdf->setFont('Arial', '', 9);
+    $pdf->setFont('Arial', '', 8);
     $pdf->setTextColor(0, 0, 0);
 
     foreach ($dataCategorias as $rowCategoriaa) {
         
         // Se imprimen las celdas con los datos de los productos.
-        $pdf->cell(22, 10, $pdf->encodeString( $rowCategoriaa['categoria']), 1, 0, 'C');
+        $pdf->cell(30, 10, $pdf->encodeString( $rowCategoriaa['categoria']), 1, 0, 'C');
         $pdf->cell(30, 10, $pdf->encodeString($rowCategoriaa['rango_edades'] . ' años'), 1, 0, 'C');
-        $pdf->cell(30, 10, $pdf->encodeString( $rowCategoriaa['nivel_entrenamiento']), 1, 0, 'C');
-        $pdf->cell(105, 10, $pdf->encodeString($rowCategoriaa['id_horario_lugar']), 1, 1, 'C');
+        $pdf->cell(28, 10, $pdf->encodeString( $rowCategoriaa['nivel_entrenamiento']), 1, 0, 'C');
+        $pdf->cell(98, 10, $pdf->encodeString($rowCategoriaa['id_horario_lugar']), 1, 1, 'C');
     }
 } else {
     $pdf->cell(0, 10, $pdf->encodeString('No hay productos para mostrar'), 1, 1);
