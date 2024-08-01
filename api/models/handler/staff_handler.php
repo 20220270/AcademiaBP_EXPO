@@ -47,6 +47,15 @@ class StaffHandler
         return Database::getRows($sql);
     }
 
+    public function readAllReport()
+    {
+        $sql = 'SELECT id_staff, nombre_staff, apellido_staff, descripcion_extra
+                FROM tb_staffs
+                ORDER BY apellido_staff';
+        return Database::getRows($sql);
+    }
+
+
     public function readOne()
     {
         $sql = "SELECT id_staff, nombre_staff, apellido_staff, imagen_staff, descripcion_extra, CONCAT(nombre_staff, ' ' ,apellido_staff) as 'Nombre'
