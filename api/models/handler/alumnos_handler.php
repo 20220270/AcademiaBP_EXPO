@@ -65,6 +65,8 @@ class AlumnosHandler
     LEFT JOIN 
     tb_staffs_categorias USING (id_staff_categorias)
     LEFT JOIN 
+    tb_categorias_horarios USING(id_categoria_horario)
+    LEFT JOIN 
     tb_categorias_alumnos USING(id_categoria_alumno)
     LEFT JOIN 
     tb_staffs USING (id_staff)
@@ -122,16 +124,18 @@ class AlumnosHandler
     public function categoriasConMasAlumnos()
     {
         $sql = "SELECT 
-                ca.categoria,
-                COUNT(a.id_alumno) AS cantidad_alumnos
+                categoria,
+                COUNT(id_alumno) AS cantidad_alumnos
                 FROM 
-                tb_categorias_alumnos ca
+                tb_alumnos
                 JOIN 
-                tb_staffs_categorias sc ON ca.id_categoria_alumno = sc.id_categoria_alumno
+                tb_staffs_categorias USING(id_staff_categorias)
                 JOIN 
-                tb_alumnos a ON sc.id_staff_categorias = a.id_staff_categorias
+                tb_categorias_horarios USING(id_categoria_horario)
+                JOIN 
+                tb_categorias_alumnos USING(id_categoria_alumno)
                 GROUP BY 
-                ca.categoria
+                categoria
                 ORDER BY 
                 cantidad_alumnos DESC LIMIT 5";
                 return Database::getRows($sql);
