@@ -103,9 +103,12 @@ class StaffHandler
 
     public function readAllAlumnosStaff()
     {
-        $sql = "SELECT CONCAT(nombre_alumno, ' ', apellido_alumno) AS nombre_alumnos, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS 'edad'
+        $sql = "SELECT CONCAT(nombre_alumno, ' ', apellido_alumno) AS nombre_alumnos, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS 'edad', 
+                CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_clientes
                 FROM tb_alumnos INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
-                INNER JOIN tb_staffs USING (id_staff) where id_staff = ?
+                INNER JOIN tb_staffs USING (id_staff) 
+                INNER JOIN tb_clientes USING (id_cliente) 
+                WHERE id_staff = ?
                 GROUP BY nombre_alumnos
                 ORDER BY id_staff;";
         $params = array($this->id);

@@ -168,7 +168,7 @@ class CategoriasAlumnosHandler
         categoria, 
         CONCAT(edad_minima, '-' ,edad_maxima) as 'rango_edades', 
         nivel_entrenamiento,
-        CONCAT(nombre_lugar, ' ', dia_entrenamiento, ' ', TIME_FORMAT(hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(hor_fin, '%h:%i %p')) AS id_horario_lugar
+        CONCAT(nombre_lugar, ', ', dia_entrenamiento, ' ', TIME_FORMAT(hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(hor_fin, '%h:%i %p')) AS id_horario_lugar
         FROM 
         tb_categorias_horarios
         INNER JOIN 
