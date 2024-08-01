@@ -164,14 +164,6 @@ class ClienteHandler
         return Database::getRows($sql);
     }
 
-    public function readAllReport()
-    {
-        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, estado_cliente, telefono_cliente, estado_cliente
-                FROM tb_clientes
-                ORDER BY apellido_cliente';
-        return Database::getRows($sql);
-    }
-
 
     /*
     *  1

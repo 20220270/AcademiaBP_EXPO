@@ -7,42 +7,32 @@ require_once ('../../models/data/staff_data.php');
 // Se instancia la clase para crear el reporte.
 $pdf = new Report;
 // Se inicia el reporte con el encabezado del documento.
-$pdf->startReport('staffs Registrados');
+$pdf->startReport('Miembros del staff registrados');
 
 
 // Se instancia el modelo staff para obtener los datos.
 $staffModel = new StaffData;
 // Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
-if ($dataStaff = $staffModel->readAllReport()) {
+if ($dataStaff = $staffModel->readAll()) {
     // Se establece un color de relleno para los encabezados.
-    $pdf->setFillColor(13, 92, 49);
+    $pdf->setFillColor(64, 136, 64);
     $pdf->setTextColor(255, 255, 255);
     // Se establece la fuente para los encabezados.
-    $pdf->setFont('Arial', 'B', 8);
+    $pdf->setFont('Arial', 'B', 11);
 
     // Encabezados
-    $pdf->cell(10, 10, 'ID', 1, 0, 'C', 1);
-    $pdf->cell(25, 10, 'Nombre', 1, 0, 'C', 1);
-    $pdf->cell(25, 10, 'Apellido', 1, 0, 'C', 1);
-    $pdf->cell(130, 10, 'Descripcion', 1, 1, 'C', 1);
+    $pdf->cell(0, 10, 'Nombre completo', 1, 1, 'C', 1);
 
     // Se establece la fuente para los datos de los staffs.
-    $pdf->setFont('Arial', '', 8);
+    $pdf->setFont('Arial', '', 11);
 
     // Recorremos los datos de los staffs
     foreach ($dataStaff as $staff) {
         $pdf->setTextColor(0, 0, 0);
-        // ID del staff
-        $pdf->cell(10, 10, $staff['id_staff'], 1, 0, 'C');
 
         // Nombre
-        $pdf->cell(25, 10, $pdf->encodeString($staff['nombre_staff']), 1, 0, 'C');
+        $pdf->cell(0, 10, $pdf->encodeString($staff['nombre_completo']), 1, 1, 'C');
 
-        // Apellido
-        $pdf->cell(25, 10, $pdf->encodeString($staff['apellido_staff']), 1, 0, 'C');
-
-        // Correo
-        $pdf->cell(130, 10, $pdf->encodeString($staff['descripcion_extra']), 1, 1, 'C');
     }
 } else {
     // Si no hay staffs registrados
