@@ -108,7 +108,13 @@ const fillTable = async (form = null) => {
                     
                     <img src="../../resources/images/btnDetalles.png" alt="" width="30px" height="30px"
                         class="mb-1">
-                </button>
+                    </button>
+
+                    <button type="submit" class="btn mt-1" id="btnDetalles" name="btnDetalles" onclick="openReport(${row.id_compra})">
+                    
+                    <img src="../../resources/images/report.png" alt="" width="30px" height="30px"
+                        class="mb-1">
+                    </button>
 
                   </td>
               </tr>
@@ -154,6 +160,9 @@ const openDetail = async (id) => {
     // Petición para obtener los datos del registro solicitado.
     const DATA = await fetchData(COMPRAS_API, 'readDetails', FORM);
 
+    //Variable para calcular el total de la compra a partir de los sub totales
+    let totalCompra = 0;
+
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         if (DATA.status) {
@@ -173,12 +182,21 @@ const openDetail = async (id) => {
                       
                   </tr>
               `;
+
+              totalCompra += parseFloat(row.SubtotalConDescuento);
             });
             // Se muestra un mensaje de acuerdo con el resultado.
             ROWS_FOUND.textContent = DATA.message;
         } else {
             sweetAlert(4, DATA.error, true);
         }
+
+        TABLE_BODY2.innerHTML += `
+                  <tr>
+                    <td colspan="6" class="bg-dark text-white fw-bold">Total de la compra</td>
+                    <td class="bg-dark text-white fw-bold">$${totalCompra.toFixed(2)}</td>
+                </tr>
+              `
         
         // Se muestra la caja de diálogo con su título.
         DETALLE_FORM.show();
@@ -221,4 +239,13 @@ const openDelete = async (id) => {
             sweetAlert(2, DATA.error, false);
         }
     }
+}
+
+const openReport = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/compra_productos.php`);
+    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
+    PATH.searchParams.append('idCompra', id);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
 }
