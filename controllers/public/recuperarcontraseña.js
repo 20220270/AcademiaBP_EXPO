@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   document.getElementById("botonEnviarCorreo").addEventListener("click", async function () {
+
     const CODIGO = generateRandomCode(8); // Puedes ajustar la longitud del código aquí
 
     const FORM = new FormData(FORM_CORREO);
@@ -119,7 +120,7 @@ const enviarEmail = async (codigo, email, nombre) => {
   };
 
   try {
-    const response = await emailjs.send('service_s2lfbj7', 'template_a4w4ouh', templateParams);
+    const response = await emailjs.send('service_s2lfbj7', 'template_o3v4ckw', templateParams);
     console.log('Correo enviado exitosamente:', response.status, response.text);
     if (response.status !== 200) {
       throw new Error('Error al enviar el correo');
