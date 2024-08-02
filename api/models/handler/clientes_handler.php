@@ -76,6 +76,15 @@ class ClienteHandler
         return Database::executeRow($sql, $params);
     }
 
+    public function checkCorreo()
+    {
+        $sql = 'SELECT correo_cliente, nombre_cliente
+                FROM tb_clientes
+                WHERE correo_cliente = ?;';
+        $params = array($this->correo);
+        return Database::getRow($sql, $params);
+    }
+
     public function readProfile()
     {
         $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, correo_cliente, telefono_cliente, dui_cliente, direccion_cliente, foto_cliente, fecha_registro
@@ -84,6 +93,7 @@ class ClienteHandler
         $params = array($_SESSION['idCliente']);
         return Database::getRow($sql, $params);
     }
+    
 
     public function checkPassword($password)
     {
@@ -163,7 +173,6 @@ class ClienteHandler
                 ORDER BY id_cliente";
         return Database::getRows($sql);
     }
-
 
     /*
     *  1

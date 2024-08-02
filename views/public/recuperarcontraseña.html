@@ -14,12 +14,14 @@
 
 <body>
     <main>
-        <!--contenedor donde se hara la recuperacion de contraseña-->
+
+        <!--contenedor 1 donde se hara la recuperacion de contraseña-->
         <div class="container text-center mt-5">
             <div class="row">
                 <div class="col contenedor1">
-                    <!--Imagen arriba del titulo-->
-                    <div class="d-flex justify-content-center align-items-center mt-5">
+                   <form id="formCorreo">
+                     <!--Imagen arriba del titulo-->
+                     <div class="d-flex justify-content-center align-items-center mt-5">
                         <img src="/resources/images/logoAcademiaBP.png" alt="..." width="100px" height="100px">
                     </div>
                     <h3 class="text-center mt-3">Recupera tu contraseña</h3>
@@ -47,8 +49,10 @@
                             </a>
                         </div>
                     </div>
+                   </form>
                 </div>
 
+                <!--contenedor 2 donde se pide el código-->
                 <div class="col contenedor2">
                     <!--Imagen arriba del titulo-->
                     <div class="d-flex justify-content-center align-items-center mt-5">
@@ -79,6 +83,8 @@
                     </div>
                 </div>
 
+
+                 <!--contenedor 3 donde se ingresa la nueva contraseña-->
                 <div class="col contenedor3">
                     <!--Imagen arriba del titulo-->
                     <div class="d-flex justify-content-center align-items-center mt-5">
@@ -92,14 +98,14 @@
                         <div class="mb-3 input-with-icon">
                             <img src="/resources/images/confirmacontra.png" alt="..." width="25px" height="25px">
                             <!--Input donde ingresas la nueva contraseña-->
-                            <input type="password" class="form-control mt-5" id="formGroupExampleInput"
+                            <input type="password" class="form-control mt-5" id="nuevaClave"
                                 placeholder="Ingresa tu nueva contraseña">
 
                         </div>
                         <div class="mb-3 input-with-icon">
                             <img src="/resources/images/confirmacontra.png" alt="..." width="25px" height="25px">
                             <!--Input donde confirmas la nueva contraseña-->
-                            <input type="password" class="form-control mt-3" id="formGroupExampleInput"
+                            <input type="password" class="form-control mt-3" id="confirmarClave"
                                 placeholder="Confirma tu nueva contraseña">
 
                         </div>
@@ -119,8 +125,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+        <script src="../../controllers/utils/sweetalert.min.js"></script>
+    <script src="../../controllers/utils/components.js"></script>
     <!--Controlador de la pantalla recuperarcontraseña-->
     <script src="/controllers/public/recuperarcontraseña.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 </body>
 
 </html>
