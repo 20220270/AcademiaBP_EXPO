@@ -136,7 +136,7 @@ const graficoBarrasCategorias = async () => {
             cantidades.push(row.cantidad_producto);
         });
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart5', categorias, cantidades, 'Cantidad de productos', 'Categoría con más productos');
+        barGraph('chart5', categorias, cantidades, 'Cantidad de productos', 'Categorías con más productos');
     } else {
         document.getElementById('chart5').remove();
         console.log(DATA.error);
