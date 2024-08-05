@@ -6,61 +6,13 @@ document.addEventListener("DOMContentLoaded", function () {
   // Obtener referencia a los botones y a los contenedores
   var botonEnviarCorreo = document.getElementById("botonEnviarCorreo");
   var botonVerificarCodigo = document.getElementById("botonVerificarCodigo");
+  var botonReenviarCorreo = document.getElementById("botonReenviarCodigo");
   var BOTONREGRESAR = document.getElementById("regresarBoton1");
   var BOTONREGRESAR2 = document.getElementById("regresarBoton2");
   var contenedor1 = document.querySelector(".contenedor1");
   var contenedor2 = document.querySelector(".contenedor2");
   var contenedor3 = document.querySelector(".contenedor3");
 
-
-
-  // Agregar un event listener al botón botonVerificarCodigo
-  botonVerificarCodigo.addEventListener("click", function () {
-    event.preventDefault();
-    // Ocultar contenedor2 y mostrar contenedor3
-    const inputCodigo = document.getElementById("inputCodigo").value;
-
-     if (inputCodigo === localStorage.getItem("codigo")) {
-
-      sweetAlert(1, "El código ingresado es correcto", true);
-      contenedor2.style.display = "none";
-      contenedor3.style.display = "block";
-
-      // Centrar contenedor3 en la pantalla
-      contenedor3.style.position = "absolute";
-      contenedor3.style.top = "50%";
-      contenedor3.style.left = "50%";
-      contenedor3.style.transform = "translate(-50%, -50%)";
-    }
-    else {
-      sweetAlert(2, "El código ingresado es incorrecto", false);
-    }
-
-  });
-
-  BOTONREGRESAR.addEventListener("click", function () {
-    // Ocultar contenedor2 y mostrar contenedor3
-    contenedor1.style.display = "block";
-    contenedor2.style.display = "none";
-
-    // Centrar contenedor3 en la pantalla
-    contenedor1.style.position = "absolute";
-    contenedor1.style.top = "50%";
-    contenedor1.style.left = "50%";
-    contenedor1.style.transform = "translate(-50%, -50%)";
-  });
-
-  BOTONREGRESAR2.addEventListener("click", function () {
-    // Ocultar contenedor2 y mostrar contenedor3
-    contenedor2.style.display = "block";
-    contenedor3.style.display = "none";
-
-    // Centrar contenedor3 en la pantalla
-    contenedor2.style.position = "absolute";
-    contenedor2.style.top = "50%";
-    contenedor2.style.left = "50%";
-    contenedor2.style.transform = "translate(-62%, -50%)";
-  });
 
   botonEnviarCorreo.addEventListener("click", async function () {
     event.preventDefault();
@@ -96,7 +48,79 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+  BOTONREGRESAR.addEventListener("click", function () {
+    // Ocultar contenedor2 y mostrar contenedor3
+    contenedor1.style.display = "block";
+    contenedor2.style.display = "none";
 
+    // Centrar contenedor3 en la pantalla
+    contenedor1.style.position = "absolute";
+    contenedor1.style.top = "50%";
+    contenedor1.style.left = "50%";
+    contenedor1.style.transform = "translate(-50%, -50%)";
+  });
+
+  // Agregar un event listener al botón botonVerificarCodigo
+  botonVerificarCodigo.addEventListener("click", function () {
+    event.preventDefault();
+    // Ocultar contenedor2 y mostrar contenedor3
+    const inputCodigo = document.getElementById("inputCodigo").value;
+
+     if (inputCodigo === localStorage.getItem("codigo")) {
+
+      sweetAlert(1, "El código ingresado es correcto", true);
+      contenedor2.style.display = "none";
+      contenedor3.style.display = "block";
+
+      // Centrar contenedor3 en la pantalla
+      contenedor3.style.position = "absolute";
+      contenedor3.style.top = "50%";
+      contenedor3.style.left = "50%";
+      contenedor3.style.transform = "translate(-50%, -50%)";
+    }
+    else {
+      sweetAlert(2, "El código ingresado es incorrecto", false);
+    }
+
+  });
+
+  // Agregar un event listener al botón botonReenviarCorreo
+  botonReenviarCorreo.addEventListener("click", async function () {
+    event.preventDefault();
+    const CODIGO = generateRandomCode(8); // Puedes ajustar la longitud del código aquí
+
+    const FORM = new FormData(FORM_CORREO);
+    const DATA = await fetchData(API_CLIENTE, 'checkCorreo', FORM);
+    const NOMBRE = DATA.dataset.nombre_cliente;
+
+    if (DATA.status) {
+      // Enviar el correo y obtener la respuesta
+      const RESPONSE_EMAIL = await enviarEmail(CODIGO, document.getElementById("inputCorreo").value, NOMBRE);
+      if (RESPONSE_EMAIL) {
+        localStorage.setItem("codigo", CODIGO);
+        sweetAlert(1, DATA.message, true);
+      } else {
+        sweetAlert(2, DATA.error, false);
+      }
+    }
+    else {
+      sweetAlert(2, DATA.error, false);
+    }
+
+  });
+
+
+  BOTONREGRESAR2.addEventListener("click", function () {
+    // Ocultar contenedor2 y mostrar contenedor3
+    contenedor2.style.display = "block";
+    contenedor3.style.display = "none";
+
+    // Centrar contenedor3 en la pantalla
+    contenedor2.style.position = "absolute";
+    contenedor2.style.top = "50%";
+    contenedor2.style.left = "50%";
+    contenedor2.style.transform = "translate(-62%, -50%)";
+  });
 });
 
 
