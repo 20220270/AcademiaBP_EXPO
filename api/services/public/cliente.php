@@ -169,6 +169,22 @@ if (isset($_GET['action'])) {
                         $result['error'] = 'Cliente inexistente';
                     }
                     break;
+            case 'updateClave':
+                    $_POST = Validator::validateForm($_POST);
+                       if (
+                            !$cliente->setCorreo($_POST['inputCorreo']) or
+                            !$cliente->setClave($_POST['nuevaClave'])
+                            ) {
+                            $result['error'] = $cliente->getDataError();
+                     }elseif ($_POST['nuevaClave'] != $_POST['confirmarClave']) {
+                            $result['error'] = 'Contraseñas diferentes';} 
+                    elseif ($cliente->updateClave()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Contraseña actualizada correctamente';
+                    } else {
+                            $result['error'] = 'Ocurrió un problema al actualizar la contraseña';
+                    }
+                    break;
             case 'signUpMovil':
                 $_POST = Validator::validateForm($_POST);
                 if (

@@ -212,7 +212,31 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Credenciales incorrectas';
                 }
                 break;
-
+            case 'checkCorreo':
+                    if (!$administrador->setCorreo($_POST['inputCorreo'])) {
+                        $result['error'] = $administrador->getDataError();
+                    } elseif ($result['dataset'] = $administrador->checkCorreo()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'administrador inexistente';
+                    }
+                    break;
+            case 'updateClave':
+                    $_POST = Validator::validateForm($_POST);
+                    if (
+                                !$cliente->setCorreo($_POST['inputCorreo']) or
+                                !$cliente->setClave($_POST['nuevaClave'])
+                                ) {
+                                $result['error'] = $cliente->getDataError();
+                         }elseif ($_POST['nuevaClave'] != $_POST['confirmarClave']) {
+                                $result['error'] = 'Contraseñas diferentes';} 
+                        elseif ($cliente->updateClave()) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Contraseña actualizada correctamente';
+                        } else {
+                                $result['error'] = 'Ocurrió un problema al actualizar la contraseña';
+                        }
+                        break;
             case 'checkEmail':
                 // Verificar si se proporcionó un correo electrónico en la solicitud
                 if (isset($_POST['email'])) {

@@ -109,6 +109,16 @@ class AdministradorHandler
         return Database::getRows($sql, $params);
     }
 
+    
+    public function checkCorreo()
+    {
+        $sql = 'SELECT correo_administrador, nombre_admistrador
+                FROM tb_administradores
+                WHERE correo_administrador = ?;';
+        $params = array($this->correo);
+        return Database::getRow($sql, $params);
+    }
+
     public function createRow()
     {
         $sql = 'INSERT INTO tb_administradores(nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, estado_adminstrador, id_nivel, foto_administrador)

@@ -1,12 +1,15 @@
 
 const FORM_CORREO = document.getElementById("formCorreo");
+const FORM_CONTRA = document.getElementById("formContra");
 const API_CLIENTE = 'services/public/cliente.php';
+const API_ADMIN = 'services/admin/administrador.php';
 
 document.addEventListener("DOMContentLoaded", function () {
   // Obtener referencia a los botones y a los contenedores
   var botonEnviarCorreo = document.getElementById("botonEnviarCorreo");
   var botonVerificarCodigo = document.getElementById("botonVerificarCodigo");
   var botonReenviarCorreo = document.getElementById("botonReenviarCodigo");
+  var botonContra = document.getElementById("botonResetContra");
   var BOTONREGRESAR = document.getElementById("regresarBoton1");
   var BOTONREGRESAR2 = document.getElementById("regresarBoton2");
   var contenedor1 = document.querySelector(".contenedor1");
@@ -19,16 +22,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const CODIGO = generateRandomCode(8); // Puedes ajustar la longitud del código aquí
 
     const FORM = new FormData(FORM_CORREO);
-    const DATA = await fetchData(API_CLIENTE, 'checkCorreo', FORM);
-    const NOMBRE = DATA.dataset.nombre_cliente;
+    const DATA_CLIENTE = await fetchData(API_CLIENTE, 'checkCorreo', FORM);
+    const DATA_ADMIN = await fetchData(API_ADMIN, 'checkCorreo', FORM);
+    
 
-    if (DATA.status) {
-
+    if (DATA_CLIENTE.status) {
+      const NOMBRE = DATA_CLIENTE.dataset.nombre_cliente;
       // Enviar el correo y obtener la respuesta
       const RESPONSE_EMAIL = await enviarEmail(CODIGO, document.getElementById("inputCorreo").value, NOMBRE);
       if (RESPONSE_EMAIL) {
         localStorage.setItem("codigo", CODIGO);
-        sweetAlert(1, DATA.message, true);
+        localStorage.setItem("email", document.getElementById("inputCorreo").value);
+        sweetAlert(1, DATA_CLIENTE.message, true);
         // Ocultar contenedor1 y mostrar contenedor2
         contenedor1.style.display = "none";
         contenedor2.style.display = "block";
@@ -39,11 +44,32 @@ document.addEventListener("DOMContentLoaded", function () {
         contenedor2.style.left = "50%";
         contenedor2.style.transform = "translate(-62%, -50%)";
       } else {
-        sweetAlert(2, DATA.error, false);
+        sweetAlert(2, DATA_CLIENTE.error, false);
+      }
+    }
+    else if (DATA_ADMIN.status) {
+      const NOMBRE = DATA_ADMIN.dataset.nombre_admistrador;
+      // Enviar el correo y obtener la respuesta
+      const RESPONSE_EMAIL = await enviarEmail(CODIGO, document.getElementById("inputCorreo").value, NOMBRE);
+      if (RESPONSE_EMAIL) {
+        localStorage.setItem("codigo", CODIGO);
+        localStorage.setItem("email", document.getElementById("inputCorreo").value);
+        sweetAlert(1, DATA_ADMIN.message, true);
+        // Ocultar contenedor1 y mostrar contenedor2
+        contenedor1.style.display = "none";
+        contenedor2.style.display = "block";
+
+        // Centrar contenedor2 en la pantalla
+        contenedor2.style.position = "absolute";
+        contenedor2.style.top = "50%";
+        contenedor2.style.left = "50%";
+        contenedor2.style.transform = "translate(-62%, -50%)";
+      } else {
+        sweetAlert(2, DATA_ADMIN.error, false);
       }
     }
     else {
-      sweetAlert(2, DATA.error, false);
+      sweetAlert(2, "El correo ingresado no existe", false);
     }
 
 });
@@ -90,23 +116,82 @@ document.addEventListener("DOMContentLoaded", function () {
     const CODIGO = generateRandomCode(8); // Puedes ajustar la longitud del código aquí
 
     const FORM = new FormData(FORM_CORREO);
-    const DATA = await fetchData(API_CLIENTE, 'checkCorreo', FORM);
-    const NOMBRE = DATA.dataset.nombre_cliente;
+    const DATA_CLIENTE = await fetchData(API_CLIENTE, 'checkCorreo', FORM);
+    const DATA_ADMIN = await fetchData(API_ADMIN, 'checkCorreo', FORM);
 
-    if (DATA.status) {
+    if (DATA_CLIENTE.status) {
+      const NOMBRE = DATA_CLIENTE.dataset.nombre_cliente;
       // Enviar el correo y obtener la respuesta
       const RESPONSE_EMAIL = await enviarEmail(CODIGO, document.getElementById("inputCorreo").value, NOMBRE);
       if (RESPONSE_EMAIL) {
         localStorage.setItem("codigo", CODIGO);
-        sweetAlert(1, DATA.message, true);
+        localStorage.setItem("email", document.getElementById("inputCorreo").value);
+        sweetAlert(1, DATA_CLIENTE.message, true);
+        // Ocultar contenedor1 y mostrar contenedor2
+        contenedor1.style.display = "none";
+        contenedor2.style.display = "block";
+
+        // Centrar contenedor2 en la pantalla
+        contenedor2.style.position = "absolute";
+        contenedor2.style.top = "50%";
+        contenedor2.style.left = "50%";
+        contenedor2.style.transform = "translate(-62%, -50%)";
       } else {
-        sweetAlert(2, DATA.error, false);
+        sweetAlert(2, DATA_CLIENTE.error, false);
+      }
+    }
+    else if (DATA_ADMIN.status) {
+      const NOMBRE = DATA_ADMIN.dataset.nombre_admistrador;
+      // Enviar el correo y obtener la respuesta
+      const RESPONSE_EMAIL = await enviarEmail(CODIGO, document.getElementById("inputCorreo").value, NOMBRE);
+      if (RESPONSE_EMAIL) {
+        localStorage.setItem("codigo", CODIGO);
+        localStorage.setItem("email", document.getElementById("inputCorreo").value);
+        sweetAlert(1, DATA_ADMIN.message, true);
+        // Ocultar contenedor1 y mostrar contenedor2
+        contenedor1.style.display = "none";
+        contenedor2.style.display = "block";
+
+        // Centrar contenedor2 en la pantalla
+        contenedor2.style.position = "absolute";
+        contenedor2.style.top = "50%";
+        contenedor2.style.left = "50%";
+        contenedor2.style.transform = "translate(-62%, -50%)";
+      } else {
+        sweetAlert(2, DATA_ADMIN.error, false);
       }
     }
     else {
-      sweetAlert(2, DATA.error, false);
+      sweetAlert(2, "El correo ingresado no existe", false);
     }
+  });
 
+  // Agregar un event listener al botón botonContra
+  botonContra.addEventListener("click", async function () {
+    event.preventDefault();
+    const FORM = new FormData(FORM_CONTRA);
+    const email = localStorage.getItem("email");
+    console.log(FORM);
+    console.log(email);
+    FORM.append('inputCorreo', email);  
+
+    const currentPath = window.location.pathname;
+    if (currentPath.includes('public')) {
+      const DATA = await fetchData(API_CLIENTE, 'updateClave', FORM);
+      if (DATA.status) {
+          sweetAlert(1, DATA.message, true, 'registrosesion.html');
+      } else {
+          sweetAlert(2, DATA.error, false);
+      }
+  }
+  else if (currentPath.includes('admin')) {
+      const DATA = await fetchData(API_ADMIN, 'updateClave', FORM);
+      if (DATA.status) {
+          sweetAlert(1, DATA.message, true, 'index.html');
+      } else {
+          sweetAlert(2, DATA.error, false);
+      }
+  }
   });
 
 
@@ -122,6 +207,7 @@ document.addEventListener("DOMContentLoaded", function () {
     contenedor2.style.transform = "translate(-62%, -50%)";
   });
 });
+
 
 
 //Codigo para validar el ingreso de 8 caracteres dentro del input

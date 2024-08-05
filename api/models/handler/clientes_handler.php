@@ -84,6 +84,15 @@ class ClienteHandler
         $params = array($this->correo);
         return Database::getRow($sql, $params);
     }
+    
+    public function updateClave()
+    {
+        $sql = 'UPDATE tb_clientes
+                SET clave_cliente = ?
+                WHERE correo_cliente = ?';
+        $params = array($this->clave, $this->correo);
+        return Database::executeRow($sql, $params);
+    }
 
     public function readProfile()
     {
