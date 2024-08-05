@@ -16,15 +16,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Agregar un event listener al botón botonVerificarCodigo
   botonVerificarCodigo.addEventListener("click", function () {
+    event.preventDefault();
     // Ocultar contenedor2 y mostrar contenedor3
-    contenedor2.style.display = "none";
-    contenedor3.style.display = "block";
+    const inputCodigo = document.getElementById("inputCodigo").value;
 
-    // Centrar contenedor3 en la pantalla
-    contenedor3.style.position = "absolute";
-    contenedor3.style.top = "50%";
-    contenedor3.style.left = "50%";
-    contenedor3.style.transform = "translate(-50%, -50%)";
+     if (inputCodigo === localStorage.getItem("codigo")) {
+
+      sweetAlert(1, "El código ingresado es correcto", true);
+      contenedor2.style.display = "none";
+      contenedor3.style.display = "block";
+
+      // Centrar contenedor3 en la pantalla
+      contenedor3.style.position = "absolute";
+      contenedor3.style.top = "50%";
+      contenedor3.style.left = "50%";
+      contenedor3.style.transform = "translate(-50%, -50%)";
+    }
+    else {
+      sweetAlert(2, "El código ingresado es incorrecto", false);
+    }
+
   });
 
   BOTONREGRESAR.addEventListener("click", function () {
@@ -51,8 +62,8 @@ document.addEventListener("DOMContentLoaded", function () {
     contenedor2.style.transform = "translate(-62%, -50%)";
   });
 
-  document.getElementById("botonEnviarCorreo").addEventListener("click", async function () {
-
+  botonEnviarCorreo.addEventListener("click", async function () {
+    event.preventDefault();
     const CODIGO = generateRandomCode(8); // Puedes ajustar la longitud del código aquí
 
     const FORM = new FormData(FORM_CORREO);
@@ -64,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Enviar el correo y obtener la respuesta
       const RESPONSE_EMAIL = await enviarEmail(CODIGO, document.getElementById("inputCorreo").value, NOMBRE);
       if (RESPONSE_EMAIL) {
+        localStorage.setItem("codigo", CODIGO);
         sweetAlert(1, DATA.message, true);
         // Ocultar contenedor1 y mostrar contenedor2
         contenedor1.style.display = "none";
@@ -81,7 +93,6 @@ document.addEventListener("DOMContentLoaded", function () {
     else {
       sweetAlert(2, DATA.error, false);
     }
-    // Verificar la respuesta 
 
 });
 
@@ -98,9 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
   inputCodigo.addEventListener("input", function () {
     // Obtener el valor actual del campo de entrada
     var codigo = inputCodigo.value;
-
-    // Remover cualquier caracter que no sea un número
-    inputCodigo.value = codigo.replace(/[^0-9]/g, '');
 
     // Verificar si la longitud del código es mayor a 8
     if (inputCodigo.value.length > 8) {
