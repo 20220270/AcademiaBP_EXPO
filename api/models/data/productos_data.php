@@ -145,6 +145,17 @@ class ProductoData extends ProductoHandler
         }
     }
 
+    public function setIdAdmin($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->idadmin = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del administrador es incorrecto';
+            return false;
+        }
+    }
+
     /*
      *  Métodos para obtener los atributos adicionales.
      */

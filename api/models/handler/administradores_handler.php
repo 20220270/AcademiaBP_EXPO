@@ -90,7 +90,7 @@ class AdministradorHandler
         $sql = 'UPDATE tb_administradores
                 SET foto_administrador = ?, nombre_admistrador = ?, apellido_administrador = ?, dui_administrador = ?, correo_administrador = ?, telefono_administrador = ?, alias_administrador = ?
                 WHERE id_administrador = ?';
-        $params = array( $this->imagen, $this->nombre, $this->apellido, $this->dui, $this->correo, $this->telefono, $this->alias, $_SESSION['idAdministrador']);
+        $params = array($this->imagen, $this->nombre, $this->apellido, $this->dui, $this->correo, $this->telefono, $this->alias, $_SESSION['idAdministrador']);
         return Database::executeRow($sql, $params);
     }
 
@@ -123,6 +123,15 @@ class AdministradorHandler
         FROM tb_administradores
         INNER JOIN tb_niveles_administradores USING(id_nivel)
                 ORDER BY id_administrador';
+        return Database::getRows($sql);
+    }
+
+    public function readAll2()
+    {
+        $sql = "SELECT DISTINCT id_administrador, CONCAT(nombre_admistrador, ' ', apellido_administrador) as Nombre, correo_administrador, alias_administrador, clave_administrador, nivel, estado_adminstrador, fecha_registro
+        FROM tb_administradores
+        INNER JOIN tb_niveles_administradores USING(id_nivel)
+                ORDER BY id_administrador";
         return Database::getRows($sql);
     }
 
@@ -175,10 +184,10 @@ class AdministradorHandler
 
     //Método para la recuperación de contraseña
     public function checkEmailExists($email)
-{
-    $sql = 'SELECT COUNT(*) AS count FROM tb_administradores WHERE correo_administrador = ?';
-    $params = array($email);
-    $data = Database::getRow($sql, $params);
-    return $data['count'] > 0;
-}
+    {
+        $sql = 'SELECT COUNT(*) AS count FROM tb_administradores WHERE correo_administrador = ?';
+        $params = array($email);
+        $data = Database::getRow($sql, $params);
+        return $data['count'] > 0;
+    }
 }

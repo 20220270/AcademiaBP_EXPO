@@ -18,6 +18,7 @@ class ProductoHandler
     protected $estado = null;
     protected $descuento = null;
     protected $iddetalle = null;
+    protected $idadmin = null;
 
     // Constante para establecer la ruta de las imágenes.
     const RUTA_IMAGEN = '../../images/productos/';
@@ -125,6 +126,17 @@ class ProductoHandler
                 WHERE id_categoria_producto = ?  AND id_producto = ? AND estado_producto = "En venta" AND existencias_producto > 0
                 ORDER BY nombre_producto';
         $params = array($this->categoria , $this->id);
+        return Database::getRows($sql, $params);
+    }
+
+    public function productosAdministradores()
+    {
+        $sql = 'SELECT nombre_producto, precio_producto, estado_producto, tb_productos.fecha_registro
+                FROM tb_productos
+                INNER JOIN tb_administradores USING(id_administrador)
+                WHERE id_administrador = ?
+                ORDER BY nombre_producto';
+        $params = array($this->idadmin);
         return Database::getRows($sql, $params);
     }
 

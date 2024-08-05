@@ -143,6 +143,9 @@ SEARCH_FORM.addEventListener('submit', (event) => {
                                 <button type="button" class="btn btn-sm" onclick="openDelete(${row.id_administrador})">
                                     <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button>
+                                <button type="button" class="btn btn-sm" onclick="openReport2(${row.id_administrador})">
+                                    <img src="../../resources/images/reporte.png" alt="" width="30px" height="30px" class="mb-1">
+                                </button>
                             </div>
                             <h5 class="card-title text-dark mb-5 fs-1"><b>${row.alias_administrador}</b></h5>
                             <p class="card-text">Nombre: ${row.nombre_admistrador}</p>
@@ -347,5 +350,21 @@ const fillTable2 = async (form = null) => {
         }
     }
   }
+
+  const openReport = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/administradores.php`);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
+
+const openReport2 = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/administrador_productos.php`);
+
+    PATH.searchParams.append('idAdministrador', id)
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
   
   
