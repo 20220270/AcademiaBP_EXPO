@@ -224,13 +224,13 @@ if (isset($_GET['action'])) {
             case 'updateClave':
                     $_POST = Validator::validateForm($_POST);
                     if (
-                                !$cliente->setCorreo($_POST['inputCorreo']) or
-                                !$cliente->setClave($_POST['nuevaClave'])
+                                !$administrador->setCorreo($_POST['inputCorreo']) or
+                                !$administrador->setClave($_POST['nuevaClave'])
                                 ) {
-                                $result['error'] = $cliente->getDataError();
+                                $result['error'] = $administrador->getDataError();
                          }elseif ($_POST['nuevaClave'] != $_POST['confirmarClave']) {
                                 $result['error'] = 'Contraseñas diferentes';} 
-                        elseif ($cliente->updateClave()) {
+                        elseif ($administrador->updateClave()) {
                                 $result['status'] = 1;
                                 $result['message'] = 'Contraseña actualizada correctamente';
                         } else {

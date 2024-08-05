@@ -119,6 +119,16 @@ class AdministradorHandler
         return Database::getRow($sql, $params);
     }
 
+    public function updateClave()
+    {
+        $sql = 'UPDATE tb_administradores
+                SET clave_administrador = ?
+                WHERE correo_administrador = ?';
+        $params = array($this->clave, $this->correo);
+        return Database::executeRow($sql, $params);
+    }
+
+
     public function createRow()
     {
         $sql = 'INSERT INTO tb_administradores(nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, estado_adminstrador, id_nivel, foto_administrador)
