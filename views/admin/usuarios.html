@@ -51,6 +51,12 @@
                             <button type="button" class="btn btn-white" onclick="openCreate()">
                                 <img src="../../resources/images/agregar.png" alt="Agregar" width="60rem" />
                             </button>
+                            <button class="btn fw-semibold" id="btnRegistrar" name="btnRegistrar"
+                                onclick="openReport()">
+
+                                <img src="../../resources/images/reporte.png" alt="" width="50px" height="50px"
+                                    class="mb-1">
+                            </button>
                         </div>
                     </div>
                     <!-- Área de tarjetas con scroll -->
@@ -129,31 +135,31 @@
                             <div class="col-lg-6 col-md-12">
                                 <div class="mb-2">
                                     <!-- Label e input para agregar el nombre del administrador -->
-                                    <label class="form-label">Nombre del administrador:</label>
+                                    <label class="form-label">Nombre:</label>
                                     <input type="text" class="form-control mb-2" id="nombreAdministrador"
                                         name="nombreAdministrador" required oninput="this.value = this.value.replace(/[0-9]/g, '')">
                                 </div>
                                 <div class="mb-2">
                                     <!-- Label e input para agregar el apellido del administrador -->
-                                    <label class="form-label">Apellido del administrador:</label>
+                                    <label class="form-label">Apellido:</label>
                                     <input type="text" class="form-control mb-2" id="apellidoAdministrador"
                                         name="apellidoAdministrador" required oninput="this.value = this.value.replace(/[0-9]/g, '')">
                                 </div>
                                 <div class="mb-2">
                                     <!-- Label e input para agregar el correo del administrador -->
-                                    <label class="form-label">Correo del administrador:</label>
+                                    <label class="form-label">Correo:</label>
                                     <input type="email" class="form-control mb-2" id="correoAdministrador"
                                         name="correoAdministrador" required>
                                 </div>
                                 <div class="mb-2">
                                     <!-- Label e input para agregar el DUI del administrador -->
-                                    <label class="form-label">Dui del administrador:</label>
+                                    <label class="form-label">DUI:</label>
                                     <input type="text" class="form-control mb-2" id="duiAdministrador"
                                         name="duiAdministrador" required maxlength="10" oninput="this.value = this.value.replace(/[^0-9-]/g, '')" pattern="[0-9-]+">
                                 </div>
                                 <div class="mb-2">
                                     <!-- Label e input para agregar el teléfono del administrador -->
-                                    <label class="form-label">Teléfono del administrador:</label>
+                                    <label class="form-label">Teléfono:</label>
                                     <input type="text" class="form-control mb-2" id="telefonoAdministrador"
                                         name="telefonoAdministrador" required maxlength="9" pattern="[0-9\-]*"  
                                         oninput="this.value = this.value.replace(/[^\d-]/g, '');">
@@ -161,20 +167,20 @@
 
                                 <div class="mb-2">
                                     <!-- Label e input para confirmar la clave del administrador -->
-                                    <label class="form-label">Imagen para el administrador:</label>
+                                    <label class="form-label">Foto:</label>
                                     <input type="file" class="form-control mb-2" id="fotoAdmin" name="fotoAdmin">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12">
                                 <div class="mb-2">
                                     <!-- Label e input para agregar el alias del administrador -->
-                                    <label class="form-label">Alias del administrador:</label>
+                                    <label class="form-label">Alias:</label>
                                     <input type="text" class="form-control mb-2" id="aliasAdministrador"
                                         name="aliasAdministrador" required>
                                 </div>
                                 <div class="mb-2">
                                     <!-- Label e input para agregar la clave del administrador -->
-                                    <label class="form-label">Clave del administrador:</label>
+                                    <label class="form-label">Clave:</label>
                                     <input type="password" class="form-control mb-2" id="claveAdministrador"
                                         name="claveAdministrador" required>
                                 </div>
@@ -186,7 +192,7 @@
                                 </div>
                                 <div class="mb-2">
                                     <!-- Dropdown para el estado del usuario -->
-                                    <label class="form-label">Estado del usuario:</label>
+                                    <label class="form-label">Estado del administrador:</label>
                                     <select class="form-select mb-2" id="selectEstado" name="selectEstado" required>
                                         <option value="Activo">Activo</option>
                                         <option value="Inactivo">Inactivo</option>

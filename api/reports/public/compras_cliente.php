@@ -18,7 +18,7 @@ if (isset($_GET['idCompra'])) {
         // Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
         if ($dataOrdenes = $ordenes->myOrdersReport()) {
             // Se establece un color de relleno para los encabezados.
-            $pdf->setFillColor(80, 193, 80);
+            $pdf->setFillColor(64, 136, 64);
             // Se establece la fuente para los encabezados.
             $pdf->setFont('Arial', 'B', 11);
             $pdf->setTextColor(255, 255, 255);

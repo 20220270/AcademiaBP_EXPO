@@ -25,16 +25,18 @@ if (isset($_GET['idStaff'])) {
                 $pdf->setFont('Arial', 'B', 9);
                 $pdf->setTextColor(255, 255, 255);
                 // Se imprimen las celdas con los encabezados.
-                $pdf->cell(140, 10, 'Nombre del alumno', 1, 0, 'C', 1);
-                $pdf->cell(40, 10, 'Edad', 1, 1, 'C', 1);
+                $pdf->cell(75, 10, 'Nombre del alumno', 1, 0, 'C', 1);
+                $pdf->cell(40, 10, 'Edad', 1, 0, 'C', 1);
+                $pdf->cell(65, 10, 'Responsable', 1, 1, 'C', 1);
                 // Se establece la fuente para los datos de los productos.
                 $pdf->setFont('Arial', '', 10);
                 $pdf->setTextColor(0, 0, 0);
                 // Se recorren los registros fila por fila.
                 foreach ($dataAlumnos as $rowAlumnos) {
                     // Se imprimen las celdas con los datos de los productos.
-                    $pdf->cell(140, 10, $pdf->encodeString($rowAlumnos['nombre_alumnos']), 1, 0, 'C');
-                    $pdf->cell(40, 10, $pdf->encodeString($rowAlumnos['edad'] . ' años'), 1, 1, 'C');
+                    $pdf->cell(75, 10, $pdf->encodeString($rowAlumnos['nombre_alumnos']), 1, 0, 'C');
+                    $pdf->cell(40, 10, $pdf->encodeString($rowAlumnos['edad'] . ' años'), 1, 0, 'C');
+                    $pdf->cell(65, 10, $pdf->encodeString($rowAlumnos['nombre_clientes']), 1, 1, 'C');
                 }
             } else {
                 $pdf->cell(0, 10, $pdf->encodeString('No hay alumnos a cargo de ') . $pdf->encodeString($rowStaff['Nombre']), 1, 1);

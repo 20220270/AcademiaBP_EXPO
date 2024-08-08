@@ -56,9 +56,12 @@ class StaffHandler
      */
     public function readAllReport()
     {
-        $sql = 'SELECT id_staff, nombre_staff, apellido_staff, descripcion_extra
-                FROM tb_staffs
-                ORDER BY apellido_staff';
+        $sql = "SELECT id_staff, CONCAT(nombre_staff, ' ', apellido_staff) AS nombre_completo, categoria, nivel_entrenamiento
+                FROM tb_staffs_categorias LEFT JOIN tb_staffs USING (id_staff)
+                LEFT JOIN tb_categorias_horarios USING (id_categoria_horario)
+                LEFT JOIN tb_categorias_alumnos USING (id_categoria_alumno)
+                LEFT JOIN tb_niveles_entrenamientos USING (id_nivel_entrenamiento)
+                ORDER BY id_staff;";
         return Database::getRows($sql);
     }
 
@@ -119,10 +122,11 @@ class StaffHandler
      */
     public function readAllAlumnosStaff()
     {
-        $sql = "SELECT CONCAT(nombre_alumno, ' ', apellido_alumno) AS nombre_alumnos, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS 'edad'
-                FROM tb_alumnos 
-                INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
+        $sql = "SELECT CONCAT(nombre_alumno, ' ', apellido_alumno) AS nombre_alumnos, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS 'edad', 
+                CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_clientes
+                FROM tb_alumnos INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
                 INNER JOIN tb_staffs USING (id_staff) 
+                INNER JOIN tb_clientes USING (id_cliente) 
                 WHERE id_staff = ?
                 GROUP BY nombre_alumnos
                 ORDER BY id_staff;";
