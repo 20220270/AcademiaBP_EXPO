@@ -128,8 +128,9 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <!-- Encabezado de la ventana modal -->
-                <div class="modal-header">
-                    <h5 class="modal-title text-align-center" id="modalTitle"></h5>
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fs-3 w-100 text-center" id="modalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <!-- Contenido de la ventana modal -->
                 <form id="saveForm">
@@ -153,13 +154,13 @@
                         </div>
 
                         <div class="col-sm-12 col-md-6">
-                            <label for="descripcionProducto" class="form-label">Descripción del producto:</label>
+                            <label for="descripcionProducto" class="form-label">Descripción:</label>
                             <input id="descripcionProducto" type="text" name="descripcionProducto" class="form-control"
                                 required>
                         </div>
 
                         <div class="col-sm-12 col-md-6">
-                            <label for="precio" class="form-label">Precio del producto:</label>
+                            <label for="precio" class="form-label">Precio:</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="logoDolar">$</span>
                                 <input type="number" class="form-control" id="PrecioProducto"
@@ -181,7 +182,7 @@
                         </div>
 
                         <div class="col-sm-12 col-md-6">
-                            <label for="Orden" class="col-sm-7 col-form-label">Estado del producto:</label>
+                            <label for="Orden" class="col-sm-7 col-form-label">Estado:</label>
                             <select class="form-select" id="selectEstado" name="selectEstado"
                                 aria-label="Default select example">
                                 <option>En venta</option>
@@ -198,8 +199,6 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-dark" id="btnGuardarD">Guardar</button>
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal"
-                            id="btnCerrar">Cerrar</button>
                     </div>
                 </form>
             </div>
@@ -212,8 +211,9 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <!-- Encabezado de la ventana modal -->
-                <div class="modal-header">
-                    <h5 class="modal-title text-align-center" id="modalTitle2"></h5>
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fs-3 w-100 text-center" id="modalTitle2"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <!-- Contenido de la ventana modal -->
                 <form id="saveForm2">
@@ -256,8 +256,6 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-dark" id="btnGuardarD">Guardar</button>
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal"
-                            id="btnCerrar">Cerrar</button>
                     </div>
                 </form>
             </div>

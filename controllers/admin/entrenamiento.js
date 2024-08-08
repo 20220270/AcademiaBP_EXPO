@@ -376,7 +376,7 @@ const openCreate2 = () => {
 const openCreate3 = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL3.show();
-    MODAL_TITLE3.textContent = 'Asignar horarios y entrenamientos';
+    MODAL_TITLE3.textContent = 'Asignar horarios';
     // Se prepara el formulario.
     SAVE_FORM3.reset();
 

@@ -71,6 +71,10 @@
                                             <img src="../../resources/images/agregar.png" alt="buttonpng"
                                                 width="60rem" />
                                         </button>
+                                        <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openReport()">
+                                            <img src="../../resources/images/reporte.png" alt="buttonpng"
+                                                width="60rem" />
+                                        </button>
                                     </div>
                                     <div class="row justify-content-center p-3 bg-body-tertiary rounded" id="cardsAlumnos">
                                         <!-- Aquí se insertarán las tarjetas -->
@@ -92,8 +96,9 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <!-- Encabezado de la ventana modal -->
-                <div class="modal-header">
-                    <h5 class="modal-title text-align-center" id="modalTitle"></h5>
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fs-3 w-100 text-center" id="modalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <!-- Contenido de la ventana modal -->
                 <form id="saveForm">
@@ -101,12 +106,12 @@
                         <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                         <input type="hidden" id="idAlumno" name="idAlumno">
                         <div class="col-sm-12 col-md-6">
-                            <label for="nombreAlumno" class="col-sm-7 col-form-label">Nombre del alumno:</label>
+                            <label for="nombreAlumno" class="col-sm-7 col-form-label">Nombre:</label>
                             <input id="nombreAlumno" type="text" name="nombreAlumno" class="form-control" required>
                         </div>
 
                         <div class="col-sm-12 col-md-6">
-                            <label for="nombreValor" class="col-sm-7 col-form-label">Apellido del alumno:</label>
+                            <label for="nombreValor" class="col-sm-7 col-form-label">Apellido:</label>
                             <input id="apellidoAlumno" type="text" name="apellidoAlumno" class="form-control" required>
                         </div>
 
@@ -150,7 +155,7 @@
                         </div>
 
                         <div class="col-sm-12 col-md-6" id="selectEstadopo">
-                            <label for="selectEstado" class="col-sm-7 col-form-label">Estado del alumno:</label>
+                            <label for="selectEstado" class="col-sm-7 col-form-label">Estado:</label>
                             <select class="form-select" id="selectEstado" name="selectEstado"
                                 aria-label="Default select example">
                                 <option>Activo</option>
@@ -159,8 +164,7 @@
                         </div>
 
                         <div class="col-sm-12 col-md-6">
-                            <label for="imagenProducto" class="col-sm-7 col-form-label">Foto del
-                                alumno:</label>
+                            <label for="imagenProducto" class="col-sm-7 col-form-label">Foto:</label>
                             <div class="position-relative">
                                 <div class="input-group mb-3">
                                     <input type="file" class="form-control" id="fotoAlumno"
@@ -172,8 +176,6 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-dark" id="btnGuardar" name="btnGuardar">Guardar</button>
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal" id="btnCerrar"
-                            name="btnCerrar">Cerrar</button>
                     </div>
                 </form>
             </div>

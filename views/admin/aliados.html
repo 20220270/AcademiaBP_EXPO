@@ -83,8 +83,9 @@
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <!-- Encabezado de la ventana modal -->
-                    <div class="modal-header">
-                        <h5 class="modal-title text-align-center" id="modalTitle"></h5>
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title fs-3 w-100 text-center" id="modalTitle"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <!-- Contenido de la ventana modal -->
                     <form id="saveForm">
@@ -92,7 +93,7 @@
                             <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                             <input type="hidden" id="idAliado" name="idAliado">
                             <div class="col-sm-12 col-md-6">
-                                <label for="nombreAliado" class="col-sm-7 col-form-label">Nombre del aliado:</label>
+                                <label for="nombreAliado" class="col-sm-7 col-form-label">Nombre:</label>
                                 <input id="nombreAliado" type="text" name="nombreAliado" class="form-control" required>
                             </div>
 
@@ -110,8 +111,6 @@
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-dark" id="btnGuardar"
                                 name="btnGuardar">Guardar</button>
-                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal" id="btnCerrar"
-                                name="btnCerrar">Cerrar</button>
                         </div>
                     </form>
                 </div>

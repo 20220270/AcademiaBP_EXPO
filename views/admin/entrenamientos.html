@@ -101,7 +101,7 @@
                             </div>
 
                             <div class="col contenedorLugares">
-                                <h5 class="mt-5 fw-bold mb-2">Asignar horarios a entrenamientos</h5>
+                                <h5 class="mt-5 fw-bold mb-2">Asignar horarios</h5>
                                 <div class="row">
                                     <div class="col-12 d-flex justify-content-center">
                                         <form class="d-flex" id="searchForm3">
@@ -205,34 +205,38 @@
         aria-labelledby="staticBackdropLabel" aria-hidden="true" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-body row g-3">
-                    <h1 class="modal-title fs-3 w-100 text-center" id="modalTitle2"></h1>
-                    
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fs-3 w-100 text-center" id="modalTitle2"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <!-- cuerpo del modal -->
                 <div class="modal-body">
                     <form id="saveForm2">
                         <div class="container text-center">
                             <div class="container text-center">
-                                <div class="row">
+                                <div class="row text-start">
                                     <input type="hidden" id="idLugar" name="idLugar">
                                     <div class="col mb-3">
-                                        <input type="text" class="form-control" placeholder="Nombre del lugar"
+                                        <label for="DiaEntreno" id="DiaEntreno">Nombre:</label>
+                                        <input type="text" class="form-control"
                                             aria-label="First name" id="nombreLugar" name="nombreLugar" required>
                                     </div>
-                                    <div class="col">
-                                        <input type="file" class="form-control" placeholder="Imagen del lugar"
+                                    <div class="col text-start">
+                                        <label for="DiaEntreno" id="DiaEntreno">Imagen:</label>
+                                        <input type="file" class="form-control"
                                             aria-label="Last name" id="imagenLugar" name="imagenLugar">
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row text-start">
                                     <div class="col mb-3">
-                                        <input type="text" class="form-control" placeholder="Dirección del lugar"
+                                        <label for="DiaEntreno" id="DiaEntreno">Direccion:</label>
+                                        <input type="text" class="form-control"
                                             aria-label="First name" id="direccionLugar" name="direccionLugar" required>
                                     </div>
-                                    <div class="col">
-                                        <input type="url" class="form-control" placeholder="URL del lugar"
-                                            aria-label="Last name" id="URLLugar" name="URLLugar" required readonly>
+                                    <div class="col text-start">
+                                        <label for="DiaEntreno" id="DiaEntreno">URL:</label>
+                                        <input type="url" class="form-control"
+                                            aria-label="Last name" id="URLLugar" name="URLLugar" placeholder="Obtenga la URL haciendo clic dentro el mapa" required readonly>
                                     </div>
                                 </div>
                                 <h3>Mapa</h3>
@@ -242,7 +246,6 @@
                         </div>
                         <div class="modal-footer border-0">
                             <button type="submit" class="btn btn-dark">Guardar</button>
-                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal" id="cerrar">Cerrar</button>
                         </div>
                     </form>
                 </div>
@@ -255,8 +258,7 @@
             <div class="modal-content">
                 <!-- header del modal -->
                 <div class="modal-header border-0">
-                    <h1 class="modal-title fs-3 w-100 text-center" id="modalTitle3">
-                    </h1>
+                    <h1 class="modal-title fs-3 w-100 text-center" id="modalTitle3"></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <!-- cuerpo del modal -->

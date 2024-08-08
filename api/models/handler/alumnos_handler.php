@@ -54,13 +54,12 @@ class AlumnosHandler
 
     public function readAll()
     {
-        $sql = "SELECT id_alumno, nombre_alumno, apellido_alumno, fecha_nacimiento, foto_alumno,
+        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, fecha_nacimiento, foto_alumno,
     TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad,
     posicion_alumno, 
     estado_alumno, 
     categoria, 
-    nombre_staff, 
-    apellido_staff, 
+    CONCAT(nombre_staff, ' ', apellido_staff) AS 'Staff',
     numero_dias, 
     mensualidad_pagar,
     CONCAT(nombre_cliente, ' ', apellido_cliente) AS 'Encargado' 

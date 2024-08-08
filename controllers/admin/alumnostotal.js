@@ -91,12 +91,12 @@ const fillTable = async (form = null) => {
                     <div class="status-circle ${row.estado_alumno === 'Activo' ? 'activo' : 'inactivo'}"></div>
                     <img src="${SERVER_URL}images/alumnos/${row.foto_alumno}" class="rounded-circle" height="200px" width="200px">
                     <h5 class="card-title"><b>ID: </b>${row.id_alumno}</h5>
-                    <p class="card-text"><b>Nombre del alumno: </b>${row.nombre_alumno} ${row.apellido_alumno}</p>
+                    <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
                     <p class="card-text"><b>Encargado del alumno: </b>${row.Encargado}</p>
                     <p class="card-text"><b>Fecha de nacimiento: </b>${row.fecha_nacimiento}<b> -- </b>${row.edad} años</p>
                     <p class="card-text"><b>Posición del alumno: </b>${row.posicion_alumno}</p>
                     <p class="card-text"><b>Categoría: </b>${row.categoria}</p>
-                    <p class="card-text"><b>Encargado de la categoría: </b>${row.nombre_staff} ${row.apellido_staff}</p>
+                    <p class="card-text"><b>Encargado de la categoría: </b>${row.Staff}</p>
                     <p class="card-text"><b>Número de días que entrena: </b>${row.numero_dias}</p>
                     <p class="card-text"><b>Mensualidad que paga: </b>$${row.mensualidad_pagar}</p>
                     <div class="d-flex justify-content-center gap-2">
@@ -203,5 +203,13 @@ const openDelete = async (id) => {
             sweetAlert(2, DATA.error, false);
         }
     }
+}
+
+const openReport = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/alumnos.php`);
+
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
 }
 
