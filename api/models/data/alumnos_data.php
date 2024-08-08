@@ -12,6 +12,7 @@ class AlumnosData extends AlumnosHandler
      *  Atributos adicionales.
      */
     private $data_error = null;
+    private $filename = null;
 
     /*
      *  Métodos para validar y establecer los datos.
@@ -127,11 +128,43 @@ class AlumnosData extends AlumnosHandler
         }
     }
 
+    public function setFoto($file, $filename = null)
+    {
+        if (Validator::validateImageFile($file, 2000, 2000)) {
+            $this->foto = Validator::getFilename();
+            return true;
+        } elseif (Validator::getFileError()) {
+            $this->data_error = Validator::getFileError();
+            return false;
+        } elseif ($filename) {
+            $this->foto = $filename;
+            return true;
+        } else {
+            $this->foto = 'default.png';
+            return true;
+        }
+    }
+
+    public function setFilename()
+    {
+        if ($data = $this->readFilename()) {
+            $this->filename = $data['foto_alumno'];
+            return true;
+        } else {
+            $this->data_error = 'Alumno inexistente';
+            return false;
+        }
+    }
+
     /*
      *  Métodos para obtener los atributos adicionales.
      */
     public function getDataError()
     {
         return $this->data_error;
+    }
+    public function getFilename()
+    {
+        return $this->filename;
     }
 }

@@ -80,6 +80,18 @@ body {
     box-shadow: none;
 }
 
+.container #fotoAlumno {
+    border: none;
+    margin: 8px 0;
+    padding: 0px 0px;
+    font-size: 12px;
+    font-size: 13px;
+    outline: none;
+    border-bottom: 1px solid #000000;
+    background-color: transparent;
+    box-shadow: none;
+}
+
 #posicion {
     border: none;
     margin: 8px 0;

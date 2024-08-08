@@ -186,6 +186,7 @@ const fillTable = async (correo) => {
                 CARDS_ALUMNOSREG.innerHTML += `
                     <div class="card mb-4 mt-4" id="borderAlumnos">
                         <div class="card-body">
+                        <img src="${SERVER_URL}images/alumnos/${row.foto_alumno}" class="card-img-top rounded-circle mb-4" height="30px" width="30px">
                             <input id="SelectDatosPago-${row.id_alumno}" type="text" name="SelectDatosPago" class="form-control" value="${row.id_alumno}" hidden>
                             <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
                             <p class="card-text"><b>Edad: </b>${row.edad}</p>

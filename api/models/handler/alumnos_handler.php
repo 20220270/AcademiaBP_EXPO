@@ -18,6 +18,9 @@ class AlumnosHandler
     protected $ididaspago = null;
     protected $estado = null;
     protected $idcliente = null;
+    protected $foto = null;
+
+    const RUTA_IMAGEN = '../../images/alumnos/';
 
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
@@ -28,6 +31,7 @@ class AlumnosHandler
         $sql = "SELECT id_alumno, nombre_alumno, apellido_alumno, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad, fecha_nacimiento, posicion_alumno, estado_alumno, categoria, nombre_staff, apellido_staff, numero_dias, mensualidad_pagar,
         CONCAT(nombre_cliente, ' ', apellido_cliente) as 'Encargado' FROM tb_alumnos
         INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
+        INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
         INNER JOIN tb_categorias_alumnos USING(id_categoria_alumno)
         INNER JOIN tb_staffs USING (id_staff)
         INNER JOIN tb_dias_pagos USING (id_dia_pago)
@@ -41,16 +45,16 @@ class AlumnosHandler
     public function createRow()
     {
         // Llamada al procedimiento almacenado
-        $sql = 'CALL sp_insert_alumno(?, ?, ?, ?, ?, ?)';
+        $sql = 'CALL sp_insert_alumno(?, ?, ?, ?, ?, ?, ?)';
 
-        $params = array($this->nombre, $this->apellido, $this->fechanacimiento, $this->posicion, $this->ididaspago, $this->idcliente);
+        $params = array($this->nombre, $this->apellido, $this->fechanacimiento, $this->posicion, $this->ididaspago, $this->idcliente, $this->foto);
         return Database::executeRow($sql, $params);
     }
 
 
     public function readAll()
     {
-        $sql = "SELECT id_alumno, nombre_alumno, apellido_alumno, fecha_nacimiento, 
+        $sql = "SELECT id_alumno, nombre_alumno, apellido_alumno, fecha_nacimiento, foto_alumno,
     TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad,
     posicion_alumno, 
     estado_alumno, 
@@ -91,9 +95,9 @@ class AlumnosHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_alumnos
-                SET nombre_alumno = ?, apellido_alumno = ?, fecha_nacimiento = ?, posicion_alumno = ?, id_staff_categorias = ?, id_dia_pago = ?, estado_alumno = ?, id_cliente = ?
+                SET foto_Alumno = ?, nombre_alumno = ?, apellido_alumno = ?, fecha_nacimiento = ?, posicion_alumno = ?, id_staff_categorias = ?, id_dia_pago = ?, estado_alumno = ?, id_cliente = ?
                 WHERE id_alumno = ?';
-        $params = array($this->nombre, $this->apellido, $this->fechanacimiento, $this->posicion, $this->idstaffcategoria, $this->ididaspago, $this->estado, $this->idcliente, $this->id);
+        $params = array($this->foto, $this->nombre, $this->apellido, $this->fechanacimiento, $this->posicion, $this->idstaffcategoria, $this->ididaspago, $this->estado, $this->idcliente, $this->id);
         return Database::executeRow($sql, $params);
     }
 
@@ -109,6 +113,7 @@ class AlumnosHandler
     {
         $sql = "SELECT id_staff_categorias, CONCAT(nombre_staff, ' ', apellido_staff, ' - ' , categoria) AS 'nombre_categoria' FROM tb_staffs_categorias
                 INNER JOIN tb_staffs USING(id_staff)
+                INNER JOIN tb_categorias_horarios USING(id_categoria_horario)
                 INNER JOIN tb_categorias_alumnos USING(id_categoria_alumno);";
         return Database::getRows($sql);
     }
@@ -146,9 +151,18 @@ class AlumnosHandler
     public function createRowAlumno()
     {
         // Llamada al procedimiento almacenado
-        $sql = 'CALL sp_insert_alumno(?, ?, ?, ?, ?, ?)';
+        $sql = 'CALL sp_insert_alumno(?, ?, ?, ?, ?, ?, ?)';
 
-        $params = array($this->nombre, $this->apellido, $this->fechanacimiento, $this->posicion, $this->ididaspago, $_SESSION['idCliente']);
+        $params = array($this->nombre, $this->apellido, $this->fechanacimiento, $this->posicion, $this->ididaspago, $_SESSION['idCliente'], $this->foto);
         return Database::executeRow($sql, $params);
+    }
+
+    public function readFilename()
+    {
+        $sql = 'SELECT foto_alumno
+                FROM tb_alumnos
+                WHERE id_alumno = ?';
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
     }
 }

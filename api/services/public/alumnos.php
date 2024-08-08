@@ -23,15 +23,18 @@ if (isset($_GET['action'])) {
                     !$alumno->setApellido($_POST['apellidoAlumno']) or
                     !$alumno->setNacimiento($_POST['fechaNacimiento']) or
                     !$alumno->setPosicion($_POST['selectPosicion']) or
-                    !$alumno->setIdDiasPago($_POST['selectDias'])
+                    !$alumno->setIdDiasPago($_POST['selectDias']) or
+                    !$alumno->setFoto($_FILES['fotoAlumno'])
                 ) {
                     $result['error'] = $alumno->getDataError();
                 } elseif ($alumno->createRowAlumno()) {
                     $result['status'] = 1;
                     $result['message'] = 'Alumno registrado correctamente';
+                    $result['fileStatus'] = Validator::saveFile($_FILES['fotoAlumno'], $alumno::RUTA_IMAGEN);
                 } else {
                     $result['error'] = 'Ocurrió un problema al registrar el alumno';
                 }
+                
                 break;
 
             case 'readAllDiasPago':

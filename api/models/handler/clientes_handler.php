@@ -253,10 +253,12 @@ class ClienteHandler
         $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ', apellido_alumno) as nombre,
                 TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) as edad,
                 categoria,
-                numero_dias
+                numero_dias,
+                foto_alumno
                 FROM tb_alumnos
                 INNER JOIN tb_clientes USING (id_cliente)
                 INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
+                INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
                 INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
                 INNER JOIN tb_dias_pagos USING (id_dia_pago)
                 WHERE id_cliente = ?";

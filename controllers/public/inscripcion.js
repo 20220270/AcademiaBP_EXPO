@@ -8,7 +8,8 @@ const MAIN_TITLE = document.getElementById('mainTitle');
     APELLIDO_ALUMNO = document.getElementById('apellidoAlumno'),
     FECHA_NACIMIENTO = document.getElementById('fechaNacimiento'),
     POSICION_ALUMNO = document.getElementById('selectPosicion'),
-    ID_DIASPAGO = document.getElementById('selectDias');
+    ID_DIASPAGO = document.getElementById('selectDias'),
+    FOTO_ALUMNO = document.getElementById('fotoAlumno');
 
 ALUMNO_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.

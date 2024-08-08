@@ -28,7 +28,8 @@ const SAVE_FORM = document.getElementById('saveForm'),
     ID_STAFFCATEGORIA = document.getElementById('selectCategoriaEncargado'),
     ID_DIASPAGO = document.getElementById('selectDias'),
     ESTADO_ALUMNO = document.getElementById('selectEstado'),
-    ENCARGADO_ALUMNO = document.getElementById('selectEncargado');
+    ENCARGADO_ALUMNO = document.getElementById('selectEncargado'),
+    FOTO_aLUMNO = document.getElementById('fotoAlumno');
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -88,6 +89,7 @@ const fillTable = async (form = null) => {
                 <div class="card-body text-start">
                     <!-- Círculo indicador del estado -->
                     <div class="status-circle ${row.estado_alumno === 'Activo' ? 'activo' : 'inactivo'}"></div>
+                    <img src="${SERVER_URL}images/alumnos/${row.foto_alumno}" class="rounded-circle" height="200px" width="200px">
                     <h5 class="card-title"><b>ID: </b>${row.id_alumno}</h5>
                     <p class="card-text"><b>Nombre del alumno: </b>${row.nombre_alumno} ${row.apellido_alumno}</p>
                     <p class="card-text"><b>Encargado del alumno: </b>${row.Encargado}</p>
