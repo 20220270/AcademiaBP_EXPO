@@ -40,167 +40,190 @@
                     </div>
                 </div>
 
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active text-success" id="calendar-tab" data-bs-toggle="tab"
+                            data-bs-target="#calendar-section" type="button" role="tab" aria-controls="calendar-section"
+                            aria-selected="true">
+                            <img src="../../resources/images/calendar-birthday-black.png" alt="calendar.png"
+                                class="mt-2" width="50px" height="50px"></button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link text-success" id="chartPrediction-tab" data-bs-toggle="tab"
+                            data-bs-target="#chartPrediction-section" type="button" role="tab"
+                            aria-controls="chartPrediction-section" aria-selected="false">
+                            <img src="../../resources/images/prediction-black.png" alt="calendar.png" class="mt-2"
+                                width="50px" height="50px"></button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link text-success" id="chart1-tab" data-bs-toggle="tab"
+                            data-bs-target="#chart1-section" type="button" role="tab" aria-controls="chart1-section"
+                            aria-selected="false">
+                            <img src="../../resources/images/morestudents-black.png" alt="calendar.png" class="mt-2"
+                                width="70px" height="50px"></button>
+                    </li>
+                </ul>
 
-                <div class="row" id="columna2">
-                    <div class="col-md-12">
-                        <div class="row" id="contenedor1">
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="container col-md-12">
-                                        <h5><b>Registrar días de entrenamiento y cuotas</b></h5>
-                                        <div class="col-6 offset-3 d-flex justify-content-center">
-                                            <!-- Añadimos una clase offset-3 para centrar el buscador -->
-                                            <form class="d-flex flex-grow-1" id="searchForm">
-                                                <div class="buscador mx-auto position-relative">
-                                                    <i class="fas fa-microphone search-icon microphone-button"
-                                                        id="microphone-button"></i>
-                                                    <input class="busc light-table-filter" data-table="order-table"
-                                                        type="text" placeholder="Busque número de días o mensualidad"
-                                                        id="Buscador" name="search">
-                                                    <div class="btna">
-                                                        <i class="fa fa-search"><ion-icon
-                                                                name="search-outline"></ion-icon></i>
-                                                    </div>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active col-lg-12 col-md-12 col-sm-12 mt-3" id="calendar-section"
+                        role="tabpanel" aria-labelledby="calendar-tab">
+                        <div class="col-md-12" id="contenedor3">
+                            <div class="row">
+                                <div class="container col-md-12">
+                                    <h5><b>Registrar días de entrenamiento y cuotas</b></h5>
+                                    <div class="col-6 offset-3 d-flex justify-content-center">
+                                        <!-- Añadimos una clase offset-3 para centrar el buscador -->
+                                        <form class="d-flex flex-grow-1" id="searchForm">
+                                            <div class="buscador mx-auto position-relative">
+                                                <i class="fas fa-microphone search-icon microphone-button"
+                                                    id="microphone-button"></i>
+                                                <input class="busc light-table-filter" data-table="order-table"
+                                                    type="text" placeholder="Busque número de días o mensualidad"
+                                                    id="Buscador" name="search">
+                                                <div class="btna">
+                                                    <i class="fa fa-search"><ion-icon
+                                                            name="search-outline"></ion-icon></i>
                                                 </div>
-                                            </form>
-                                        </div>
-                                        <div class="col-3 d-flex justify-content-end">
-                                            <!-- Botón alineado a la derecha -->
-                                            <button type="button" class="btn btn-white me-md-2 mt-1"
-                                                onclick="openCreate()">
-                                                <img src="../../resources/images/agregar.png" alt="buttonpng"
-                                                    width="60rem" />
-                                            </button>
-                                        </div>
-                                        <div class="container mt-2">
-                                            <div class="row" id="cardDiasPago">
-
                                             </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-3 d-flex justify-content-end">
+                                        <!-- Botón alineado a la derecha -->
+                                        <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate()">
+                                            <img src="../../resources/images/agregar.png" alt="buttonpng"
+                                                width="60rem" />
+                                        </button>
+                                    </div>
+                                    <div class="container mt-2">
+                                        <div class="row" id="cardDiasPago">
+
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
-                            <div class="col-md-8">
-                                <!-- Columna para la tabla -->
-                                <div class="col-md-12 col-lg-12 container">
-                                    <div class="container">
-                                        <h4><b>Tabla de pagos</b></h4>
-                                        <div class="col-6 offset-3 d-flex justify-content-center">
-                                            <!-- Añadimos una clase offset-3 para centrar el buscador -->
-                                            <form class="d-flex flex-grow-1" id="searchForm2">
-                                                <div class="buscador mx-auto position-relative">
-                                                    <i class="fas fa-microphone search-icon microphone-button"
-                                                        id="microphone-button2"></i>
-                                                    <input class="busc light-table-filter" data-table="order-table"
-                                                        type="text" placeholder="Busque por cliente, alumno o fechas"
-                                                        id="Buscador2" name="search2">
-                                                    <div class="btna">
-                                                        <i class="fa fa-search"><ion-icon
-                                                                name="search-outline"></ion-icon></i>
-                                                    </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mt-3 mx-auto" id="chartPrediction-section"
+                        role="tabpanel" aria-labelledby="chartPrediction-tab">
+                        <div class="col-md-12" id="contenedor2">
+                            <!-- Columna para la tabla -->
+                            <div class="col-md-12 container">
+                                <div class="container">
+                                    <h4><b>Tabla de pagos</b></h4>
+                                    <div class="col-6 offset-3 d-flex justify-content-center">
+                                        <!-- Añadimos una clase offset-3 para centrar el buscador -->
+                                        <form class="d-flex flex-grow-1" id="searchForm2">
+                                            <div class="buscador mx-auto position-relative">
+                                                <i class="fas fa-microphone search-icon microphone-button"
+                                                    id="microphone-button2"></i>
+                                                <input class="busc light-table-filter" data-table="order-table"
+                                                    type="text" placeholder="Busque por cliente, alumno o fechas"
+                                                    id="Buscador2" name="search2">
+                                                <div class="btna">
+                                                    <i class="fa fa-search"><ion-icon
+                                                            name="search-outline"></ion-icon></i>
                                                 </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        </form>
                                         <div class="col-3 col-lg-9 d-flex justify-content-end">
                                             <!-- Botón alineado a la derecha -->
-                                            <button type="button" class="btn btn-white me-md-2 mt-1"
+                                            <button type="button" class="btn btn-white me-md-2 mt-4"
                                                 onclick="openCreate2()">
                                                 <img src="../../resources/images/agregar.png" alt="buttonpng"
                                                     width="60rem" />
                                             </button>
-                                            <p class="mt-4"><b>Realice el pago de un alumno aquí</b></p>
+                                            <p class="mt-5"><b>Realice el pago de un alumno aquí</b></p>
                                         </div>
-
-                                        <table class="table light-table-filter">
-                                            <thead>
-                                                <tr>
-                                                    <td colspan="9" id="rowsFound"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="table-dark text-white fw-bold">ID</th>
-                                                    <th class="table-dark text-white fw-bold">Nombre del alumno</th>
-                                                    <th class="table-dark text-white fw-bold">Nombre del responsable
-                                                    </th>
-                                                    <th class="table-dark text-white fw-bold">Teléfono del responsable
-                                                    </th>
-                                                    <th class="table-dark text-white fw-bold">Días que entrena el alumno
-                                                    </th>
-                                                    <th class="table-dark text-white fw-bold">Mensualidad a pagar</th>
-                                                    <th class="table-dark text-white fw-bold">Estado de la mensualidad
-                                                    </th>
-                                                    <th class="table-dark text-white fw-bold">Fecha del último pago</th>
-                                                    <th class="table-dark text-white fw-bold">Acciones</th>
-                                            </thead>
-                                            <tbody id="tableBody">
-
-                                            </tbody>
-                                        </table>
                                     </div>
-                                </div>
+                                   
 
+                                    <table class="table light-table-filter">
+                                        <thead>
+                                            <tr>
+                                                <td colspan="9" id="rowsFound"></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="table-dark text-white fw-bold">ID</th>
+                                                <th class="table-dark text-white fw-bold">Nombre del alumno</th>
+                                                <th class="table-dark text-white fw-bold">Nombre del responsable
+                                                </th>
+                                                <th class="table-dark text-white fw-bold">Teléfono del responsable
+                                                </th>
+                                                <th class="table-dark text-white fw-bold">Días que entrena el alumno
+                                                </th>
+                                                <th class="table-dark text-white fw-bold">Mensualidad a pagar</th>
+                                                <th class="table-dark text-white fw-bold">Estado de la mensualidad
+                                                </th>
+                                                <th class="table-dark text-white fw-bold">Fecha del último pago</th>
+                                                <th class="table-dark text-white fw-bold">Acciones</th>
+                                        </thead>
+                                        <tbody id="tableBody">
+
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
 
                         </div>
-
-                        <div class="row mt-2" id="contenedor2">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <!-- Columna para la tabla -->
-                                    <div class="col-md-12 col-lg-12 mx-auto">
-                                        <div class="container">
-                                            <h4><b>Datos para boleta de pago</b></h4>
-                                            <div class="col-6 offset-3 d-flex justify-content-center">
-                                                <!-- Añadimos una clase offset-3 para centrar el buscador -->
-                                                <form class="d-flex flex-grow-1" id="searchForm3">
-                                                    <div class="buscador mx-auto position-relative">
-                                                        <i class="fas fa-microphone search-icon microphone-button"
-                                                            id="microphone-button3"></i>
-                                                        <input class="busc light-table-filter" data-table="order-table"
-                                                            type="text" placeholder="Busque por alumno, cliente o fechas"
-                                                            id="Buscador3" name="search3">
-                                                        <div class="btna">
-                                                            <i class="fa fa-search"><ion-icon
-                                                                    name="search-outline"></ion-icon></i>
-                                                        </div>
+                    </div>
+                    <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chart1-section" role="tabpanel"
+                        aria-labelledby="chart1-tab">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <!-- Columna para la tabla -->
+                                <div class="col-md-12 col-lg-12 mx-auto">
+                                    <div class="container">
+                                        <h4><b>Datos para boleta de pago</b></h4>
+                                        <div class="col-6 offset-3 d-flex justify-content-center">
+                                            <!-- Añadimos una clase offset-3 para centrar el buscador -->
+                                            <form class="d-flex flex-grow-1" id="searchForm3">
+                                                <div class="buscador mx-auto position-relative">
+                                                    <i class="fas fa-microphone search-icon microphone-button"
+                                                        id="microphone-button3"></i>
+                                                    <input class="busc light-table-filter" data-table="order-table"
+                                                        type="text" placeholder="Busque por alumno, cliente o fechas"
+                                                        id="Buscador3" name="search3">
+                                                    <div class="btna">
+                                                        <i class="fa fa-search"><ion-icon
+                                                                name="search-outline"></ion-icon></i>
                                                     </div>
-                                                </form>
-                                                <div class="col-3 d-flex justify-content-end">
-                                                    <!-- Botón alineado a la derecha -->
-                                                    <button type="button" class="btn btn-white me-md-2 mt-1"
-                                                        onclick="openCreate3()">
-                                                        <img src="../../resources/images/agregar.png" alt="buttonpng"
-                                                            width="60rem" />
-                                                    </button>
                                                 </div>
+                                            </form>
+                                            <div class="col-3 d-flex justify-content-end">
+                                                <!-- Botón alineado a la derecha -->
+                                                <button type="button" class="btn btn-white me-md-2 mt-1"
+                                                    onclick="openCreate3()">
+                                                    <img src="../../resources/images/agregar.png" alt="buttonpng"
+                                                        width="60rem" />
+                                                </button>
                                             </div>
-
-
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <td colspan="7" id="rowsFound2"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="table-dark text-white fw-bold">ID</th>
-                                                        <th class="table-dark text-white fw-bold">Pago número</th>
-                                                        <th class="table-dark text-white fw-bold">Nombre del alumno</th>
-                                                        <th class="table-dark text-white fw-bold">Fecha del pago</th>
-                                                        <th class="table-dark text-white fw-bold">Total pagado</th>
-                                                        <th class="table-dark text-white fw-bold">Descripción del pago
-                                                        </th>
-                                                        <th class="table-dark text-white fw-bold">Fecha de próximo pago
-                                                        </th>
-                                                        <th class="table-dark text-white fw-bold">Estado del próximo pago
-                                                        </th>
-                                                        <th class="table-dark text-white fw-bold">Acciones</th>
-                                                </thead>
-                                                <tbody id="tableBody2">
-
-                                                </tbody>
-                                            </table>
                                         </div>
+
+
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <td colspan="7" id="rowsFound2"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="table-dark text-white fw-bold">ID</th>
+                                                    <th class="table-dark text-white fw-bold">Pago número</th>
+                                                    <th class="table-dark text-white fw-bold">Nombre del alumno</th>
+                                                    <th class="table-dark text-white fw-bold">Fecha del pago</th>
+                                                    <th class="table-dark text-white fw-bold">Total pagado</th>
+                                                    <th class="table-dark text-white fw-bold">Descripción del pago
+                                                    </th>
+                                                    <th class="table-dark text-white fw-bold">Fecha de próximo pago
+                                                    </th>
+                                                    <th class="table-dark text-white fw-bold">Estado del próximo pago
+                                                    </th>
+                                                    <th class="table-dark text-white fw-bold">Acciones</th>
+                                            </thead>
+                                            <tbody id="tableBody2">
+
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +265,7 @@
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-dark" id="btnGuardar"
                                 name="btnGuardar">Guardar</button>
-                            
+
                         </div>
                     </form>
                 </div>
@@ -283,18 +306,18 @@
                             <div class="col-sm-12 col-md-12" id="columnaEstado" hidden>
                                 <label for="selectEstado" class="col-sm-7 col-form-label">Estado del pago:</label>
                                 <select class="form-select" id="selectEstado" name="selectEstado"
-                                    aria-label="Default select example" >
+                                    aria-label="Default select example">
                                     <option value="Pagado">Pagado</option>
                                     <option value="Pendiente de pago">Pendiente de pago</option>
                                 </select>
-                                
+
                             </div>
 
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-dark" id="btnGuardar"
                                 name="btnGuardar">Guardar</button>
-                            
+
                         </div>
                     </form>
                 </div>
@@ -336,7 +359,7 @@
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-dark" id="btnGuardar"
                                 name="btnGuardar">Guardar</button>
-                            
+
                         </div>
                     </form>
                 </div>

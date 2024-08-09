@@ -160,6 +160,11 @@ input[type=range]::-moz-range-thumb {
     overflow-y: auto;
 }
 
+#contenedor3{
+    max-height: 280px;
+    overflow-y: auto;
+}
+
 @media (max-width: 768px) {
     .titulo-card{
         font-size: 15px;

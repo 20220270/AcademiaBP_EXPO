@@ -198,7 +198,7 @@ const fillTable = async (form = null) => {
             const dia = fechaNacimiento.getDate();
 
             const eventoCumpleaños = {
-                title: `${row.nombre_alumno} ${row.apellido_alumno}`,
+                title: `${row.nombre}`,
                 start: new Date(new Date().getFullYear(), mes, dia),
                 allDay: true,
                 backgroundColor: 'green'
