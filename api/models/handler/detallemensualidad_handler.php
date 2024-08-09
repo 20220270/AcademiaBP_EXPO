@@ -113,3 +113,4 @@ class DetallesPagosMensualidadHandler
         return Database::getRows($sql, $params);
     }
 }
+
