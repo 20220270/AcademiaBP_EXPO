@@ -363,20 +363,21 @@ const fillTable6 = async (form = null) => {
         DATA.dataset.forEach(row => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             CARD_ALUMNOSSINPAGAR.innerHTML += `
-                            <div class="card-body">
-                                <h1 class="card-title titulo-card">Alumnos sin pagar.</h1>
-                                <p class="card-text mt-5">
-                                    <h3 id="solventStudents">${row.total_alumnos_registradosss}</h3>
-                                    <input type="range" value="${row.total_alumnos_registradosss}" max="${row.total_alumnos_registrados}" readonly class="barra-roja form-control" style="max-width: 100%;">
-                                </p>
-                                <div class="d-flex justify-content-start"></div>
-                            </div>
+                <div class="card-body">
+                    <h1 class="card-title titulo-card">Alumnos sin pagar.</h1>
+                    <p class="card-text mt-5">
+                        <h3 id="solventStudents">${row.total_alumnos_sin_pagar}</h3>
+                        <input type="range" value="${row.total_alumnos_sin_pagar}" max="${row.total_alumnos_sin_pagar}" readonly class="barra-roja form-control" style="max-width: 100%;">
+                    </p>
+                    <div class="d-flex justify-content-start"></div>
+                </div>
             `;
         });
     } else {
         sweetAlert(4, DATA.error, true);
     }
 }
+
 
 //Fin de las cards que tienen el conteo de alumnos
 

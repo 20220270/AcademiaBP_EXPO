@@ -110,6 +110,8 @@ class PagosMensualidadHandler
         return Database::getRows($sql);
     }
 
+
+    //Alumnos que ya hayan pagado su mensualidad
     public function readAlumnosSolventes()
     {
         $sql = "SELECT 'Alumnos solventes con el pago.' AS descripcion, 
@@ -120,13 +122,14 @@ class PagosMensualidadHandler
         return Database::getRows($sql);
     }
 
+    //Métodos para el conteo de alumnos sin cancelar su mensualidad
+    //Restamos los alumnos existencias y los que ya están solventes, para saber cuántos no han pagado
     public function readAlumnosSinPagar()
     {
-        $sql = "SELECT 'Alumnos solventes con el pago.' AS descripcion, 
-                COUNT(CONCAT(nombre_alumno, ' ', apellido_alumno)) AS total_alumnos_registradosss 
-                FROM tb_pagos
-                INNER JOIN tb_alumnos USING(id_alumno)
-                WHERE estado_pago = 'Pendiente de pago';";
+        $sql = "SELECT 
+                (SELECT COUNT(*) FROM tb_alumnos) - 
+                (SELECT COUNT(*) FROM tb_pagos WHERE estado_pago = 'Pagado') 
+            AS total_alumnos_sin_pagar;";
         return Database::getRows($sql);
     }
 }
