@@ -23,7 +23,7 @@ if ($dataPagos = $PagosModel->reportPagos()) {
     $pdf->cell(55, 10, 'Nombre del alumno', 1, 0, 'C', 1);
     $pdf->cell(55, 10, 'Nombre responsable', 1, 0, 'C', 1);
     $pdf->cell(25, 10, 'Cantidad pagada', 1, 0, 'C', 1);
-    $pdf->cell(25, 10, 'Fecha de pagó', 1, 0, 'C', 1);
+    $pdf->cell(25, 10, 'Fecha de pago', 1, 1, 'C', 1);
 
     // Se establece la fuente para los datos de los clientes.
     $pdf->setFont('Arial', '', 8);
@@ -39,10 +39,10 @@ if ($dataPagos = $PagosModel->reportPagos()) {
         $pdf->cell(55, 10, $Pagos['NombreCliente'], 1, 0, 'C');
     
          // Telefono del cliente
-         $pdf->cell(25, 10, $Pagos['mensualidad_pagar'], 1, 0, 'C');
+         $pdf->cell(25, 10,'$' . $Pagos['mensualidad_pagar'], 1, 0, 'C');
 
           // Estado del cliente
-        $pdf->cell(25, 10, $clientePagos['fecha_pago'], 1, 1, 'C');
+        $pdf->cell(25, 10, $Pagos['fecha_pago'], 1, 1, 'C');
     }
 } else {
     // Si no hay clientes registrados
