@@ -99,6 +99,7 @@ const fillTable = async (form = null) => {
                     <p class="card-text"><b>Encargado de la categoría: </b>${row.Staff}</p>
                     <p class="card-text"><b>Número de días que entrena: </b>${row.numero_dias}</p>
                     <p class="card-text"><b>Mensualidad que paga: </b>$${row.mensualidad_pagar}</p>
+                    <p class="card-text"><small class="text-body-secondary">Inscrito desde: ${row.fecha_inscripcion}</small></p>
                     <div class="d-flex justify-content-center gap-2">
                         <button type="button" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_alumno})">
                             <img src="../../resources/images/btnEliminarIMG.png" alt="Eliminar" width="30px" height="30px" class="mb-1">

@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     graficoBarrasClientes();
     graficoBarrasExistencias();
     graficoPredictivo();
+    graficoPredictivoAlumnos();
 });
 
 
@@ -163,18 +164,18 @@ const loadBirthdayEvents = (birthdayEvents) => {
             day: 'Día'
         },
         events: birthdayEvents,
-        dateClick: function(info) {
+        dateClick: function (info) {
             var fechaSeleccionada = info.date;
-            var eventosCumpleanios = birthdayEvents.filter(function(evento) {
+            var eventosCumpleanios = birthdayEvents.filter(function (evento) {
                 var startEvento = new Date(evento.start);
                 return startEvento.getFullYear() === fechaSeleccionada.getFullYear() &&
-                       startEvento.getMonth() === fechaSeleccionada.getMonth() &&
-                       startEvento.getDate() === fechaSeleccionada.getDate();
+                    startEvento.getMonth() === fechaSeleccionada.getMonth() &&
+                    startEvento.getDate() === fechaSeleccionada.getDate();
             });
 
             var mensajeAlerta = `Alumnos que cumplen años el ${fechaSeleccionada.toLocaleDateString()}:\n`;
             if (eventosCumpleanios.length > 0) {
-                eventosCumpleanios.forEach(function(evento) {
+                eventosCumpleanios.forEach(function (evento) {
                     mensajeAlerta += `- ${evento.title}\n`;
                 });
             } else {
@@ -265,6 +266,57 @@ const graficoPredictivo = async () => {
         } else {
             document.getElementById('chartPrediction').remove();
             console.log(dataGanancias.error || dataPerdidas.error);
+        }
+    } catch (error) {
+        console.error('Error en la petición de datos:', error);
+    }
+}
+
+const graficoPredictivoAlumnos = async () => {
+    try {
+        // Peticiones para obtener los datos de nuevos alumnos.
+        const dataNuevosAlumnos = await fetchData(ALUMNOS_API, 'alumnosPredictGraph');
+
+        if (dataNuevosAlumnos.status) {
+            // Arreglos para guardar los datos a graficar.
+            let meses = [];
+            let nuevosAlumnos = Array(12).fill(0); // Inicializar con ceros para todos los meses
+
+            // Arreglo de nombres de meses.
+            const nombresMeses = [
+                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+            ];
+
+            // Procesar datos de nuevos alumnos
+            dataNuevosAlumnos.dataset.forEach(row => {
+                if (row.Mes && row.Inscripciones) { // Asegurarse de que los datos sean válidos
+                    const mesIndex = parseInt(row.Mes, 10) - 1; // Convertir el mes a índice (0-11)
+                    if (!isNaN(mesIndex) && mesIndex >= 0 && mesIndex < 12) {
+                        meses[mesIndex] = nombresMeses[mesIndex];
+                        nuevosAlumnos[mesIndex] = parseInt(row.Inscripciones, 10) || 0; // Asegurarse de que sea un número o 0
+                    }
+                }
+            });
+
+            // Calcular el total de nuevos alumnos del año.
+            const totalNuevosAlumnos = nuevosAlumnos.reduce((total, num) => total + num, 0);
+
+            // Añadir registros de depuración
+            console.log('Meses:', meses);
+            console.log('Nuevos Alumnos:', nuevosAlumnos);
+            console.log('Total Nuevos Alumnos del Año:', totalNuevosAlumnos);
+
+            // Llamada a la función para generar y mostrar un gráfico de líneas.
+            lineGraphA('chartPrediction2', meses, nuevosAlumnos, [], 'Nuevos alumnos por mes');
+
+            // Mostrar el total de nuevos alumnos del año en el label.
+            document.getElementById('totalNuevosAlumnos').textContent =
+                `Total de nuevos alumnos estimados para el año: ${totalNuevosAlumnos}`;
+                
+        } else {
+            document.getElementById('chartPrediction2').remove();
+            console.log(dataNuevosAlumnos.error);
         }
     } catch (error) {
         console.error('Error en la petición de datos:', error);

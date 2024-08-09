@@ -28,7 +28,8 @@ class AlumnosHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = "SELECT id_alumno, nombre_alumno, apellido_alumno, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad, fecha_nacimiento, posicion_alumno, estado_alumno, categoria, nombre_staff, apellido_staff, numero_dias, mensualidad_pagar,
+        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad, fecha_nacimiento, posicion_alumno, estado_alumno, categoria, fecha_inscripcion,
+        CONCAT(nombre_staff, ' ', apellido_staff) AS 'Staff', numero_dias, mensualidad_pagar,
         CONCAT(nombre_cliente, ' ', apellido_cliente) as 'Encargado' FROM tb_alumnos
         INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
         INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
@@ -36,9 +37,10 @@ class AlumnosHandler
         INNER JOIN tb_staffs USING (id_staff)
         INNER JOIN tb_dias_pagos USING (id_dia_pago)
         INNER JOIN tb_clientes using(id_cliente)
-        WHERE nombre_alumno LIKE ? OR apellido_alumno LIKE ? OR categoria LIKE ? OR nombre_staff LIKE ? OR apellido_staff LIKE ? OR numero_dias LIKE ? OR estado_alumno LIKE ?
+        WHERE CONCAT(nombre_alumno, ' ' ,apellido_alumno) LIKE ? OR categoria LIKE ? OR 
+        CONCAT(nombre_staff, ' ', apellido_staff) LIKE ? OR numero_dias LIKE ? OR estado_alumno LIKE ?
         ORDER BY id_alumno";
-        $params = array($value, $value, $value, $value, $value, $value, $value);
+        $params = array($value, $value, $value, $value, $value);
         return Database::getRows($sql, $params);
     }
 
@@ -54,7 +56,7 @@ class AlumnosHandler
 
     public function readAll()
     {
-        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, fecha_nacimiento, foto_alumno,
+        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, fecha_nacimiento, foto_alumno, fecha_inscripcion,
     TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad,
     posicion_alumno, 
     estado_alumno, 
@@ -142,7 +144,7 @@ class AlumnosHandler
                 categoria
                 ORDER BY 
                 cantidad_alumnos DESC LIMIT 5";
-                return Database::getRows($sql);
+        return Database::getRows($sql);
     }
 
     //Sitio publico
@@ -163,5 +165,38 @@ class AlumnosHandler
                 WHERE id_alumno = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
+    }
+
+    /*Esta es la consulta para mostrar un estimado de cuántos alumnos se registrarán en el año*/
+    public function alumnosPredictGraph()
+    {
+        $sql = "WITH inscripciones_mensuales AS (
+    SELECT 
+        MONTH(fecha_inscripcion) AS mes,
+        COUNT(*) AS inscripciones
+    FROM tb_alumnos
+    WHERE YEAR(fecha_inscripcion) = YEAR(CURDATE())
+    GROUP BY MONTH(fecha_inscripcion)),
+
+    tasa_inscripcion AS (
+    SELECT 
+        AVG(inscripciones) AS tasa_promedio_mensual
+    FROM inscripciones_mensuales)
+
+    SELECT 
+    mes AS 'Mes',
+    inscripciones AS 'Inscripciones',
+    NULL AS 'Proyección'
+    FROM inscripciones_mensuales
+    UNION ALL
+
+    SELECT 
+    NULL AS 'Mes',
+    NULL AS 'Inscripciones',
+    ROUND(tasa_promedio_mensual * (12 - MONTH(CURDATE())), 0) AS 'Proyección'
+    FROM tasa_inscripcion;
+    ";
+
+        return Database::getRows($sql);
     }
 }

@@ -31,6 +31,10 @@
                         <img src="../../resources/images/prediction-black.png" alt="calendar.png" class="mt-2" width="50px" height="50px"></button>
                 </li>
                 <li class="nav-item" role="presentation">
+                    <button class="nav-link text-success" id="chartPrediction-tab2" data-bs-toggle="tab" data-bs-target="#chartPrediction-section2" type="button" role="tab" aria-controls="chartPrediction-section2" aria-selected="false">
+                        <img src="../../resources/images/prediction-black.png" alt="calendar.png" class="mt-2" width="50px" height="50px"></button>
+                </li>
+                <li class="nav-item" role="presentation">
                     <button class="nav-link text-success" id="chart1-tab" data-bs-toggle="tab" data-bs-target="#chart1-section" type="button" role="tab" aria-controls="chart1-section" aria-selected="false">
                         <img src="../../resources/images/morestudents-black.png" alt="calendar.png" class="mt-2" width="70px" height="50px"></button>
                 </li>
@@ -62,9 +66,13 @@
                     <label id="totalGanancias" class="d-block"></label>
                     <label id="totalPerdidas"></label>
                 </div>
+                <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chartPrediction-section2" role="tabpanel" aria-labelledby="chartPrediction-tab2">
+                    <canvas id="chartPrediction2"></canvas>
+                </div>
                 <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chart1-section" role="tabpanel" aria-labelledby="chart1-tab">
                     <div class="chart-container2 mt-4">
-                        <canvas id="chart1" class="mt-1 mb-4"></canvas>
+                        <canvas id="chartPrediction2" class="mt-1 mb-4"></canvas>
+                        <label id="totalNuevosAlumnos"></label>
                     </div>
                 </div>
                 <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chart2-section" role="tabpanel" aria-labelledby="chart2-tab">

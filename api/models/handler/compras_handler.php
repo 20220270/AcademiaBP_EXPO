@@ -292,6 +292,11 @@ class ComprasHandler
         return Database::getRows($sql, $params);
     }
 
+
+    //Gráficos de predicción
+
+
+    /*Esta es la consulta para mostrar las ganancias obtenidas, y a partir de ahí calcular las ganancias estimadas*/
     public function predictGraph()
     {
         $sql = "WITH GananciasMensuales AS (
@@ -321,9 +326,7 @@ class ComprasHandler
         return Database::getRows($sql);
     }
 
-
-
-
+    /*Esta es la consulta para mostrar las pérdidas, y a partir de ahí calcular las pérdidas estimadas*/
     public function perdidasPredictGraph()
     {
         $sql = "WITH PerdidasMensuales AS (

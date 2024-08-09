@@ -297,6 +297,49 @@ const lineGraph = (canvas, xAxis, yAxis1, yAxis2, legend1, legend2) => {
     });
 }
 
+const lineGraphA = (canvas, xAxis, yAxis, legend) => {
+    new Chart(document.getElementById(canvas), {
+        type: 'line',
+        data: {
+            labels: xAxis,
+            datasets: [
+                {
+                    label: legend,
+                    data: yAxis,
+                    borderColor: '#007bff',
+                    backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                    fill: false,
+                    tension: 0.1
+                }
+            ]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: legend
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Meses'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Número de Alumnos'
+                    }
+                }
+            }
+        }
+    });
+}
+
+
+
 
 
 /*

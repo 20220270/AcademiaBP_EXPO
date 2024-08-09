@@ -162,6 +162,15 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+                case 'alumnosPredictGraph':
+                    if ($result['dataset'] = $alumno->alumnosPredictGraph()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                    } else {
+                        $result['error'] = 'No existen alumnos registrados';
+                    }
+                    break;
+
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

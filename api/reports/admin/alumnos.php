@@ -7,7 +7,6 @@ require_once('../../models/data/alumnos_data.php');
 
 // Se instancia la clase para crear el reporte.
 $pdf = new Report;
-
 $pdf->startReportHorizontal('Alumnos registrados');
 
 // Se instancian las entidades correspondientes.
@@ -19,47 +18,58 @@ if ($dataalumnos = $alumnos->readAll()) {
     $pdf->setFillColor(64, 136, 64);
     // Se establece la fuente para los encabezados.
     $pdf->setFont('Arial', 'B', 9);
-
     $pdf->setTextColor(255, 255, 255);
+
     // Se imprimen las celdas con los encabezados.
     $pdf->cell(95, 10, 'Nombre y foto', 1, 0, 'C', 1);
-    $pdf->cell(45, 10, 'Fecha de nacimiento', 1, 0, 'C', 1);
-    $pdf->cell(35, 10, 'Edad', 1, 0, 'C', 1);
-    $pdf->cell(40, 10, $pdf->encodeString('Categoría'), 1, 0, 'C', 1);
-    $pdf->cell(30, 10, $pdf->encodeString('Número de días'), 1, 1, 'C', 1);
+    $pdf->cell(35, 10, 'Fecha de nacimiento', 1, 0, 'C', 1);
+    $pdf->cell(25, 10, 'Edad', 1, 0, 'C', 1);
+    $pdf->cell(35, 10, $pdf->encodeString('Categoría'), 1, 0, 'C', 1);
+    $pdf->cell(30, 10, $pdf->encodeString('Número de días'), 1, 0, 'C', 1);
+    $pdf->cell(30, 10, $pdf->encodeString('Inscrito desde'), 1, 1, 'C', 1);
 
     // Se establece la fuente para los datos de los productos.
     $pdf->setFont('Arial', '', 8);
     $pdf->setTextColor(0, 0, 0);
 
+    // Tamaño de la celda y de la imagen.
+    $cellWidth = 18;
+    $cellHeight = 18;
+    $imgWidth = 13;
+    $imgHeight = 13;
+
     // Se recorren los registros fila por fila.
     foreach ($dataalumnos as $rowAlumnos) {
-        // Agrega la imagen desde la ruta especificada.
+        // Verificamos si es necesario agregar una nueva página.
+        //Esto lo hacemos para evitar que las imagenes sobre salgan de sus celdas.
+        if ($pdf->GetY() + $cellHeight > $pdf->GetPageHeight() - 20) {
+            $pdf->AddPage('L', 'Letter'); //Generamos otra página con la misma orientación que definimos para el reporte en un principio
+            $pdf->setFillColor(64, 136, 64);
+            $pdf->setFont('Arial', 'B', 9);
+            $pdf->setTextColor(255, 255, 255);
+            $pdf->setFont('Arial', '', 8);
+            $pdf->setTextColor(0, 0, 0);
+        }
+
+        // Agregamos la imagen desde la ruta especificada.
         $imgPath = "../../images/alumnos/" . $rowAlumnos['foto_alumno'];
         if (file_exists($imgPath)) {
-            // Tamaño de la celda y de la imagen.
-            $cellWidth = 30;
-            $cellHeight = 30;
-            $imgWidth = 20;
-            $imgHeight = 20;
-
-            // Calcula la posición para centrar la imagen dentro de la celda.
+            // Calculamos la posición para centrar la imagen dentro de la celda.
             $xPos = $pdf->GetX() + ($cellWidth - $imgWidth) / 2;
             $yPos = $pdf->GetY() + ($cellHeight - $imgHeight) / 2;
-
-            // Dibuja la celda y luego la imagen centrada dentro de la celda.
             $pdf->cell($cellWidth, $cellHeight, '', 1, 0, 'C'); // Celda vacía con borde.
             $pdf->Image($imgPath, $xPos, $yPos, $imgWidth, $imgHeight); // Imagen centrada dentro de la celda.
         } else {
-            $pdf->cell(30, 30, 'Sin foto', 1, 0, 'C');
+            $pdf->cell($cellWidth, $cellHeight, 'Sin foto', 1, 0, 'C');
         }
 
-        // Imprime el nombre del alumno.
-        $pdf->cell(65, 30, $pdf->encodeString($rowAlumnos['nombre']), 1, 0, 'C');
-        $pdf->cell(45, 30, $rowAlumnos['fecha_nacimiento'], 1, 0, 'C');
-        $pdf->cell(35, 30, $pdf->encodeString($rowAlumnos['edad'] . ' años'), 1, 0, 'C');
-        $pdf->cell(40, 30, $pdf->encodeString($rowAlumnos['categoria']), 1, 0, 'C');
-        $pdf->cell(30, 30, $rowAlumnos['numero_dias'], 1, 1, 'C');
+        // Imprime los datos del alumno.
+        $pdf->cell(77, $cellHeight, $pdf->encodeString($rowAlumnos['nombre']), 1, 0, 'C');
+        $pdf->cell(35, $cellHeight, $rowAlumnos['fecha_nacimiento'], 1, 0, 'C');
+        $pdf->cell(25, $cellHeight, $pdf->encodeString($rowAlumnos['edad'] . ' años'), 1, 0, 'C');
+        $pdf->cell(35, $cellHeight, $pdf->encodeString($rowAlumnos['categoria']), 1, 0, 'C');
+        $pdf->cell(30, $cellHeight, $rowAlumnos['numero_dias'], 1, 0, 'C');
+        $pdf->cell(30, $cellHeight, $rowAlumnos['fecha_inscripcion'], 1, 1, 'C');
     }
 } else {
     $pdf->cell(0, 10, $pdf->encodeString('No hay administradores para mostrar'), 1, 1);

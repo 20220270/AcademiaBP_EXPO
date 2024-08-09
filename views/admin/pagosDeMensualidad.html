@@ -27,19 +27,24 @@
                 </h1>
 
 
-
+                <!--Contenedores para mostrar datos de los alumnos registrados-->
                 <div class="card-container shadow p-3 mb-5 bg-body-tertiary rounded">
+                    <!--Contenedor para mostrar el total de alumnos registrados-->
                     <div class="card" id="alumnototal">
 
                     </div>
+                    <!--Contenedor para mostrar el total de alumnos que ya han pagado su mensualidad-->
                     <div class="card" id="alumnospagados">
 
                     </div>
+                    <!--Contenedor para mostrar el total de alumnos que no han pagado su mensualidad-->
                     <div class="card" id="alumnospendientes">
 
                     </div>
                 </div>
 
+                <!--Tablist, obtenida desde Bootstrap, con la cual mostraremos todo lo relacionado a pagos de mensualidad,
+                separando cada parte y siendo visible al seleccionar su botón correspondiente-->
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active text-success" id="calendar-tab" data-bs-toggle="tab"
@@ -64,6 +69,7 @@
                     </li>
                 </ul>
 
+                <!--Contenedor donde se guardarán y gestionarán los días de pago-->
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active col-lg-12 col-md-12 col-sm-12 mt-3" id="calendar-section"
                         role="tabpanel" aria-labelledby="calendar-tab">
@@ -104,6 +110,8 @@
 
                         </div>
                     </div>
+
+                    <!--Contenedor donde se guardarán y gestionarán los datos referentes a los pagos de mensualidad-->
                     <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mt-3 mx-auto" id="chartPrediction-section"
                         role="tabpanel" aria-labelledby="chartPrediction-tab">
                         <div class="col-md-12" id="contenedor2">
@@ -167,6 +175,8 @@
 
                         </div>
                     </div>
+
+                    <!--Contenedor donde se guardarán y gestionarán los datos para generar la boleta de pago-->
                     <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chart1-section" role="tabpanel"
                         aria-labelledby="chart1-tab">
                         <div class="col-md-12">
