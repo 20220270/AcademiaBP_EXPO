@@ -140,7 +140,6 @@ class PagosMensualidadHandler
         INNER JOIN tb_alumnos USING (id_alumno)
         INNER JOIN tb_clientes USING (id_cliente)
         INNER JOIN tb_dias_pagos USING (id_dia_pago) ";
-        $params = array($_SESSION['idCliente']);
-        return Database::getRows($sql, $params);
+        return Database::getRows($sql);
     }
 }
