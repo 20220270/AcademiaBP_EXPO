@@ -322,7 +322,8 @@ class CategoriasAlumnosHandler
                 INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
                 INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
                 INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
-                WHERE id_categoria_alumno = ?";
+                WHERE id_categoria_alumno = ?
+                ORDER BY posicion_alumno";
         $params = array($this->idcategoria);
         return Database::getRows($sql, $params);
     }
