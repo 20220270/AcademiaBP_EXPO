@@ -13,7 +13,7 @@ $pdf->startReport('Mensualidades pagadas');
 // Se instancia el modelo Cliente para obtener los datos.
 $PagosModel = new PagosMensualidadData;
 // Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
-if ($dataPagos = $PagosModel->readAll()) {
+if ($dataPagos = $PagosModel->reportPagos()) {
     // Se establece un color de relleno para los encabezados.
     $pdf->setFillColor(64, 136, 64);
     $pdf->setTextColor(255, 255, 255);

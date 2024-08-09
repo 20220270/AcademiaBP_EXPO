@@ -132,4 +132,15 @@ class PagosMensualidadHandler
             AS total_alumnos_sin_pagar;";
         return Database::getRows($sql);
     }
+
+    public function reportPagos()
+    {
+        $sql = "SELECT CONCAT(nombre_alumno, ' ', apellido_alumno) AS Nombre, CONCAT(nombre_cliente, ' ', apellido_cliente) AS NombreCliente, 
+        mensualidad_pagar, fecha_pago from tb_pagos
+        INNER JOIN tb_alumnos USING (id_alumno)
+        INNER JOIN tb_clientes USING (id_cliente)
+        INNER JOIN tb_dias_pagos USING (id_dia_pago) ";
+        $params = array($_SESSION['idCliente']);
+        return Database::getRows($sql, $params);
+    }
 }
