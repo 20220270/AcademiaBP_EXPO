@@ -299,17 +299,17 @@ const lineGraph = (canvas, xAxis, yAxis1, yAxis2, legend1, legend2) => {
 
 const lineGraphA = (canvas, xAxis, yAxis, legend) => {
     new Chart(document.getElementById(canvas), {
-        type: 'line',
+        type: 'line', // Tipo de gráfico: línea
         data: {
             labels: xAxis,
             datasets: [
                 {
                     label: legend,
                     data: yAxis,
-                    borderColor: '#007bff',
-                    backgroundColor: 'rgba(0, 123, 255, 0.2)',
-                    fill: false,
-                    tension: 0.1
+                    borderColor: '#1B9100', // Color de la línea
+                    backgroundColor: 'rgba(27, 145, 0, 0.2)', // Color de fondo
+                    fill: false, // No rellenar el área bajo la línea
+                    tension: 0.1 // Suavizar la línea (opcional)
                 }
             ]
         },
@@ -317,7 +317,7 @@ const lineGraphA = (canvas, xAxis, yAxis, legend) => {
             plugins: {
                 title: {
                     display: true,
-                    text: legend
+                    text: 'Predicción de alumnos'
                 }
             },
             scales: {
@@ -330,14 +330,18 @@ const lineGraphA = (canvas, xAxis, yAxis, legend) => {
                 y: {
                     title: {
                         display: true,
-                        text: 'Número de Alumnos'
+                        text: 'Cantidad de alumnos'
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return  value;
+                        }
                     }
                 }
             }
         }
     });
 }
-
 
 
 

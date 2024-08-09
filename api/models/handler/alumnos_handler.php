@@ -168,33 +168,58 @@ class AlumnosHandler
     }
 
     /*Esta es la consulta para mostrar un estimado de cuántos alumnos se registrarán en el año*/
+
+    /**Explicación de los datos obtenidos:
+     * 
+     * Se toman todos los registros de alumnos por cada mes hasta la fecha actual, y ese valor lo divide entre los meses en los que hay datos registrados.
+     * De esa parte, obtenemos la tasa promedio de inscripciones
+     * 
+     * Para la proyección, necesitamos saber los meses restantes y esa tasa promedio.
+     * 
+     * Primero, restamos 12 (porque hay 12 meses en el año) y los meses en los que ya hay datos registrados
+     * 
+     * Luego, multiplicamos la tasa promedio por los meses restantes. De aquí obtendremos la proyección de inscripciones para los meses restantes
+     * 
+     * Finalmente, para saber cuántos alumnos habrá al finalizar el año, sumamos la cantidad actual de alumnos y el número obtenido de la proyección.
+     */
     public function alumnosPredictGraph()
     {
         $sql = "WITH inscripciones_mensuales AS (
-    SELECT 
-        MONTH(fecha_inscripcion) AS mes,
-        COUNT(*) AS inscripciones
-    FROM tb_alumnos
-    WHERE YEAR(fecha_inscripcion) = YEAR(CURDATE())
-    GROUP BY MONTH(fecha_inscripcion)),
-
+        SELECT 
+            MONTH(fecha_inscripcion) AS mes,
+            COUNT(*) AS inscripciones
+        FROM tb_alumnos
+        WHERE YEAR(fecha_inscripcion) = YEAR(CURDATE())
+        GROUP BY MONTH(fecha_inscripcion)
+    ),
+    
     tasa_inscripcion AS (
+        SELECT 
+            AVG(inscripciones) AS tasa_promedio_mensual
+        FROM inscripciones_mensuales
+    ),
+    
+    total_inscripciones AS (
+        SELECT 
+            SUM(inscripciones) AS total_actual
+        FROM inscripciones_mensuales
+    )
+    
     SELECT 
-        AVG(inscripciones) AS tasa_promedio_mensual
-    FROM inscripciones_mensuales)
-
-    SELECT 
-    mes AS 'Mes',
-    inscripciones AS 'Inscripciones',
-    NULL AS 'Proyección'
+        mes AS 'Mes',
+        inscripciones AS 'Inscripciones',
+        NULL AS 'Proyección',
+        NULL AS 'Total Anual'
     FROM inscripciones_mensuales
+    
     UNION ALL
-
+    
     SELECT 
-    NULL AS 'Mes',
-    NULL AS 'Inscripciones',
-    ROUND(tasa_promedio_mensual * (12 - MONTH(CURDATE())), 0) AS 'Proyección'
-    FROM tasa_inscripcion;
+        NULL AS 'Mes',
+        NULL AS 'Inscripciones',
+        ROUND(tasa_promedio_mensual * (12 - MONTH(CURDATE())), 0) AS 'Proyección',
+        (total_actual + ROUND(tasa_promedio_mensual * (12 - MONTH(CURDATE())), 0)) AS 'Total Anual'
+    FROM tasa_inscripcion, total_inscripciones;
     ";
 
         return Database::getRows($sql);

@@ -288,6 +288,9 @@ const graficoPredictivoAlumnos = async () => {
                 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
             ];
 
+            // Variables para el total de nuevos alumnos
+            let totalNuevosAlumnos = 0;
+
             // Procesar datos de nuevos alumnos
             dataNuevosAlumnos.dataset.forEach(row => {
                 if (row.Mes && row.Inscripciones) { // Asegurarse de que los datos sean válidos
@@ -297,10 +300,11 @@ const graficoPredictivoAlumnos = async () => {
                         nuevosAlumnos[mesIndex] = parseInt(row.Inscripciones, 10) || 0; // Asegurarse de que sea un número o 0
                     }
                 }
+                // Obtener el total proyectado
+                if (row['Total Anual']) {
+                    totalNuevosAlumnos = parseInt(row['Total Anual'], 10) || 0;
+                }
             });
-
-            // Calcular el total de nuevos alumnos del año.
-            const totalNuevosAlumnos = nuevosAlumnos.reduce((total, num) => total + num, 0);
 
             // Añadir registros de depuración
             console.log('Meses:', meses);
@@ -308,7 +312,7 @@ const graficoPredictivoAlumnos = async () => {
             console.log('Total Nuevos Alumnos del Año:', totalNuevosAlumnos);
 
             // Llamada a la función para generar y mostrar un gráfico de líneas.
-            lineGraphA('chartPrediction2', meses, nuevosAlumnos, [], 'Nuevos alumnos por mes');
+            lineGraphA('chartPrediction2', meses, nuevosAlumnos, 'Nuevos alumnos del mes');
 
             // Mostrar el total de nuevos alumnos del año en el label.
             document.getElementById('totalNuevosAlumnos').textContent =

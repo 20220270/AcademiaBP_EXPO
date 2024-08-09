@@ -86,7 +86,7 @@ class CategoriasAlumnosHandler
         ca.id_categoria_alumno";
         return Database::getRows($sql);
     }
-    
+
 
     public function readOneAlumno()
     {
@@ -186,7 +186,7 @@ class CategoriasAlumnosHandler
         return Database::getRows($sql);
     }
 
-    
+
 
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete). Horarios y categorias
@@ -259,7 +259,7 @@ class CategoriasAlumnosHandler
         tb_horarios_entrenamientos USING (id_horario)";
         return Database::getRows($sql);
     }
-    
+
 
     public function readOneAlumnosHorario()
     {
@@ -310,5 +310,20 @@ class CategoriasAlumnosHandler
    INNER JOIN 
     tb_horarios_entrenamientos he ON hl.id_horario = he.id_horario;";
         return Database::getRows($sql);
+    }
+
+    public function reportAlumnosCategoria()
+    {
+        $sql = "SELECT foto_alumno, CONCAT(nombre_alumno, ' ', apellido_alumno) as Nombre, 
+                fecha_nacimiento,
+                TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad,
+                posicion_alumno 
+                FROM tb_alumnos
+                INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
+                INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
+                INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
+                WHERE id_categoria_alumno = ?";
+        $params = array($this->idcategoria);
+        return Database::getRows($sql, $params);
     }
 }
