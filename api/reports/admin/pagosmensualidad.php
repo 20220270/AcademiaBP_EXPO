@@ -20,9 +20,9 @@ if ($dataPagos = $PagosModel->reportPagos()) {
     // Se establece la fuente para los encabezados.
     $pdf->setFont('Arial', 'B', 8);
 
-    $pdf->cell(55, 10, 'Nombre del alumno', 1, 0, 'C', 1);
-    $pdf->cell(55, 10, 'Nombre responsable', 1, 0, 'C', 1);
-    $pdf->cell(25, 10, 'Cantidad pagada', 1, 0, 'C', 1);
+    $pdf->cell(65, 10, 'Nombre del alumno', 1, 0, 'C', 1);
+    $pdf->cell(65, 10, 'Nombre responsable', 1, 0, 'C', 1);
+    $pdf->cell(35, 10, 'Cantidad pagada', 1, 0, 'C', 1);
     $pdf->cell(25, 10, 'Fecha de pago', 1, 1, 'C', 1);
 
     // Se establece la fuente para los datos de los clientes.
@@ -33,13 +33,13 @@ if ($dataPagos = $PagosModel->reportPagos()) {
         $pdf->setTextColor(0, 0, 0);
 
         // Nombre del alumno
-        $pdf->cell(55, 10, $pdf->encodeString($Pagos['Nombre']), 1, 0, 'C');
+        $pdf->cell(65, 10, $pdf->encodeString($Pagos['Nombre']), 1, 0, 'C');
 
         // Correo
-        $pdf->cell(55, 10, $Pagos['NombreCliente'], 1, 0, 'C');
+        $pdf->cell(65, 10, $pdf->encodeString ($Pagos['NombreCliente']), 1, 0, 'C');
     
          // Telefono del cliente
-         $pdf->cell(25, 10,'$' . $Pagos['mensualidad_pagar'], 1, 0, 'C');
+         $pdf->cell(35, 10,'$' . $Pagos['mensualidad_pagar'], 1, 0, 'C');
 
           // Estado del cliente
         $pdf->cell(25, 10, $Pagos['fecha_pago'], 1, 1, 'C');
