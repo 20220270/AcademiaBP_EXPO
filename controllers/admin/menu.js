@@ -279,14 +279,11 @@ const graficoPredictivoAlumnos = async () => {
 
         if (dataNuevosAlumnos.status) {
             // Arreglos para guardar los datos a graficar.
-            let meses = [];
-            let nuevosAlumnos = Array(12).fill(0); // Inicializar con ceros para todos los meses
-
-            // Arreglo de nombres de meses.
-            const nombresMeses = [
+            const meses = [
                 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
                 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
             ];
+            let nuevosAlumnos = Array(12).fill(0); // Inicializar con ceros para todos los meses
 
             // Variables para el total de nuevos alumnos
             let totalNuevosAlumnos = 0;
@@ -296,7 +293,6 @@ const graficoPredictivoAlumnos = async () => {
                 if (row.Mes && row.Inscripciones) { // Asegurarse de que los datos sean válidos
                     const mesIndex = parseInt(row.Mes, 10) - 1; // Convertir el mes a índice (0-11)
                     if (!isNaN(mesIndex) && mesIndex >= 0 && mesIndex < 12) {
-                        meses[mesIndex] = nombresMeses[mesIndex];
                         nuevosAlumnos[mesIndex] = parseInt(row.Inscripciones, 10) || 0; // Asegurarse de que sea un número o 0
                     }
                 }

@@ -301,16 +301,16 @@ class ComprasHandler
     {
         $sql = "WITH GananciasMensuales AS (
                 SELECT 
-                    MONTH(o.fecha_registro) AS mes,
-                    SUM(d.cantidad_producto * d.precio_producto) AS ganancias_mensuales
+                    MONTH(fecha_registro) AS mes,
+                    SUM(cantidad_producto * precio_producto) AS ganancias_mensuales
                 FROM 
-                    tb_detalles_compras d
+                    tb_detalles_compras
                 JOIN 
-                    tb_compras o ON d.id_compra = o.id_compra
+                    tb_compras USING (id_compra)
                 WHERE 
-                    YEAR(o.fecha_registro) = YEAR(CURDATE())
+                    YEAR(fecha_registro) = YEAR(CURDATE())
                 GROUP BY 
-                    MONTH(o.fecha_registro)
+                    MONTH(fecha_registro)
             )
             SELECT 
                 mes,
@@ -331,17 +331,17 @@ class ComprasHandler
     {
         $sql = "WITH PerdidasMensuales AS (
             SELECT 
-                MONTH(o.fecha_registro) AS mes,
-                SUM(d.cantidad_producto * d.precio_producto) AS perdidas_mensuales
+                MONTH(fecha_registro) AS mes,
+                SUM(cantidad_producto * precio_producto) AS perdidas_mensuales
             FROM 
-                tb_detalles_compras d
+                tb_detalles_compras
             JOIN 
-                tb_compras o ON d.id_compra = o.id_compra
+                tb_compras USING (id_compra)
             WHERE 
-                YEAR(o.fecha_registro) = YEAR(CURDATE()) 
-                AND o.estado_compra = 'Anulada'
+                YEAR(fecha_registro) = YEAR(CURDATE()) 
+                AND estado_compra = 'Anulada'
             GROUP BY 
-                MONTH(o.fecha_registro)
+                MONTH(fecha_registro)
         )
         SELECT 
             mes,

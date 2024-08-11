@@ -147,16 +147,16 @@ class ProductoHandler
     public function productosMasVendids()
     {
         $sql = 'SELECT 
-                p.nombre_producto,
-                SUM(dc.cantidad_producto) AS total_vendido
+                nombre_producto,
+                SUM(cantidad_producto) AS total_vendido
                 FROM 
-                tb_detalles_compras dc
+                tb_detalles_compras
                 INNER JOIN 
-                tb_detalleProducto dp ON dc.id_detalle_producto = dp.id_detalle_producto
+                tb_detalleProducto USING (id_detalle_producto)
                 INNER JOIN 
-                tb_productos p ON dp.id_producto = p.id_producto
+                tb_productos USING (id_producto)
                 GROUP BY 
-                p.id_producto
+                id_producto
                 ORDER BY 
                 total_vendido DESC
                 LIMIT 5;';
@@ -166,19 +166,19 @@ class ProductoHandler
     public function productosMasVendi2()
     {
         $sql = 'SELECT 	
-                p.nombre_producto,
-                p.imagen_producto,
-                p.estado_producto,
-                p.precio_producto,
-                SUM(dc.cantidad_producto) AS total_vendido
+                nombre_producto,
+                imagen_producto,
+                estado_producto,
+                tb_productos.precio_producto,
+                SUM(cantidad_producto) AS total_vendido
                 FROM 
-                tb_detalles_compras dc
+                tb_detalles_compras
                 INNER JOIN 
-                tb_detalleProducto dp ON dc.id_detalle_producto = dp.id_detalle_producto
+                tb_detalleProducto USING (id_detalle_producto)
                 INNER JOIN 
-                tb_productos p ON dp.id_producto = p.id_producto
+                tb_productos USING (id_producto)
                 GROUP BY 
-                p.id_producto
+                id_producto
                 ORDER BY 
                 total_vendido DESC
                 LIMIT 4;';

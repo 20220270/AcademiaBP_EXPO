@@ -22,7 +22,7 @@ if ($dataPagos = $PagosModel->reportPagos()) {
 
     $pdf->cell(65, 10, 'Nombre del alumno', 1, 0, 'C', 1);
     $pdf->cell(65, 10, 'Nombre responsable', 1, 0, 'C', 1);
-    $pdf->cell(35, 10, 'Cantidad pagada', 1, 0, 'C', 1);
+    $pdf->cell(30, 10, 'Cantidad pagada', 1, 0, 'C', 1);
     $pdf->cell(25, 10, 'Fecha de pago', 1, 1, 'C', 1);
 
     // Se establece la fuente para los datos de los clientes.
@@ -39,7 +39,7 @@ if ($dataPagos = $PagosModel->reportPagos()) {
         $pdf->cell(65, 10, $pdf->encodeString ($Pagos['NombreCliente']), 1, 0, 'C');
     
          // Telefono del cliente
-         $pdf->cell(35, 10,'$' . $Pagos['mensualidad_pagar'], 1, 0, 'C');
+         $pdf->cell(30, 10,'$' . $Pagos['mensualidad_pagar'], 1, 0, 'C');
 
           // Estado del cliente
         $pdf->cell(25, 10, $Pagos['fecha_pago'], 1, 1, 'C');

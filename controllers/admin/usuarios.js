@@ -138,13 +138,13 @@ SEARCH_FORM.addEventListener('submit', (event) => {
                         <div class="card-body">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button type="button" class="btn btn-sm" onclick="openUpdate(${row.id_administrador})">
-                                     <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                                     <img src="../../resources/images/btnActualizarIMG.png" alt="" width="40px" height="40px" class="mb-1">
                                 </button>
                                 <button type="button" class="btn btn-sm" onclick="openDelete(${row.id_administrador})">
-                                    <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                                    <img src="../../resources/images/btnEliminarIMG.png" alt="" width="40px" height="40px" class="mb-1">
                                 </button>
                                 <button type="button" class="btn btn-sm" onclick="openReport2(${row.id_administrador})">
-                                    <img src="../../resources/images/reporte_5.png" alt="" width="20px" height="20px" class="mb-1">
+                                    <img src="../../resources/images/reporte_2.png" alt="" width="40rem" height="50rem" class="mb-1">
                                 </button>
                             </div>
                             <h5 class="card-title text-dark mb-5 fs-1"><b>${row.alias_administrador}</b></h5>
@@ -186,10 +186,10 @@ const fillTable2 = async (form = null) => {
             <td>${row.id_nivel}</td>
             <td>${row.nivel}</td>
             <td><button type="button" class="btn btn-sm" onclick="openUpdate2(${row.id_nivel})">
-                                     <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                                     <img src="../../resources/images/btnActualizarIMG.png" alt="" width="40px" height="40px" class="mb-1">
                                 </button>
                                 <button type="button" class="btn btn-sm" onclick="openDelete2(${row.id_nivel})">
-                                    <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                                    <img src="../../resources/images/btnEliminarIMG.png" alt="" width="40px" height="40px" class="mb-1">
                                 </button></td>
             `;
         });
