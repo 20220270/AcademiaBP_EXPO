@@ -70,8 +70,7 @@
                 </ul>
 
                 <!--Contenedor donde se guardarán y gestionarán los días de pago-->
-                 <button type="submit" class="btn btn-dark" id="btnGuardar"
-                                name="btnGuardar" onclick="openReport()">Guardar</button>
+
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active col-lg-12 col-md-12 col-sm-12 mt-3" id="calendar-section"
                         role="tabpanel" aria-labelledby="calendar-tab">
@@ -121,6 +120,7 @@
                             <div class="col-md-12 container">
                                 <div class="container">
                                     <h4><b>Tabla de pagos</b></h4>
+
                                     <div class="col-6 offset-3 d-flex justify-content-center">
                                         <!-- Añadimos una clase offset-3 para centrar el buscador -->
                                         <form class="d-flex flex-grow-1" id="searchForm2">
@@ -136,6 +136,11 @@
                                                 </div>
                                             </div>
                                         </form>
+
+                                        <button type="submit" class="btn mx-5" id="btnGuardar" name="btnGuardar"
+                                            onclick="openReport()"><img src="../../resources/images/report.png"
+                                                alt="buttonpng" width="40rem"/></button>
+
                                         <div class="col-3 col-lg-9 d-flex justify-content-end">
                                             <!-- Botón alineado a la derecha -->
                                             <button type="button" class="btn btn-white me-md-2 mt-4"
@@ -144,9 +149,10 @@
                                                     width="60rem" />
                                             </button>
                                             <p class="mt-5"><b>Realice el pago de un alumno aquí</b></p>
+
                                         </div>
                                     </div>
-                                   
+
 
                                     <table class="table light-table-filter">
                                         <thead>
@@ -181,7 +187,7 @@
                     <!--Contenedor donde se guardarán y gestionarán los datos para generar la boleta de pago-->
                     <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chart1-section" role="tabpanel"
                         aria-labelledby="chart1-tab">
-                        <div class="col-md-12">
+                        <div class="col-md-12" id="contenedor4">
                             <div class="row">
                                 <!-- Columna para la tabla -->
                                 <div class="col-md-12 col-lg-12 mx-auto">

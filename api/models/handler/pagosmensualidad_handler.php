@@ -142,4 +142,22 @@ class PagosMensualidadHandler
         INNER JOIN tb_dias_pagos USING (id_dia_pago) ";
         return Database::getRows($sql);
     }
+
+    //Consulta para el reporte de la boleta de pagos
+
+    public function readAllVerPagos()
+    {
+        $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar, CONCAT(nombre_alumno, ' ', apellido_alumno) as nombre,
+            categoria, descripcion_pago, fecha_proximo_pago 
+            FROM tb_detalles_pagos
+            INNER JOIN tb_pagos USING (id_pago)
+            INNER JOIN tb_alumnos USING (id_alumno)
+            INNER JOIN tb_dias_pagos USING (id_dia_pago)
+            INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
+            INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
+            INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
+            WHERE id_pago = ?";
+        $params = array($this->idpago);
+        return Database::getRows($sql, $params);
+    }
 }

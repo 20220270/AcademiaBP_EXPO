@@ -150,18 +150,18 @@ input[type=range]::-moz-range-thumb {
     font-size: 1.4rem;
 }
 
-#contenedor1{
-    max-height: 190px;
-    overflow-x: auto;
-}
-
 #contenedor2{
-    max-height: 210px;
+    max-height: 280px;
     overflow-y: auto;
 }
 
 #contenedor3{
-    max-height: 280px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#contenedor4{
+    max-height: 320px;
     overflow-y: auto;
 }
 
