@@ -282,6 +282,10 @@ const fillTable3 = async (form = null) => {
                             <i class="bi bi-x-square-fill"></i>
                             <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                         </button>
+                        <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openReport2(${row.id_pago})">
+                            <i class="bi bi-x-square-fill"></i>
+                            <img src="../../resources/images/reporte_2.png" alt="" width="30px" height="30px" class="mb-1">
+                        </button>
                     </div>
                 </td>
             </tr>`;
@@ -559,6 +563,14 @@ const openReport = () => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
     const PATH = new URL(`${SERVER_URL}reports/admin/pagosmensualidad.php`);
 
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
+
+const openReport2 = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/boleta_pagos.php`);
+    PATH.searchParams.append('idPagoARealizar', id);
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }

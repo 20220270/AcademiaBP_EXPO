@@ -16,6 +16,9 @@ class Report extends FPDF
     // Propiedad para guardar el título del reporte.
     private $title = null;
 
+    // Propiedad para indicar si el reporte es del tipo Boleta.
+    private $isBoleta = false;
+
     /*
     *   Método para iniciar el reporte con el encabezado del documento.
     *   Parámetros: $title (título del reporte).
@@ -33,7 +36,7 @@ class Report extends FPDF
             $this->title = $title;
             // Se establece el título del documento (true = utf-8).
             $this->setTitle('AcademiaBP - Reporte', true);
-            // Se establecen los margenes del documento (izquierdo, superior y derecho).
+            // Se establecen los márgenes del documento (izquierdo, superior y derecho).
             $this->setMargins(15, 15, 15);
             // Se añade una nueva página al documento con orientación vertical y formato carta, llamando implícitamente al método header()
             $this->addPage('p', 'letter');
@@ -45,16 +48,24 @@ class Report extends FPDF
         }
     }
 
+    
+
+    /*
+    *   Método para iniciar un reporte desde la vista del cliente.
+    *   Parámetros: $title (título del reporte).
+    *   Retorno: ninguno.
+    */
     public function startReportClient($title)
     {
         // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en los reportes.
         session_start();
-        // Se verifica si un administrador ha iniciado sesión para generar el documento, de lo contrario se direcciona a la página web principal.
+        // Se verifica si un cliente ha iniciado sesión para generar el documento, de lo contrario se direcciona a la página web principal.
         if (isset($_SESSION['idCliente'])) {
+            // Se asigna el título del documento a la propiedad de la clase.
             $this->title = $title;
             // Se establece el título del documento (true = utf-8).
             $this->setTitle('AcademiaBP - Reporte', true);
-            // Se establecen los margenes del documento (izquierdo, superior y derecho).
+            // Se establecen los márgenes del documento (izquierdo, superior y derecho).
             $this->setMargins(15, 15, 15);
             // Se añade una nueva página al documento con orientación vertical y formato carta, llamando implícitamente al método header()
             $this->addPage('p', 'letter');
@@ -65,7 +76,11 @@ class Report extends FPDF
         }
     }
 
-    //Reporte horizontal
+    /*
+    *   Método para iniciar un reporte horizontal.
+    *   Parámetros: $title (título del reporte).
+    *   Retorno: ninguno.
+    */
     public function startReportHorizontal($title)
     {
         // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en los reportes.
@@ -78,7 +93,7 @@ class Report extends FPDF
             $this->title = $title;
             // Se establece el título del documento (true = utf-8).
             $this->setTitle('AcademiaBP - Reporte', true);
-            // Se establecen los margenes del documento (izquierdo, superior y derecho).
+            // Se establecen los márgenes del documento (izquierdo, superior y derecho).
             $this->setMargins(15, 15, 15);
             // Se añade una nueva página al documento con orientación horizontal y formato carta, llamando implícitamente al método header()
             $this->addPage('l', 'letter');
@@ -87,6 +102,34 @@ class Report extends FPDF
             $this->aliasNbPages();
         } else {
             header('location:' . self::CLIENT_URL);
+        }
+    }
+
+    /*
+    *   Método para iniciar un reporte tipo Boleta con un encabezado personalizado.
+    *   Parámetros: $title (título del reporte).
+    *   Retorno: ninguno.
+    */
+    public function startReportBoleta($title)
+    {
+        // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en los reportes.
+        session_start();
+        // Se verifica si un administrador ha iniciado sesión para generar el documento, de lo contrario se direcciona a la página web principal.
+        if (isset($_SESSION['aliasAdministrador'])) {
+            // Se asigna el título del documento a la propiedad de la clase.
+            $this->title = $title;
+            // Se establece el indicador de que es un reporte tipo Boleta.
+            $this->isBoleta = true;
+            // Se establece el título del documento (true = utf-8).
+            $this->setTitle('AcademiaBP - Boleta', true);
+            // Se establecen los márgenes del documento (izquierdo, superior y derecho).
+            $this->setMargins(15, 15, 15);
+            // Se añade una nueva página al documento con orientación horizontal y formato de página personalizado, llamando implícitamente al método header()
+            $this->addPage('l', array(230, 230));
+            // Se define un alias para el número total de páginas que se muestra en el pie del documento.
+            $this->aliasNbPages();
+        } else {
+            header('location:' . self::CLIENT_URL2);
         }
     }
 
@@ -105,7 +148,34 @@ class Report extends FPDF
     *   Se llama automáticamente en el método addPage()
     */
     public function header()
-    {
+{
+    if ($this->isBoleta) {
+        // Se obtiene el ancho actual de la página.
+        $pageWidth = $this->getPageWidth() - 50;
+        // Se establece el logo.
+        $this->image('../../images/logoAcademiaBP.png', 15, 20, 20); // Imagen personalizada
+        // Se ubica el título.
+        $this->cell(20);
+        $this->setFont('Arial', '', 10);
+        $this->cell($pageWidth, 10, 'Fecha/Hora: ' . date('d-m-Y H:i:s'), 0, 1, 'R');
+        $this->setFont('Arial', 'B', 30);
+        $this->cell(185, 10, $this->encodeString($this->title), 0, 1, 'C');
+        // Coloca la misma imagen del logo debajo del título con un tamaño más pequeño.
+        $this->image('../../images/whatsapp.jpg', 80, 40, 10);
+        $this->image('../../images/logoFacebook.png', 81, 55, 8);
+        // Texto a la par de la imagen de logoAcademiaBP
+        $this->setXY(93, 40); // Posiciona el cursor a la derecha de la imagen
+        $this->setFont('Arial', '', 12);
+        $this->cell(0, 10, $this->encodeString('Teléfono: 7303-5707'), 0, 1, 'L');
+        // Texto a la par de la imagen de logoFacebook
+        $this->setXY(93, 55); // Posiciona el cursor a la derecha de la imagen
+        $this->setFont('Arial', '', 12);
+        $this->cell(0, 10, $this->encodeString('La Academia BP'), 0, 1, 'L');
+        // Se agrega un salto de línea para mostrar el contenido principal del documento.
+        $this->ln(10); // Aumentamos el espacio a 40 para que la imagen no interfiera con el contenido
+    }
+    
+     else {
         // Se obtiene el ancho actual de la página.
         $pageWidth = $this->getPageWidth() - 30; // Resta los márgenes (15+15)
         // Se establece el logo.
@@ -121,16 +191,17 @@ class Report extends FPDF
         // Se agrega un salto de línea para mostrar el contenido principal del documento.
         $this->ln(10);
     }
+}
+
 
     /*
-    *   Se sobrescribe el método de la librería para establecer la plantilla del pie de los reportes.
-    *   Se llama automáticamente en el método output()
+    *   Se sobrescribe el método de la librería para establecer la plantilla del pie de página de los reportes.
+    *   Se llama automáticamente en el método addPage()
     */
     public function footer()
     {
         // Se establece la posición para el número de página (a 15 milímetros del final).
         $this->setY(-15);
-        // Se establece la fuente para el número de página.
         $this->setFont('Arial', 'I', 8);
         // Se imprime una celda con el número de página.
         $this->cell(0, 10, $this->encodeString('Página ') . $this->pageNo() . '/{nb}', 0, 0, 'C');

@@ -145,9 +145,9 @@ class PagosMensualidadHandler
 
     //Consulta para el reporte de la boleta de pagos
 
-    public function readAllVerPagos()
+    public function readBoletaPagos()
     {
-        $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar, CONCAT(nombre_alumno, ' ', apellido_alumno) as nombre,
+        $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, numero_dias, mensualidad_pagar, CONCAT(nombre_alumno, ' ', apellido_alumno) as nombre,
             categoria, descripcion_pago, fecha_proximo_pago 
             FROM tb_detalles_pagos
             INNER JOIN tb_pagos USING (id_pago)
