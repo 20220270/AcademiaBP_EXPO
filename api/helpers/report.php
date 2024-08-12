@@ -153,26 +153,26 @@ class Report extends FPDF
         // Se obtiene el ancho actual de la página.
         $pageWidth = $this->getPageWidth() - 50;
         // Se establece el logo.
-        $this->image('../../images/logoAcademiaBP.png', 15, 20, 20); // Imagen personalizada
+        $this->image('../../images/logoAcademiaBP.png', 15, 30, 20); // Imagen personalizada
         // Se ubica el título.
         $this->cell(20);
         $this->setFont('Arial', '', 10);
         $this->cell($pageWidth, 10, 'Fecha/Hora: ' . date('d-m-Y H:i:s'), 0, 1, 'R');
         $this->setFont('Arial', 'B', 30);
-        $this->cell(185, 10, $this->encodeString($this->title), 0, 1, 'C');
+        $this->cell(185, 30, $this->encodeString($this->title), 0, 1, 'C');
         // Coloca la misma imagen del logo debajo del título con un tamaño más pequeño.
-        $this->image('../../images/whatsapp.jpg', 80, 40, 10);
-        $this->image('../../images/logoFacebook.png', 81, 55, 8);
+        $this->image('../../images/whatsapp.jpg', 80, 50, 10);
+        $this->image('../../images/logoFacebook.png', 81, 65, 8);
         // Texto a la par de la imagen de logoAcademiaBP
-        $this->setXY(93, 40); // Posiciona el cursor a la derecha de la imagen
+        $this->setXY(93, 50); // Posiciona el cursor a la derecha de la imagen
         $this->setFont('Arial', '', 12);
         $this->cell(0, 10, $this->encodeString('Teléfono: 7303-5707'), 0, 1, 'L');
         // Texto a la par de la imagen de logoFacebook
-        $this->setXY(93, 55); // Posiciona el cursor a la derecha de la imagen
+        $this->setXY(93, 65); // Posiciona el cursor a la derecha de la imagen
         $this->setFont('Arial', '', 12);
         $this->cell(0, 10, $this->encodeString('La Academia BP'), 0, 1, 'L');
         // Se agrega un salto de línea para mostrar el contenido principal del documento.
-        $this->ln(10); // Aumentamos el espacio a 40 para que la imagen no interfiera con el contenido
+        $this->ln(1); // Aumentamos el espacio a 40 para que la imagen no interfiera con el contenido
     }
     
      else {

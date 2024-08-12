@@ -272,4 +272,52 @@ class ProductoHandler
         $params = array($this->categoria);
         return Database::getRows($sql, $params);
     }
+
+    public function reportPredictionsProducts()
+    {
+        $sql = 'SELECT imagen_producto,
+                nombre_producto,
+                ROUND(SUM(cantidad_producto) / COUNT(DISTINCT MONTH(fecha_registro)) * 12, 0) AS proyeccion_ventas
+                FROM 
+                tb_detalles_compras
+                INNER JOIN 
+                tb_detalleProducto USING (id_detalle_producto)
+                INNER JOIN 
+                tb_productos USING (id_producto)
+                WHERE
+                YEAR(fecha_registro) = YEAR(CURDATE())
+                GROUP BY 
+                id_producto
+                ORDER BY 
+                proyeccion_ventas DESC LIMIT 7;';
+        return Database::getRows($sql);
+    }
+
+    public function reportPredictionsProductsRating()
+    {
+        $sql = 'WITH calificaciones_promedio AS (
+                SELECT
+                id_producto,
+                ROUND(AVG(calificacion_producto), 1) AS promedio_calificacion
+                FROM tb_valoraciones
+                JOIN tb_detalles_compras USING (id_detalle_compra)
+                INNER JOIN tb_detalleProducto USING (id_detalle_producto)
+                INNER JOIN tb_productos USING (id_producto)
+                WHERE YEAR(fecha_valoracion) = YEAR(CURDATE())
+                GROUP BY id_producto
+                ),
+
+                productos_mejores_calificaciones AS (
+                SELECT
+                p.imagen_producto,
+                p.nombre_producto,
+                cp.promedio_calificacion
+                FROM calificaciones_promedio cp
+                JOIN tb_productos p ON p.id_producto = cp.id_producto
+                )
+
+                SELECT * FROM productos_mejores_calificaciones
+                ORDER BY promedio_calificacion DESC LIMIT 7;';
+        return Database::getRows($sql);
+    }
 }
