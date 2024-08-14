@@ -159,7 +159,7 @@ const fillTable = async (form = null) => {
             </button>
             <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openReport(${row.id_categoria_producto})">
               <i class="bi bi-x-square-fill"></i>
-              <img src="../../resources/images/reporte_2.png" alt="" width="30px" height="30px" class="mb-1">
+              <img src="../../resources/images/reporteee.png" alt="" width="20px" height="25px" class="mb-1">
             </button>
           </div>
             </div>

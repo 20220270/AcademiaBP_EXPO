@@ -259,7 +259,7 @@ const fillTable2 = async (form = null) => {
                                                 <!--Aquí le damos las coordenadas del estadio Cuscatlan,
                                                 obtenidas de la wikipedia y jugar con la posicion porque no son exactas las de la Wikipedia-->
                                                 <img src="../../resources/images/llegar.png" alt="..."
-                                                    width="25px" height="25px">
+                                                    width="20px" height="20px">
                                                 </a>
                                             </div>
                                         </div>

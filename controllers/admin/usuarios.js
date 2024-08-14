@@ -144,7 +144,7 @@ SEARCH_FORM.addEventListener('submit', (event) => {
                                     <img src="../../resources/images/btnEliminarIMG.png" alt="" width="40px" height="40px" class="mb-1">
                                 </button>
                                 <button type="button" class="btn btn-sm" onclick="openReport2(${row.id_administrador})">
-                                    <img src="../../resources/images/reporte_2.png" alt="" width="40rem" height="50rem" class="mb-1">
+                                    <img src="../../resources/images/reporteee.png" alt="" width="20px" height="25px" class="mb-1">
                                 </button>
                             </div>
                             <h5 class="card-title text-dark mb-5 fs-1"><b>${row.alias_administrador}</b></h5>
