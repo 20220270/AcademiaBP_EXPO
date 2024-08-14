@@ -175,3 +175,10 @@ SEARCH_FORM.addEventListener('submit', (event) => {
         }
     }
   }
+
+  const openReport = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/prediccion_productos_valoraciones.php`);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}

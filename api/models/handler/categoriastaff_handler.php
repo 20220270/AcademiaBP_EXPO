@@ -92,9 +92,9 @@ class CategoriaStaffHandler
 
     public function readAllCategoriasHorarios()
     {
-        $sql = "SELECT 
+        $sql = "SELECT
     id_categoria_horario,
-    CONCAT(categoria, ', ', nombre_lugar, ', ', dia_entrenamiento, ' ', TIME_FORMAT(hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(hor_fin, '%h:%i %p')) AS horario
+    categoria
     FROM 
     tb_categorias_horarios
     INNER JOIN 
@@ -104,7 +104,8 @@ class CategoriaStaffHandler
     INNER JOIN 
     tb_lugares_entrenamientos USING (id_lugar)
    INNER JOIN 
-    tb_horarios_entrenamientos USING (id_horario)";
+    tb_horarios_entrenamientos USING (id_horario)
+    GROUP BY categoria";
         return Database::getRows($sql);
     }
 
