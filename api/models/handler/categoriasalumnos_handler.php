@@ -327,4 +327,30 @@ class CategoriasAlumnosHandler
         $params = array($this->idcategoria);
         return Database::getRows($sql, $params);
     }
+
+    public function graphicAlumnosEdades()
+    {
+        $sql = 'WITH Edades AS (
+    SELECT 
+        TIMESTAMPDIFF(YEAR, a.fecha_nacimiento, CURDATE()) AS edad
+    FROM 
+        tb_alumnos a
+    INNER JOIN 
+        tb_staffs_categorias sc USING (id_staff_categorias)
+    INNER JOIN 
+        tb_categorias_horarios ch USING (id_categoria_horario)
+    WHERE 
+        ch.id_categoria_alumno = ?
+)
+SELECT 
+    edad,
+    COUNT(*) AS cantidad
+FROM 
+    Edades
+GROUP BY 
+    edad;
+';
+        $params = array($this->idcategoria);
+        return Database::getRows($sql, $params);
+    }
 }

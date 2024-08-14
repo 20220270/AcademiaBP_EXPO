@@ -128,7 +128,7 @@ if (isset($_GET['action'])) {
 
                 /////(/)
             case 'searchRowsAlumnosHorario':
-                if (!Validator::validateSearch($_POST['search2'])) {
+                if (!Validator::validateSearch($_POST['search3'])) {
                     $result['error'] = Validator::getSearchError();
                 } elseif ($result['dataset'] = $categoriasalumnos->searchRowsAlumnosHorario()) {
                     $result['status'] = 1;
@@ -230,6 +230,22 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar esta asignación';
                 }
                 break;
+
+                case 'graphicAlumnosEdades':
+                    // Lee el JSON del cuerpo de la solicitud
+                    $data = json_decode(file_get_contents('php://input'), true);
+                    
+                    // Verifica si se ha recibido 'idCategoriaAlumno'
+                    if (!isset($data['idCategoriaAlumno']) || !$categoriasalumnos->setIdCategoria($data['idCategoriaAlumno'])) {
+                        $result['error'] = 'El identificador de la categoría es incorrecto';
+                    } elseif ($result['dataset'] = $categoriasalumnos->graphicAlumnosEdades()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Categoría inexistente';
+                    }
+                    break;
+                
+
 
 
             default:

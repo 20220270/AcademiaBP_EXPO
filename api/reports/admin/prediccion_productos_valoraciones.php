@@ -50,7 +50,7 @@ if ($dataProductos = $producto->reportPredictionsProductsRating()) {
             $pdf->cell($cellWidth, $cellHeight, 'Sin foto', 1, 0, 'C');
         }
         $pdf->cell(65, $cellHeight, $rowProducto['nombre_producto'], 1, 0, 'C');
-        $pdf->cell(80, $cellHeight, $pdf->encodeString( $rowProducto['promedio_calificacion']), 1, 1, 'C');
+        $pdf->cell(80, $cellHeight, $pdf->encodeString( $rowProducto['promedio_final']), 1, 1, 'C');
     }
 } else {
     $pdf->cell(0, 10, $pdf->encodeString('No hay productos para mostrar'), 1, 1);

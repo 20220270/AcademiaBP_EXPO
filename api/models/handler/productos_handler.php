@@ -91,7 +91,7 @@ class ProductoHandler
         $sql = 'UPDATE tb_productos
                 SET imagen_producto = ?, nombre_producto = ?, descripcion_producto = ?, precio_producto = ?, estado_producto = ?, descuento_producto = ? , id_categoria_producto = ?
                 WHERE id_producto = ?';
-        $params = array($this->imagen, $this->nombre, $this->descripcion, $this->precio, $this -> estado, $this->descuento, $this->categoria, $this->id);
+        $params = array($this->imagen, $this->nombre, $this->descripcion, $this->precio, $this->estado, $this->descuento, $this->categoria, $this->id);
         return Database::executeRow($sql, $params);
     }
 
@@ -125,7 +125,7 @@ class ProductoHandler
                 INNER JOIN tb_colores USING(id_color)
                 WHERE id_categoria_producto = ?  AND id_producto = ? AND estado_producto = "En venta" AND existencias_producto > 0
                 ORDER BY nombre_producto';
-        $params = array($this->categoria , $this->id);
+        $params = array($this->categoria, $this->id);
         return Database::getRows($sql, $params);
     }
 
@@ -141,7 +141,7 @@ class ProductoHandler
     }
 
 
-       /*
+    /*
     *   Métodos para generar gráficos.
     */
     public function productosMasVendids()
@@ -243,7 +243,7 @@ class ProductoHandler
         return Database::getRows($sql);
     }
 
-    
+
     public function commentsProduct()
     {
         $sql = "SELECT id_valoracion, nombre_producto, comentario_producto, calificacion_producto, foto_cliente, nombre_cliente, apellido_cliente, fecha_valoracion from tb_valoraciones
@@ -275,9 +275,11 @@ class ProductoHandler
 
     public function reportPredictionsProducts()
     {
-        $sql = 'SELECT imagen_producto,
-                nombre_producto,
-                ROUND(SUM(cantidad_producto) / COUNT(DISTINCT MONTH(fecha_registro)) * 12, 0) AS proyeccion_ventas
+        $sql = 'WITH ventas_mensuales AS (
+                SELECT
+                id_producto,
+                MONTH(fecha_registro) AS mes,
+                SUM(cantidad_producto) AS ventas_mes
                 FROM 
                 tb_detalles_compras
                 INNER JOIN 
@@ -286,38 +288,76 @@ class ProductoHandler
                 tb_productos USING (id_producto)
                 WHERE
                 YEAR(fecha_registro) = YEAR(CURDATE())
-                GROUP BY 
-                id_producto
-                ORDER BY 
-                proyeccion_ventas DESC LIMIT 7;';
+                GROUP BY
+                id_producto, mes),
+
+                tendencia_ventas AS (
+                SELECT
+                id_producto,
+                AVG(ventas_mes) AS promedio_mensual,
+                COUNT(mes) AS meses_activos,
+                SUM(ventas_mes) AS total_ventas
+                FROM
+                ventas_mensuales
+                GROUP BY
+                id_producto),
+
+                prediccion_ventas AS (
+                SELECT
+                id_producto,
+                ROUND(total_ventas + (promedio_mensual * (12 - meses_activos)), 0) AS proyeccion_ventas
+                FROM
+                tendencia_ventas)
+
+                SELECT
+                p.imagen_producto,
+                p.nombre_producto,
+                pv.proyeccion_ventas
+                FROM
+                prediccion_ventas pv
+                JOIN
+                tb_productos p ON p.id_producto = pv.id_producto
+                ORDER BY
+                pv.proyeccion_ventas DESC
+                LIMIT 7;';
         return Database::getRows($sql);
     }
 
     public function reportPredictionsProductsRating()
     {
-        $sql = 'WITH calificaciones_promedio AS (
-                SELECT
-                id_producto,
-                ROUND(AVG(calificacion_producto), 1) AS promedio_calificacion
-                FROM tb_valoraciones
-                JOIN tb_detalles_compras USING (id_detalle_compra)
-                INNER JOIN tb_detalleProducto USING (id_detalle_producto)
-                INNER JOIN tb_productos USING (id_producto)
-                WHERE YEAR(fecha_valoracion) = YEAR(CURDATE())
-                GROUP BY id_producto
-                ),
+        $sql = 'WITH calificaciones_actuales AS (
+                SELECT id_producto,
+                COUNT(*) AS num_calificaciones,
+                SUM(calificacion_producto) AS total_calificacion,
+                ROUND(AVG(calificacion_producto), 1) AS promedio_actual
+            FROM tb_valoraciones
+            JOIN tb_detalles_compras USING (id_detalle_compra)
+            INNER JOIN tb_detalleProducto USING (id_detalle_producto)
+            INNER JOIN tb_productos USING (id_producto)
+            WHERE YEAR(fecha_valoracion) = YEAR(CURDATE())
+            GROUP BY id_producto),
 
-                productos_mejores_calificaciones AS (
-                SELECT
-                p.imagen_producto,
-                p.nombre_producto,
-                cp.promedio_calificacion
-                FROM calificaciones_promedio cp
-                JOIN tb_productos p ON p.id_producto = cp.id_producto
-                )
+            prediccion_calificaciones AS (
+            SELECT
+            id_producto,
+            imagen_producto,
+            nombre_producto,
+            promedio_actual,
+            ROUND(
+            (total_calificacion + (365 - DAYOFYEAR(CURDATE())) * promedio_actual) / 
+            (num_calificaciones + (365 - DAYOFYEAR(CURDATE()))),
+            1) AS promedio_final
+                FROM calificaciones_actuales
+            JOIN tb_productos USING (id_producto))
 
-                SELECT * FROM productos_mejores_calificaciones
-                ORDER BY promedio_calificacion DESC LIMIT 7;';
-        return Database::getRows($sql);
+            SELECT 
+            id_producto,
+            imagen_producto,
+            nombre_producto,
+            promedio_actual,
+            promedio_final
+            FROM prediccion_calificaciones
+            ORDER BY promedio_final DESC LIMIT 7;';
+            return Database::getRows($sql);
     }
 }
