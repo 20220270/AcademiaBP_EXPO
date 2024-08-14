@@ -231,20 +231,20 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                case 'graphicAlumnosEdades':
-                    // Lee el JSON del cuerpo de la solicitud
-                    $data = json_decode(file_get_contents('php://input'), true);
-                    
-                    // Verifica si se ha recibido 'idCategoriaAlumno'
-                    if (!isset($data['idCategoriaAlumno']) || !$categoriasalumnos->setIdCategoria($data['idCategoriaAlumno'])) {
-                        $result['error'] = 'El identificador de la categoría es incorrecto';
-                    } elseif ($result['dataset'] = $categoriasalumnos->graphicAlumnosEdades()) {
-                        $result['status'] = 1;
-                    } else {
-                        $result['error'] = 'Categoría inexistente';
-                    }
-                    break;
-                
+            case 'graphicAlumnosEdades':
+                // Lee el JSON del cuerpo de la solicitud
+                $data = json_decode(file_get_contents('php://input'), true);
+
+                // Verifica si se ha recibido 'idCategoriaAlumno'
+                if (!isset($data['idCategoriaAlumno']) || !$categoriasalumnos->setIdCategoria($data['idCategoriaAlumno'])) {
+                    $result['error'] = 'El identificador de la categoría es incorrecto';
+                } elseif ($result['dataset'] = $categoriasalumnos->graphicAlumnosEdades()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Categoría inexistente';
+                }
+                break;
+
 
 
 

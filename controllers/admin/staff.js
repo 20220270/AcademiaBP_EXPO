@@ -146,7 +146,7 @@ const fillTable = async (form = null) => {
                             </button>
                             
                             <button type="button" class="btn btn-sm" onclick="openReport2(${row.id_staff})">
-                            <img src="../../resources/images/reporteee.png" alt="" width="20px" height="25px" class="mb-1">
+                            <img src="../../resources/images/reporteee.png" alt="" width="20px" height="25px" class="mt-1 mx-3">
                             </button>
 
                             </div>

@@ -93,7 +93,7 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
-                
+
             case 'deleteRow':
                 if (
                     !$nivelesentrenamiento->setId($_POST['idNivelEntrenamiento']) or
@@ -107,6 +107,20 @@ if (isset($_GET['action'])) {
                     $result['fileStatus'] = Validator::deleteFile($nivelesentrenamiento::RUTA_IMAGEN, $nivelesentrenamiento->getFilename());
                 } else {
                     $result['error'] = 'Ocurrió un problema al eliminar este nivel';
+                }
+                break;
+
+            case 'graphCategoriasNiveles':
+                // Lee el JSON del cuerpo de la solicitud
+                $data = json_decode(file_get_contents('php://input'), true);
+
+                // Verifica si se ha recibido 'idNivelEntrenamiento'
+                if (!isset($data['idNivelEntrenamiento']) || !$nivelesentrenamiento->setId($data['idNivelEntrenamiento'])) {
+                    $result['error'] = 'El identificador del nivel es incorrecto';
+                } elseif ($result['dataset'] = $nivelesentrenamiento->graphCategoriasNiveles()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Nivel inexistente';
                 }
                 break;
             default:

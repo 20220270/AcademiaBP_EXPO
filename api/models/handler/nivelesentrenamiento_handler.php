@@ -83,4 +83,31 @@ class NivelesEntrenamientoHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+
+    //Método para mostrar gráfico de la cantidad de categorías registradas dentro de un nivel de entrenamiento
+
+    public function graphCategoriasNiveles()
+    {
+        $sql = 'WITH Categorias AS (
+    SELECT 
+        id_categoria_alumno,
+        nivel_entrenamiento,
+        COUNT(id_alumno) AS total_Alumnos
+    FROM 
+        tb_alumnos
+        INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
+        INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
+        INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
+        INNER JOIN tb_niveles_entrenamientos USING (id_nivel_entrenamiento)
+    WHERE 
+        id_nivel_entrenamiento = ?
+    GROUP BY 
+        id_categoria_alumno, nivel_entrenamiento)
+    SELECT nivel_entrenamiento, SUM(total_Alumnos) AS total_Alumnos
+    FROM 
+    Categorias;';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
 }
