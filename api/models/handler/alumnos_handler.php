@@ -224,4 +224,11 @@ class AlumnosHandler
 
         return Database::getRows($sql);
     }
+    
+    public function pruebaReporte()
+    {
+        $sql = '';
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
+    }
 }
