@@ -265,4 +265,29 @@ class ClienteHandler
         $params = array($_SESSION['idCliente']);
         return Database::getRows($sql, $params); //Se manda rows, para que traiga todos los datos
     }
+
+    public function readClientesComprasGraph()
+    {
+        $sql = 'SELECT 
+                    p.nombre_producto,
+                    SUM(dc.cantidad_producto) AS total_comprado
+                FROM 
+                    tb_compras c
+                JOIN 
+                    tb_clientes cl USING (id_cliente)
+                JOIN 
+                    tb_detalles_compras dc USING (id_compra)
+                JOIN 
+                    tb_detalleProducto dp USING (id_detalle_producto)
+                JOIN 
+                    tb_productos p USING (id_producto)
+                WHERE 
+                    c.id_cliente = ?
+                GROUP BY 
+                    p.nombre_producto
+                ORDER BY 
+                    total_comprado DESC;';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
 }

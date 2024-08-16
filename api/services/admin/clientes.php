@@ -98,6 +98,20 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+            case 'readClientesComprasGraph':
+                // Lee el JSON del cuerpo de la solicitud
+                $data = json_decode(file_get_contents('php://input'), true);
+
+                // Verifica si se ha recibido 'idCliente'
+                if (!isset($data['idCliente']) || !$cliente->setId($data['idCliente'])) {
+                    $result['error'] = 'El identificador del cliente es incorrecto';
+                } elseif ($result['dataset'] = $cliente->readClientesComprasGraph()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Cliente inexistente';
+                }
+                break;
+
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

@@ -1,4 +1,5 @@
 const CLIENTES_API = 'services/admin/clientes.php';
+const CLIENTES_API2 = 'http://localhost/AcademiaBP_EXPO/api/services/admin/clientes.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer los elementos de la tabla de niveles de usuario.
@@ -65,40 +66,49 @@ SEARCH_FORM.addEventListener('submit', (event) => {
   });
 
   const fillTable = async (form = null) => {
-    // Se inicializa el contenido de la tabla.
+    // Inicializa el contenido de la tabla.
     TABLE_BODY.innerHTML = '';
     ROWS_FOUND.innerHTML = '';
-    // Se verifica la acción a realizar.
+    // Verifica la acción a realizar.
     const action = form ? 'searchRows' : 'readAll';
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(CLIENTES_API, action, form);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    // Comprueba si la respuesta es satisfactoria; de lo contrario, muestra un mensaje de error.
     if (DATA.status) {
-        // Se recorre el conjunto de registros fila por fila.
+        // Recorre el conjunto de registros fila por fila.
         DATA.dataset.forEach(row => {
-            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+            // Crea y concatena las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
-            <td>${row.id_cliente}</td>
-            <td><img src="${SERVER_URL}images/clientes/${row.foto_cliente}" class="card-img-top"></td>
-            <td>${row.nombre_completo}</td>
-            <td>${row.dui_cliente}</td>
-            <td>${row.correo_cliente}</td>
-            <td>${row.telefono_cliente}</td>
-            <td>${row.direccion_cliente}</td>
-            <td>${row.fecha_registro}</td>
-            <td>${row.estado_cliente}</td>
-            <td><button type="button" class="btn btn-sm" onclick="openUpdate(${row.id_cliente})">
-                                     <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
-                                </button>
-                                <button type="button" class="btn btn-sm" onclick="openDelete(${row.id_cliente})">
-                                    <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
-                                </button></td>
+            <tr>
+                <td>${row.id_cliente}</td>
+                <td><img src="${SERVER_URL}images/clientes/${row.foto_cliente}" class="card-img-top rounded-circle"></td>
+                <td>${row.nombre_completo}</td>
+                <td>${row.dui_cliente}</td>
+                <td>${row.correo_cliente}</td>
+                <td>${row.telefono_cliente}</td>
+                <td>${row.direccion_cliente}</td>
+                <td>${row.fecha_registro}</td>
+                <td>${row.estado_cliente}</td>
+                <td>
+                    <button type="button" class="btn btn-sm" onclick="openUpdate(${row.id_cliente})">
+                        <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                    </button>
+                    <button type="button" class="btn btn-sm" onclick="openDelete(${row.id_cliente})">
+                        <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                    </button>
+                    <button type="button" class="btn btn-sm" onclick="openGraph(${row.id_cliente}, this)">
+                        <img src="../../resources/images/reporteee.png" alt="" width="25px" height="25px" class="mb-1">
+                    </button>
+                </td>
+                <td id="chartColumn-${row.id_cliente}"></td>
+            </tr>
             `;
         });
     } else {
         sweetAlert(4, DATA.error, true);
     }
 }
+
 
 const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
@@ -175,3 +185,66 @@ const openCreate = () => {
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }
+
+//Método para generar el gráfico de los productos más comprados por un cliente seleccionado
+//El parámetro a enviar es el id del cliente, guardado en la variable idCliente
+
+//Es importante mencionar que este método no se ejecutará al cargar la página, sino al especificar un cliente. Por ende, no se envía en el DOMContentLoaded
+const openGraph = async (idCliente) => {
+    // Obtiene la celda de la tabla donde se mostrará el gráfico.
+    const chartCell = document.getElementById(`chartColumn-${idCliente}`);
+    
+    // Verifica si ya hay un gráfico en la celda
+    const existingCanvas = document.getElementById(`chartCanvas-${idCliente}`);
+    
+    if (existingCanvas) {
+        // Si el gráfico ya está en la celda, alterna su visibilidad
+        if (existingCanvas.style.display === 'none' || existingCanvas.style.display === '') {
+            existingCanvas.style.display = 'block'; // Muestra el gráfico si está oculto
+        } else {
+            existingCanvas.style.display = 'none'; // Oculta el gráfico si está visible
+        }
+        return; // Salimos de la función ya que el gráfico ya existe
+    }
+
+    // Crea el elemento canvas para el gráfico con un tamaño reducido.
+    const canvas = document.createElement('canvas');
+    canvas.id = `chartCanvas-${idCliente}`; // Le asignamos un ID
+    canvas.style.width = '200px';  // Ajusta el ancho
+    canvas.style.height = '200px'; // Ajusta la altura
+    canvas.style.display = 'block'; // Asegúrate de que el canvas esté visible inicialmente
+    chartCell.appendChild(canvas); // Agregamos el elemento canvas a chartCell
+
+    try {
+        // Realiza la solicitud a la API para obtener los datos del gráfico.
+        const response = await fetch(CLIENTES_API2 + '?action=readClientesComprasGraph', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ idCliente }) // Enviamos el parámetro a la API
+        });
+
+        const DATA = await response.json();
+
+        if (DATA.status) {
+            // Declara arreglos para almacenar los datos del gráfico.
+            let productos = [];
+            let cantidades = [];
+
+            DATA.dataset.forEach(row => {
+                productos.push(row.nombre_producto);
+                cantidades.push(row.total_comprado);
+            });
+
+            // Llama a la función para generar el gráfico de pastel,
+            // Asignando el elemento canvas, el valor a mostrar, la cantidad a mostrar, y el título del gráfico
+            pieGraph(canvas.id, productos, cantidades, 'Productos más comprados por el cliente');
+        } else {
+            console.log(DATA.error);
+        }
+    } catch (error) {
+        console.error('Error al generar el gráfico:', error);
+    }
+}
+
