@@ -170,7 +170,7 @@ class Validator
     public static function validateAlphanumeric($value)
     {
         // Se verifica el contenido y la longitud de acuerdo con la base de datos.
-        if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s]+$/', $value)) {
+        if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\,]+$/', $value)) {
             return true;
         } else {
             return false;

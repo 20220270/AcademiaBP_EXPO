@@ -43,7 +43,6 @@ if (isset($_GET['action'])) {
             case 'readAll':
                 if ($result['dataset'] = $pagos->readAll()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
                     $result['error'] = 'No existen pagos registradas';
                 }

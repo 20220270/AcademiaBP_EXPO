@@ -81,31 +81,68 @@ const sweetAlert = async (type, text, timer, url = null) => {
 *   Retorno: ninguno.
 */
 const fillSelect = async (filename, action, select, selected = null) => {
-    // Petición para obtener los datos.
     const DATA = await fetchData(filename, action);
     let content = '';
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje.
+
     if (DATA.status) {
         content += '<option value="" selected>Seleccione una opción</option>';
-        // Se recorre el conjunto de registros fila por fila a través del objeto row.
+
         DATA.dataset.forEach(row => {
-            // Se obtiene el dato del primer campo.
-            value = Object.values(row)[0];
-            // Se obtiene el dato del segundo campo.
-            text = Object.values(row)[1];
-            // Se verifica cada valor para enlistar las opciones.
-            if (value != selected) {
-                content += `<option value="${value}">${text}</option>`;
+            const value = Object.values(row)[0];
+            const text = Object.values(row)[1];
+
+            if (select === 'selectColor') {
+                let colorHex = Object.values(row)[1];
+
+                if (colorHex && colorHex.trim() !== '') {
+                    // Asegúrate de que el color tenga el prefijo '#'
+                    if (!colorHex.startsWith('#')) {
+                        colorHex = `#${colorHex}`;
+                        console.log(colorHex)
+                    }
+
+                    content += `
+                        <option value="${value}" style="background-color: ${colorHex}; color: ${getContrastingTextColor(colorHex)};">
+                            ${text}
+                        </option>`;
+                } else {
+                    console.error('El valor hexadecimal de color no está definido para:', row);
+                    console.log(colorHex)
+                }
             } else {
-                content += `<option value="${value}" selected>${text}</option>`;
+                if (value != selected) {
+                    content += `<option value="${value}">${text}</option>`;
+                } else {
+                    content += `<option value="${value}" selected>${text}</option>`;
+                }
             }
         });
     } else {
         content += '<option>No hay opciones disponibles</option>';
     }
-    // Se agregan las opciones a la etiqueta select mediante el id.
+
     document.getElementById(select).innerHTML = content;
+};
+
+// Función para determinar un color de texto que contraste con el fondo
+function getContrastingTextColor(hex) {
+    // Verifica que hex sea una cadena válida
+    if (!hex || hex.length !== 7 || hex[0] !== '#') {
+        console.error('Formato de color hexadecimal no válido:', hex);
+        return '#000'; // Devuelve negro por defecto si el color es inválido
+    }
+
+    // Convierte el hexadecimal en RGB
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+
+    // Calcula el brillo (YIQ) para determinar si el fondo es oscuro o claro
+    const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+    return (yiq >= 128) ? '#000' : '#FFF'; // Devuelve negro o blanco según el brillo
 }
+
+
 
 /*
 *   Función para generar un gráfico de barras verticales. Requiere la librería chart.js para funcionar.
