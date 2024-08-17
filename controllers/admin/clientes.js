@@ -4,7 +4,7 @@ const CLIENTES_API2 = 'http://localhost/AcademiaBP_EXPO/api/services/admin/clien
 const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer los elementos de la tabla de niveles de usuario.
 const TABLE_BODY = document.getElementById('tableBody'),
-ROWS_FOUND = document.getElementById('rowsFound');
+    ROWS_FOUND = document.getElementById('rowsFound');
 // Constantes para establecer los elementos del componente Modal.
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
@@ -12,7 +12,7 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm')
 
-    ID_CLIENTE = document.getElementById('idCliente'),
+ID_CLIENTE = document.getElementById('idCliente'),
     NOMBRE_CLIENTE = document.getElementById('nombreCliente'),
     APELLIDO_CLIENTE = document.getElementById('apellidoCliente'),
     DUI_CLIENTE = document.getElementById('duiCliente'),
@@ -41,9 +41,9 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     const FORM = new FormData(SEARCH_FORM);
     // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
     fillTable(FORM);
-  });
+});
 
-  SAVE_FORM.addEventListener('submit', async (event) => {
+SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
@@ -63,9 +63,9 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     } else {
         sweetAlert(2, DATA.error, false);
     }
-  });
+});
 
-  const fillTable = async (form = null) => {
+const fillTable = async (form = null) => {
     // Inicializa el contenido de la tabla.
     TABLE_BODY.innerHTML = '';
     ROWS_FOUND.innerHTML = '';
@@ -116,9 +116,9 @@ const openCreate = () => {
     MODAL_TITLE.textContent = 'Crear cliente';
     // Se prepara el formulario.
     SAVE_FORM.reset();
-  }
+}
 
-  const openUpdate = async (id) => {
+const openUpdate = async (id) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idCliente', id);
@@ -143,21 +143,21 @@ const openCreate = () => {
         CLAVE_CLIENTE.value = ROW.clave_cliente;
         CONFIRMAR_CLAVE.value = ROW.clave_cliente;
         ESTADO_CLIENTE.value = ROW.estado_cliente;
-        
-        
+
+
     } else {
         sweetAlert(2, DATA.error, false);
     }
-  }
+}
 
-  
-  
-  /*
-  *   Función asíncrona para eliminar un registro.
-  *   Parámetros: id (identificador del registro seleccionado).
-  *   Retorno: ninguno.
-  */
-  const openDelete = async (id) => {
+
+
+/*
+*   Función asíncrona para eliminar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openDelete = async (id) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
     const RESPONSE = await confirmAction('¿Desea eliminar este cliente de forma permanente?');
     // Se verifica la respuesta del mensaje.
@@ -177,9 +177,9 @@ const openCreate = () => {
             sweetAlert(2, DATA.error, false);
         }
     }
-  }
+}
 
-  const openReport = () => {
+const openReport = () => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
     const PATH = new URL(`${SERVER_URL}reports/admin/clientes.php`);
     // Se abre el reporte en una nueva pestaña.
@@ -193,10 +193,10 @@ const openCreate = () => {
 const openGraph = async (idCliente) => {
     // Obtiene la celda de la tabla donde se mostrará el gráfico.
     const chartCell = document.getElementById(`chartColumn-${idCliente}`);
-    
+
     // Verifica si ya hay un gráfico en la celda
     const existingCanvas = document.getElementById(`chartCanvas-${idCliente}`);
-    
+
     if (existingCanvas) {
         // Si el gráfico ya está en la celda, alterna su visibilidad
         if (existingCanvas.style.display === 'none' || existingCanvas.style.display === '') {
@@ -240,6 +240,8 @@ const openGraph = async (idCliente) => {
             // Llama a la función para generar el gráfico de pastel,
             // Asignando el elemento canvas, el valor a mostrar, la cantidad a mostrar, y el título del gráfico
             pieGraph(canvas.id, productos, cantidades, 'Productos más comprados por el cliente');
+
+            chartCell.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else {
             console.log(DATA.error);
         }

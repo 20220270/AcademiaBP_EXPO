@@ -286,7 +286,7 @@ class ClienteHandler
                 GROUP BY 
                     p.nombre_producto
                 ORDER BY 
-                    total_comprado DESC;';
+                    total_comprado DESC LIMIT 4;';
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }

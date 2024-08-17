@@ -98,7 +98,8 @@ class PagosMensualidadHandler
                 ) AS Detalles
             FROM tb_alumnos
             INNER JOIN tb_clientes USING(id_cliente)
-            INNER JOIN tb_dias_pagos USING(id_dia_pago)";
+            INNER JOIN tb_dias_pagos USING(id_dia_pago)
+            ORDER BY id_alumno";
         return Database::getRows($sql);
     }
 

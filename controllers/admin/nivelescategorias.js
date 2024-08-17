@@ -4,7 +4,6 @@ const NIVELES_ENTRENAMIENTO_API2 = 'http://localhost/AcademiaBP_EXPO/api/service
 const CATEGORIA_ALUMNO_API = 'services/admin/categoriasalumnos.php';
 const CATEGORIA_ALUMNO_API2 = 'http://localhost/AcademiaBP_EXPO/api/services/admin/categoriasalumnos.php';
 
-
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
 const SEARCH_FORM2 = document.getElementById('searchForm2');
@@ -58,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fillTable();
     fillTable2();
     fillTable3();
-    
+
 });
 
 SEARCH_FORM.addEventListener('submit', (event) => {
@@ -185,9 +184,7 @@ const fillTable = async (form = null) => {
             </div>
         </div>
     </div>
-</div>
-
-            `;
+</div>`;
         });
     } else {
         sweetAlert(4, DATA.error, true);
@@ -234,9 +231,11 @@ const fillTable2 = async (form = null) => {
                                 <button type="button" class="btn btn-sm" onclick="openReport2(${row.id_categoria_alumno})">
                                     <img src="../../resources/images/reporte.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button>
-                                <button type="button" class="btn btn-sm" onclick="generarGrafico(${row.id_categoria_alumno})">
+                                <button type="button" class="btn btn-sm" onclick="generarGrafico(${row.id_categoria_alumno}, 'card-${row.id_categoria_alumno}')">
                                     <img src="../../resources/images/graph.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button>
+
+
                                 
                             </div>
                         </div>
@@ -504,7 +503,7 @@ const openReport2 = (id) => {
 const generarGrafico = async (idCategoriaAlumno) => {
     // Obtén el contenedor donde se mostrará el gráfico, que es justo debajo de las cards de las categorías de alumnos
     const container = CARD_CATEGORIAS_ALUMNOS;
-    
+
     // Si ya hay un gráfico, elimínalo
     const existingChartContainer = document.getElementById('chartContainer');
     if (existingChartContainer) {
@@ -522,8 +521,9 @@ const generarGrafico = async (idCategoriaAlumno) => {
     canvas.id = 'chartCanvas'; // Asegúrate de que el ID sea único y utilizado correctamente
     chartContainer.appendChild(canvas);
 
-    // Añade el contenedor del gráfico debajo del contenedor de las tarjetas
+    // Añade el contenedor del gráfico debajo del contenedor de las tarjetas, o después de la última card encontrada
     container.insertAdjacentElement('afterend', chartContainer);
+
 
     // Realiza la solicitud a la API para obtener los datos del gráfico
     try {
@@ -532,13 +532,13 @@ const generarGrafico = async (idCategoriaAlumno) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ idCategoriaAlumno })
+            body: JSON.stringify({ idCategoriaAlumno }) //Aquí mandamos el parámetro a la capa de servicios
         });
 
         const DATA = await response.json();
 
         if (DATA.status) {
-            // Declara arreglos para almacenar los datos del gráfico
+            // Declaramos arreglos para almacenar los datos del gráfico
             let edades = [];
             let cantidades = [];
 
@@ -549,6 +549,17 @@ const generarGrafico = async (idCategoriaAlumno) => {
 
             // Llama a la función para generar el gráfico de pastel
             pieGraph('chartCanvas', edades, cantidades, 'Cantidad de alumno dentro de rango de edades por categoría');
+
+
+            // Desplazamiento hasta el contenedor del gráfico
+            //Formato del scrollViewInto
+
+            /*1- behavior: Es el comportamiento del desplazamiento, 
+            es decir si el desplazamiento hasta el gráfico debe ser lento (smooth) o automático (auto)
+            
+              2- block: Define cómo se debe alinear el elemento dentro del contenedor visible, en este caso al inicio*/
+            chartContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
         } else {
             console.log(DATA.error);
         }
@@ -557,10 +568,11 @@ const generarGrafico = async (idCategoriaAlumno) => {
     }
 };
 
+
 const openGraph2 = async (idNivelEntrenamiento) => {
-    // Obtén el contenedor donde se mostrará el gráfico, que es justo debajo de las cards de las categorías de alumnos
+    // Obtén el contenedor donde se mostrará el gráfico, que es justo debajo de las cards de los niveles de entrenamiento
     const container2 = CARD_NIVELES_ENTRENAMIENTO;
-    
+
     // Si ya hay un gráfico, elimínalo
     const existingChartContainer = document.getElementById('chartContainer2');
     if (existingChartContainer) {
@@ -605,6 +617,9 @@ const openGraph2 = async (idNivelEntrenamiento) => {
 
             // Llama a la función para generar el gráfico de pastel
             pieGraph('chartCanvas2', niveles, categorias, 'Cantidad de alumnos dentro de niveles de entrenamiento');
+
+            // Desplaza la vista para mostrar el gráfico
+            chartContainer2.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else {
             console.log(DATA.error);
         }
@@ -612,3 +627,4 @@ const openGraph2 = async (idNivelEntrenamiento) => {
         console.error('Error al generar el gráfico:', error);
     }
 };
+
