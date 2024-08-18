@@ -63,30 +63,30 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Categoría inexistente';
                 }
                 break;
-                case 'updateRow':
-                    $_POST = Validator::validateForm($_POST);
-                    if (
-                        !$categoria->setId($_POST['idCategoriaProducto']) ||
-                        !$categoria->setFilename() ||
-                        !$categoria->setNombre($_POST['nombreCategoriaProducto']) ||
-                        !$categoria->setImagen($_FILES['imagenCategoriaProducto'], $categoria->getFilename())
-                    ) {
-                        $result['error'] = $categoria->getDataError();
-                    } else {
-                        try {
-                            if ($categoria->updateRow()) {
-                                $result['status'] = 1;
-                                $result['message'] = 'Categoría modificada correctamente';
-                                // Se asigna el estado del archivo después de actualizar.
-                                $result['fileStatus'] = Validator::changeFile($_FILES['imagenCategoriaProducto'], $categoria::RUTA_IMAGEN, $categoria->getFilename());
-                            } else {
-                                $result['error'] = 'No se pudo modificar la categoría, puede que ya exista un registro con el mismo nombre';
-                            }
-                        } catch (Exception $e) {
-                            $result['error'] = 'Error al modificar la categoría: ' . $e->getMessage();
+            case 'updateRow':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$categoria->setId($_POST['idCategoriaProducto']) ||
+                    !$categoria->setFilename() ||
+                    !$categoria->setNombre($_POST['nombreCategoriaProducto']) ||
+                    !$categoria->setImagen($_FILES['imagenCategoriaProducto'], $categoria->getFilename())
+                ) {
+                    $result['error'] = $categoria->getDataError();
+                } else {
+                    try {
+                        if ($categoria->updateRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Categoría modificada correctamente';
+                            // Se asigna el estado del archivo después de actualizar.
+                            $result['fileStatus'] = Validator::changeFile($_FILES['imagenCategoriaProducto'], $categoria::RUTA_IMAGEN, $categoria->getFilename());
+                        } else {
+                            $result['error'] = 'No se pudo modificar la categoría, puede que ya exista un registro con el mismo nombre';
                         }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al modificar la categoría: ' . $e->getMessage();
                     }
-                    break;
+                }
+                break;
             case 'deleteRow':
                 if (
                     !$categoria->setId($_POST['idCategoriaProducto']) or
@@ -100,6 +100,20 @@ if (isset($_GET['action'])) {
                     $result['fileStatus'] = Validator::deleteFile($categoria::RUTA_IMAGEN, $categoria->getFilename());
                 } else {
                     $result['error'] = 'Ocurrió un problema al eliminar la categoría';
+                }
+                break;
+
+            case 'readTopproductosCategoria':
+                // Lee el JSON del cuerpo de la solicitud
+                $data = json_decode(file_get_contents('php://input'), true);
+
+                // Verifica si se ha recibido 'idCategoriaAlumno'
+                if (!isset($data['idCategoriaProducto']) || !$categoria->setId($data['idCategoriaProducto'])) {
+                    $result['error'] = 'El identificador de la categoría es incorrecto';
+                } elseif ($result['dataset'] = $categoria->readTopproductosCategoria()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Categoría inexistente';
                 }
                 break;
             default:

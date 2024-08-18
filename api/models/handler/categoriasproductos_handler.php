@@ -80,4 +80,27 @@ class CategoriaProductosHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    //Gráfico de los productos más vendidos por una categoría seleccionada
+
+    public function readTopproductosCategoria()
+    {
+        $sql = 'SELECT
+    nombre_producto,
+    SUM(cantidad_producto) AS total_vendido
+    FROM
+    tb_detalles_compras
+    INNER JOIN tb_detalleProducto USING (id_detalle_producto)
+    INNER JOIN tb_productos USING(id_producto)
+    INNER JOIN tb_compras USING(id_compra)
+    INNER JOIN tb_categorias_productos USING(id_categoria_producto)
+    WHERE
+    id_categoria_producto = ?
+    GROUP BY
+    nombre_producto
+    ORDER BY
+    total_vendido DESC;';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
 }

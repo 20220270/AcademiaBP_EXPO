@@ -1,4 +1,5 @@
 const CATEGORIA_API = 'services/admin/categoriasproductos.php';
+const CATEGORIA_API2 = 'http://localhost/AcademiaBP_EXPO/api/services/admin/categoriasproductos.php';
 const COLORES_API = 'services/admin/colores.php';
 const TALLAS_API = 'services/admin/tallas.php';
 // Constante para establecer el formulario de buscar.
@@ -160,6 +161,10 @@ const fillTable = async (form = null) => {
             <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openReport(${row.id_categoria_producto})">
               <i class="bi bi-x-square-fill"></i>
               <img src="../../resources/images/reporteee.png" alt="" width="20px" height="25px" class="mb-1">
+            </button>
+            <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="generarGrafico(${row.id_categoria_producto})">
+              <i class="bi bi-x-square-fill"></i>
+              <img src="../../resources/images/graph.png" alt="" width="25px" height="25px" class="mb-1 mx-2">
             </button>
           </div>
             </div>
@@ -413,13 +418,82 @@ const openReport = (id) => {
     window.open(PATH.href);
 }
 
-
-
 localStorage.setItem('paginaOrigen', window.location.href);
 
+
+//Función para convertir el color seleccionado a formato hexadecimal
 function updateColorHex(color) {
     // Convertir el color seleccionado a formato hexadecimal
     var colorHex = color.substring(1); // Eliminar el símbolo '#' al inicio
     // Asignar el valor hexadecimal al input oculto
     document.getElementById("colorHex").value = colorHex;
 }
+
+//Función asíncrona para generar un gráfico con los productos más vendidos de una categoria seleccionada
+const generarGrafico = async (idCategoriaProducto) => {
+    // Obtén el contenedor donde se mostrará el gráfico, que es justo debajo de las cards de las categorías de alumnos
+    const container = CARD_CATEGORIAS;
+
+    // Si ya hay un gráfico, elimínalo
+    const existingChartContainer = document.getElementById('chartContainer');
+    if (existingChartContainer) {
+        existingChartContainer.remove();
+    }
+
+    // Crea el contenedor del gráfico y añade un canvas para el gráfico
+    const chartContainer = document.createElement('div');
+    chartContainer.id = 'chartContainer';
+    chartContainer.style.width = '100%';
+    chartContainer.style.height = '400px'; // Ajusta la altura según sea necesario
+
+    // Crea el elemento canvas para el gráfico
+    const canvas = document.createElement('canvas');
+    canvas.id = 'chartCanvas'; // Asegúrate de que el ID sea único y utilizado correctamente
+    chartContainer.appendChild(canvas);
+
+    // Añade el contenedor del gráfico debajo del contenedor de las tarjetas, o después de la última card encontrada
+    container.insertAdjacentElement('afterend', chartContainer);
+
+
+    // Realiza la solicitud a la API para obtener los datos del gráfico
+    try {
+        const response = await fetch(CATEGORIA_API2 + '?action=readTopproductosCategoria', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ idCategoriaProducto }) //Aquí mandamos el parámetro a la capa de servicios
+        });
+
+        const DATA = await response.json();
+
+        if (DATA.status) {
+            // Declaramos arreglos para almacenar los datos del gráfico
+            let productos = [];
+            let total = [];
+
+            DATA.dataset.forEach(row => {
+                productos.push(row.nombre_producto);
+                total.push(row.total_vendido);
+            });
+
+            // Llama a la función para generar el gráfico de pastel
+            pieGraph('chartCanvas', productos, total, 'Productos más vendidos de la categoría');
+
+
+            // Desplazamiento hasta el contenedor del gráfico
+            //Formato del scrollViewInto
+
+            /*1- behavior: Es el comportamiento del desplazamiento, 
+            es decir si el desplazamiento hasta el gráfico debe ser lento (smooth) o automático (auto)
+            
+              2- block: Define cómo se debe alinear el elemento dentro del contenedor visible, en este caso al inicio*/
+            chartContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        } else {
+            console.log(DATA.error);
+        }
+    } catch (error) {
+        console.error('Error al generar el gráfico:', error);
+    }
+};
