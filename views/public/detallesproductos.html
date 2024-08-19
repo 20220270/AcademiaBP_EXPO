@@ -22,9 +22,9 @@
 
         <div class="d-flex justify-content-center flex-wrap">
             <!-- Tarjeta de detalles del producto -->
-            <div class="card mb-3 mt-2 col-lg-4 mx-2" id="product-card">
+            <div class="card mb-3 mt-2 col-lg-3 mx-2" id="product-card">
                 <div class="position-relative">
-                    <img id="imagenProducto" class="img-fluid" alt="Imagen del Producto">
+                    <img id="imagenProducto" class="img-fluid mx-auto" alt="Imagen del Producto">
                 </div>
                 <div class="card-body">
                     <h5 class="card-title text-center" id="nombreProducto"></h5>
@@ -39,12 +39,12 @@
                     <form class="row" id="shoppingForm">
                         <input type="hidden" id="idProducto" name="idProducto">
                         <input type="hidden" id="idDetalle" name="idDetalle">
-                        <div class="col-6 col-lg-6">
+                        <div class="col-6 col-lg-6 mt-2">
                             <input type="number" id="cantidadProducto" name="cantidadProducto" min="1" class="form-control" placeholder="Cantidad" required>
                         </div>
                         <div class="col-6 align-self-end">
-                            <button type="submit" class="btn btn-primary" id="btnVerDetalle">
-                                <i class="bi bi-cart-plus-fill"></i> Agregar al carrito
+                            <button type="submit" class="btn col-4" id="btnVerDetalle">
+                                <img src="../../resources/images/cart-green.png" alt="Agregar al carrito" height="1px" width="1px">
                             </button>
                         </div>
                     </form>
@@ -52,7 +52,7 @@
             </div>
 
             <!-- Sección de comentarios y valoraciones -->
-            <div class="card mb-3 mt-2 col-lg-5 mx-2" id="coments">
+            <div class="card mb-3 mt-2 col-lg-4 mx-2" id="coments">
                 <h5 class="card-title mx-auto mt-2" id="titulo">Comentarios y valoraciones</h5>
                 <div class="row mx-auto" id="cardComentarios">
                 </div>

@@ -97,7 +97,7 @@ const fillTable = async (form = null) => {
                         <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                     </button>
                     <button type="button" class="btn btn-sm" onclick="openGraph(${row.id_cliente}, this)">
-                        <img src="../../resources/images/reporteee.png" alt="" width="25px" height="25px" class="mb-1">
+                        <img src="../../resources/images/graph.png" alt="" width="20px" height="20px" class="mb-1">
                     </button>
                 </td>
                 <td id="chartColumn-${row.id_cliente}"></td>

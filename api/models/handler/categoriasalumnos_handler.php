@@ -33,27 +33,21 @@ class CategoriasAlumnosHandler
     {
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = "SELECT 
-        ca.id_categoria_alumno, 
-        ca.categoria, 
-        ca.edad_minima,
-        ca.edad_maxima, 
-        ne.nivel_entrenamiento, 
-        ne.descripcion_nivel,
-        ne.imagen_nivel,
-        ca.imagen_categoria
+        id_categoria_alumno, 
+        categoria, 
+        edad_minima,
+        edad_maxima, 
+        nivel_entrenamiento, 
+        descripcion_nivel,
+        imagen_nivel,
+        imagen_categoria
         FROM 
-        tb_categorias_alumnos ca
+        tb_categorias_alumnos
         INNER JOIN 
-        tb_niveles_entrenamientos ne ON ca.id_nivel_entrenamiento = ne.id_nivel_entrenamiento
-        INNER JOIN 
-        tb_horarios_lugares hl ON ca.id_horario_lugar = hl.id_horario_lugar
-        INNER JOIN 
-        tb_lugares_entrenamientos le ON hl.id_lugar = le.id_lugar
-        INNER JOIN 
-        tb_horarios_entrenamientos he ON hl.id_horario = he.id_horario
-        WHERE ca.categoria LIKE ? OR ne.nivel_entrenamiento LIKE ?
+        tb_niveles_entrenamientos USING (id_nivel_entrenamiento)
+        WHERE categoria LIKE ? OR nivel_entrenamiento LIKE ?
         ORDER BY 
-        ca.id_categoria_alumno;";
+        id_categoria_alumno;";
         $params = array($value, $value);
         return Database::getRows($sql, $params);
     }

@@ -57,7 +57,7 @@ async function loadValoresData() {
                     <div class="col-sm-12 col-md-6 col-lg-4 mb-4 mx-auto">
                         <div class="card h-100">
                             <img src="${SERVER_URL}images/valores/${row.imagen_valor}" class="card-img-top rounded-4" alt="${row.nombre_valor}">
-                            <div class="card-body">
+                            <div class="card-body text-center">
                                 <h5 class="card-title">${row.nombre_valor}</h5>
                                 <p class="card-text">${row.descripcion_valor}</p>
                             </div>

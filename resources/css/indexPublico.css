@@ -33,6 +33,19 @@ header {
   font-size: 15px;
 }
 
+/*body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.dark-mode .seccion1 {
+  background-color: #222;
+}
+
+.dark-mode .text-secondary {
+  color: #cccccc !important;
+}*/
+
 
 
 /*Todo el main*/
@@ -61,6 +74,10 @@ main {
     que se encuentra sobre la imagen que le da una tonalidad oscura*/
   z-index: 1;
   /* Ajusta el z-index para que la superposición, posición adicional, esté por encima de la imagen */
+}
+
+.nav-link{
+  font-size: 14px;
 }
 
 .primerTextoImagen1,

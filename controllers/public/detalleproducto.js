@@ -76,12 +76,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div class="d-flex align-items-center">
                             <img src="${SERVER_URL}images/clientes/${row.foto_cliente}" alt="..." height="40px" width="40px" class="mr-2 rounded-circle">
-                            <span class="card-text">${row.nombre_cliente} ${row.apellido_cliente}</span>
+                            <span class="card-text mx-2">${row.nombre_cliente} ${row.apellido_cliente}</span>
                         </div>
                         <span class="card-text">${row.fecha_valoracion}</span>
                     </div>
+                    <span class="card-text d-block">${generateStars(row.calificacion_producto)} ${row.calificacion_producto}</span>
                     <span class="card-text d-block">${row.comentario_producto}</span>
-                    <span class="card-text d-block">${generateStars(row.calificacion_producto)} ${row.calificacion_producto}</span>     
+                         
                 </div>
             </div>
             `;

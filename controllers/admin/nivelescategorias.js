@@ -7,6 +7,7 @@ const CATEGORIA_ALUMNO_API2 = 'http://localhost/AcademiaBP_EXPO/api/services/adm
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
 const SEARCH_FORM2 = document.getElementById('searchForm2');
+const SEARCH_FORM3 = document.getElementById('searchForm3');
 // Constantes para establecer los elementos de la tabla.
 const TABLE_BODY = document.getElementById('tableBody'),
     ROWS_FOUND = document.getElementById('rowsFound');
@@ -70,6 +71,11 @@ SEARCH_FORM2.addEventListener('submit', (event) => {
     event.preventDefault();
     const FORM2 = new FormData(SEARCH_FORM2);
     fillTable2(FORM2);
+});
+SEARCH_FORM3.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const FORM3 = new FormData(SEARCH_FORM3);
+    fillTable3(FORM3);
 });
 
 // Método del evento para cuando se envía el formulario de guardar.

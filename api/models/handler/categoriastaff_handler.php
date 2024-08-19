@@ -24,6 +24,7 @@ class CategoriaStaffHandler
         $sql = "SELECT id_staff_categorias, CONCAT(nombre_staff, ' ', apellido_staff) AS nombre_completo, imagen_staff, categoria, imagen_categoria
                 FROM tb_staffs_categorias
                 INNER JOIN tb_staffs USING (id_staff)
+                 INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
                 INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
                 WHERE nombre_staff LIKE ? OR apellido_staff LIKE ? OR categoria LIKE ?
                 ORDER BY id_staff";

@@ -1,8 +1,5 @@
 /* Asegurar que las imágenes no se desborden */
-.card img {
-    object-fit: cover; /* Asegura que la imagen cubra el área del contenedor */
 
-}
 
 /* Ajustar el margen superior del título principal */
 #mainTitle {
@@ -30,19 +27,15 @@
     border-radius: 15px;
 }
 
-#btnVerDetalle {
-    background-color: #408840;
-    color: #fff;
-}
-
 #product-card .position-relative {
     overflow: hidden;
 }
 
 #product-card img {
     object-fit: cover;
-    width: 100%;
+    width: 50%;
     height: auto;
+    
 }
 
 
