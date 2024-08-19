@@ -140,12 +140,6 @@ class CategoriasAlumnosHandler
         tb_categorias_alumnos ca
         INNER JOIN 
         tb_niveles_entrenamientos ne ON ca.id_nivel_entrenamiento = ne.id_nivel_entrenamiento
-        INNER JOIN 
-        tb_horarios_lugares hl ON ca.id_horario_lugar = hl.id_horario_lugar
-        INNER JOIN 
-        tb_lugares_entrenamientos le ON hl.id_lugar = le.id_lugar
-        INNER JOIN 
-        tb_horarios_entrenamientos he ON hl.id_horario = he.id_horario
         WHERE ne.id_nivel_entrenamiento = ?
         ORDER BY 
         ca.categoria;";

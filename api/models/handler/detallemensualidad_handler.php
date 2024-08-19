@@ -20,7 +20,7 @@ class DetallesPagosMensualidadHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar,  CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
+        $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar,  CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno', estado_proximo_pago,
             descripcion_pago, fecha_proximo_pago from tb_detalles_pagos
             INNER JOIN tb_pagos USING (id_pago)
             INNER JOIN tb_alumnos USING (id_alumno)
