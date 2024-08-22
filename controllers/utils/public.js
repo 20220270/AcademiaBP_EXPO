@@ -49,19 +49,23 @@ const loadTemplate = async () => {
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-7 col-sm-5 col-6 align-self-center">
+                <div class="col-lg-4 col-md-6 col-sm-5 col-6 align-self-center">
                     <a href="index.html">
                         <img src="../../resources/images/logoAcademiaBP.png" alt="..." height="120px" width="120px" id="imagenLogoA">
                     </a>
                 </div>
 
-                <div class="mt-5 text-end col-lg-4 col-md-2 col-sm-3 col-8">
+                <div class="mt-5 text-end col-lg-2 col-md-1 col-sm-1 col-6">
                 <a href="perfil.html">
-                    <img src="../../resources/images/userIcon.png" class="me-5 mt-2 imagenUser text-end" alt="..."
+                    <img src="../../resources/images/userIcon.png" class="mt-2 imagenUser text-end" alt="..."
                         width="30px" height="30px">
                 </a>
                 </div>
 
+                <div class="mt-5 text-end col-lg-2 col-md-2 col-sm-2 col-3">
+                <a href="carrito.html"><img src="../../resources/images/cart-dark.png" alt="..." width="25px"
+                                            height="25px" class="me-5 mt-2 imagenUser"></a>
+                </div>
                 
             </div>
         </div>
@@ -100,9 +104,6 @@ const loadTemplate = async () => {
                                             <img src="../../resources/images/cesta.png" alt="..." width="25px"
                                                 height="25px" class="me-1"> Mis compras</a></li>
 
-                                    <li class="nav-item col-lg-2 col-md-12 text-start"><a class="nav-link me-4 text-white" href="carrito.html">
-                                         <img src="../../resources/images/cart.png" alt="..." width="25px"
-                                            height="25px" class="me-1">Carrito</a></li>
 
                                     <li class="nav-item col-lg-5 col-md-12 text-start">
                                         <a class="nav-link me-2 text-white" href="conocenos.html">
