@@ -40,7 +40,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al leer el perfil';
                 }
                 break;
-                
+
             case 'editProfile':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -79,15 +79,15 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                case 'readAlumnos':
-                    if (!$cliente->setCorreo($_POST['correoCliente'])) {
-                        $result['error'] = $cliente->getDataError();
-                    } elseif ($result['dataset'] = $cliente->readAlumnos()) {
-                        $result['status'] = 1;
-                    } else {
-                        $result['error'] = 'No tienes ningún alumno registrado';
-                    }
-                    break;
+            case 'readAlumnos':
+                if (!$cliente->setCorreo($_POST['correoCliente'])) {
+                    $result['error'] = $cliente->getDataError();
+                } elseif ($result['dataset'] = $cliente->readAlumnos()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No tienes ningún alumno registrado';
+                }
+                break;
 
 
             default:
@@ -100,20 +100,41 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 // Se establece la clave secreta para el reCAPTCHA de acuerdo con la cuenta de Google.
                 $secretKey = '6LdBzLQUAAAAAL6oP4xpgMao-SmEkmRCpoLBLri-';
-                // Se establece la dirección IP del servidor.
-                $ip = $_SERVER['REMOTE_ADDR'];
-                // Se establecen los datos del reCAPTCHA.
-                $data = array('secret' => $secretKey, 'response' => $_POST['gRecaptchaResponse'], 'remoteip' => $ip);
-                // Se establecen las opciones del reCAPTCHA.
-                $options = array(
-                    'http' => array('header' => 'Content-type: application/x-www-form-urlencoded\r\n', 'method' => 'POST', 'content' => http_build_query($data)),
-                    'ssl' => array('verify_peer' => false, 'verify_peer_name' => false)
-                );
 
-                $url = 'https://www.google.com/recaptcha/api/siteverify';
-                $context = stream_context_create($options);
-                $response = file_get_contents($url, false, $context);
+                //Código para verificar el token
+
+                //Asignamos el token a una variable
+                $token = $_POST['gRecaptchaResponse'];
+                //$action = $_POST['action'];
+
+                // Inicializa una nueva sesión cURL para realizar la solicitud HTTP.
+                $ch = curl_init();
+
+                // Establece la URL a la que se enviará la solicitud POST para verificar el reCAPTCHA.
+                curl_setopt($ch, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+
+                // Indica que se usará el método POST en la solicitud HTTP.
+                curl_setopt($ch, CURLOPT_POST, 1);
+
+                // Define los datos que se enviarán en la solicitud POST. Se utiliza `http_build_query` 
+                // para formatear los datos en un string de consulta HTTP (query string). 
+                // Se envía la clave secreta del reCAPTCHA y el token de respuesta del usuario.
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('secret' => $secretKey, 'response' => $token)));
+
+                // Indica que se debe devolver el resultado de la solicitud como una cadena en lugar de mostrarlo directamente.
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                // Ejecuta la solicitud y almacena la respuesta en la variable $response.
+                $response = curl_exec($ch);
+
+                // Cierra la sesión cURL para liberar recursos.
+                curl_close($ch);
+
+                // Decodifica la respuesta JSON del reCAPTCHA en un array asociativo de PHP.
+                // $captcha ahora contiene los datos de la respuesta, que incluyen el estado de verificación (success/failure) 
+                // y otros posibles mensajes o detalles.
                 $captcha = json_decode($response, true);
+
 
                 if (!$captcha['success']) {
                     $result['recaptcha'] = 1;
@@ -160,31 +181,31 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
-                case 'checkCorreo':
-                    if (!$cliente->setCorreo($_POST['inputCorreo'])) {
-                        $result['error'] = $cliente->getDataError();
-                    } elseif ($result['dataset'] = $cliente->checkCorreo()) {
-                        $result['status'] = 1;
-                    } else {
-                        $result['error'] = 'Cliente inexistente';
-                    }
-                    break;
+            case 'checkCorreo':
+                if (!$cliente->setCorreo($_POST['inputCorreo'])) {
+                    $result['error'] = $cliente->getDataError();
+                } elseif ($result['dataset'] = $cliente->checkCorreo()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Cliente inexistente';
+                }
+                break;
             case 'updateClave':
-                    $_POST = Validator::validateForm($_POST);
-                       if (
-                            !$cliente->setCorreo($_POST['inputCorreo']) or
-                            !$cliente->setClave($_POST['nuevaClave'])
-                            ) {
-                            $result['error'] = $cliente->getDataError();
-                     }elseif ($_POST['nuevaClave'] != $_POST['confirmarClave']) {
-                            $result['error'] = 'Contraseñas diferentes';} 
-                    elseif ($cliente->updateClave()) {
-                            $result['status'] = 1;
-                            $result['message'] = 'Contraseña actualizada correctamente';
-                    } else {
-                            $result['error'] = 'Ocurrió un problema al actualizar la contraseña';
-                    }
-                    break;
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$cliente->setCorreo($_POST['inputCorreo']) or
+                    !$cliente->setClave($_POST['nuevaClave'])
+                ) {
+                    $result['error'] = $cliente->getDataError();
+                } elseif ($_POST['nuevaClave'] != $_POST['confirmarClave']) {
+                    $result['error'] = 'Contraseñas diferentes';
+                } elseif ($cliente->updateClave()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Contraseña actualizada correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al actualizar la contraseña';
+                }
+                break;
             case 'signUpMovil':
                 $_POST = Validator::validateForm($_POST);
                 if (
