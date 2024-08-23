@@ -181,6 +181,63 @@ const barGraph = (canvas, xAxis, yAxis, legend, title) => {
     });
 }
 
+const barGraphA = (canvas, data, title) => {
+    const ctx = document.getElementById(canvas).getContext('2d');
+
+    // Organizar los datos por año
+    const labels = [];
+    const datasets = [];
+
+    const years = [...new Set(data.map(row => row.anio))];
+    const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+    years.forEach(year => {
+        const yearData = months.map(month => {
+            const record = data.find(row => row.anio === year && row.mes === months.indexOf(month) + 1);
+            return record ? record.total_inscripciones : 0;
+        });
+
+        datasets.push({
+            label: `Año ${year}`,
+            data: yearData,
+            backgroundColor: `#${Math.random().toString(16).substring(2, 8)}`,
+            borderColor: `#${Math.random().toString(16).substring(2, 8)}`,
+            borderWidth: 1
+        });
+    });
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: months,
+            datasets: datasets
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: title
+                },
+                legend: {
+                    display: true
+                }
+            },
+            scales: {
+                x: {
+                    stacked: false,  // Cambiado a false para que las barras no se apilen
+                    barPercentage: 0.9,
+                    categoryPercentage: 0.8
+                },
+                y: {
+                    stacked: false
+                }
+            }
+        }
+    });
+}
+
+
+
 /*
 *   Función para generar un gráfico de pastel. Requiere la librería chart.js para funcionar.
 *   Parámetros: canvas (identificador de la etiqueta canvas), legends (valores para las etiquetas), values (valores de los datos) y title (título del gráfico).

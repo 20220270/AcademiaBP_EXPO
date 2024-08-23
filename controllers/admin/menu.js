@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     graficoBarrasExistencias();
     graficoPredictivo();
     graficoPredictivoAlumnos();
+    graficoPredictivoAlumnos3();
 });
 
 
@@ -274,46 +275,16 @@ const graficoPredictivo = async () => {
 
 const graficoPredictivoAlumnos = async () => {
     try {
-        // Peticiones para obtener los datos de nuevos alumnos.
-        const dataNuevosAlumnos = await fetchData(ALUMNOS_API, 'alumnosPredictGraph');
+        // Petición para obtener los datos de nuevos alumnos.
+        const dataNuevosAlumnos = await fetchData(ALUMNOS_API, 'alumnosPredictGraph2');
 
         if (dataNuevosAlumnos.status) {
-            // Arreglos para guardar los datos a graficar.
-            const meses = [
-                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-            ];
-            let nuevosAlumnos = Array(12).fill(0); // Inicializar con ceros para todos los meses
+            // Procesar los datos de nuevos alumnos
+            const data = dataNuevosAlumnos.dataset;
 
-            // Variables para el total de nuevos alumnos
-            let totalNuevosAlumnos = 0;
+            // Llamada a la función para generar y mostrar un gráfico de barras.
+            barGraphA('chartPrediction2', data, 'Nuevos alumnos por mes y año');
 
-            // Procesar datos de nuevos alumnos
-            dataNuevosAlumnos.dataset.forEach(row => {
-                if (row.Mes && row.Inscripciones) { // Asegurarse de que los datos sean válidos
-                    const mesIndex = parseInt(row.Mes, 10) - 1; // Convertir el mes a índice (0-11)
-                    if (!isNaN(mesIndex) && mesIndex >= 0 && mesIndex < 12) {
-                        nuevosAlumnos[mesIndex] = parseInt(row.Inscripciones, 10) || 0; // Asegurarse de que sea un número o 0
-                    }
-                }
-                // Obtener el total proyectado
-                if (row['Total Anual']) {
-                    totalNuevosAlumnos = parseInt(row['Total Anual'], 10) || 0;
-                }
-            });
-
-            // Añadir registros de depuración
-            console.log('Meses:', meses);
-            console.log('Nuevos Alumnos:', nuevosAlumnos);
-            console.log('Total Nuevos Alumnos del Año:', totalNuevosAlumnos);
-
-            // Llamada a la función para generar y mostrar un gráfico de líneas.
-            lineGraphA('chartPrediction2', meses, nuevosAlumnos, 'Nuevos alumnos del mes');
-
-            // Mostrar el total de nuevos alumnos del año en el label.
-            document.getElementById('totalNuevosAlumnos').textContent =
-                `Total de nuevos alumnos estimados para el año: ${totalNuevosAlumnos}`;
-                
         } else {
             document.getElementById('chartPrediction2').remove();
             console.log(dataNuevosAlumnos.error);
@@ -322,3 +293,46 @@ const graficoPredictivoAlumnos = async () => {
         console.error('Error en la petición de datos:', error);
     }
 }
+
+const graficoPredictivoAlumnos3 = async () => {
+    try {
+        // Petición para obtener los datos de la proyección de alumnos.
+        const dataNuevosAlumnos3 = await fetchData(ALUMNOS_API, 'alumnosPredictGraph3');
+
+        if (dataNuevosAlumnos3.status) {
+            // Procesar los datos de nuevos alumnos
+            const data = dataNuevosAlumnos3.dataset;
+
+            // Extraer los meses y proyecciones
+            const months = data.map(row => {
+                switch (row.Mes) {
+                    case 1: return 'Enero';
+                    case 2: return 'Febrero';
+                    case 3: return 'Marzo';
+                    case 4: return 'Abril';
+                    case 5: return 'Mayo';
+                    case 6: return 'Junio';
+                    case 7: return 'Julio';
+                    case 8: return 'Agosto';
+                    case 9: return 'Septiembre';
+                    case 10: return 'Octubre';
+                    case 11: return 'Noviembre';
+                    case 12: return 'Diciembre';
+                    default: return '';
+                }
+            });
+            const projections = data.map(row => row.Proyección);
+
+            // Llamada a la función para generar y mostrar un gráfico de barras.
+            barGraph('chartPrediction3', months, projections, 'Proyección de inscripciones por mes', 'Proyección de alumnos para el próximo año');
+            
+        } else {
+            document.getElementById('chartPrediction3').remove();
+            console.log(dataNuevosAlumnos3.error);
+        }
+    } catch (error) {
+        console.error('Error en la petición de datos:', error);
+    }
+}
+
+

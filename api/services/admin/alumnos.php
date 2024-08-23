@@ -24,44 +24,44 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
-                case 'createRow':
-                    $_POST = Validator::validateForm($_POST);
-                
-                    // Validar edad del alumno
-                    $fechaNacimiento = $_POST['fechaNacimiento'];
-                    $fechaActual = new DateTime();
-                    $fechaNacimiento = new DateTime($fechaNacimiento);
-                    $edad = $fechaNacimiento->diff($fechaActual)->y;
-                
-                    if ($edad < 2) {
-                        $result['error'] = 'El alumno no puede ser menor a dos años';
-                    } else {
-                        try {
-                            if (
-                                !$alumno->setNombre($_POST['nombreAlumno']) ||
-                                !$alumno->setApellido($_POST['apellidoAlumno']) ||
-                                !$alumno->setNacimiento($_POST['fechaNacimiento']) ||
-                                !$alumno->setPosicion($_POST['selectPosicion']) ||
-                                !$alumno->setIdDiasPago($_POST['selectDias']) ||
-                                !$alumno->setIdCliente($_POST['selectEncargado']) ||
-                                !$alumno->setFoto($_FILES['fotoAlumno'])
-                            ) {
-                                $result['error'] = $alumno->getDataError();
-                            } elseif ($alumno->createRow()) {
-                                $result['status'] = 1;
-                                $result['message'] = 'Alumno registrado correctamente';
-                                $result['fileStatus'] = Validator::saveFile($_FILES['fotoAlumno'], $alumno::RUTA_IMAGEN);
-                            } else {
-                                $result['error'] = 'Ocurrió un problema al registrar el alumno';
-                            }
-                        } catch (Exception $e) {
-                            $result['error'] = 'Error al registrar el alumno: ' . $e->getMessage();
+            case 'createRow':
+                $_POST = Validator::validateForm($_POST);
+
+                // Validar edad del alumno
+                $fechaNacimiento = $_POST['fechaNacimiento'];
+                $fechaActual = new DateTime();
+                $fechaNacimiento = new DateTime($fechaNacimiento);
+                $edad = $fechaNacimiento->diff($fechaActual)->y;
+
+                if ($edad < 2) {
+                    $result['error'] = 'El alumno no puede ser menor a dos años';
+                } else {
+                    try {
+                        if (
+                            !$alumno->setNombre($_POST['nombreAlumno']) ||
+                            !$alumno->setApellido($_POST['apellidoAlumno']) ||
+                            !$alumno->setNacimiento($_POST['fechaNacimiento']) ||
+                            !$alumno->setPosicion($_POST['selectPosicion']) ||
+                            !$alumno->setIdDiasPago($_POST['selectDias']) ||
+                            !$alumno->setIdCliente($_POST['selectEncargado']) ||
+                            !$alumno->setFoto($_FILES['fotoAlumno'])
+                        ) {
+                            $result['error'] = $alumno->getDataError();
+                        } elseif ($alumno->createRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Alumno registrado correctamente';
+                            $result['fileStatus'] = Validator::saveFile($_FILES['fotoAlumno'], $alumno::RUTA_IMAGEN);
+                        } else {
+                            $result['error'] = 'Ocurrió un problema al registrar el alumno';
                         }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al registrar el alumno: ' . $e->getMessage();
                     }
-                    break;
-                
-                
-                
+                }
+                break;
+
+
+
             case 'readAll':
                 if ($result['dataset'] = $alumno->readAll()) {
                     $result['status'] = 1;
@@ -79,50 +79,50 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Alumno inexistente';
                 }
                 break;
-                case 'updateRow':
-                    $_POST = Validator::validateForm($_POST);
-                
-                    // Validar edad del alumno
-                    $fechaNacimiento = $_POST['fechaNacimiento'];
-                    $fechaActual = new DateTime();
-                    $fechaNacimiento = new DateTime($fechaNacimiento);
-                    $edad = $fechaNacimiento->diff($fechaActual)->y;
-                
-                    if ($edad < 2) {
-                        $result['error'] = 'El alumno no puede ser menor a dos años';
-                    } else {
-                        try {
-                            if (
-                                !$alumno->setId($_POST['idAlumno']) ||
-                                !$alumno->setFilename() ||
-                                !$alumno->setNombre($_POST['nombreAlumno']) ||
-                                !$alumno->setApellido($_POST['apellidoAlumno']) ||
-                                !$alumno->setNacimiento($_POST['fechaNacimiento']) ||
-                                !$alumno->setPosicion($_POST['selectPosicion']) ||
-                                !$alumno->setIdStaffCategoria($_POST['selectCategoriaEncargado']) ||
-                                !$alumno->setIdDiasPago($_POST['selectDias']) ||
-                                !$alumno->setEstado($_POST['selectEstado']) ||
-                                !$alumno->setIdCliente($_POST['selectEncargado']) ||
-                                !$alumno->setFoto($_FILES['fotoAlumno'], $alumno->getFilename())
-                            ) {
-                                $result['error'] = $alumno->getDataError();
-                            } elseif ($alumno->updateRow()) {
-                                $result['status'] = 1;
-                                $result['message'] = 'Alumno modificado correctamente';
-                                $result['fileStatus'] = Validator::changeFile($_FILES['fotoAlumno'], $alumno::RUTA_IMAGEN, $alumno->getFilename());
-                            } else {
-                                $result['error'] = 'Ocurrió un problema al modificar datos del alumno';
-                            }
-                        } catch (Exception $e) {
-                            if (strpos($e->getMessage(), 'TLa fecha de nacimiento del alumno indica que debe tener al menos dos años de edad.') !== false) {
-                                $result['error'] = 'El alumno no puede ser menor a dos años';
-                            } else {
-                                $result['error'] = 'Error al modificar datos del alumno: ' . $e->getMessage();
-                            }
+            case 'updateRow':
+                $_POST = Validator::validateForm($_POST);
+
+                // Validar edad del alumno
+                $fechaNacimiento = $_POST['fechaNacimiento'];
+                $fechaActual = new DateTime();
+                $fechaNacimiento = new DateTime($fechaNacimiento);
+                $edad = $fechaNacimiento->diff($fechaActual)->y;
+
+                if ($edad < 2) {
+                    $result['error'] = 'El alumno no puede ser menor a dos años';
+                } else {
+                    try {
+                        if (
+                            !$alumno->setId($_POST['idAlumno']) ||
+                            !$alumno->setFilename() ||
+                            !$alumno->setNombre($_POST['nombreAlumno']) ||
+                            !$alumno->setApellido($_POST['apellidoAlumno']) ||
+                            !$alumno->setNacimiento($_POST['fechaNacimiento']) ||
+                            !$alumno->setPosicion($_POST['selectPosicion']) ||
+                            !$alumno->setIdStaffCategoria($_POST['selectCategoriaEncargado']) ||
+                            !$alumno->setIdDiasPago($_POST['selectDias']) ||
+                            !$alumno->setEstado($_POST['selectEstado']) ||
+                            !$alumno->setIdCliente($_POST['selectEncargado']) ||
+                            !$alumno->setFoto($_FILES['fotoAlumno'], $alumno->getFilename())
+                        ) {
+                            $result['error'] = $alumno->getDataError();
+                        } elseif ($alumno->updateRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Alumno modificado correctamente';
+                            $result['fileStatus'] = Validator::changeFile($_FILES['fotoAlumno'], $alumno::RUTA_IMAGEN, $alumno->getFilename());
+                        } else {
+                            $result['error'] = 'Ocurrió un problema al modificar datos del alumno';
+                        }
+                    } catch (Exception $e) {
+                        if (strpos($e->getMessage(), 'TLa fecha de nacimiento del alumno indica que debe tener al menos dos años de edad.') !== false) {
+                            $result['error'] = 'El alumno no puede ser menor a dos años';
+                        } else {
+                            $result['error'] = 'Error al modificar datos del alumno: ' . $e->getMessage();
                         }
                     }
-                    break;
-                
+                }
+                break;
+
             case 'deleteRow':
                 if (
                     !$alumno->setId($_POST['idAlumno'])
@@ -162,14 +162,29 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                case 'alumnosPredictGraph':
-                    if ($result['dataset'] = $alumno->alumnosPredictGraph()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-                    } else {
-                        $result['error'] = 'No existen alumnos registrados';
-                    }
-                    break;
+            case 'alumnosPredictGraph':
+                if ($result['dataset'] = $alumno->alumnosPredictGraph()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No hay datos disponibles';
+                }
+                break;
+
+            case 'alumnosPredictGraph2':
+                if ($result['dataset'] = $alumno->alumnosPredictGraph2()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No hay datos disponibles';
+                }
+                break;
+
+            case 'alumnosPredictGraph3':
+                if ($result['dataset'] = $alumno->alumnosPredictGraph3()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No hay datos disponibles';
+                }
+                break;
 
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
