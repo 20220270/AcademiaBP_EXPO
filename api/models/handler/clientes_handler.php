@@ -43,7 +43,8 @@ class ClienteHandler
         }
     }
 
-    public function checkStatus() {
+    public function checkStatus()
+    {
         $sql = 'SELECT estado_cliente FROM tb_clientes WHERE id_cliente = ?';
         $params = array($this->id);
         $data = Database::getRow($sql, $params);
@@ -56,7 +57,8 @@ class ClienteHandler
 
 
     // Método para obtener el ID del cliente usando el correo electrónico
-    public function getIdByEmail($correo) {
+    public function getIdByEmail($correo)
+    {
         $sql = 'SELECT id_cliente FROM tb_clientes WHERE correo_cliente = ?';
         $params = array($correo);
         $data = Database::getRow($sql, $params);
@@ -84,7 +86,7 @@ class ClienteHandler
         $params = array($this->correo);
         return Database::getRow($sql, $params);
     }
-    
+
     public function updateClave()
     {
         $sql = 'UPDATE tb_clientes
@@ -102,7 +104,7 @@ class ClienteHandler
         $params = array($_SESSION['idCliente']);
         return Database::getRow($sql, $params);
     }
-    
+
 
     public function checkPassword($password)
     {
@@ -199,7 +201,7 @@ class ClienteHandler
     {
         $sql = 'INSERT INTO tb_clientes(nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, direccion_cliente, clave_cliente, foto_cliente)
                 VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->apellido, $this->correo, $this->dui, $this->telefono, $this->direccion, $this->clave , $this->imagen);
+        $params = array($this->nombre, $this->apellido, $this->correo, $this->dui, $this->telefono, $this->direccion, $this->clave, $this->imagen);
         return Database::executeRow($sql, $params);
     }
 
@@ -207,7 +209,7 @@ class ClienteHandler
     {
         $sql = 'INSERT INTO tb_clientes(nombre_cliente, apellido_cliente, correo_cliente, dui_cliente, telefono_cliente, direccion_cliente, clave_cliente, foto_cliente)
                 VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->apellido, $this->correo, $this->dui, $this->telefono, $this->direccion, $this->clave , $this->imagen);
+        $params = array($this->nombre, $this->apellido, $this->correo, $this->dui, $this->telefono, $this->direccion, $this->clave, $this->imagen);
         return Database::executeRow($sql, $params);
     }
 
@@ -246,8 +248,23 @@ class ClienteHandler
         return Database::getRow($sql, $params);
     }
 
-    
-    
+    public function readAllVerPagos()
+    {
+        $sql = "SELECT CONCAT(nombre_alumno, ' ', apellido_alumno) as alumno,
+                mensualidad_pagar,
+                fecha_pago,
+                descripcion_pago from tb_detalles_pagos
+                INNER JOIN tb_pagos USING(id_pago)
+                INNER JOIN tb_alumnos USING(id_alumno)
+                INNER JOIN tb_clientes USING(id_cliente)
+                INNER JOIN tb_dias_pagos USING(id_dia_pago)
+                where id_cliente = ? ";
+        $params = array($_SESSION['idCliente']);
+        return Database::getRows($sql, $params);
+    }
+
+
+    //Reporte para
     public function readAlumnos()
     {
         $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ', apellido_alumno) as nombre,
@@ -266,17 +283,19 @@ class ClienteHandler
         return Database::getRows($sql, $params); //Se manda rows, para que traiga todos los datos
     }
 
+
+    //Gráfico parametrizado para mostrar los 4 productos más comprados por el cliente seleccionado
     public function readClientesComprasGraph()
     {
         $sql = 'SELECT 
                     p.nombre_producto,
                     SUM(dc.cantidad_producto) AS total_comprado
                 FROM 
-                    tb_compras c
+                    tb_detalles_compras dc
+                JOIN 
+                    tb_compras c USING (id_compra)
                 JOIN 
                     tb_clientes cl USING (id_cliente)
-                JOIN 
-                    tb_detalles_compras dc USING (id_compra)
                 JOIN 
                     tb_detalleProducto dp USING (id_detalle_producto)
                 JOIN 

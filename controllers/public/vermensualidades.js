@@ -44,7 +44,7 @@ const fillTable = async (id) => {
 
                                 <div class="col-lg-6">
                                     <p class="card-text"><b>Alumno cancelado: </b>${row.alumno}</p>
-                                    <p class="card-text"><b>Total cancelado: </b>${row.mensualidad_pagar}</p>
+                                    <p class="card-text"><b>Total cancelado: </b>$${row.mensualidad_pagar}</p>
                                     <p class="card-text"><b>Pago realizado en la fecha: </b>${row.fecha_pago}</p>
                                     <p class="card-text"><b>Descripción del pago: </b>${row.descripcion_pago}</p>
                                 </div>    

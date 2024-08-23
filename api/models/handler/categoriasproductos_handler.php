@@ -81,7 +81,7 @@ class CategoriaProductosHandler
         return Database::executeRow($sql, $params);
     }
 
-    //Gráfico de los productos más vendidos por una categoría seleccionada
+    //Gráfico parametrizado de los productos más vendidos por una categoría seleccionada
 
     public function readTopproductosCategoria()
     {

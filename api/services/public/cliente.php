@@ -80,12 +80,19 @@ if (isset($_GET['action'])) {
                 break;
 
             case 'readAlumnos':
-                if (!$cliente->setCorreo($_POST['correoCliente'])) {
-                    $result['error'] = $cliente->getDataError();
-                } elseif ($result['dataset'] = $cliente->readAlumnos()) {
+                if ($result['dataset'] = $cliente->readAlumnos()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'No tienes ningún alumno registrado';
+                    $result['error'] = 'No tienes alumnos registrados';
+                }
+                break;
+
+                case 'readAllPagos':
+                if ($result['dataset'] = $detallemensualidad->readAllPagos()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen detalles de pagos registrados';
                 }
                 break;
 

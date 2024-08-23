@@ -66,18 +66,18 @@ class CategoriasAlumnosHandler
     public function readAllAlumno()
     {
         $sql = "SELECT 
-        ca.id_categoria_alumno, 
-        ca.categoria, 
-        ca.edad_minima,
-        ca.edad_maxima, 
-        ne.nivel_entrenamiento,
-        ca.imagen_categoria
+        id_categoria_alumno, 
+        categoria, 
+        edad_minima,
+        edad_maxima, 
+        nivel_entrenamiento,
+        imagen_categoria
         FROM 
-        tb_categorias_alumnos ca
+        tb_categorias_alumnos
         INNER JOIN 
-        tb_niveles_entrenamientos ne ON ca.id_nivel_entrenamiento = ne.id_nivel_entrenamiento
+        tb_niveles_entrenamientos USING(id_nivel_entrenamiento)
         ORDER BY 
-        ca.id_categoria_alumno";
+        id_categoria_alumno";
         return Database::getRows($sql);
     }
 
@@ -130,19 +130,19 @@ class CategoriasAlumnosHandler
     public function readAllAlumnosCategs()
     {
         $sql = "SELECT 
-        ca.id_categoria_alumno, 
-        ca.categoria, 
-        ca.edad_minima,
-        ca.edad_maxima, 
-        ne.nivel_entrenamiento, 
-        ca.imagen_categoria
+        id_categoria_alumno, 
+        categoria, 
+        edad_minima,
+        edad_maxima, 
+        nivel_entrenamiento, 
+        imagen_categoria
         FROM 
-        tb_categorias_alumnos ca
+        tb_categorias_alumnos
         INNER JOIN 
-        tb_niveles_entrenamientos ne ON ca.id_nivel_entrenamiento = ne.id_nivel_entrenamiento
-        WHERE ne.id_nivel_entrenamiento = ?
+        tb_niveles_entrenamientos USING(id_nivel_entrenamiento)
+        WHERE id_nivel_entrenamiento = ?
         ORDER BY 
-        ca.categoria;";
+        categoria;";
         $params = array($this->idnivel);
         return Database::getRows($sql, $params);
     }
@@ -188,7 +188,7 @@ class CategoriasAlumnosHandler
         edad_minima,
         edad_maxima, 
         nivel_entrenamiento, 
-       descripcion_nivel,
+        descripcion_nivel,
         imagen_nivel,
         imagen_categoria,
         CONCAT(nombre_lugar, ' ', dia_entrenamiento, ' ', TIME_FORMAT(hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(hor_fin, '%h:%i %p')) AS id_horario_lugar
@@ -286,20 +286,23 @@ class CategoriasAlumnosHandler
         return Database::getRows($sql);
     }
 
+    //Combobox que muestra los lugares de entrenamiento, tomando el id de cada registro y mostrando los datos en el formato: 
+        // Nombre del lugar, día de entrenamiento, la hora de inicio y hora de finalización del entrenamiento.
     public function readAllHorariosCombo()
     {
         $sql = "SELECT 
-    hl.id_horario_lugar,
-    CONCAT(le.nombre_lugar, ', ', he.dia_entrenamiento, ' ', TIME_FORMAT(he.hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(he.hor_fin, '%h:%i %p')) AS horario
+    id_horario_lugar,
+    CONCAT(nombre_lugar, ', ', dia_entrenamiento, ' ', TIME_FORMAT(hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(hor_fin, '%h:%i %p')) AS horario
     FROM 
-    tb_horarios_lugares hl
+    tb_horarios_lugares
     INNER JOIN 
-    tb_lugares_entrenamientos le ON hl.id_lugar = le.id_lugar
+    tb_lugares_entrenamientos USING(id_lugar)
    INNER JOIN 
-    tb_horarios_entrenamientos he ON hl.id_horario = he.id_horario;";
+    tb_horarios_entrenamientos USING(id_horario)";
         return Database::getRows($sql);
     }
 
+    //Reporte parametrizado para saber los alumnos que se encuentran registrados dentro de la categoría seleccionada
     public function reportAlumnosCategoria()
     {
         $sql = "SELECT foto_alumno, CONCAT(nombre_alumno, ' ', apellido_alumno) as Nombre, 
@@ -316,11 +319,13 @@ class CategoriasAlumnosHandler
         return Database::getRows($sql, $params);
     }
 
+    //Gráfico parametrizado para mostrar la cantidad de alumnos que están dentro de un rango de edades, rango el cual estará
+    //definido por la categoría que se seleccione
     public function graphicAlumnosEdades()
     {
         $sql = 'WITH Edades AS (
     SELECT 
-        TIMESTAMPDIFF(YEAR, a.fecha_nacimiento, CURDATE()) AS edad
+        TIMESTAMPDIFF(YEAR, a.fecha_nacimiento, CURDATE()) AS edad -- Convertimos las fechas de nacimiento a edad entera, tomando el año actual y el año de nacimiento del alumno
     FROM 
         tb_alumnos a
     INNER JOIN 
@@ -329,15 +334,14 @@ class CategoriasAlumnosHandler
         tb_categorias_horarios ch USING (id_categoria_horario)
     WHERE 
         ch.id_categoria_alumno = ?
-)
-SELECT 
-    edad,
-    COUNT(*) AS cantidad
-FROM 
+    )
+    SELECT 
+    edad, -- Se obtienen las edades
+    COUNT(*) AS cantidad -- Se obtienen el total de alumnos que tienen las edades definidas.
+    FROM 
     Edades
-GROUP BY 
-    edad;
-';
+    GROUP BY 
+    edad;';
         $params = array($this->idcategoria);
         return Database::getRows($sql, $params);
     }

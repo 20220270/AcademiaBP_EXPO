@@ -167,68 +167,75 @@ class AlumnosHandler
         return Database::getRow($sql, $params);
     }
 
-    /*Esta es la consulta para mostrar un estimado de cuántos alumnos se registrarán en el año*/
+    /* Esta es la consulta para mostrar un estimado de cuántos alumnos se registrarán en el año */
 
-    /**Explicación de los datos obtenidos:
+    /** Explicación de los datos obtenidos:
      * 
-     * Se toman todos los registros de alumnos por cada mes hasta la fecha actual, y ese valor lo divide entre los meses en los que hay datos registrados.
-     * De esa parte, obtenemos la tasa promedio de inscripciones
+     * 1. **Inscripciones Mensuales:**
+     * Se toman todos los registros de alumnos por cada mes hasta la fecha actual del año en curso, 
+     * y se agrupan por mes. Esto nos proporciona la cantidad de inscripciones de alumnos para cada mes.
      * 
-     * Para la proyección, necesitamos saber los meses restantes y esa tasa promedio.
+     * 2. **Tasa Promedio de Inscripción:**
+     * A partir de las inscripciones mensuales, se calcula la tasa promedio mensual de inscripciones. 
+     * Esta tasa se obtiene dividiendo la suma total de inscripciones entre el número de meses en los 
+     * que hay datos registrados.
      * 
-     * Primero, restamos 12 (porque hay 12 meses en el año) y los meses en los que ya hay datos registrados
+     * 3. **Total Actual de Inscripciones:**
+     * Se suma el total de inscripciones registradas hasta la fecha actual. Este es el número de 
+     * inscripciones de alumnos que ya han ocurrido en el año.
      * 
-     * Luego, multiplicamos la tasa promedio por los meses restantes. De aquí obtendremos la proyección de inscripciones para los meses restantes
+     * 4. **Proyección de Inscripciones:**
+     * Para la proyección, se calcula cuántos meses faltan hasta el final del año. 
+     * Esto se hace restando el número de meses con datos registrados del total de 12 meses del año.
      * 
-     * Finalmente, para saber cuántos alumnos habrá al finalizar el año, sumamos la cantidad actual de alumnos y el número obtenido de la proyección.
+     * 5. **Estimación Total Anual:**
+     * Luego, se multiplica la tasa promedio de inscripciones por los meses restantes. 
+     * Este valor es la proyección de inscripciones para los meses restantes.
+     * Finalmente, para obtener el número total de inscripciones al finalizar el año, 
+     * se suma el total de inscripciones actuales con la proyección de inscripciones para los meses restantes.
      */
     public function alumnosPredictGraph()
     {
         $sql = "WITH inscripciones_mensuales AS (
         SELECT 
-            MONTH(fecha_inscripcion) AS mes,
-            COUNT(*) AS inscripciones
+            MONTH(fecha_inscripcion) AS mes,  -- Mes de la inscripción
+            COUNT(*) AS inscripciones  -- Número de inscripciones en ese mes
         FROM tb_alumnos
-        WHERE YEAR(fecha_inscripcion) = YEAR(CURDATE())
-        GROUP BY MONTH(fecha_inscripcion)
+        WHERE YEAR(fecha_inscripcion) = YEAR(CURDATE())  -- Filtra por el año en curso
+        GROUP BY MONTH(fecha_inscripcion)  -- Agrupa por mes
     ),
     
     tasa_inscripcion AS (
         SELECT 
-            AVG(inscripciones) AS tasa_promedio_mensual
+            AVG(inscripciones) AS tasa_promedio_mensual  -- Calcula la tasa promedio mensual de inscripciones
         FROM inscripciones_mensuales
     ),
     
     total_inscripciones AS (
         SELECT 
-            SUM(inscripciones) AS total_actual
+            SUM(inscripciones) AS total_actual  -- Suma el total de inscripciones actuales
         FROM inscripciones_mensuales
     )
     
+    -- Consulta principal
     SELECT 
-        mes AS 'Mes',
-        inscripciones AS 'Inscripciones',
-        NULL AS 'Proyección',
-        NULL AS 'Total Anual'
+        mes AS 'Mes',  -- Muestra el mes
+        inscripciones AS 'Inscripciones',  -- Muestra las inscripciones mensuales
+        NULL AS 'Proyección',  -- No muestra la proyección en esta parte
+        NULL AS 'Total Anual'  -- No muestra el total anual en esta parte
     FROM inscripciones_mensuales
     
-    UNION ALL
+    UNION ALL  -- Combina los resultados anteriores con los siguientes
     
     SELECT 
-        NULL AS 'Mes',
-        NULL AS 'Inscripciones',
-        ROUND(tasa_promedio_mensual * (12 - MONTH(CURDATE())), 0) AS 'Proyección',
-        (total_actual + ROUND(tasa_promedio_mensual * (12 - MONTH(CURDATE())), 0)) AS 'Total Anual'
+        NULL AS 'Mes',  -- No muestra el mes en esta parte
+        NULL AS 'Inscripciones',  -- No muestra las inscripciones mensuales en esta parte
+        ROUND(tasa_promedio_mensual * (12 - MONTH(CURDATE())), 0) AS 'Proyección',  -- Calcula la proyección de inscripciones
+        (total_actual + ROUND(tasa_promedio_mensual * (12 - MONTH(CURDATE())), 0)) AS 'Total Anual'  -- Calcula el total anual proyectado
     FROM tasa_inscripcion, total_inscripciones;
     ";
 
         return Database::getRows($sql);
     }
-    
-    public function pruebaReporte()
-    {
-        $sql = '';
-        $params = array($this->id);
-        return Database::getRow($sql, $params);
-    }
+
 }

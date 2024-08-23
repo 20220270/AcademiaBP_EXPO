@@ -85,12 +85,17 @@ class CategoriaStaffHandler
         return Database::executeRow($sql, $params);
     }
 
+    //Combobox que muestra el nombre completo del miembro del staff, esto gracias a la función CONCAT.
+    //El combobox mandará a la base de datos el id del staff.
     public function readAllStaffs()
     {
         $sql = "SELECT id_staff, CONCAT(nombre_staff, ' ', apellido_staff) AS 'Nombre completo' FROM tb_staffs;";
         return Database::getRows($sql);
     }
 
+    //Combobox que muestra las categorías de alumnos registradas, las cuales se obtienen desde la tabla intermedia entre
+    //Las categorías de alumnos y los horarios de entrenamiento.
+    //El combobox enviará a la base de datos el id de la tabla intermedia y se lo asignará a un miembro del staff
     public function readAllCategoriasHorarios()
     {
         $sql = "SELECT
