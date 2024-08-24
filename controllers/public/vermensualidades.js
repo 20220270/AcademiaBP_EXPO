@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadTemplate();
     fillTable();
 
-    MAIN_TITLE.textContent = 'Pagos en línea';
+    MAIN_TITLE.textContent = 'Pagos registrados';
 });
 
 

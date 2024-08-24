@@ -43,12 +43,21 @@ class PagosMensualidadHandler
 
     public function readAll()
     {
-        $sql = "SELECT id_pago, CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
-        CONCAT(nombre_cliente, ' ', apellido_cliente) as 'Encargado',   telefono_cliente, numero_dias, mensualidad_pagar, estado_pago, fecha_pago from tb_pagos
-        INNER JOIN tb_alumnos USING(id_alumno)
-        INNER JOIN tb_clientes USING(id_cliente)
-        INNER JOIN tb_dias_pagos USING(id_dia_pago)
-        ORDER BY fecha_pago DESC;";
+        $sql = "SELECT id_pago, 
+                   CONCAT(nombre_alumno, ' ', apellido_alumno) AS 'Alumno',
+                   CONCAT(nombre_cliente, ' ', apellido_cliente) AS 'Encargado', 
+                   telefono_cliente, 
+                   numero_dias, 
+                   mensualidad_pagar, 
+                   estado_pago, 
+                   fecha_pago 
+            FROM tb_pagos
+            INNER JOIN tb_alumnos USING(id_alumno)
+            INNER JOIN tb_clientes USING(id_cliente)
+            INNER JOIN tb_dias_pagos USING(id_dia_pago)
+            WHERE YEAR(fecha_pago) = YEAR(CURDATE()) 
+              AND MONTH(fecha_pago) = MONTH(CURDATE())
+            ORDER BY fecha_pago DESC;";
         return Database::getRows($sql);
     }
 
@@ -119,7 +128,9 @@ class PagosMensualidadHandler
                 COUNT(CONCAT(nombre_alumno, ' ', apellido_alumno)) AS total_alumnos_registradoss 
                 FROM tb_pagos
                 INNER JOIN tb_alumnos USING(id_alumno)
-                WHERE estado_pago = 'Pagado';";
+                WHERE estado_pago = 'Pagado'
+                AND YEAR(fecha_pago) = YEAR(CURDATE()) 
+                AND MONTH(fecha_pago) = MONTH(CURDATE());";
         return Database::getRows($sql);
     }
 
@@ -129,8 +140,9 @@ class PagosMensualidadHandler
     {
         $sql = "SELECT 
                 (SELECT COUNT(*) FROM tb_alumnos) - 
-                (SELECT COUNT(*) FROM tb_pagos WHERE estado_pago = 'Pagado') 
-            AS total_alumnos_sin_pagar;";
+                (SELECT COUNT(*) FROM tb_pagos WHERE estado_pago = 'Pagado' AND YEAR(fecha_pago) = YEAR(CURDATE()) 
+              AND MONTH(fecha_pago) = MONTH(CURDATE())) 
+                AS total_alumnos_sin_pagar;";
         return Database::getRows($sql);
     }
 

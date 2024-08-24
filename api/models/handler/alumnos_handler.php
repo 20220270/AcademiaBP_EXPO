@@ -86,9 +86,9 @@ class AlumnosHandler
 
     public function readOne()
     {
-        $sql = 'SELECT id_alumno, nombre_alumno, apellido_alumno, fecha_nacimiento, posicion_alumno, id_staff_categorias, id_dia_pago, estado_alumno, id_cliente
+        $sql = "SELECT id_alumno, nombre_alumno, apellido_alumno, fecha_nacimiento, posicion_alumno, id_staff_categorias, id_dia_pago, estado_alumno, id_cliente, CONCAT(nombre_alumno, ' ', apellido_alumno) AS Nombre
         FROM tb_alumnos
-        WHERE id_alumno = ?';
+        WHERE id_alumno = ?";
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
@@ -261,5 +261,27 @@ ORDER BY
     meses.mes;";
 
         return Database::getRows($sql);
+    }
+
+
+    //Reporte específico: Historial de pagos dependiendo el id_alumno que se seleccione
+
+    public function readAllVerPagosReport()
+    {
+        $sql = "SELECT CONCAT(nombre_alumno, ' ', apellido_alumno) as alumno,
+                mensualidad_pagar,
+                fecha_pago,
+                descripcion_pago,
+                categoria from tb_detalles_pagos
+                INNER JOIN tb_pagos USING(id_pago)
+                INNER JOIN tb_alumnos USING(id_alumno)
+                INNER JOIN tb_clientes USING(id_cliente)
+                INNER JOIN tb_dias_pagos USING(id_dia_pago)
+                INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
+                INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
+                INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
+                WHERE id_alumno = ? ";
+        $params = array($this -> id);
+        return Database::getRows($sql, $params);
     }
 }

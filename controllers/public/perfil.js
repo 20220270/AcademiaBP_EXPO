@@ -189,12 +189,17 @@ const fillTable = async (correo) => {
                         <img src="${SERVER_URL}images/alumnos/${row.foto_alumno}" class="card-img-top rounded-circle mb-4" height="30px" width="30px">
                             <input id="SelectDatosPago-${row.id_alumno}" type="text" name="SelectDatosPago" class="form-control" value="${row.id_alumno}" hidden>
                             <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
-                            <p class="card-text"><b>Edad: </b>${row.edad}</p>
+                            <p class="card-text"><b>Edad: </b>${row.edad} años</p>
                             <p class="card-text"><b>Categoria: </b>${row.categoria}</p>
                             <p class="card-text"><b>Numero de dias que entrena: </b>${row.numero_dias}</p>
                             <button type="button" class="btn btn-pagar btnPagar" data-id="${row.id_alumno}">
                                 <img src="../../resources/images/mensualidadp.png" height="25px" width="25px" class="me-2"> Pagar mensualidad
                             </button>
+                            <button type="button" class="btn btnPagar mt-3" data-id="${row.id_alumno}" onclick="openReport(this)">
+                                <img src="../../resources/images/mensualidadp.png" height="25px" width="25px" class="me-2"> Historial de pago del alumno
+                            </button>
+
+
                         </div>
                     </div>
                 `;
@@ -296,3 +301,20 @@ const openPassword = () => {
     // Se restauran los elementos del formulario.
     PASSWORD_FORM.reset();
 }
+
+
+
+const openReport = (buttonElement) => {
+    // Obtener el valor de data-id del botón clickeado.
+    const id = buttonElement.getAttribute('data-id');
+    
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/public/historial_pagosmensualidad_alumno.php`);
+    
+    // Se añade el parámetro id directamente a la URL.
+    PATH.searchParams.append('id', id);
+    
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
+
