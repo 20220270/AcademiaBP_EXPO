@@ -14,83 +14,131 @@
 </head>
 
 <body>
-    
+
     <button class="toggle-btn1 d-md-none d-flex" type="button" onclick="toggleSidebar()">
         <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
     </button>
     <main>
         <div class="container">
             <!-- Botones de navegación -->
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <ul class="nav nav-tabs col-lg-8 col-md-10" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active text-success" id="calendar-tab" data-bs-toggle="tab"  data-bs-target="#calendar-section" type="button" role="tab" aria-controls="calendar-section" aria-selected="true">
-                       <img src="../../resources/images/icons8-calendar-100.png" alt="calendar.png" class="mt-2" width="50px" height="50px"></button>
+                    <button class="nav-link active text-success" id="calendar-tab" data-bs-toggle="tab"
+                        data-bs-target="#calendar-section" type="button" role="tab" aria-controls="calendar-section"
+                        aria-selected="true">
+                        <img src="../../resources/images/icons8-calendar-100.png" alt="calendar.png" class="mt-2"
+                            width="50px" height="50px"></button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link text-success" id="chartPrediction-tab" data-bs-toggle="tab" data-bs-target="#chartPrediction-section" type="button" role="tab" aria-controls="chartPrediction-section" aria-selected="false">
-                        <img src="../../resources/images/ganancias_perdidas_grafico.png" alt="calendar.png" class="mt-2" width="50px" height="60px"></button>
+                    <button class="nav-link text-success" id="chartPrediction-tab" data-bs-toggle="tab"
+                        data-bs-target="#chartPrediction-section" type="button" role="tab"
+                        aria-controls="chartPrediction-section" aria-selected="false">
+                        <img src="../../resources/images/ganancias_perdidas_grafico.png" alt="calendar.png" class="mt-2"
+                            width="50px" height="60px"></button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link text-success" id="chartPrediction-tab2" data-bs-toggle="tab" data-bs-target="#chartPrediction-section2" type="button" role="tab" aria-controls="chartPrediction-section2" aria-selected="false">
-                        <img src="../../resources/images/alumnos_33.png" alt="calendar.png" class="mt-2" width="50px" height="55px"></button>
+                    <button class="nav-link text-success" id="chartPrediction-tab2" data-bs-toggle="tab"
+                        data-bs-target="#chartPrediction-section2" type="button" role="tab"
+                        aria-controls="chartPrediction-section2" aria-selected="false">
+                        <img src="../../resources/images/alumnos_33.png" alt="calendar.png" class="mt-2" width="50px"
+                            height="55px"></button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link text-success" id="chart1-tab" data-bs-toggle="tab" data-bs-target="#chart1-section" type="button" role="tab" aria-controls="chart1-section" aria-selected="false">
-                        <img src="../../resources/images/categorias_mas_alumnos.png" alt="calendar.png" class="mt-2" width="60px" height="60px"></button>
+                    <button class="nav-link text-success" id="chart1-tab" data-bs-toggle="tab"
+                        data-bs-target="#chart1-section" type="button" role="tab" aria-controls="chart1-section"
+                        aria-selected="false">
+                        <img src="../../resources/images/categorias_mas_alumnos.png" alt="calendar.png" class="mt-2"
+                            width="60px" height="60px"></button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link text-success" id="chart2-tab" data-bs-toggle="tab" data-bs-target="#chart2-section" type="button" role="tab" aria-controls="chart2-section" aria-selected="false">
-                        <img src="../../resources/images/clientess_mas_comprass.png" alt="calendar.png" class="mt-2" width="60px" height="55px"></button>
+                    <button class="nav-link text-success" id="chart2-tab" data-bs-toggle="tab"
+                        data-bs-target="#chart2-section" type="button" role="tab" aria-controls="chart2-section"
+                        aria-selected="false">
+                        <img src="../../resources/images/clientess_mas_comprass.png" alt="calendar.png" class="mt-2"
+                            width="60px" height="55px"></button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link text-success" id="chart3-tab" data-bs-toggle="tab" data-bs-target="#chart3-section" type="button" role="tab" aria-controls="chart3-section" aria-selected="false">
-                        <img src="../../resources/images/productos_mas_vendidos.png" alt="calendar.png" class="mt-2" width="50px" height="50px"></button>
+                    <button class="nav-link text-success" id="chart3-tab" data-bs-toggle="tab"
+                        data-bs-target="#chart3-section" type="button" role="tab" aria-controls="chart3-section"
+                        aria-selected="false">
+                        <img src="../../resources/images/productos_mas_vendidos.png" alt="calendar.png" class="mt-2"
+                            width="50px" height="50px"></button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link text-success" id="chart4-tab" data-bs-toggle="tab" data-bs-target="#chart4-section" type="button" role="tab" aria-controls="chart4-section" aria-selected="false">
-                        <img src="../../resources/images/calificacion_2.png" alt="calendar.png" class="mt-2" width="50px" height="60px"></button>
+                    <button class="nav-link text-success" id="chart4-tab" data-bs-toggle="tab"
+                        data-bs-target="#chart4-section" type="button" role="tab" aria-controls="chart4-section"
+                        aria-selected="false">
+                        <img src="../../resources/images/calificacion_2.png" alt="calendar.png" class="mt-2"
+                            width="50px" height="60px"></button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link text-success" id="chart5-tab" data-bs-toggle="tab" data-bs-target="#chart5-section" type="button" role="tab" aria-controls="chart5-section" aria-selected="false">
-                        <img src="../../resources/images/categorias_mas_productoss2.png" alt="calendar.png" class="mt-2" width="60px" height="60px"></button>
+                    <button class="nav-link text-success" id="chart5-tab" data-bs-toggle="tab"
+                        data-bs-target="#chart5-section" type="button" role="tab" aria-controls="chart5-section"
+                        aria-selected="false">
+                        <img src="../../resources/images/categorias_mas_productoss2.png" alt="calendar.png" class="mt-2"
+                            width="60px" height="60px"></button>
                 </li>
             </ul>
 
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active col-lg-12 col-md-12 col-sm-12 mt-4" id="calendar-section" role="tabpanel" aria-labelledby="calendar-tab">
+                <div class="tab-pane fade show active col-lg-12 col-md-12 col-sm-12 mt-4" id="calendar-section"
+                    role="tabpanel" aria-labelledby="calendar-tab">
                     <h4>Fechas de nacimiento de cada alumno</h4>
                     <div id="calendar" class="mt-1"></div>
                 </div>
-                <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chartPrediction-section" role="tabpanel" aria-labelledby="chartPrediction-tab">
-                    <canvas id="chartPrediction"></canvas>
-                    <label id="totalGanancias" class="d-block"></label>
-                    <label id="totalPerdidas"></label>
+                <div class="tab-pane fade col-lg-12 col-md-12 col-sm-12 mx-auto" id="chartPrediction-section"
+                    role="tabpanel" aria-labelledby="chartPrediction-tab">
+                    <div class="row">
+                        <label for="" class="text-center mt-2 fw-bold">Ventas</label>
+                        <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+                            <canvas id="chartPredictionVentas"></canvas>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+                            <canvas id="chartPredictionVentasNextYear"></canvas>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="" class="text-center mt-2 fw-bold">Pérdidas</label>
+                        <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+                            <canvas id="chartPredictionPerdidas"></canvas>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+                            <canvas id="chartPredictionPerdidasNextYear"></canvas>
+                        </div>
+                    </div>
                 </div>
-                <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chartPrediction-section2" role="tabpanel" aria-labelledby="chartPrediction-tab2">
+
+                <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chartPrediction-section2"
+                    role="tabpanel" aria-labelledby="chartPrediction-tab2">
                     <canvas id="chartPrediction2"></canvas>
                     <canvas id="chartPrediction3"></canvas>
                 </div>
-                <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chart1-section" role="tabpanel" aria-labelledby="chart1-tab">
+                <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chart1-section" role="tabpanel"
+                    aria-labelledby="chart1-tab">
                     <div class="chart-container2 mt-4">
                         <canvas id="chart1" class="mt-1"></canvas>
                     </div>
                 </div>
-                <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chart2-section" role="tabpanel" aria-labelledby="chart2-tab">
+                <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chart2-section" role="tabpanel"
+                    aria-labelledby="chart2-tab">
                     <div class="chart-container2 mt-4">
                         <canvas id="chart2" class="mt-1"></canvas>
                     </div>
                 </div>
-                <div class="tab-pane fade col-lg-8 col-md-12 col-sm-12 mx-auto" id="chart3-section" role="tabpanel" aria-labelledby="chart3-tab">
+                <div class="tab-pane fade col-lg-8 col-md-12 col-sm-12 mx-auto" id="chart3-section" role="tabpanel"
+                    aria-labelledby="chart3-tab">
                     <div class="chart-container mt-4">
                         <canvas id="chart3" class="mt-5"></canvas>
                     </div>
                 </div>
-                <div class="tab-pane fade col-lg-8 col-md-12 col-sm-12 mx-auto" id="chart4-section" role="tabpanel" aria-labelledby="chart4-tab">
+                <div class="tab-pane fade col-lg-8 col-md-12 col-sm-12 mx-auto" id="chart4-section" role="tabpanel"
+                    aria-labelledby="chart4-tab">
                     <div class="chart-container2 mt-4">
                         <canvas id="chart4" class="mt-5"></canvas>
                     </div>
                 </div>
-                <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chart5-section" role="tabpanel" aria-labelledby="chart5-tab">
+                <div class="tab-pane fade col-lg-11 col-md-12 col-sm-12 mx-auto" id="chart5-section" role="tabpanel"
+                    aria-labelledby="chart5-tab">
                     <div class="chart-container2 mt-4">
                         <canvas id="chart5" class="mt-5 "></canvas>
                     </div>

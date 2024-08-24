@@ -83,16 +83,40 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-            case 'predictGraph':
-                if ($result['dataset'] = $ordenes->predictGraph()) {
+            case 'ventasPredictGraph':
+                if ($result['dataset'] = $ordenes->ventasPredictGraph()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
                     $result['error'] = 'No existen ordenes registradas';
                 }
                 break;
-            case 'perdidasPredictGraph':
-                if ($result['dataset'] = $ordenes->perdidasPredictGraph()) {
+            case 'ventasPredictGraph2':
+                if ($result['dataset'] = $ordenes->ventasPredictGraph2()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen ordenes registradas';
+                }
+                break;
+            case 'ventasPredictGraph3':
+                if ($result['dataset'] = $ordenes->ventasPredictGraph3()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen ordenes registradas';
+                }
+                break;
+            case 'ventasPredictGraph4':
+                if ($result['dataset'] = $ordenes->ventasPredictGraph4()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen ordenes registradas';
+                }
+                break;
+            case 'ventasPredictGraph5':
+                if ($result['dataset'] = $ordenes->ventasPredictGraph5()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {

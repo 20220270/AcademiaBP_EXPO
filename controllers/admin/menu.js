@@ -18,7 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     graficoPastelProductoss();
     graficoBarrasClientes();
     graficoBarrasExistencias();
-    graficoPredictivo();
+    graficoPredictivoVentas();
+    graficoPredictivoVentasNextYear();
+    graficoPredictivoPerdidasNextYear();
+    graficoPredictivoPerdidas();
     graficoPredictivoAlumnos();
     graficoPredictivoAlumnos3();
 });
@@ -214,64 +217,132 @@ const fillTable = async (form = null) => {
     }
 }
 
-const graficoPredictivo = async () => {
+const graficoPredictivoVentas = async () => {
     try {
-        // Peticiones para obtener los datos de ganancias y pérdidas.
-        const [dataGanancias, dataPerdidas] = await Promise.all([
-            fetchData(COMPRAS_API, 'predictGraph'),
-            fetchData(COMPRAS_API, 'perdidasPredictGraph')
-        ]);
+        // Petición para obtener los datos de ventas.
+        const dataVentas = await fetchData(COMPRAS_API, 'ventasPredictGraph2');
 
-        if (dataGanancias.status && dataPerdidas.status) {
-            // Arreglos para guardar los datos a graficar.
-            let mesventas = [];
-            let ganancias = Array(12).fill(0); // Inicializar con ceros para todos los meses
-            let perdidas = Array(12).fill(0); // Inicializar con ceros para todos los meses
+        if (dataVentas.status) {
+            // Procesar los datos de ventas
+            const data = dataVentas.dataset;
+            console.log(data);
 
-            // Arreglo de nombres de meses.
-            const meses = [
-                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-            ];
-
-            // Procesar datos de ganancias
-            dataGanancias.dataset.forEach(row => {
-                mesventas.push(meses[row.mes - 1]);
-                ganancias[row.mes - 1] = parseFloat(row.ganancias_mensuales);
-            });
-
-            // Procesar datos de pérdidas
-            dataPerdidas.dataset.forEach(row => {
-                perdidas[row.mes - 1] = parseFloat(row.perdidas_mensuales);
-            });
-
-            // Calcular las ganancias totales del año.
-            const totalGanancias = parseFloat(dataGanancias.dataset[0].ganancias_totales_proyectadas);
-            const totalPerdidas = parseFloat(dataPerdidas.dataset[0].perdidas_totales_proyectadas);
-
-            // Añadir registros de depuración
-            console.log('Ganancias Mensuales:', ganancias);
-            console.log('Pérdidas Mensuales:', perdidas);
-            console.log('Ganancias Totales Proyectadas:', totalGanancias);
-            console.log('Pérdidas Totales Proyectadas:', totalPerdidas);
-
-            // Llamada a la función para generar y mostrar un gráfico de líneas.
-            lineGraph('chartPrediction', meses, ganancias, perdidas, 'Ganancias por mes (USD $)', 'Pérdidas por mes (USD $)');
-
-            // Mostrar el total de ganancias y pérdidas del año en el label.
-            document.getElementById('totalGanancias').textContent =
-                `Ganancias totales estimadas para el año: $${totalGanancias.toFixed(2)}`;
-            document.getElementById('totalPerdidas').textContent =
-                `Pérdidas totales estimadas para el año: $${totalPerdidas.toFixed(2)}`;
+            // Llamada a la función para generar y mostrar un gráfico de barras para ventas.
+            barGraphVP('chartPredictionVentas', data, 'Ventas por año (USD $)');
 
         } else {
-            document.getElementById('chartPrediction').remove();
-            console.log(dataGanancias.error || dataPerdidas.error);
+            document.getElementById('chartPredictionVentas').remove();
+            console.log(dataVentas.error);
         }
     } catch (error) {
         console.error('Error en la petición de datos:', error);
     }
 }
+
+const graficoPredictivoPerdidas = async () => {
+    try {
+        // Petición para obtener los datos de pérdidas.
+        const dataPerdidas = await fetchData(COMPRAS_API, 'ventasPredictGraph3');
+
+        if (dataPerdidas.status) {
+            // Procesar los datos de pérdidas
+            const data = dataPerdidas.dataset;
+            console.log(data);
+
+            // Llamada a la función para generar y mostrar un gráfico de barras para pérdidas.
+            barGraphVP('chartPredictionPerdidas', data, 'Pérdidas por año (USD $)');
+
+        } else {
+            document.getElementById('chartPredictionPerdidas').remove();
+            console.log(dataPerdidas.error);
+        }
+    } catch (error) {
+        console.error('Error en la petición de datos:', error);
+    }
+}
+
+const graficoPredictivoVentasNextYear = async () => {
+    try {
+        // Petición para obtener los datos de la proyección de ventas.
+        const dataVentasNextYear = await fetchData(COMPRAS_API, 'ventasPredictGraph4');
+
+        if (dataVentasNextYear.status) {
+            // Procesar los datos de ventas
+            const data = dataVentasNextYear.dataset;
+
+            // Extraer los meses y proyecciones
+            const months = data.map(row => {
+                switch (row.mes) {
+                    case 1: return 'Enero';
+                    case 2: return 'Febrero';
+                    case 3: return 'Marzo';
+                    case 4: return 'Abril';
+                    case 5: return 'Mayo';
+                    case 6: return 'Junio';
+                    case 7: return 'Julio';
+                    case 8: return 'Agosto';
+                    case 9: return 'Septiembre';
+                    case 10: return 'Octubre';
+                    case 11: return 'Noviembre';
+                    case 12: return 'Diciembre';
+                    default: return '';
+                }
+            });
+            const projections = data.map(row => parseFloat(row.proyeccion_ventas_mensual || 0)); // Ajuste para el campo correspondiente y conversión a número
+
+            // Llamada a la función para generar y mostrar un gráfico de barras.
+            barGraph('chartPredictionVentasNextYear', months, projections, 'Proyección de ventas por mes (USD $)', 'Proyección de ventas para el próximo año');
+            
+        } else {
+            document.getElementById('chartPredictionVentasNextYear').remove();
+            console.log(dataVentasNextYear.error);
+        }
+    } catch (error) {
+        console.error('Error en la petición de datos:', error);
+    }
+}
+
+const graficoPredictivoPerdidasNextYear = async () => {
+    try {
+        // Petición para obtener los datos de la proyección de pérdidas.
+        const dataPerdidasNextYear = await fetchData(COMPRAS_API, 'ventasPredictGraph5');
+
+        if (dataPerdidasNextYear.status) {
+            // Procesar los datos de pérdidas
+            const data = dataPerdidasNextYear.dataset;
+
+            // Extraer los meses y proyecciones
+            const months = data.map(row => {
+                switch (row.mes) {
+                    case 1: return 'Enero';
+                    case 2: return 'Febrero';
+                    case 3: return 'Marzo';
+                    case 4: return 'Abril';
+                    case 5: return 'Mayo';
+                    case 6: return 'Junio';
+                    case 7: return 'Julio';
+                    case 8: return 'Agosto';
+                    case 9: return 'Septiembre';
+                    case 10: return 'Octubre';
+                    case 11: return 'Noviembre';
+                    case 12: return 'Diciembre';
+                    default: return '';
+                }
+            });
+            const projections = data.map(row => parseFloat(row.proyeccion_ventas_anuladas_mensual || 0)); // Ajuste para el campo correspondiente y conversión a número
+
+            // Llamada a la función para generar y mostrar un gráfico de barras.
+            barGraph('chartPredictionPerdidasNextYear', months, projections, 'Proyección de pérdidas por mes (USD $)', 'Proyección de pérdidas para el próximo año');
+            
+        } else {
+            document.getElementById('chartPredictionPerdidasNextYear').remove();
+            console.log(dataPerdidasNextYear.error);
+        }
+    } catch (error) {
+        console.error('Error en la petición de datos:', error);
+    }
+}
+
 
 const graficoPredictivoAlumnos = async () => {
     try {

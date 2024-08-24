@@ -295,64 +295,226 @@ class ComprasHandler
 
     //Gráficos de predicción
 
-
-    /*Esta es la consulta para mostrar las ganancias obtenidas, y a partir de ahí calcular las ganancias estimadas*/
-    public function predictGraph()
+    public function ventasPredictGraph()
     {
-        $sql = "WITH GananciasMensuales AS (
-                SELECT 
-                    MONTH(fecha_registro) AS mes,
-                    SUM(cantidad_producto * precio_producto) AS ganancias_mensuales
-                FROM 
-                    tb_detalles_compras
-                JOIN 
-                    tb_compras USING (id_compra)
-                WHERE 
-                    YEAR(fecha_registro) = YEAR(CURDATE())
-                GROUP BY 
-                    MONTH(fecha_registro)
-            )
-            SELECT 
-                mes,
-                ROUND(ganancias_mensuales, 2) AS ganancias_mensuales,
-                COUNT(*) OVER () AS meses_registrados,
-                ROUND(SUM(ganancias_mensuales) OVER (), 2) AS ganancias_actuales,
-                ROUND(AVG(ganancias_mensuales) OVER (), 2) AS media_mensual,
-                ROUND(SUM(ganancias_mensuales) OVER () + (AVG(ganancias_mensuales) OVER () * (12 - COUNT(*) OVER ())), 2) AS ganancias_totales_proyectadas
-            FROM 
-                GananciasMensuales;
-        ";
+        $sql = "SELECT 
+    YEAR(fecha_registro) AS año,
+    SUM(cantidad_producto * precio_producto) AS total_ventas_anual
+FROM 
+    tb_detalles_compras
+JOIN 
+    tb_compras USING (id_compra)
+WHERE 
+    MONTH(fecha_registro) <= MONTH(CURDATE()) 
+    AND DAY(fecha_registro) <= DAY(CURDATE())
+    AND (estado_compra = 'Finalizada' OR estado_compra = 'Entregada')
+GROUP BY 
+    YEAR(fecha_registro)
+ORDER BY 
+    año;
+";
 
         return Database::getRows($sql);
     }
 
-    /*Esta es la consulta para mostrar las pérdidas, y a partir de ahí calcular las pérdidas estimadas*/
-    public function perdidasPredictGraph()
+
+    public function ventasPredictGraph2()
     {
-        $sql = "WITH PerdidasMensuales AS (
-            SELECT 
-                MONTH(fecha_registro) AS mes,
-                SUM(cantidad_producto * precio_producto) AS perdidas_mensuales
-            FROM 
-                tb_detalles_compras
-            JOIN 
-                tb_compras USING (id_compra)
-            WHERE 
-                YEAR(fecha_registro) = YEAR(CURDATE()) 
-                AND estado_compra = 'Anulada'
-            GROUP BY 
-                MONTH(fecha_registro)
-        )
-        SELECT 
-            mes,
-            ROUND(perdidas_mensuales, 2) AS perdidas_mensuales,
-            COUNT(*) OVER () AS meses_registrados,
-            ROUND(SUM(perdidas_mensuales) OVER (), 2) AS perdidas_actuales,
-            ROUND(AVG(perdidas_mensuales) OVER (), 2) AS media_mensual,
-            ROUND(SUM(perdidas_mensuales) OVER () + (AVG(perdidas_mensuales) OVER () * (12 - COUNT(*) OVER ())), 2) AS perdidas_totales_proyectadas
-        FROM 
-            PerdidasMensuales;
-    ";
+        $sql = "WITH meses AS (
+    SELECT DISTINCT YEAR(fecha_registro) AS año, MONTH(fecha_registro) AS mes
+    FROM tb_compras
+    UNION ALL
+    SELECT DISTINCT YEAR(CURDATE()) AS año, mes.mes
+    FROM (
+        SELECT 1 AS mes UNION ALL
+        SELECT 2 UNION ALL
+        SELECT 3 UNION ALL
+        SELECT 4 UNION ALL
+        SELECT 5 UNION ALL
+        SELECT 6 UNION ALL
+        SELECT 7 UNION ALL
+        SELECT 8 UNION ALL
+        SELECT 9 UNION ALL
+        SELECT 10 UNION ALL
+        SELECT 11 UNION ALL
+        SELECT 12
+    ) AS mes
+)
+
+SELECT 
+    meses.año,
+    meses.mes,
+    IFNULL(SUM(CASE WHEN estado_compra = 'Finalizada' OR estado_compra = 'Entregada' THEN cantidad_producto * precio_producto ELSE 0 END), 0) AS total_ventas_mensual
+FROM 
+    meses
+LEFT JOIN 
+    tb_compras ON YEAR(tb_compras.fecha_registro) = meses.año AND MONTH(tb_compras.fecha_registro) = meses.mes
+LEFT JOIN 
+    tb_detalles_compras ON tb_compras.id_compra = tb_detalles_compras.id_compra
+GROUP BY 
+    meses.año, meses.mes
+ORDER BY 
+    meses.año, meses.mes;
+";
+
+        return Database::getRows($sql);
+    }
+
+
+    public function ventasPredictGraph3()
+    {
+        $sql = "WITH meses AS (
+    SELECT DISTINCT YEAR(fecha_registro) AS año, MONTH(fecha_registro) AS mes
+    FROM tb_compras
+    UNION ALL
+    SELECT DISTINCT YEAR(CURDATE()) AS año, mes.mes
+    FROM (
+        SELECT 1 AS mes UNION ALL
+        SELECT 2 UNION ALL
+        SELECT 3 UNION ALL
+        SELECT 4 UNION ALL
+        SELECT 5 UNION ALL
+        SELECT 6 UNION ALL
+        SELECT 7 UNION ALL
+        SELECT 8 UNION ALL
+        SELECT 9 UNION ALL
+        SELECT 10 UNION ALL
+        SELECT 11 UNION ALL
+        SELECT 12
+    ) AS mes
+)
+
+SELECT 
+    meses.año,
+    meses.mes,
+    IFNULL(SUM(CASE WHEN estado_compra = 'Anulada' THEN cantidad_producto * precio_producto ELSE 0 END), 0) AS total_ventas_anuladas_mensual
+FROM 
+    meses
+LEFT JOIN 
+    tb_compras ON YEAR(tb_compras.fecha_registro) = meses.año AND MONTH(tb_compras.fecha_registro) = meses.mes
+LEFT JOIN 
+    tb_detalles_compras ON tb_compras.id_compra = tb_detalles_compras.id_compra
+GROUP BY 
+    meses.año, meses.mes
+ORDER BY 
+    meses.año, meses.mes;
+";
+
+        return Database::getRows($sql);
+    }
+
+    public function ventasPredictGraph4()
+    {
+        $sql = "WITH meses AS (
+    SELECT DISTINCT YEAR(fecha_registro) AS año, MONTH(fecha_registro) AS mes
+    FROM tb_compras
+    UNION ALL
+    SELECT DISTINCT YEAR(CURDATE()) AS año, mes.mes
+    FROM (
+        SELECT 1 AS mes UNION ALL
+        SELECT 2 UNION ALL
+        SELECT 3 UNION ALL
+        SELECT 4 UNION ALL
+        SELECT 5 UNION ALL
+        SELECT 6 UNION ALL
+        SELECT 7 UNION ALL
+        SELECT 8 UNION ALL
+        SELECT 9 UNION ALL
+        SELECT 10 UNION ALL
+        SELECT 11 UNION ALL
+        SELECT 12
+    ) AS mes
+),
+ventas_mensuales AS (
+    SELECT 
+        meses.año,
+        meses.mes,
+        IFNULL(SUM(CASE WHEN estado_compra IN ('Finalizada', 'Entregada') THEN cantidad_producto * precio_producto ELSE 0 END), 0) AS total_ventas_mensual
+    FROM 
+        meses
+    LEFT JOIN 
+        tb_compras ON YEAR(tb_compras.fecha_registro) = meses.año AND MONTH(tb_compras.fecha_registro) = meses.mes
+    LEFT JOIN 
+        tb_detalles_compras ON tb_compras.id_compra = tb_detalles_compras.id_compra
+    GROUP BY 
+        meses.año, meses.mes
+),
+promedio_mensual AS (
+    SELECT 
+        AVG(total_ventas_mensual) AS promedio_ventas_mensual
+    FROM 
+        ventas_mensuales
+)
+SELECT 
+    mes,
+    ROUND(promedio_ventas_mensual, 2) AS proyeccion_ventas_mensual
+FROM 
+    (SELECT DISTINCT mes FROM ventas_mensuales) AS meses
+CROSS JOIN 
+    promedio_mensual
+ORDER BY 
+    mes;
+";
+
+        return Database::getRows($sql);
+    }
+
+
+    public function ventasPredictGraph5()
+    {
+        $sql = "WITH meses AS (
+    SELECT DISTINCT YEAR(fecha_registro) AS año, MONTH(fecha_registro) AS mes
+    FROM tb_compras
+    UNION ALL
+    SELECT DISTINCT YEAR(CURDATE()) AS año, mes.mes
+    FROM (
+        SELECT 1 AS mes UNION ALL
+        SELECT 2 UNION ALL
+        SELECT 3 UNION ALL
+        SELECT 4 UNION ALL
+        SELECT 5 UNION ALL
+        SELECT 6 UNION ALL
+        SELECT 7 UNION ALL
+        SELECT 8 UNION ALL
+        SELECT 9 UNION ALL
+        SELECT 10 UNION ALL
+        SELECT 11 UNION ALL
+        SELECT 12
+    ) AS mes
+),
+ventas_anuladas_mensuales AS (
+    SELECT 
+        meses.año,
+        meses.mes,
+        IFNULL(SUM(CASE WHEN estado_compra = 'Anulada' THEN cantidad_producto * precio_producto ELSE 0 END), 0) AS total_ventas_anuladas_mensual
+    FROM 
+        meses
+    LEFT JOIN 
+        tb_compras ON YEAR(tb_compras.fecha_registro) = meses.año AND MONTH(tb_compras.fecha_registro) = meses.mes
+    LEFT JOIN 
+        tb_detalles_compras ON tb_compras.id_compra = tb_detalles_compras.id_compra
+    GROUP BY 
+        meses.año, meses.mes
+),
+promedio_mensual AS (
+    SELECT 
+        AVG(total_ventas_anuladas_mensual) AS promedio_ventas_anuladas_mensual
+    FROM 
+        ventas_anuladas_mensuales
+    WHERE 
+        año = YEAR(CURDATE())
+)
+SELECT 
+    mes,
+    ROUND(promedio_ventas_anuladas_mensual, 2) AS proyeccion_ventas_anuladas_mensual
+FROM 
+    (SELECT DISTINCT mes FROM ventas_anuladas_mensuales) AS meses
+CROSS JOIN 
+    promedio_mensual
+ORDER BY 
+    mes;
+
+";
 
         return Database::getRows($sql);
     }

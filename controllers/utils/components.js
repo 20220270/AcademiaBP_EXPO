@@ -236,6 +236,63 @@ const barGraphA = (canvas, data, title) => {
     });
 }
 
+const barGraphVP = (canvas, data, title) => {
+    const ctx = document.getElementById(canvas).getContext('2d');
+
+    // Organizar los datos por año
+    const labels = [];
+    const datasets = [];
+
+    const years = [...new Set(data.map(row => row.año))];
+    const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+    years.forEach(year => {
+        const yearData = months.map(month => {
+            const record = data.find(row => row.año === year && row.mes === months.indexOf(month) + 1);
+            return record ? parseFloat(record.total_ventas_mensual || record.total_ventas_anuladas_mensual || 0) : 0; // Ajuste para el campo correspondiente y conversión a número
+        });
+
+        datasets.push({
+            label: `Año ${year}`,
+            data: yearData,
+            backgroundColor: `#${Math.random().toString(16).substring(2, 8)}`,
+            borderColor: `#${Math.random().toString(16).substring(2, 8)}`,
+            borderWidth: 1
+        });
+    });
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: months,
+            datasets: datasets
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: title
+                },
+                legend: {
+                    display: true 
+                }
+            },
+            scales: {
+                x: {
+                    stacked: false,
+                    barPercentage: 0.9,
+                    categoryPercentage: 0.8
+                },
+                y: {
+                    stacked: false
+                }
+            }
+        }
+    });
+}
+
+
+
 
 
 /*

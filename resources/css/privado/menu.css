@@ -45,3 +45,21 @@ canvas {
     max-width: 110%;
 
 }
+
+@media (max-width: 768px) {
+    .tab-pane .chart-container, 
+    .tab-pane .chart-container2 {
+        margin-bottom: 30px; /* Espaciado entre gráficos */
+    }
+
+    canvas {
+        height: 180px !important; /* Ajustar la altura de los canvas */
+    }
+}
+
+/* Ajustes adicionales si es necesario */
+@media (max-width: 576px) {
+    canvas {
+        height: 180px !important; /* Mayor altura en pantallas muy pequeñas */
+    }
+}
