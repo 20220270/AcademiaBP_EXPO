@@ -41,7 +41,7 @@ if (isset($_GET['idCategoriaAlumno'])) {
                 foreach ($datacategoria as $rowAlumnos) {
 
                     if ($pdf->GetY() + $cellHeight > $pdf->GetPageHeight() - 20) {
-                        $pdf->AddPage('L', 'Letter'); //Generamos otra página con la misma orientación que definimos para el reporte en un principio
+                        $pdf->AddPage('p', 'Letter'); //Generamos otra página con la misma orientación que definimos para el reporte en un principio
                         $pdf->setFillColor(64, 136, 64);
                         $pdf->setFont('Arial', 'B', 9);
                         $pdf->setTextColor(255, 255, 255);

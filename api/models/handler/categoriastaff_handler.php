@@ -55,12 +55,12 @@ class CategoriaStaffHandler
 
     public function readOne()
     {
-        $sql = 'SELECT id_staff_categorias, id_staff, id_categoria_horario, categoria
+        $sql = "SELECT id_staff_categorias, id_staff, id_categoria_horario, categoria, CONCAT(nombre_staff, ' ' ,apellido_staff) as 'Nombre'
                 FROM tb_staffs_categorias
                 INNER JOIN tb_staffs USING (id_staff)
                 INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
                 INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
-                WHERE id_staff_categorias = ?';
+                WHERE id_staff_categorias = ?";
 
         $params = array($this->idstaffcategoria);
         return Database::getRow($sql, $params);
@@ -114,5 +114,35 @@ class CategoriaStaffHandler
     GROUP BY categoria";
         return Database::getRows($sql);
     }
+
+
+    public function readAllAlumnosStaff()
+{
+    $sql = "SELECT 
+            foto_alumno, 
+            CONCAT(nombre_alumno, ' ', apellido_alumno) AS nombre_alumnos, 
+            TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad, 
+            CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_clientes
+        FROM 
+            tb_alumnos 
+        INNER JOIN 
+            tb_staffs_categorias USING (id_staff_categorias)
+        INNER JOIN 
+            tb_categorias_horarios USING (id_categoria_horario)
+        INNER JOIN 
+            tb_staffs USING (id_staff) 
+        INNER JOIN 
+            tb_clientes USING (id_cliente)
+        WHERE 
+            id_staff_categorias = ? 
+            AND id_categoria_horario = (SELECT id_categoria_horario FROM tb_staffs_categorias WHERE id_staff_categorias = ?)
+        ORDER BY 
+            id_staff;
+    ";
+    // Aquí debes pasar los dos parámetros para el filtro
+    $params = array($this->idstaffcategoria, $this->idstaffcategoria);
+    return Database::getRows($sql, $params);
+}
+
 
 }

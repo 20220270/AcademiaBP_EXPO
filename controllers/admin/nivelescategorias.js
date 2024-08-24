@@ -235,7 +235,7 @@ const fillTable2 = async (form = null) => {
                                     <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button>
                                 <button type="button" class="btn btn-sm" onclick="openReport2(${row.id_categoria_alumno})">
-                                    <img src="../../resources/images/reporte.png" alt="" width="30px" height="30px" class="mb-1">
+                                    <img src="../../resources/images/reporteee.png" alt="" width="25px" height="30px" class="mb-1">
                                 </button>
                                 <button type="button" class="btn btn-sm" onclick="generarGrafico(${row.id_categoria_alumno}, 'card-${row.id_categoria_alumno}')">
                                     <img src="../../resources/images/graph.png" alt="" width="30px" height="30px" class="mb-1">
