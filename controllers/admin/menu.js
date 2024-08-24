@@ -39,7 +39,7 @@ const graficoBarrasExistencias = async () => {
             existencias.push(row.cantidad_alumnos);
         });
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart1', producto, existencias, 'Existencias', 'Categorías con más alumnos');
+        barGraph('chart1', producto, existencias, 'Alumnos', 'Categorías con más alumnos');
     } else {
         document.getElementById('chart1').remove();
         console.log(DATA.error);
@@ -283,7 +283,7 @@ const graficoPredictivoAlumnos = async () => {
             const data = dataNuevosAlumnos.dataset;
 
             // Llamada a la función para generar y mostrar un gráfico de barras.
-            barGraphA('chartPrediction2', data, 'Nuevos alumnos por mes y año');
+            barGraphA('chartPrediction2', data, 'Inscripciones de alumnos registradas por año');
 
         } else {
             document.getElementById('chartPrediction2').remove();
