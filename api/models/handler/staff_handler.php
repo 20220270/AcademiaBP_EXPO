@@ -133,5 +133,23 @@ class StaffHandler
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }
+
+    //Función para generar reporte de todos los miembros del staff y la categoría de la que son encargados
+    //En caso de que no tenga una categoría asignada, se manda el valor 'Ninguna categoría', 
+    //Se conectan mediante un LEFT JOIN para mostrar datos aunque en la base no se encuentren debido a la consulta
+    public function readAllStaffReport()
+{
+    $sql = "SELECT 
+                s.id_staff, 
+                CONCAT(s.nombre_staff, ' ', s.apellido_staff) AS nombre_completo,
+                COALESCE(ca.categoria, 'Ninguna categoría') AS categoria
+            FROM tb_staffs AS s
+            LEFT JOIN tb_staffs_categorias AS sc USING (id_staff)
+            LEFT JOIN tb_categorias_horarios AS ch USING (id_categoria_horario)
+            LEFT JOIN tb_categorias_alumnos AS ca USING (id_categoria_alumno)
+            ORDER BY s.id_staff";
+    return Database::getRows($sql);
+}
+
 }
 ?>
