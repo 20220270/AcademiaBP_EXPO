@@ -317,7 +317,7 @@ ORDER BY
         return Database::getRows($sql);
     }
 
-
+//Función para mostrar las ventas registradas de la base de datos
     public function ventasPredictGraph2()
     {
         $sql = "WITH meses AS (
@@ -360,7 +360,7 @@ ORDER BY
         return Database::getRows($sql);
     }
 
-
+//Función para mostrar las pérdidas registradas de todos los años
     public function ventasPredictGraph3()
     {
         $sql = "WITH meses AS (
@@ -403,12 +403,16 @@ ORDER BY
         return Database::getRows($sql);
     }
 
+    //Función para la proyección de ventas
     public function ventasPredictGraph4()
     {
-        $sql = "WITH meses AS (
+        $sql = "WITH meses AS ( -- Generar una lista de meses y años basada en las fechas de registro en tb_compras,
+        -- asegurando que todos los meses de todos los años (incluso los futuros) estén presentes
+        
     SELECT DISTINCT YEAR(fecha_registro) AS año, MONTH(fecha_registro) AS mes
     FROM tb_compras
     UNION ALL
+    -- Agregar todos los meses del año actual para asegurarse de que todos los meses se incluyan
     SELECT DISTINCT YEAR(CURDATE()) AS año, mes.mes
     FROM (
         SELECT 1 AS mes UNION ALL
@@ -425,13 +429,17 @@ ORDER BY
         SELECT 12
     ) AS mes
 ),
+
+-- Calcular las ventas mensuales para cada mes y año, considerando solo las compras finalizadas o entregadas
 ventas_mensuales AS (
     SELECT 
         meses.año,
         meses.mes,
+        -- Sumar las ventas mensuales basadas en el estado de la compra
         IFNULL(SUM(CASE WHEN estado_compra IN ('Finalizada', 'Entregada') THEN cantidad_producto * precio_producto ELSE 0 END), 0) AS total_ventas_mensual
     FROM 
         meses
+    -- Vincular las ventas con los meses y años correspondientes
     LEFT JOIN 
         tb_compras ON YEAR(tb_compras.fecha_registro) = meses.año AND MONTH(tb_compras.fecha_registro) = meses.mes
     LEFT JOIN 
@@ -439,34 +447,60 @@ ventas_mensuales AS (
     GROUP BY 
         meses.año, meses.mes
 ),
-promedio_mensual AS (
+
+-- Calcular el promedio de ventas para cada mes específico (enero, febrero, etc.)
+promedio_mensual_por_mes AS (
     SELECT 
+        mes,
+        -- Calcular el promedio de ventas mensuales por mes
         AVG(total_ventas_mensual) AS promedio_ventas_mensual
     FROM 
         ventas_mensuales
+    GROUP BY 
+        mes
 )
+
+-- Seleccionar el promedio de ventas para cada mes y proyectarlo para el próximo año
 SELECT 
     mes,
+    -- Redondear el promedio de ventas para una mejor presentación
     ROUND(promedio_ventas_mensual, 2) AS proyeccion_ventas_mensual
 FROM 
-    (SELECT DISTINCT mes FROM ventas_mensuales) AS meses
-CROSS JOIN 
-    promedio_mensual
+    promedio_mensual_por_mes
 ORDER BY 
-    mes;
-";
+    mes;";
 
         return Database::getRows($sql);
     }
 
 
+    //Función para la proyección de pérdidas
     public function ventasPredictGraph5()
     {
-        $sql = "WITH meses AS (
+        $sql = "WITH meses AS ( -- Paso 1: Generar la lista de meses para todos los años y para el próximo año
+    -- Seleccionar todos los años y meses únicos basados en los registros existentes en tb_compras
     SELECT DISTINCT YEAR(fecha_registro) AS año, MONTH(fecha_registro) AS mes
     FROM tb_compras
     UNION ALL
-    SELECT DISTINCT YEAR(CURDATE()) AS año, mes.mes
+    -- Añadir todos los meses del año actual
+    SELECT YEAR(CURDATE()) AS año, mes.mes
+    FROM (
+        SELECT 1 AS mes UNION ALL
+        SELECT 2 UNION ALL
+        SELECT 3 UNION ALL
+        SELECT 4 UNION ALL
+        SELECT 5 UNION ALL
+        SELECT 6 UNION ALL
+        SELECT 7 UNION ALL
+        SELECT 8 UNION ALL
+        SELECT 9 UNION ALL
+        SELECT 10 UNION ALL
+        SELECT 11 UNION ALL
+        SELECT 12
+    ) AS mes
+    UNION ALL
+    -- Añadir todos los meses del próximo año
+    SELECT YEAR(CURDATE()) + 1 AS año, mes.mes
     FROM (
         SELECT 1 AS mes UNION ALL
         SELECT 2 UNION ALL
@@ -482,11 +516,14 @@ ORDER BY
         SELECT 12
     ) AS mes
 ),
+
+-- Paso 2: Calcular las ventas anuladas mensuales para todos los meses
 ventas_anuladas_mensuales AS (
     SELECT 
-        meses.año,
-        meses.mes,
+        meses.año,  -- Año del mes
+        meses.mes,  -- Mes del año
         IFNULL(SUM(CASE WHEN estado_compra = 'Anulada' THEN cantidad_producto * precio_producto ELSE 0 END), 0) AS total_ventas_anuladas_mensual
+        -- Calcular el total de ventas anuladas para el mes actual. Si no hay registros, se devuelve 0.
     FROM 
         meses
     LEFT JOIN 
@@ -495,24 +532,42 @@ ventas_anuladas_mensuales AS (
         tb_detalles_compras ON tb_compras.id_compra = tb_detalles_compras.id_compra
     GROUP BY 
         meses.año, meses.mes
+    -- Agrupar por año y mes para calcular el total de ventas anuladas para cada combinación de año y mes
 ),
+
+-- Paso 3: Calcular el promedio mensual de las ventas anuladas basado en datos históricos
 promedio_mensual AS (
     SELECT 
+        mes,  -- Mes del año
         AVG(total_ventas_anuladas_mensual) AS promedio_ventas_anuladas_mensual
+        -- Calcular el promedio de ventas anuladas mensuales
     FROM 
         ventas_anuladas_mensuales
     WHERE 
-        año = YEAR(CURDATE())
+        año < YEAR(CURDATE()) OR (año = YEAR(CURDATE()) AND mes <= MONTH(CURDATE()))
+        -- Filtrar para incluir datos hasta el mes actual del año en curso
+    GROUP BY 
+        mes
+    -- Agrupar por mes para obtener el promedio mensual
 )
+
+-- Paso 4: Proyectar el promedio mensual para cada mes del próximo año
 SELECT 
-    mes,
-    ROUND(promedio_ventas_anuladas_mensual, 2) AS proyeccion_ventas_anuladas_mensual
+    YEAR(CURDATE()) + 1 AS año,  -- El próximo año para la proyección
+    meses.mes,  -- Mes del año para la proyección
+    ROUND(IFNULL(promedio_mensual.promedio_ventas_anuladas_mensual, 0), 2) AS proyeccion_ventas_anuladas_mensual
+    -- Redondear la proyección a dos decimales, usando 0 si no hay datos históricos
 FROM 
-    (SELECT DISTINCT mes FROM ventas_anuladas_mensuales) AS meses
-CROSS JOIN 
-    promedio_mensual
+    (SELECT 1 AS mes UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL 
+     SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL 
+     SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL 
+     SELECT 10 UNION ALL SELECT 11 UNION ALL SELECT 12) AS meses
+LEFT JOIN 
+    promedio_mensual ON meses.mes = promedio_mensual.mes
+    -- Unir con el promedio mensual para obtener la proyección para cada mes
 ORDER BY 
-    mes;
+    meses.mes;
+    -- Ordenar los resultados por mes
 
 ";
 
