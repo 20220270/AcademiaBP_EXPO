@@ -250,7 +250,8 @@ class ProductoHandler
                 INNER JOIN tb_detalleProducto USING(id_detalle_producto) 
                 INNER JOIN tb_productos USING(id_producto)
                 INNER JOIN tb_clientes USING(id_cliente)
-        where id_producto = ? AND estado_comentario = 'Habilitado'";
+        where id_producto = ? AND estado_comentario = 'Habilitado'
+        ORDER BY fecha_valoracion";
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }
@@ -275,121 +276,132 @@ class ProductoHandler
     //Reportes predictivos
     //Se explica el funcionamiento de la consulta
     public function reportPredictionsProducts()
-    {
-        // Consulta SQL para predecir las ventas anuales de los productos
-        $sql = 'WITH ventas_mensuales AS ( -- Subconsulta: Calcula las ventas mensuales de cada producto para el año en curso
-            SELECT
-                id_producto,  -- ID del producto
-                MONTH(fecha_registro) AS mes,  -- Mes de la venta
-                SUM(cantidad_producto) AS ventas_mes  -- Suma de la cantidad de productos vendidos en ese mes
-            FROM 
-                tb_detalles_compras  -- Tabla que almacena los detalles de las compras
-            INNER JOIN 
-                tb_detalleProducto USING (id_detalle_producto)  -- Se une con la tabla de detalles del producto
-            INNER JOIN 
-                tb_productos USING (id_producto)  -- Se une con la tabla de productos
-            WHERE
-                YEAR(fecha_registro) = YEAR(CURDATE())  -- Filtra solo las ventas del año actual
-            GROUP BY
-                id_producto, mes  -- Agrupa por producto y mes
-        ),
+{
+    // Consulta SQL para predecir las ventas anuales de los productos basándose en datos históricos
+    $sql = 'WITH ventas_anuales AS (
+    SELECT
+        id_detalle_producto,
+        YEAR(tb_compras.fecha_registro) AS año,
+        SUM(cantidad_producto) AS ventas_anuales
+    FROM 
+        tb_detalles_compras
+        INNER JOIN tb_compras USING (id_compra)
+        INNER JOIN tb_detalleProducto USING (id_detalle_producto)
+    WHERE
+        YEAR(tb_compras.fecha_registro) >= YEAR(CURDATE()) - 5
+    GROUP BY
+        id_detalle_producto, año
+),
+tendencia_ventas AS (
+    SELECT
+        id_detalle_producto,
+        SUM(ventas_anuales) AS total_ventas,
+        COUNT(DISTINCT año) AS años_activos,
+        MAX(ventas_anuales) AS ventas_maximas  -- Tomar el año con mayor venta para simplificar
+    FROM
+        ventas_anuales
+    GROUP BY
+        id_detalle_producto
+),
+prediccion_ventas AS (
+    SELECT
+        id_detalle_producto,
+        ROUND(ventas_maximas * (1 + (5 - años_activos) / 5), 0) AS proyeccion_proximo_año,  -- Ajuste simple para proyección
+        ventas_maximas AS promedio_actual
+    FROM
+        tendencia_ventas
+)
+SELECT
+    p.imagen_producto,
+    p.nombre_producto,
+    pv.promedio_actual,
+    pv.proyeccion_proximo_año
+FROM
+    prediccion_ventas pv
+JOIN
+    tb_detalleProducto dp ON dp.id_detalle_producto = pv.id_detalle_producto
+JOIN
+    tb_productos p ON p.id_producto = dp.id_producto
+ORDER BY
+    pv.proyeccion_proximo_año DESC
+LIMIT 7;
 
-        -- Subconsulta: Calcula la tendencia de ventas basada en las ventas mensuales
-        tendencia_ventas AS (
-            SELECT
-                id_producto,  -- ID del producto
-                AVG(ventas_mes) AS promedio_mensual,  -- Promedio de ventas mensuales
-                COUNT(mes) AS meses_activos,  -- Número de meses en los que hubo ventas
-                SUM(ventas_mes) AS total_ventas  -- Total de ventas hasta la fecha
-            FROM
-                ventas_mensuales  -- Utiliza los resultados de la subconsulta anterior
-            GROUP BY
-                id_producto  -- Agrupa por producto
-        ),
 
-        -- Subconsulta: Predice las ventas totales para el año en curso
-        prediccion_ventas AS (
-            SELECT
-                id_producto,  -- ID del producto
-                ROUND(total_ventas + (promedio_mensual * (12 - meses_activos)), 0) AS proyeccion_ventas
-                -- Calcula la proyección de ventas sumando las ventas actuales con la estimación
-                -- basada en el promedio mensual y los meses restantes del año.
-            FROM
-                tendencia_ventas  -- Utiliza los resultados de la subconsulta anterior
-        )
 
-        -- Consulta principal: Selecciona los productos con las mayores proyecciones de ventas
-        SELECT
-            p.imagen_producto,  -- Imagen del producto
-            p.nombre_producto,  -- Nombre del producto
-            pv.proyeccion_ventas  -- Proyección de ventas para el año
-        FROM
-            prediccion_ventas pv  -- Utiliza la subconsulta de predicción de ventas
-        JOIN
-            tb_productos p ON p.id_producto = pv.id_producto  -- Se une con la tabla de productos para obtener los detalles
-        ORDER BY
-            pv.proyeccion_ventas DESC  -- Ordena por proyección de ventas en orden descendente
-        LIMIT 7;  -- Limita el resultado a los 7 productos con mayor proyección de ventas
     ';
 
-        return Database::getRows($sql);
-    }
+    return Database::getRows($sql);
+}
+
 
 
     public function reportPredictionsProductsRating()
     {
         // Consulta SQL para predecir la calificación promedio final de los productos al final del año
-        $sql = 'WITH calificaciones_actuales AS ( -- Subconsulta: Calcula las calificaciones actuales de cada producto en el año en curso
-            SELECT 
-                id_producto,  -- ID del producto
-                COUNT(*) AS num_calificaciones,  -- Número total de calificaciones recibidas
-                SUM(calificacion_producto) AS total_calificacion,  -- Suma de todas las calificaciones recibidas
-                ROUND(AVG(calificacion_producto), 1) AS promedio_actual  -- Promedio actual de calificaciones, redondeado a un decimal
-            FROM 
-                tb_valoraciones  -- Tabla que almacena las valoraciones de los productos
-            JOIN 
-                tb_detalles_compras USING (id_detalle_compra)  -- Se une con la tabla de detalles de compras
-            INNER JOIN 
-                tb_detalleProducto USING (id_detalle_producto)  -- Se une con la tabla de detalles del producto
-            INNER JOIN 
-                tb_productos USING (id_producto)  -- Se une con la tabla de productos
-            WHERE 
-                YEAR(fecha_valoracion) = YEAR(CURDATE())  -- Filtra solo las calificaciones del año actual
-            GROUP BY 
-                id_producto  -- Agrupa por producto
-        ),
-
-        -- Subconsulta: Predice el promedio final de calificaciones al final del año
-        prediccion_calificaciones AS (
-            SELECT 
-                id_producto,  -- ID del producto
-                imagen_producto,  -- Imagen del producto
-                nombre_producto,  -- Nombre del producto
-                promedio_actual,  -- Promedio actual de calificaciones
-                ROUND(
-                    (total_calificacion + (365 - DAYOFYEAR(CURDATE())) * promedio_actual) / 
-                    -- Suma total de calificaciones hasta la fecha más las calificaciones estimadas para los días restantes del año
-                    (num_calificaciones + (365 - DAYOFYEAR(CURDATE()))), 1) AS promedio_final
-                    -- Se divide por el número total de calificaciones actuales más las calificaciones estimadas
-                -- Calcula el promedio final proyectado para el año, redondeado a un decimal
-            FROM 
-                calificaciones_actuales  -- Utiliza los resultados de la subconsulta anterior
-            JOIN 
-                tb_productos USING (id_producto)  -- Se une con la tabla de productos para obtener los detalles
-        )
-
-        -- Consulta principal: Selecciona los productos con las mayores proyecciones de calificaciones
-        SELECT 
+        $sql = 'WITH valoraciones_anuales AS ( -- Subconsulta: Calcula el promedio de valoraciones por producto y año
+        SELECT
             id_producto,  -- ID del producto
-            imagen_producto,  -- Imagen del producto
-            nombre_producto,  -- Nombre del producto
-            promedio_actual,  -- Promedio actual de calificaciones
-            promedio_final  -- Promedio final proyectado para el año
+            YEAR(tb_compras.fecha_registro) AS año,  -- Año de la valoración
+            AVG(calificacion_producto) AS promedio_anual  -- Promedio de valoraciones del año
         FROM 
-            prediccion_calificaciones  -- Utiliza la subconsulta de predicción de calificaciones
-        ORDER BY 
-            promedio_final DESC  -- Ordena por promedio final en orden descendente
-        LIMIT 7;  -- Limita el resultado a los 7 productos con mejor proyección de calificación
+            tb_valoraciones  -- Tabla que almacena los detalles de las compras
+            INNER JOIN 
+            tb_detalles_compras USING (id_detalle_compra)
+            INNER JOIN 
+            tb_compras USING (id_compra)
+        INNER JOIN 
+            tb_detalleProducto USING (id_detalle_producto)  -- Se une con la tabla de detalles del producto
+        INNER JOIN 
+            tb_productos USING (id_producto)  -- Se une con la tabla de productos
+        WHERE
+            calificacion_producto IS NOT NULL  -- Considera solo registros con valoraciones
+        GROUP BY
+            id_producto, año  -- Agrupa por producto y año
+    ),
+
+    -- Subconsulta: Calcula la tendencia de valoraciones basada en los promedios anuales
+    tendencia_valoraciones AS (
+        SELECT
+            id_producto,  -- ID del producto
+            AVG(promedio_anual) AS promedio_historico,  -- Promedio histórico de valoraciones anuales
+            COUNT(año) AS años_activos  -- Número de años con valoraciones
+        FROM
+            valoraciones_anuales  -- Utiliza los resultados de la subconsulta anterior
+        GROUP BY
+            id_producto  -- Agrupa por producto
+    ),
+
+    -- Subconsulta: Predice el promedio de valoraciones para el próximo año
+    prediccion_valoraciones AS (
+        SELECT
+            id_producto,  -- ID del producto
+            ROUND(promedio_historico, 2) AS promedio_actual,  -- Promedio de valoraciones del año actual
+            ROUND(promedio_historico * (1 + (12 - años_activos) / 12), 2) AS proyeccion_proximo_año  -- Calcula la proyección de valoraciones del próximo año
+        FROM
+            tendencia_valoraciones  -- Utiliza los resultados de la subconsulta anterior
+    )
+
+    -- Consulta principal: Selecciona los productos con las mayores proyecciones de valoraciones
+    SELECT
+        p.imagen_producto,  -- Imagen del producto
+        p.nombre_producto,  -- Nombre del producto
+        pv.promedio_actual,  -- Promedio de valoraciones del año actual
+        pv.proyeccion_proximo_año,  -- Proyección de valoraciones para el próximo año
+        -- Conversión de la proyección a una escala del 1 al 5
+        CASE
+            WHEN pv.proyeccion_proximo_año <= 2.0 THEN 1
+            WHEN pv.proyeccion_proximo_año <= 4.0 THEN 2
+            WHEN pv.proyeccion_proximo_año <= 6.0 THEN 3
+            WHEN pv.proyeccion_proximo_año <= 8.0 THEN 4
+            ELSE 5
+        END AS escala_proyeccion
+    FROM
+        prediccion_valoraciones pv  -- Utiliza la subconsulta de predicción de valoraciones
+    JOIN
+        tb_productos p ON p.id_producto = pv.id_producto  -- Se une con la tabla de productos para obtener los detalles
+    ORDER BY
+        pv.proyeccion_proximo_año DESC  -- Ordena por proyección de valoraciones en orden descendente
+    LIMIT 7;
     ';
 
         return Database::getRows($sql);

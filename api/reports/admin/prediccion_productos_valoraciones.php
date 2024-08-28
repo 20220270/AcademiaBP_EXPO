@@ -8,7 +8,7 @@ require_once('../../models/data/productos_data.php');
 $pdf = new Report;
 // Se inicia el reporte con el encabezado del documento.
 $pdf->startReport('Proyección de productos con mejor calificación');
-// Se instancia el módelo Categoría para obtener los datos.
+// Se instancia el modelo ProductoData para obtener los datos.
 $producto = new ProductoData;
 // Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
 if ($dataProductos = $producto->reportPredictionsProductsRating()) {
@@ -16,25 +16,26 @@ if ($dataProductos = $producto->reportPredictionsProductsRating()) {
     // Se establece un color de relleno para los encabezados.
     $pdf->setFillColor(64, 136, 64);
     // Se establece la fuente para los encabezados.
-    $pdf->setFont('Arial', 'B', 10);
+    $pdf->setFont('Arial', 'B', 9);
     $pdf->setTextColor(255, 255, 255);
-    $pdf->cell(185, 8, $pdf->encodeString('Los 7 productos con mejor proyección de mejor calificación'), 1, 1, 'C', 1);
+    $pdf->cell(185, 8, $pdf->encodeString('Los 7 productos con mejor proyección de calificación'), 1, 1, 'C', 1);
     // Se imprimen las celdas con los encabezados.
-    $pdf->cell(40, 10, 'Imagen', 1, 0, 'C', 1);
-    $pdf->cell(65, 10, 'Nombre del producto', 1, 0, 'C', 1);
-    $pdf->cell(80, 10, $pdf->encodeString('Proyección de calificación al finalizar año'), 1, 1, 'C', 1);
+    $pdf->cell(75, 10, 'Imagen y producto', 1, 0, 'C', 1);
+    $pdf->cell(40, 10, 'Promedio actual', 1, 0, 'C', 1);
+    $pdf->cell(40, 10, $pdf->encodeString('Promedio proyectado'), 1, 0, 'C', 1);
+    $pdf->cell(30, 10, 'Escala 1-5', 1, 1, 'C', 1);
 
-    // Se establece un color de relleno para mostrar el nombre de la categoría.
+    // Se establece un color de relleno para mostrar los datos.
     $pdf->setFillColor(240);
     // Se establece la fuente para los datos de los productos.
-    $pdf->setFont('Arial', '', 9);
+    $pdf->setFont('Arial', '', 7);
     $pdf->setTextColor(0, 0, 0);
 
-        // Tamaño de la celda y de la imagen.
-        $cellWidth = 40;
-        $cellHeight = 25;
-        $imgWidth = 20;
-        $imgHeight = 20;
+    // Tamaño de la celda y de la imagen.
+    $cellWidth = 25;
+    $cellHeight = 20;
+    $imgWidth = 14;
+    $imgHeight = 14;
 
     foreach ($dataProductos as $rowProducto) {
         
@@ -49,8 +50,10 @@ if ($dataProductos = $producto->reportPredictionsProductsRating()) {
         } else {
             $pdf->cell($cellWidth, $cellHeight, 'Sin foto', 1, 0, 'C');
         }
-        $pdf->cell(65, $cellHeight, $rowProducto['nombre_producto'], 1, 0, 'C');
-        $pdf->cell(80, $cellHeight, $pdf->encodeString( $rowProducto['promedio_final']), 1, 1, 'C');
+        $pdf->cell(50, $cellHeight, $rowProducto['nombre_producto'], 1, 0, 'C');
+        $pdf->cell(40, $cellHeight, $pdf->encodeString($rowProducto['promedio_actual']), 1, 0, 'C');
+        $pdf->cell(40, $cellHeight, $pdf->encodeString($rowProducto['proyeccion_proximo_año']), 1, 0, 'C');
+        $pdf->cell(30, $cellHeight, $pdf->encodeString($rowProducto['escala_proyeccion']), 1, 1, 'C');
     }
 } else {
     $pdf->cell(0, 10, $pdf->encodeString('No hay productos para mostrar'), 1, 1);

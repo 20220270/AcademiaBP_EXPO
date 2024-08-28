@@ -20,21 +20,21 @@ if ($dataProductos = $producto->reportPredictionsProducts()) {
     $pdf->setTextColor(255, 255, 255);
     $pdf->cell(185, 8, $pdf->encodeString('Los 7 productos con mejor proyección de ventas'), 1, 1, 'C', 1);
     // Se imprimen las celdas con los encabezados.
-    $pdf->cell(40, 10, 'Imagen', 1, 0, 'C', 1);
-    $pdf->cell(65, 10, 'Nombre del producto', 1, 0, 'C', 1);
-    $pdf->cell(80, 10, $pdf->encodeString('Proyección de ventas al finalizar año'), 1, 1, 'C', 1);
+    $pdf->cell(70, 10, 'Imagen y producto', 1, 0, 'C', 1);
+    $pdf->cell(55, 10, $pdf->encodeString('Promedio de ventas'), 1, 0, 'C', 1);
+    $pdf->cell(60, 10, $pdf->encodeString('Proyección'), 1, 1, 'C', 1);
 
     // Se establece un color de relleno para mostrar el nombre de la categoría.
     $pdf->setFillColor(240);
     // Se establece la fuente para los datos de los productos.
-    $pdf->setFont('Arial', '', 9);
+    $pdf->setFont('Arial', '', 7);
     $pdf->setTextColor(0, 0, 0);
 
         // Tamaño de la celda y de la imagen.
-        $cellWidth = 40;
-        $cellHeight = 25;
-        $imgWidth = 20;
-        $imgHeight = 20;
+        $cellWidth = 25;
+        $cellHeight = 20;
+        $imgWidth = 14;
+        $imgHeight = 14;
 
     foreach ($dataProductos as $rowProducto) {
         
@@ -49,8 +49,9 @@ if ($dataProductos = $producto->reportPredictionsProducts()) {
         } else {
             $pdf->cell($cellWidth, $cellHeight, 'Sin foto', 1, 0, 'C');
         }
-        $pdf->cell(65, $cellHeight, $rowProducto['nombre_producto'], 1, 0, 'C');
-        $pdf->cell(80, $cellHeight, $pdf->encodeString( $rowProducto['proyeccion_ventas']), 1, 1, 'C');
+        $pdf->cell(45, $cellHeight, $pdf->encodeString($rowProducto['nombre_producto']), 1, 0, 'C');
+        $pdf->cell(55, $cellHeight, $pdf->encodeString( $rowProducto['promedio_actual']), 1, 0, 'C');
+        $pdf->cell(60, $cellHeight, $pdf->encodeString( $rowProducto['proyeccion_proximo_año']), 1, 1, 'C');
     }
 } else {
     $pdf->cell(0, 10, $pdf->encodeString('No hay productos para mostrar'), 1, 1);
