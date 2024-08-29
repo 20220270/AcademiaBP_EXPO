@@ -190,7 +190,7 @@ const fillTable = async (form = null) => {
                             </button>
                             <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="generarGrafico(${row.id_dia_pago})">
                                 <i class="bi bi-x-square-fill"></i>
-                                    <img src="../../resources/images/graph.png" alt="" width="25px" height="25px" class="mb-1 mx-2">
+                                    <img src="../../resources/images/graph.png" alt="" width="25px" height="25px" class="mb-1">
                             </button>
                         </div>
                     </div>

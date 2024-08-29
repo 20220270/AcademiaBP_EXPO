@@ -199,7 +199,7 @@ const barGraphA = (canvas, data, title) => {
         });
 
         datasets.push({
-            label: `Año ${year}`,
+            label: `Año ${year}:`,
             data: yearData,
             backgroundColor: `#${Math.random().toString(16).substring(2, 8)}`,
             borderColor: `#${Math.random().toString(16).substring(2, 8)}`,
@@ -221,6 +221,20 @@ const barGraphA = (canvas, data, title) => {
                 },
                 legend: {
                     display: true
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ' ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += `${context.parsed.y} inscripciones`; //Aquí se formatean los datos para que se coloque el signo de dólar al principio
+                            }
+                            return label;
+                        }
+                    }
                 }
             },
             scales: {

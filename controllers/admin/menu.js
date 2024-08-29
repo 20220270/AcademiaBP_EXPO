@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
     graficoPredictivoVentasNextYear();
     graficoPredictivoPerdidasNextYear();
     graficoPredictivoPerdidas();
+    graficoInscripcionesAlumnos();
     graficoPredictivoAlumnos();
-    graficoPredictivoAlumnos3();
 });
 
 
@@ -344,7 +344,7 @@ const graficoPredictivoPerdidasNextYear = async () => {
 }
 
 
-const graficoPredictivoAlumnos = async () => {
+const graficoInscripcionesAlumnos = async () => {
     try {
         // Petición para obtener los datos de nuevos alumnos.
         const dataNuevosAlumnos = await fetchData(ALUMNOS_API, 'alumnosPredictGraph2');
@@ -365,7 +365,7 @@ const graficoPredictivoAlumnos = async () => {
     }
 }
 
-const graficoPredictivoAlumnos3 = async () => {
+const graficoPredictivoAlumnos = async () => {
     try {
         // Petición para obtener los datos de la proyección de alumnos.
         const dataNuevosAlumnos3 = await fetchData(ALUMNOS_API, 'alumnosPredictGraph3');
@@ -395,7 +395,7 @@ const graficoPredictivoAlumnos3 = async () => {
             const projections = data.map(row => row.Proyección);
 
             // Llamada a la función para generar y mostrar un gráfico de barras.
-            barGraph('chartPrediction3', months, projections, 'Proyección de inscripciones por mes', 'Proyección de alumnos para el próximo año');
+            barGraph('chartPrediction3', months, projections, 'Inscripciones proyectadas por mes', 'Proyección de inscripciones de alumnos para el próximo año');
             
         } else {
             document.getElementById('chartPrediction3').remove();
