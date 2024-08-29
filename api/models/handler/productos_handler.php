@@ -276,59 +276,73 @@ class ProductoHandler
     //Reportes predictivos
     //Se explica el funcionamiento de la consulta
     public function reportPredictionsProducts()
-{
+    {
     // Consulta SQL para predecir las ventas anuales de los productos basándose en datos históricos
-    $sql = 'WITH ventas_anuales AS (
+    $sql = 'WITH ventas_totales AS (-- CTE para calcular las ventas totales de cada producto
     SELECT
-        id_detalle_producto,
-        YEAR(tb_compras.fecha_registro) AS año,
-        SUM(cantidad_producto) AS ventas_anuales
-    FROM 
-        tb_detalles_compras
-        INNER JOIN tb_compras USING (id_compra)
-        INNER JOIN tb_detalleProducto USING (id_detalle_producto)
-    WHERE
-        YEAR(tb_compras.fecha_registro) >= YEAR(CURDATE()) - 5
+        dp.id_producto,  -- Identificador del producto
+        SUM(dc.cantidad_producto) AS total_ventas  -- Suma total de ventas de cada producto
+        FROM
+        tb_detalles_compras dc
+        INNER JOIN tb_compras c USING(id_compra)  -- Unir con la tabla de compras
+        INNER JOIN tb_detalleProducto dp USING(id_detalle_producto)  -- Unir con la tabla de detalle de producto
     GROUP BY
-        id_detalle_producto, año
-),
-tendencia_ventas AS (
+        dp.id_producto  -- Agrupar por el identificador del producto
+    ),
+
+-- CTE para calcular las ventas anuales de cada producto en los últimos 5 años
+    ventas_anuales AS (
     SELECT
-        id_detalle_producto,
-        SUM(ventas_anuales) AS total_ventas,
-        COUNT(DISTINCT año) AS años_activos,
-        MAX(ventas_anuales) AS ventas_maximas  -- Tomar el año con mayor venta para simplificar
+        dp.id_producto,  -- Identificador del producto
+        YEAR(c.fecha_registro) AS año,  -- Año de la venta
+        SUM(dc.cantidad_producto) AS ventas_anuales  -- Suma de ventas anuales de cada producto
+    FROM
+        tb_detalles_compras dc
+        INNER JOIN tb_compras c USING(id_compra)  -- Unir con la tabla de compras
+        INNER JOIN tb_detalleProducto dp USING(id_detalle_producto)  -- Unir con la tabla de detalle de producto
+    WHERE
+        YEAR(c.fecha_registro) >= YEAR(CURDATE()) - 5  -- Considerar solo los últimos 5 años
+    GROUP BY
+        dp.id_producto, año  -- Agrupar por identificador de producto y año
+    ),
+
+-- CTE para identificar la tendencia de ventas, el número de años activos y las ventas máximas por año
+    tendencia_ventas AS (
+    SELECT
+        id_producto,  -- Identificador del producto
+        SUM(ventas_anuales) AS total_ventas,  -- Suma total de ventas en los últimos 5 años
+        COUNT(DISTINCT año) AS años_activos,  -- Contar el número de años en los que hubo ventas
+        MAX(ventas_anuales) AS ventas_maximas  -- Máximo de ventas en un año para este producto
     FROM
         ventas_anuales
     GROUP BY
-        id_detalle_producto
-),
-prediccion_ventas AS (
+        id_producto  -- Agrupar por identificador de producto
+    ),
+
+-- CTE para proyectar las ventas para el próximo año basado en la tendencia de ventas y el ajuste por años activos
+    proyeccion_ventas AS (
     SELECT
-        id_detalle_producto,
-        ROUND(ventas_maximas * (1 + (5 - años_activos) / 5), 0) AS proyeccion_proximo_año,  -- Ajuste simple para proyección
-        ventas_maximas AS promedio_actual
+        id_producto,  -- Identificador del producto
+        ROUND(ventas_maximas * (1 + (5 - años_activos) / 5), 0) AS proyeccion_proximo_año  -- Proyección ajustada de ventas para el próximo año
     FROM
         tendencia_ventas
-)
-SELECT
-    p.imagen_producto,
-    p.nombre_producto,
-    pv.promedio_actual,
-    pv.proyeccion_proximo_año
-FROM
-    prediccion_ventas pv
-JOIN
-    tb_detalleProducto dp ON dp.id_detalle_producto = pv.id_detalle_producto
-JOIN
-    tb_productos p ON p.id_producto = dp.id_producto
-ORDER BY
-    pv.proyeccion_proximo_año DESC
-LIMIT 7;
+    )
 
-
-
-    ';
+-- Consulta final para obtener los datos relevantes
+    SELECT
+    p.imagen_producto,  -- Imagen del producto
+    p.nombre_producto,  -- Nombre del producto
+    vt.total_ventas AS ventas_totales,  -- Total de ventas históricas
+    pv.proyeccion_proximo_año  -- Proyección de ventas para el próximo año
+    FROM
+    ventas_totales vt
+    JOIN
+    proyeccion_ventas pv ON vt.id_producto = pv.id_producto  -- Unir con la tabla de proyecciones de ventas
+    JOIN
+    tb_productos p ON p.id_producto = vt.id_producto  -- Unir con la tabla de productos
+    ORDER BY
+    vt.total_ventas DESC  -- Ordenar por ventas totales en orden descendente
+    LIMIT 7;  -- Limitar la consulta a los 7 productos más vendidos';
 
     return Database::getRows($sql);
 }

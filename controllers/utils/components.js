@@ -181,6 +181,7 @@ const barGraph = (canvas, xAxis, yAxis, legend, title) => {
     });
 }
 
+//Función para el gráfico de barras que mostrará los datos predictivos de las inscripciones de alumnos
 const barGraphA = (canvas, data, title) => {
     const ctx = document.getElementById(canvas).getContext('2d');
 
@@ -236,24 +237,23 @@ const barGraphA = (canvas, data, title) => {
     });
 }
 
+//Función para el gráfico de barras que mostrará los datos predictivos de las ventas y pérdidas
 const barGraphVP = (canvas, data, title) => {
     const ctx = document.getElementById(canvas).getContext('2d');
 
     // Organizar los datos por año
-    const labels = [];
     const datasets = [];
-
     const years = [...new Set(data.map(row => row.año))];
     const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
     years.forEach(year => {
         const yearData = months.map(month => {
             const record = data.find(row => row.año === year && row.mes === months.indexOf(month) + 1);
-            return record ? parseFloat(record.total_ventas_mensual || record.total_ventas_anuladas_mensual || 0) : 0; // Ajuste para el campo correspondiente y conversión a número
+            return record ? parseFloat(record.total_ventas_mensual || record.total_ventas_anuladas_mensual || 0) : 0;
         });
 
         datasets.push({
-            label: `Año ${year}`,
+            label: `Año ${year}: `,
             data: yearData,
             backgroundColor: `#${Math.random().toString(16).substring(2, 8)}`,
             borderColor: `#${Math.random().toString(16).substring(2, 8)}`,
@@ -275,6 +275,20 @@ const barGraphVP = (canvas, data, title) => {
                 },
                 legend: {
                     display: true 
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ' ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += `$${context.parsed.y}`; //Aquí se formatean los datos para que se coloque el signo de dólar al principio
+                            }
+                            return label;
+                        }
+                    }
                 }
             },
             scales: {
@@ -284,13 +298,17 @@ const barGraphVP = (canvas, data, title) => {
                     categoryPercentage: 0.8
                 },
                 y: {
-                    stacked: false
+                    stacked: false,
+                    ticks: {
+                        callback: function(value) {
+                            return `$${value}`; //Aquí se formatean los datos para que se coloque el signo de dólar al principio
+                        }
+                    }
                 }
             }
         }
     });
 }
-
 
 
 

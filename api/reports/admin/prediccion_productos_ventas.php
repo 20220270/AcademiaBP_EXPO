@@ -22,7 +22,7 @@ if ($dataProductos = $producto->reportPredictionsProducts()) {
     // Se imprimen las celdas con los encabezados.
     $pdf->cell(70, 10, 'Imagen y producto', 1, 0, 'C', 1);
     $pdf->cell(55, 10, $pdf->encodeString('Promedio de ventas'), 1, 0, 'C', 1);
-    $pdf->cell(60, 10, $pdf->encodeString('Proyección'), 1, 1, 'C', 1);
+    $pdf->cell(60, 10, $pdf->encodeString('Proyección de ventas'), 1, 1, 'C', 1);
 
     // Se establece un color de relleno para mostrar el nombre de la categoría.
     $pdf->setFillColor(240);
@@ -50,7 +50,7 @@ if ($dataProductos = $producto->reportPredictionsProducts()) {
             $pdf->cell($cellWidth, $cellHeight, 'Sin foto', 1, 0, 'C');
         }
         $pdf->cell(45, $cellHeight, $pdf->encodeString($rowProducto['nombre_producto']), 1, 0, 'C');
-        $pdf->cell(55, $cellHeight, $pdf->encodeString( $rowProducto['promedio_actual']), 1, 0, 'C');
+        $pdf->cell(55, $cellHeight, $pdf->encodeString( $rowProducto['ventas_totales']), 1, 0, 'C');
         $pdf->cell(60, $cellHeight, $pdf->encodeString( $rowProducto['proyeccion_proximo_año']), 1, 1, 'C');
     }
 } else {

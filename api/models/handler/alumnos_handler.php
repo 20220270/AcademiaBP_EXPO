@@ -38,9 +38,9 @@ class AlumnosHandler
         INNER JOIN tb_dias_pagos USING (id_dia_pago)
         INNER JOIN tb_clientes using(id_cliente)
         WHERE CONCAT(nombre_alumno, ' ' ,apellido_alumno) LIKE ? OR categoria LIKE ? OR 
-        CONCAT(nombre_staff, ' ', apellido_staff) LIKE ? OR numero_dias LIKE ? OR estado_alumno LIKE ?
+        CONCAT(nombre_staff, ' ', apellido_staff) LIKE ? OR numero_dias LIKE ? OR estado_alumno LIKE ? OR fecha_inscripcion LIKE ?
         ORDER BY id_alumno";
-        $params = array($value, $value, $value, $value, $value);
+        $params = array($value, $value, $value, $value, $value, $value);
         return Database::getRows($sql, $params);
     }
 

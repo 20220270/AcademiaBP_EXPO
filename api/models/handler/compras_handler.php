@@ -45,6 +45,14 @@ class ComprasHandler
         return Database::getRows($sql);
     }
 
+    public function readAll2()
+    {
+        $sql = "SELECT id_compra, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro FROM tb_compras p
+        INNER JOIN tb_clientes USING(id_cliente)
+                ORDER BY p.fecha_registro";
+        return Database::getRows($sql);
+    }
+
     public function readOne()
     {
         $sql = "SELECT id_compra, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro FROM tb_compras p

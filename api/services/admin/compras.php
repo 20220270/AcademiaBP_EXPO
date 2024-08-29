@@ -34,6 +34,15 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+            case 'readAll2':
+                if ($result['dataset'] = $ordenes->readAll2()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen ordenes registradas';
+                }
+                break;
+
             case 'readOne':
                 if (!$ordenes->setIdOrden($_POST['idCompra'])) {
                     $result['error'] = $ordenes->getDataError();

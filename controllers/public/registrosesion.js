@@ -82,17 +82,26 @@ document.addEventListener('DOMContentLoaded', async () => {
 SESSION_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
+
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SESSION_FORM);
+
     // Petición para determinar si el cliente se encuentra registrado.
     const DATA = await fetchData(USERR_API, 'logIn', FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
+
+    // Se comprueba si la respuesta es undefined o no contiene un estado válido.
+    if (!DATA) {
+        // Muestra la alerta de "Usuario no encontrado" si no se encontró el correo.
+        sweetAlert(2, "Correo no encontrado", false);
+    } else if (DATA.status) {
+        // Si la respuesta es satisfactoria.
         sweetAlert(1, DATA.message, true, 'index.html');
     } else {
+        // Si hubo un error diferente al de no encontrar el usuario.
         sweetAlert(2, DATA.error, false);
     }
 });
+
 
 
   

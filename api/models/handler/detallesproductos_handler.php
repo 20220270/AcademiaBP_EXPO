@@ -48,7 +48,7 @@ class DetalleProductoHandler
                 INNER JOIN tb_productos USING(id_producto)
                 INNER JOIN tb_categorias_productos USING(id_categoria_producto)
                 INNER JOIN tb_tallas USING(id_talla)
-                INNER JOIN tb_colores USING(id_color);
+                INNER JOIN tb_colores USING(id_color)
                 ORDER BY id_detalle_producto';
         return Database::getRows($sql);
     }
