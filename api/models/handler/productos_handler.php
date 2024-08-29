@@ -209,7 +209,7 @@ class ProductoHandler
                 id_cliente, nombre_cliente, apellido_cliente
                 ORDER BY 
                 total_compras DESC
-                LIMIT 7;";
+                LIMIT 5;";
         return Database::getRows($sql);
     }
 

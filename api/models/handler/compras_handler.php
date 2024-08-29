@@ -389,24 +389,22 @@ ORDER BY
         SELECT 10 UNION ALL
         SELECT 11 UNION ALL
         SELECT 12
-    ) AS mes
-)
+    ) AS mes)
 
-SELECT 
+    SELECT 
     meses.año,
     meses.mes,
     IFNULL(SUM(CASE WHEN estado_compra = 'Anulada' THEN cantidad_producto * precio_producto ELSE 0 END), 0) AS total_ventas_anuladas_mensual
-FROM 
+    FROM 
     meses
-LEFT JOIN 
+    LEFT JOIN 
     tb_compras ON YEAR(tb_compras.fecha_registro) = meses.año AND MONTH(tb_compras.fecha_registro) = meses.mes
-LEFT JOIN 
+    LEFT JOIN 
     tb_detalles_compras ON tb_compras.id_compra = tb_detalles_compras.id_compra
-GROUP BY 
+    GROUP BY 
     meses.año, meses.mes
-ORDER BY 
-    meses.año, meses.mes;
-";
+    ORDER BY 
+    meses.año, meses.mes;";
 
         return Database::getRows($sql);
     }
@@ -435,11 +433,10 @@ ORDER BY
         SELECT 10 UNION ALL
         SELECT 11 UNION ALL
         SELECT 12
-    ) AS mes
-),
+    ) AS mes),
 
 -- Calcular las ventas mensuales para cada mes y año, considerando solo las compras finalizadas o entregadas
-ventas_mensuales AS (
+    ventas_mensuales AS (
     SELECT 
         meses.año,
         meses.mes,
@@ -453,11 +450,10 @@ ventas_mensuales AS (
     LEFT JOIN 
         tb_detalles_compras ON tb_compras.id_compra = tb_detalles_compras.id_compra
     GROUP BY 
-        meses.año, meses.mes
-),
+        meses.año, meses.mes),
 
 -- Calcular el promedio de ventas para cada mes específico (enero, febrero, etc.)
-promedio_mensual_por_mes AS (
+    promedio_mensual_por_mes AS (
     SELECT 
         mes,
         -- Calcular el promedio de ventas mensuales por mes
@@ -465,17 +461,16 @@ promedio_mensual_por_mes AS (
     FROM 
         ventas_mensuales
     GROUP BY 
-        mes
-)
+        mes)
 
 -- Seleccionar el promedio de ventas para cada mes y proyectarlo para el próximo año
-SELECT 
+    SELECT 
     mes,
     -- Redondear el promedio de ventas para una mejor presentación
     ROUND(promedio_ventas_mensual, 2) AS proyeccion_ventas_mensual
-FROM 
+    FROM 
     promedio_mensual_por_mes
-ORDER BY 
+    ORDER BY 
     mes;";
 
         return Database::getRows($sql);

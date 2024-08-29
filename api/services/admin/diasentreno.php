@@ -63,7 +63,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                
+
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -77,7 +77,6 @@ if (isset($_GET['action'])) {
                         if ($diasentreno->updateRow()) {
                             $result['status'] = 1;
                             $result['message'] = 'Dato modificado correctamente';
-                            
                         } else {
                             $result['error'] = 'No se pudo modificar el día de pago, puede que ya exista un registro con el mismo número de día';
                         }
@@ -96,6 +95,20 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'Día y pago eliminados correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al eliminar el día y pago';
+                }
+                break;
+
+            case 'readDiasCategsAlumnos':
+                // Lee el JSON del cuerpo de la solicitud
+                $data = json_decode(file_get_contents('php://input'), true);
+
+                // Verifica si se ha recibido 'idNivelEntrenamiento'
+                if (!isset($data['idDiasPago']) || !$diasentreno->setId($data['idDiasPago'])) {
+                    $result['error'] = 'El identificador del día de pago es incorrecto';
+                } elseif ($result['dataset'] = $diasentreno->readDiasCategsAlumnos()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Día de pago inexistente';
                 }
                 break;
             default:

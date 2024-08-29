@@ -2,6 +2,7 @@
 const DIAS_PAGO_API = 'services/admin/diasentreno.php';
 const MENSUALIDAD_API = 'services/admin/pagosmensualidad.php';
 const DETALLESMENSUALIDAD_API = 'services/admin/detallemensualidad.php';
+const DIAS_PAGO_API2 = 'http://localhost/AcademiaBP_EXPO/api/services/admin/diasentreno.php';
 
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
@@ -186,6 +187,10 @@ const fillTable = async (form = null) => {
                             </button>
                             <button type="button" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_dia_pago})">
                                 <img src="../../resources/images/btnActualizarIMG.png" alt="Actualizar" width="30px" height="30px" class="mb-1">
+                            </button>
+                            <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="generarGrafico(${row.id_dia_pago})">
+                                <i class="bi bi-x-square-fill"></i>
+                                    <img src="../../resources/images/graph.png" alt="" width="25px" height="25px" class="mb-1 mx-2">
                             </button>
                         </div>
                     </div>
@@ -574,3 +579,73 @@ const openReport2 = (id) => {
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }
+
+//Gráfico parametrizado para mostrar las 5 categorías de alumnos con más alumnos registrados a partir del id_dia_pago seleccionado
+const generarGrafico = async (idDiasPago) => {
+    // Obtén el contenedor donde se mostrará el gráfico, que es justo debajo de las cards de las categorías de alumnos
+    const container = CARD_DIASPAGOS;
+
+    // Si ya hay un gráfico, elimínalo
+    const existingChartContainer = document.getElementById('chartContainer');
+    if (existingChartContainer) {
+        existingChartContainer.remove();
+    }
+
+    // Crea el contenedor del gráfico y añade un canvas para el gráfico
+    const chartContainer = document.createElement('div');
+    chartContainer.id = 'chartContainer';
+    chartContainer.style.width = '100%';
+    chartContainer.style.height = '400px'; // Ajusta la altura según sea necesario
+
+    // Crea el elemento canvas para el gráfico
+    const canvas = document.createElement('canvas');
+    canvas.id = 'chartCanvas'; // Asegúrate de que el ID sea único y utilizado correctamente
+    chartContainer.appendChild(canvas);
+
+    // Añade el contenedor del gráfico debajo del contenedor de las tarjetas, o después de la última card encontrada
+    container.insertAdjacentElement('afterend', chartContainer);
+
+
+    // Realiza la solicitud a la API para obtener los datos del gráfico
+    try {
+        const response = await fetch(DIAS_PAGO_API2 + '?action=readDiasCategsAlumnos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ idDiasPago }) //Aquí mandamos el parámetro a la capa de servicios
+        });
+
+        const DATA = await response.json();
+        console.log(DATA);
+
+        if (DATA.status) {
+            // Declaramos arreglos para almacenar los datos del gráfico
+            let categorias = [];
+            let total = [];
+
+            DATA.dataset.forEach(row => {
+                categorias.push(row.categoria);
+                total.push(row.total_alumnos);
+            });
+
+            // Llama a la función para generar el gráfico de pastel
+            pieGraph('chartCanvas', categorias, total, 'Las 5 categorías con más alumnos registrados por día de pago');
+
+
+            // Desplazamiento hasta el contenedor del gráfico
+            //Formato del scrollViewInto
+
+            /*1- behavior: Es el comportamiento del desplazamiento, 
+            es decir si el desplazamiento hasta el gráfico debe ser lento (smooth) o automático (auto)
+            
+              2- block: Define cómo se debe alinear el elemento dentro del contenedor visible, en este caso al inicio*/
+            chartContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        } else {
+            console.log(DATA.error);
+        }
+    } catch (error) {
+        console.error('Error al generar el gráfico:', error);
+    }
+};

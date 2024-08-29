@@ -46,6 +46,8 @@ canvas {
 
 }
 
+
+
 @media (max-width: 768px) {
     .tab-pane .chart-container, 
     .tab-pane .chart-container2 {
@@ -55,11 +57,30 @@ canvas {
     canvas {
         height: 180px !important; /* Ajustar la altura de los canvas */
     }
+    .imagenGrafico{
+        width: 50px;
+        height: 50px;
+    }
 }
 
 /* Ajustes adicionales si es necesario */
 @media (max-width: 576px) {
     canvas {
-        height: 180px !important; /* Mayor altura en pantallas muy pequeñas */
+        height: 350px !important; /* Mayor altura en pantallas muy pequeñas */
+    }
+    img{
+        width: 30px;
+        height: 30px;
+    }
+}
+
+
+@media (max-width: 500px) {
+    canvas {
+        height: 450px !important; /* Mayor altura en pantallas muy pequeñas */
+    }
+    img{
+        width: 30px;
+        height: 30px;
     }
 }

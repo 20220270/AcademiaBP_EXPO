@@ -42,7 +42,7 @@ const graficoBarrasExistencias = async () => {
             existencias.push(row.cantidad_alumnos);
         });
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart1', producto, existencias, 'Alumnos', 'Categorías con más alumnos');
+        barGraph('chart1', producto, existencias, 'Alumnos', 'Las 5 categorías con más alumnos');
     } else {
         document.getElementById('chart1').remove();
         console.log(DATA.error);
@@ -66,7 +66,7 @@ const graficoBarrasClientes = async () => {
             compras.push(row.total_compras);
         });
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        horizontalBarGraph('chart2', clientes, compras, 'Total de compras', 'Clientes con más compras');
+        horizontalBarGraph('chart2', clientes, compras, 'Total de compras', 'Los 5 clientes con más compras');
     } else {
         document.getElementById('chart2').remove();
         console.log(DATA.error);
@@ -90,7 +90,7 @@ const graficoPastelProductoss = async () => {
             ventas.push(row.total_vendido);
         });
         // Llamada a la función para generar y mostrar un gráfico de pastel. Se encuentra en el archivo components.js
-        doughnutGraph('chart3', productos, ventas, 'Productos más vendidos (Unidades)');
+        doughnutGraph('chart3', productos, ventas, 'Los 5 productos más vendidos (Unidades)');
     } else {
         document.getElementById('chart3').remove();
         console.log(DATA.error);
@@ -118,7 +118,7 @@ const graficoPastelProductos = async () => {
             promedios.push(row.promedio_calificacion);
         });
         // Llamada a la función para generar y mostrar un gráfico de pastel. Se encuentra en el archivo components.js
-        pieGraph('chart4', productos, promedios, 'Productos con mejor calificación');
+        pieGraph('chart4', productos, promedios, 'Los 5 productos con mejor calificación');
     } else {
         document.getElementById('chart4').remove();
         console.log(DATA.error);
@@ -141,7 +141,7 @@ const graficoBarrasCategorias = async () => {
             cantidades.push(row.cantidad_producto);
         });
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart5', categorias, cantidades, 'Cantidad de productos', 'Categorías con más productos');
+        barGraph('chart5', categorias, cantidades, 'Cantidad de productos', 'Las 5 categorías con más productos');
     } else {
         document.getElementById('chart5').remove();
         console.log(DATA.error);

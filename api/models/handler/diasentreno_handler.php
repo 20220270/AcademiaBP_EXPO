@@ -81,4 +81,21 @@ class DiasPagoHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    public function readDiasCategsAlumnos()
+    {
+        $sql = 'SELECT categoria, COUNT(*) AS total_alumnos
+                FROM tb_alumnos
+                INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
+                INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
+                INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
+                INNER JOIN tb_niveles_entrenamientos USING (id_nivel_entrenamiento)
+                INNER JOIN tb_dias_pagos USING (id_dia_pago)
+                WHERE id_dia_pago = ?
+                GROUP BY id_categoria_alumno
+                ORDER BY total_alumnos DESC
+                LIMIT 5;';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
 }
