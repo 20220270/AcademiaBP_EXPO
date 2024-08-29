@@ -70,6 +70,22 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen alumnos registrados';
                 }
                 break;
+            /*case 'readAll2':
+                if ($result['dataset'] = $alumno->readAll2()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen alumnos registrados';
+                }
+                break;
+            case 'readAll3':
+                if ($result['dataset'] = $alumno->readAll3()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen alumnos registrados';
+                }
+                break;*/
             case 'readOne':
                 if (!$alumno->setId($_POST['idAlumno'])) {
                     $result['error'] = $alumno->getDataError();

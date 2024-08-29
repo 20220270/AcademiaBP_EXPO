@@ -31,16 +31,16 @@ class AlumnosHandler
         $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad, foto_alumno, fecha_nacimiento, posicion_alumno, estado_alumno, categoria, fecha_inscripcion,
         CONCAT(nombre_staff, ' ', apellido_staff) AS 'Staff', numero_dias, mensualidad_pagar,
         CONCAT(nombre_cliente, ' ', apellido_cliente) as 'Encargado' FROM tb_alumnos
-        INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
-        INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
-        INNER JOIN tb_categorias_alumnos USING(id_categoria_alumno)
-        INNER JOIN tb_staffs USING (id_staff)
-        INNER JOIN tb_dias_pagos USING (id_dia_pago)
-        INNER JOIN tb_clientes using(id_cliente)
+        LEFT JOIN tb_staffs_categorias USING (id_staff_categorias)
+        LEFT JOIN tb_categorias_horarios USING (id_categoria_horario)
+        LEFT JOIN tb_categorias_alumnos USING(id_categoria_alumno)
+        LEFT JOIN tb_staffs USING (id_staff)
+        LEFT JOIN tb_dias_pagos USING (id_dia_pago)
+        LEFT JOIN tb_clientes using(id_cliente)
         WHERE CONCAT(nombre_alumno, ' ' ,apellido_alumno) LIKE ? OR categoria LIKE ? OR 
-        CONCAT(nombre_staff, ' ', apellido_staff) LIKE ? OR numero_dias LIKE ? OR estado_alumno LIKE ? OR fecha_inscripcion LIKE ?
+        CONCAT(nombre_staff, ' ', apellido_staff) LIKE ? OR numero_dias LIKE ? OR estado_alumno LIKE ? OR fecha_inscripcion LIKE ? OR posicion_alumno LIKE ?
         ORDER BY id_alumno";
-        $params = array($value, $value, $value, $value, $value, $value);
+        $params = array($value, $value, $value, $value, $value, $value , $value);
         return Database::getRows($sql, $params);
     }
 
@@ -83,6 +83,66 @@ class AlumnosHandler
     id_alumno;";
         return Database::getRows($sql);
     }
+
+    /*public function readAll2()
+    {
+        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, fecha_nacimiento, foto_alumno, fecha_inscripcion,
+    TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad,
+    posicion_alumno, 
+    estado_alumno, 
+    categoria, 
+    CONCAT(nombre_staff, ' ', apellido_staff) AS 'Staff',
+    numero_dias, 
+    mensualidad_pagar,
+    CONCAT(nombre_cliente, ' ', apellido_cliente) AS 'Encargado' 
+    FROM 
+    tb_alumnos
+    LEFT JOIN 
+    tb_staffs_categorias USING (id_staff_categorias)
+    LEFT JOIN 
+    tb_categorias_horarios USING(id_categoria_horario)
+    LEFT JOIN 
+    tb_categorias_alumnos USING(id_categoria_alumno)
+    LEFT JOIN 
+    tb_staffs USING (id_staff)
+    LEFT JOIN 
+    tb_dias_pagos USING (id_dia_pago)
+    LEFT JOIN
+    tb_clientes USING(id_cliente)
+    ORDER BY 
+    fecha_inscripcion;";
+        return Database::getRows($sql);
+    }
+
+    public function readAll3()
+    {
+        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, fecha_nacimiento, foto_alumno, fecha_inscripcion,
+    TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad,
+    posicion_alumno, 
+    estado_alumno, 
+    categoria, 
+    CONCAT(nombre_staff, ' ', apellido_staff) AS 'Staff',
+    numero_dias, 
+    mensualidad_pagar,
+    CONCAT(nombre_cliente, ' ', apellido_cliente) AS 'Encargado' 
+    FROM 
+    tb_alumnos
+    LEFT JOIN 
+    tb_staffs_categorias USING (id_staff_categorias)
+    LEFT JOIN 
+    tb_categorias_horarios USING(id_categoria_horario)
+    LEFT JOIN 
+    tb_categorias_alumnos USING(id_categoria_alumno)
+    LEFT JOIN 
+    tb_staffs USING (id_staff)
+    LEFT JOIN 
+    tb_dias_pagos USING (id_dia_pago)
+    LEFT JOIN
+    tb_clientes USING(id_cliente)
+    ORDER BY 
+    edad;";
+        return Database::getRows($sql);
+    }*/
 
     public function readOne()
     {
