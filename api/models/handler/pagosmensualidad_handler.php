@@ -152,7 +152,8 @@ class PagosMensualidadHandler
         mensualidad_pagar, fecha_pago from tb_pagos
         INNER JOIN tb_alumnos USING (id_alumno)
         INNER JOIN tb_clientes USING (id_cliente)
-        INNER JOIN tb_dias_pagos USING (id_dia_pago) ";
+        INNER JOIN tb_dias_pagos USING (id_dia_pago)
+        ORDER BY fecha_pago ASC";
         return Database::getRows($sql);
     }
 

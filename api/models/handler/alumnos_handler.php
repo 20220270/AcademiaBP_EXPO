@@ -246,15 +246,15 @@ class AlumnosHandler
     years.anio,  -- Año de inscripción
     months.mes,  -- Mes de inscripción
     IFNULL(inscripciones.total_inscripciones, 0) AS total_inscripciones  -- Total de inscripciones, o 0 si no hay datos
-FROM 
+    FROM 
     -- Subconsulta para obtener todos los años distintos de las inscripciones
     (SELECT DISTINCT YEAR(fecha_inscripcion) AS anio FROM tb_alumnos) AS years
-CROSS JOIN 
+    CROSS JOIN 
     -- Subconsulta para generar todos los meses del año
     (SELECT 1 AS mes UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION 
      SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION 
      SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) AS months
-LEFT JOIN 
+    LEFT JOIN 
     -- Subconsulta para contar las inscripciones por año y mes
     (SELECT 
         YEAR(fecha_inscripcion) AS anio,  -- Año de inscripción
@@ -265,10 +265,10 @@ LEFT JOIN
     GROUP BY 
         YEAR(fecha_inscripcion),  -- Agrupa por año
         MONTH(fecha_inscripcion)) AS inscripciones  -- Agrupa por mes
-ON 
+    ON 
     -- Une la tabla de años y meses con la tabla de inscripciones
     years.anio = inscripciones.anio AND months.mes = inscripciones.mes
-ORDER BY 
+    ORDER BY 
     years.anio,  -- Ordena por año
     months.mes;  -- Ordena por mes";
 

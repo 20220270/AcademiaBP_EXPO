@@ -219,15 +219,18 @@ const fillTable = async (form = null) => {
 
 const graficoPredictivoVentas = async () => {
     try {
-        // Petición para obtener los datos de ventas.
         const dataVentas = await fetchData(COMPRAS_API, 'ventasPredictGraph2');
 
         if (dataVentas.status) {
-            // Procesar los datos de ventas
             const data = dataVentas.dataset;
-            console.log(data);
 
-            // Llamada a la función para generar y mostrar un gráfico de barras para ventas.
+            // Calcular la suma de las ventas
+            const totalVentas = data.reduce((sum, row) => sum + parseFloat(row.total_ventas_mensual || 0), 0);
+
+            // Mostrar la suma en el label
+            document.querySelector("label[for='chartPredictionVentas']").textContent = `Total de ventas actual: $${totalVentas.toFixed(2)}`;
+
+            // Generar el gráfico
             barGraphVP('chartPredictionVentas', data, 'Ventas por año (USD $)');
 
         } else {
@@ -241,15 +244,18 @@ const graficoPredictivoVentas = async () => {
 
 const graficoPredictivoPerdidas = async () => {
     try {
-        // Petición para obtener los datos de pérdidas.
         const dataPerdidas = await fetchData(COMPRAS_API, 'ventasPredictGraph3');
 
         if (dataPerdidas.status) {
-            // Procesar los datos de pérdidas
             const data = dataPerdidas.dataset;
-            console.log(data);
 
-            // Llamada a la función para generar y mostrar un gráfico de barras para pérdidas.
+            // Calcular la suma de las pérdidas
+            const totalPerdidas = data.reduce((sum, row) => sum + parseFloat(row.total_ventas_anuladas_mensual || 0), 0);
+
+            // Mostrar la suma en el label
+            document.querySelector("label[for='chartPredictionPerdidas']").textContent = `Total de pérdidas actual: $${totalPerdidas.toFixed(2)}`;
+
+            // Generar el gráfico
             barGraphVP('chartPredictionPerdidas', data, 'Pérdidas por año (USD $)');
 
         } else {
@@ -263,15 +269,14 @@ const graficoPredictivoPerdidas = async () => {
 
 const graficoPredictivoVentasNextYear = async () => {
     try {
-        // Petición para obtener los datos de la proyección de ventas.
+        //Aquí hacemos la solicitud de los datos a la API
         const dataVentasNextYear = await fetchData(COMPRAS_API, 'ventasPredictGraph4');
 
         if (dataVentasNextYear.status) {
-            // Procesar los datos de ventas
             const data = dataVentasNextYear.dataset;
 
-            // Extraer los meses y proyecciones
             const months = data.map(row => {
+                // Se hace un switch case para cada més del año, los cuales también vienen incluidos en la consulta.
                 switch (row.mes) {
                     case 1: return 'Enero';
                     case 2: return 'Febrero';
@@ -288,9 +293,16 @@ const graficoPredictivoVentasNextYear = async () => {
                     default: return '';
                 }
             });
-            const projections = data.map(row => parseFloat(row.proyeccion_ventas_mensual || 0)); // Ajuste para el campo correspondiente y conversión a número
+            //Parseo de todos los datos obtenidos de la proyección a dato flotante
+            const projections = data.map(row => parseFloat(row.proyeccion_ventas_mensual || 0));
 
-            // Llamada a la función para generar y mostrar un gráfico de barras.
+            // Calcular la suma de la proyección de ventas
+            const totalProyeccionVentas = projections.reduce((sum, value) => sum + value, 0);
+
+            // Mostrar la suma en el label
+            document.querySelector("label[for='chartPredictionVentasNextYear']").textContent = `Proyección de Ventas del Próximo Año: $${totalProyeccionVentas.toFixed(2)}`;
+
+            // Generar el gráfico
             barGraph('chartPredictionVentasNextYear', months, projections, 'Proyección de ventas por mes (USD $)', 'Proyección de ventas para el próximo año');
             
         } else {
@@ -302,16 +314,15 @@ const graficoPredictivoVentasNextYear = async () => {
     }
 }
 
+//Función para la predicción de las pérdidas del próximo año
 const graficoPredictivoPerdidasNextYear = async () => {
     try {
-        // Petición para obtener los datos de la proyección de pérdidas.
+        //Aquí hacemos la solicitud de los datos a la API
         const dataPerdidasNextYear = await fetchData(COMPRAS_API, 'ventasPredictGraph5');
 
         if (dataPerdidasNextYear.status) {
-            // Procesar los datos de pérdidas
             const data = dataPerdidasNextYear.dataset;
 
-            // Extraer los meses y proyecciones
             const months = data.map(row => {
                 switch (row.mes) {
                     case 1: return 'Enero';
@@ -329,14 +340,20 @@ const graficoPredictivoPerdidasNextYear = async () => {
                     default: return '';
                 }
             });
-            const projections = data.map(row => parseFloat(row.proyeccion_ventas_anuladas_mensual || 0)); // Ajuste para el campo correspondiente y conversión a número
+            const projections = data.map(row => parseFloat(row.proyeccion_ventas_anuladas_mensual || 0));
 
-            // Llamada a la función para generar y mostrar un gráfico de barras.
+            // Calcular la suma de la proyección de pérdidas
+            const totalProyeccionPerdidas = projections.reduce((sum, value) => sum + value, 0);
+
+            // Mostrar la suma en el label
+            document.querySelector("label[for='chartPredictionPerdidasNextYear']").textContent = `Proyección de Pérdidas del Próximo Año: $${totalProyeccionPerdidas.toFixed(2)}`;
+
+            // Generar el gráfico
             barGraph('chartPredictionPerdidasNextYear', months, projections, 'Proyección de pérdidas por mes (USD $)', 'Proyección de pérdidas para el próximo año');
             
         } else {
             document.getElementById('chartPredictionPerdidasNextYear').remove();
-            console.log(dataPerdidasNextYear.error);
+            
         }
     } catch (error) {
         console.error('Error en la petición de datos:', error);
@@ -344,37 +361,53 @@ const graficoPredictivoPerdidasNextYear = async () => {
 }
 
 
+//Función para mostrar el total de inscripciones de alumnos registradas en la base de datos
 const graficoInscripcionesAlumnos = async () => {
     try {
-        // Petición para obtener los datos de nuevos alumnos.
         const dataNuevosAlumnos = await fetchData(ALUMNOS_API, 'alumnosPredictGraph2');
 
         if (dataNuevosAlumnos.status) {
-            // Procesar los datos de nuevos alumnos
             const data = dataNuevosAlumnos.dataset;
 
-            // Llamada a la función para generar y mostrar un gráfico de barras.
-            barGraphA('chartPrediction2', data, 'Inscripciones de alumnos registradas por año');
+            // Inspeccionar los datos para depuración
+            data.forEach(row => console.log(`Cantidad: ${row.total_inscripciones}`)); // Verificar cada valor de cantidad, desde el campo total_inscripciones
 
+            // Asegurarse de que cada valor es un número y calcular la suma
+            const sumaAlumnos = data.reduce((total, row) => {
+                const cantidad = parseFloat(row.total_inscripciones) || 0; // Validar y convertir a número
+                return total + cantidad;
+            }, 0);
+
+            document.querySelector("label[for='chartPrediction2']").textContent = `Total de inscripciones actuales: ${sumaAlumnos} inscripciones`;
+
+            // Generar y mostrar el gráfico de barras
+            barGraphA('chartPrediction2', data, 'Inscripciones de alumnos registradas por año');
         } else {
             document.getElementById('chartPrediction2').remove();
-            console.log(dataNuevosAlumnos.error);
         }
     } catch (error) {
         console.error('Error en la petición de datos:', error);
     }
 }
 
+
+
+//Función para la predicción de las inscripciones de alumnos para el próximo año
 const graficoPredictivoAlumnos = async () => {
     try {
-        // Petición para obtener los datos de la proyección de alumnos.
         const dataNuevosAlumnos3 = await fetchData(ALUMNOS_API, 'alumnosPredictGraph3');
 
         if (dataNuevosAlumnos3.status) {
-            // Procesar los datos de nuevos alumnos
             const data = dataNuevosAlumnos3.dataset;
 
-            // Extraer los meses y proyecciones
+            // Asegurarse de que cada valor es un número y calcular la suma
+            const sumaProyecciones = data.reduce((total, row) => {
+                const proyeccion = Number(row.Proyección) || 0; // Validar y convertir a número
+                return total + proyeccion;
+            }, 0);
+
+            document.querySelector("label[for='chartPrediction3']").textContent = `Inscripciones proyectadas: ${sumaProyecciones} nuevas inscripciones`;
+
             const months = data.map(row => {
                 switch (row.Mes) {
                     case 1: return 'Enero';
@@ -394,9 +427,7 @@ const graficoPredictivoAlumnos = async () => {
             });
             const projections = data.map(row => row.Proyección);
 
-            // Llamada a la función para generar y mostrar un gráfico de barras.
             barGraph('chartPrediction3', months, projections, 'Inscripciones proyectadas por mes', 'Proyección de inscripciones de alumnos para el próximo año');
-            
         } else {
             document.getElementById('chartPrediction3').remove();
             console.log(dataNuevosAlumnos3.error);
@@ -405,5 +436,3 @@ const graficoPredictivoAlumnos = async () => {
         console.error('Error en la petición de datos:', error);
     }
 }
-
-
