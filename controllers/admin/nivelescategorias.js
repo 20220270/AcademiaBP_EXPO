@@ -184,9 +184,6 @@ const fillTable = async (form = null) => {
                 <button type="button" class="btn btn-sm" onclick="openDelete(${row.id_nivel_entrenamiento})">
                     <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                 </button>
-                <button type="button" class="btn btn-sm" onclick="openGraph2(${row.id_nivel_entrenamiento})">
-                    <img src="../../resources/images/graph.png" alt="" width="30px" height="30px" class="mb-1">
-                </button>
             </div>
         </div>
     </div>

@@ -324,6 +324,7 @@ class ProductoHandler
     SELECT
         id_producto,  -- Identificador del producto
         ROUND(ventas_maximas * (1 + (5 - años_activos) / 5), 0) AS proyeccion_proximo_año  -- Proyección ajustada de ventas para el próximo año
+        -- A medida que los años_activos aumentan, el factor de crecimiento disminuye
     FROM
         tendencia_ventas
     )
