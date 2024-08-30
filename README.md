@@ -12,9 +12,10 @@ La Academia BP se destaca por brindar una experiencia emocionante y accesible pa
 #JavaScipt:
 * SCREAMING_SNAKE_CASE: Se utilizan en las constantes.
 * K&R Style (Kernighan and Ritchie): Se utiliza en la ubicación de los contenidos de if y else.
-* CamelCase: Se utilizan principalmente en los ID de los componentes y las funciones.
+* CamelCase: Se utilizan principalmente en los ID de los componentes, parametros y las funciones.
 
 #PHP:
+* SnakeCase: Se utiliza para identificar los nombres de los campos de la base
 * PascalCase: Se utilizan en el nombre de las clases
 * CamelCase: Se utilizan principalmente en las funciones.
-* alllowercase: Se utilizan principalmente en los atributos.
+* lowercase: Se utilizan principalmente en los atributos.
