@@ -204,6 +204,10 @@
     background-color: rgb(191, 5, 5);
 }
 
+.pendiente {
+    background-color: rgb(58, 58, 58);
+}
+
 @media (max-width: 768px) {
     .status-circle {
         width: 5vw;

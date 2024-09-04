@@ -31,6 +31,8 @@ const SAVE_FORM = document.getElementById('saveForm'),
     ENCARGADO_ALUMNO = document.getElementById('selectEncargado'),
     FOTO_aLUMNO = document.getElementById('fotoAlumno');
 
+// Variable para rastrear la vista actual
+    let isUsingReadAll2 = false;
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -39,6 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
     //MAIN_TITLE.textContent = 'Gestionar categorías';
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
+
+    document.getElementById('toggleViewBtn').addEventListener('click', () => {
+        isUsingReadAll2 = !isUsingReadAll2;
+        document.getElementById('toggleViewBtn').textContent = isUsingReadAll2 ? 'Filtrar por antigüedad' : 'Ver inscripciones pendientes';
+        fillTable(); // Recarga la tabla con la vista seleccionada
+    });
 });
 
 SEARCH_FORM.addEventListener('submit', (event) => {
@@ -75,7 +83,7 @@ const fillTable = async (form = null) => {
     // Se inicializa el contenido de la tabla.
     CARD_ALUMNOS.innerHTML = '';
     // Se verifica la acción a realizar.
-    const action = form ? 'searchRows' : 'readAll';
+    const action = form ? 'searchRows' : (isUsingReadAll2 ? 'readAll2' : 'readAll');
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(ALUMNOS_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -88,7 +96,7 @@ const fillTable = async (form = null) => {
             <div class="card h-100" id="carttr">
                 <div class="card-body text-start">
                     <!-- Círculo indicador del estado -->
-                    <div class="status-circle ${row.estado_alumno === 'Activo' ? 'activo' : 'inactivo'}"></div>
+                    <div class="status-circle ${row.estado_alumno === 'Activo' ? 'activo' : row.estado_alumno === 'Pendiente' ? 'pendiente' : 'inactivo'}"></div>
                     <img src="${SERVER_URL}images/alumnos/${row.foto_alumno}" class="rounded-circle" height="200px" width="200px">
                     <h5 class="card-title"><b>ID: </b>${row.id_alumno}</h5>
                     <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>

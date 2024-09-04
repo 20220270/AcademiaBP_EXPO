@@ -70,7 +70,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen alumnos registrados';
                 }
                 break;
-            /*case 'readAll2':
+            case 'readAll2':
                 if ($result['dataset'] = $alumno->readAll2()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
@@ -78,7 +78,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen alumnos registrados';
                 }
                 break;
-            case 'readAll3':
+            /*case 'readAll3':
                 if ($result['dataset'] = $alumno->readAll3()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
