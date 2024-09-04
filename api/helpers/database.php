@@ -96,6 +96,9 @@ class Database
             case '1045':
                 self::$error = 'Acceso denegado';
                 break;
+            case '45000':
+                self::$error = 'Se ha ingresado una cantidad mayor a las existencias disponibles';
+                break;
         }
     }
 

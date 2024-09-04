@@ -139,7 +139,7 @@ const openCreate = () => {
     document.getElementById('selectEstadopo').style.display = 'none';
     document.getElementById('selectCategoriaEncargadopo').style.display = 'none';
 
-    fillSelect(ALUMNOS_API, 'readAllDiasPago', 'selectDias');
+    fillSelect(ALUMNOS_API, 'readAllDiasPago2', 'selectDias');
     fillSelect(CLIENTES_API, 'readAll', 'selectEncargado');
     validarFechaNacimiento();
     

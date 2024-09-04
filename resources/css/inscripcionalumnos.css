@@ -37,7 +37,7 @@ body {
 }
 
 .container span {
-    font-size: 12px;
+    font-size: 10px;
     letter-spacing: 0.5px;
 }
 
@@ -73,7 +73,6 @@ body {
     margin: 8px 0;
     padding: 10px 0px;
     font-size: 12px;
-    font-size: 13px;
     outline: none;
     border-bottom: 1px solid #000000;
     background-color: transparent;
@@ -198,12 +197,12 @@ body {
 
     .container {
         background-color: #fff;
-        border-radius: 30px;
+        border-radius: 5px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
         position: relative;
         overflow: hidden;
         max-width: 100%;
-
+        min-height: 660px;
     }
 
 
@@ -214,7 +213,7 @@ body {
     }
 
     .container span {
-        font-size: 9px;
+        font-size: 8px;
         letter-spacing: 0.5px;
     }
 
@@ -234,6 +233,8 @@ body {
     .toggle-image {
         display: none;
     }
+
+
 }
 
 
@@ -256,7 +257,6 @@ body {
         position: relative;
         overflow: hidden;
         max-width: 100%;
-
     }
 
 
@@ -300,16 +300,16 @@ body {
 
     .container {
         background-color: #fff;
-        border-radius: 30px;
+        border-radius: 5px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
         position: relative;
         overflow: hidden;
         max-width: 100%;
-
+        min-height: 650px;
     }
 
     .container span {
-        font-size: 9.5px;
+        font-size: 8.5px;
         letter-spacing: 0.5px;
     }
 
@@ -326,7 +326,27 @@ body {
 
     .toggle-image {
         position: absolute;
-        transform: translateX(-20%);
+        transform: translate(-20%, 10%);
+    }
+
+    .toggle img {
+        width: 200px;
+        height: auto;
+    }
+
+    .toggle-container {
+        position: absolute;
+        top: 0;
+        left: 60%;
+        width: 40%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 130px 0 0 80px;
+    
+    }
+
+    #alumnoForm{
+        width: 125%;
     }
 }
 

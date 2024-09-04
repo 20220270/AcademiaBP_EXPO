@@ -114,66 +114,6 @@ class AlumnosHandler
         return Database::getRows($sql);
     }
 
-    /*public function readAll2()
-    {
-        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, fecha_nacimiento, foto_alumno, fecha_inscripcion,
-    TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad,
-    posicion_alumno, 
-    estado_alumno, 
-    categoria, 
-    CONCAT(nombre_staff, ' ', apellido_staff) AS 'Staff',
-    numero_dias, 
-    mensualidad_pagar,
-    CONCAT(nombre_cliente, ' ', apellido_cliente) AS 'Encargado' 
-    FROM 
-    tb_alumnos
-    LEFT JOIN 
-    tb_staffs_categorias USING (id_staff_categorias)
-    LEFT JOIN 
-    tb_categorias_horarios USING(id_categoria_horario)
-    LEFT JOIN 
-    tb_categorias_alumnos USING(id_categoria_alumno)
-    LEFT JOIN 
-    tb_staffs USING (id_staff)
-    LEFT JOIN 
-    tb_dias_pagos USING (id_dia_pago)
-    LEFT JOIN
-    tb_clientes USING(id_cliente)
-    ORDER BY 
-    fecha_inscripcion;";
-        return Database::getRows($sql);
-    }
-
-    public function readAll3()
-    {
-        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, fecha_nacimiento, foto_alumno, fecha_inscripcion,
-    TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad,
-    posicion_alumno, 
-    estado_alumno, 
-    categoria, 
-    CONCAT(nombre_staff, ' ', apellido_staff) AS 'Staff',
-    numero_dias, 
-    mensualidad_pagar,
-    CONCAT(nombre_cliente, ' ', apellido_cliente) AS 'Encargado' 
-    FROM 
-    tb_alumnos
-    LEFT JOIN 
-    tb_staffs_categorias USING (id_staff_categorias)
-    LEFT JOIN 
-    tb_categorias_horarios USING(id_categoria_horario)
-    LEFT JOIN 
-    tb_categorias_alumnos USING(id_categoria_alumno)
-    LEFT JOIN 
-    tb_staffs USING (id_staff)
-    LEFT JOIN 
-    tb_dias_pagos USING (id_dia_pago)
-    LEFT JOIN
-    tb_clientes USING(id_cliente)
-    ORDER BY 
-    edad;";
-        return Database::getRows($sql);
-    }*/
-
     public function readOne()
     {
         $sql = "SELECT id_alumno, nombre_alumno, apellido_alumno, fecha_nacimiento, posicion_alumno, id_staff_categorias, id_dia_pago, estado_alumno, id_cliente, CONCAT(nombre_alumno, ' ', apellido_alumno) AS Nombre
@@ -209,9 +149,17 @@ class AlumnosHandler
         return Database::getRows($sql);
     }
 
+    //Se vincula a una vista creada en la base de datos
     public function readAllDiasPago()
     {
-        $sql = "SELECT id_dia_pago, CONCAT(numero_dias, ' Días, $', mensualidad_pagar) AS 'dia_pago' FROM tb_dias_pagos;";
+        $sql = "SELECT * FROM vista_dias_pago;";
+        return Database::getRows($sql);
+    }
+
+    public function readAllDiasPago2()
+    {
+        $sql = "SELECT id_dia_pago, CONCAT(numero_dias, ' Días, $', mensualidad_pagar) AS 'dia_pago' 
+                FROM tb_dias_pagos";
         return Database::getRows($sql);
     }
 

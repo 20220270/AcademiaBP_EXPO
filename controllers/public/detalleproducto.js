@@ -115,6 +115,7 @@ SHOPPING_FORM.addEventListener('submit', async (event) => {
         sweetAlert(1, DATA.message, false, 'carrito.html');
     } else if (DATA.session) {
         sweetAlert(2, DATA.error, false);
+        sweetAlert(2, DATA.exception, false);
     } else {
         sweetAlert(3, DATA.error, true, 'login.html');
     }

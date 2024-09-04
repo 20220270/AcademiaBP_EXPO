@@ -42,6 +42,7 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'Producto agregado correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al agregar el producto';
+                    $result['exception'] = 'Se ha ingresado una cantidad mayor a las existencias disponibles';
                 }
                 break;
                 // Acción para obtener los productos agregados en el carrito de compras.
