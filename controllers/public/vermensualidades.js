@@ -35,7 +35,7 @@ const fillTable = async (id) => {
             // Iterar sobre cada fila de datos para construir las tarjetas de los alumnos
             rows.forEach(row => {
                 CARDS_PAGOS.innerHTML += `
-                    <div class="card mb-4 mt-4 mx-auto col-lg-5 col-md-12 col-sm-12 col-12 h-50" id="borderAlumnos">
+                    <div class="card mb-4 mt-4 mx-auto col-lg-5 col-md-8 col-sm-8 col-12 h-50" id="borderAlumnos">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-6">

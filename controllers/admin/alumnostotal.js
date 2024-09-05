@@ -10,7 +10,7 @@ const SEARCH_FORM = document.getElementById('searchForm');
 //ROWS_FOUND = document.getElementById('rowsFound');
 
 const CARD_ALUMNOS = document.getElementById('cardsAlumnos');
-
+const CARD_ALUMNOS2 = document.getElementById('cardsAlumnos2');
 //CARD_CATEGORIAS = document.getElementById('cardCategorias');
 // Constantes para establecer los elementos del componente Modal.
 
@@ -31,8 +31,6 @@ const SAVE_FORM = document.getElementById('saveForm'),
     ENCARGADO_ALUMNO = document.getElementById('selectEncargado'),
     FOTO_aLUMNO = document.getElementById('fotoAlumno');
 
-// Variable para rastrear la vista actual
-    let isUsingReadAll2 = false;
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -41,12 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //MAIN_TITLE.textContent = 'Gestionar categorías';
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
-
-    document.getElementById('toggleViewBtn').addEventListener('click', () => {
-        isUsingReadAll2 = !isUsingReadAll2;
-        document.getElementById('toggleViewBtn').textContent = isUsingReadAll2 ? 'Filtrar por antigüedad' : 'Ver inscripciones pendientes';
-        fillTable(); // Recarga la tabla con la vista seleccionada
-    });
+    fillTable2();
 });
 
 SEARCH_FORM.addEventListener('submit', (event) => {
@@ -83,7 +76,7 @@ const fillTable = async (form = null) => {
     // Se inicializa el contenido de la tabla.
     CARD_ALUMNOS.innerHTML = '';
     // Se verifica la acción a realizar.
-    const action = form ? 'searchRows' : (isUsingReadAll2 ? 'readAll2' : 'readAll');
+    const action = form ? 'searchRows' : 'readAll';
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(ALUMNOS_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -97,8 +90,55 @@ const fillTable = async (form = null) => {
                 <div class="card-body text-start">
                     <!-- Círculo indicador del estado -->
                     <div class="status-circle ${row.estado_alumno === 'Activo' ? 'activo' : row.estado_alumno === 'Pendiente' ? 'pendiente' : 'inactivo'}"></div>
-                    <img src="${SERVER_URL}images/alumnos/${row.foto_alumno}" class="rounded-circle" height="200px" width="200px">
-                    <h5 class="card-title"><b>ID: </b>${row.id_alumno}</h5>
+                    <img src="${SERVER_URL}images/alumnos/${row.foto_alumno}" class="rounded-circle mt-4 mx-5" height="150px" width="150px">
+                    <h5 class="card-title mt-4"><b>ID: </b>${row.id_alumno}</h5>
+                    <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
+                    <p class="card-text"><b>Encargado del alumno: </b>${row.Encargado}</p>
+                    <p class="card-text"><b>Fecha de nacimiento: </b>${row.fecha_nacimiento}<b> -- </b>${row.edad} años</p>
+                    <p class="card-text"><b>Posición del alumno: </b>${row.posicion_alumno}</p>
+                    <p class="card-text"><b>Número de días que entrena: </b>${row.numero_dias}</p>
+                    <p class="card-text"><b>Mensualidad que paga: </b>$${row.mensualidad_pagar}</p>
+                    <p class="card-text"><b>Categoría: </b>${row.categoria}</p>
+                    <p class="card-text"><b>Encargado de la categoría: </b>${row.Staff}</p>
+                    <p class="card-text"><small class="text-body-secondary">Inscrito desde: ${row.fecha_inscripcion}</small></p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <button type="button" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_alumno})">
+                            <img src="../../resources/images/btnEliminarIMG.png" alt="Eliminar" width="30px" height="30px" class="mb-1">
+                        </button>
+                        <button type="button" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_alumno})">
+                            <img src="../../resources/images/btnActualizarIMG.png" alt="Actualizar" width="30px" height="30px" class="mb-1">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            `;
+        });
+    } else {
+        sweetAlert(4, DATA.error, true);
+    }
+}
+
+const fillTable2 = async (form = null) => {
+    // Se inicializa el contenido de la tabla.
+    CARD_ALUMNOS2.innerHTML = '';
+    // Se verifica la acción a realizar.
+    const action = (form) ? 'searchRows' : 'readAll3';
+    // Petición para obtener los registros disponibles.
+    const DATA = await fetchData(ALUMNOS_API, action, form);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se recorre el conjunto de registros fila por fila.
+        DATA.dataset.forEach(row => {
+            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+            CARD_ALUMNOS2.innerHTML += `
+            <div class="col-12 col-md-12 mb-3" id="cardDiasPagos">
+            <div class="card h-100" id="carttr">
+                <div class="card-body text-start">
+                    <!-- Círculo indicador del estado -->
+                    <div class="status-circle ${row.estado_alumno === 'Activo' ? 'activo' : row.estado_alumno === 'Pendiente' ? 'pendiente' : 'inactivo'}"></div>
+                    <img src="${SERVER_URL}images/alumnos/${row.foto_alumno}" class="rounded-circle mt-4 mx-5" height="150px" width="150px">
+                    <h5 class="card-title mt-5"><b>ID: </b>${row.id_alumno}</h5>
                     <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
                     <p class="card-text"><b>Encargado del alumno: </b>${row.Encargado}</p>
                     <p class="card-text"><b>Fecha de nacimiento: </b>${row.fecha_nacimiento}<b> -- </b>${row.edad} años</p>
