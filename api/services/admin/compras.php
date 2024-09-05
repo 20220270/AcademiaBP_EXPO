@@ -43,6 +43,16 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+            case 'readAll3':
+                if (!$ordenes->setFecha($_POST['fechaCompra'])) {
+                    $result['error'] = $ordenes->getDataError();
+                } elseif ($result['dataset'] = $ordenes->readAll3()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Orden inexistente';
+                }
+                break;
+
             case 'readOne':
                 if (!$ordenes->setIdOrden($_POST['idCompra'])) {
                     $result['error'] = $ordenes->getDataError();

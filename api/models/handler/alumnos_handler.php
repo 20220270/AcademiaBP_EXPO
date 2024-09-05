@@ -158,7 +158,14 @@ class AlumnosHandler
 
     public function readAllDiasPago2()
     {
-        $sql = "SELECT id_dia_pago, CONCAT(numero_dias, ' Días, $', mensualidad_pagar) AS 'dia_pago' 
+        $sql = "SELECT 
+                id_dia_pago, 
+                CONCAT(
+                CASE 
+                    WHEN numero_dias < 2 THEN CONCAT(numero_dias, ' Día') -- Cuando el valor de numero_dias es menor a 2 (es decir que es 1), el texto que sigue al número es Día
+                    ELSE CONCAT(numero_dias, ' Días') -- Sino, el texto será Días 
+                END, 
+                ', $', mensualidad_pagar) AS dia_pago
                 FROM tb_dias_pagos";
         return Database::getRows($sql);
     }

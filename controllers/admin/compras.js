@@ -2,6 +2,7 @@ const COMPRAS_API = 'services/admin/compras.php';
 const PRODUCTOS_API = 'services/admin/productos.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
+const FILTER_FORM = document.getElementById('filterForm');
 // Constantes para establecer los elementos de la tabla.
 const TABLE_BODY = document.getElementById('tableBody');
 const ROWS_FOUND = document.getElementById('rowsFound');
@@ -22,6 +23,7 @@ const NOMBRE_PRODUCTO = document.getElementById('nombreProductoDetalle');
 const PRECIO_PRODUCTO = document.getElementById('precioProductoDetalle');
 const CANTIDAD_PRODUCTO = document.getElementById('cantidadProductoDetalle');
 const TOTAL_PAGADO = document.getElementById('TotalPagadoProductoDetalle');
+const FECHA_FILTRO = document.getElementById('fechaCompra');
 
 // Variable para rastrear la vista actual
 let isUsingReadAll2 = false;
@@ -40,6 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('toggleViewBtn').textContent = isUsingReadAll2 ? 'Filtrar por ID' : 'Filtrar por fecha de la compra';
         fillTable(); // Recarga la tabla con la vista seleccionada
     });
+});
+
+document.getElementById('fechaCompra').addEventListener('change', function() {
+    fillTable(); // Llama a fillTable al cambiar la fecha
 });
 
 // Método del evento para cuando se envía el formulario de buscar.
@@ -80,10 +86,24 @@ const fillTable = async (form = null) => {
     // Se inicializa el contenido de la tabla.
     ROWS_FOUND.textContent = '';
     TABLE_BODY.innerHTML = '';
-    // Se verifica la acción a realizar.
-    const action = form ? 'searchRows' : (isUsingReadAll2 ? 'readAll2' : 'readAll');
+
+    // Verificar si el input de fecha tiene un valor.
+    const fechaCompra = document.getElementById('fechaCompra').value;
+    let action;
+
+    if (fechaCompra) {
+        // Si hay una fecha seleccionada, usar 'readAll3' para filtrar por fecha.
+        action = 'readAll3';
+        form = new FormData();  // Crear un nuevo FormData si no existe uno
+        form.append('fechaCompra', fechaCompra);
+    } else {
+        // Si no hay fecha seleccionada, usar la acción según la lógica previa.
+        action = form ? 'searchRows' : (isUsingReadAll2 ? 'readAll2' : 'readAll');
+    }
+
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(COMPRAS_API, action, form);
+
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se recorre el conjunto de registros fila por fila.
@@ -119,6 +139,7 @@ const fillTable = async (form = null) => {
         sweetAlert(4, DATA.error, true);
     }
 };
+
 
 const openUpdate = async (id) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.

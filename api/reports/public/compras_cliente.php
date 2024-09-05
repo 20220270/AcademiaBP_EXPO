@@ -79,15 +79,15 @@ if (isset($_GET['idCompra'])) {
             $pdf->cell(153, 10, 'Total de la compra: ', 1, 0, 'L', 1);
             $pdf->cell(33, 10, '$' . number_format($totalCompra, 2, '.', ''), 1, 1, 'C', 1);
 
-
+            $pdf->output('I', 'factura_compra.pdf');
         } else {
-            $pdf->cell(0, 10, $pdf->encodeString('No hay compras para mostrar'), 1, 1);
+            print('No hay compras para mostrar');
         }
     } else {
-        $pdf->cell(0, 10, $pdf->encodeString('Compra incorrecta'), 1, 1);
+        print('Compra incorrecta');
     }
 } else {
-    $pdf->cell(0, 10, $pdf->encodeString('Debe seleccionar una compra'), 1, 1);
+    print('Debe seleccionar una compra');
 }
 // Se llama implícitamente al método footer() y se envía el documento al navegador web.
-$pdf->output('I', 'compras.pdf');
+

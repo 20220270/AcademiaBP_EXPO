@@ -3,3 +3,13 @@
     overflow-y: auto;
 }
 
+#filterForm {
+    max-width: 400px;
+    margin: auto;
+}
+
+#fechaCompra {
+    max-width: 100%;
+}
+
+
