@@ -118,6 +118,7 @@ if (isset($_GET['action'])) {
                             !$alumno->setIdStaffCategoria($_POST['selectCategoriaEncargado']) ||
                             !$alumno->setIdDiasPago($_POST['selectDias']) ||
                             !$alumno->setEstado($_POST['selectEstado']) ||
+                            !$alumno->setFechaInscripcion($_POST['fechaInscripcion']) ||
                             !$alumno->setIdCliente($_POST['selectEncargado']) ||
                             !$alumno->setFoto($_FILES['fotoAlumno'], $alumno->getFilename())
                         ) {

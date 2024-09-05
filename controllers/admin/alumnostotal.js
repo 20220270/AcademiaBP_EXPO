@@ -30,6 +30,7 @@ const SAVE_FORM = document.getElementById('saveForm'),
     ESTADO_ALUMNO = document.getElementById('selectEstado'),
     ENCARGADO_ALUMNO = document.getElementById('selectEncargado'),
     FOTO_aLUMNO = document.getElementById('fotoAlumno');
+    FECHA_INSCRIPCION = document.getElementById('fechaInscripcion');
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -90,7 +91,7 @@ const fillTable = async (form = null) => {
                 <div class="card-body text-start">
                     <!-- Círculo indicador del estado -->
                     <div class="status-circle ${row.estado_alumno === 'Activo' ? 'activo' : row.estado_alumno === 'Pendiente' ? 'pendiente' : 'inactivo'}"></div>
-                    <img src="${SERVER_URL}images/alumnos/${row.foto_alumno}" class="rounded-circle mt-4 mx-5" height="150px" width="150px">
+                    <img src="${SERVER_URL}images/alumnos/${row.foto_alumno}" class="rounded-circle mt-4 mx-3" height="150px" width="150px">
                     <h5 class="card-title mt-4"><b>ID: </b>${row.id_alumno}</h5>
                     <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
                     <p class="card-text"><b>Encargado del alumno: </b>${row.Encargado}</p>
@@ -137,7 +138,7 @@ const fillTable2 = async (form = null) => {
                 <div class="card-body text-start">
                     <!-- Círculo indicador del estado -->
                     <div class="status-circle ${row.estado_alumno === 'Activo' ? 'activo' : row.estado_alumno === 'Pendiente' ? 'pendiente' : 'inactivo'}"></div>
-                    <img src="${SERVER_URL}images/alumnos/${row.foto_alumno}" class="rounded-circle mt-4 mx-5" height="150px" width="150px">
+                    <img src="${SERVER_URL}images/alumnos/${row.foto_alumno}" class="rounded-circle mt-4 mx-4" height="150px" width="150px">
                     <h5 class="card-title mt-5"><b>ID: </b>${row.id_alumno}</h5>
                     <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
                     <p class="card-text"><b>Encargado del alumno: </b>${row.Encargado}</p>
@@ -172,6 +173,7 @@ const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
     MODAL_TITLE.textContent = 'Registrar alumno';
+
     // Se prepara el formulario.
     SAVE_FORM.reset();
 
@@ -179,10 +181,12 @@ const openCreate = () => {
     document.getElementById('selectEstadopo').style.display = 'none';
     document.getElementById('selectCategoriaEncargadopo').style.display = 'none';
 
+    // Ocultar el campo de fecha de inscripción en el modo de creación
+    document.getElementById('fechaInscripcionContainer').style.display = 'none';
+
     fillSelect(ALUMNOS_API, 'readAllDiasPago2', 'selectDias');
     fillSelect(CLIENTES_API, 'readAll', 'selectEncargado');
     validarFechaNacimiento();
-    
 }
 
 function validarFechaNacimiento() {
@@ -199,15 +203,19 @@ const openUpdate = async (id) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idAlumno', id);
+    
     // Petición para obtener los datos del registro solicitado.
     const DATA = await fetchData(ALUMNOS_API, 'readOne', FORM);
+    
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
         MODAL_TITLE.textContent = 'Actualizar datos del alumno';
+        
         // Se prepara el formulario.
         SAVE_FORM.reset();
+        
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
         ID_ALUMNO.value = ROW.id_alumno;
@@ -215,9 +223,13 @@ const openUpdate = async (id) => {
         APELLIDO_ALUMNO.value = ROW.apellido_alumno;
         FECHA_NACIMIENTO.value = ROW.fecha_nacimiento;
         POSICION_ALUMNO.value = ROW.posicion_alumno;
+        FECHA_INSCRIPCION.value = ROW.fecha_inscripcion
 
         document.getElementById('selectEstadopo').style.display = 'block';
-    document.getElementById('selectCategoriaEncargadopo').style.display = 'block';
+        document.getElementById('selectCategoriaEncargadopo').style.display = 'block';
+        
+        // Hacer visible el campo de fecha de inscripción en el modo de actualización
+        document.getElementById('fechaInscripcionContainer').style.display = 'block';
 
         fillSelect(ALUMNOS_API, 'readAllStaffCategorias', 'selectCategoriaEncargado', ROW.id_staff_categorias);
         fillSelect(ALUMNOS_API, 'readAllDiasPago', 'selectDias', ROW.id_dia_pago);

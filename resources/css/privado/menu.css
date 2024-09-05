@@ -12,7 +12,7 @@ body {
     flex-direction: column;
     overflow-y: auto;
     overflow-x: auto;
-    max-height: 710px;
+    max-height: 670px;
 }
 
 #calendar {

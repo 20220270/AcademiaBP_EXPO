@@ -231,6 +231,10 @@ margin-top: 230px;
   color: white;
 }
 
+.nav-link{
+  font-size: 12px;
+}
+
 
   @media (max-width: 360px) {
 

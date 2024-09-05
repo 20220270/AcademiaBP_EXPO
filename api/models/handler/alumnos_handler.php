@@ -19,6 +19,7 @@ class AlumnosHandler
     protected $estado = null;
     protected $idcliente = null;
     protected $foto = null;
+    protected $fechainscripcion = null;
 
     const RUTA_IMAGEN = '../../images/alumnos/';
 
@@ -148,7 +149,7 @@ class AlumnosHandler
 
     public function readOne()
     {
-        $sql = "SELECT id_alumno, nombre_alumno, apellido_alumno, fecha_nacimiento, posicion_alumno, id_staff_categorias, id_dia_pago, estado_alumno, id_cliente, CONCAT(nombre_alumno, ' ', apellido_alumno) AS Nombre
+        $sql = "SELECT id_alumno, nombre_alumno, apellido_alumno, fecha_nacimiento, posicion_alumno, id_staff_categorias, id_dia_pago, estado_alumno, id_cliente, CONCAT(nombre_alumno, ' ', apellido_alumno) AS Nombre, fecha_inscripcion
         FROM tb_alumnos
         WHERE id_alumno = ?";
         $params = array($this->id);
@@ -158,9 +159,9 @@ class AlumnosHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_alumnos
-                SET foto_Alumno = ?, nombre_alumno = ?, apellido_alumno = ?, fecha_nacimiento = ?, posicion_alumno = ?, id_staff_categorias = ?, id_dia_pago = ?, estado_alumno = ?, id_cliente = ?
+                SET foto_Alumno = ?, nombre_alumno = ?, apellido_alumno = ?, fecha_nacimiento = ?, posicion_alumno = ?, id_staff_categorias = ?, id_dia_pago = ?, estado_alumno = ?, id_cliente = ?, fecha_inscripcion = ?
                 WHERE id_alumno = ?';
-        $params = array($this->foto, $this->nombre, $this->apellido, $this->fechanacimiento, $this->posicion, $this->idstaffcategoria, $this->ididaspago, $this->estado, $this->idcliente, $this->id);
+        $params = array($this->foto, $this->nombre, $this->apellido, $this->fechanacimiento, $this->posicion, $this->idstaffcategoria, $this->ididaspago, $this->estado, $this->idcliente, $this->fechainscripcion, $this->id);
         return Database::executeRow($sql, $params);
     }
 

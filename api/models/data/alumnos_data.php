@@ -145,6 +145,17 @@ class AlumnosData extends AlumnosHandler
         }
     }
 
+    public function setFechaInscripcion($value)
+    {
+        if (Validator::validateDate($value)) {
+            $this->fechainscripcion = $value;
+            return true;
+        } else {
+            $this->data_error = 'La fecha de inscripcion es incorrecta';
+            return false;
+        }
+    }
+
     public function setFilename()
     {
         if ($data = $this->readFilename()) {
