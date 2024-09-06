@@ -4,6 +4,7 @@ CREATE DATABASE academiabp_db;
 
 USE academiabp_db;
 
+------------------------------------------------------------
 -- niveles de usuario
 CREATE TABLE tb_niveles_administradores(
 id_nivel INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -14,6 +15,8 @@ INSERT INTO tb_niveles_administradores (nivel) VALUES('Administrador'), ('Trabaj
 
 ALTER TABLE tb_niveles_administradores ADD CONSTRAINT u_nivel UNIQUE (nivel);
 
+
+------------------------------------------------------------
 -- administradores
 CREATE TABLE tb_administradores(
     id_administrador INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -41,7 +44,7 @@ ALTER TABLE tb_administradores ADD CONSTRAINT u_dui_admin UNIQUE(dui_administrad
 ALTER TABLE tb_administradores ADD CONSTRAINT u_correo_admin UNIQUE(correo_administrador);
 ALTER TABLE tb_administradores ADD CONSTRAINT u_telefono_admin UNIQUE(telefono_administrador);
 ALTER TABLE tb_administradores ADD CONSTRAINT u_alias_admin UNIQUE(alias_administrador);
------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO tb_administradores (nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, id_nivel, fecha_registro, estado_adminstrador) VALUES
 
@@ -55,7 +58,7 @@ INSERT INTO tb_administradores (nombre_admistrador, apellido_administrador, dui_
 ('Pablo', 'Gómez', '89012345-8', 'pablo@example.com', '89012345', 'pablito', 'clavepqr', 1, NOW(), 'Activo'),
 ('Elena', 'Fernández', '23456789-0', 'elena@example.com', '23456789', 'elenita', 'clavestu', 2, NOW(), 'Activo');
 
-
+------------------------------------------------------------
 -- categorias de productos
 CREATE TABLE tb_categorias_productos(
 id_categoria_producto INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -65,21 +68,21 @@ imagen_categoria VARCHAR(100) NOT NULL
 
 ALTER TABLE tb_categorias_productos ADD CONSTRAINT U_categoriaaa UNIQUE(categoria_producto);
 
-
+------------------------------------------------------------
 CREATE TABLE tb_tallas(
 id_talla INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 talla VARCHAR(20) NOT NULL
 );
 ALTER TABLE tb_tallas ADD CONSTRAINT U_talla UNIQUE(talla);
 
-
+------------------------------------------------------------
 CREATE TABLE tb_colores(
 id_color INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 color VARCHAR(40) NOT NULL
 );
 ALTER TABLE tb_colores ADD CONSTRAINT U_color UNIQUE(color);
 
-
+------------------------------------------------------------
 -- productos
 CREATE TABLE tb_productos(
 id_producto INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -109,6 +112,7 @@ ALTER TABLE tb_productos ADD CONSTRAINT ch_precio CHECK(precio_producto > 0);
 ALTER TABLE tb_productos ADD CONSTRAINT ch_descuento CHECK(descuento_producto < 100 && descuento_producto >= 0);
 ALTER TABLE tb_productos ADD CONSTRAINT u_producto UNIQUE(nombre_producto);
 
+------------------------------------------------------------
 CREATE TABLE tb_detalleProducto(
 id_detalle_producto INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 id_producto INT NOT NULL,
@@ -138,7 +142,6 @@ ADD CONSTRAINT unique_producto_talla_color UNIQUE (id_producto, id_talla, id_col
 
 --------------------------------
 
--- Botellas
 
 -- tabla para los valores de la Academia
 CREATE TABLE tb_valores(
@@ -150,6 +153,7 @@ imagen_valor VARCHAR(100) NOT NULL
 
 alter table tb_valores add constraint U_nombre UNIQUE(nombre_valor);
 
+------------------------------------------------------------
 -- tabla para los aliados que tenga la Academia
 CREATE TABLE tb_aliados(
 id_aliado INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -159,6 +163,7 @@ imagen_aliado VARCHAR(100) NOT NULL
 
 alter table tb_aliados add constraint U_aliado UNIQUE(nombre_aliado);
 
+------------------------------------------------------------
 -- staff, o personal, de la academia
 CREATE TABLE tb_staffs(
 id_staff INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -180,6 +185,8 @@ INSERT INTO tb_staffs (nombre_staff, apellido_staff, descripcion_extra, imagen_s
 ('Lucas', 'Rivera', 'Especialista en acondicionamiento físico y entrenamiento de fuerza para deportistas.', 'imagen.png'),
 ('Eduardo', 'Quintanilla', 'Entrenadora personal con enfoque en pérdida de peso y mejora de la salud general.', 'imagen.png');
 
+
+------------------------------------------------------------
 CREATE TABLE tb_niveles_entrenamientos(
 id_nivel_entrenamiento INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 nivel_entrenamiento VARCHAR(100) NOT NULL,
@@ -187,10 +194,9 @@ descripcion_nivel VARCHAR(500) NOT NULL,
 imagen_nivel VARCHAR(100) NOT NULL
 );
 
-
-
 ALTER TABLE tb_niveles_entrenamientos ADD CONSTRAINT U_nivelentrenamiento UNIQUE(nivel_entrenamiento);
 
+------------------------------------------------------------
 CREATE TABLE tb_horarios_entrenamientos(
 id_horario INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 dia_entrenamiento ENUM('Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo') NOT NULL,
@@ -200,6 +206,7 @@ hor_fin TIME NOT NULL
 
 ALTER TABLE tb_horarios_entrenamientos ADD CONSTRAINT ch_horarios CHECK (hora_inicio < hor_fin);
 
+------------------------------------------------------------
 CREATE TABLE tb_lugares_entrenamientos(
 id_lugar INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 nombre_lugar VARCHAR(200) NOT NULL,
@@ -223,7 +230,7 @@ CREATE TABLE tb_horarios_lugares (
         ON DELETE CASCADE
 );
 
-
+------------------------------------------------------------
 
 
 CREATE TABLE tb_dias_pagos(
@@ -232,23 +239,25 @@ numero_dias INT NOT NULL,
 mensualidad_pagar DECIMAL(8, 2) NOT NULL
 );
 
-ALTER TABLE tb_dias_pagos ADD CONSTRAINT U_numerodias UNIQUE(numero_dias);
-ALTER TABLE tb_dias_pagos ADD CONSTRAINT ch_mensualidad CHECK(mensualidad_pagar > 1);
+ALTER TABLE tb_dias_pagos ADD CONSTRAINT ch_mensualidad CHECK(mensualidad_pagar >= 0);
 ALTER TABLE tb_dias_pagos ADD CONSTRAINT ch_dias CHECK(numero_dias > 0);
 
+
+
+------------------------------------------------------------
 -- categorias de alumnos
 CREATE TABLE tb_categorias_alumnos(
 id_categoria_alumno INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 categoria VARCHAR(30) NOT NULL,
 edad_maxima INT NOT NULL, -- Edad máxima para estar en una categoría
 id_nivel_entrenamiento INT NOT NULL,
-id_horario_lugar INT NOT NULL,
 imagen_categoria VARCHAR(100) NOT NULL
 );
 ALTER TABLE tb_categorias_alumnos ADD edad_minima INT NOT NULL;
 
 
 ALTER TABLE tb_categorias_alumnos ADD CONSTRAINT ch_eddad CHECK(edad_maxima > 0);
+ALTER TABLE tb_categorias_alumnos ADD CONSTRAINT ch_eddadd CHECK(edad_minima > 0 AND edad_minima < edad_maxima);
 ALTER TABLE tb_categorias_alumnos ADD CONSTRAINT U_cate UNIQUE(categoria);
 
 ALTER TABLE tb_categorias_alumnos ADD CONSTRAINT fk_nivel_entrenamiento_categoria 
@@ -256,17 +265,33 @@ FOREIGN KEY (id_nivel_entrenamiento) REFERENCES tb_niveles_entrenamientos(id_niv
 ON UPDATE CASCADE 
 ON DELETE CASCADE;
 
-ALTER TABLE tb_categorias_alumnos ADD CONSTRAINT fk_horario_lugar_categoria 
+
+
+------------------------------------------------------------
+
+CREATE TABLE tb_categorias_horarios(
+    id_categoria_horario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_categoria_alumno INT NOT NULL,
+    id_horario_lugar INT NOT NULL
+);
+
+ALTER TABLE tb_categorias_horarios ADD CONSTRAINT fk_categoria_alumnooos 
+FOREIGN KEY (id_categoria_alumno) REFERENCES tb_categorias_alumnos(id_categoria_alumno) 
+ON UPDATE CASCADE 
+ON DELETE CASCADE;
+
+ALTER TABLE tb_categorias_horarios ADD CONSTRAINT fk_categoria_horariooo 
 FOREIGN KEY (id_horario_lugar) REFERENCES tb_horarios_lugares(id_horario_lugar) 
 ON UPDATE CASCADE 
 ON DELETE CASCADE;
 
+------------------------------------------------------------
 
 
 CREATE TABLE tb_staffs_categorias(
     id_staff_categorias INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     id_staff INT NOT NULL,
-    id_categoria_alumno INT NOT NULL
+    id_categoria_horario INT NOT NULL
 );
 
 
@@ -277,11 +302,13 @@ ON UPDATE CASCADE
 ON DELETE CASCADE;
 
 ALTER TABLE tb_staffs_categorias ADD CONSTRAINT fk_categoria_alumno 
-FOREIGN KEY (id_categoria_alumno) REFERENCES tb_categorias_alumnos(id_categoria_alumno) 
+FOREIGN KEY (id_categoria_horario) REFERENCES tb_categorias_horarios(id_categoria_horario) 
 ON UPDATE CASCADE 
 ON DELETE CASCADE;
 
 
+
+------------------------------------------------------------
 -- clientes de la tienda en linea
 CREATE TABLE tb_clientes(
 id_cliente INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -303,7 +330,7 @@ foto_cliente VARCHAR(200) NULL
 ALTER TABLE tb_clientes ADD CONSTRAINT u_dui_cliente UNIQUE(dui_cliente);
 ALTER TABLE tb_clientes ADD CONSTRAINT u_correo_cliente UNIQUE(correo_cliente);
 ALTER TABLE tb_clientes ADD CONSTRAINT u_telefono_cliente UNIQUE(telefono_cliente);
-------------------------------
+
 
 INSERT INTO tb_clientes (nombre_cliente, apellido_cliente, dui_cliente, correo_cliente, telefono_cliente, direccion_cliente, clave_cliente, estado_cliente, fecha_registro, foto_cliente) VALUES
 ('María', 'López', '12345678-9', 'maria@example.com', '78901234', 'Calle Principal #123', 'clave123', 'Activo', NOW(), 'maria_foto.jpg'),
@@ -319,6 +346,7 @@ INSERT INTO tb_clientes (nombre_cliente, apellido_cliente, dui_cliente, correo_c
 ('Diego', 'González', '01234567-8', 'diego@example.com', '90123456', 'Avenida Principal #7890', 'clavevwx', 'Activo', NOW(), 'diego_foto.jpg'),
 ('Lucía', 'Martín', '09876543-2', 'lucia@example.com', '01234567', 'Calle Principal #8901', 'claveyz', 'Activo', NOW(), 'lucia_foto.jpg');
 
+------------------------------------------------------------------------------------------
 
 -- alumnos
 CREATE TABLE tb_alumnos(
@@ -330,9 +358,12 @@ posicion_alumno ENUM('Portero', 'Jugador de campo') NOT NULL,
 id_staff_categorias INT,
 id_dia_pago INT NOT NULL,
 id_cliente INT NOT NULL,
-estado_alumno ENUM('Activo', 'Inactivo') NOT NULL DEFAULT('Activo')
+estado_alumno ENUM('Activo', 'Inactivo', 'Pendiente') NOT NULL DEFAULT('Pendiente')
 -- id_dia_entreno INT NOT NULL
 );
+ALTER TABLE tb_alumnos ADD foto_alumno VARCHAR(200) NULL DEFAULT 'alumno.png';
+ALTER TABLE tb_alumnos ADD fecha_inscripcion DATE NOT NULL DEFAULT NOW();
+
 
 
 ALTER TABLE tb_alumnos ADD CONSTRAINT fk_alumno_categoria FOREIGN KEY(id_staff_categorias) REFERENCES tb_staffs_categorias(id_staff_categorias)
@@ -348,6 +379,15 @@ ON UPDATE CASCADE;
 ALTER TABLE tb_alumnos
 ADD CONSTRAINT check_fecha_nacimiento CHECK (fecha_nacimiento <= CURDATE());
 
+
+------------------------------------------------------------------------------------------
+-- CREATE TABLE tb_alumnos_categorias(
+-- id_alumno_categoria INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+-- id_alumno INT NOT NULL,
+-- id_staff_categorias INT NOT NULL
+-- );
+------------------------------------------------------------------------------------------
+
 -- compras que se realicen
 CREATE TABLE tb_compras(
 id_compra INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -362,6 +402,7 @@ ALTER TABLE tb_compras ADD CONSTRAINT fk_pedido_cliente FOREIGN KEY(id_cliente) 
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 
+------------------------------------------------------------------------------------------
 
 -- detalles de cada compra
 CREATE TABLE tb_detalles_compras(
@@ -397,6 +438,8 @@ INSERT INTO tb_detalles_compras (id_compra, id_detalle_producto, cantidad_produc
 
 SELECT * FROM tb_detalles_compras;
 
+------------------------------------------------------------------------------------------
+
         
 -- valoracion de los productos comprados
 CREATE TABLE tb_valoraciones(
@@ -407,14 +450,6 @@ comentario_producto varchar(250) NULL,
 fecha_valoracion DATE NOT NULL DEFAULT NOW(),
 estado_comentario ENUM("Habilitado", "Deshabilitado") NOT NULL
 );
-
-SELECT id_valoracion, nombre_producto, comentario_producto, calificacion_producto, nombre_cliente, apellido_cliente, fecha_valoracion from tb_valoraciones
-        INNER JOIN tb_detalles_compras USING(id_detalle_compra)
-        INNER JOIN tb_compras USING(id_compra)
-       INNER JOIN tb_detalleProducto USING(id_detalle_producto) 
-       INNER JOIN tb_productos USING(id_producto)
-       INNER JOIN tb_clientes USING(id_cliente)
-        where id_producto = 1 AND estado_comentario = "Habilitado";
         
 
 ALTER TABLE tb_valoraciones ADD CONSTRAINT fk_orden_valoracion FOREIGN KEY (id_detalle_compra) REFERENCES tb_detalles_compras(id_detalle_compra)
@@ -429,7 +464,7 @@ INSERT INTO tb_valoraciones (id_detalle_compra, calificacion_producto, comentari
 (3, 3, 'Regular, podría mejorar.', NOW(), 'Deshabilitado'),
 (4, 5, 'Producto de calidad.', NOW(), 'Habilitado');
 
-
+------------------------------------------------------------------------------------------
 
 -- pagos de mensualidad
 CREATE TABLE tb_pagos (
@@ -450,6 +485,7 @@ ALTER TABLE tb_pagos ADD CONSTRAINT ch_cuotasAn CHECK(cuotas_anuales >= 0);
 ALTER TABLE tb_pagos ADD CONSTRAINT ch_cuotasAnn CHECK(cuotas_anuales < 13);
 ALTER TABLE tb_pagos ADD CONSTRAINT cuotasPe CHECK(cuotas_pendientes >= 0);
 
+------------------------------------------------------------------------------------------
 
 -- detalles de cada pago
 CREATE TABLE tb_detalles_pagos(
@@ -465,6 +501,7 @@ ON UPDATE CASCADE;
 
 ALTER TABLE tb_detalles_pagos ADD estado_proximo_pago ENUM('Pendiente de pago', 'Pagado') NOT NULL DEFAULT ('Pendiente de pago');
 
+------------------------------------------------------------------------------------------
 
 -- soporte tecnico
 CREATE TABLE tb_soporte_tecnico(
