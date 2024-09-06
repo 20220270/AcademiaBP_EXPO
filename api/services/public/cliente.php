@@ -18,11 +18,13 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
             case 'getUser':
-                if (isset($_SESSION['correoCliente'])) {
+                if (isset($_SESSION['nombreCliente']) && isset($_SESSION['apellidoCliente'])) {
                     $result['status'] = 1;
-                    $result['username'] = $_SESSION['correoCliente'];
+                    $result['nombre'] = $_SESSION['nombreCliente'];
+                    $result['apellido'] = $_SESSION['apellidoCliente'];
+                    $result['username'] = $_SESSION['nombreCliente'] . ' ' . $_SESSION['apellidoCliente'];
                 } else {
-                    $result['error'] = 'Correo de usuario indefinido';
+                    $result['error'] = 'Nombre de usuario indefinido';
                 }
                 break;
             case 'logOut':
@@ -87,7 +89,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                case 'readAllPagos':
+            case 'readAllPagos':
                 if ($result['dataset'] = $detallemensualidad->readAllPagos()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
@@ -95,6 +97,35 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen detalles de pagos registrados';
                 }
                 break;
+
+                //Evitamos el error de acción no disponible dentro de la sesión
+            case 'logIn':
+                $_POST = Validator::validateForm($_POST);
+                if (!$cliente->checkUser($_POST['correoCliente'], $_POST['claveCliente'])) {
+                    $result['error'] = 'Datos incorrectos';
+                } else {
+                    // Establece el ID del cliente antes de verificar el estado.
+                    $cliente->setId($cliente->getIdByEmail($_POST['correoCliente']));
+
+                    // Verificamos el estado del cliente.
+                    if ($cliente->checkStatus()) {
+                        // Configura la sesión ya que el estado es activo.
+                        $_SESSION['idCliente'] = $cliente->getIdByEmail($_POST['correoCliente']);
+                        $_SESSION['correoCliente'] = $_POST['correoCliente'];
+
+                        // Recupera el nombre y apellido del cliente y lo guarda en la sesión.
+                        $perfil = $cliente->readProfile();
+                        $_SESSION['nombreCliente'] = $perfil['nombre_cliente']; //Asignamos el nombre del cliente
+                        $_SESSION['apellidoCliente'] = $perfil['apellido_cliente']; //Asignamos el apellido del cliente
+
+                        $result['status'] = 1;
+                        $result['message'] = 'Autenticación correcta';
+                    } else {
+                        $result['error'] = 'La cuenta ha sido desactivada';
+                    }
+                }
+                break;
+
 
 
             default:
@@ -174,13 +205,19 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Datos incorrectos';
                 } else {
                     // Establece el ID del cliente antes de verificar el estado.
-                    $cliente->setId($cliente->getIdByEmail($_POST['correoCliente'])); // Suponiendo que getIdByEmail obtiene el ID del cliente usando el correo.
+                    $cliente->setId($cliente->getIdByEmail($_POST['correoCliente']));
 
-                    // Ahora verificamos el estado del cliente.
+                    // Verificamos el estado del cliente.
                     if ($cliente->checkStatus()) {
                         // Configura la sesión ya que el estado es activo.
                         $_SESSION['idCliente'] = $cliente->getIdByEmail($_POST['correoCliente']);
                         $_SESSION['correoCliente'] = $_POST['correoCliente'];
+
+                        // Recupera el nombre y apellido del cliente y lo guarda en la sesión.
+                        $perfil = $cliente->readProfile();
+                        $_SESSION['nombreCliente'] = $perfil['nombre_cliente']; //Asignamos el nombre del cliente
+                        $_SESSION['apellidoCliente'] = $perfil['apellido_cliente']; //Asignamos el apellido del cliente
+
                         $result['status'] = 1;
                         $result['message'] = 'Autenticación correcta';
                     } else {
