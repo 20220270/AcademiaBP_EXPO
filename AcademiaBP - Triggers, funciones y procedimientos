@@ -1,6 +1,3 @@
--- Trigger y procedimientos
-
--- Triggers para asignar el precio del producto, y actualizar las existencias del producto
 DELIMITER //
 
 CREATE TRIGGER before_insert_detalles_compras
@@ -51,7 +48,8 @@ END
 
 DELIMITER ;
 
--- Triggers para asignar una categoria a un alumno a partir de su edad
+-- Procedimiento para asignar una categoria a un alumno a partir de su edad
+
 DELIMITER //
 
 CREATE PROCEDURE sp_insert_alumno(
@@ -60,7 +58,8 @@ CREATE PROCEDURE sp_insert_alumno(
     IN p_fecha_nacimiento DATE,
     IN p_posicion_alumno ENUM('Portero', 'Jugador de campo'),
     IN p_id_dia_pago INT,
-    IN p_id_cliente INT
+    IN p_id_cliente INT,
+    IN p_foto_alumno VARCHAR(200)
 )
 BEGIN
     DECLARE edad INT;
@@ -68,8 +67,8 @@ BEGIN
     DECLARE new_id_alumno INT;
 
     -- Insertar el nuevo alumno
-    INSERT INTO tb_alumnos(nombre_alumno, apellido_alumno, fecha_nacimiento, posicion_alumno, id_dia_pago, id_cliente)
-    VALUES(p_nombre_alumno, p_apellido_alumno, p_fecha_nacimiento, p_posicion_alumno, p_id_dia_pago, p_id_cliente);
+    INSERT INTO tb_alumnos(nombre_alumno, apellido_alumno, fecha_nacimiento, posicion_alumno, id_dia_pago, id_cliente, foto_alumno)
+    VALUES(p_nombre_alumno, p_apellido_alumno, p_fecha_nacimiento, p_posicion_alumno, p_id_dia_pago, p_id_cliente, p_foto_alumno);
 
     -- Obtener el ID del nuevo alumno insertado
     SET new_id_alumno = LAST_INSERT_ID();
@@ -80,8 +79,9 @@ BEGIN
     -- Buscar el id_categoria que contenga la edad del alumno
     SELECT sc.id_staff_categorias INTO id_categoria
     FROM tb_staffs_categorias sc
-    JOIN tb_categorias_alumnos ca ON sc.id_categoria_alumno = ca.id_categoria_alumno
-    WHERE edad >= ca.edad_minima AND edad <= ca.edad_maxima
+    JOIN tb_categorias_horarios ca ON sc.id_categoria_horario = ca.id_categoria_horario
+     JOIN tb_categorias_alumnos cal ON ca.id_categoria_alumno = cal.id_categoria_alumno
+    WHERE edad >= cal.edad_minima AND edad <= cal.edad_maxima
     LIMIT 1;
 
     -- Actualizar el registro del alumno con el id_categoria encontrado
@@ -91,6 +91,8 @@ BEGIN
 END//
 
 DELIMITER ;
+
+SELECT * FROM tb_staffs_categorias
 
 
 DELIMITER //
@@ -190,3 +192,110 @@ END//
 
 DELIMITER ;
 
+
+CREATE VIEW vista_dias_pago AS
+SELECT 
+    id_dia_pago, 
+    CONCAT(
+        CASE 
+            WHEN numero_dias < 2 THEN CONCAT(numero_dias, ' Día') -- Cuando el valor de numero_dias es menor a 2 (es decir que es 1), el texto que sigue al número es Día
+            ELSE CONCAT(numero_dias, ' Días') -- Sino, el texto será Días 
+        END, 
+        ', $', mensualidad_pagar
+    ) AS dia_pago
+FROM tb_dias_pagos
+WHERE mensualidad_pagar > 0;
+
+DELIMITER ;
+
+-- Trigger para actualizar la cantidad de existencias cuando el cliente actualice la cantidad de productos adquiridos.
+DELIMITER //
+ CREATE TRIGGER trg_update_detalle AFTER UPDATE ON tb_detalles_compras FOR EACH ROW BEGIN
+
+    DECLARE v_existencias_producto INT;
+
+    DECLARE v_cantidad_anterior INT;
+
+    DECLARE v_diferencia INT;
+
+
+
+    -- Obtener la cantidad anterior del detalle
+
+    SET v_cantidad_anterior = OLD.cantidad_producto;
+
+
+
+    -- Calcular la diferencia entre la cantidad nueva y la anterior
+
+    SET v_diferencia = NEW.cantidad_producto - v_cantidad_anterior;
+
+
+
+    -- Obtener las existencias actuales del producto
+
+    SELECT existencias_producto 
+
+    INTO v_existencias_producto
+
+    FROM tb_detalleProducto
+
+    WHERE id_detalle_producto = NEW.id_detalle_producto;
+
+
+
+    -- Validar que la nueva cantidad no reduzca las existencias a un número negativo
+
+    IF (v_existencias_producto - v_diferencia) < 0 THEN
+
+        SIGNAL SQLSTATE '45000'
+
+        SET MESSAGE_TEXT = 'No hay suficientes existencias para el producto con ID ';
+
+    ELSE
+
+        -- Actualizar las existencias del producto
+
+        UPDATE tb_detalleProducto
+
+        SET existencias_producto = v_existencias_producto - v_diferencia
+
+        WHERE id_detalle_producto = NEW.id_detalle_producto;
+
+    END IF;
+
+END //
+DELIMITER ;
+
+-- Trigger para actualizar la cantidad de existencias de productos cuando el cliente elimine un producto del carrito de compras
+DELIMITER //
+ CREATE TRIGGER trg_delete_detalle AFTER DELETE ON tb_detalles_compras FOR EACH ROW BEGIN
+
+    DECLARE v_existencias_producto INT;
+
+
+
+    -- Obtener las existencias actuales del producto
+
+    SELECT existencias_producto 
+
+    INTO v_existencias_producto
+
+    FROM tb_detalleproducto
+
+    WHERE id_detalle_producto = OLD.id_detalle_producto;
+
+
+
+    -- Actualizar las existencias del producto, devolviendo la cantidad eliminada
+
+    UPDATE tb_detalleproducto
+
+    SET existencias_producto = v_existencias_producto + OLD.cantidad_producto
+
+    WHERE id_detalle_producto = OLD.id_detalle_producto;
+
+
+
+END //
+DELIMITER ;
