@@ -90,7 +90,7 @@ class CategoriaProductosHandler
     SUM(cantidad_producto) AS total_vendido
     FROM
     tb_detalles_compras
-    INNER JOIN tb_detalleProducto USING (id_detalle_producto)
+    INNER JOIN tb_detalleproducto USING (id_detalle_producto)
     INNER JOIN tb_productos USING(id_producto)
     INNER JOIN tb_compras USING(id_compra)
     INNER JOIN tb_categorias_productos USING(id_categoria_producto)

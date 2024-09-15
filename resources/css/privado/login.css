@@ -305,7 +305,7 @@ img.logo {
   max-width: 70%;
 }
 
-@media (max-width: 870px) {
+@media (max-width: 992px) {
   .container {
     min-height: 800px;
     height: 100vh;

@@ -117,7 +117,7 @@ SHOPPING_FORM.addEventListener('submit', async (event) => {
         sweetAlert(2, DATA.error, false);
         sweetAlert(2, DATA.exception, false);
     } else {
-        sweetAlert(3, DATA.error, true, 'login.html');
+        sweetAlert(3, DATA.error, true, 'index.html');
     }
 });
 

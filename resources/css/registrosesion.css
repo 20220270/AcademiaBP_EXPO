@@ -587,7 +587,7 @@ body {
     }
 }
 
-@media (max-width: 416px) {
+@media (max-width: 200px) AND (max-width: 416px) {
     .tituloIS {
         font-size: 16px;
     }

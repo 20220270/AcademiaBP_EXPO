@@ -98,7 +98,7 @@ class ComprasHandler
         tb_productos.descuento_producto
         FROM tb_detalles_compras
         INNER JOIN tb_compras USING(id_compra)
-        INNER JOIN tb_detalleProducto USING(id_detalle_producto)
+        INNER JOIN tb_detalleproducto USING(id_detalle_producto)
         INNER JOIN tb_productos USING(id_producto) WHERE id_compra = ?';
         $params = array($this->idcompra);
         return Database::getRows($sql, $params);
@@ -111,7 +111,7 @@ class ComprasHandler
     {
         $sql = 'SELECT imagen_producto
                  FROM tb_detalles_compras
-                         INNER JOIN tb_detalleProducto USING(id_detalle_producto)
+                         INNER JOIN tb_detalleproducto USING(id_detalle_producto)
                 INNER JOIN tb_productos USING(id_producto)
                 WHERE id_detalle_compra = ?';
         $params = array($this->iddetalle);
@@ -173,7 +173,7 @@ class ComprasHandler
         nombre_producto, 
         talla,
         color,
-        tb_detalles_compras.precio_producto, 
+        tb_productos.precio_producto, 
         cantidad_producto, 
         (tb_productos.precio_producto * cantidad_producto) AS Subtotal,
         tb_productos.descuento_producto,
@@ -182,7 +182,7 @@ class ComprasHandler
         tb_detalles_compras
     INNER JOIN 
         tb_compras USING(id_compra)
-                INNER JOIN tb_detalleProducto USING(id_detalle_producto)
+                INNER JOIN tb_detalleproducto USING(id_detalle_producto)
     INNER JOIN 
         tb_productos USING(id_producto)
         INNER JOIN 
@@ -243,7 +243,7 @@ class ComprasHandler
          tb_detalles_compras
      INNER JOIN 
          tb_compras USING(id_compra)
-                 INNER JOIN tb_detalleProducto USING(id_detalle_producto)
+                 INNER JOIN tb_detalleproducto USING(id_detalle_producto)
      INNER JOIN 
          tb_productos USING(id_producto) 
                 WHERE id_cliente = ? AND (nombre_producto LIKE ? OR tb_compras.fecha_registro LIKE ? OR id_compra LIKE ? or id_detalle_compra LIKE ?)
@@ -271,7 +271,7 @@ class ComprasHandler
          tb_detalles_compras
         INNER JOIN 
         tb_compras USING(id_compra)
-                INNER JOIN tb_detalleProducto USING(id_detalle_producto)
+                INNER JOIN tb_detalleproducto USING(id_detalle_producto)
         INNER JOIN 
          tb_productos USING(id_producto)  WHERE id_cliente = ?
          ORDER BY id_compra';
@@ -301,7 +301,7 @@ class ComprasHandler
                 INNER JOIN 
                 tb_clientes USING(id_cliente)
                 INNER JOIN 
-                tb_detalleProducto USING(id_detalle_producto)
+                tb_detalleproducto USING(id_detalle_producto)
                 INNER JOIN 
                 tb_productos USING(id_producto)  WHERE id_cliente = ? AND id_compra = ?
                 ORDER BY id_compra";

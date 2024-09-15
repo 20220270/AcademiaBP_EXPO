@@ -292,21 +292,24 @@ footer {
 
 
 
-@media (min-width: 270px) and (max-width: 360px) {
+@media (min-width: 200px) and (max-width: 360px) {
 
+  .carousel{
+    margin-top: -99px;
+  }
   .imagenPrincipal {
-    margin-top: 30px;
+    margin-top: 10px;
     width: 100%;
   }
 
 
   .overlay {
     position: absolute;
-    top: 0;
+    top: -15px;
     left: 0;
     width: 100%;
     margin-top: 26px;
-    height: 89%;
+    height: 98%;
     background-color: rgba(0, 0, 0, 0.7);
     /*El último valor del rgba define la intensidad del color negro del overlay, o la capa
       que se encuentra sobre la imagen que le da una tonalidad oscura*/
@@ -453,9 +456,9 @@ footer {
 
 
 
-@media (min-width: 400px) and (max-width: 556px) {
+@media (min-width: 401px) and (max-width: 556px) {
   main {
-    margin-top: 240px;
+    margin-top: 150px;
     /* Ajusta el margen superior para pantallas pequeñas */
   }
 

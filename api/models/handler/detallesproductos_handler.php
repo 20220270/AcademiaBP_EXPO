@@ -22,7 +22,7 @@ class DetalleProductoHandler
     {
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = 'SELECT id_detalle_producto, categoria_producto, nombre_producto, imagen_producto, talla, color, existencias_producto 
-                FROM tb_detalleProducto
+                FROM tb_detalleproducto
         INNER JOIN tb_productos USING(id_producto)
         INNER JOIN tb_categorias_productos USING(id_categoria_producto)
         INNER JOIN tb_tallas USING(id_talla)
@@ -35,7 +35,7 @@ class DetalleProductoHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_detalleProducto(id_producto, id_talla, id_color, existencias_producto)
+        $sql = 'INSERT INTO tb_detalleproducto(id_producto, id_talla, id_color, existencias_producto)
                 VALUES(?, ?, ?, ?)';
         $params = array($this->idproducto, $this->idtalla, $this->idcolor, $this->existencias);
         return Database::executeRow($sql, $params);
@@ -44,7 +44,7 @@ class DetalleProductoHandler
     public function readAll()
     {
         $sql = 'SELECT id_detalle_producto, id_producto, categoria_producto, nombre_producto, imagen_producto, talla, color, existencias_producto 
-                FROM tb_detalleProducto
+                FROM tb_detalleproducto
                 INNER JOIN tb_productos USING(id_producto)
                 INNER JOIN tb_categorias_productos USING(id_categoria_producto)
                 INNER JOIN tb_tallas USING(id_talla)
@@ -56,7 +56,7 @@ class DetalleProductoHandler
     public function readOne()
     {
         $sql = 'SELECT id_detalle_producto, id_producto, id_talla, id_color, existencias_producto
-                FROM tb_detalleProducto
+                FROM tb_detalleproducto
                 WHERE id_detalle_producto = ?';
         $params = array($this->iddetalle);
         return Database::getRow($sql, $params);
@@ -64,7 +64,7 @@ class DetalleProductoHandler
 
     public function updateRow()
     {
-        $sql = 'UPDATE tb_detalleProducto
+        $sql = 'UPDATE tb_detalleproducto
                 SET id_producto = ?, id_talla = ?, id_color = ?, existencias_producto = ?
                 WHERE id_detalle_producto = ?';
         $params = array($this->idproducto, $this->idtalla, $this->idcolor, $this->existencias, $this->iddetalle);
@@ -73,7 +73,7 @@ class DetalleProductoHandler
 
     public function deleteRow()
     {
-        $sql = 'DELETE FROM tb_detalleProducto
+        $sql = 'DELETE FROM tb_detalleproducto
                 WHERE id_detalle_producto = ?';
         $params = array($this->iddetalle);
         return Database::executeRow($sql, $params);

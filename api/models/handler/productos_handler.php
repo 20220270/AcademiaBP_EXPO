@@ -118,7 +118,7 @@ class ProductoHandler
     {
         $sql = 'SELECT id_producto, id_categoria_producto, id_detalle_producto, nombre_producto, descripcion_producto, precio_producto, imagen_producto, 
         estado_producto, descuento_producto, existencias_producto, id_talla, id_color,
-        talla, color FROM tb_detalleProducto
+        talla, color FROM tb_detalleproducto
                 INNER JOIN tb_productos USING(id_producto)
                 INNER JOIN tb_categorias_productos USING(id_categoria_producto)
                 INNER JOIN tb_tallas USING(id_talla)
@@ -152,7 +152,7 @@ class ProductoHandler
                 FROM 
                 tb_detalles_compras
                 INNER JOIN 
-                tb_detalleProducto USING (id_detalle_producto)
+                tb_detalleproducto USING (id_detalle_producto)
                 INNER JOIN 
                 tb_productos USING (id_producto)
                 GROUP BY 
@@ -174,7 +174,7 @@ class ProductoHandler
                 FROM 
                 tb_detalles_compras
                 INNER JOIN 
-                tb_detalleProducto USING (id_detalle_producto)
+                tb_detalleproducto USING (id_detalle_producto)
                 INNER JOIN 
                 tb_productos USING (id_producto)
                 GROUP BY 
@@ -229,7 +229,7 @@ class ProductoHandler
                 ROUND(AVG(calificacion_producto), 1) AS promedio_calificacion
                 FROM tb_valoraciones
                 INNER JOIN tb_detalles_compras USING (id_detalle_compra)
-                INNER JOIN tb_detalleProducto USING(id_detalle_producto) 
+                INNER JOIN tb_detalleproducto USING(id_detalle_producto) 
                 INNER JOIN tb_productos USING(id_producto)
                 WHERE 
                 calificacion_producto IS NOT NULL
@@ -247,7 +247,7 @@ class ProductoHandler
         $sql = "SELECT id_valoracion, nombre_producto, comentario_producto, calificacion_producto, foto_cliente, nombre_cliente, apellido_cliente, fecha_valoracion from tb_valoraciones
                 INNER JOIN tb_detalles_compras USING(id_detalle_compra)
                 INNER JOIN tb_compras USING(id_compra)
-                INNER JOIN tb_detalleProducto USING(id_detalle_producto) 
+                INNER JOIN tb_detalleproducto USING(id_detalle_producto) 
                 INNER JOIN tb_productos USING(id_producto)
                 INNER JOIN tb_clientes USING(id_cliente)
         where id_producto = ? AND estado_comentario = 'Habilitado'
@@ -261,7 +261,7 @@ class ProductoHandler
     */
     public function productosCategoria()
     {
-        $sql = 'SELECT categoria_producto, nombre_producto, descuento_producto, precio_producto, descuento_producto, estado_producto, talla, color, existencias_producto from tb_detalleProducto
+        $sql = 'SELECT categoria_producto, nombre_producto, descuento_producto, precio_producto, descuento_producto, estado_producto, talla, color, existencias_producto from tb_detalleproducto
                 INNER JOIN tb_tallas USING(id_talla)
                 INNER JOIN tb_colores USING(id_color)
                 INNER JOIN tb_productos USING(id_producto)
@@ -285,7 +285,7 @@ class ProductoHandler
         FROM
         tb_detalles_compras dc
         INNER JOIN tb_compras c USING(id_compra)  -- Unir con la tabla de compras
-        INNER JOIN tb_detalleProducto dp USING(id_detalle_producto)  -- Unir con la tabla de detalle de producto
+        INNER JOIN tb_detalleproducto dp USING(id_detalle_producto)  -- Unir con la tabla de detalle de producto
     GROUP BY
         dp.id_producto  -- Agrupar por el identificador del producto
     ),
@@ -299,7 +299,7 @@ class ProductoHandler
     FROM
         tb_detalles_compras dc
         INNER JOIN tb_compras c USING(id_compra)  -- Unir con la tabla de compras
-        INNER JOIN tb_detalleProducto dp USING(id_detalle_producto)  -- Unir con la tabla de detalle de producto
+        INNER JOIN tb_detalleproducto dp USING(id_detalle_producto)  -- Unir con la tabla de detalle de producto
     WHERE
         YEAR(c.fecha_registro) >= YEAR(CURDATE()) - 5  -- Considerar solo los últimos 5 años
     GROUP BY
@@ -365,7 +365,7 @@ class ProductoHandler
             INNER JOIN 
             tb_compras USING (id_compra)
         INNER JOIN 
-            tb_detalleProducto USING (id_detalle_producto)  -- Se une con la tabla de detalles del producto
+            tb_detalleproducto USING (id_detalle_producto)  -- Se une con la tabla de detalles del producto
         INNER JOIN 
             tb_productos USING (id_producto)  -- Se une con la tabla de productos
         WHERE

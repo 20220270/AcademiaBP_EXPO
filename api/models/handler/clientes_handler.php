@@ -299,7 +299,7 @@ class ClienteHandler
                 JOIN 
                     tb_clientes cl USING (id_cliente)
                 JOIN 
-                    tb_detalleProducto dp USING (id_detalle_producto)
+                    tb_detalleproducto dp USING (id_detalle_producto)
                 JOIN 
                     tb_productos p USING (id_producto)
                 WHERE 

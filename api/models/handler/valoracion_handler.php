@@ -29,7 +29,7 @@ class ValoracionHandler
         INNER JOIN tb_detalles_compras USING(id_detalle_compra)
         INNER JOIN tb_compras USING(id_compra)
         INNER JOIN tb_clientes USING(id_cliente)
-        INNER JOIN tb_detalleProducto USING(id_detalle_producto)
+        INNER JOIN tb_detalleproducto USING(id_detalle_producto)
         INNER JOIN tb_productos USING(id_producto)
         WHERE nombre_producto LIKE ? OR estado_comentario LIKE ? OR calificacion_producto LIKE ? OR p.fecha_valoracion LIKE ?
         GROUP BY id_valoracion
@@ -45,7 +45,7 @@ class ValoracionHandler
         INNER JOIN tb_detalles_compras USING(id_detalle_compra)
         INNER JOIN tb_compras USING(id_compra)
         INNER JOIN tb_clientes USING(id_cliente)
-        INNER JOIN tb_detalleProducto USING(id_detalle_producto)
+        INNER JOIN tb_detalleproducto USING(id_detalle_producto)
         INNER JOIN tb_productos USING(id_producto)
         ORDER BY id_valoracion, calificacion_producto DESC;
         ';
@@ -59,7 +59,7 @@ class ValoracionHandler
         INNER JOIN tb_detalles_compras USING(id_detalle_compra)
         INNER JOIN tb_compras USING(id_compra)
         INNER JOIN tb_clientes USING(id_cliente)
-        INNER JOIN tb_detalleProducto USING(id_detalle_producto)
+        INNER JOIN tb_detalleproducto USING(id_detalle_producto)
         INNER JOIN tb_productos USING(id_producto)
         WHERE id_valoracion = ?';
         $params = array($this->idvaloracion);
