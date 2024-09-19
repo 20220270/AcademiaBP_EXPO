@@ -197,7 +197,8 @@ const barGraphA = (canvas, data, title) => {
             const record = data.find(row => row.anio === year && row.mes === months.indexOf(month) + 1);
             return record ? record.total_inscripciones : 0;
         });
-
+        console.log("Datos de entrada:", data);
+console.log("Meses:", months);
         datasets.push({
             label: `Año ${year}:`,
             data: yearData,
