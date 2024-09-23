@@ -323,7 +323,9 @@ direccion_cliente VARCHAR(250) NOT NULL,
 clave_cliente VARCHAR(100) NOT NULL,
 estado_cliente ENUM("Activo", "Inactivo") NOT NULL DEFAULT("Activo"),
 fecha_registro DATE NOT NULL default NOW(),
-foto_cliente VARCHAR(200) NULL
+foto_cliente VARCHAR(200) NULL,
+intentos_fallidos INT DEFAULT 0,
+bloqueado_hasta DATETIME DEFAULT NULL 
 );
 
 

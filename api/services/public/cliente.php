@@ -98,35 +98,54 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+
+
+
+
+
+
+
                 //Evitamos el error de acción no disponible dentro de la sesión
-            case 'logIn':
+              case 'logIn':
                 $_POST = Validator::validateForm($_POST);
-                if (!$cliente->checkUser($_POST['correoCliente'], $_POST['claveCliente'])) {
-                    $result['error'] = 'Datos incorrectos';
-                } else {
-                    // Establece el ID del cliente antes de verificar el estado.
-                    $cliente->setId($cliente->getIdByEmail($_POST['correoCliente']));
-
-                    // Verificamos el estado del cliente.
-                    if ($cliente->checkStatus()) {
-                        // Configura la sesión ya que el estado es activo.
-                        $_SESSION['idCliente'] = $cliente->getIdByEmail($_POST['correoCliente']);
-                        $_SESSION['correoCliente'] = $_POST['correoCliente'];
-
-                        // Recupera el nombre y apellido del cliente y lo guarda en la sesión.
-                        $perfil = $cliente->readProfile();
-                        $_SESSION['nombreCliente'] = $perfil['nombre_cliente']; //Asignamos el nombre del cliente
-                        $_SESSION['apellidoCliente'] = $perfil['apellido_cliente']; //Asignamos el apellido del cliente
-
-                        $result['status'] = 1;
-                        $result['message'] = 'Autenticación correcta';
+                
+                // Verificar si el usuario existe
+                if ($cliente->checkUserExists($_POST['correoCliente'])) {
+                    // Obtener intentos fallidos y el tiempo de bloqueo
+                    $intentosFallidos = $cliente->getFailedAttempts($_POST['correoCliente']);
+                    $bloqueadoHasta = $cliente->getLockTime($_POST['correoCliente']);
+                    
+                    // Verificar si la cuenta está bloqueada
+                    $ahora = time();
+                    if ($bloqueadoHasta && $ahora < strtotime($bloqueadoHasta)) {
+                        $result['error'] = 'Cuenta bloqueada. Intente de nuevo después de 24 horas.';
                     } else {
-                        $result['error'] = 'La cuenta ha sido desactivada';
+                        // Si no está bloqueada, proceder con la validación de la contraseña
+                        if ($cliente->checkUser($_POST['correoCliente'], $_POST['claveCliente'])) {
+                            // Resetear intentos fallidos si la autenticación es correcta
+                            $cliente->resetFailedAttempts($_POST['correoCliente']);
+                            $result['status'] = 1;
+                            $result['message'] = 'Autenticación correcta';
+                        } else {
+                            // Incrementar los intentos fallidos
+                            $cliente->incrementFailedAttempts($_POST['correoCliente']);
+                            
+                            // Obtener los nuevos intentos fallidos
+                            $intentosFallidos = $cliente->getFailedAttempts($_POST['correoCliente']);
+                            
+                            if ($intentosFallidos >= 3) {
+                                // Bloquear la cuenta por 24 horas si hay 3 intentos fallidos
+                                $cliente->lockAccount($_POST['correoCliente'], date("Y-m-d H:i:s", $ahora + 24 * 60 * 60));
+                                $result['error'] = 'Cuenta bloqueada por 24 horas debido a múltiples intentos fallidos.';
+                            } else {
+                                $result['error'] = 'Credenciales incorrectas. Intento ' . $intentosFallidos . ' de 3.';
+                            }
+                        }
                     }
+                } else {
+                    $result['error'] = 'El usuario no existe.';
                 }
                 break;
-
-
 
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
