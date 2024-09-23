@@ -381,6 +381,26 @@ footer {
     margin-top: 1px;
   }
 
+  .carousel{
+    margin-top: -130px;
+  }
+
+  .texto1,
+  .texto2{
+    font-size: 12px;
+  }
+
+  #imagenita{
+    width: 25px;
+    height: 25px;
+  }
+
+  #imagenLogoA{
+    width: 70px;
+    height: 70px;
+    margin-top: 15px;
+  }
+
   .overlay {
     position: absolute;
     top: 0;

@@ -139,7 +139,7 @@ const loadTemplate = async () => {
                     <!-- Contenedor con un display flex para alinear elementos horizontalmente -->
                     <div class="d-flex align-items-center mt-2">
                         <img src="../../resources/images/soporte-tecnico-colorNegro.png" class="mt-4 me-1" alt="..."
-                            height="40px" width="40px">
+                            height="40px" width="40px" id="imagenita">
                         <div class="texto mt-4">
                             <span class="d-block texto1">Soporte técnico</span>
                             <!--Los elementos d-block nos ayudan a separar los span de modo que cada span se colocará debajo del otro-->
