@@ -33,42 +33,42 @@
                         <input type="hidden" id="gRecaptchaResponse" name="gRecaptchaResponse">
                         <div class="col-12 mx-auto">
                             <label for="nombreCliente" class="form-label">Nombre</label>
-                            <input type="text" id="nombreCliente" name="nombreCliente" class="form-control"  oninput="this.value = this.value.replace(/[0-9]/g, '')">
+                            <input type="text" id="nombreCliente" autocomplete="off" name="nombreCliente" class="form-control"  oninput="this.value = this.value.replace(/[0-9]/g, '')">
                         </div>
                         <div class="col-12 mt-2 mx-auto">
                             <label for="apellidoCliente" class="form-label">Apellido</label>
-                            <input type="text" id="apellidoCliente" name="apellidoCliente" class="form-control"
+                            <input type="text" id="apellidoCliente" autocomplete="off" name="apellidoCliente" class="form-control"
                                 required  oninput="this.value = this.value.replace(/[0-9]/g, '')">
                         </div>
                         <div class="col-12 mt-2 mx-auto">
                             <label for="correoCliente" class="form-label">Correo electrónico</label>
-                            <input type="email" id="correoCliente" name="correoCliente" maxlength="100"
+                            <input type="email" id="correoCliente" autocomplete="off" name="correoCliente" maxlength="100"
                                 class="form-control" required>
                         </div>
                         <div class="col-12 mt-2 mx-auto">
                             <label for="duiCliente" class="form-label">DUI</label>
-                            <input type="text" id="duiCliente" name="duiCliente" placeholder="00000000-0"
+                            <input type="text" id="duiCliente" autocomplete="off" name="duiCliente" placeholder="00000000-0"
                                 class="form-control" required oninput="this.value = this.value.replace(/[^0-9-]/g, '')" pattern="[0-9-]+" maxlength="10">
                         </div>
                         <div class="col-12 mt-2 mx-auto">
                             <label for="telefonoCliente" class="form-label">Teléfono</label>
-                            <input type="text" id="telefonoCliente" name="telefonoCliente" placeholder="0000-0000"
+                            <input type="text" id="telefonoCliente" autocomplete="off" name="telefonoCliente" placeholder="0000-0000"
                                 class="form-control" required  required maxlength="9" pattern="[0-9\-]*"  
                                 oninput="this.value = this.value.replace(/[^\d-]/g, '');">
                         </div>
                         <div class="col-12 mt-2 mx-auto">
                             <label for="direccionCliente" class="form-label">Dirección</label>
-                            <input type="text" id="direccionCliente" name="direccionCliente" maxlength="250"
+                            <input type="text" id="direccionCliente" autocomplete="off" name="direccionCliente" maxlength="250"
                                 class="form-control" required>
                         </div>
                         <div class="col-12 mt-2 mx-auto">
                             <label for="claveCliente" class="form-label">Contraseña</label>
-                            <input type="password" id="claveCliente" name="claveCliente" class="form-control"
+                            <input type="password" id="claveCliente" autocomplete="off" name="claveCliente" class="form-control"
                                 required>
                         </div>
                         <div class="col-12 mt-2 mx-auto">
                             <label for="confirmarClave" class="form-label">Confirmar contraseña</label>
-                            <input type="password" id="confirmarClave" name="confirmarClave" class="form-control"
+                            <input type="password" id="confirmarClave" autocomplete="off" name="confirmarClave" class="form-control"
                                 required>
                         </div>
 
@@ -99,9 +99,9 @@
                     </div>
                     <label class="textoIng">O ingresa tus credenciales</label>
                     <!-- Campos de inicio de sesión -->
-                    <input type="email" class="form-control" placeholder="Correo electrónico" id="textoCor"
+                    <input type="email" class="form-control" autocomplete="off" placeholder="Correo electrónico" id="textoCor"
                         name="correoCliente">
-                    <input type="password" class="form-control" placeholder="Contraseña" id="textoContraC"
+                    <input type="password" class="form-control" autocomplete="off" placeholder="Contraseña" id="textoContraC"
                         name="claveCliente">
                     <a href="recuperarcontraseña.html">¿Olvidaste tu contraseña?</a>
                     <button class="submit"><a class="mostrarIndex text-white">Iniciar sesión</a></button>
