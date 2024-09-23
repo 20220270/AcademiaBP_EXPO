@@ -210,4 +210,57 @@ class AdministradorHandler
         $data = Database::getRow($sql, $params);
         return $data['count'] > 0;
     }
+
+    // Verificar si el usuario existe.
+    public function checkUserExists($usuario)
+    {
+        $sql = 'SELECT COUNT(*) AS count FROM tb_administradores WHERE alias_administrador = ?';
+        $params = array($usuario);
+        $data = Database::getRow($sql, $params);
+        return $data['count'] > 0;
+    }
+
+    // Obtener los intentos fallidos.
+    public function getFailedAttempts($usuario)
+    {
+        $sql = 'SELECT intentos_fallidos FROM tb_administradores WHERE alias_administrador = ?';
+        $params = array($usuario);
+        $data = Database::getRow($sql, $params);
+        return $data['intentos_fallidos'];
+    }
+
+    // Obtener el tiempo de bloqueo.
+    public function getLockTime($usuario)
+    {
+        $sql = 'SELECT bloqueado_hasta FROM tb_administradores WHERE alias_administrador = ?';
+        $params = array($usuario);
+        $data = Database::getRow($sql, $params);
+        return $data['bloqueado_hasta'];
+    }
+
+    // Incrementar los intentos fallidos.
+    public function incrementFailedAttempts($usuario)
+    {
+        $sql = 'UPDATE tb_administradores SET intentos_fallidos = intentos_fallidos + 1 WHERE alias_administrador = ?';
+        $params = array($usuario);
+        return Database::executeRow($sql, $params);
+    }
+
+    // Reiniciar los intentos fallidos.
+    public function resetFailedAttempts($usuario)
+    {
+        $sql = 'UPDATE tb_administradores SET intentos_fallidos = 0 WHERE alias_administrador = ?';
+        $params = array($usuario);
+        return Database::executeRow($sql, $params);
+    }
+
+    // Bloquear la cuenta hasta una fecha/hora específica.
+    public function lockAccount($usuario, $bloqueadoHasta)
+    {
+        $sql = 'UPDATE tb_administradores SET bloqueado_hasta = ? WHERE alias_administrador = ?';
+        $params = array($bloqueadoHasta, $usuario);
+        return Database::executeRow($sql, $params);
+    }
 }
+
+

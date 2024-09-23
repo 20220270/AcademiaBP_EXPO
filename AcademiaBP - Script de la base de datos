@@ -30,7 +30,9 @@ CREATE TABLE tb_administradores(
     fecha_registro DATE NOT NULL DEFAULT NOW(),
     foto_administrador VARCHAR(200) NULL,
     id_nivel INT NOT NULL,
-    estado_adminstrador ENUM('Activo', 'Inactivo') NOT NULL
+    estado_adminstrador ENUM('Activo', 'Inactivo') NOT NULL,
+    intentos_fallidos INT DEFAULT 0,
+    bloqueado_hasta DATETIME DEFAULT NULL 
 );
 
 -- restricciones de administradores
