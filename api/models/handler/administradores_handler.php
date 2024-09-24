@@ -283,7 +283,7 @@ class AdministradorHandler
 
     public function readOne()
     {
-        $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, nivel, estado_adminstrador, fecha_registro, foto_administrador
+        $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, id_nivel, estado_adminstrador, fecha_registro, foto_administrador
         FROM tb_administradores
         INNER JOIN tb_niveles_administradores USING(id_nivel)
                 WHERE id_administrador = ?';

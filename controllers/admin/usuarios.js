@@ -261,7 +261,7 @@ const fillTable2 = async (form = null) => {
         CONFIRMAR_CLAVE.value = ROW.clave_administrador;
         
   
-        fillSelect(NIVELESUSUARIO_API, 'readAll', 'selectNivelAdmin', ROW.nivel);
+        fillSelect(NIVELESUSUARIO_API, 'readAll', 'selectNivelAdmin', ROW.id_nivel);
         
 
         ID_ADMINISTRADOR.readOnly = true;

@@ -98,13 +98,6 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-
-
-
-
-
-
-
                 //Evitamos el error de acción no disponible dentro de la sesión
               case 'logIn':
                 $_POST = Validator::validateForm($_POST);
