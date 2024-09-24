@@ -32,7 +32,9 @@ CREATE TABLE tb_administradores(
     id_nivel INT NOT NULL,
     estado_adminstrador ENUM('Activo', 'Inactivo') NOT NULL,
     intentos_fallidos INT DEFAULT 0,
-    bloqueado_hasta DATETIME DEFAULT NULL 
+    bloqueado_hasta DATETIME DEFAULT NULL,
+    codigo_acceso VARCHAR(6) NOT NULL,
+    fecha_expiracion_codigo DATETIME NULL
 );
 
 -- restricciones de administradores
@@ -325,7 +327,9 @@ estado_cliente ENUM("Activo", "Inactivo") NOT NULL DEFAULT("Activo"),
 fecha_registro DATE NOT NULL default NOW(),
 foto_cliente VARCHAR(200) NULL,
 intentos_fallidos INT DEFAULT 0,
-bloqueado_hasta DATETIME DEFAULT NULL 
+bloqueado_hasta DATETIME DEFAULT NULL,
+codigo_acceso VARCHAR(6) NOT NULL,
+fecha_expiracion_codigo DATETIME NULL
 );
 
 

@@ -92,24 +92,22 @@
                 </div>
             </div>
             <!-- Contenedor de iniciar sesión -->
-            <div class="form-container iniciar_sesion">
-                <form id="sessionForm" action="../../api/helpers/autenticacion.php" method="POST">
-                    <h1 class="tituloIS">¡Inicia sesión!</h1>
-                    <!-- Iconos sociales -->
-                    <div class="social-icons">
-                        <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                        <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                    </div>
-                    <label class="textoIng">O ingresa tus credenciales</label>
-                    <!-- Campos de inicio de sesión -->
-                    <input type="email" class="form-control" autocomplete="off" placeholder="Correo electrónico"
-                        id="textoCor" name="correoCliente">
-                    <input type="password" class="form-control" autocomplete="off" placeholder="Contraseña"
-                        id="textoContraC" name="claveCliente">
-                    <a href="recuperarcontraseña.html">¿Olvidaste tu contraseña?</a>
-                    <button class="submit"><a class="mostrarIndex text-white">Iniciar sesión</a></button>
-                </form>
-            </div>
+            <!-- Contenedor de iniciar sesión -->
+<div class="form-container iniciar_sesion">
+    <form id="sessionForm" action="../../api/helpers/validar_codigo.php" method="POST">
+        <h1 class="tituloIS">Autenticación en dos pasos</h1>
+        <label class="textoIng">Te enviamos un código a tu correo</label>
+        <input id="code" type="text" name="code" class="form-control" required placeholder="Ingresa tu código">
+        <a href="recuperarcontraseña.html">¿Olvidaste tu contraseña?</a>
+
+        <button type="submit" class="submit">Verificar</button>
+    </form>
+</div>
+
+
+
+
+
             <!-- Contenedor lateral para cambiar entre registro e inicio de sesión -->
             <div class="toggle-container">
                 <div class="toggle">
@@ -118,9 +116,8 @@
                         <div class="toggle-image">
                             <img src="../../resources/images/logoAcademiaBP.png" alt="logoAcademiaBP">
                         </div>
-                        <h1>¡Inicia sesión!</h1>
-                        <p class="textoSi">Si ya dispones de una cuenta, ingresa aquí</p>
-                        <button class="hidden" id="iniciar_sesion">Iniciar sesión</button>
+                        <h1>Autenticacion en dos pasos</h1>
+                        <button class="hidden" id="iniciar_sesion">Verificar</button>
                     </div>
                     <!-- Panel derecho: Registrarse -->
                     <div class="toggle-panel toggle-right">
@@ -144,7 +141,7 @@
         crossorigin="anonymous"></script>
     <script src="../../controllers/utils/sweetalert.min.js"></script>
     <script src="../../controllers/utils/components.js"></script>
-    <script src="../../controllers/public/registrosesion.js"></script>
+    <script src="../../controllers/public/twosteps.js"></script>
 </body>
 
 </html>
