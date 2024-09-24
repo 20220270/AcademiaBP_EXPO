@@ -370,6 +370,10 @@ footer {
     height: 80px;
   }
 
+  .textoboton {
+    font-size: 13px;
+  }
+
 }
 
 
@@ -388,6 +392,10 @@ footer {
   .texto1,
   .texto2{
     font-size: 12px;
+  }
+
+  .textoboton {
+    font-size: 14px;
   }
 
   #imagenita{
