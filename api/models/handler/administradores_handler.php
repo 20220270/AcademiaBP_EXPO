@@ -36,7 +36,7 @@ class AdministradorHandler
      *  Métodos para gestionar la cuenta del administrador.
      */
 
-     /*
+    
      public function checkUser($username, $password)
      {
          $sql = 'SELECT id_administrador, alias_administrador, clave_administrador
@@ -54,10 +54,9 @@ class AdministradorHandler
          }
      }
 
-        *
-*/
+  
 
-
+ /*
      
     public function checkUser($username, $password){
     // Se escribe la consulta
@@ -169,7 +168,8 @@ class AdministradorHandler
     }
 }
  
-
+      *
+*/
     public function checkPassword($password)
     {
         $sql = 'SELECT clave_administrador
