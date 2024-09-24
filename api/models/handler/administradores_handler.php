@@ -24,25 +24,151 @@ class AdministradorHandler
     protected $nivel = null;
     protected $imagen = null;
 
+    protected $tiempo = null;
+    protected $dias = null;
+    protected $bloqueo = null;
+    protected $condicion = null;
+    protected $fecha_hoy = null;
     /*
      *  Métodos para gestionar la cuenta del administrador.
      */
-    public function checkUser($username, $password)
-    {
-        $sql = 'SELECT id_administrador, alias_administrador, clave_administrador
-                FROM tb_administradores
-                WHERE  alias_administrador = ?';
-        $params = array($username);
-        if (!($data = Database::getRow($sql, $params))) {
-            return false;
-        } elseif (password_verify($password, $data['clave_administrador'])) {
-            $_SESSION['idAdministrador'] = $data['id_administrador'];
-            $_SESSION['aliasAdministrador'] = $data['alias_administrador'];
-            return true;
+     /*
+     *  Métodos para gestionar la cuenta del administrador.
+     */
+
+     /*
+     public function checkUser($username, $password)
+     {
+         $sql = 'SELECT id_administrador, alias_administrador, clave_administrador
+                 FROM tb_administradores
+                 WHERE  alias_administrador = ?';
+         $params = array($username);
+         if (!($data = Database::getRow($sql, $params))) {
+             return false;
+         } elseif (password_verify($password, $data['clave_administrador'])) {
+             $_SESSION['idAdministrador'] = $data['id_administrador'];
+             $_SESSION['aliasAdministrador'] = $data['alias_administrador'];
+             return true;
+         } else {
+             return false;
+         }
+     }
+
+        *
+*/
+
+
+     
+    public function checkUser($username, $password){
+    // Se escribe la consulta
+    $sql = 'SELECT id_administrador AS ID, alias_administrador AS ALIAS, correo_administrador AS CORREO,
+            CONCAT(nombre_admistrador, " ", apellido_administrador) AS NOMBRECOMPLETO,
+            clave_administrador AS CLAVE, foto_administrador AS FOTO, 
+            estado_adminstrador AS ESTADO, apellido_administrador AS APELLIDO,
+            intentos_administrador AS INTENTOS, DATEDIFF(CURRENT_DATE, ultima_cambio_clave) as DIAS, 
+            tiempo_intento AS TIEMPO, fecha_bloqueo AS BLOQUEO
+            FROM tb_administradores 
+            WHERE (BINARY alias_administrador = ? OR BINARY correo_administrador = ?)';
+
+    // Se mandan los parámetros en el orden que lo pide el procedimiento. Primer parámetro: Alias o Correo.
+    $params = array($username, $username);
+    
+    // Se guardan los datos retornados de la base en una variable, para su uso
+    $data = Database::getRow($sql, $params);
+    
+    // Obtener la fecha y hora actual
+    $now = new DateTime();
+    
+    // Casteamos la fecha
+    $now->setTime($now->format('H'), $now->format('i'), $now->format('s'));
+    
+    // Guardamos la fecha para corroborar que de verdad se haya pasado el tiempo de bloqueo
+    $this->fecha_hoy = $now;
+
+    // Casteamos el tiempo de bloqueo
+    if (is_string($data['TIEMPO'])) {
+        $data['TIEMPO'] = new DateTime($data['TIEMPO']);
+    }
+
+    // Se verifica si tiene contador o si este ya pasó.
+    if ($data['TIEMPO'] != null && $data['TIEMPO'] > $now) {
+        // El usuario tiene contador de tiempo
+        return $this->condicion = 'temporizador';
+    } elseif ($data['TIEMPO'] != null && $data['TIEMPO'] < $now) {
+        // El usuario ya cumplió su tiempo bloqueado
+        // Guardamos el alias
+        $this->alias = $data['ALIAS'];
+        // Reiniciamos los intentos
+        $this->resetTimeAttempt(null);
+        // Cambiamos el estado de bloqueado y eliminamos la fecha para realizar otro intento
+        $this->changeStateBlock();
+        // Reiniciamos los intentos a 0
+        $this->resetAttempts();
+        // Repetimos la lógica normal del login, para simular que ya se desbloqueó el usuario
+        if ($data['INTENTOS'] >= 3) {
+            // Las contraseñas no coinciden, se validan los intentos de sesión para ver si el usuario debería tener un contador
+            return $this->condicion = 'tiempo';
         } else {
-            return false;
+            if ($data['DIAS'] >= 90) {
+                // Las contraseñas no coinciden, se validan los intentos de sesión para ver si el usuario debería tener un contador
+                $this->correo = $data['CORREO'];
+                return $this->condicion = 'clave';
+            } else {
+                // Se verifica si la contraseña coincide con el hash almacenado en la base de datos. 
+                if (password_verify($password, $data['CLAVE'])) {
+                    $_SESSION['idAdministrador'] = $data['ID'];
+                    $_SESSION['aliasAdministrador'] = $data['ALIAS'];
+                    $_SESSION['fotoAdministrador'] = $data['FOTO'];
+                    $_SESSION['nombreAdministrador'] = $data['NOMBRECOMPLETO'];
+                    $_SESSION['apellidoAdministrador'] = $data['APELLIDO'];
+                    $_SESSION['correoAdministrador'] = $data['CORREO'];
+                    $this->dias = $data['DIAS'];
+                    $this->estado = $data['ESTADO'];
+                    return true;
+                } else {
+                    // Se retorna false si falla la autentificación
+                    return false;
+                }
+            }
+        }
+    } else {
+        // Verificar si está bloqueado el usuario
+        if ($data['ESTADO'] == "Inactivo") { // Cambia "Bloqueado" por "Inactivo" según tu ENUM
+            // El usuario está bloqueado
+            return $this->condicion = 'bloqueado';
+        } else {
+            // El usuario no tiene contador
+            $this->alias = $data['ALIAS'];
+            if ($data['INTENTOS'] >= 3) {
+                // Las contraseñas no coinciden, se validan los intentos de sesión para ver si el usuario debería tener un contador
+                return $this->condicion = 'tiempo';
+            } else {
+                if ($data['DIAS'] >= 90) {
+                    // Las contraseñas no coinciden, se validan los intentos de sesión para ver si el usuario debería tener un contador
+                    $this->correo = $data['CORREO'];
+                    return $this->condicion = 'clave';
+                } else {
+                    // Se verifica si la contraseña coincide con el hash almacenado en la base de datos. 
+                    if (password_verify($password, $data['CLAVE'])) {
+                        $_SESSION['idAdministrador'] = $data['ID'];
+                        $_SESSION['aliasAdministrador'] = $data['ALIAS'];
+                        $_SESSION['fotoAdministrador'] = $data['FOTO'];
+                        $_SESSION['nombreAdministrador'] = $data['NOMBRECOMPLETO'];
+                        $_SESSION['apellidoAdministrador'] = $data['APELLIDO'];
+                        $_SESSION['correoAdministrador'] = $data['CORREO'];
+                        $this->dias = $data['DIAS'];
+                        $this->estado = $data['ESTADO'];
+                        return true;
+                    } else {
+                        // Se retorna false si falla la autentificación
+                        return false;
+                    }
+                }
+            }
         }
     }
+}
+ 
 
     public function checkPassword($password)
     {
@@ -261,6 +387,36 @@ class AdministradorHandler
         $params = array($bloqueadoHasta, $usuario);
         return Database::executeRow($sql, $params);
     }
+
+
+    public function resetTimeAttempt($timer)
+    {
+        $sql = 'UPDATE tb_administradores SET tiempo_intento = ? WHERE alias_administrador = ?';
+        $params = array($timer, $this->alias);
+        return Database::executeRow($sql, $params);
+    }
+
+
+ public function resetAttempts()
+    {
+        $sql = 'UPDATE tb_administradores SET intentos_administrador = 0 WHERE alias_administrador = ?';
+        $params = array($this->alias);
+        return Database::executeRow($sql, $params);
+    }
+
+ public function changeStateBlock()
+    {
+        $sql = 'UPDATE tb_administradores SET estado_administrador = 1, fecha_bloqueo = NULL WHERE alias_administrador = ?';
+        $params = array($this->alias);
+        return Database::executeRow($sql, $params);
+    }
+
+
+
+
+
+
 }
+
 
 
