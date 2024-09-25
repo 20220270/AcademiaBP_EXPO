@@ -85,7 +85,7 @@ SESSION_FORM.addEventListener('submit', async (event) => {
     const FORM = new FormData(SESSION_FORM);
 
     // Petición para verificar el código de autenticación.
-    const DATA = await fetch('../../api/helpers/validar_codigo.php', {
+    const DATA = await fetch('../../api/helpers/validar_codigo(cliente).php', {
         method: 'POST',
         body: FORM
     }).then(response => response.json());

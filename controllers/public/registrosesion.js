@@ -123,7 +123,7 @@ SESSION_FORM.addEventListener('submit', async (event) => {
         sweetAlert(1, DATA.message, true, 'twosteps.html');
 
         // Después del inicio de sesión exitoso, enviamos el correo de verificación.
-        fetch('../../api/helpers/autenticacion.php', {
+        fetch('../../api/helpers/enviar_codigo(cliente).php', {
             method: 'POST',
             body: FORM // Utilizamos los mismos datos del formulario
         })

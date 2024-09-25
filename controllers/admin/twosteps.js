@@ -30,33 +30,28 @@ SIGNUP.addEventListener('submit', async (event) => {
 });
 
 // Evento para el formulario de inicio de sesión.
-LOGIN.addEventListener('submit', async(event) => {
-    // Se evita recargar la página web después de enviar el formulario.
-    event.preventDefault();
+LOGIN.addEventListener('submit', async (event) => {
+    event.preventDefault(); // Evita la recarga de la página.
+
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(LOGIN);
-    // Petición para validar las credenciales, pero aún no iniciar sesión.
-    const DATA = await fetchData(USER_API, 'logIn', FORM);
 
-    // Se comprueba si la respuesta es satisfactoria.
-    if (DATA.status) {
-        // Si el login es exitoso, se envía el correo de verificación.
-        const response = await fetch('../../api/helpers/enviar_codigo(admin).php', {
-            method: 'POST',
-            body: FORM // Utilizamos los mismos datos del formulario
-        });
+    // Petición para verificar el código de autenticación.
+    const DATA = await fetch('../../api/helpers/validar_codigo(admin).php', {
+        method: 'POST',
+        body: FORM
+    }).then(response => response.json());
 
-        // Comprobar si el envío del código fue exitoso.
-        const result = await response.json();
-        if (result.status) {
-            // Redirigir a la página de verificación de dos pasos.
-            sweetAlert(1, 'Te hemos enviado un código de verificación', true, 'twosteps.html');
-        } else {
-            // Si hay un problema con el envío del correo.
-            sweetAlert(2, 'Error al enviar el código de verificación. Inténtalo de nuevo.', false);
-        }
+    // Se comprueba si la respuesta es undefined o no contiene un estado válido.
+    if (!DATA) {
+        // Muestra la alerta de "Código incorrecto".
+        sweetAlert(2, "Código incorrecto o expirado", false);
+    } else if (DATA.status) {
+        // Si el código es correcto, redirige al menú.
+        sweetAlert(1, DATA.message, true, 'menu.html');
     } else {
-        // Si el login falla, mostrar error.
-        sweetAlert(2, DATA.error, false);
+        // Si hubo un error con la validación del código.
+        sweetAlert(2, DATA.message, false);
     }
 });
+

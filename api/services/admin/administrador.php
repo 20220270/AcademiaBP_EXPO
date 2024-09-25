@@ -203,46 +203,48 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
-            case 'logIn':
-                $_POST = Validator::validateForm($_POST);
-                
-                // Verificar si el usuario existe
-                if ($administrador->checkUserExists($_POST['usuarioAdmin'])) {
-                    // Obtener intentos fallidos y el tiempo de bloqueo
-                    $intentosFallidos = $administrador->getFailedAttempts($_POST['usuarioAdmin']);
-                    $bloqueadoHasta = $administrador->getLockTime($_POST['usuarioAdmin']);
+                case 'logIn':
+                    $_POST = Validator::validateForm($_POST);
                     
-                    // Verificar si la cuenta está bloqueada
-                    $ahora = time();
-                    if ($bloqueadoHasta && $ahora < strtotime($bloqueadoHasta)) {
-                        $result['error'] = 'Cuenta bloqueada. Intente de nuevo después de 24 horas.';
-                    } else {
-                        // Si no está bloqueada, proceder con la validación de la contraseña
-                        if ($administrador->checkUser($_POST['usuarioAdmin'], $_POST['contraseñaAdmin'])) {
-                            // Resetear intentos fallidos si la autenticación es correcta
-                            $administrador->resetFailedAttempts($_POST['usuarioAdmin']);
-                            $result['status'] = 1;
-                            $result['message'] = 'Autenticación correcta';
+                    // Verificar si el usuario existe
+                    if ($administrador->checkUserExists($_POST['usuarioAdmin'])) {
+                        // Obtener intentos fallidos y el tiempo de bloqueo
+                        $intentosFallidos = $administrador->getFailedAttempts($_POST['usuarioAdmin']);
+                        $bloqueadoHasta = $administrador->getLockTime($_POST['usuarioAdmin']);
+                        
+                        // Verificar si la cuenta está bloqueada
+                        $ahora = time();
+                        if ($bloqueadoHasta && $ahora < strtotime($bloqueadoHasta)) {
+                            $result['error'] = 'Cuenta bloqueada. Intente de nuevo después de 24 horas.';
                         } else {
-                            // Incrementar los intentos fallidos
-                            $administrador->incrementFailedAttempts($_POST['usuarioAdmin']);
-                            
-                            // Obtener los nuevos intentos fallidos
-                            $intentosFallidos = $administrador->getFailedAttempts($_POST['usuarioAdmin']);
-                            
-                            if ($intentosFallidos >= 3) {
-                                // Bloquear la cuenta por 24 horas si hay 3 intentos fallidos
-                                $administrador->lockAccount($_POST['usuarioAdmin'], date("Y-m-d H:i:s", $ahora + 24 * 60 * 60));
-                                $result['error'] = 'Cuenta bloqueada por 24 horas debido a múltiples intentos fallidos.';
+                            // Si no está bloqueada, proceder con la validación de la contraseña
+                            if ($administrador->checkUser($_POST['usuarioAdmin'], $_POST['contraseñaAdmin'])) {
+                                // Resetear intentos fallidos si la autenticación es correcta
+                                $administrador->resetFailedAttempts($_POST['usuarioAdmin']);
+                                $_SESSION['aliasAdministrador'] = $_POST['usuarioAdmin']; // O el valor que corresponda
+                
+                                $result['status'] = 1;
+                                $result['message'] = 'Autenticación correcta';
                             } else {
-                                $result['error'] = 'Credenciales incorrectas. Intento ' . $intentosFallidos . ' de 3.';
+                                // Incrementar los intentos fallidos
+                                $administrador->incrementFailedAttempts($_POST['usuarioAdmin']);
+                                
+                                // Obtener los nuevos intentos fallidos
+                                $intentosFallidos = $administrador->getFailedAttempts($_POST['usuarioAdmin']);
+                                
+                                if ($intentosFallidos >= 3) {
+                                    // Bloquear la cuenta por 24 horas si hay 3 intentos fallidos
+                                    $administrador->lockAccount($_POST['usuarioAdmin'], date("Y-m-d H:i:s", $ahora + 24 * 60 * 60));
+                                    $result['error'] = 'Cuenta bloqueada por 24 horas debido a múltiples intentos fallidos.';
+                                } else {
+                                    $result['error'] = 'Credenciales incorrectas. Intento ' . $intentosFallidos . ' de 3.';
+                                }
                             }
                         }
+                    } else {
+                        $result['error'] = 'El usuario no existe.';
                     }
-                } else {
-                    $result['error'] = 'El usuario no existe.';
-                }
-                break;
+                    break;                
             case 'checkCorreo':
                     if (!$administrador->setCorreo($_POST['inputCorreo'])) {
                         $result['error'] = $administrador->getDataError();

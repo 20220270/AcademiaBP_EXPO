@@ -16,19 +16,14 @@
         <div class="forms-container">
             <div class="signin-signup">
                 <form action="#" class="sign-in-form" id="sessionForm">
-                    <h2 class="title">Iniciar sesión </h2>
-                    <div class="input-field" autocomplete="off">
-                        <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Usuario" id="usuarioAdmin" name="usuarioAdmin"
-                            autocomplete="off" />
-                    </div>
+                    <h2 class="title">Verificacion en dos pasos </h2>
+                    <p class="text-white">por tu seguridad enviamos un codigo a tu correo </p>
                     <div class="input-field" autocomplete="off">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Contraseña" id="contraseñaAdmin" name="contraseñaAdmin" />
+                        <input type="password" placeholder="Codigo " id="code" name="code" />
                     </div>
-                    <button class="mt-2 mb-2"><a href="recuperarcontrasena.html" class="text-white botonContraC">¿Has
-                            olvido tu contraseña?</a></button>
-                    <button class="btn mb-3"><a class="linkIni text-white">Iniciar sesión</a></button>
+
+                    <button class="btn mb-3"><a class="linkIni text-white">Verificar</a></button>
                     <p class="social-text text-white">Iniciar sesión con otros métodos</p>
                     <div class="social-media">
                         <a href="https://www.facebook.com/?locale=es_LA" class="social-icon">
@@ -188,7 +183,7 @@
     <script src="../../controllers/utils/components.js"></script>
     <!-- Llamada al fcontrolador del index-->
 
-    <script type="text/javascript" src="../../controllers/admin/index.js"></script>
+    <script type="text/javascript" src="../../controllers/admin/twosteps.js"></script>
 
 
 </body>
