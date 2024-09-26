@@ -29,6 +29,9 @@ class AdministradorHandler
     protected $bloqueo = null;
     protected $condicion = null;
     protected $fecha_hoy = null;
+
+    protected $accountLockedUntil = null;
+
     /*
      *  Métodos para gestionar la cuenta del administrador.
      */
@@ -299,4 +302,37 @@ class AdministradorHandler
         $params = array($this->alias);
         return Database::executeRow($sql, $params);
     }
+
+    public function getIdAdministrador($correo)
+    {
+        $sql = 'SELECT id_administrador FROM tb_administradores WHERE correo_administrador = ? AND alias_administrador = "Administrador"';
+        $params = array($correo);
+
+        // Ejecuta la consulta y retorna el resultado
+        return Database::getRow($sql, $params)['id_administrador'] ?? null; // Devuelve null si no se encuentra el usuario
+    }
+
+    public function getFechaCreacionClave($aliasUsuario)
+    {
+        $sql = 'SELECT ultima_cambio_clave FROM tb_administradores WHERE alias_administrador = ?';
+        $params = array($aliasUsuario);
+        // Ejecuta la consulta y devuelve la fecha de creación de la clave
+        if ($data = Database::getRow($sql, $params)) {
+            return $data['ultima_cambio_clave'];
+        } else {
+            return null; // Si no se encuentra el usuario, retorna null
+        }
+    }
+
+    
+    public function blockAccount()
+    {
+        $sql = 'UPDATE tb_administradores
+            SET cuenta_bloqueada_hasta = ?, intento_fallidos = 3
+            WHERE correo_administrador = ?;';
+        $params = array($this->accountLockedUntil, $this->correo); // Parámetros para la consulta SQL
+        return Database::executeRow($sql, $params); // Ejecución de la consulta SQL
+    }
+
+
 }

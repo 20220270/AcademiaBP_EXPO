@@ -105,6 +105,16 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Alias de administrador indefinido';
                 }
                 break;
+            case 'getUserData':
+                $_POST = Validator::validateForm($_POST);
+                if (!$usuario->setCorreo($_POST['usuarioAdmin'])) {
+                    $result['error'] = $usuario->getDataError();
+                } elseif ($result['dataset'] = $usuario->getUserData()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Usuario inexistente';
+                }
+                break;
             case 'logOut':
                 if (session_destroy()) {
                     $result['status'] = 1;
@@ -207,6 +217,30 @@ if (isset($_GET['action'])) {
             case 'logIn':
                 $_POST = Validator::validateForm($_POST);
 
+                // Comprobar si la contraseña ha expirado
+                $fechaCreacionClave = $usuario->getFechaCreacionClave($_POST['usuarioAdmin']); // Asegúrate de que este valor sea correcto
+                $fechaCreacionClave = date('Y-m-d H:i:s', strtotime($fechaCreacionClave)); // Formato de la fecha de creación
+                $fechaLimite = date('Y-m-d H:i:s', strtotime($fechaCreacionClave . ' + 90 days'));
+
+                // Obtener la fecha y hora actual en el mismo formato
+                $fechaActual = date('Y-m-d H:i:s');
+
+                // Comparar las fechas
+                if (new DateTime($fechaActual) > new DateTime($fechaLimite)) {
+                    $result['error'] = 'Su contraseña ha expirado. Por favor, cambie su contraseña.'; // Mensaje de error
+                    break;
+                } else {
+                    // Comprobar si el usuario existe y las credenciales son correctas
+                    if ($usuario->checkUser($_POST['usuarioAdmin'], $_POST['contraseñaAdmin'])) {
+                        // Aquí solo se crea la sesión si la contraseña no ha expirado
+                        $_SESSION['idAdministrador'] = $usuario->getIdAdministrador($_POST['usuarioAdmin']); // Asegúrate de que esta función retorne el ID correcto
+                        $result['status'] = 1; // Indicar que se ha iniciado sesión correctamente
+                        $result['message'] = 'Autenticación correcta';
+                    } else {
+                        $result['error'] = 'Credenciales incorrectas'; // Mensaje de error para credenciales incorrectas
+                    }
+                }
+
                 // Verificar si el usuario existe
                 if ($administrador->checkUserExists($_POST['usuarioAdmin'])) {
                     // Obtener intentos fallidos y el tiempo de bloqueo
@@ -269,6 +303,39 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'Contraseña actualizada correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al actualizar la contraseña';
+                }
+                break;
+            case 'resetFailedAttempts':
+                $_POST = Validator::validateForm($_POST);
+                if (!$usuario->setCorreo($_POST['usuarioAdmin'])) {
+                    $result['error'] = 'Usuario incorrecto';
+                } elseif ($result['dataset'] = $usuario->resetFailedAttempts()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Usuario inexistente';
+                }
+                break;
+            case 'blockAccount':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$usuario->setCorreo($_POST['usuarioAdmin']) or
+                    !$usuario->setAccountLockedUntil($_POST['accountLockedUntil'])
+                ) {
+                    $result['error'] = 'Ocurrio un error al recibir el correo y el tiempo.';
+                } elseif ($result['dataset'] = $usuario->blockAccount()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Ocurrio un error al intentar bloquear la cuenta.';
+                }
+                break;
+            case 'incrementFailedAttempts':
+                $_POST = Validator::validateForm($_POST);
+                if (!$usuario->setCorreo($_POST['usuarioAdmin'])) {
+                    $result['error'] = 'Usuario incorrecto';
+                } elseif ($result['dataset'] = $usuario->incrementFailedAttempts()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Usuario inexistente';
                 }
                 break;
             case 'checkEmail':
