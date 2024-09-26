@@ -58,7 +58,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen categorias registrados';
+                    $result['error'] = 'No existen categorias registradas';
                 }
                 break;
 
@@ -67,7 +67,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen categorias registrados';
+                    $result['error'] = 'No existen categorias registradas';
                 }
                 break;
 
@@ -164,7 +164,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen categorias registrados';
+                    $result['error'] = 'No existen asignaciones de categorias y horarios registradas';
                 }
                 break;
 

@@ -43,7 +43,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen datos registrados';
+                    $result['error'] = 'No existen asignaciones de staff y categorías registradas';
                 }
                 break;
             case 'readOne':

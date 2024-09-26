@@ -170,6 +170,17 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+                case 'resetFailedAttempts':
+                    $_POST = Validator::validateForm($_POST);
+                    if (!$administrador->setCorreo($_POST['usuarioAdmin'])) {
+                        $result['error'] = 'Usuario incorrecto';
+                    } elseif ($result['dataset'] = $administrador->resetFailedAttempts(!$administrador->setCorreo($_POST['usuarioAdmin']))) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Usuario inexistente';
+                    }
+                    break;
+
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
@@ -307,9 +318,9 @@ if (isset($_GET['action'])) {
                 break;
             case 'resetFailedAttempts':
                 $_POST = Validator::validateForm($_POST);
-                if (!$usuario->setCorreo($_POST['usuarioAdmin'])) {
+                if (!$administrador->setCorreo($_POST['usuarioAdmin'])) {
                     $result['error'] = 'Usuario incorrecto';
-                } elseif ($result['dataset'] = $usuario->resetFailedAttempts()) {
+                } elseif ($result['dataset'] = $administrador->resetFailedAttempts(!$administrador->setCorreo($_POST['usuarioAdmin']))) {
                     $result['status'] = 1;
                 } else {
                     $result['error'] = 'Usuario inexistente';
@@ -355,6 +366,17 @@ if (isset($_GET['action'])) {
                     echo json_encode(array('status' => 0, 'message' => 'No se proporcionó un correo electrónico.'));
                 }
                 break;
+
+                case 'getUserData':
+                    $_POST = Validator::validateForm($_POST);
+                    if (!$administrador->setAlias($_POST['usuarioAdmin'])) {
+                        $result['error'] = $administrador->getDataError();
+                    } elseif ($result['dataset'] = $administrador->getUserData()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Usuario inexistente';
+                    }
+                    break;
 
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';

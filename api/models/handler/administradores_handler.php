@@ -338,8 +338,8 @@ class AdministradorHandler
     {
         $sql = 'SELECT *
                 FROM tb_administradores
-                WHERE correo_administrador = ?';
-        $params = array($this->correo);
+                WHERE alias_administrador = ?';
+        $params = array($this->alias);
         return Database::getRow($sql, $params);
     }
 
