@@ -334,5 +334,13 @@ class AdministradorHandler
         return Database::executeRow($sql, $params); // Ejecución de la consulta SQL
     }
 
+    public function getUserData()
+    {
+        $sql = 'SELECT *
+                FROM tb_administradores
+                WHERE correo_administrador = ?';
+        $params = array($this->correo);
+        return Database::getRow($sql, $params);
+    }
 
 }

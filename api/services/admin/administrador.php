@@ -107,9 +107,9 @@ if (isset($_GET['action'])) {
                 break;
             case 'getUserData':
                 $_POST = Validator::validateForm($_POST);
-                if (!$usuario->setCorreo($_POST['usuarioAdmin'])) {
-                    $result['error'] = $usuario->getDataError();
-                } elseif ($result['dataset'] = $usuario->getUserData()) {
+                if (!$administrador->setCorreo($_POST['usuarioAdmin'])) {
+                    $result['error'] = $administrador->getDataError();
+                } elseif ($result['dataset'] = $administrador->getUserData()) {
                     $result['status'] = 1;
                 } else {
                     $result['error'] = 'Usuario inexistente';
@@ -217,8 +217,7 @@ if (isset($_GET['action'])) {
             case 'logIn':
                 $_POST = Validator::validateForm($_POST);
 
-                // Comprobar si la contraseña ha expirado
-                $fechaCreacionClave = $usuario->getFechaCreacionClave($_POST['usuarioAdmin']); // Asegúrate de que este valor sea correcto
+                $fechaCreacionClave = $administrador->getFechaCreacionClave($_POST['usuarioAdmin']); // Asegúrate de que este valor sea correcto
                 $fechaCreacionClave = date('Y-m-d H:i:s', strtotime($fechaCreacionClave)); // Formato de la fecha de creación
                 $fechaLimite = date('Y-m-d H:i:s', strtotime($fechaCreacionClave . ' + 90 days'));
 
@@ -231,15 +230,16 @@ if (isset($_GET['action'])) {
                     break;
                 } else {
                     // Comprobar si el usuario existe y las credenciales son correctas
-                    if ($usuario->checkUser($_POST['usuarioAdmin'], $_POST['contraseñaAdmin'])) {
+                    if ($administrador->checkUser($_POST['usuarioAdmin'], $_POST['contraseñaAdmin'])) {
                         // Aquí solo se crea la sesión si la contraseña no ha expirado
-                        $_SESSION['idAdministrador'] = $usuario->getIdAdministrador($_POST['usuarioAdmin']); // Asegúrate de que esta función retorne el ID correcto
+                        $_SESSION['idAdministrador'] = $administrador->getIdAdministrador($_POST['usuarioAdmin']); // Asegúrate de que esta función retorne el ID correcto
                         $result['status'] = 1; // Indicar que se ha iniciado sesión correctamente
                         $result['message'] = 'Autenticación correcta';
                     } else {
                         $result['error'] = 'Credenciales incorrectas'; // Mensaje de error para credenciales incorrectas
                     }
                 }
+
 
                 // Verificar si el usuario existe
                 if ($administrador->checkUserExists($_POST['usuarioAdmin'])) {
