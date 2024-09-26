@@ -39,53 +39,22 @@ class AdministradorHandler
 
      public function checkUser($username, $password)
      {
-         $sql = 'SELECT id_administrador, alias_administrador, clave_administrador, ultima_cambio_clave, intentos_administrador, bloqueado_hasta
+         $sql = 'SELECT id_administrador, alias_administrador, clave_administrador
                  FROM tb_administradores
-                 WHERE alias_administrador = ?';
+                 WHERE  alias_administrador = ?';
          $params = array($username);
-     
          if (!($data = Database::getRow($sql, $params))) {
              return false;
-         }
-     
-         // Verificar si la cuenta está bloqueada
-         if ($data['bloqueado_hasta'] && time() < strtotime($data['bloqueado_hasta'])) {
-             return 'bloqueado';
-         }
-     
-         // Verificar la contraseña
-         if (password_verify($password, $data['clave_administrador'])) {
-             
-             // Verificar si la contraseña ha expirado
-             $fechaCambio = strtotime($data['ultima_cambio_clave']);
-             $fechaLimite = $fechaCambio + (90 * 24 * 60 * 60);
-     
-             if (time() > $fechaLimite) {
-                 return 'expirada';
-             }
-     
-             // Resetear intentos fallidos
-             $sql = 'UPDATE tb_administradores SET intentos_administrador = 0, bloqueado_hasta = NULL WHERE id_administrador = ?';
-             $params = array($data['id_administrador']);
-             Database::executeRow($sql, $params);
-     
+         } elseif (password_verify($password, $data['clave_administrador'])) {
+             $_SESSION['idAdministrador'] = $data['id_administrador'];
+             $_SESSION['aliasAdministrador'] = $data['alias_administrador'];
              return true;
          } else {
-             // Incrementar intentos fallidos si la contraseña es incorrecta
-             $intentos_fallidos = $data['intentos_administrador'] + 1;
-             $bloqueado_hasta = null;
-     
-             if ($intentos_fallidos >= 3) {
-                 $bloqueado_hasta = date('Y-m-d H:i:s', strtotime('+24 hours'));
-             }
-     
-             $sql = 'UPDATE tb_administradores SET intentos_administrador = ?, bloqueado_hasta = ? WHERE id_administrador = ?';
-             $params = array($intentos_fallidos, $bloqueado_hasta, $data['id_administrador']);
-             Database::executeRow($sql, $params);
-     
-             return $bloqueado_hasta ? 'bloqueado' : false;
+             return false;
          }
      }
+ 
+     
      
 
 
