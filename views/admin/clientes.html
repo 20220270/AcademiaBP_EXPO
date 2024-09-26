@@ -133,7 +133,7 @@
                                     <!-- Label e input para agregar el DUI -->
                                     <label class="form-label">Dui:</label>
                                     <input type="text" class="form-control mb-2" id="duiCliente" name="duiCliente"
-                                        required>
+                                        required maxlength="10" oninput="this.value = this.value.replace(/[^0-9-]/g, '')" pattern="[0-9-]+">
                                 </div>
 
                                 <div class="mb-2">
