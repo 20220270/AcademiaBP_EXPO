@@ -1,7 +1,6 @@
 const ALUMNOS_API = 'services/admin/alumnos.php';
 const PRODUCTOS_API = 'services/admin/productos.php';
 const COMPRAS_API = 'services/admin/compras.php';
-const ADMINISTRADOR_API = 'services/admin/administrador.php';
 
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');

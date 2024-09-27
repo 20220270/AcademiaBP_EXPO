@@ -273,6 +273,7 @@ if (isset($_GET['action'])) {
 
                             $result['status'] = 1;
                             $result['message'] = 'Autenticación correcta';
+                            $administrador->updateLastLogin();
                         } else {
                             // Incrementar los intentos fallidos
                             $administrador->incrementFailedAttempts($_POST['usuarioAdmin']);
