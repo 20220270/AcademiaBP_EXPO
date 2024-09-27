@@ -187,4 +187,10 @@ class AdministradorData extends AdministradorHandler
     {
         return $this->filename;
     }
+
+    public function setAccountLockedUntil($value)
+    {
+        $this->accountLockedUntil = $value;
+        return true;
+    }
 }
