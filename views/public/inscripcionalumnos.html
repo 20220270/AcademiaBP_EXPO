@@ -31,14 +31,14 @@
                 <!-- Contenedor para agrupar Nombre y Apellido en la misma línea -->
 
 
-                <input type="text" id="nombreAlumno" name="nombreAlumno" placeholder="Nombres" class="col-lg-11 col-md-11 col-sm-12 col-12 mb-2" required>
+                <input type="text" autocomplete="off" id="nombreAlumno" name="nombreAlumno" placeholder="Nombres" class="col-lg-11 col-md-11 col-sm-12 col-12 mb-2" required>
 
 
-                <input type="text" id="apellidoAlumno" name="apellidoAlumno" placeholder="Apellidos" class="col-lg-11 col-md-11 col-sm-12 col-12 mb-2" required>
+                <input type="text" autocomplete="off" id="apellidoAlumno" name="apellidoAlumno" placeholder="Apellidos" class="col-lg-11 col-md-11 col-sm-12 col-12 mb-2" required>
 
 
 
-                <input type="date" id="fechaNacimiento" name="fechaNacimiento"
+                <input type="date" autocomplete="off" id="fechaNacimiento" name="fechaNacimiento"
                     class="col-lg-11 col-md-11 col-sm-12 col-12 mb-2" required onchange="validarFechaNacimiento()">
 
                 <div class="col-sm-12 col-md-11 mb-2">
@@ -61,7 +61,7 @@
                 <div class="col-sm-12 col-md-11 mb-2">
                     <label for="fotoAlumno" class="col-sm-7 col-form-label">Una foto de su hijo (Campo
                         opcional):</label>
-                    <input type="file" id="fotoAlumno" name="fotoAlumno"
+                    <input autocomplete="off" type="file" id="fotoAlumno" name="fotoAlumno"
                         class="col-lg-12 col-md-11 col-sm-12 col-12 mb-2">
                 </div>
 

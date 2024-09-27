@@ -67,36 +67,36 @@
                                 <div class="row g-3">
                                     <input id="idCliente" type="text" name="idCliente" class="form-control" hidden>
                                     <div class="col-sm-12 col-md-10">
-                                        <label for="nombreCliente" class="form-label">Nombre:</label>
-                                        <input id="nombreCliente" type="text" name="nombreCliente" class="form-control"
+                                        <label for="nombreCliente" class="form-label" >Nombre:</label>
+                                        <input autocomplete="off" id="nombreCliente" type="text" name="nombreCliente" class="form-control"
                                             required oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                     </div>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="apellidoCliente" class="form-label">Apellido:</label>
-                                        <input id="apellidoCliente" type="text" name="apellidoCliente"
+                                        <input autocomplete="off" id="apellidoCliente" type="text" name="apellidoCliente"
                                             class="form-control" required
                                             oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                     </div>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="duiCliente" class="form-label">Dui:</label>
-                                        <input id="duiCliente" type="text" name="duiCliente" class="form-control"
+                                        <input autocomplete="off" id="duiCliente" type="text" name="duiCliente" class="form-control"
                                             required oninput="this.value = this.value.replace(/[^0-9-]/g, '')"
                                             pattern="[0-9-]+" maxlength="10">
                                     </div>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="correoCliente" class="form-label">Correo:</label>
-                                        <input id="correoCliente" type="email" name="correoCliente" class="form-control"
+                                        <input autocomplete="off" id="correoCliente" type="email" name="correoCliente" class="form-control"
                                             required>
                                     </div>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="telefonoCliente" class="form-label">Teléfono:</label>
-                                        <input id="telefonoCliente" type="text" name="telefonoCliente"
+                                        <input autocomplete="off" id="telefonoCliente" type="text" name="telefonoCliente"
                                             class="form-control" required maxlength="9" pattern="[0-9\-]*"
                                             oninput="this.value = this.value.replace(/[^\d-]/g, '');">
                                     </div>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="direccionCliente" class="form-label">Dirección:</label>
-                                        <input id="direccionCliente" type="text" name="direccionCliente"
+                                        <input autocomplete="off" id="direccionCliente" type="text" name="direccionCliente"
                                             class="form-control" required>
                                     </div>
                                 </div>

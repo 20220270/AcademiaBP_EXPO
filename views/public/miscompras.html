@@ -31,7 +31,7 @@
                            <form class="d-flex flex-grow-1 mt-1" id="searchForm">
                                 <div class="buscador mx-auto position-relative">
                                     <i class="fas fa-microphone search-icon microphone-button" id="microphone-button"></i>
-                                    <input class="busc light-table-filter" data-table="order-table" type="text"
+                                    <input class="busc light-table-filter" autocomplete="off" data-table="order-table" type="text"
                                         placeholder="Busque por producto o fecha de compra" id="Buscador" name="search">
                                     <div class="btna">
                                         <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
@@ -86,8 +86,8 @@
                             <!--Formulario donde se ingresara la valoracion-->
                             <form id="formularioValoracion">
                                 <div class="col col-lg-12">
-                                    <input type="hidden" id="idDetalle" name="idDetalle">
-                                    <input type="hidden" id="idProducto" name="idProducto">
+                                    <input type="hidden" autocomplete="off"id="idDetalle" name="idDetalle">
+                                    <input type="hidden" autocomplete="off" id="idProducto" name="idProducto">
                                     <div class="rating">
                                         <i class="bi bi-star-fill star"></i>
                                         <i class="bi bi-star-fill star"></i>
@@ -96,12 +96,12 @@
                                         <i class="bi bi-star-fill star"></i>
 
                                     </div>
-                                    <input class="mt-3" type="text" name="calificacion" id="calificacion" readonly>
+                                    <input class="mt-3" type="text" autocomplete="off" name="calificacion" id="calificacion" readonly>
                                 </div>
                                 <!--texto que informa que se agrega el comentario de la valoracion-->
                                 <div class="col col-lg-12 mt-2 mb-4">
                                     <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Leave a comment here"
+                                        <textarea class="form-control" autocomplete="off" placeholder="Leave a comment here"
                                             id="comentario" name="comentario" style="height: 100px" required></textarea>
                                         <label for="floatingTextarea2">Agrega tu comentario</label>
                                     </div>
