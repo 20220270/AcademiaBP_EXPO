@@ -19,3 +19,29 @@ La Academia BP se destaca por brindar una experiencia emocionante y accesible pa
 * PascalCase: Se utilizan en el nombre de las clases
 * CamelCase: Se utilizan principalmente en las funciones.
 * lowercase: Se utilizan principalmente en los atributos.
+
+#OWASP Top 10 - 2021:
+
+Cryptographic Failures
+
+son vulnerabilidades relacionadas con la implementación y el uso inadecuado de algoritmos y prácticas criptográficas en aplicaciones.
+Estas fallas pueden comprometer la confidencialidad, integridad y autenticidad de la información y en nuestro proyecto hemos aplicado un metodo de cifrado para no guardar las contraseñas como texto plano.
+
+Insecure Design
+
+en el contexto del OWASP  la falta de HTTPS es considerado como insecure design debido a que la aplicacon web dejara de proteger los datos que estan en transito y 
+esto la puede volver vulnerable a ataques y pueden pasar consecuencias como que se expongan datos sensibles de los usuarios.
+
+https://www.academiabp.website/AcademiaBP_EXPO/views/admin/menu.html
+
+Identification and Authentication Failure
+
+Esta vulnerabilidad se refiere al problema en la gestión de identidades y en el proceso de autenticación, lo que puede facilitar un ataque.
+
+No limitar el número de intentos de inicio de sesión permite a un atacante probar múltiples combinaciones de usuario y contraseña, aumentando las posibilidades de acceder a cuentas de usuario, 
+por eso en nuestro proyecto hemos implementado que el usuario tenga tres intentos para poder ingresar en los inicios de sesion, si se equivoca su cuenta sera bloqueada por 24 horas.
+
+
+
+
+
