@@ -20,7 +20,7 @@ La Academia BP se destaca por brindar una experiencia emocionante y accesible pa
 * CamelCase: Se utilizan principalmente en las funciones.
 * lowercase: Se utilizan principalmente en los atributos.
 
-#OWASP Top 10 - 2021:
+# OWASP Top 10 - 2021:
 
 Cryptographic Failures
 
