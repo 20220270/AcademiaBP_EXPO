@@ -280,6 +280,7 @@ class AlumnosHandler
         COUNT(*) AS total_inscripciones    -- Total de inscripciones en ese año y mes
     FROM 
         tb_alumnos
+        WHERE estado_alumno = 'Activo'
     GROUP BY 
         YEAR(fecha_inscripcion),  -- Agrupa por año
         MONTH(fecha_inscripcion)) AS inscripciones  -- Agrupa por mes
