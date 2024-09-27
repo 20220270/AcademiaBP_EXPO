@@ -354,5 +354,14 @@ class AdministradorHandler
     return Database::executeRow($sql, $params);
     }
 
+    public function updateLastLogin2()
+    {
+    $sql = 'UPDATE tb_administradores
+            SET ultima_sesion = NOW()
+            WHERE alias_administrador = ?';
+        $params = array($this->alias);
+        return Database::getRow($sql, $params);
+    }
+
 
 }

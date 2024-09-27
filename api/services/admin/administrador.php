@@ -247,7 +247,7 @@ if (isset($_GET['action'])) {
                         $_SESSION['idAdministrador'] = $administrador->getIdAdministrador($_POST['usuarioAdmin']); // Asegúrate de que esta función retorne el ID correcto
                         $result['status'] = 1; // Indicar que se ha iniciado sesión correctamente
                         $result['message'] = 'Autenticación correcta';
-                        $administrador->updateLastLogin();
+                        
                     } else {
                         $result['error'] = 'Credenciales incorrectas'; // Mensaje de error para credenciales incorrectas
                     }
@@ -273,7 +273,6 @@ if (isset($_GET['action'])) {
 
                             $result['status'] = 1;
                             $result['message'] = 'Autenticación correcta';
-                            $administrador->updateLastLogin();
                         } else {
                             // Incrementar los intentos fallidos
                             $administrador->incrementFailedAttempts($_POST['usuarioAdmin']);
