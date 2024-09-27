@@ -10,15 +10,18 @@ La Academia BP se destaca por brindar una experiencia emocionante y accesible pa
 
 # Estándares de programación utilizados en
 #JavaScipt:
-* SCREAMING_SNAKE_CASE: Se utilizan en las constantes.
+* SCREAMING_SNAKE_CASE: Se utilizan en los nombres de las constantes.
 * K&R Style (Kernighan and Ritchie): Se utiliza en la ubicación de los contenidos de if y else.
 * CamelCase: Se utilizan principalmente en los ID de los componentes, parametros y las funciones.
+* snake_case: Se utilizan para asignar los campos obtenidos de la base de datos
+* Sangría de 4 espacios
 
 #PHP:
 * SnakeCase: Se utiliza para identificar los nombres de los campos de la base
 * PascalCase: Se utilizan en el nombre de las clases
 * CamelCase: Se utilizan principalmente en las funciones.
 * lowercase: Se utilizan principalmente en los atributos.
+* UPPER CASE: Se utilizan en las consultas y peticiones a la base, como los SELECT, INSERT, DELETE y UPDATE
 
 # OWASP Top 10 - 2021:
 

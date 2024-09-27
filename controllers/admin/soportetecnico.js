@@ -82,6 +82,7 @@ const fillTable = async (form = null) => {
                     <h5 class="card-title fs-2 mb-2">ID: ${row.id_soporte}</h5>
                     <p class="card-text"><b>Mensaje:</b> ${row.mensaje}</p>
                     <p class="card-text"><b>Cliente que envió el mensaje:</b> ${row.cliente}</p>
+                    <p class="card-text"><b>Correo del cliente:</b> ${row.correo_cliente}</p>
                     <p class="card-text"><b>Estado del mensaje:</b> 
                         <span class="estado-mensaje">
                             ${row.estado_mensaje === "Pendiente" ? '<i class="far fa-check-circle"></i>' :

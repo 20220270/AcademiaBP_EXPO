@@ -81,7 +81,7 @@ class EntrenamientoData extends EntrenamientoHandler
      }
 
      public function setNombreLugar($value, $min = 2, $max = 100)
-{
+    {
     if (Validator::validateLength($value, $min, $max)) {
         $this->nombrelugar = $value;
         return true;
@@ -89,12 +89,15 @@ class EntrenamientoData extends EntrenamientoHandler
         $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
         return false;
     }
-}
+    }
 
 
-    public function setDireccionLugar($value, $min = 2, $max = 100)
+    public function setDireccionLugar($value, $min = 2, $max = 250)
     {
-        if (Validator::validateLength($value, $min, $max)) {
+        if (!Validator::validateString($value)) {
+            $this->data_error = 'La dirección contiene caracteres prohibidos';
+            return false;
+        } elseif(Validator::validateLength($value, $min, $max)) {
             $this->direccionlugar = $value;
             return true;
         } else {
