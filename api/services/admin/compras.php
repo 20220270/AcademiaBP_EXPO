@@ -30,7 +30,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen ordenes registradas';
+                    $result['error'] = 'No existen compras registradas';
                 }
                 break;
 
@@ -39,7 +39,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen ordenes registradas';
+                    $result['error'] = 'No existen compras registradas';
                 }
                 break;
 
@@ -49,7 +49,7 @@ if (isset($_GET['action'])) {
                 } elseif ($result['dataset'] = $ordenes->readAll3()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'Orden inexistente';
+                    $result['error'] = 'Compra inexistente';
                 }
                 break;
 
@@ -59,7 +59,7 @@ if (isset($_GET['action'])) {
                 } elseif ($result['dataset'] = $ordenes->readOne()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'Orden inexistente';
+                    $result['error'] = 'Compra inexistente';
                 }
                 break;
 
@@ -69,7 +69,7 @@ if (isset($_GET['action'])) {
                 } elseif ($result['dataset'] = $ordenes->readDetails()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'Detalle de orden inexistente';
+                    $result['error'] = 'Detalle de compra inexistente';
                 }
                 break;
 
@@ -83,9 +83,9 @@ if (isset($_GET['action'])) {
                     $result['error'] = $ordenes->getDataError();
                 } elseif ($ordenes->updateRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Estado de la orden modificado correctamente';
+                    $result['message'] = 'Estado de la compra modificado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar la orden';
+                    $result['error'] = 'Ocurrió un problema al modificar la compra';
                 }
                 break;
 
@@ -107,7 +107,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen ordenes registradas';
+                    $result['error'] = 'No existen compras registradas';
                 }
                 break;
             case 'ventasPredictGraph2':
@@ -115,7 +115,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen ordenes registradas';
+                    $result['error'] = 'No existen compras registradas';
                 }
                 break;
             case 'ventasPredictGraph3':
@@ -123,7 +123,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen ordenes registradas';
+                    $result['error'] = 'No existen compras registradas';
                 }
                 break;
             case 'ventasPredictGraph4':
@@ -131,7 +131,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen ordenes registradas';
+                    $result['error'] = 'No existen compras registradas';
                 }
                 break;
             case 'ventasPredictGraph5':
@@ -139,7 +139,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen ordenes registradas';
+                    $result['error'] = 'No existen compras registradas';
                 }
                 break;
 

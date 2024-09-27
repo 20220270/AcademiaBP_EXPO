@@ -117,6 +117,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'logOut':
                 if (session_destroy()) {
+                    $administrador->updateLastLogin(); //Después que se ha cerrado la sesión, se ejecuta el método que actualiza la última conección del usuario
                     $result['status'] = 1;
                     $result['message'] = 'Sesión eliminada correctamente';
                 } else {
@@ -170,16 +171,16 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                case 'resetFailedAttempts':
-                    $_POST = Validator::validateForm($_POST);
-                    if (!$administrador->setCorreo($_POST['usuarioAdmin'])) {
-                        $result['error'] = 'Usuario incorrecto';
-                    } elseif ($result['dataset'] = $administrador->resetFailedAttempts(!$administrador->setCorreo($_POST['usuarioAdmin']))) {
-                        $result['status'] = 1;
-                    } else {
-                        $result['error'] = 'Usuario inexistente';
-                    }
-                    break;
+            case 'resetFailedAttempts':
+                $_POST = Validator::validateForm($_POST);
+                if (!$administrador->setCorreo($_POST['usuarioAdmin'])) {
+                    $result['error'] = 'Usuario incorrecto';
+                } elseif ($result['dataset'] = $administrador->resetFailedAttempts(!$administrador->setCorreo($_POST['usuarioAdmin']))) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Usuario inexistente';
+                }
+                break;
 
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
@@ -246,6 +247,7 @@ if (isset($_GET['action'])) {
                         $_SESSION['idAdministrador'] = $administrador->getIdAdministrador($_POST['usuarioAdmin']); // Asegúrate de que esta función retorne el ID correcto
                         $result['status'] = 1; // Indicar que se ha iniciado sesión correctamente
                         $result['message'] = 'Autenticación correcta';
+                        $administrador->updateLastLogin();
                     } else {
                         $result['error'] = 'Credenciales incorrectas'; // Mensaje de error para credenciales incorrectas
                     }
@@ -367,16 +369,16 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                case 'getUserData':
-                    $_POST = Validator::validateForm($_POST);
-                    if (!$administrador->setAlias($_POST['usuarioAdmin'])) {
-                        $result['error'] = $administrador->getDataError();
-                    } elseif ($result['dataset'] = $administrador->getUserData()) {
-                        $result['status'] = 1;
-                    } else {
-                        $result['error'] = 'Usuario inexistente';
-                    }
-                    break;
+            case 'getUserData':
+                $_POST = Validator::validateForm($_POST);
+                if (!$administrador->setAlias($_POST['usuarioAdmin'])) {
+                    $result['error'] = $administrador->getDataError();
+                } elseif ($result['dataset'] = $administrador->getUserData()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Usuario inexistente';
+                }
+                break;
 
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';

@@ -30,7 +30,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen valoraciones registrados';
+                    $result['error'] = 'No existen valoraciones registradas';
                 }
                 break;
             case 'readOne':

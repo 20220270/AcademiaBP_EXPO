@@ -156,6 +156,8 @@ SEARCH_FORM.addEventListener('submit', (event) => {
                             <p class="card-text">Nivel de usuario: ${row.nivel}</p>
                             <p class="card-text">Estado: ${row.estado_adminstrador}</p>
                             <p class="card-text"><small class="text-body-secondary">Registrado desde: ${row.fecha_registro}</small></p>
+                            <p class="card-text"><small class="text-body-secondary">Última sesión: ${row.ultima_sesion}</small></p>
+                            
                         </div>
                     </div>
                 </div>

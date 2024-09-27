@@ -10,6 +10,7 @@ const PROFILE_FORM = document.getElementById('profileForm'),
     NIVEL_ADMINISTRADOR = document.getElementById('nivelAdministrador'),
     FECHA_REGISTRO = document.getElementById('fecharegistroAdmin'),
     ALIAS_ADMINISTRADOR = document.getElementById('aliasAdministrador');
+    ULTIMA_CONECCION = document.getElementById('ultimaConeccion');
     FOTO_ADMINISTRADOR = document.getElementById('imagen');
 // Constante para establecer la modal de cambiar contraseña.
 const PASSWORD_MODAL = new bootstrap.Modal('#passwordModal');
@@ -31,6 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         FECHA_REGISTRO.value = ROW.fecha_registro;
         NIVEL_ADMINISTRADOR.value = ROW.nivel;
         ALIAS_ADMINISTRADOR.value = ROW.alias_administrador;
+        ULTIMA_CONECCION.value = ROW.ultima_sesion;
         FOTO_ADMINISTRADOR.src = `${SERVER_URL}images/administradores/${ROW.foto_administrador}`; //Mandamos a llamar la foto del administrador
     } else {
         sweetAlert(2, DATA.error, null);

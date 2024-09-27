@@ -191,6 +191,7 @@ class CategoriasAlumnosHandler
         descripcion_nivel,
         imagen_nivel,
         imagen_categoria,
+        id_categoria_horario,
         CONCAT(nombre_lugar, ' ', dia_entrenamiento, ' ', TIME_FORMAT(hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(hor_fin, '%h:%i %p')) AS id_horario_lugar
         FROM 
         tb_categorias_horarios

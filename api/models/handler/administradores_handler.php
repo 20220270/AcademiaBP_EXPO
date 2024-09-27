@@ -95,7 +95,8 @@ class AdministradorHandler
 
     public function readProfile()
     {
-        $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, foto_administrador, nivel, fecha_registro, estado_adminstrador
+        $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, foto_administrador, nivel, fecha_registro, estado_adminstrador,
+                ultima_sesion
                 FROM tb_administradores
                 INNER JOIN tb_niveles_administradores USING(id_nivel)
                 WHERE id_administrador = ?';
@@ -157,7 +158,8 @@ class AdministradorHandler
 
     public function readAll()
     {
-        $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, nivel, estado_adminstrador, fecha_registro, foto_administrador
+        $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, nivel, estado_adminstrador, fecha_registro, foto_administrador,
+        ultima_sesion
         FROM tb_administradores
         INNER JOIN tb_niveles_administradores USING(id_nivel)
                 ORDER BY id_administrador';
@@ -342,5 +344,15 @@ class AdministradorHandler
         $params = array($this->alias);
         return Database::getRow($sql, $params);
     }
+
+    public function updateLastLogin()
+    {
+    $sql = 'UPDATE tb_administradores
+            SET ultima_sesion = NOW()
+            WHERE id_administrador = ?';
+    $params = array($_SESSION['idAdministrador']);
+    return Database::executeRow($sql, $params);
+    }
+
 
 }

@@ -101,17 +101,19 @@ class CategoriaStaffHandler
         $sql = "SELECT
     id_categoria_horario,
     categoria
-    FROM 
+FROM 
     tb_categorias_horarios
-    INNER JOIN 
+INNER JOIN 
     tb_categorias_alumnos USING (id_categoria_alumno)
-     INNER JOIN 
+INNER JOIN 
     tb_horarios_lugares USING (id_horario_lugar)
-    INNER JOIN 
+INNER JOIN 
     tb_lugares_entrenamientos USING (id_lugar)
-   INNER JOIN 
+INNER JOIN 
     tb_horarios_entrenamientos USING (id_horario)
-    GROUP BY categoria";
+GROUP BY 
+    id_categoria_horario, categoria;
+";
         return Database::getRows($sql);
     }
 

@@ -90,8 +90,8 @@ LOGIN.addEventListener('submit', async (event) => {
     if (DATA.status) {
         const RESULT_RESET = await fetchData(USER_API, 'resetFailedAttempts', FORM2); // Restablecer intentos fallidos
         if (RESULT_RESET.status) {
-            console.log('// Restablecer intentos fallidos, inicia sesión');
-            location.href = 'Menu.html'; // Redirigir al panel principal
+            
+            location.href = 'menu.html'; // Redirigir al panel principal
         }
     } else {
         if (DATA.error != 'Credenciales incorrectas') {
