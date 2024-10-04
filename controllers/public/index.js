@@ -93,6 +93,15 @@ const SOPORTETECNICO_API = 'services/public/soportetecnico.php';
             });
         } else {
             // Manejar el caso donde no hay datos o ha ocurrido un error.
+            // Se presenta un mensaje de error cuando no existen datos para mostrar.
+        document.getElementById('mainTitle').textContent = DATA.error;
+        // Se limpia el contenido cuando no hay datos para mostrar.
+        PRODUCTOS.innerHTML= `
+        <div class="center-content">
+            <img src="../../resources/images/no-hay-resultados.png" alt="No comments available" height="80px" width="80px">
+            <b>Aún no hay productos en esta sección</b>
+        </div>
+        `;
         }
         
         
