@@ -82,9 +82,10 @@ class EntrenamientoHandler
 
     public function readAllHorarios()
     {
-        $sql = 'SELECT id_horario, dia_entrenamiento, hora_inicio, hor_fin
+        $sql = "SELECT id_horario, dia_entrenamiento, hora_inicio, hor_fin, 
+                CONCAT(dia_entrenamiento, ' ', TIME_FORMAT(hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(hor_fin, '%h:%i %p')) AS horario
                 FROM tb_horarios_entrenamientos
-                ORDER BY id_horario';
+                ORDER BY id_horario";
         return Database::getRows($sql);
     }
 
@@ -195,10 +196,11 @@ class EntrenamientoHandler
 
     public function readAllLugaresHorarios()
     {
-        $sql = 'SELECT id_horario_lugar, nombre_lugar, dia_entrenamiento, hora_inicio, hor_fin FROM tb_horarios_lugares
+        $sql = "SELECT id_horario_lugar, nombre_lugar, dia_entrenamiento, hora_inicio, hor_fin,
+        CONCAT(nombre_lugar, ' ', dia_entrenamiento, ' ', TIME_FORMAT(hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(hor_fin, '%h:%i %p')) AS horariolugar FROM tb_horarios_lugares
                 INNER JOIN tb_horarios_entrenamientos USING(id_horario)
                 INNER JOIN tb_lugares_entrenamientos USING(id_lugar)
-                ORDER BY id_horario_lugar';
+                ORDER BY id_horario_lugar";
         return Database::getRows($sql);
     }
 

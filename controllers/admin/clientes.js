@@ -90,13 +90,13 @@ const fillTable = async (form = null) => {
                 <td>${row.fecha_registro}</td>
                 <td>${row.estado_cliente}</td>
                 <td>
-                    <button type="button" class="btn btn-sm" onclick="openUpdate(${row.id_cliente})">
+                    <button type="button" class="btn btn-sm" onclick="openUpdate(${row.id_cliente}, '${row.nombre_completo}')"  title="Actualizar cliente ${row.nombre_completo}">
                         <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                     </button>
-                    <button type="button" class="btn btn-sm" onclick="openDelete(${row.id_cliente})">
+                    <button type="button" class="btn btn-sm" onclick="openDelete(${row.id_cliente}, '${row.nombre_completo}')"  title="Eliminar cliente ${row.nombre_completo}">
                         <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                     </button>
-                    <button type="button" class="btn btn-sm" onclick="openGraph(${row.id_cliente}, this)">
+                    <button type="button" class="btn btn-sm" onclick="openGraph(${row.id_cliente}, this)"  title="Generar gráfico de compras del cliente ${row.nombre_completo}">
                         <img src="../../resources/images/graph.png" alt="" width="20px" height="20px" class="mb-1">
                     </button>
                 </td>
@@ -118,7 +118,7 @@ const openCreate = () => {
     SAVE_FORM.reset();
 }
 
-const openUpdate = async (id) => {
+const openUpdate = async (id, nombre) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idCliente', id);
@@ -128,7 +128,7 @@ const openUpdate = async (id) => {
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar cliente';
+        MODAL_TITLE.textContent = 'Actualizar cliente ' + nombre;
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
@@ -157,9 +157,9 @@ const openUpdate = async (id) => {
 *   Parámetros: id (identificador del registro seleccionado).
 *   Retorno: ninguno.
 */
-const openDelete = async (id) => {
+const openDelete = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar este cliente de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar este cliente: ' +nombre+ ' de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.

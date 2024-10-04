@@ -103,10 +103,10 @@ const fillTable = async (form = null) => {
                     <p class="card-text"><b>Encargado de la categoría: </b>${row.Staff}</p>
                     <p class="card-text"><small class="text-body-secondary">Inscrito desde: ${row.fecha_inscripcion}</small></p>
                     <div class="d-flex justify-content-center gap-2">
-                        <button type="button" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_alumno})">
+                        <button type="button" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_alumno})" title="Eliminar ${row.nombre}">
                             <img src="../../resources/images/btnEliminarIMG.png" alt="Eliminar" width="30px" height="30px" class="mb-1">
                         </button>
-                        <button type="button" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_alumno})">
+                        <button type="button" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_alumno})" title="Actualizar ${row.nombre}">
                             <img src="../../resources/images/btnActualizarIMG.png" alt="Actualizar" width="30px" height="30px" class="mb-1">
                         </button>
                     </div>

@@ -187,13 +187,13 @@ const fillTable = async (form = null) => {
                         <div class="container contendorBotones">
                             <div class="row gx-2 justify-content-end">
                                 <div class="col-auto">
-                                    <button type="button" class="btn btn-white mt-2" onclick="openUpdate(${row.id_horario})">
+                                    <button type="button" class="btn btn-white mt-2" onclick="openUpdate(${row.id_horario}, '${row.horario}')"  title="Actualizar horario ${row.horario}">
                                         <img src="../../resources/images/btnActualizarIMG.png" alt=""
                                             width="30px" height="30px" class="mb-1">
                                     </button>
                                 </div>
                                 <div class="col-auto">
-                                    <button type="button" class="btn btn-white mt-2" onclick="openDelete(${row.id_horario})">
+                                    <button type="button" class="btn btn-white mt-2" onclick="openDelete(${row.id_horario}, '${row.horario}')" title="Eliminar horario ${row.horario}">
                                         <img src="../../resources/images/btnEliminarIMG.png" alt=""
                                             width="30px" height="30px" class="mb-1">
                                     </button>
@@ -244,12 +244,12 @@ const fillTable2 = async (form = null) => {
                                         <div class="row gx-2 justify-content-center">
     
                                             <div class="col-auto">
-                                                <button type="button" class="btn btn-white mt-2" onclick="openUpdate2(${row.id_lugar})">
+                                                <button type="button" class="btn btn-white mt-2" onclick="openUpdate2(${row.id_lugar}, '${row.nombre_lugar}')"  title="Actualizar ${row.nombre_lugar}">
                                                     <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                                                 </button>
                                             </div>
                                             <div class="col-auto">
-                                                <button type="button" class="btn btn-white mt-2" onclick="openDelete2(${row.id_lugar})">
+                                                <button type="button" class="btn btn-white mt-2" onclick="openDelete2(${row.id_lugar}, '${row.nombre_lugar}')"  title="Eliminar ${row.nombre_lugar}">
                                                     <img src="../../resources/images/btnEliminarIMG.png" alt=""
                                                          width="30px" height="30px" class="mb-1">
                                                 </button>
@@ -259,7 +259,7 @@ const fillTable2 = async (form = null) => {
                                                 <!--Aquí le damos las coordenadas del estadio Cuscatlan,
                                                 obtenidas de la wikipedia y jugar con la posicion porque no son exactas las de la Wikipedia-->
                                                 <img src="../../resources/images/llegar.png" alt="..."
-                                                    width="20px" height="20px">
+                                                    width="20px" height="20px"  title="Ir a la ubicación">
                                                 </a>
                                             </div>
                                         </div>
@@ -317,13 +317,13 @@ const fillTable3 = async (form = null) => {
                                                     <div class="row gx-2 justify-content-end">
 
                                                         <div class="col-auto">
-                                                            <button type="button" class="btn btn-white mt-2" onclick="openUpdate3(${row.id_horario_lugar})">
+                                                            <button type="button" class="btn btn-white mt-2" onclick="openUpdate3(${row.id_horario_lugar}, '${row.horariolugar}')"  title="Actualizar asignación ${row.horariolugar}">
                                                                 <img src="../../resources/images/btnActualizarIMG.png"
                                                                     alt="" width="30px" height="30px" class="mb-1">
                                                             </button>
                                                         </div>
                                                         <div class="col-auto">
-                                                            <button type="button" class="btn btn-white mt-2" onclick="openDelete3(${row.id_horario_lugar})">
+                                                            <button type="button" class="btn btn-white mt-2" onclick="openDelete3(${row.id_horario_lugar}, '${row.horariolugar}')"  title="Eliminar asignación ${row.horariolugar}">
                                                                 <img src="../../resources/images/btnEliminarIMG.png"
                                                                     alt="" width="30px" height="30px" class="mb-1">
                                                             </button>
@@ -386,7 +386,7 @@ const openCreate3 = () => {
 
 
 
-const openUpdate = async (id) => {
+const openUpdate = async (id, nombre) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idHorario', id);
@@ -396,7 +396,7 @@ const openUpdate = async (id) => {
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar horario';
+        MODAL_TITLE.textContent = 'Actualizar horario ' + nombre;
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
@@ -410,7 +410,7 @@ const openUpdate = async (id) => {
     }
 }
 
-const openUpdate2 = async (id) => {
+const openUpdate2 = async (id, nombre) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idLugar', id);
@@ -420,7 +420,7 @@ const openUpdate2 = async (id) => {
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL2.show();
-        MODAL_TITLE2.textContent = 'Actualizar lugar de entrenamiento';
+        MODAL_TITLE2.textContent = 'Actualizar ' + nombre;
         // Se prepara el formulario.
         SAVE_FORM2.reset();
         // Se inicializan los campos con los datos.
@@ -434,7 +434,7 @@ const openUpdate2 = async (id) => {
     }
 }
 
-const openUpdate3 = async (id) => {
+const openUpdate3 = async (id, nombre) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idHorarioLugar', id);
@@ -444,7 +444,7 @@ const openUpdate3 = async (id) => {
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL3.show();
-        MODAL_TITLE3.textContent = 'Actualizar asignación de lugar y horario';
+        MODAL_TITLE3.textContent = 'Actualizar asignación ' + nombre;
         // Se prepara el formulario.
         SAVE_FORM3.reset();
         // Se inicializan los campos con los datos.
@@ -464,9 +464,9 @@ const openUpdate3 = async (id) => {
 *   Parámetros: id (identificador del registro seleccionado).
 *   Retorno: ninguno.
 */
-const openDelete = async (id) => {
+const openDelete = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar este horario de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar este horario: ' +nombre+', de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
@@ -486,9 +486,9 @@ const openDelete = async (id) => {
     }
 }
 
-const openDelete2 = async (id) => {
+const openDelete2 = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar este lugar de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar este lugar: ' +nombre+', de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
@@ -508,9 +508,9 @@ const openDelete2 = async (id) => {
     }
 }
 
-const openDelete3 = async (id) => {
+const openDelete3 = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar esta asignación de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar esta asignación: ' +nombre+' de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.

@@ -74,16 +74,15 @@ const fillTable = async (form = null) => {
         DATA.dataset.forEach(row => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
-            <td>${row.id_aliado}</td>
             <td>${row.nombre_aliado}</td>
             <td><img src="${SERVER_URL}images/aliados/${row.imagen_aliado}" class="card-img-top"></td>
             <td>
             <div class="d-flex justify-content-center gap-2">
-                <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_aliado})">
+                <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_aliado}, '${row.nombre_aliado}')" title="Eliminar ${row.nombre_aliado}">
                     <i class="bi bi-search"></i>
                         <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                 </button>
-                <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_aliado})">
+                <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_aliado}, '${row.nombre_aliado}')" title="Actualizar ${row.nombre_aliado}">
                     <i class="bi bi-x-square-fill"></i>
                         <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                 </button>
@@ -111,17 +110,18 @@ const openCreate = () => {
 *   Parámetros: id (identificador del registro seleccionado).
 *   Retorno: ninguno.
 */
-const openUpdate = async (id) => {
+const openUpdate = async (id, nombre) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idAliado', id);
+    FORM.append('nombreAliado', nombre);
     // Petición para obtener los datos del registro solicitado.
     const DATA = await fetchData(ALIADOS_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar aliado';
+        MODAL_TITLE.textContent = 'Actualizar ' + nombre;
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
@@ -139,9 +139,9 @@ const openUpdate = async (id) => {
 *   Parámetros: id (identificador del registro seleccionado).
 *   Retorno: ninguno.
 */
-const openDelete = async (id) => {
+const openDelete = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar la MARCA de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar el aliado ' +nombre+ ' de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.

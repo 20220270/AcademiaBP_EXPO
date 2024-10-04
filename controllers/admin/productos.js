@@ -127,11 +127,11 @@ const fillTable = async (form = null) => {
                             <p class="card-text"><small class="text-muted">Registrado desde: ${row.fecha_registro}</small></p>
                             
                             <div class="d-flex justify-content-center gap-1">
-                            <button type="submit" class="btn" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_producto})">
+                            <button type="submit" class="btn" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_producto}, '${row.nombre_producto}')" title="Eliminar ${row.nombre_producto}">
                             <i class="bi bi-search"></i>
                             <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                             </button>
-                            <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_producto})">
+                            <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_producto}, '${row.nombre_producto}')" title="Actualizar ${row.nombre_producto}">
                             <i class="bi bi-x-square-fill"></i>
                             <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                             </button>
@@ -175,11 +175,11 @@ const fillTable2 = async (form = null) => {
             <p class="card-text mt-2"><b>Existencias: </b> ${row.existencias_producto}</p>
             
             <div class="d-flex justify-content-center gap-1 mt-3">
-                <button type="submit" class="btn" id="btnEliminar" name="btnEliminar" onclick="openDelete2(${row.id_detalle_producto})">
+                <button type="submit" class="btn" id="btnEliminar" name="btnEliminar" onclick="openDelete2(${row.id_detalle_producto}, '${row.nombre_producto}')" title="Eliminar detalle de ${row.nombre_producto}">
                     <i class="bi bi-search"></i>
                     <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                 </button>
-                <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate2(${row.id_detalle_producto})">
+                <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate2(${row.id_detalle_producto}, '${row.nombre_producto}')" title="Actualizar detalle de ${row.nombre_producto}">
                     <i class="bi bi-x-square-fill"></i>
                     <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                 </button>
@@ -216,17 +216,18 @@ const openCreate2 = () => {
 }
 
 
-const openUpdate = async (id) => {
+const openUpdate = async (id, nombre) => {
     // Se define un objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idProducto', id);
+    FORM.append('nombreProducto', nombre);
     // Petición para obtener los datos del registro solicitado.
     const DATA = await fetchData(PRODUCTO_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar producto';
+        MODAL_TITLE.textContent = 'Actualizar ' + nombre;
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
@@ -244,17 +245,18 @@ const openUpdate = async (id) => {
     }
 }
 
-const openUpdate2 = async (id) => {
+const openUpdate2 = async (id, nombre) => {
     // Se define un objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idDetalleProducto', id);
+    FORM.append('nombreProducto', nombre);
     // Petición para obtener los datos del registro solicitado.
     const DATA = await fetchData(DETALLES_PRODUCTOS_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL2.show();
-        MODAL_TITLE2.textContent = 'Actualizar detalle';
+        MODAL_TITLE2.textContent = 'Actualizar detalle de ' + nombre;
         // Se prepara el formulario.
         SAVE_FORM2.reset();
         //ESTADO_PRODUCTO.disabled = false;
@@ -276,9 +278,9 @@ const openUpdate2 = async (id) => {
 *   Parámetros: id (identificador del registro seleccionado).
 *   Retorno: ninguno.
 */
-const openDelete = async (id) => {
+const openDelete = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar el producto de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar el producto ' +nombre+ ' de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
@@ -298,9 +300,9 @@ const openDelete = async (id) => {
     }
 }
 
-const openDelete2 = async (id) => {
+const openDelete2 = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar el producto de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar el detalle del producto ' +nombre+ ' de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
