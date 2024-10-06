@@ -150,6 +150,14 @@ const loadTemplate = async () => {
                             </li>
 
                             <li class="sidebar-item">
+                                <a href="metodospagos.html" class="sidebar-link">
+                                    <i class="fas fa-credit-card"></i>
+                                        Métodos de pago
+                                </a>
+                            </li>
+
+
+                            <li class="sidebar-item">
                                 <a href="valoraciones.html" class="sidebar-link">
                                     <i class="lni lni-popup"></i>
                                     Valoraciones

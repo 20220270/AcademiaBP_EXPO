@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soporte técnico</title>
+    <!-- Enlace al conjunto de iconos bootstrap,fontawesome y LineIcons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://kit.fontawesome.com/051460de0f.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <!-- Enlace al archivo CSS de Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!--Libreria para el grafico, lastimosamente no se puede ubicar debajo del contenido-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Enlace al conjunto de iconos de boostrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/litepicker/2.0.11/litepicker.js"></script>
+
+    <!-- Enlace a tu propio archivo de estilos CSS -->
+    <link rel="stylesheet" href="../../resources/css/privado/index.css">
+    <link rel="stylesheet" href="../../resources/css/privado/categoriaalumnos.css">
+    <link rel="stylesheet" href="../../resources/css/privado/soportetecnico.css">
+
+</head>
+
+<body>
+    
+    <button class="toggle-btn1 d-md-none d-flex" type="button" onclick="toggleSidebar()">
+        <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
+    </button>
+    <!-- Codigo de html -->
+    <main>
+        <div class="main p-3">
+            <div class="text-center">
+                <h1>Métodos de pago</h1>
+                <div class="scrollable-content1">
+
+
+                    <!--cards de para el soporte técnico-->
+                    <div class="container px-5 col-lg-12">
+                        <div class="container" >
+
+                            <div class="row">
+                                <!-- Primera sección de tarjetas -->
+                                <div class="col-lg-12 ">
+                                    <div class="col-6 offset-3 d-flex justify-content-center">
+                                        <!-- Añadimos una clase offset-3 para centrar el buscador -->
+                                        <form class="d-flex flex-grow-1" id="searchForm">
+                                            <div class="buscador mx-auto position-relative">
+                                                <i class="fas fa-microphone search-icon microphone-button"
+                                                    id="microphone-button"></i>
+                                                <input class="busc light-table-filter" data-table="order-table"
+                                                    type="text"
+                                                    placeholder="Busque por nombre del método de pago"
+                                                    id="Buscador" name="search">
+                                                <div class="btna">
+                                                    <i class="fa fa-search"><ion-icon
+                                                            name="search-outline"></ion-icon></i>
+                                                </div>
+                                            </div>
+
+                                        </form>
+
+
+                                    </div>
+
+                                    <div class="col-2 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
+                                        <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate()">
+                                            <img src="../../resources/images/agregar.png" alt="buttonpng"
+                                                width="60rem" />
+                                        </button>
+                                    </div>
+
+                                    <div class="row rounded border-3" id="cardsMetodos">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+
+    <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Encabezado de la ventana modal -->
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fs-3 w-100 text-center" id="modalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- Contenido de la ventana modal -->
+                <form id="saveForm">
+                    <div class="modal-body row g-3">
+                        <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                        <input type="hidden" id="idMetodoPago" name="idMetodoPago">
+
+                        <div class="col-sm-12 col-md-6">
+                            <label for="nombreMetodo" class="col-sm-7 col-form-label">Nombre del método:</label>
+                            <input id="nombreMetodo" type="text" name="nombreMetodo" class="form-control"
+                                required>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6">
+                            <label for="imagenMetodo" class="col-sm-7 col-form-label">Imagen:</label>
+                            <div class="position-relative">
+                                <div class="input-group mb-3">
+                                    <input type="file" class="form-control" id="imagenMetodo" name="imagenMetodo">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-dark" id="btnGuardar" name="btnGuardar">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!-- Scripts -->
+    <!-- Script de Bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <!-- Tu propio script para el sidebar -->
+    <script src="../../controllers/utils/sweetalert.min.js"></script>
+    <script src="../../controllers/utils/components.js"></script>
+    <script src="../../controllers/utils/private.js"></script>
+    <script src="../../controllers/utils/voicerecognition.js"></script>
+    <script src="../../controllers/utils/voicerecognitionn.js"></script>
+    <script src="../../controllers/admin/metodospagos.js"></script>
+    <script src="../../controllers/utils/toggle.js"></script>
+</body>
+
+</html>

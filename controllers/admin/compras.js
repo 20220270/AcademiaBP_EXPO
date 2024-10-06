@@ -117,16 +117,16 @@ const fillTable = async (form = null) => {
                   <td>${row.fecha_registro}</td>
                   <td>${row.estado_compra}</td>
                   <td>
-                    <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_compra})">
+                    <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_compra})" title="Eliminar compra número ${row.id_compra}, del cliente ${row.nombre_completo}" >
                         <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                     </button>
-                    <button type="submit" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_compra})">
+                    <button type="submit" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_compra})" title="Actualizar compra número ${row.id_compra}, del cliente ${row.nombre_completo}">
                         <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                     </button>
-                    <button type="submit" class="btn mt-1" id="btnDetalles" name="btnDetalles" onclick="openDetail(${row.id_compra})">
+                    <button type="submit" class="btn mt-1" id="btnDetalles" name="btnDetalles" onclick="openDetail(${row.id_compra})" title="Ver detalles de la compra ${row.id_compra}, del cliente ${row.nombre_completo}">
                         <img src="../../resources/images/btnDetalles.png" alt="" width="30px" height="30px" class="mb-1">
                     </button>
-                    <button type="submit" class="btn mt-1" id="btnDetalles" name="btnDetalles" onclick="openReport(${row.id_compra})">
+                    <button type="submit" class="btn mt-1" id="btnDetalles" name="btnDetalles" onclick="openReport(${row.id_compra})" title="Ver factura de la compra número ${row.id_compra} del cliente ${row.nombre_completo}">
                         <img src="../../resources/images/report.png" alt="" width="30px" height="30px" class="mb-1">
                     </button>
                   </td>
@@ -151,7 +151,7 @@ const openUpdate = async (id) => {
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar estado de la compra';
+        MODAL_TITLE.textContent = 'Actualizar estado de la compra ' + id;
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
@@ -214,7 +214,7 @@ const openDetail = async (id) => {
         
         // Se muestra la caja de diálogo con su título.
         DETALLE_FORM.show();
-        MODAL_TITLED.textContent = 'Detalles del pedido';
+        MODAL_TITLED.textContent = 'Detalles del pedido ' + id;
 
         
         // Se prepara el formulario.
@@ -235,7 +235,7 @@ const openDetail = async (id) => {
 */
 const openDelete = async (id) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar este detalle de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar esta compra: Compra #' +id+ ' de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.

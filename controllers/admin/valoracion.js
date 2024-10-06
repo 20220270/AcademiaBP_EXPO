@@ -81,13 +81,13 @@ SEARCH_FORM.addEventListener('submit', (event) => {
                     <td>${row.fecha_valoracion}</td>
                     <td>${row.estado_comentario}</td>
                     <td>
-                     <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_valoracion})">
+                     <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_valoracion})" title="Eliminar valoración del producto ${row.nombre_producto}">
                         
                         <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px"
                             class="mb-1">
 
                     </button>
-                    <button type="submit" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_valoracion})">
+                    <button type="submit" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_valoracion})" title="Actualizar estado de la valoración del producto ${row.nombre_producto}">
                         
                         <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px"
                             class="mb-1">

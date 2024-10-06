@@ -43,7 +43,8 @@ class CategoriaStaffHandler
     public function readAll()
 {
     $sql = "SELECT id_staff_categorias, id_staff, CONCAT(nombre_staff, ' ', apellido_staff) AS nombre_completo, 
-    imagen_staff, descripcion_extra, id_categoria_alumno, categoria, edad_minima, edad_maxima, imagen_categoria
+    imagen_staff, descripcion_extra, id_categoria_alumno, categoria, edad_minima, edad_maxima, imagen_categoria, 
+    CONCAT(nombre_staff, ' ', apellido_staff, ' - ', categoria) as asignacion
                 FROM tb_staffs_categorias
                 INNER JOIN tb_staffs USING (id_staff)
                 INNER JOIN tb_categorias_horarios USING (id_categoria_horario)

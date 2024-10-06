@@ -178,10 +178,10 @@ const fillTable = async (form = null) => {
                         </div>
                 <p class="card-text mt-2">${row.descripcion_nivel}</p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
-                <button type="button" class="btn btn-sm" onclick="openUpdate(${row.id_nivel_entrenamiento})">
+                <button type="button" class="btn btn-sm" onclick="openUpdate(${row.id_nivel_entrenamiento}, '${row.nivel_entrenamiento}')" title="Actualizar ${row.nivel_entrenamiento}">
                     <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                 </button>
-                <button type="button" class="btn btn-sm" onclick="openDelete(${row.id_nivel_entrenamiento})">
+                <button type="button" class="btn btn-sm" onclick="openDelete(${row.id_nivel_entrenamiento} , '${row.nivel_entrenamiento}')" title="Eliminar ${row.nivel_entrenamiento}">
                     <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                 </button>
             </div>
@@ -225,16 +225,16 @@ const fillTable2 = async (form = null) => {
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-sm me-2" onclick="openUpdate2(${row.id_categoria_alumno})">
+                                <button type="button" class="btn btn-sm me-2" onclick="openUpdate2(${row.id_categoria_alumno}, '${row.categoria}')" title="Actualizar categoría ${row.categoria}">
                                     <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button>
-                                <button type="button" class="btn btn-sm" onclick="openDelete2(${row.id_categoria_alumno})">
+                                <button type="button" class="btn btn-sm me-2" onclick="openDelete2(${row.id_categoria_alumno}, '${row.categoria}')" title="Eliminar categoría ${row.categoria}">
                                     <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button>
-                                <button type="button" class="btn btn-sm" onclick="openReport2(${row.id_categoria_alumno})">
+                                <button type="button" class="btn btn-sm me-2" onclick="openReport2(${row.id_categoria_alumno})" title="Generar reporte de los alumnos de la categoría ${row.categoria}">
                                     <img src="../../resources/images/reporteee.png" alt="" width="25px" height="30px" class="mb-1">
                                 </button>
-                                <button type="button" class="btn btn-sm" onclick="generarGrafico(${row.id_categoria_alumno}, 'card-${row.id_categoria_alumno}')">
+                                <button type="button" class="btn btn-sm" onclick="generarGrafico(${row.id_categoria_alumno}, 'card-${row.id_categoria_alumno}')" title="Generar gráfico de rango de edades de la categoría ${row.categoria}">
                                     <img src="../../resources/images/graph.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button>
 
@@ -280,11 +280,11 @@ const fillTable3 = async (form = null) => {
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-sm me-2" onclick="openUpdate3(${row.id_categoria_horario})">
+                                <button type="button" class="btn btn-sm me-2" onclick="openUpdate3(${row.id_categoria_horario}, '${row.asignacion}')" title="Actualizar asignación de horario ${row.asignacion}">
                                     <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button>
-                                <button type="button" class="btn btn-sm" onclick="openDelete3(${row.id_categoria_horario})">
-                                    <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                                <button type="button" class="btn btn-sm" onclick="openDelete3(${row.id_categoria_horario}, '${row.asignacion}')">
+                                    <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1" title="Eliminar asignación de horario ${row.asignacion}">
                                 </button>
                                 
                             </div>
@@ -333,7 +333,7 @@ const openCreate3 = () => {
 *   Parámetros: id (identificador del registro seleccionado).
 *   Retorno: ninguno.
 */
-const openUpdate = async (id) => {
+const openUpdate = async (id, nombre) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idNivelEntrenamiento', id);
@@ -343,7 +343,7 @@ const openUpdate = async (id) => {
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar valor';
+        MODAL_TITLE.textContent = 'Actualizar ' + nombre;
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
@@ -356,7 +356,7 @@ const openUpdate = async (id) => {
     }
 }
 
-const openUpdate2 = async (id) => {
+const openUpdate2 = async (id, nombre) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idCategoriaAlumno', id);
@@ -366,7 +366,7 @@ const openUpdate2 = async (id) => {
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL2.show();
-        MODAL_TITLE2.textContent = 'Actualizar categoria';
+        MODAL_TITLE2.textContent = 'Actualizar categoria ' + nombre;
         // Se prepara el formulario.
         SAVE_FORM2.reset();
         // Se inicializan los campos con los datos.
@@ -382,7 +382,7 @@ const openUpdate2 = async (id) => {
     }
 }
 
-const openUpdate3 = async (id) => {
+const openUpdate3 = async (id, nombre) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idCategoriaHorario', id);
@@ -392,7 +392,7 @@ const openUpdate3 = async (id) => {
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL3.show();
-        MODAL_TITLE3.textContent = 'Actualizar asignación';
+        MODAL_TITLE3.textContent = 'Actualizar asignación ' + nombre;
         // Se prepara el formulario.
         SAVE_FORM3.reset();
         // Se inicializan los campos con los datos.
@@ -411,9 +411,9 @@ const openUpdate3 = async (id) => {
 *   Parámetros: id (identificador del registro seleccionado).
 *   Retorno: ninguno.
 */
-const openDelete = async (id) => {
+const openDelete = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar este nivel de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar este nivel: ' +nombre+ ', de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
@@ -433,9 +433,9 @@ const openDelete = async (id) => {
     }
 }
 
-const openDelete2 = async (id) => {
+const openDelete2 = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar esta categoria de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar esta categoria: ' +nombre+', de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
 
@@ -460,9 +460,9 @@ const openDelete2 = async (id) => {
 }
 
 
-const openDelete3 = async (id) => {
+const openDelete3 = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar esta categoria de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar esta asignación: ' +nombre+ ', de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
 
