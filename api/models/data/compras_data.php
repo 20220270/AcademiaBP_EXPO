@@ -122,6 +122,28 @@ class ComprasData extends ComprasHandler
         }
     }
 
+    public function setIdMetodo($value) //id del pedido
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->idmetodopago = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del método de pago es incorrecto';
+            return false;
+        }
+    }
+
+    public function setInformacion($value)
+    {
+        if (Validator::validateString($value)) {
+            $this->informacionmetodo = $value;
+            return true;
+        } else {
+            $this->data_error = 'La información del método de pago es incorrecta';
+            return false;
+        }
+    }
+
     //Para mostrar la imagen del producto del detalle
     public function setImagen($file, $filename = null)
     {

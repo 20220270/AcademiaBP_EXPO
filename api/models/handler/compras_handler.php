@@ -19,6 +19,8 @@ class ComprasHandler
     protected $precioproducto = null;
     protected $cantidad = null;
     protected $fecha = null;
+    protected $idmetodopago = null;
+    protected $informacionmetodo = null;
 
     // Constante para establecer la ruta de las imágenes a mostrar.
     const RUTA_IMAGEN = '../../images/productos/';
@@ -194,14 +196,21 @@ class ComprasHandler
         return Database::getRows($sql, $params);
     }
 
+    //Método para consultar los métodos de pago
+    public function readMetodosPago()
+    {
+        $sql = "SELECT id_metodo_pago, nombre_metodo, imagen_metodo FROM tb_metodos_pago ORDER BY id_metodo_pago";
+        return Database::getRows($sql);
+    }
+
     // Método para finalizar un pedido por parte del cliente.
     public function finishOrder()
     {
         $this->estadocompra = 'Finalizada';
         $sql = 'UPDATE tb_compras
-                SET estado_compra= ?
+                SET estado_compra= ?, id_metodo_pago = ?, informacion_metodo_pago = ?
                 WHERE id_compra= ?';
-        $params = array($this->estadocompra, $_SESSION['idCompra']);
+        $params = array($this->estadocompra, $this->idmetodopago, $this->informacionmetodo, $_SESSION['idCompra']);
         return Database::executeRow($sql, $params);
     }
 

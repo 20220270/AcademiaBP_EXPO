@@ -4,9 +4,13 @@ const PEDIDO_API = 'services/public/compras.php';
 const TABLE_BODY = document.getElementById('tableBody');
 // Constante para establecer la caja de diálogo de cambiar producto.
 const ITEM_MODAL = new bootstrap.Modal('#itemModal');
+const SAVE_MODAL = new bootstrap.Modal('#modalMetodos');
 // Constante para establecer el formulario de cambiar producto.
 const ITEM_FORM = document.getElementById('itemForm');
 const CARD_CARRITO = document.getElementById('cardProductosCarrito');
+const CARD_METODOS = document.getElementById('cardsMetodos');
+
+const MODAL_METODOS = document.getElementById('metodosForm');
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,6 +21,89 @@ document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar los productos del carrito de compras.
     readDetail();
 });
+
+
+const fillTable = async (form = null) => {
+    // Inicializa el contenido de las cards.
+    CARD_METODOS.innerHTML = '';
+    // Verifica la acción a realizar.
+    const action = (form) ? 'searchRows' : 'readMetodosPago';
+    // Petición para obtener los registros disponibles.
+    const DATA = await fetchData(PEDIDO_API, action, form);
+    // Comprueba si la respuesta es satisfactoria, de lo contrario muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Crea y concatena las cards con los datos de cada registro.
+            CARD_METODOS.innerHTML += `
+                <div class="col-12 col-md-12 col-lg-10 mt-3 mb-3 mx-auto" >
+                    <div class="card h-100" data-id-metodo="${row.id_metodo_pago}">
+                        <div class="row mb-5 mt-2 mx-auto" onclick="seleccionarMetodoPago(${row.id_metodo_pago}, '${row.nombre_metodo}')">
+                            <div class="col-3">
+                                <div class="mt-4"><img src="${SERVER_URL}images/metodospagos/${row.imagen_metodo}" class="card-img-top"></div>
+                            </div>
+                            <div class="col-8 mt-3">
+                                <div class="card-body text-start">
+                                    <h5 class="card-title fs-2 mb-2"> ${row.nombre_metodo}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    } else {
+        sweetAlert(4, DATA.error, true);
+    }
+}
+
+
+
+
+function seleccionarMetodoPago(id_metodo_pago, nombre_metodo) {
+    // Asignar el id_metodo_pago y el nombre_metodo a los inputs ocultos
+    document.getElementById('idMetodoPago').value = id_metodo_pago;
+    document.getElementById('nombreMetodo').value = nombre_metodo;
+
+    // Obtener todos los elementos que tengan la clase 'selected'
+    const elementosSeleccionados = document.querySelectorAll('.selected');
+    
+    // Remover la clase 'selected' de los elementos previamente seleccionados
+    elementosSeleccionados.forEach(elemento => {
+        elemento.classList.remove('selected');
+    });
+
+    // Añadir la clase 'selected' al elemento seleccionado
+    const metodoSeleccionado = document.querySelector(`[data-id-metodo="${id_metodo_pago}"]`);
+    metodoSeleccionado.classList.add('selected');
+}
+
+function actualizarDatosPago() {
+    // Obtener los valores de los inputs
+    const nombreMetodo = document.getElementById('nombreMetodo').value;
+    const numeroMetodo = document.getElementById('numeroMetodo').value;
+    const cvc = document.getElementById('CVC').value;
+    const fechaExpiracion = document.getElementById('fechaExpiracion').value;
+    
+    // Concatenar los valores separados por comas
+    const datosConcatenados = [nombreMetodo, numeroMetodo, cvc, fechaExpiracion].filter(Boolean).join(', ');
+
+    // Asignar el valor concatenado al input oculto
+    document.getElementById('datosPago').value = datosConcatenados;
+}
+
+
+
+
+
+const openCreate = () => {
+    // Se muestra la caja de diálogo con su título.
+    SAVE_MODAL.show();
+    // Se prepara el formulario.
+    MODAL_METODOS.reset();
+
+    fillTable();
+}
 
 // Método del evento para cuando se envía el formulario de cambiar cantidad de producto.
 ITEM_FORM.addEventListener('submit', async (event) => {
@@ -137,8 +224,9 @@ async function finishOrder() {
     const RESPONSE = await confirmAction('¿Está seguro de finalizar la compra?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
+        const FORM = new FormData(MODAL_METODOS);
         // Petición para finalizar el pedido en proceso.
-        const DATA = await fetchData(PEDIDO_API, 'finishOrder');
+        const DATA = await fetchData(PEDIDO_API, 'finishOrder', FORM);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
             sweetAlert(1, DATA.message, true, 'index.html');

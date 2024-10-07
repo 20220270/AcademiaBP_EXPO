@@ -15,7 +15,7 @@ if (isset($_GET['action'])) {
         $result['session'] = 1;
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
-            
+
             case 'searchOrders':
                 if (!Validator::validateSearch($_POST['search'])) {
                     $result['error'] = Validator::getSearchError();
@@ -32,7 +32,7 @@ if (isset($_GET['action'])) {
                 if (!$pedido->startOrder()) {
                     $result['error'] = 'Ocurrió un problema al iniciar la compra';
                 } elseif (
-                    
+
                     !$pedido->setIdDetalle($_POST['idDetalle']) or
                     !$pedido->setCantidad($_POST['cantidadProducto'])
                 ) {
@@ -65,6 +65,15 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen compras registradas';
                 }
                 break;
+
+            case 'readMetodosPago':
+                if ($result['dataset'] = $pedido->readMetodosPago()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen métodos de pago registrados';
+                }
+                break;
                 // Acción para actualizar la cantidad de un producto en el carrito de compras.
             case 'updateDetail':
                 $_POST = Validator::validateForm($_POST);
@@ -92,14 +101,23 @@ if (isset($_GET['action'])) {
                 }
                 break;
                 // Acción para finalizar el carrito de compras.
-            case 'finishOrder':
-                if ($pedido->finishOrder()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Compra finalizada correctamente';
-                } else {
-                    $result['error'] = 'Ocurrió un problema al finalizar la compra';
-                }
-                break;
+                case 'finishOrder':
+                    $_POST = Validator::validateForm($_POST); // Validar los datos de entrada
+                
+                    // Verificar que se puedan establecer los métodos de pago e información de pago
+                    if (
+                        !$pedido->setIdMetodo($_POST['idMetodoPago']) || 
+                        !$pedido->setInformacion($_POST['datosPago'])
+                    ) {
+                        $result['error'] = $pedido->getDataError(); // Obtener el error si no se pueden establecer
+                    } elseif ($pedido->finishOrder()) { // Llamar al método para finalizar la orden
+                        $result['status'] = 1; // Indicar éxito
+                        $result['message'] = 'Compra finalizada correctamente'; // Mensaje de éxito
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al finalizar la compra'; // Mensaje de error
+                    }
+                    break;
+                
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

@@ -49,9 +49,9 @@
                         <p>Total a pagar: $<b id="pago"></b></p>
                         <div id="contenedorBoton" class="mb-3 col-12">
                             <!-- Botón para finalizar el pedido -->
-                            <button type="button" class="btn but col-lg-5 mt-1" onclick="finishOrder()">
+                            <button type="button" class="btn but col-lg-5 mt-1" onclick="openCreate()">
                                 <img src="../../resources/images/finich.png" alt="..." width="30px" height="30px">
-                                Finalizar pedido
+                                Pagar mi compra
                             </button>
                             <!-- Enlace para seguir comprando -->
                             <a href="index.html" class="btn but col-lg-6 mt-1">
@@ -66,9 +66,9 @@
             <!-- Párrafo para mostrar un botón que finaliza el pedido -->
 
             <!-- Componente Modal para mostrar una caja de diálogo -->
-            <div class="modal fade" id="itemModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            <div class="modal fade " id="itemModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="modalTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
                     <!-- Contenido del componente Modal -->
                     <div class="modal-content">
                         <!-- Encabezado del modal -->
@@ -82,8 +82,8 @@
                                 <input type="hidden" id="idDetalle" name="idDetalle">
                                 <div class="col-sm-12">
                                     <label for="cantidadProducto" class="form-label">Ingrese la nueva cantidad</label>
-                                    <input id="cantidadProducto" autocomplete="off" type="number" name="cantidadProducto" min="1"
-                                        class="form-control" required>
+                                    <input id="cantidadProducto" autocomplete="off" type="number"
+                                        name="cantidadProducto" min="1" class="form-control" required>
                                 </div>
                             </div>
                             <!-- Pie del modal con botón para guardar los cambios -->
@@ -98,48 +98,69 @@
                 </div>
             </div>
 
-        </div>
+            <!-- Modal para mostrar los métodos de pago y la información-->
 
-        <!-- Modal para opciones de pago -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog rounded-5">
-                <div class="modal-content">
-                    <!-- Encabezado del modal -->
-                    <div class="modal-header rounded-1">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <!-- Cuerpo del modal -->
-                    <div class="modal-body">
-                        <!-- Imagen del logo y título del modal -->
-                        <div class="d-flex justify-content-center align-items-center mb-3">
-                            <img src="../../resources/images/logoAcademiaBP.png" alt="..." width="150px" height="150px">
+            <!-- Modal para mostrar los métodos de pago y la información-->
+            <div class="modal fade" id="modalMetodos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="modalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <!-- Contenido del componente Modal -->
+                    <div class="modal-content">
+                        <!-- Encabezado del modal -->
+                        <div class="modal-header border-0">
+                            <h1 class="modal-title fs-5 text-white" id="modalTitle2">Complete aquí su pago</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <span class="fw-bold d-block text-center fs-5 mb-5">¿Cómo deseas realizar el pago?</span>
-                        <!-- Opciones de pago -->
-                        <div class="container text-center">
-                            <div class="row">
-                                <div class="col-12 col-lg-6">
-                                    <img src="../../resources/images/credito.png" alt="..." width="140px"
-                                        height="120px">
-                                    <span class="d-block mb-3">Tarjeta de crédito</span>
+                        <!-- Formulario para métodos de pago -->
+                        <form id="metodosForm" class="p-3">
+                            <h4 class="modal-title fs-5 text-white">Seleccione un método de pago</h4>
+
+                            <!-- Cards que mostrarán las cards de los métodos de pago -->
+                            <div class="row rounded border-3" id="cardsMetodos"></div>
+
+                            <input type="" id="idMetodoPago" name="idMetodoPago">
+
+                            <!-- Agrupar los inputs en un contenedor centrado -->
+                            <div class="text-center mb-3">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 mb-3">
+                                        <label for="datosPago" class="col-sm-7 col-form-label">Datos del pago</label>
+                                        <input id="datosPago" type="text" name="datosPago" class="form-control" autocomplete="off" readonly>
+                                    </div>
+                                    
+                                    <div class="col-sm-12 col-md-6 mb-3">
+                                        <label for="nombreMetodo" class="col-sm-7 col-form-label">Método de pago:</label>
+                                        <input id="nombreMetodo" type="text" name="nombreMetodo" class="form-control" readonly autocomplete="off" oninput="actualizarDatosPago()">
+                                    </div>
+                                    
+                                    <div class="col-sm-12 col-md-6 mb-3" id="numeroMeetodo">
+                                        <label for="numeroMetodo" class="col-sm-7 col-form-label">Número de tarjeta:</label>
+                                        <input id="numeroMetodo" type="text" name="numeroMetodo" class="form-control" autocomplete="off" oninput="actualizarDatosPago()">
+                                    </div>
+                                    
+                                    <div class="col-sm-12 col-md-6 mb-3" id="CVC">
+                                        <label for="CVC" class="col-sm-7 col-form-label">CVC:</label>
+                                        <input id="CVC" type="number" name="CVC" class="form-control" autocomplete="off" oninput="actualizarDatosPago()">
+                                    </div>
+                                    
+                                    <div class="col-sm-12 col-md-6 mb-3">
+                                        <label for="fechaExpiracion" class="col-sm-7 col-form-label">Fecha de expiración:</label>
+                                        <input id="fechaExpiracion" type="date" name="fechaExpiracion" class="form-control" autocomplete="off" oninput="actualizarDatosPago()">
+                                    </div>
                                 </div>
-                                <div class="col-12 col-lg-6 debito">
-                                    <img src="../../resources/images/debito.png" alt="..." width="140px" height="120px">
-                                    <span class="d-block">Débito</span>
-                                </div>
-                                <span class="LetraO">O</span>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Pie del modal con botones de acción -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn botonCerrar" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn botonPago">Completar mi pago</button>
+
+                            <button type="button" class="btn but col-lg-6 mt-1" onclick="finishOrder()">
+                                <img src="../../resources/images/finich.png" alt="..." width="30px" height="30px">
+                                Finalizar compra
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
+
         </div>
+
 
     </main>
 
