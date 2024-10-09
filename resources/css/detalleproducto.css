@@ -55,3 +55,14 @@
     border-color: #408840; /* Color verde */
 }
 
+/* Estilos para los botones de incrementar y decrementar */
+.btn-outline-success {
+    width: 40px; /* Ajusta el tamaño del botón */
+    font-size: 18px; /* Tamaño de la fuente */
+}
+
+.form-control {
+    text-align: center; /* Centra el texto en el input */
+}
+
+

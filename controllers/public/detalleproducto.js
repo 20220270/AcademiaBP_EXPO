@@ -134,3 +134,31 @@ function generateStars(rating) {
     }
     return stars;
 }
+
+
+//Funcionalidad para los botones de incrementar y decrementar el valor de la cantidad de productos adquirida
+$(document).ready(function () {
+    // Incrementar cantidad
+    $('#btnIncrementar').click(function () {
+        let cantidad = parseInt($('#cantidadProducto').val());
+        // Si el campo está vacío o NaN, establecemos la cantidad a 1
+        if (isNaN(cantidad) || cantidad <= 0) {
+            $('#cantidadProducto').val(1);
+        } else {
+            $('#cantidadProducto').val(cantidad + 1);
+        }
+    });
+
+    // Decrementar cantidad
+    $('#btnDecrementar').click(function () {
+        let cantidad = parseInt($('#cantidadProducto').val());
+        // Si el campo está vacío o NaN, establecemos la cantidad a 1
+        if (isNaN(cantidad) || cantidad <= 0) {
+            $('#cantidadProducto').val(1);
+        } else if (cantidad > 1) {
+            $('#cantidadProducto').val(cantidad - 1);
+        }
+    });
+});
+
+
