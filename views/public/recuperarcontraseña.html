@@ -69,7 +69,7 @@
                                 <img src="../../resources/images/ingresarcod.png" alt="..." width="25px" height="25px">
                                 <!--Input donde se ingresara el codigo de recuperacion enviado al correo del usuario-->
                                 <input type="text" autocomplete="off" class="form-control mt-5" id="inputCodigo" name="inputCodigo"
-                                    placeholder="XXXXXXXX">
+                                required maxlength="8"   placeholder="XXXXXXXX">
                             </div>
                             <div>
                                 <!--Boton que verificara que el codigo sea verdadero-->
@@ -104,7 +104,7 @@
                                     height="25px">
                                 <!--Input donde ingresas la nueva contraseña-->
                                 <input type="password" autocomplete="off" class="form-control mt-5" id="nuevaClave" name="nuevaClave"
-                                    placeholder="Ingresa tu nueva contraseña">
+                                required maxlength="8"  placeholder="Ingresa tu nueva contraseña">
 
                             </div>
                             <div class="mb-3 input-with-icon">
@@ -112,7 +112,7 @@
                                     height="25px">
                                 <!--Input donde confirmas la nueva contraseña-->
                                 <input type="password" autocomplete="off" class="form-control mt-3" id="confirmarClave" name="confirmarClave"
-                                    placeholder="Confirma tu nueva contraseña">
+                                required maxlength="8"  placeholder="Confirma tu nueva contraseña">
 
                             </div>
                         </form>
