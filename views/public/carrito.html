@@ -100,56 +100,78 @@
 
             <!-- Modal para mostrar los métodos de pago y la información-->
 
-            <!-- Modal para mostrar los métodos de pago y la información-->
-            <div class="modal fade" id="modalMetodos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal fade" id="modalMetodos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <!-- Contenido del componente Modal -->
                     <div class="modal-content">
                         <!-- Encabezado del modal -->
                         <div class="modal-header border-0">
                             <h1 class="modal-title fs-5 text-white" id="modalTitle2">Complete aquí su pago</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+            
                         <!-- Formulario para métodos de pago -->
                         <form id="metodosForm" class="p-3">
                             <h4 class="modal-title fs-5 text-white">Seleccione un método de pago</h4>
-
-                            <!-- Cards que mostrarán las cards de los métodos de pago -->
+            
+                            <!-- Cards de métodos de pago -->
                             <div class="row rounded border-3" id="cardsMetodos"></div>
-
-                            <input type="" id="idMetodoPago" name="idMetodoPago">
-
-                            <!-- Agrupar los inputs en un contenedor centrado -->
+            
+                            <input type="hidden" id="idMetodoPago" name="idMetodoPago">
+            
+                            <!-- Inputs del método de pago -->
                             <div class="text-center mb-3">
                                 <div class="row">
+                                    <!-- Datos del pago y método de pago -->
                                     <div class="col-sm-12 col-md-6 mb-3">
                                         <label for="datosPago" class="col-sm-7 col-form-label">Datos del pago</label>
                                         <input id="datosPago" type="text" name="datosPago" class="form-control" autocomplete="off" readonly>
                                     </div>
-                                    
+            
                                     <div class="col-sm-12 col-md-6 mb-3">
                                         <label for="nombreMetodo" class="col-sm-7 col-form-label">Método de pago:</label>
                                         <input id="nombreMetodo" type="text" name="nombreMetodo" class="form-control" readonly autocomplete="off" oninput="actualizarDatosPago()">
                                     </div>
-                                    
-                                    <div class="col-sm-12 col-md-6 mb-3" id="numeroMeetodo">
-                                        <label for="numeroMetodo" class="col-sm-7 col-form-label">Número de tarjeta:</label>
-                                        <input id="numeroMetodo" type="text" name="numeroMetodo" class="form-control" autocomplete="off" oninput="actualizarDatosPago()">
+            
+                                    <!-- Inputs para tarjeta de crédito y débito -->
+                                    <div class="col-sm-12 col-md-6 mb-3" id="inputTarjeta">
+                                        <label for="numeroTarjeta" class="col-sm-7 col-form-label">Número de tarjeta:</label>
+                                        <input id="numeroTarjeta" type="text" name="numeroTarjeta" class="form-control" autocomplete="off" oninput="actualizarDatosPago()">
                                     </div>
-                                    
-                                    <div class="col-sm-12 col-md-6 mb-3" id="CVC">
-                                        <label for="CVC" class="col-sm-7 col-form-label">CVC:</label>
-                                        <input id="CVC" type="number" name="CVC" class="form-control" autocomplete="off" oninput="actualizarDatosPago()">
+            
+                                    <div class="col-sm-12 col-md-6 mb-3" id="nombreTarjeta">
+                                        <label for="nombreTarjeta" class="col-sm-7 col-form-label">Nombre en tarjeta:</label>
+                                        <input id="nombreTarjeta" type="text" name="nombreTarjeta" class="form-control" autocomplete="off" oninput="actualizarDatosPago()">
                                     </div>
-                                    
-                                    <div class="col-sm-12 col-md-6 mb-3">
-                                        <label for="fechaExpiracion" class="col-sm-7 col-form-label">Fecha de expiración:</label>
-                                        <input id="fechaExpiracion" type="date" name="fechaExpiracion" class="form-control" autocomplete="off" oninput="actualizarDatosPago()">
+            
+                                    <div class="col-sm-12 col-md-6 mb-3" id="fechaVencimiento">
+                                        <label for="fechaVencimiento" class="col-sm-7 col-form-label">Fecha de vencimiento:</label>
+                                        <input id="fechaVencimiento" type="date" name="fechaVencimiento" class="form-control" autocomplete="off" oninput="actualizarDatosPago()">
+                                    </div>
+            
+                                    <div class="col-sm-12 col-md-6 mb-3" id="codigoCVV">
+                                        <label for="codigoCVV" class="col-sm-7 col-form-label">Código CVV:</label>
+                                        <input id="codigoCVV" type="number" name="codigoCVV" class="form-control" autocomplete="off" oninput="actualizarDatosPago()">
+                                    </div>
+            
+                                    <!-- PayPal: Input para correo electrónico -->
+                                    <div class="col-sm-12 col-md-6 mb-3" id="inputPayPal">
+                                        <label for="paypalCorreo" class="col-sm-7 col-form-label">Correo de PayPal:</label>
+                                        <input id="paypalCorreo" type="email" name="paypalCorreo" class="form-control" autocomplete="off" oninput="actualizarDatosPago()">
+                                    </div>
+            
+                                    <!-- Transferencia Bancaria: Inputs para número de cuenta y código SWIFT/BAN -->
+                                    <div class="col-sm-12 col-md-6 mb-3" id="inputTransferencia">
+                                        <label for="numeroCuenta" class="col-sm-7 col-form-label">Número de cuenta:</label>
+                                        <input id="numeroCuenta" type="text" name="numeroCuenta" class="form-control" autocomplete="off" oninput="actualizarDatosPago()">
+                                    </div>
+            
+                                    <div class="col-sm-12 col-md-6 mb-3" id="inputSWIFT">
+                                        <label for="codigoSWIFT" class="col-sm-7 col-form-label">Código SWIFT/BAN:</label>
+                                        <input id="codigoSWIFT" type="text" name="codigoSWIFT" class="form-control" autocomplete="off" oninput="actualizarDatosPago()">
                                     </div>
                                 </div>
                             </div>
-
+            
                             <button type="button" class="btn but col-lg-6 mt-1" onclick="finishOrder()">
                                 <img src="../../resources/images/finich.png" alt="..." width="30px" height="30px">
                                 Finalizar compra
@@ -158,6 +180,7 @@
                     </div>
                 </div>
             </div>
+            
 
         </div>
 

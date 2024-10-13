@@ -182,13 +182,13 @@ const fillTable = async (form = null) => {
                         <p class="card-text">Número de días: ${row.numero_dias}</p>
                         <p class="card-text">Mensualidad a pagar por día: $${row.mensualidad_pagar}</p>
                         <div class="d-flex justify-content-center gap-2">
-                            <button type="button" class="btnr mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_dia_pago})">
+                            <button type="button" class="btnr mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_dia_pago}, '${row.datopago}')" title="Eliminar número de día y mensualidad ${row.datopago}">
                                 <img src="../../resources/images/btnEliminarIMG.png" alt="Eliminar" width="30px" height="30px" class="mb-1">
                             </button>
-                            <button type="button" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_dia_pago})">
+                            <button type="button" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_dia_pago}, '${row.datopago}')" title="Actualizar número de día y mensualidad ${row.datopago}">
                                 <img src="../../resources/images/btnActualizarIMG.png" alt="Actualizar" width="30px" height="30px" class="mb-1">
                             </button>
-                            <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="generarGrafico(${row.id_dia_pago})">
+                            <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="generarGrafico(${row.id_dia_pago}, '${row.datopago}')" title="Generar gráfico de números de alumnos por categoría en día de pago y mensualidad ${row.datopago}">
                                 <i class="bi bi-x-square-fill"></i>
                                     <img src="../../resources/images/graph.png" alt="" width="25px" height="25px" class="mb-1">
                             </button>
@@ -232,11 +232,11 @@ const fillTable2 = async (form = null) => {
                 <td>${row.fecha_pago}</td>
                 <td>
                     <div class="d-flex justify-content-center gap-2">
-                        <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete2(${row.id_pago})">
+                        <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete2(${row.id_pago})" title="Eliminar pago de mensualidad de ${row.Alumno}">
                             <i class="bi bi-search"></i>
                             <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                         </button>
-                        <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate2(${row.id_pago})">
+                        <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate2(${row.id_pago})" title="Actualizar pago de mensualidad de ${row.Alumno}">
                             <i class="bi bi-x-square-fill"></i>
                             <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                         </button>
@@ -279,15 +279,15 @@ const fillTable3 = async (form = null) => {
                 <td class="${statusClass}"><b>${row.estado_proximo_pago}</b></td>
                 <td>
                     <div class="d-flex justify-content-center gap-2">
-                        <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete3(${row.id_detalle_pago})">
+                        <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete3(${row.id_detalle_pago})" title="Eliminar boleta de pago de ${row.Alumno}">
                             <i class="bi bi-search"></i>
                             <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                         </button>
-                        <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate3(${row.id_detalle_pago})">
+                        <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate3(${row.id_detalle_pago})" title="Actualizar boleta de pago de ${row.Alumno}">
                             <i class="bi bi-x-square-fill"></i>
                             <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                         </button>
-                        <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openReport2(${row.id_pago})">
+                        <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openReport2(${row.id_pago})" title="Generar boleta de pago de ${row.Alumno}">
                             <i class="bi bi-x-square-fill"></i>
                             <img src="../../resources/images/reporte_2.png" alt="" width="30px" height="30px" class="mb-1">
                         </button>
@@ -416,7 +416,7 @@ const openCreate3 = () => {
     fillSelect(DETALLESMENSUALIDAD_API, 'readAllPagos', 'idPagoRealizado')
 }
 
-const openUpdate = async (id) => {
+const openUpdate = async (id, nombre) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idDiasPago', id);
@@ -426,7 +426,7 @@ const openUpdate = async (id) => {
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar número de días y pago';
+        MODAL_TITLE.textContent = 'Actualizar número de días y pago: ' + nombre;
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
@@ -498,9 +498,9 @@ const openUpdate3 = async (id) => {
     }
 }
 
-const openDelete = async (id) => {
+const openDelete = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar este día y pago de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar este día y pago: ' +nombre+ ', de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
@@ -544,7 +544,7 @@ const openDelete2 = async (id) => {
 
 const openDelete3 = async (id) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar este detalle de pago de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar esta boleta de pago de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.

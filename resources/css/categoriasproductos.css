@@ -235,6 +235,20 @@ margin-top: 230px;
   font-size: 12px;
 }
 
+#borde{
+  border: 2px solid #408840;
+  border-radius: 15px;
+}
+
+.card-body {
+  overflow: hidden; /* Asegura que el contenido no se desborde */
+}
+
+#productos2{
+  max-height: 400px;
+  overflow-y: auto;
+}
+
 
   @media (max-width: 360px) {
 

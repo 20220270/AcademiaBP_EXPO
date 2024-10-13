@@ -313,6 +313,48 @@ class ClienteHandler
         return Database::getRows($sql, $params);
     }
 
+    //Funciones para mostrar más datos sobre el cliente
+
+    //Función para mostrar el producto más comprado por el cliente
+    public function readProductoMasCompradoCliente()
+    {
+        $sql = 'SELECT 
+                    p.nombre_producto,
+                    SUM(dc.cantidad_producto) AS total_comprado
+                FROM 
+                    tb_detalles_compras dc
+                JOIN 
+                    tb_compras c USING (id_compra)
+                JOIN 
+                    tb_clientes cl USING (id_cliente)
+                JOIN 
+                    tb_detalleproducto dp USING (id_detalle_producto)
+                JOIN 
+                    tb_productos p USING (id_producto)
+                WHERE 
+                    c.id_cliente = ?
+                GROUP BY 
+                    p.nombre_producto
+                ORDER BY 
+                    total_comprado DESC LIMIT 1;';
+        $params = array($_SESSION['idCliente']);
+        return Database::getRow($sql, $params);
+    }
+
+    //Función para mostrar la fecha de la última compra realizado
+    public function readUltimaCompraCliente()
+    {
+        $sql = 'SELECT fecha_registro 
+                FROM tb_compras 
+                WHERE id_cliente = ?
+                ORDER BY fecha_registro DESC 
+                LIMIT 1;';
+        $params = array($_SESSION['idCliente']);
+        return Database::getRow($sql, $params);
+    }
+
+    //-------------------------------------------------
+
     // Verificar si el usuario existe.
     public function checkUserExists($usuario)
     {

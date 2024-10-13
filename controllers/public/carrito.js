@@ -36,7 +36,7 @@ const fillTable = async (form = null) => {
         DATA.dataset.forEach(row => {
             // Crea y concatena las cards con los datos de cada registro.
             CARD_METODOS.innerHTML += `
-                <div class="col-12 col-md-12 col-lg-10 mt-3 mb-3 mx-auto" >
+                <div class="col-12 col-md-12 col-lg-6 mt-3 mb-3 mx-auto" >
                     <div class="card h-100" data-id-metodo="${row.id_metodo_pago}">
                         <div class="row mb-5 mt-2 mx-auto" onclick="seleccionarMetodoPago(${row.id_metodo_pago}, '${row.nombre_metodo}')">
                             <div class="col-3">
@@ -58,6 +58,32 @@ const fillTable = async (form = null) => {
 }
 
 
+function mostrarInputs() {
+    const metodoPago = document.getElementById('nombreMetodo').value;
+
+    // Ocultar todos los inputs inicialmente
+    document.getElementById('inputTarjeta').style.display = 'none';
+    document.getElementById('nombreTarjeta').style.display = 'none';
+    document.getElementById('fechaVencimiento').style.display = 'none';
+    document.getElementById('codigoCVV').style.display = 'none';
+    document.getElementById('inputPayPal').style.display = 'none';
+    document.getElementById('inputTransferencia').style.display = 'none';
+    document.getElementById('inputSWIFT').style.display = 'none';
+
+    // Mostrar los inputs según el método de pago seleccionado
+    if (metodoPago === "Tarjeta de crédito" || metodoPago === "Tarjeta de débito") {
+        document.getElementById('inputTarjeta').style.display = 'block';
+        document.getElementById('nombreTarjeta').style.display = 'block';
+        document.getElementById('fechaVencimiento').style.display = 'block';
+        document.getElementById('codigoCVV').style.display = 'block';
+    } else if (metodoPago === "PayPal") {
+        document.getElementById('inputPayPal').style.display = 'block';
+    } else if (metodoPago === "Transferencia bancaria") {
+        document.getElementById('inputTransferencia').style.display = 'block';
+        document.getElementById('inputSWIFT').style.display = 'block';
+    }
+}
+
 
 
 function seleccionarMetodoPago(id_metodo_pago, nombre_metodo) {
@@ -76,23 +102,51 @@ function seleccionarMetodoPago(id_metodo_pago, nombre_metodo) {
     // Añadir la clase 'selected' al elemento seleccionado
     const metodoSeleccionado = document.querySelector(`[data-id-metodo="${id_metodo_pago}"]`);
     metodoSeleccionado.classList.add('selected');
+
+    mostrarInputs();
 }
+
 
 function actualizarDatosPago() {
     // Obtener los valores de los inputs
     const nombreMetodo = document.getElementById('nombreMetodo').value;
-    const numeroMetodo = document.getElementById('numeroMetodo').value;
-    const cvc = document.getElementById('CVC').value;
-    const fechaExpiracion = document.getElementById('fechaExpiracion').value;
-    
+    const numeroTarjeta = document.getElementById('numeroTarjeta').value;
+    const nombreTarjeta = document.getElementById('nombreTarjeta').value;
+    const fechaVencimiento = document.getElementById('fechaVencimiento').value;
+    const codigoCVV = document.getElementById('codigoCVV').value;
+    const paypalCorreo = document.getElementById('paypalCorreo').value;
+    const numeroCuenta = document.getElementById('numeroCuenta').value;
+    const codigoSWIFT = document.getElementById('codigoSWIFT').value;
+
+    // Imprimir los valores en la consola para verificar
+    console.log('Nombre Método:', nombreMetodo);
+    console.log('Número Tarjeta:', numeroTarjeta);
+    console.log('Nombre Tarjeta:', nombreTarjeta);
+    console.log('Fecha Vencimiento:', fechaVencimiento);
+    console.log('Código CVV:', codigoCVV);
+    console.log('Correo PayPal:', paypalCorreo);
+    console.log('Número Cuenta:', numeroCuenta);
+    console.log('Código SWIFT:', codigoSWIFT);
+
     // Concatenar los valores separados por comas
-    const datosConcatenados = [nombreMetodo, numeroMetodo, cvc, fechaExpiracion].filter(Boolean).join(', ');
+    const datosConcatenados = [
+        nombreMetodo,
+        numeroTarjeta,
+        nombreTarjeta,
+        fechaVencimiento,
+        codigoCVV,
+        paypalCorreo,
+        numeroCuenta,
+        codigoSWIFT
+    ].filter(Boolean) // Filtrar valores falsy
+    .join(', '); // Unir los valores con coma
 
     // Asignar el valor concatenado al input oculto
     document.getElementById('datosPago').value = datosConcatenados;
+
+    // Imprimir el resultado en la consola
+    console.log('Datos Concatenados:', datosConcatenados);
 }
-
-
 
 
 
@@ -103,6 +157,7 @@ const openCreate = () => {
     MODAL_METODOS.reset();
 
     fillTable();
+    mostrarInputs();
 }
 
 // Método del evento para cuando se envía el formulario de cambiar cantidad de producto.
@@ -227,6 +282,7 @@ async function finishOrder() {
         const FORM = new FormData(MODAL_METODOS);
         // Petición para finalizar el pedido en proceso.
         const DATA = await fetchData(PEDIDO_API, 'finishOrder', FORM);
+        console.log(DATA);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
             sweetAlert(1, DATA.message, true, 'index.html');

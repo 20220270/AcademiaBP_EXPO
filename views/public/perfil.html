@@ -42,8 +42,8 @@
                                     <button type="button"
                                         class="btn position-absolute bottom-0 end-0 translate-middle mt-5"
                                         id="botonCargarFoto" onclick="document.getElementById('fotoInput').click()">
-                                        <img src="../../resources/images/edit.png" alt="" width="30px"
-                                            height="30px" class="mb-1 mt-4">
+                                        <img src="../../resources/images/edit.png" alt="" width="30px" height="30px"
+                                            class="mb-1 mt-4">
                                     </button>
                                 </div>
                                 <div class="mb-3">
@@ -52,14 +52,19 @@
                                         class="form-control text-center" required readonly>
                                 </div>
 
-                                <!-- Contenedor Flex para la imagen y el texto de cerrar sesión -->
-                                <div class="d-flex align-items-center" id="cerrarS">
-                                    <img src="../../resources/images/cerrarsesion.png" alt="..." width="40px"
-                                        height="40px" class="imagenCerarr" onclick="logOut()">
-                                    <a onclick="logOut()" class="d-flex align-items-center ms-2">
-                                        <h6 class="textito mb-0">Cerrar sesión</h6>
-                                    </a>
+                                <div class="mb-3">
+                                    <label for="productoMasAdquirido" class="form-label">Producto más adquirido:</label>
+                                    <input id="productoMasAdquirido" type="text" name="productoMasAdquirido"
+                                        class="form-control text-center" required readonly>
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="ultimafechaCompra" class="form-label">Fecha de su última compra:</label>
+                                    <input id="ultimafechaCompra" type="text" name="ultimafechaCompra"
+                                        class="form-control text-center" required readonly>
+                                </div>
+
+
                             </div>
 
                             <!-- Contenedor para el ingreso y edicion de datos para el perfil -->
@@ -67,54 +72,68 @@
                                 <div class="row g-3">
                                     <input id="idCliente" type="text" name="idCliente" class="form-control" hidden>
                                     <div class="col-sm-12 col-md-10">
-                                        <label for="nombreCliente" class="form-label" >Nombre:</label>
-                                        <input autocomplete="off" id="nombreCliente" type="text" name="nombreCliente" class="form-control"
-                                            required oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
-                                    </div>
-                                    <div class="col-sm-12 col-md-10">
-                                        <label for="apellidoCliente" class="form-label">Apellido:</label>
-                                        <input autocomplete="off" id="apellidoCliente" type="text" name="apellidoCliente"
+                                        <label for="nombreCliente" class="form-label">Nombre:</label>
+                                        <input autocomplete="off" id="nombreCliente" type="text" name="nombreCliente"
                                             class="form-control" required
                                             oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                     </div>
                                     <div class="col-sm-12 col-md-10">
+                                        <label for="apellidoCliente" class="form-label">Apellido:</label>
+                                        <input autocomplete="off" id="apellidoCliente" type="text"
+                                            name="apellidoCliente" class="form-control" required
+                                            oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
+                                    </div>
+                                    <div class="col-sm-12 col-md-10">
                                         <label for="duiCliente" class="form-label">Dui:</label>
-                                        <input autocomplete="off" id="duiCliente" type="text" name="duiCliente" class="form-control"
-                                            required oninput="this.value = this.value.replace(/[^0-9-]/g, '')"
-                                            pattern="[0-9-]+" maxlength="10">
+                                        <input autocomplete="off" id="duiCliente" type="text" name="duiCliente"
+                                            class="form-control" required
+                                            oninput="this.value = this.value.replace(/[^0-9-]/g, '')" pattern="[0-9-]+"
+                                            maxlength="10">
                                     </div>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="correoCliente" class="form-label">Correo:</label>
-                                        <input autocomplete="off" id="correoCliente" type="email" name="correoCliente" class="form-control"
-                                            required>
+                                        <input autocomplete="off" id="correoCliente" type="email" name="correoCliente"
+                                            class="form-control" required>
                                     </div>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="telefonoCliente" class="form-label">Teléfono:</label>
-                                        <input autocomplete="off" id="telefonoCliente" type="text" name="telefonoCliente"
-                                            class="form-control" required maxlength="9" pattern="[0-9\-]*"
+                                        <input autocomplete="off" id="telefonoCliente" type="text"
+                                            name="telefonoCliente" class="form-control" required maxlength="9"
+                                            pattern="[0-9\-]*"
                                             oninput="this.value = this.value.replace(/[^\d-]/g, '');">
                                     </div>
                                     <div class="col-sm-12 col-md-10">
                                         <label for="direccionCliente" class="form-label">Dirección:</label>
-                                        <input autocomplete="off" id="direccionCliente" type="text" name="direccionCliente"
-                                            class="form-control" required>
+                                        <input autocomplete="off" id="direccionCliente" type="text"
+                                            name="direccionCliente" class="form-control" required>
                                     </div>
                                 </div>
 
                                 <!-- Contenedor para los botones de edicion y actualizacion de datos del perfil del usuario -->
                                 <div class="text-center mb-4 mt-3">
 
-                                    <button type="submit" class="btn mt-1" id="botonActualizarDatos">
-                                        <img src="../../resources/images/editardatos.png" alt="Editar datos"
-                                            width="40px" height="40px" class="ms-5 botonC">
-                                    </button>
+                                    <!-- Contenedor Flex para la imagen y el texto de cerrar sesión -->
+                                    <div class="d-flex align-items-center" id="cerrarS">
+                                        <img src="../../resources/images/cerrarsesion.png" alt="..." width="40px"
+                                            height="40px" class="imagenCerarr" onclick="logOut()">
+                                        <a onclick="logOut()" class="d-flex align-items-center ms-2">
+                                            <h6 class="textito mb-0">Cerrar sesión</h6>
+                                        </a>
+
+                                        <button type="submit" class="btn mt-1" id="botonActualizarDatos">
+                                            <img src="../../resources/images/editardatos.png" alt="Editar datos"
+                                                width="40px" height="40px" class="ms-5 botonC">
+                                        </button>
 
 
-                                    <button type="button" class="btn rounded-2 mt-1" onclick="openPassword()"
-                                        id="botonActualizarContrasena">
-                                        <img src="../../resources/images/cambiarcontra.png" alt="Cambiar contraseña"
-                                            width="40px" height="40px" class="ms-3 botonC">
-                                    </button>
+                                        <button type="button" class="btn rounded-2 mt-1" onclick="openPassword()"
+                                            id="botonActualizarContrasena">
+                                            <img src="../../resources/images/cambiarcontra.png" alt="Cambiar contraseña"
+                                                width="40px" height="40px" class="ms-3 botonC">
+                                        </button>
+                                    </div>
+
+
                                 </div>
                             </div>
 
@@ -150,9 +169,10 @@
                     <div class="modal-header d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center">
                             <h1 class="modal-title fs-5 fw-bold me-3 text-white" id="modalTitle">Cambiar contraseña</h1>
-                            <img src="../../resources/images/logoAcademiaBP.png" alt="logoAcademiaBP" class="btn-close logo-academia" data-bs-dismiss="modal" aria-label="Close">
+                            <img src="../../resources/images/logoAcademiaBP.png" alt="logoAcademiaBP"
+                                class="btn-close logo-academia" data-bs-dismiss="modal" aria-label="Close">
                         </div>
-                        <button type="button" ></button>
+                        <button type="button"></button>
                     </div>
                     <form id="passwordForm">
                         <div class="modal-body row g-3">

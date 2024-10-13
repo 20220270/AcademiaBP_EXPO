@@ -98,16 +98,32 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+            case 'readProductoMasCompradoCliente':
+                if ($result['dataset'] = $cliente->readProductoMasCompradoCliente()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No tienes productos adquiridos';
+                }
+                break;
+
+            case 'readUltimaCompraCliente':
+                if ($result['dataset'] = $cliente->readUltimaCompraCliente()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No tienes productos adquiridos';
+                }
+                break;
+
                 //Evitamos el error de acción no disponible dentro de la sesión
-              case 'logIn':
+            case 'logIn':
                 $_POST = Validator::validateForm($_POST);
-                
+
                 // Verificar si el usuario existe
                 if ($cliente->checkUserExists($_POST['correoCliente'])) {
                     // Obtener intentos fallidos y el tiempo de bloqueo
                     $intentosFallidos = $cliente->getFailedAttempts($_POST['correoCliente']);
                     $bloqueadoHasta = $cliente->getLockTime($_POST['correoCliente']);
-                    
+
                     // Verificar si la cuenta está bloqueada
                     $ahora = time();
                     if ($bloqueadoHasta && $ahora < strtotime($bloqueadoHasta)) {
@@ -122,10 +138,10 @@ if (isset($_GET['action'])) {
                         } else {
                             // Incrementar los intentos fallidos
                             $cliente->incrementFailedAttempts($_POST['correoCliente']);
-                            
+
                             // Obtener los nuevos intentos fallidos
                             $intentosFallidos = $cliente->getFailedAttempts($_POST['correoCliente']);
-                            
+
                             if ($intentosFallidos >= 3) {
                                 // Bloquear la cuenta por 24 horas si hay 3 intentos fallidos
                                 $cliente->lockAccount($_POST['correoCliente'], date("Y-m-d H:i:s", $ahora + 24 * 60 * 60));
@@ -281,6 +297,22 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'Cuenta registrada correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al registrar la cuenta';
+                }
+                break;
+
+            case 'readAlumnos':
+                if ($result['dataset'] = $cliente->readAlumnos()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No tienes alumnos registrados';
+                }
+                break;
+
+            case 'readProductoMasCompradoCliente':
+                if ($result['dataset'] = $cliente->readProductoMasCompradoCliente()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No tienes productos adquiridos';
                 }
                 break;
 

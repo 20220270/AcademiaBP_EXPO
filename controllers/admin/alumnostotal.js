@@ -103,10 +103,10 @@ const fillTable = async (form = null) => {
                     <p class="card-text"><b>Encargado de la categoría: </b>${row.Staff}</p>
                     <p class="card-text"><small class="text-body-secondary">Inscrito desde: ${row.fecha_inscripcion}</small></p>
                     <div class="d-flex justify-content-center gap-2">
-                        <button type="button" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_alumno})" title="Eliminar ${row.nombre}">
+                        <button type="button" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_alumno}, '${row.nombre}')" title="Eliminar ${row.nombre}">
                             <img src="../../resources/images/btnEliminarIMG.png" alt="Eliminar" width="30px" height="30px" class="mb-1">
                         </button>
-                        <button type="button" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_alumno})" title="Actualizar ${row.nombre}">
+                        <button type="button" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_alumno}, '${row.nombre}')" title="Actualizar ${row.nombre}">
                             <img src="../../resources/images/btnActualizarIMG.png" alt="Actualizar" width="30px" height="30px" class="mb-1">
                         </button>
                     </div>
@@ -150,10 +150,10 @@ const fillTable2 = async (form = null) => {
                     <p class="card-text"><b>Encargado de la categoría: </b>${row.Staff}</p>
                     <p class="card-text"><small class="text-body-secondary">Inscrito desde: ${row.fecha_inscripcion}</small></p>
                     <div class="d-flex justify-content-center gap-2">
-                        <button type="button" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_alumno})">
+                        <button type="button" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_alumno}, '${row.nombre}')" title="Actualizar inscripción de ${row.nombre}">
                             <img src="../../resources/images/btnEliminarIMG.png" alt="Eliminar" width="30px" height="30px" class="mb-1">
                         </button>
-                        <button type="button" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_alumno})">
+                        <button type="button" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_alumno}, '${row.nombre}')" title="Eliminar inscripción de ${row.nombre}">
                             <img src="../../resources/images/btnActualizarIMG.png" alt="Actualizar" width="30px" height="30px" class="mb-1">
                         </button>
                     </div>
@@ -199,7 +199,7 @@ function validarFechaNacimiento() {
 
 
 
-const openUpdate = async (id) => {
+const openUpdate = async (id, nombre) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idAlumno', id);
@@ -211,7 +211,7 @@ const openUpdate = async (id) => {
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar datos del alumno';
+        MODAL_TITLE.textContent = 'Actualizar datos del alumno ' + nombre;
         
         // Se prepara el formulario.
         SAVE_FORM.reset();
@@ -244,9 +244,9 @@ const openUpdate = async (id) => {
 
 
 
-const openDelete = async (id) => {
+const openDelete = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar este alumno de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar este alumno: ' +nombre+ ', de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.

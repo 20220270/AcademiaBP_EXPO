@@ -50,9 +50,9 @@ class DiasPagoHandler
 
     public function readAll()
     {
-        $sql = 'SELECT id_dia_pago, numero_dias, mensualidad_pagar 
+        $sql = "SELECT id_dia_pago, numero_dias, mensualidad_pagar, CONCAT(numero_dias, ', $', mensualidad_pagar) AS datopago
                 FROM tb_dias_pagos
-                ORDER BY id_dia_pago';
+                ORDER BY id_dia_pago";
         return Database::getRows($sql);
     }
 

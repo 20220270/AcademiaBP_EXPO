@@ -137,13 +137,13 @@ SEARCH_FORM.addEventListener('submit', (event) => {
                     <div class="col-md-8">
                         <div class="card-body">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="button" class="btn btn-sm" onclick="openUpdate(${row.id_administrador})">
+                                <button type="button" class="btn btn-sm" onclick="openUpdate(${row.id_administrador}, '${row.nombre_admistrador} ${row.apellido_administrador}')" title="Actualizar datos del administrador ${row.nombre_admistrador} ${row.apellido_administrador}">
                                      <img src="../../resources/images/btnActualizarIMG.png" alt="" width="40px" height="40px" class="mb-1">
                                 </button>
-                                <button type="button" class="btn btn-sm" onclick="openDelete(${row.id_administrador})">
+                                <button type="button" class="btn btn-sm" onclick="openDelete(${row.id_administrador} , '${row.nombre_admistrador} ${row.apellido_administrador}')" title="Eliminar datos del administrador ${row.nombre_admistrador} ${row.apellido_administrador}">
                                     <img src="../../resources/images/btnEliminarIMG.png" alt="" width="40px" height="40px" class="mb-1">
                                 </button>
-                                <button type="button" class="btn btn-sm" onclick="openReport2(${row.id_administrador})">
+                                <button type="button" class="btn btn-sm" onclick="openReport2(${row.id_administrador}, '${row.nombre_admistrador} ${row.apellido_administrador}')" title="Generar reporte de productos registrador por el administrador ${row.nombre_admistrador} ${row.apellido_administrador}">
                                     <img src="../../resources/images/reporteee.png" alt="" width="20px" height="25px" class="mb-1">
                                 </button>
                             </div>
@@ -187,10 +187,10 @@ const fillTable2 = async (form = null) => {
             TABLE_BODY.innerHTML += `
             <td>${row.id_nivel}</td>
             <td>${row.nivel}</td>
-            <td><button type="button" class="btn btn-sm" onclick="openUpdate2(${row.id_nivel})">
+            <td><button type="button" class="btn btn-sm" onclick="openUpdate2(${row.id_nivel}, '${row.nivel}')" title="Actualizar nivel de usuario ${row.nivel}">
                                      <img src="../../resources/images/btnActualizarIMG.png" alt="" width="40px" height="40px" class="mb-1">
                                 </button>
-                                <button type="button" class="btn btn-sm" onclick="openDelete2(${row.id_nivel})">
+                                <button type="button" class="btn btn-sm" onclick="openDelete2(${row.id_nivel} , '${row.nivel}')"  title="Eliminar nivel de usuario ${row.nivel}">
                                     <img src="../../resources/images/btnEliminarIMG.png" alt="" width="40px" height="40px" class="mb-1">
                                 </button></td>
             `;
@@ -237,7 +237,7 @@ const fillTable2 = async (form = null) => {
   *   Parámetros: id (identificador del registro seleccionado).
   *   Retorno: ninguno.
   */
-  const openUpdate = async (id) => {
+  const openUpdate = async (id, nombre) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idAdministrador', id);
@@ -247,7 +247,7 @@ const fillTable2 = async (form = null) => {
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar administrador';
+        MODAL_TITLE.textContent = 'Actualizar administrador ' + nombre;
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
@@ -281,7 +281,7 @@ const fillTable2 = async (form = null) => {
     }
   }
 
-  const openUpdate2 = async (id) => {
+  const openUpdate2 = async (id, nombre) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idNivel', id);
@@ -291,7 +291,7 @@ const fillTable2 = async (form = null) => {
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL2.show();
-        MODAL_TITLE2.textContent = 'Actualizar nivel de usuario';
+        MODAL_TITLE2.textContent = 'Actualizar nivel de usuario ' + nombre;
         // Se prepara el formulario.
         SAVE_FORM2.reset();
         // Se inicializan los campos con los datos.
@@ -309,9 +309,9 @@ const fillTable2 = async (form = null) => {
   *   Parámetros: id (identificador del registro seleccionado).
   *   Retorno: ninguno.
   */
-  const openDelete = async (id) => {
+  const openDelete = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar este administrador de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar este administrador: ' +nombre+ ', de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
@@ -331,9 +331,9 @@ const fillTable2 = async (form = null) => {
     }
   }
 
-  const openDelete2 = async (id) => {
+  const openDelete2 = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar este nivel de administrador de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar este nivel de administrador: ' +nombre+ ', de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.

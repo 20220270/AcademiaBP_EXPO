@@ -93,10 +93,10 @@ const fillTable = async (form = null) => {
                     <p class="card-text"><small class="text-muted">Mensaje enviado en la fecha: ${row.fecha_envio}</small></p>
                     
                     <div class="d-flex justify-content-center gap-1">
-                        <button type="submit" class="btn" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_soporte})">
+                        <button type="submit" class="btn" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_soporte})" title="Eliminar mensaje">
                             <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                         </button>
-                        <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_soporte})">
+                        <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_soporte})" title="Actualizar estado del mensaje">
                             <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                         </button>
                     </div>

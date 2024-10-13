@@ -11,7 +11,9 @@ const PROFILE_FORM = document.getElementById('profileForm'),
     TELEFONO_CLIENTE = document.getElementById('telefonoCliente'),
     DIRECCION_CLIENTE = document.getElementById('direccionCliente'),
     FECHA_REGISTRO = document.getElementById('fecharegistroCliente'),
-    FOTO_CLIENTE = document.getElementById('imagen');
+    FOTO_CLIENTE = document.getElementById('imagen'),
+    PRODUCTOMASCOMPRADO = document.getElementById('productoMasAdquirido'),
+    ULTIMAFECHACOMPRA = document.getElementById('ultimafechaCompra');
 
 const PROFILE_FORM2 = document.getElementById('profileForm2'),
     CARDS_ALUMNOSREG = document.getElementById('cardAlumnos');
@@ -25,7 +27,12 @@ const PASSWORD_FORM = document.getElementById('passwordForm');
 document.addEventListener('DOMContentLoaded', async () => {
     loadTemplate();
     const DATA = await fetchData(USER_API, 'readProfile');
+    const DATA2 = await fetchData(USER_API, 'readProductoMasCompradoCliente');
+    const DATA3 = await fetchData(USER_API, 'readUltimaCompraCliente');
+    
     let ROW; // Definir ROW en un alcance más amplio
+    let ROW2;
+    let ROW3;
 
     if (DATA.status) {
         ROW = DATA.dataset;
@@ -39,11 +46,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         DIRECCION_CLIENTE.value = ROW.direccion_cliente;
 
         FOTO_CLIENTE.src = `${SERVER_URL}images/clientes/${ROW.foto_cliente}`;
-        console.log(ROW.foto_cliente);
 
         // Llamar fillTable con el correo del cliente
         fillTable(ROW.correo_cliente);
     } else {
+        sweetAlert(2, DATA.error, null);
+    }
+
+    if(DATA2.status){
+        ROW2 = DATA2.dataset;
+        PRODUCTOMASCOMPRADO.value = ROW2.nombre_producto;
+    }else {
+        sweetAlert(2, DATA.error, null);
+    }
+
+    if(DATA3.status){
+        ROW3 = DATA3.dataset;
+        ULTIMAFECHACOMPRA.value = ROW3.fecha_registro;
+    }else {
         sweetAlert(2, DATA.error, null);
     }
 
@@ -146,9 +166,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 const fotoInput = document.getElementById('fotoInput');
 // Escuchar cambios en el elemento de entrada de archivo
 fotoInput.addEventListener('change', function () {
-
-
-
     // Verificar si se seleccionó un archivo
     if (this.files && this.files[0]) {
         const reader = new FileReader();

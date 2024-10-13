@@ -5,11 +5,16 @@ const PARAMS = new URLSearchParams(location.search);
 // Elementos del DOM
 const PRODUCTOS = document.getElementById('productos');
 const PRODUCTOS1 = document.getElementById('productos1');
+const PRODUCTOS_COMENTARIOS = document.getElementById('productos2');
+const SAVE_MODAL2 = new bootstrap.Modal(document.getElementById('saveModal2'));
+const SAVE_FORM2 = document.getElementById('saveForm2'),
+MODAL_TITLE2 = document.getElementById('modalTitle2');
 const MAIN_TITLE = document.getElementById('mainTitle');
 const SEARCH_FORM = document.getElementById('searchForm');
 const SAVE_MODAL = new bootstrap.Modal(document.getElementById('saveModal'));
 const SAVE_FORM = document.getElementById('saveForm'),
 MODAL_TITLE = document.getElementById('modalTitle');
+
 
 // Método manejador de eventos para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
@@ -37,18 +42,23 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div class="col-sm-12 col-md-6 col-lg-3 mb-3">
                         <div class="card h-100">
                             <img src="${SERVER_URL}images/productos/${row.imagen_producto}" class="card-img-top img-fluid mt-3" alt="${row.nombre_producto}">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">${row.nombre_producto}</h5>
-                                <ul class="list-group list-group-flush">
-                                    
-                                    <button type="button" class="btn mt-1" id="btnDetalles" name="btnDetalles" onclick="fillTable(${row.id_producto})">
-                                        <img src="../../resources/images/verdetalles.png" alt="" width="30px" height="30px" class="mb-1">
-                                    </button>
-
-                                </ul>
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">${row.nombre_producto}</h5>
+                                        <ul class="list-group list-group-flush">
+                                <!-- Contenedor flex para alinear los botones en la misma línea -->
+                                <div class="d-flex justify-content-center">
+                                <button type="button" class="btn mt-1 mx-1" id="btnDetalles" name="btnDetalles" onclick="fillTable(${row.id_producto})">
+                                    <img src="../../resources/images/verdetalles.png" alt="" width="30px" height="30px" class="mb-1">
+                                </button>
+                                <button type="button" class="btn mt-1 mx-1" id="btnComentarios" name="btnComentarios" onclick="fillTable2(${row.id_producto}, '${row.nombre_producto}')">
+                                    <img src="../../resources/images/comentarios.png" alt="" width="30px" height="30px" class="mb-1">
+                                </button>
+                                    </div>
+                                        </ul>
                             </div>
                         </div>
                     </div>
+
                 `;
             });
         } else {
@@ -135,7 +145,7 @@ const fillTable = async (id) => {
             });
             // Mostrar la modal después de llenar los detalles del producto.
             SAVE_MODAL.show();
-            MODAL_TITLE.textContent = 'Productos';
+            MODAL_TITLE.textContent = 'Comentarios';
         } else {
             sweetAlert(4, DATA.error, true);
         }
@@ -143,6 +153,66 @@ const fillTable = async (id) => {
         console.error('Error al cargar detalles del producto:', error);
         sweetAlert(4, 'Error al cargar detalles del producto', true);
     }
+}
+
+const fillTable2 = async (id, nombre) => {
+    // Inicializa el contenido de las cards de detalles.
+    PRODUCTOS_COMENTARIOS.innerHTML = '';
+    const FORM = new FormData();
+    FORM.append('idProducto', id); // Agregar el idProducto al formulario
+
+    try {
+        // Petición para obtener los detalles del producto seleccionado.
+        const DATA = await fetchData(PRODUCTO_API, 'commentsProduct', FORM);
+        console.log(DATA)
+        
+        // Comprueba si la respuesta es satisfactoria, de lo contrario muestra un mensaje con la excepción.
+        if (DATA.status) {
+            // Recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
+            DATA.dataset.forEach(row => {
+                
+                // Crea y concatena las cards con los datos de cada registro.
+                PRODUCTOS_COMENTARIOS.innerHTML += `
+                    <div class="col-md-12 col-lg-12 mt-3 mb-1">
+                        <div class="card-body" id="borde">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="d-flex align-items-center">
+                            <img src="${SERVER_URL}images/clientes/${row.foto_cliente}" alt="..." height="40px" width="40px" class="mr-2 rounded-circle">
+                            <span class="card-text mx-2">${row.nombre_cliente} ${row.apellido_cliente}</span>
+                        </div>
+                        <span class="card-text">${row.fecha_valoracion}</span>
+                    </div>
+                    <span class="card-text d-block">${generateStars(row.calificacion_producto)} ${row.calificacion_producto}</span>
+                    <span class="card-text d-block">${row.comentario_producto}</span>
+                         
+                </div>
+            </div>
+                `;
+            });
+            // Mostrar la modal después de llenar los detalles del producto.
+            SAVE_MODAL2.show();
+            MODAL_TITLE2.textContent = 'Comentarios del producto ' + nombre;
+        } else {
+            sweetAlert(4, DATA.error, true);
+        }
+    } catch (error) {
+        console.error('Error al cargar detalles del producto:', error);
+        sweetAlert(4, 'Error al cargar detalles del producto', true);
+    }
+}
+
+// Función para generar estrellas basado en la calificación
+function generateStars(rating) {
+    const maxStars = 5;
+    let stars = '';
+    for (let i = 1; i <= maxStars; i++) {
+        if (i <= rating) {
+            stars += '<span class="star filled">★</span>';
+        } else {
+            stars += '<span class="star">☆</span>';
+        }
+    }
+    return stars;
 }
 
 

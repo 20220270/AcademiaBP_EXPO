@@ -49,21 +49,21 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active text-success" id="calendar-tab" data-bs-toggle="tab"
                             data-bs-target="#calendar-section" type="button" role="tab" aria-controls="calendar-section"
-                            aria-selected="true">
+                            aria-selected="true" title="Días de pago">
                             <img src="../../resources/images/icons8-calendar-100.png" alt="calendar.png"
                                 class="mt-2" width="50px" height="50px"></button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link text-success" id="chartPrediction-tab" data-bs-toggle="tab"
                             data-bs-target="#chartPrediction-section" type="button" role="tab"
-                            aria-controls="chartPrediction-section" aria-selected="false">
+                            aria-controls="chartPrediction-section" aria-selected="false" title="Pagos de mensualidad">
                             <img src="../../resources/images/ganancias_perdidas_grafico.png" alt="calendar.png" class="mt-2"
                                 width="50px" height="50px"></button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link text-success" id="chart1-tab" data-bs-toggle="tab"
                             data-bs-target="#chart1-section" type="button" role="tab" aria-controls="chart1-section"
-                            aria-selected="false">
+                            aria-selected="false" title="Boletas de pago">
                             <img src="../../resources/images/add_user.png" alt="calendar.png" class="mt-2"
                                 width="50px" height="60px"></button>
                     </li>
@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="col-3 d-flex justify-content-end">
                                         <!-- Botón alineado a la derecha -->
-                                        <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate()">
+                                        <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate()" title="Agregar día y cuota de pago">
                                             <img src="../../resources/images/agregar.png" alt="buttonpng"
                                                 width="60rem" />
                                         </button>
@@ -138,13 +138,13 @@
                                         </form>
 
                                         <button type="submit" class="btn mx-5" id="btnGuardar" name="btnGuardar"
-                                            onclick="openReport()"><img src="../../resources/images/report.png"
+                                            onclick="openReport()" title="Generar reporte de pagos de mensualidad"><img src="../../resources/images/report.png"
                                                 alt="buttonpng" width="40rem"/></button>
 
                                         <div class="col-3 col-lg-9 d-flex justify-content-end">
                                             <!-- Botón alineado a la derecha -->
                                             <button type="button" class="btn btn-white me-md-2 mt-4"
-                                                onclick="openCreate2()">
+                                                onclick="openCreate2()" title="Registrar pago de mensualidad">
                                                 <img src="../../resources/images/agregar.png" alt="buttonpng"
                                                     width="60rem" />
                                             </button>
@@ -211,7 +211,7 @@
                                             <div class="col-3 d-flex justify-content-end">
                                                 <!-- Botón alineado a la derecha -->
                                                 <button type="button" class="btn btn-white me-md-2 mt-1"
-                                                    onclick="openCreate3()">
+                                                    onclick="openCreate3()" title="Registrar datos para boleta de pago">
                                                     <img src="../../resources/images/agregar.png" alt="buttonpng"
                                                         width="60rem" />
                                                 </button>
