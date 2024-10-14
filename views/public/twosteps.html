@@ -21,74 +21,7 @@
             <div class="form-container registrarse">
                 <div class="scrollable-content1">
                     <!-- Formulario de registro -->
-                    <form class="row mt-5" id="signupForm">
-                        <!-- Título principal -->
-                        <h2 id="mainTitle" class="text-center mt-4"></h2>
-                        <!-- Iconos sociales -->
-                        <div class="social-icons">
-                            <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                            <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                        </div>
-                        <!-- Campos del formulario -->
-                        <input type="hidden" id="gRecaptchaResponse" name="gRecaptchaResponse">
-                        <div class="col-12 mx-auto">
-                            <label for="nombreCliente" class="form-label">Nombre</label>
-                            <input type="text" id="nombreCliente" autocomplete="off" name="nombreCliente"
-                                class="form-control" oninput="this.value = this.value.replace(/[0-9]/g, '')">
-                        </div>
-                        <div class="col-12 mt-2 mx-auto">
-                            <label for="apellidoCliente" class="form-label">Apellido</label>
-                            <input type="text" id="apellidoCliente" autocomplete="off" name="apellidoCliente"
-                                class="form-control" required oninput="this.value = this.value.replace(/[0-9]/g, '')">
-                        </div>
-                        <div class="col-12 mt-2 mx-auto">
-                            <label for="correoCliente" class="form-label">Correo electrónico</label>
-                            <input type="email" id="correoCliente" autocomplete="off" name="correoCliente"
-                                maxlength="100" class="form-control" required>
-                        </div>
-                        <div class="col-12 mt-2 mx-auto">
-                            <label for="duiCliente" class="form-label">DUI</label>
-                            <input type="text" id="duiCliente" autocomplete="off" name="duiCliente"
-                                placeholder="00000000-0" class="form-control" required
-                                oninput="this.value = this.value.replace(/[^0-9-]/g, '')" pattern="[0-9-]+"
-                                maxlength="10">
-                        </div>
-                        <div class="col-12 mt-2 mx-auto">
-                            <label for="telefonoCliente" class="form-label">Teléfono</label>
-                            <input type="text" id="telefonoCliente" autocomplete="off" name="telefonoCliente"
-                                placeholder="0000-0000" class="form-control" required required maxlength="9"
-                                pattern="[0-9\-]*" oninput="this.value = this.value.replace(/[^\d-]/g, '');">
-                        </div>
-                        <div class="col-12 mt-2 mx-auto">
-                            <label for="direccionCliente" class="form-label">Dirección</label>
-                            <input type="text" id="direccionCliente" autocomplete="off" name="direccionCliente"
-                                maxlength="250" class="form-control" required>
-                        </div>
-                        <div class="col-12 mt-2 mx-auto">
-                            <label for="claveCliente" class="form-label">Contraseña</label>
-                            <input type="password" id="claveCliente" autocomplete="off" name="claveCliente"
-                                class="form-control" required>
-                        </div>
-                        <div class="col-12 mt-2 mx-auto">
-                            <label for="confirmarClave" class="form-label">Confirmar contraseña</label>
-                            <input type="password" id="confirmarClave" autocomplete="off" name="confirmarClave"
-                                class="form-control" required>
-                        </div>
-
-                        <!-- Checkbox de aceptar términos y condiciones -->
-                        <div class="form-check d-flex justify-content-center mt-2">
-                            <input type="checkbox" class="form-check-input" id="condicion" name="condicion" required>
-                            <label class="form-check-label" for="condicion">Acepto términos y condiciones</label>
-                        </div>
-                        <!-- Botones de cancelar y registrar -->
-                        <div class="text-center">
-
-                            <button type="submit" class="btn btn-dark mt-2"><i class="bi bi-person-fill"></i>
-                                Registrar</button>
-                            <button type="reset" class="btn btn-dark mt-2"><i class="bi bi-x-square-fill"></i>
-                                Cancelar</button>
-                        </div>
-                    </form>
+                    
                 </div>
             </div>
             <!-- Contenedor de iniciar sesión -->
@@ -96,7 +29,7 @@
                 <form id="sessionForm" action="../../api/helpers/validar_codigo(cliente).php" method="POST">
                     <h1 class="tituloIS">Autenticación en dos pasos</h1>
                     <label class="textoIng">Te enviamos un código a tu correo</label>
-                    <input id="code" type="password" name="code" autocomplete="off" class="form-control" required placeholder="Ingresa tu código">
+                    <input id="code" type="text" name="code" autocomplete="off" class="form-control" required placeholder="Ingresa tu código">
                     <a href="recuperarcontraseña.html">¿Olvidaste tu contraseña?</a>
 
                     <button type="submit" class="submit">Verificar</button>
@@ -116,12 +49,9 @@
                     </div>
                     <!-- Panel derecho: Registrarse -->
                     <div class="toggle-panel toggle-right">
-                        <div class="toggle-image">
+                        <div class="toggle-image1">
                             <img src="../../resources/images/logoAcademiaBP.png" alt="logoAcademiaBP">
                         </div>
-                        <h1>¡Regístrate!</h1>
-                        <p class="textoSi2">Si aún no dispones de una cuenta, ingresa aquí</p>
-                        <button class="hidden" id="registrarse">Registrarse</button>
                     </div>
                 </div>
             </div>

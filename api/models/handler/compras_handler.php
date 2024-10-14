@@ -41,24 +41,27 @@ class ComprasHandler
 
     public function readAll()
     {
-        $sql = "SELECT id_compra, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro FROM tb_compras p
+        $sql = "SELECT id_compra, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro, nombre_metodo FROM tb_compras p
         INNER JOIN tb_clientes USING(id_cliente)
+        LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
                 ORDER BY id_compra";
         return Database::getRows($sql);
     }
 
     public function readAll2()
     {
-        $sql = "SELECT id_compra, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro FROM tb_compras p
+        $sql = "SELECT id_compra, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro, nombre_metodo FROM tb_compras p
         INNER JOIN tb_clientes USING(id_cliente)
+        LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
                 ORDER BY p.fecha_registro";
         return Database::getRows($sql);
     }
 
     public function readAll3()
     {
-        $sql = "SELECT id_compra, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro FROM tb_compras p
+        $sql = "SELECT id_compra, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro, nombre_metodo FROM tb_compras p
         INNER JOIN tb_clientes USING(id_cliente)
+        LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
                 WHERE p.fecha_registro = ?";
         $params = array($this->fecha);
         return Database::getRows($sql, $params);
@@ -66,8 +69,9 @@ class ComprasHandler
 
     public function readOne()
     {
-        $sql = "SELECT id_compra, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro FROM tb_compras p
+        $sql = "SELECT id_compra, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro, nombre_metodo FROM tb_compras p
         INNER JOIN tb_clientes USING(id_cliente)
+        LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
                 WHERE id_compra = ?";
         $params = array($this->idcompra);
         return Database::getRow($sql, $params);
@@ -243,6 +247,8 @@ class ComprasHandler
          imagen_producto, 
          tb_productos.precio_producto, 
          cantidad_producto, 
+         nombre_metodo,
+         imagen_metodo,
          tb_productos.descuento_producto, 
          (tb_productos.precio_producto * cantidad_producto) AS Subtotal, 
          ROUND((tb_productos.precio_producto * cantidad_producto) - (tb_productos.precio_producto * cantidad_producto * tb_productos.descuento_producto / 100), 2) AS SubtotalConDescuento,
@@ -252,7 +258,8 @@ class ComprasHandler
          tb_detalles_compras
      INNER JOIN 
          tb_compras USING(id_compra)
-                 INNER JOIN tb_detalleproducto USING(id_detalle_producto)
+         LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
+    INNER JOIN tb_detalleproducto USING(id_detalle_producto)
      INNER JOIN 
          tb_productos USING(id_producto) 
                 WHERE id_cliente = ? AND (nombre_producto LIKE ? OR tb_compras.fecha_registro LIKE ? OR id_compra LIKE ? or id_detalle_compra LIKE ?)
@@ -270,7 +277,9 @@ class ComprasHandler
          nombre_producto, 
          imagen_producto, 
          tb_productos.precio_producto, 
-         cantidad_producto, 
+         cantidad_producto,
+         nombre_metodo,
+         imagen_metodo,
          tb_productos.descuento_producto, 
          (tb_productos.precio_producto * cantidad_producto) AS Subtotal, 
          ROUND((tb_productos.precio_producto * cantidad_producto) - (tb_productos.precio_producto * cantidad_producto * tb_productos.descuento_producto / 100), 2) AS SubtotalConDescuento,
@@ -280,9 +289,11 @@ class ComprasHandler
          tb_detalles_compras
         INNER JOIN 
         tb_compras USING(id_compra)
-                INNER JOIN tb_detalleproducto USING(id_detalle_producto)
+        LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
+		INNER JOIN tb_detalleproducto USING(id_detalle_producto)
         INNER JOIN 
-         tb_productos USING(id_producto)  WHERE id_cliente = ?
+         tb_productos USING(id_producto)
+         WHERE id_cliente = ?
          ORDER BY id_compra';
         $params = array($_SESSION['idCliente']);
         return Database::getRows($sql, $params);
@@ -299,7 +310,9 @@ class ComprasHandler
                 tb_compras.fecha_registro, 
                 nombre_producto, 
                 tb_productos.precio_producto, 
-                cantidad_producto, 
+                cantidad_producto,
+                nombre_metodo,
+                imagen_metodo, 
                 tb_productos.descuento_producto, 
                 (tb_productos.precio_producto * cantidad_producto) AS Subtotal, 
                 ROUND((tb_productos.precio_producto * cantidad_producto) - (tb_productos.precio_producto * cantidad_producto * tb_productos.descuento_producto / 100), 2) AS SubtotalConDescuento
@@ -307,6 +320,7 @@ class ComprasHandler
                 tb_detalles_compras
                 INNER JOIN 
                 tb_compras USING(id_compra)
+                LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
                 INNER JOIN 
                 tb_clientes USING(id_cliente)
                 INNER JOIN 

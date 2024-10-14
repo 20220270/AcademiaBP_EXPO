@@ -176,14 +176,14 @@ const fillTable2 = async (id, nombre) => {
                     <div class="col-md-12 col-lg-12 mt-3 mb-1">
                         <div class="card-body" id="borde">
                             <div class="d-flex justify-content-between align-items-center mb-4">
-                                <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center mx-2 mt-2">
                             <img src="${SERVER_URL}images/clientes/${row.foto_cliente}" alt="..." height="40px" width="40px" class="mr-2 rounded-circle">
                             <span class="card-text mx-2">${row.nombre_cliente} ${row.apellido_cliente}</span>
                         </div>
-                        <span class="card-text">${row.fecha_valoracion}</span>
+                        <span class="card-text me-4">${row.fecha_valoracion}</span>
                     </div>
-                    <span class="card-text d-block">${generateStars(row.calificacion_producto)} ${row.calificacion_producto}</span>
-                    <span class="card-text d-block">${row.comentario_producto}</span>
+                    <span class="card-text d-block mx-2">${generateStars(row.calificacion_producto)} ${row.calificacion_producto}</span>
+                    <span class="card-text d-block mx-2 mb-3">${row.comentario_producto}</span>
                          
                 </div>
             </div>

@@ -116,6 +116,7 @@ const fillTable = async (form = null) => {
                   <td>${row.direccion_compra}</td>
                   <td>${row.fecha_registro}</td>
                   <td>${row.estado_compra}</td>
+                    <td>${row.nombre_metodo}</td>
                   <td>
                     <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_compra})" title="Eliminar compra número ${row.id_compra}, del cliente ${row.nombre_completo}" >
                         <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">

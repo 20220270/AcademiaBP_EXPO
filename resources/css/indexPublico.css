@@ -302,6 +302,11 @@ footer {
     width: 100%;
   }
 
+  .texto1,
+  .texto2{
+    font-size: 8px;
+  }
+
 
   .overlay {
     position: absolute;
@@ -391,7 +396,7 @@ footer {
 
   .texto1,
   .texto2{
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .textoboton {

@@ -30,7 +30,7 @@ if (isset($_GET['idCompra'])) {
                 $pdf->cell(0, 10, $pdf->encodeString('Dirección: ' . $rowOrdenes['direccion_compra']), 1, 1, 'L', 1);
                 $pdf->cell(0, 10, $pdf->encodeString('Fecha de la compra: ' . $rowOrdenes['fecha_registro']), 1, 1, 'L', 1);
                 $pdf->cell(0, 10, $pdf->encodeString('Estado de la orden: ' . $rowOrdenes['estado_compra']), 1, 1, 'R', 1);
-
+                $pdf->cell(0, 10, $pdf->encodeString('Método de pago: ' . $rowOrdenes['nombre_metodo']), 1, 1, 'L', 1);
                 $pdf->Ln();
 
                 // Se imprimen las celdas con los encabezados.

@@ -122,6 +122,15 @@ SEARCH_FORM.addEventListener('submit', (event) => {
                                         <span class="cantidadCompra">${row.descuento_producto}%</span>
                                     </div>
                                 </div>
+                                <div class="row mb-2">
+                                    <div class="col-6">
+                                        <strong>Método de pago:</strong>
+                                    </div>
+                                    <div class="col-6">
+                                        <img src="${SERVER_URL}images/metodospagos/${row.imagen_metodo}" alt="Producto" height="30px" width="40px">
+                                        <span class="cantidadCompra">${row.nombre_metodo}</span>
+                                    </div>
+                                </div>
                                     <div class="text-center mt-3">
                                         <strong>Valorar producto:</strong>
                                         <button type="submit" class="btn mt-1 mostrarModalValoracion" onclick="openRating(${row.id_detalle_compra})">

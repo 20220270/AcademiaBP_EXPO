@@ -35,6 +35,7 @@ if (isset($_GET['idCompra'])) {
             $pdf->cell(0, 10, $pdf->encodeString('Compra número: ' . $dataOrdenes[0]['id_compra']), 1, 1, 'L', 1);
             $pdf->cell(93, 10, $pdf->encodeString('Cliente: ' . $dataOrdenes[0]['Cliente']), 1, 0, 'L', 1);
             $pdf->cell(92.9, 10, $pdf->encodeString('Correo: ' . $dataOrdenes[0]['correo_cliente']), 1, 1, 'L', 1);
+            $pdf->cell(0, 10, $pdf->encodeString('Método de pago: ' . $dataOrdenes[0]['nombre_metodo']), 1, 1, 'L', 1);
             $pdf->cell(0, 10, $pdf->encodeString('Fecha de la compra: ' . $dataOrdenes[0]['fecha_registro']), 1, 1, 'R', 1);
 
             //Salto de linea para separar los datos de la compra y los datos del producto

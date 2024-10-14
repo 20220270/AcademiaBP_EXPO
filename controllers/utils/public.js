@@ -36,10 +36,10 @@ const loadTemplate = async () => {
                 <header>
                     <div class="container-fluid text-center mt-3">
             <div class="row"> <!---->
-                <div class="col-lg-4 col-md-3 col-sm-4 col-6 ">
+                <div class="col-lg-4 col-md-3 col-sm-4 col-4">
                     <!-- Contenedor con un display flex para alinear elementos horizontalmente -->
                     <div class="d-flex align-items-center mt-2">
-                        <img src="../../resources/images/soporte-tecnico-colorNegro.png" class="mt-4 me-1" alt="..."
+                        <img src="../../resources/images/soporte-tecnico-colorNegro.png" class="mt-4 me-1 iconoito" alt="..."
                             height="40px" width="40px">
                         <div class="texto mt-4">
                             <span class="d-block texto1">Soporte técnico</span>
@@ -49,7 +49,7 @@ const loadTemplate = async () => {
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-5 col-6 align-self-center">
+                <div class="col-lg-4 col-md-6 col-sm-5 col-1 align-self-center">
                     <a href="index.html">
                         <img src="../../resources/images/logoAcademiaBP.png" alt="..." height="120px" width="120px" id="imagenLogoA">
                     </a>
