@@ -112,6 +112,15 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+            case 'clientesTotal':
+                if ($result['dataset'] = $cliente->clientesTotal()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen clientes registrados';
+                }
+                break;
+
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

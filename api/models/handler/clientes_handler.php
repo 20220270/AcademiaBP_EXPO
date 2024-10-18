@@ -405,4 +405,10 @@ class ClienteHandler
         $params = array($bloqueadoHasta, $usuario);
         return Database::executeRow($sql, $params);
     }
+
+    public function clientesTotal()
+    {
+        $sql = 'SELECT COUNT(*) as TotalClientes FROM tb_clientes';
+        return Database::getRows($sql);
+    }
 }

@@ -4,3 +4,7 @@ tbody{
 ::placeholder{
     font-size: 13px;
 }
+main{
+    max-height: 740px;
+    overflow-y: auto;
+}

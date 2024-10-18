@@ -9,6 +9,8 @@ const TABLE_BODY = document.getElementById('tableBody'),
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
 
+    const CARD_CLIENTES = document.getElementById('clientestotal');
+
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm')
 
@@ -32,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //MAIN_TITLE.textContent = 'Gestionar categorías';
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
+    fillTable2();
 });
 
 SEARCH_FORM.addEventListener('submit', (event) => {
@@ -102,6 +105,34 @@ const fillTable = async (form = null) => {
                 </td>
                 <td id="chartColumn-${row.id_cliente}"></td>
             </tr>
+            `;
+        });
+    } else {
+        sweetAlert(4, DATA.error, true);
+    }
+}
+
+const fillTable2 = async (form = null) => {
+    // Se inicializa el contenido de la tabla.
+    CARD_CLIENTES.innerHTML = '';
+    // Se verifica la acción a realizar.
+    const action = form ? 'searchRows' : 'clientesTotal';
+    // Petición para obtener los registros disponibles.
+    const DATA = await fetchData(CLIENTES_API, action, form);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se recorre el conjunto de registros fila por fila.
+        DATA.dataset.forEach(row => {
+            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+                CARD_CLIENTES.innerHTML += `
+                            <div class="card-body text-center">
+                                <h1 class="card-title titulo-card">Total de cliente registrados.</h1>
+                                <p class="card-text mt-5">
+                                    <h3 id="totalStudents">${row.TotalClientes}</h3>
+                                    
+                                </p>
+                                <div class="d-flex justify-content-start"></div>
+                            </div>
             `;
         });
     } else {
