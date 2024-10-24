@@ -35,7 +35,7 @@
     <main>
         <div class="main">
             <div class="text-center">
-                <div class="" id="content1">
+                <div class="sticky-top" id="content1">
 
 
                     <!--cards de alumnos que han cancelado-->
@@ -45,8 +45,9 @@
                             <div class="row">
                                 <!-- Primera sección de tarjetas -->
                                 <div class="col-lg-12">
-                                    <h1>Alumnos</h1>
+                                    <h1 class="mt-4">Alumnos</h1>
                                     <div class="col-6 offset-3 d-flex justify-content-center">
+                                        <!--Definimos los métodos de búsqueda-->
                                         <!-- Añadimos una clase offset-3 para centrar el buscador -->
                                         <form class="d-flex flex-grow-1" id="searchForm">
                                             <div class="buscador mx-auto position-relative">
@@ -62,17 +63,29 @@
                                                 </div>
                                             </div>
 
+                                            <div class="col-sm-12 col-md-5 mx-2" id="selectEstadopo">
+                                                <label for="selectEstado" class="col-sm-10 col-form-label">Filtrar por estado del alumno:</label>
+                                                <select class="form-select" id="estado" name="estado"
+                                                    aria-label="Default select example">
+                                                    <option>Activo</option>
+                                                    <option>Inactivo</option>
+                                                    <option>Pendiente</option>
+                                                </select>
+                                            </div>
 
                                         </form>
-
+                                        
+                                        
 
                                     </div>
                                     <div class="col-2 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
-                                        <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate()" title="Registrar alumno">
+                                        <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate()"
+                                            title="Registrar alumno">
                                             <img src="../../resources/images/agregar.png" alt="buttonpng"
                                                 width="60rem" />
                                         </button>
-                                        <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openReport()" title="Generar reporte de todos los alumnos">
+                                        <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openReport()"
+                                            title="Generar reporte de todos los alumnos">
                                             <img src="../../resources/images/reportee.png" width="50rem" height="40rem"
                                                 alt="buttonpng" width="60rem" />
                                         </button>
@@ -80,19 +93,10 @@
                                     <div class="container col-lg-12">
                                         <div class="row">
                                             <!-- Primera sección de tarjetas -->
-                                            <div class="col-lg-7 col-md-12">
-                                                <p class="fs-3 fw-bold">Alumnos inscritos</p>
+                                            <div class="col-lg-12 col-md-12">
                                                 <div class="row justify-content-center p-3 bg-body-tertiary rounded"
                                                     id="cardsAlumnos">
                                                     <!-- Aquí se insertarán las tarjetas de la primera sección -->
-                                                </div>
-                                            </div>
-                                            <!-- Segunda sección de tarjetas -->
-                                            <div class="col-lg-4 col-md-12 mx-4">
-                                                <p class="fs-5 fw-bold">Inscripciones pendientes</p>
-                                                <div class="row justify-content-center p-3 mt-4 bg-body-tertiary rounded"
-                                                    id="cardsAlumnos2">
-                                                    <!-- Aquí se insertarán las tarjetas de la segunda sección -->
                                                 </div>
                                             </div>
                                         </div>
@@ -197,7 +201,7 @@
                             <label for="fechaInscripcion" class="col-sm-7 col-form-label">Fecha de inscripción:</label>
                             <input id="fechaInscripcion" type="date" name="fechaInscripcion" class="form-control">
                         </div>
-                        
+
 
                     </div>
                     <div class="modal-footer">
@@ -206,6 +210,33 @@
                 </form>
             </div>
 
+        </div>
+    </div>
+
+    <!-- Modal para mostrar la información del alumno -->
+    <div class="modal fade" id="detailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fs-3 w-100 text-center" id="modalTitleD"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form id="detailForm">
+                    <div class="modal-body overflow-auto" id="modalBodyD">
+                        <input type="hidden" id="idAlumno" name="idAlumno">
+                        <div class="col-lg-10 col-sm-10 col-md-12 col-12 mx-auto">
+                            <div id="scrollD">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
