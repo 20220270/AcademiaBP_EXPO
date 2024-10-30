@@ -35,19 +35,55 @@ const ID_TALLA = document.getElementById('selectTalla');
 const ID_COLOR = document.getElementById('selectColor');
 const EXISTENCIAS_PRODUCTO = document.getElementById('existenciasProducto');
 
+const ESTADO_SELECT = document.getElementById('estado');
+const BSUCADOR = document.getElementById('Buscador');
+
+let currentMethod = 'readAll'; // Método actual por defecto para la vista de fillTable2
+
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
     loadTemplate();
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
     fillTable2();
+
+    // Configuración del botón para alternar entre vistas
+    document.getElementById('toggleViewBtn').addEventListener('click', () => {
+        // Alterna entre los métodos
+        if (currentMethod === 'readAll') {
+            currentMethod = 'readAllMayorMenor';
+            document.getElementById('toggleViewBtn').textContent = 'Ver productos con menos existencias';
+        } else if (currentMethod === 'readAllMayorMenor') {
+            currentMethod = 'readAllMenorMayor';
+            document.getElementById('toggleViewBtn').textContent = 'Ver productos por ID';
+        } else {
+            currentMethod = 'readAll';
+            document.getElementById('toggleViewBtn').textContent = 'Ver productos con más existencias';
+        }
+        fillTable2(); // Recarga la tabla con la vista seleccionada
+    });
 });
 
+// Función para manejar la búsqueda al enviar el formulario
 SEARCH_FORM.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const FORM = new FormData(SEARCH_FORM);
-    fillTable(FORM);
+    event.preventDefault();  // Evita el envío predeterminado del formulario
+    const FORM = new FormData(SEARCH_FORM);  // Crea el objeto FormData
+    fillTable(FORM);  // Realiza la búsqueda
 });
+
+// Función para realizar la búsqueda al cambiar el estado
+function realizarBusqueda() {
+    const estadoSeleccionado = ESTADO_SELECT.value;  // Captura el estado seleccionado
+    BSUCADOR.value = estadoSeleccionado;  // Asigna el estado seleccionado al input BSUCADOR
+
+    const FORM = new FormData(SEARCH_FORM);  // Crea el objeto FormData
+    FORM.append('estado', estadoSeleccionado);  // Agrega el estado al FormData
+
+    fillTable(FORM);  // Realiza la búsqueda
+}
+
+// Evento para cambiar el estado
+ESTADO_SELECT.addEventListener('change', realizarBusqueda);  // Llama a la función de búsqueda al cambiar el estado
 
 SEARCH_FORM2.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -99,6 +135,7 @@ SAVE_FORM2.addEventListener('submit', async (event) => {
     }
 });
 
+//Método para mostrar los productos
 const fillTable = async (form = null) => {
     // Inicializa el contenido de las cards.
     CARD_PRODUCTOS.innerHTML = '';
@@ -146,48 +183,39 @@ const fillTable = async (form = null) => {
     }
 }
 
+//Método para mostrar los detalles de productos
 const fillTable2 = async (form = null) => {
-    // Inicializa el contenido de las cards.
-    CARD_DETALLES.innerHTML = '';
-    // Verifica la acción a realizar.
-    const action = (form) ? 'searchRows' : 'readAll';
-    // Petición para obtener los registros disponibles.
-    const DATA = await fetchData(DETALLES_PRODUCTOS_API, action, form);
-    // Comprueba si la respuesta es satisfactoria, de lo contrario muestra un mensaje con la excepción.
-    if (DATA.status) {
-        // Recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
+    CARD_DETALLES.innerHTML = ''; //Iniciamos el contenido de las cards vacío
+    const action = (form) ? 'searchRows' : currentMethod; // Usa el método actual según la selección
+    const DATA = await fetchData(DETALLES_PRODUCTOS_API, action, form); //Obtenemos los datos según la acción que se esté ejecutando
+
+    if (DATA.status) { //Si los datos se obtienen, los recorremos uno por uno
         DATA.dataset.forEach(row => {
-            // Crea y concatena las cards con los datos de cada registro.
+            //Y los ordenamos para mostrarlos dentro de las cards de detalles
             CARD_DETALLES.innerHTML += `
                 <div class="col">
-    <div class="card mb-3">
-        <img src="${SERVER_URL}images/productos/${row.imagen_producto}" class="card-img-top" alt="${row.nombre_producto}">
-        <div class="card-body text-start">
-            <h5 class="card-title fs-2 mb-3">Detalle: ${row.id_detalle_producto}</h5>
-            <p class="card-text"><b>Producto: </b> ${row.nombre_producto}</p>
-            <p class="card-text"><b>Talla: </b> ${row.talla}</p>
-            
-            <div class="d-flex align-items-center">
-                <h5 class="card-title me-3"><b>Color:</b> #${row.color}</h5>
-                <div class="color-box2" width="100%" height="20%"  style="background-color: #${row.color};"></div>
-            </div>
-            
-            <p class="card-text mt-2"><b>Existencias: </b> ${row.existencias_producto}</p>
-            
-            <div class="d-flex justify-content-center gap-1 mt-3">
-                <button type="submit" class="btn" id="btnEliminar" name="btnEliminar" onclick="openDelete2(${row.id_detalle_producto}, '${row.nombre_producto}')" title="Eliminar detalle de ${row.nombre_producto}">
-                    <i class="bi bi-search"></i>
-                    <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
-                </button>
-                <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate2(${row.id_detalle_producto}, '${row.nombre_producto}')" title="Actualizar detalle de ${row.nombre_producto}">
-                    <i class="bi bi-x-square-fill"></i>
-                    <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
+                    <div class="card mb-3">
+                        <img src="${SERVER_URL}images/productos/${row.imagen_producto}" class="card-img-top" alt="${row.nombre_producto}">
+                        <div class="card-body text-start">
+                            <h5 class="card-title fs-2 mb-3">Detalle: ${row.id_detalle_producto}</h5>
+                            <p class="card-text"><b>Producto: </b> ${row.nombre_producto}</p>
+                            <p class="card-text"><b>Talla: </b> ${row.talla}</p>
+                            <div class="d-flex align-items-center">
+                                <h5 class="card-title me-3"><b>Color:</b> #${row.color}</h5>
+                                <div class="color-box2" width="100%" height="20%"  style="background-color: #${row.color};"></div>
+                            </div>
+                            <p class="card-text mt-2"><b>Existencias: </b> ${row.existencias_producto}</p>
+                            <div class="d-flex justify-content-center gap-1 mt-3">
+                                <button type="submit" class="btn" id="btnEliminar" onclick="openDelete2(${row.id_detalle_producto}, '${row.nombre_producto}')" title="Eliminar detalle de ${row.nombre_producto}">
+                                    <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                                </button>
+                                <button type="reset" class="btn mt-1" id="btnActualizar" onclick="openUpdate2(${row.id_detalle_producto}, '${row.nombre_producto}')" title="Actualizar detalle de ${row.nombre_producto}">
+                                    <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             `;
         });
     } else {
@@ -280,7 +308,7 @@ const openUpdate2 = async (id, nombre) => {
 */
 const openDelete = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar el producto ' +nombre+ ' de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar el producto ' + nombre + ' de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
@@ -302,7 +330,7 @@ const openDelete = async (id, nombre) => {
 
 const openDelete2 = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar el detalle del producto ' +nombre+ ' de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar el detalle del producto ' + nombre + ' de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.

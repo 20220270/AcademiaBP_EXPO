@@ -5,11 +5,18 @@ const ORDEN_API = 'services/public/compras.php';
 const PARAMS = new URLSearchParams(location.search);
 const idDetalle = PARAMS.get('idDetalle');
 const idProducto = PARAMS.get('idProducto');
+const nombreProducto = PARAMS.get('nombreProducto');
 
 // Constante para establecer el formulario de agregar un producto al carrito de compras.
 const SHOPPING_FORM = document.getElementById('shoppingForm');
 const CANTIDAD = document.getElementById('cantidadProducto');
 const CARD = document.getElementById('cardComentarios');
+
+const divNombre = document.getElementById('nombreP');
+const divNumero = document.getElementById('numeroP');
+const divLabelNombre = document.getElementById('labelCamisa');
+const divLabelNumero = document.getElementById('labelNumero');
+const datosPersonalizacion = document.getElementById('datosPersonalizacion');
 
 // Método del eventos para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
@@ -24,10 +31,27 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const FORM2 = new FormData();
     FORM2.append('idProducto', idProducto);
-    
+
     // Petición para solicitar los datos del producto seleccionado.
     const DATA = await fetchData(PRODUCTO_API, 'readOnee', FORM);
     const DATA2 = await fetchData(PRODUCTO_API, 'commentsProduct', FORM2);
+
+    //Para mostrarlo solamente si la búsqueda incluye ese campo
+    if (nombreProducto.includes("Camisa")) {
+        divNombre.style.display = 'block';
+        divNumero.style.display = 'block';
+        divLabelNombre.style.display = 'block';
+        divLabelNumero.style.display = 'block';
+    } 
+    else if (nombreProducto.includes("Short")){
+        divNumero.style.display = 'block';
+        divLabelNumero.style.display = 'block';
+    }
+    else {
+        divNombre.style.display = 'none';
+        divNumero.style.display = 'none';
+    }
+
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se colocan los datos en la página web de acuerdo con el producto seleccionado previamente.
@@ -47,6 +71,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         document.getElementById('idProducto').value = DATA.dataset.id_producto;
         document.getElementById('idDetalle').value = DATA.dataset.id_detalle_producto;
+
 
     } else {
         // Se presenta un mensaje de error cuando no existen datos para mostrar.
@@ -100,12 +125,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
+// Función para actualizar el valor de datosPersonalizacion
+function updateDatosPersonalizacion() {
+    // Concatenar los valores de nombreP y numeroP
+    const valorNombreP = nombreP.value;
+    const valorNumeroP = numeroP.value;
+    
+    // Establecer el valor del campo de datosPersonalizacion
+    datosPersonalizacion.value = `${valorNombreP}, ${valorNumeroP}`;
+}
+
+// Agregar eventos a los campos
+nombreP.addEventListener('input', updateDatosPersonalizacion);
+numeroP.addEventListener('input', updateDatosPersonalizacion);
 
 
 // Método del evento para cuando se envía el formulario de agregar un producto al carrito.
 SHOPPING_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
+
+    updateDatosPersonalizacion();
+    
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SHOPPING_FORM);
     // Petición para guardar los datos del formulario.

@@ -194,6 +194,9 @@ class EntrenamientoHandler
         return Database::executeRow($sql, $params);
     }
 
+    //Métodos para mostrar los días de entrenamiento -------------------------------
+
+    //Ordenarlos por ID
     public function readAllLugaresHorarios()
     {
         $sql = "SELECT id_horario_lugar, nombre_lugar, dia_entrenamiento, hora_inicio, hor_fin,
@@ -203,6 +206,25 @@ class EntrenamientoHandler
                 ORDER BY id_horario_lugar";
         return Database::getRows($sql);
     }
+
+    //Ordenarlos por día y por horario. Esta consulta va a mostrarlos en este orden:
+
+    //1- Por el día de la semana, en el orden LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SÁBADO, DOMINGO
+    //2- Por el horario de entrenamiento, de forma ascendente
+
+    public function readAllLugaresHorarios2()
+    {
+        $sql = "SELECT id_horario_lugar, nombre_lugar, dia_entrenamiento, hora_inicio, hor_fin,
+                CONCAT(nombre_lugar, ' ', dia_entrenamiento, ' ', TIME_FORMAT(hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(hor_fin, '%h:%i %p')) AS horariolugar
+                FROM tb_horarios_lugares
+                INNER JOIN tb_horarios_entrenamientos USING(id_horario)
+                INNER JOIN tb_lugares_entrenamientos USING(id_lugar)
+                ORDER BY FIELD(dia_entrenamiento, 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'), 
+                hora_inicio;"; //FIELD nos ayudará a clasificar los datos, ordenándolos por el día.
+        return Database::getRows($sql);
+    }
+    
+    // Fin de métodos para mostrar los días de entrenamiento -------------------------------
 
     public function readOneLugaresHorarios()
     {
@@ -234,13 +256,13 @@ class EntrenamientoHandler
     //ya que están agrupados
     public function readAllHorariosLugares()
     {
-        $sql = "SELECT le.id_lugar, le.nombre_lugar, le.imagen_lugar, le.URL_lugar,
-                REPLACE(GROUP_CONCAT(CONCAT(he.dia_entrenamiento, ' ', he.hora_inicio, ' - ', he.hor_fin) ORDER BY he.dia_entrenamiento SEPARATOR ', '), ',', CHAR(10)) AS horarios
-                FROM tb_horarios_lugares hl
-                INNER JOIN tb_horarios_entrenamientos he ON hl.id_horario = he.id_horario
-                INNER JOIN tb_lugares_entrenamientos le ON hl.id_lugar = le.id_lugar
-                GROUP BY le.id_lugar, le.nombre_lugar
-                ORDER BY le.id_lugar;";
+        $sql = "SELECT id_lugar, nombre_lugar, imagen_lugar, URL_lugar,
+                REPLACE(GROUP_CONCAT(CONCAT(dia_entrenamiento, ' ', hora_inicio, ' - ', hor_fin) ORDER BY dia_entrenamiento SEPARATOR ', '), ',', CHAR(10)) AS horarios
+                FROM tb_horarios_lugares
+                INNER JOIN tb_horarios_entrenamientos USING(id_horario)
+                INNER JOIN tb_lugares_entrenamientos USING(id_lugar)
+                GROUP BY id_lugar, nombre_lugar
+                ORDER BY id_lugar;";
         return Database::getRows($sql);
     }
 }

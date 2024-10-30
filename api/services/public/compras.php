@@ -34,7 +34,8 @@ if (isset($_GET['action'])) {
                 } elseif (
 
                     !$pedido->setIdDetalle($_POST['idDetalle']) or
-                    !$pedido->setCantidad($_POST['cantidadProducto'])
+                    !$pedido->setCantidad($_POST['cantidadProducto']) or
+                    !$pedido ->setPersonalizacion($_POST['datosPersonalizacion'])
                 ) {
                     $result['error'] = $pedido->getDataError();
                 } elseif ($pedido->createDetail()) {

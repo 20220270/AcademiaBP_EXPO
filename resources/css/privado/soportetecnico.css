@@ -4,6 +4,12 @@
     object-fit: cover;
 }
 
+.scrollable-contentl{
+    height: 600px; /* Altura fija del contenedor */
+    overflow-y: auto; /* Habilita el desplazamiento vertical */
+    overflow-x: auto;
+}
+
 @media (max-width: 768px) {
     .scrollable-content{
         margin-right: 250px;

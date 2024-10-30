@@ -53,6 +53,34 @@ class DetalleProductoHandler
         return Database::getRows($sql);
     }
 
+    //Métodos para visualizar productos
+
+    //Productos con más existencias
+    public function readAllMayorMenor()
+    {
+        $sql = 'SELECT id_detalle_producto, id_producto, categoria_producto, nombre_producto, imagen_producto, talla, color, existencias_producto 
+                FROM tb_detalleproducto
+                INNER JOIN tb_productos USING(id_producto)
+                INNER JOIN tb_categorias_productos USING(id_categoria_producto)
+                INNER JOIN tb_tallas USING(id_talla)
+                INNER JOIN tb_colores USING(id_color)
+                 ORDER BY existencias_producto DESC';
+        return Database::getRows($sql);
+    }
+
+    //Productos con menos existencias
+    public function readAllMenorMayor()
+    {
+        $sql = 'SELECT id_detalle_producto, id_producto, categoria_producto, nombre_producto, imagen_producto, talla, color, existencias_producto 
+                FROM tb_detalleproducto
+                INNER JOIN tb_productos USING(id_producto)
+                INNER JOIN tb_categorias_productos USING(id_categoria_producto)
+                INNER JOIN tb_tallas USING(id_talla)
+                INNER JOIN tb_colores USING(id_color)
+                 ORDER BY existencias_producto ASC';
+        return Database::getRows($sql);
+    }
+
     public function readOne()
     {
         $sql = 'SELECT id_detalle_producto, id_producto, id_talla, id_color, existencias_producto

@@ -27,7 +27,7 @@
                 <div class="d-flex justify-content-center">
                     <img id="imagenProducto" class="img-fluid mx-auto" alt="Imagen del Producto">
                 </div>
-                
+
                 <div class="card-body">
                     <h5 class="card-title text-center" id="nombreProducto"></h5>
                     <p class="card-text text-start">Descripción: <span id="descripcionProducto"
@@ -50,13 +50,31 @@
                                 min="1" class="form-control mx-2 text-center" value="1" required>
                             <button type="button" class="btn btn-outline-success" id="btnIncrementar">+</button>
                         </div>
+                        <h4 class="mt-4">¡Puedes personalizar tu camisa!</h4>
 
-                        <div class="col-6 align-self-end">
-                            <button type="submit" class="btn col-4" id="btnVerDetalle">
-                                <img src="../../resources/images/cart-green.png" alt="Agregar al carrito" height="20"
-                                    width="20">
-                            </button>
+                        <input autocomplete="off" type="hidden" id="datosPersonalizacion" name="datosPersonalizacion">
+
+                        <div class="d-flex align-items-start mt-4" style="display: none;">
+                            <div class="d-flex flex-column me-2" id="divNombre">
+                                <label for="nombreP" style="display: none;" id="labelCamisa">Nombre</label>
+                                <input type="text" style="display: none;" value="Sin personalizar" autocomplete="off" id="nombreP" name="nombreP" class="form-control text-center">
+                            </div>
+                            <div class="d-flex flex-column" id="divNumero">
+                                <label for="numeroP" style="display: none;" id="labelNumero">Número</label>
+                                <input type="number" style="display: none;" value="0" autocomplete="off" id="numeroP" name="numeroP" class="form-control text-center">
+                            </div>
+
+                            <div class="col-3 align-self-end">
+                                <button type="submit" class="btn col-8" id="btnVerDetalle">
+                                    <img src="../../resources/images/cart-green.png" alt="Agregar al carrito" height="40px"
+                                        width="40px">
+                                </button>
+                            </div>
                         </div>
+                        
+
+
+                        
                     </form>
 
                 </div>

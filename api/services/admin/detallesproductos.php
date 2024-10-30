@@ -61,6 +61,22 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen detalles asignados a productos';
                 }
                 break;
+            case 'readAllMayorMenor':
+                if ($result['dataset'] = $detalleproducto->readAllMayorMenor()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen detalles asignados a productos';
+                }
+                break;
+            case 'readAllMenorMayor':
+                if ($result['dataset'] = $detalleproducto->readAllMenorMayor()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen detalles asignados a productos';
+                }
+                break;
 
             case 'readProductosCombobox':
                 if ($result['dataset'] = $detalleproducto->readProductosCombobox()) {
@@ -114,7 +130,6 @@ if (isset($_GET['action'])) {
                         if ($detalleproducto->updateRow()) {
                             $result['status'] = 1;
                             $result['message'] = 'Detalle de producto modificado correctamente';
-                            
                         } else {
                             $result['error'] = 'No se pudo modificar el detalle del producto, puede que ya exista un producto con el mismo detalle';
                         }

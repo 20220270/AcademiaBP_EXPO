@@ -18,6 +18,7 @@ class ComprasHandler
     protected $producto = null;
     protected $precioproducto = null;
     protected $cantidad = null;
+    protected $personalizacion = null;
     protected $fecha = null;
     protected $idmetodopago = null;
     protected $informacionmetodo = null;
@@ -163,9 +164,9 @@ class ComprasHandler
     public function createDetail()
     {
         // Se realiza una subconsulta para obtener el precio del producto.
-        $sql = 'INSERT INTO tb_detalles_compras(id_detalle_producto, cantidad_producto, id_compra)
-                VALUES(?, ?, ?)';
-        $params = array($this->iddetalle, $this->cantidad, $_SESSION['idCompra']);
+        $sql = 'INSERT INTO tb_detalles_compras(id_detalle_producto, cantidad_producto, personalizacion, id_compra)
+                VALUES(?, ?, ?, ?)';
+        $params = array($this->iddetalle, $this->cantidad, $this->personalizacion, $_SESSION['idCompra']);
 
         return Database::executeRow($sql, $params);
     }

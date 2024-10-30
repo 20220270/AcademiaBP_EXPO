@@ -43,7 +43,7 @@ const SAVE_FORM3 = document.getElementById('saveForm3'),
     ID_HORARIOO = document.getElementById('selectHorarioLugar'),
     ID_LUGARRR = document.getElementById('selectDiaLugar');
 
-
+let currentMethod = 'readAllLugaresHorarios'; // Método actual por defecto para la vista de fillTable3
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -53,6 +53,20 @@ document.addEventListener('DOMContentLoaded', () => {
     fillTable();
     fillTable2();
     fillTable3();
+
+    // Configuración del botón para alternar entre vistas
+    document.getElementById('toggleViewBtn').addEventListener('click', () => {
+        // Alterna entre los métodos
+        if (currentMethod === 'readAllLugaresHorarios') {
+            currentMethod = 'readAllLugaresHorarios2';
+            document.getElementById('toggleViewBtn').textContent = 'Ordenar horarios por ID';
+        } 
+        else {
+            currentMethod = 'readAllLugaresHorarios';
+            document.getElementById('toggleViewBtn').textContent = 'Ordenar horarios por día';
+        }
+        fillTable3(); // Recarga la tabla con la vista seleccionada
+    });
 });
 
 
@@ -280,7 +294,7 @@ const fillTable3 = async (form = null) => {
 
     CARDS_LUGARES_HORARIOS.innerHTML = '';
 
-    const action = form ? 'searchRowsHorariosLugares' : 'readAllLugaresHorarios';
+    const action = form ? 'searchRowsHorariosLugares' : currentMethod;
 
     const DATA = await fetchData(ENTRENAMIENTO_API, action, form);
 
@@ -466,7 +480,7 @@ const openUpdate3 = async (id, nombre) => {
 */
 const openDelete = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar este horario: ' +nombre+', de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar este horario: ' + nombre + ', de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
@@ -488,7 +502,7 @@ const openDelete = async (id, nombre) => {
 
 const openDelete2 = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar este lugar: ' +nombre+', de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar este lugar: ' + nombre + ', de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
@@ -510,7 +524,7 @@ const openDelete2 = async (id, nombre) => {
 
 const openDelete3 = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar esta asignación: ' +nombre+' de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar esta asignación: ' + nombre + ' de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
@@ -550,9 +564,9 @@ function initMap() {
         },
     });
 
-    google.maps.event.addListener(map, 'click', function(event) {
+    google.maps.event.addListener(map, 'click', function (event) {
         var clickedLocation = event.latLng;
-        
+
         if (isLocationInElSalvador(clickedLocation)) {
             if (marker) {
                 marker.setPosition(clickedLocation);
@@ -567,7 +581,7 @@ function initMap() {
             var wazeUrl = `https://waze.com/ul?ll=${clickedLocation.lat()},${clickedLocation.lng()}&navigate=yes`;
             document.getElementById('URLLugar').value = wazeUrl;
 
-            google.maps.event.addListener(marker, 'dragend', function(event) {
+            google.maps.event.addListener(marker, 'dragend', function (event) {
                 if (isLocationInElSalvador(event.latLng)) {
                     var newWazeUrl = `https://waze.com/ul?ll=${event.latLng.lat()},${event.latLng.lng()}&navigate=yes`;
                     document.getElementById('URLLugar').value = newWazeUrl;
