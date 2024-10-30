@@ -102,7 +102,8 @@ class ComprasHandler
         $sql = 'SELECT id_detalle_compra, nombre_producto, imagen_producto, tb_productos.precio_producto, cantidad_producto, 
         (tb_productos.precio_producto * cantidad_producto) Subtotal,
         ROUND((tb_productos.precio_producto * cantidad_producto) - (tb_productos.precio_producto * cantidad_producto * tb_productos.descuento_producto / 100), 2) AS SubtotalConDescuento,
-        tb_productos.descuento_producto
+        tb_productos.descuento_producto,
+        personalizacion
         FROM tb_detalles_compras
         INNER JOIN tb_compras USING(id_compra)
         INNER JOIN tb_detalleproducto USING(id_detalle_producto)
@@ -184,7 +185,8 @@ class ComprasHandler
         cantidad_producto, 
         (tb_productos.precio_producto * cantidad_producto) AS Subtotal,
         tb_productos.descuento_producto,
-        ROUND((tb_productos.precio_producto * cantidad_producto) - (tb_productos.precio_producto * cantidad_producto * tb_productos.descuento_producto / 100), 2) AS subtotal_con_descuento
+        ROUND((tb_productos.precio_producto * cantidad_producto) - (tb_productos.precio_producto * cantidad_producto * tb_productos.descuento_producto / 100), 2) AS subtotal_con_descuento,
+        personalizacion
     FROM 
         tb_detalles_compras
     INNER JOIN 

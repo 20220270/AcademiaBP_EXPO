@@ -193,6 +193,7 @@ const openDetail = async (id) => {
                       <td>$${row.precio_producto}</td>
                       <td>${row.cantidad_producto}</td>
                       <td>${row.descuento_producto}%</td>
+                      <td>${row.personalizacion}</td>
                       <td>$${row.SubtotalConDescuento}</td>
                       
                   </tr>
@@ -208,7 +209,7 @@ const openDetail = async (id) => {
 
         TABLE_BODY2.innerHTML += `
                   <tr>
-                    <td colspan="6" class="bg-dark text-white fw-bold">Total de la compra</td>
+                    <td colspan="7" class="bg-dark text-white fw-bold">Total de la compra</td>
                     <td class="bg-dark text-white fw-bold">$${totalCompra.toFixed(2)}</td>
                 </tr>
               `

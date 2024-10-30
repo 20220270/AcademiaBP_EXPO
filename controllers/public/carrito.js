@@ -353,7 +353,8 @@ async function readDetail() {
                             
                             <div class="col-md-8 card-body">
                             
-                                
+                                <label class="fw-bold mt-4">Personalización:</label>
+                                <p>${row.personalizacion}</p>
                                 <label class="fw-bold mt-4">Precio del producto:</label>
                                 <p>$${row.precio_producto}</p>
                                 <label class="fw-bold mt-4">Cantidad:</label>

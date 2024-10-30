@@ -42,8 +42,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         divNumero.style.display = 'block';
         divLabelNombre.style.display = 'block';
         divLabelNumero.style.display = 'block';
-    } 
-    else if (nombreProducto.includes("Short")){
+    }
+    else if (nombreProducto.includes("Short")) {
         divNumero.style.display = 'block';
         divLabelNumero.style.display = 'block';
     }
@@ -127,13 +127,42 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Función para actualizar el valor de datosPersonalizacion
 function updateDatosPersonalizacion() {
-    // Concatenar los valores de nombreP y numeroP
     const valorNombreP = nombreP.value;
     const valorNumeroP = numeroP.value;
-    
-    // Establecer el valor del campo de datosPersonalizacion
-    datosPersonalizacion.value = `${valorNombreP}, ${valorNumeroP}`;
+
+    const nombreRegex = /^[a-zA-Z-áéíóúÁÉÍÓÚ\s]+$/; // Regex para permitir solo letras y espacios
+    if (!nombreRegex.test(valorNombreP) && valorNombreP !== '') {
+        alert('El nombre no debe contener números.');
+        nombreP.value = ''; // Limpia el campo de entrada si no es válido
+        return; // Salir de la función
+    }
+
+    const numeroRegex = /^\d+$/; // Regex para permitir solo números
+    if (!numeroRegex.test(valorNumeroP) && valorNumeroP !== '') {
+        alert('El número no debe contener letras.');
+        numeroP.value = ''; // Limpia el campo de entrada si no es válido
+        return; // Salir de la función
+    }
+
+    if (valorNumeroP > 1000) {
+        alert('El número no debe ser mayor a 1000.');
+        numeroP.value = ''; // Limpia el campo de entrada si el número es mayor a 1000
+        return; // Salir de la función
+    }
+
+    // Verificar si ambos valores están vacíos
+    if (!nombreP.value && !numeroP.value) {
+        datosPersonalizacion.value = "Sin Personalizar"; // Si ambos están vacíos
+    } else {
+        // Concatenar los valores de nombreP y numeroP
+        datosPersonalizacion.value = `${nombreP.value || 'Sin nombre'}, ${numeroP.value || '0'}`; // Usa 'Sin nombre' si nombreP está vacío y '0' si numeroP está vacío
+    }
 }
+
+// Agregar eventos a los campos para actualizar en tiempo real
+nombreP.addEventListener('input', updateDatosPersonalizacion);
+numeroP.addEventListener('input', updateDatosPersonalizacion);
+
 
 // Agregar eventos a los campos
 nombreP.addEventListener('input', updateDatosPersonalizacion);
@@ -146,7 +175,7 @@ SHOPPING_FORM.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     updateDatosPersonalizacion();
-    
+
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SHOPPING_FORM);
     // Petición para guardar los datos del formulario.
