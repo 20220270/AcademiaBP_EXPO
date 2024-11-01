@@ -8,3 +8,21 @@ main{
     max-height: 740px;
     overflow-y: auto;
 }
+
+@media (max-width: 630px) {
+    .titulo-card,
+    .card-text{
+        font-size: 15px;
+    }
+
+    
+}
+
+@media (max-width: 400px) {
+    .titulo-card,
+    .card-text{
+        font-size: 10px;
+    }
+
+    
+}

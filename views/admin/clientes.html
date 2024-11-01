@@ -21,7 +21,7 @@
     <!-- Enlace a tu propio archivo de estilos CSS -->
 
     <link rel="stylesheet" href="../../resources/css/privado/index.css">
-    <link rel="stylesheet" href="../../resources/css/privado/valores.css">
+    <link rel="stylesheet" href="../../resources/css/buscador.css">
     <link rel="stylesheet" href="../../resources/css/privado/clientes.css">
 
 </head>
@@ -37,12 +37,17 @@
                 <h1>Clientes</h1>
             </div>
 
-            <div class="card-container shadow p-3 mb-5 bg-body-tertiary rounded">
-                <!--Contenedor para mostrar el total de alumnos registrados-->
-                <div class="card" id="clientestotal">
-
-                </div>
+            <div class="card-container d-flex justify-content-around">
+                <!-- Contenedor para mostrar el total de clientes -->
+                <div class="card col-4 col-md-4 my-2" id="clientestotal"></div>
+            
+                <!-- Contenedor para clientes activos -->
+                <div class="card col-4 col-md-4 my-2" id="clientesActivos"></div>
+            
+                <!-- Contenedor para clientes inactivos -->
+                <div class="card col-4 col-md-4 my-2" id="clientesInactivos"></div>
             </div>
+            
 
             <div class="col">
                 <div class="row">
@@ -66,12 +71,20 @@
                             </button>
                         </div>
                         <div class="col-3 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
-                            <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openReport()"  title="Generar reporte de todos los clientes registrados">
+                            <button type="button" class="btn btn-white me-md-2" onclick="openReport()"  title="Generar reporte de todos los clientes registrados">
                                 <img src="../../resources/images/reportee.png" alt="buttonpng" width="50rem" height="50rem"/>
                             </button>
                         </div>
+                        
                     </div>
                 </div>
+            </div>
+
+            
+            <div class="col-7 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
+                <button type="button" id="toggleViewBtn" class="toggleViewBtn btn btn-dark me-md-2 mt-5 mb-4 mx-5">
+                    Ver clientes recientes
+                </button>
             </div>
 
             <div class="col-lg-12 col-sm-12  col-md-12 col-12 mx-auto" id="tabla">

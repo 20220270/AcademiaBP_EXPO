@@ -121,6 +121,47 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+            case 'clientesTotalActivos':
+                if ($result['dataset'] = $cliente->clientesTotalActivos()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen clientes registrados';
+                }
+                break;
+            case 'clientesTotalInactivos':
+                if ($result['dataset'] = $cliente->clientesTotalInactivos()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen clientes registrados';
+                }
+                break;
+            case 'clientesActivos':
+                if ($result['dataset'] = $cliente->clientesActivos()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen clientes registrados';
+                }
+                break;
+            case 'clientesInactivos':
+                if ($result['dataset'] = $cliente->clientesInactivos()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen clientes registrados';
+                }
+                break;
+            case 'clientesRecientes':
+                if ($result['dataset'] = $cliente->clientesRecientes()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen clientes registrados';
+                }
+                break;
+
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

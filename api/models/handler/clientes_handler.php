@@ -179,6 +179,8 @@ class ClienteHandler
     /*
     *  1
     */
+    
+
     public function readAll()
     {
         $sql = "SELECT id_cliente, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, dui_cliente, correo_cliente, telefono_cliente, direccion_cliente, estado_cliente, fecha_registro, foto_cliente
@@ -409,6 +411,44 @@ class ClienteHandler
     public function clientesTotal()
     {
         $sql = 'SELECT COUNT(*) as TotalClientes FROM tb_clientes';
+        return Database::getRows($sql);
+    }
+
+    public function clientesTotalActivos()
+    {
+        $sql = 'SELECT COUNT(*) as TotalClientes FROM tb_clientes WHERE estado_cliente = "Activo"';
+        return Database::getRows($sql);
+    }
+
+    public function clientesTotalInactivos()
+    {
+        $sql = 'SELECT COUNT(*) as TotalClientes FROM tb_clientes WHERE estado_cliente = "Inactivo"';
+        return Database::getRows($sql);
+    }
+
+    public function clientesActivos()
+    {
+        $sql = "SELECT id_cliente, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, dui_cliente, correo_cliente, telefono_cliente, direccion_cliente, estado_cliente, fecha_registro, foto_cliente
+                FROM tb_clientes
+                WHERE estado_cliente = 'Activo'
+                ORDER BY id_cliente";
+        return Database::getRows($sql);
+    }
+
+    public function clientesInactivos()
+    {
+        $sql = "SELECT id_cliente, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, dui_cliente, correo_cliente, telefono_cliente, direccion_cliente, estado_cliente, fecha_registro, foto_cliente
+                FROM tb_clientes
+                WHERE estado_cliente = 'Inactivo'
+                ORDER BY id_cliente";
+        return Database::getRows($sql);
+    }
+
+    public function clientesRecientes()
+    {
+        $sql = "SELECT id_cliente, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, dui_cliente, correo_cliente, telefono_cliente, direccion_cliente, estado_cliente, fecha_registro, foto_cliente
+                FROM tb_clientes
+                ORDER BY fecha_registro DESC";
         return Database::getRows($sql);
     }
 }

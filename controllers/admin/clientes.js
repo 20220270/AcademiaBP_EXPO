@@ -9,7 +9,9 @@ const TABLE_BODY = document.getElementById('tableBody'),
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
 
-    const CARD_CLIENTES = document.getElementById('clientestotal');
+const CARD_CLIENTES = document.getElementById('clientestotal');
+const CARD_CLIENTESACTIVOS = document.getElementById('clientesActivos');
+const CARD_CLIENTESINACTIVOS = document.getElementById('clientesInactivos');
 
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm')
@@ -26,6 +28,7 @@ ID_CLIENTE = document.getElementById('idCliente'),
     FOTO_CLIENTE = document.getElementById('fotoCliente'),
     ESTADO_CLIENTE = document.getElementById('selectEstado');
 
+let currentMethod = 'readAll';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -35,6 +38,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
     fillTable2();
+    fillTable3();
+    fillTable4();
+
+    // Configuración del botón para alternar entre vistas
+    document.getElementById('toggleViewBtn').addEventListener('click', () => {
+        // Alterna entre los métodos
+        if (currentMethod === 'readAll') {
+            currentMethod = 'clientesRecientes';
+            document.getElementById('toggleViewBtn').textContent = 'Ver clientes activos';
+        }
+        else if (currentMethod === 'clientesRecientes') {
+            currentMethod = 'clientesActivos';
+            document.getElementById('toggleViewBtn').textContent = 'Ver clientes inactivos';
+        }
+        else if (currentMethod === 'clientesActivos') {
+            currentMethod = 'clientesInactivos';
+            document.getElementById('toggleViewBtn').textContent = 'Ver clientes antiguos';
+        }
+
+        else if (currentMethod === 'clientesInactivos') {
+            currentMethod = 'readAll';
+            document.getElementById('toggleViewBtn').textContent = 'Ver clientes recientes';
+        }
+        else {
+            currentMethod = 'readAll';
+            document.getElementById('toggleViewBtn').textContent = 'Ver clientes recientes';
+        }
+        fillTable(); // Recarga la tabla con la vista seleccionada
+    });
+
 });
 
 SEARCH_FORM.addEventListener('submit', (event) => {
@@ -73,7 +106,7 @@ const fillTable = async (form = null) => {
     TABLE_BODY.innerHTML = '';
     ROWS_FOUND.innerHTML = '';
     // Verifica la acción a realizar.
-    const action = form ? 'searchRows' : 'readAll';
+    const action = form ? 'searchRows' : currentMethod;
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(CLIENTES_API, action, form);
     // Comprueba si la respuesta es satisfactoria; de lo contrario, muestra un mensaje de error.
@@ -112,27 +145,63 @@ const fillTable = async (form = null) => {
     }
 }
 
+// Total de clientes
 const fillTable2 = async (form = null) => {
-    // Se inicializa el contenido de la tabla.
-    CARD_CLIENTES.innerHTML = '';
-    // Se verifica la acción a realizar.
+    const CARD_TOTAL = document.getElementById("clientestotal");
+    CARD_TOTAL.innerHTML = '';
     const action = form ? 'searchRows' : 'clientesTotal';
-    // Petición para obtener los registros disponibles.
     const DATA = await fetchData(CLIENTES_API, action, form);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
-        // Se recorre el conjunto de registros fila por fila.
         DATA.dataset.forEach(row => {
-            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-                CARD_CLIENTES.innerHTML += `
-                            <div class="card-body text-center">
-                                <h1 class="card-title titulo-card">Total de cliente registrados.</h1>
-                                <p class="card-text mt-5">
-                                    <h3 id="totalStudents">${row.TotalClientes}</h3>
-                                    
-                                </p>
-                                <div class="d-flex justify-content-start"></div>
-                            </div>
+            CARD_TOTAL.innerHTML += `
+                <div class="card-body text-center">
+                    <h1 class="card-title titulo-card">Total de clientes registrados</h1>
+                    <h3 class="card-text mt-5">${row.TotalClientes}</h3>
+                </div>
+            `;
+        });
+    } else {
+        sweetAlert(4, DATA.error, true);
+    }
+}
+
+// Clientes activos
+const fillTable3 = async (form = null) => {
+    const CARD_ACTIVOS = document.getElementById("clientesActivos");
+    CARD_ACTIVOS.innerHTML = '';
+    const action = form ? 'searchRows' : 'clientesTotalActivos';
+    const DATA = await fetchData(CLIENTES_API, action, form);
+    if (DATA.status) {
+        DATA.dataset.forEach(row => {
+            CARD_ACTIVOS.innerHTML += `
+                <div class="card-body text-center">
+                    <h1 class="card-title titulo-card">Total de clientes activos</h1>
+                    <div class="d-flex justify-content-center align-items-center mt-5">
+                        <h3 class="card-text me-3">${row.TotalClientes}</h3>
+                    </div>
+                </div>
+            `;
+        });
+    } else {
+        sweetAlert(4, DATA.error, true);
+    }
+}
+
+// Clientes inactivos
+const fillTable4 = async (form = null) => {
+    const CARD_INACTIVOS = document.getElementById("clientesInactivos");
+    CARD_INACTIVOS.innerHTML = '';
+    const action = form ? 'searchRows' : 'clientesTotalInactivos';
+    const DATA = await fetchData(CLIENTES_API, action, form);
+    if (DATA.status) {
+        DATA.dataset.forEach(row => {
+            CARD_INACTIVOS.innerHTML += `
+                <div class="card-body text-center">
+                    <h1 class="card-title titulo-card">Total de clientes inactivos</h1>
+                    <div class="d-flex justify-content-center align-items-center mt-5 ">
+                        <h3 class="card-text me-3">${row.TotalClientes}</h3>
+                    </div>
+                </div>
             `;
         });
     } else {
@@ -190,7 +259,7 @@ const openUpdate = async (id, nombre) => {
 */
 const openDelete = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar este cliente: ' +nombre+ ' de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar este cliente: ' + nombre + ' de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
