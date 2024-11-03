@@ -13,7 +13,7 @@ $pdf->startReportHorizontal('Alumnos registrados');
 $alumnos = new AlumnosData;
 
 // Se verifica si la categoría existe, de lo contrario se muestra un mensaje.
-if ($dataalumnos = $alumnos->readAll()) {
+if ($dataalumnos = $alumnos->readAllReport()) {
     // Se establece un color de relleno para los encabezados.
     $pdf->setFillColor(64, 136, 64);
     // Se establece la fuente para los encabezados.

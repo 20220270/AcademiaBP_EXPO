@@ -59,6 +59,29 @@ class AlumnosHandler
     //Mostrar todos los alumnos
     public function readAll()
     {
+        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, foto_alumno, estado_alumno
+    FROM 
+    tb_alumnos
+    LEFT JOIN 
+    tb_staffs_categorias USING (id_staff_categorias)
+    LEFT JOIN 
+    tb_categorias_horarios USING(id_categoria_horario)
+    LEFT JOIN 
+    tb_categorias_alumnos USING(id_categoria_alumno)
+    LEFT JOIN 
+    tb_staffs USING (id_staff)
+    LEFT JOIN 
+    tb_dias_pagos USING (id_dia_pago)
+    LEFT JOIN
+    tb_clientes USING(id_cliente)
+    ORDER BY 
+    id_alumno;";
+        return Database::getRows($sql);
+    }
+
+    //Reporte
+    public function readAllReport()
+    {
         $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, fecha_nacimiento, foto_alumno, fecha_inscripcion,
     TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad,
     posicion_alumno, 
@@ -82,6 +105,7 @@ class AlumnosHandler
     tb_dias_pagos USING (id_dia_pago)
     LEFT JOIN
     tb_clientes USING(id_cliente)
+    WHERE estado_alumno = 'Activo' OR estado_alumno = 'Inactivo'
     ORDER BY 
     id_alumno;";
         return Database::getRows($sql);
@@ -117,8 +141,194 @@ class AlumnosHandler
         return Database::getRows($sql, $params);
     }
 
+    //Vistas para los alumnos
+    //Mostrar los alumnos más recientes
+    public function readAllAlumnosRecientes()
+    {
+        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, foto_alumno, estado_alumno
+    FROM 
+    tb_alumnos
+    LEFT JOIN 
+    tb_staffs_categorias USING (id_staff_categorias)
+    LEFT JOIN 
+    tb_categorias_horarios USING(id_categoria_horario)
+    LEFT JOIN 
+    tb_categorias_alumnos USING(id_categoria_alumno)
+    LEFT JOIN 
+    tb_staffs USING (id_staff)
+    LEFT JOIN 
+    tb_dias_pagos USING (id_dia_pago)
+    LEFT JOIN
+    tb_clientes USING(id_cliente)
+    WHERE estado_alumno = 'Activo' OR estado_alumno = 'Inactivo'
+    ORDER BY 
+    fecha_inscripcion DESC";
+        return Database::getRows($sql);
+    }
 
+    //Mostrar los alumnos más antiguos
+    public function readAllAlumnosAntiguos()
+    {
+        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, foto_alumno, estado_alumno
+    FROM 
+    tb_alumnos
+    LEFT JOIN 
+    tb_staffs_categorias USING (id_staff_categorias)
+    LEFT JOIN 
+    tb_categorias_horarios USING(id_categoria_horario)
+    LEFT JOIN 
+    tb_categorias_alumnos USING(id_categoria_alumno)
+    LEFT JOIN 
+    tb_staffs USING (id_staff)
+    LEFT JOIN 
+    tb_dias_pagos USING (id_dia_pago)
+    LEFT JOIN
+    tb_clientes USING(id_cliente)
+    WHERE estado_alumno = 'Activo' OR estado_alumno = 'Inactivo'
+    ORDER BY 
+    fecha_inscripcion ASC";
+        return Database::getRows($sql);
+    }
 
+    //Mostrar los alumnos de mayor a menor según la edad
+    public function readAllAlumnosMayorEdad()
+    {
+        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, foto_alumno, estado_alumno
+    FROM 
+    tb_alumnos
+    LEFT JOIN 
+    tb_staffs_categorias USING (id_staff_categorias)
+    LEFT JOIN 
+    tb_categorias_horarios USING(id_categoria_horario)
+    LEFT JOIN 
+    tb_categorias_alumnos USING(id_categoria_alumno)
+    LEFT JOIN 
+    tb_staffs USING (id_staff)
+    LEFT JOIN 
+    tb_dias_pagos USING (id_dia_pago)
+    LEFT JOIN
+    tb_clientes USING(id_cliente)
+    WHERE estado_alumno = 'Activo' OR estado_alumno = 'Inactivo'
+    ORDER BY 
+    TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) DESC";
+        return Database::getRows($sql);
+    }
+
+    //Mostrar los alumnos de menor a mayor según la edad
+    public function readAllAlumnosMenorEdad()
+    {
+        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, foto_alumno, estado_alumno
+    FROM 
+    tb_alumnos
+    LEFT JOIN 
+    tb_staffs_categorias USING (id_staff_categorias)
+    LEFT JOIN 
+    tb_categorias_horarios USING(id_categoria_horario)
+    LEFT JOIN 
+    tb_categorias_alumnos USING(id_categoria_alumno)
+    LEFT JOIN 
+    tb_staffs USING (id_staff)
+    LEFT JOIN 
+    tb_dias_pagos USING (id_dia_pago)
+    LEFT JOIN
+    tb_clientes USING(id_cliente)
+    WHERE estado_alumno = 'Activo' OR estado_alumno = 'Inactivo'
+    ORDER BY 
+    TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) ASC";
+        return Database::getRows($sql);
+    }
+
+    //Ver alumnos que entrenan más días
+    public function readAllAlumnosMasDias()
+    {
+        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, foto_alumno, estado_alumno
+    FROM 
+    tb_alumnos
+    LEFT JOIN 
+    tb_staffs_categorias USING (id_staff_categorias)
+    LEFT JOIN 
+    tb_categorias_horarios USING(id_categoria_horario)
+    LEFT JOIN 
+    tb_categorias_alumnos USING(id_categoria_alumno)
+    LEFT JOIN 
+    tb_staffs USING (id_staff)
+    LEFT JOIN 
+    tb_dias_pagos USING (id_dia_pago)
+    LEFT JOIN
+    tb_clientes USING(id_cliente)
+    WHERE estado_alumno = 'Activo' OR estado_alumno = 'Inactivo'
+    ORDER BY numero_dias DESC";
+        return Database::getRows($sql);
+    }
+
+    //Ver alumnos que entrenan menos días
+    public function readAllAlumnosMenosDias()
+    {
+        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, foto_alumno, estado_alumno
+    FROM 
+    tb_alumnos
+    LEFT JOIN 
+    tb_staffs_categorias USING (id_staff_categorias)
+    LEFT JOIN 
+    tb_categorias_horarios USING(id_categoria_horario)
+    LEFT JOIN 
+    tb_categorias_alumnos USING(id_categoria_alumno)
+    LEFT JOIN 
+    tb_staffs USING (id_staff)
+    LEFT JOIN 
+    tb_dias_pagos USING (id_dia_pago)
+    LEFT JOIN
+    tb_clientes USING(id_cliente)
+    WHERE estado_alumno = 'Activo' OR estado_alumno = 'Inactivo'
+    ORDER BY numero_dias ASC";
+        return Database::getRows($sql);
+    }
+
+    //Ver jugadores de campos
+    public function readAllAlumnosJugadoresCampo()
+    {
+        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, foto_alumno, estado_alumno
+    FROM 
+    tb_alumnos
+    LEFT JOIN 
+    tb_staffs_categorias USING (id_staff_categorias)
+    LEFT JOIN 
+    tb_categorias_horarios USING(id_categoria_horario)
+    LEFT JOIN 
+    tb_categorias_alumnos USING(id_categoria_alumno)
+    LEFT JOIN 
+    tb_staffs USING (id_staff)
+    LEFT JOIN 
+    tb_dias_pagos USING (id_dia_pago)
+    LEFT JOIN
+    tb_clientes USING(id_cliente)
+    WHERE posicion_alumno = 'Jugador de campo' AND (estado_alumno = 'Activo' OR estado_alumno = 'Inactivo'); ";
+        return Database::getRows($sql);
+    }
+
+    //Ver porteros
+    public function readAllAlumnosPorteros()
+    {
+        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, foto_alumno, estado_alumno
+    FROM 
+    tb_alumnos
+    LEFT JOIN 
+    tb_staffs_categorias USING (id_staff_categorias)
+    LEFT JOIN 
+    tb_categorias_horarios USING(id_categoria_horario)
+    LEFT JOIN 
+    tb_categorias_alumnos USING(id_categoria_alumno)
+    LEFT JOIN 
+    tb_staffs USING (id_staff)
+    LEFT JOIN 
+    tb_dias_pagos USING (id_dia_pago)
+    LEFT JOIN
+    tb_clientes USING(id_cliente)
+    WHERE posicion_alumno = 'Portero' AND (estado_alumno = 'Activo' OR estado_alumno = 'Inactivo');";
+        return Database::getRows($sql);
+    }
+
+    //Fin de las vistas --------------------------------------
 
     public function readOne()
     {

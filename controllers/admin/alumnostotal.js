@@ -20,6 +20,7 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
 const SAVE_MODAL2 = new bootstrap.Modal('#detailModal'),
     MODAL_TITLE2 = document.getElementById('modalTitleD');
 
+let currentMethod = 'readAll';
 
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
@@ -47,6 +48,46 @@ document.addEventListener('DOMContentLoaded', () => {
     //MAIN_TITLE.textContent = 'Gestionar categorías';
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
+
+    document.getElementById('toggleViewBtn').addEventListener('click', () => {
+        if (currentMethod === 'readAll') {
+            currentMethod = 'readAllAlumnosRecientes';
+            document.getElementById('toggleViewBtn').textContent = 'Ver inscripciones antiguas'
+        }
+        else if (currentMethod === 'readAllAlumnosRecientes') {
+            currentMethod = 'readAllAlumnosAntiguos';
+            document.getElementById('toggleViewBtn').textContent = 'Ver por edades de mayor a menor'
+        }
+        else if (currentMethod === 'readAllAlumnosAntiguos') {
+            currentMethod = 'readAllAlumnosMayorEdad';
+            document.getElementById('toggleViewBtn').textContent = 'Ver por edades de menor a mayor'
+        }
+        else if (currentMethod === 'readAllAlumnosMayorEdad') {
+            currentMethod = 'readAllAlumnosMenorEdad';
+            document.getElementById('toggleViewBtn').textContent = 'Alumnos con más días de entreno'
+        }
+        else if (currentMethod === 'readAllAlumnosMenorEdad') {
+            currentMethod = 'readAllAlumnosMasDias';
+            document.getElementById('toggleViewBtn').textContent = 'Alumnos con menos días de entreno'
+        }
+        else if (currentMethod === 'readAllAlumnosMasDias') {
+            currentMethod = 'readAllAlumnosMenosDias';
+            document.getElementById('toggleViewBtn').textContent = 'Ver jugadores de campo'
+        }
+        else if (currentMethod === 'readAllAlumnosMenosDias') {
+            currentMethod = 'readAllAlumnosJugadoresCampo';
+            document.getElementById('toggleViewBtn').textContent = 'Ver porteros'
+        }
+        else if (currentMethod === 'readAllAlumnosJugadoresCampo') {
+            currentMethod = 'readAllAlumnosPorteros';
+            document.getElementById('toggleViewBtn').textContent = 'Ver por ID'
+        }
+        else {
+            currentMethod = 'readAll';
+            document.getElementById('toggleViewBtn').textContent = 'Ver inscripciones recientes'
+        }
+        fillTable();
+    })
 });
 
 // Función para manejar la búsqueda al enviar el formulario
@@ -99,7 +140,7 @@ const fillTable = async (form = null) => {
     // Se inicializa el contenido de la tabla.
     CARD_ALUMNOS.innerHTML = '';
     // Se verifica la acción a realizar.
-    const action = form ? 'searchRows' : 'readAll';
+    const action = form ? 'searchRows' : currentMethod;
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(ALUMNOS_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -158,17 +199,21 @@ const verDatosAlumno = async (id, nombre) => {
         if (Array.isArray(DATA.dataset)) {
             DATA.dataset.forEach(row => {
                 MODAL_BODY.innerHTML += `
-                <div class="mb-3">
-                    <h5 class="card-title"><b>ID: </b>${row.id_alumno}</h5>
-                    <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
-                    <p class="card-text"><b>Encargado del alumno: </b>${row.Encargado}</p>
-                    <p class="card-text"><b>Fecha de nacimiento: </b>${row.fecha_nacimiento}<b> -- </b>${row.edad} años</p>
-                    <p class="card-text"><b>Posición del alumno: </b>${row.posicion_alumno}</p>
-                    <p class="card-text"><b>Número de días que entrena: </b>${row.numero_dias}</p>
-                    <p class="card-text"><b>Mensualidad que paga: </b>$${row.mensualidad_pagar}</p>
-                    <p class="card-text"><b>Categoría: </b>${row.categoria}</p>
-                    <p class="card-text"><b>Encargado de la categoría: </b>${row.Staff}</p>
-                    <p class="card-text"><b>Inscrito desde: </b>${row.fecha_inscripcion}</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
+                        <p class="card-text"><b>Encargado del alumno: </b>${row.Encargado}</p>
+                        <p class="card-text"><b>Fecha de nacimiento: </b>${row.fecha_nacimiento}<b> -- </b>${row.edad} años</p>
+                        <p class="card-text"><b>Posición del alumno: </b>${row.posicion_alumno}</p>
+                        <p class="card-text"><b>Inscrito desde: </b>${row.fecha_inscripcion}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="card-text"><b>Número de días que entrena: </b>${row.numero_dias}</p>
+                        <p class="card-text"><b>Mensualidad que paga: </b>$${row.mensualidad_pagar}</p>
+                        <p class="card-text"><b>Categoría: </b>${row.categoria}</p>
+                        <p class="card-text"><b>Encargado de la categoría: </b>${row.Staff}</p>
+                        
+                    </div>
                 </div>
                 `;
             });

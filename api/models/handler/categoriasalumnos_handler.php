@@ -63,6 +63,7 @@ class CategoriasAlumnosHandler
         return Database::executeRow($sql, $params);
     }
 
+    //Métodos para visualizar los datos de las categorías
     public function readAllAlumno()
     {
         $sql = "SELECT 
@@ -81,6 +82,99 @@ class CategoriasAlumnosHandler
         return Database::getRows($sql);
     }
 
+    //Categorías de alumnos ordenadas por edades, de mayor a menor
+    public function readAllAlumnoCategoriasMayorMenor()
+    {
+        $sql = "SELECT 
+        id_categoria_alumno, 
+        categoria, 
+        edad_minima,
+        edad_maxima, 
+        nivel_entrenamiento,
+        imagen_categoria
+        FROM 
+        tb_categorias_alumnos
+        INNER JOIN 
+        tb_niveles_entrenamientos USING(id_nivel_entrenamiento)
+        ORDER BY 
+        edad_maxima DESC";
+        return Database::getRows($sql);
+    }
+
+    public function readAllAlumnoCategoriasMenorMayor()
+    {
+        $sql = "SELECT 
+        id_categoria_alumno, 
+        categoria, 
+        edad_minima,
+        edad_maxima, 
+        nivel_entrenamiento,
+        imagen_categoria
+        FROM 
+        tb_categorias_alumnos
+        INNER JOIN 
+        tb_niveles_entrenamientos USING(id_nivel_entrenamiento)
+        ORDER BY 
+        edad_maxima ASC";
+        return Database::getRows($sql);
+    }
+
+
+    public function readAllAlumnoCategoriasMasAlumnos()
+    {
+        $sql = "SELECT 
+        id_categoria_alumno, 
+        categoria, 
+        edad_minima,
+        edad_maxima, 
+        nivel_entrenamiento,
+        imagen_categoria,
+        COUNT(id_alumno) AS cantidad_alumnos
+        FROM 
+        tb_alumnos
+        JOIN 
+        tb_staffs_categorias USING(id_staff_categorias)
+        JOIN 
+        tb_categorias_horarios USING(id_categoria_horario)
+        JOIN 
+        tb_categorias_alumnos USING(id_categoria_alumno)
+        JOIN 
+        tb_niveles_entrenamientos USING(id_nivel_entrenamiento)
+        GROUP BY 
+        categoria
+        ORDER BY 
+        cantidad_alumnos DESC";
+        return Database::getRows($sql);
+    }
+
+    public function readAllAlumnoCategoriasMenosAlumnos()
+    {
+        $sql = "SELECT 
+        id_categoria_alumno, 
+        categoria, 
+        edad_minima,
+        edad_maxima, 
+        nivel_entrenamiento,
+        imagen_categoria,
+        COUNT(id_alumno) AS cantidad_alumnos
+        FROM 
+        tb_alumnos
+        JOIN 
+        tb_staffs_categorias USING(id_staff_categorias)
+        JOIN 
+        tb_categorias_horarios USING(id_categoria_horario)
+        JOIN 
+        tb_categorias_alumnos USING(id_categoria_alumno)
+        JOIN 
+        tb_niveles_entrenamientos USING(id_nivel_entrenamiento)
+        GROUP BY 
+        categoria
+        ORDER BY 
+        cantidad_alumnos ASC";
+        return Database::getRows($sql);
+    }
+
+    //Fin de las vistas ----------------------------------------------
 
     public function readOneAlumno()
     {
@@ -221,17 +315,14 @@ class CategoriasAlumnosHandler
         return Database::executeRow($sql, $params);
     }
 
+    //Vistas para la asignación de categorías de alumnos y horario de entrenamiento
     public function readAllAlumnosHorario()
     {
         $sql = "SELECT 
         id_categoria_horario,
         id_categoria_alumno, 
         categoria, 
-        edad_minima,
-        edad_maxima, 
         nivel_entrenamiento, 
-       descripcion_nivel,
-        imagen_nivel,
         imagen_categoria,
         CONCAT(nombre_lugar, ' ', dia_entrenamiento, ' ', TIME_FORMAT(hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(hor_fin, '%h:%i %p')) AS id_horario_lugar,
         CONCAT(categoria, ', ', nombre_lugar, ' ', dia_entrenamiento, ' ', TIME_FORMAT(hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(hor_fin, '%h:%i %p')) AS asignacion
@@ -250,6 +341,35 @@ class CategoriasAlumnosHandler
         return Database::getRows($sql);
     }
 
+    //Ver horarios por orden de día y hora de entrenamiento
+    public function readAllAlumnosHorario2()
+    {
+        $sql = "SELECT 
+        id_categoria_horario,
+        id_categoria_alumno, 
+        categoria, 
+        nivel_entrenamiento, 
+        imagen_categoria,
+        CONCAT(nombre_lugar, ' ', dia_entrenamiento, ' ', TIME_FORMAT(hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(hor_fin, '%h:%i %p')) AS id_horario_lugar,
+        CONCAT(categoria, ', ', nombre_lugar, ' ', dia_entrenamiento, ' ', TIME_FORMAT(hora_inicio, '%h:%i %p'), ' - ', TIME_FORMAT(hor_fin, '%h:%i %p')) AS asignacion
+        FROM 
+        tb_categorias_horarios
+		INNER JOIN 
+        tb_categorias_alumnos USING (id_categoria_alumno)
+        INNER JOIN 
+        tb_niveles_entrenamientos USING (id_nivel_entrenamiento)
+        INNER JOIN 
+        tb_horarios_lugares USING (id_horario_lugar)
+        INNER JOIN 
+        tb_lugares_entrenamientos USING (id_lugar)
+        INNER JOIN 
+        tb_horarios_entrenamientos USING (id_horario)
+        ORDER BY FIELD(dia_entrenamiento, 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'), 
+        hora_inicio";
+        return Database::getRows($sql);
+    }
+
+    //Fin de las vistas--------------------------------
 
     public function readOneAlumnosHorario()
     {

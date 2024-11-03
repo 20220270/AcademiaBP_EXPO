@@ -62,6 +62,43 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+
+
+            case 'readAllAlumnoCategoriasMayorMenor':
+                if ($result['dataset'] = $categoriasalumnos->readAllAlumnoCategoriasMayorMenor()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen categorias registradas';
+                }
+                break;
+            case 'readAllAlumnoCategoriasMenorMayor':
+                if ($result['dataset'] = $categoriasalumnos->readAllAlumnoCategoriasMenorMayor()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen categorias registradas';
+                }
+                break;
+            case 'readAllAlumnoCategoriasMasAlumnos':
+                if ($result['dataset'] = $categoriasalumnos->readAllAlumnoCategoriasMasAlumnos()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen categorias registradas';
+                }
+                break;
+            case 'readAllAlumnoCategoriasMenosAlumnos':
+                if ($result['dataset'] = $categoriasalumnos->readAllAlumnoCategoriasMenosAlumnos()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen datos registrados';
+                }
+                break;
+
+
+
             case 'readNivelesAlumnos':
                 if ($result['dataset'] = $categoriasalumnos->readNivelesAlumnos()) {
                     $result['status'] = 1;
@@ -161,6 +198,15 @@ if (isset($_GET['action'])) {
                 break;
             case 'readAllAlumnosHorario':
                 if ($result['dataset'] = $categoriasalumnos->readAllAlumnosHorario()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen asignaciones de categorias y horarios registradas';
+                }
+                break;
+
+            case 'readAllAlumnosHorario2':
+                if ($result['dataset'] = $categoriasalumnos->readAllAlumnosHorario2()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {

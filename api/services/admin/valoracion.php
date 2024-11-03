@@ -33,6 +33,50 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen valoraciones registradas';
                 }
                 break;
+
+
+            case 'readAllMayorValoracion':
+                if ($result['dataset'] = $valoracion->readAllMayorValoracion()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen valoraciones registradas';
+                }
+                break;
+            case 'readAllMenorValoracion':
+                if ($result['dataset'] = $valoracion->readAllMenorValoracion()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen valoraciones registradas';
+                }
+                break;
+            case 'readAllValoracionesHabilitadas':
+                if ($result['dataset'] = $valoracion->readAllValoracionesHabilitadas()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen valoraciones registradas';
+                }
+                break;
+            case 'readAllValoracionesDehabilitadas':
+                if ($result['dataset'] = $valoracion->readAllValoracionesDehabilitadas()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen valoraciones registradas';
+                }
+                break;
+            case 'readAllValoracionesRecientes':
+                if ($result['dataset'] = $valoracion->readAllValoracionesRecientes()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen valoraciones registradas';
+                }
+                break;
+
+
             case 'readOne':
                 if (!$valoracion->setIdValoracion($_POST['idValoracion'])) {
                     $result['error'] = $valoracion->getDataError();
@@ -57,19 +101,19 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-                case 'deleteRow':
-                    if (
-                        !$valoracion->setIdValoracion($_POST['idValoracion'])
-                    ) {
-                        $result['error'] = $valoracion->getDataError();
-                    } elseif ($valoracion->deleteRow()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Valoración eliminada correctamente';
-                    } else {
-                        $result['error'] = 'Ocurrió un problema al eliminar la valoración';
-                    }
-                    break;
-                    
+            case 'deleteRow':
+                if (
+                    !$valoracion->setIdValoracion($_POST['idValoracion'])
+                ) {
+                    $result['error'] = $valoracion->getDataError();
+                } elseif ($valoracion->deleteRow()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Valoración eliminada correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al eliminar la valoración';
+                }
+                break;
+
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

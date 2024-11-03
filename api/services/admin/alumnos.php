@@ -70,6 +70,72 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen alumnos registrados';
                 }
                 break;
+            case 'readAllAlumnosRecientes':
+                if ($result['dataset'] = $alumno->readAllAlumnosRecientes()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen alumnos registrados';
+                }
+                break;
+            case 'readAllAlumnosAntiguos':
+                if ($result['dataset'] = $alumno->readAllAlumnosAntiguos()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen alumnos registrados';
+                }
+                break;
+            case 'readAllAlumnosMayorEdad':
+                if ($result['dataset'] = $alumno->readAllAlumnosMayorEdad()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen alumnos registrados';
+                }
+                break;
+            case 'readAllAlumnosMenorEdad':
+                if ($result['dataset'] = $alumno->readAllAlumnosMenorEdad()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen alumnos registrados';
+                }
+                break;
+            case 'readAllAlumnosMasDias':
+                if ($result['dataset'] = $alumno->readAllAlumnosMasDias()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen alumnos registrados';
+                }
+                break;
+            case 'readAllAlumnosMenosDias':
+                if ($result['dataset'] = $alumno->readAllAlumnosMenosDias()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen alumnos registrados';
+                }
+                break;
+            case 'readAllAlumnosJugadoresCampo':
+                if ($result['dataset'] = $alumno->readAllAlumnosJugadoresCampo()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen alumnos registrados';
+                }
+                break;
+            case 'readAllAlumnosPorteros':
+                if ($result['dataset'] = $alumno->readAllAlumnosPorteros()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen alumnos registrados';
+                }
+                break;
+
+
             case 'readOne':
                 if (!$alumno->setId($_POST['idAlumno'])) {
                     $result['error'] = $alumno->getDataError();

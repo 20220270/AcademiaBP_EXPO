@@ -48,6 +48,9 @@ const SAVE_FORM3 = document.getElementById('saveForm3'),
     ID_CATEGORIA_ALUMNOO = document.getElementById('selectCategoria'),
     ID_CATEGORIA_HORARIO = document.getElementById('selectHorarioCategoria');
 
+let currentMethod = 'readAllAlumno';
+let currentMethod2 = 'readAllAlumnosHorario';
+
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -58,6 +61,46 @@ document.addEventListener('DOMContentLoaded', () => {
     fillTable();
     fillTable2();
     fillTable3();
+
+    document.getElementById('toggleViewBtn').addEventListener('click', () => {
+        if(currentMethod === 'readAllAlumno') {
+            currentMethod = 'readAllAlumnoCategoriasMayorMenor';
+            document.getElementById('toggleViewBtn').textContent = 'Edades de menor a mayor';
+        }
+        else if(currentMethod === 'readAllAlumnoCategoriasMayorMenor')
+        {
+            currentMethod = 'readAllAlumnoCategoriasMenorMayor';
+            document.getElementById('toggleViewBtn').textContent = 'Categorías con más alumnos';
+        }
+        else if (currentMethod === 'readAllAlumnoCategoriasMenorMayor')
+        {
+            currentMethod = 'readAllAlumnoCategoriasMasAlumnos';
+            document.getElementById('toggleViewBtn').textContent = 'Categorías con menos alumnos';
+        }
+        else if (currentMethod === 'readAllAlumnoCategoriasMasAlumnos')
+        {
+            currentMethod = 'readAllAlumnoCategoriasMenosAlumnos';
+            document.getElementById('toggleViewBtn').textContent = 'Ver por ID';
+        }
+        else{
+            currentMethod = 'readAllAlumno';
+            document.getElementById('toggleViewBtn').textContent = 'Edades de mayor a menor';
+        }
+        fillTable2();
+    })
+
+    document.getElementById('toggleViewBtn2').addEventListener('click', () => {
+        if(currentMethod2 === 'readAllAlumnosHorario'){
+            currentMethod2 = 'readAllAlumnosHorario2';
+            document.getElementById('toggleViewBtn2').textContent = 'Ver por ID'
+        }
+        else {
+            currentMethod2 = 'readAllAlumnosHorario';
+            document.getElementById('toggleViewBtn2').textContent = 'Ver por horario'
+        }
+
+        fillTable3();
+    })
 
 });
 
@@ -198,7 +241,7 @@ const fillTable2 = async (form = null) => {
     // Se inicializa el contenido de la tabla.
     CARD_CATEGORIAS_ALUMNOS.innerHTML = '';
     // Se verifica la acción a realizar.
-    (form) ? action = 'searchRows' : action = 'readAllAlumno';
+    (form) ? action = 'searchRows' : action = currentMethod;
     // Petición para obtener los registros disponibles.
     const DATA2 = await fetchData(CATEGORIA_ALUMNO_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -255,7 +298,7 @@ const fillTable3 = async (form = null) => {
     // Se inicializa el contenido de la tabla.
     CARD_CATEGORIAS_ALUMNOS_HORARIOS.innerHTML = '';
     // Se verifica la acción a realizar.
-    (form) ? action = 'searchRowsAlumnosHorario' : action = 'readAllAlumnosHorario';
+    (form) ? action = 'searchRowsAlumnosHorario' : action = currentMethod2;
     // Petición para obtener los registros disponibles.
     const DATA2 = await fetchData(CATEGORIA_ALUMNO_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.

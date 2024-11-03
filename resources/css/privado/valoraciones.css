@@ -6,3 +6,7 @@
     max-height: 500px;
     overflow-y: auto;
 }
+p,
+td {
+    font-size: 13px;
+}

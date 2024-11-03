@@ -17,6 +17,7 @@ const SAVE_FORM = document.getElementById('saveForm'),
     ID_DETALLEORDEN = document.getElementById('idDetalle'),
     ESTADO_COMENTARIO = document.getElementById('selectEstadoC');
 
+let currentMethod = 'readAll';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -25,6 +26,37 @@ document.addEventListener('DOMContentLoaded', () => {
     //MAIN_TITLE.textContent = 'Gestionar categorías';
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
+
+    document.getElementById('toggleViewBtn').addEventListener('click', () => {
+
+        if (currentMethod === 'readAll') {
+            currentMethod = 'readAllValoracionesRecientes';
+            document.getElementById('toggleViewBtn').textContent = 'Ver valoraciones más altas';
+        }
+        else if (currentMethod === 'readAllValoracionesRecientes') {
+            currentMethod = 'readAllMayorValoracion';
+            document.getElementById('toggleViewBtn').textContent = 'Ver valoraciones más bajas';
+        }
+        else if (currentMethod === 'readAllMayorValoracion') {
+            currentMethod = 'readAllMenorValoracion';
+            document.getElementById('toggleViewBtn').textContent = 'Ver valoraciones habilitadas';
+        }
+        else if (currentMethod === 'readAllMenorValoracion') {
+            currentMethod = 'readAllValoracionesHabilitadas';
+            document.getElementById('toggleViewBtn').textContent = 'Ver valoraciones deshabilitadas';
+        }
+        else if (currentMethod === 'readAllValoracionesHabilitadas') {
+            currentMethod = 'readAllValoracionesDehabilitadas';
+            document.getElementById('toggleViewBtn').textContent = 'Ver valoraciones antiguas';
+        }
+        else {
+            currentMethod = 'readAll';
+            document.getElementById('toggleViewBtn').textContent = 'Ver valoraciones recientes';
+        }
+
+        fillTable();
+
+    })
 });
 
 SEARCH_FORM.addEventListener('submit', (event) => {
@@ -34,10 +66,10 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     const FORM = new FormData(SEARCH_FORM);
     // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
     fillTable(FORM);
-  });
-  
-  // Método del evento para cuando se envía el formulario de guardar.
-  SAVE_FORM.addEventListener('submit', async (event) => {
+});
+
+// Método del evento para cuando se envía el formulario de guardar.
+SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
@@ -57,14 +89,14 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     } else {
         sweetAlert(2, DATA.error, false);
     }
-  });
+});
 
-  const fillTable = async (form = null) => {
+const fillTable = async (form = null) => {
     // Se inicializa el contenido de la tabla.
     ROWS_FOUND.textContent = '';
     TABLE_BODY.innerHTML = '';
     // Se verifica la acción a realizar.
-    (form) ? action = 'searchRows' : action = 'readAll';
+    (form) ? action = 'searchRows' : action = currentMethod;
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(VALORACION_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -74,7 +106,10 @@ SEARCH_FORM.addEventListener('submit', (event) => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
                 <tr>
-                    <td>${row.id_valoracion}</td>
+                    <td>
+                        <p>${row.nombre_completo}</p>
+                        <p>${row.correo_cliente}</p>
+                    </td>
                     <td>${row.nombre_producto}</td>
                     <td>${convertRatingToStars(row.calificacion_producto)} ${row.calificacion_producto}</td>
                     <td>${row.comentario_producto}</td>
@@ -103,10 +138,10 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     } else {
         sweetAlert(4, DATA.error, true);
     }
-  }
-  
-  //Funcion para convertir la calificacion a estrellas
-  const convertRatingToStars = (rating) => {
+}
+
+//Funcion para convertir la calificacion a estrellas
+const convertRatingToStars = (rating) => {
     let stars = '';
     for (let i = 0; i < 5; i++) {
         if (i < rating) {
@@ -117,14 +152,14 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     }
     return stars;
 };
-  
-  
-  /*
-  *   Función asíncrona para preparar el formulario al momento de actualizar un registro.
-  *   Parámetros: id (identificador del registro seleccionado).
-  *   Retorno: ninguno.
-  */
-  const openUpdate = async (id) => {
+
+
+/*
+*   Función asíncrona para preparar el formulario al momento de actualizar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openUpdate = async (id) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idValoracion', id);
@@ -142,19 +177,19 @@ SEARCH_FORM.addEventListener('submit', (event) => {
         ID_VALORACION.value = ROW.id_valoracion;
         ID_DETALLEORDEN.value = ROW.id_detalle;
         ESTADO_COMENTARIO.value = ROW.estado_comentario;
-        
-  
+
+
     } else {
         sweetAlert(2, DATA.error, false);
     }
-  }
-  
-  /*
-  *   Función asíncrona para eliminar un registro.
-  *   Parámetros: id (identificador del registro seleccionado).
-  *   Retorno: ninguno.
-  */
-  const openDelete = async (id) => {
+}
+
+/*
+*   Función asíncrona para eliminar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openDelete = async (id) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
     const RESPONSE = await confirmAction('¿Desea eliminar esta valoración de forma permanente?');
     // Se verifica la respuesta del mensaje.
@@ -174,9 +209,9 @@ SEARCH_FORM.addEventListener('submit', (event) => {
             sweetAlert(2, DATA.error, false);
         }
     }
-  }
+}
 
-  const openReport = () => {
+const openReport = () => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
     const PATH = new URL(`${SERVER_URL}reports/admin/prediccion_productos_valoraciones.php`);
     // Se abre el reporte en una nueva pestaña.
