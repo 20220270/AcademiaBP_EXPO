@@ -241,3 +241,63 @@ a.sidebar-link:hover {
     width: 40px; 
     height: 40px;
 }
+
+#contenedorNotificaciones{
+    border-left: #000000 3px solid;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+/* Estilo general para las tarjetas */
+#cards {
+    background-color: #f8f9fa; /* Fondo claro para las tarjetas */
+    border: 1px solid #ced4da; /* Borde gris claro */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.3s; /* Transición suave al hacer hover */
+}
+
+/* Efecto al pasar el ratón sobre la tarjeta */
+#cards:hover {
+    transform: translateY(-5px); /* Elevación al pasar el mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más fuerte */
+}
+
+/* Estilo para el título de la tarjeta */
+.card-title {
+    font-size: 1.0rem; /* Tamaño de fuente para el título */
+    font-weight: bold; /* Negrita */
+    color: #343a40; /* Color de texto */
+    margin-bottom: 1rem; /* Espacio debajo del título */
+}
+
+/* Estilo para los botones dentro de la tarjeta */
+.btn1 {
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+}
+
+.btn1:hover {
+    background-color: #0056b3; /* Color más oscuro al hacer hover */
+}
+
+/* Espaciado y alineación dentro de la tarjeta */
+.card-body {
+    padding: 1.5rem; /* Espacio interno de la tarjeta */
+}
+
+/* Espacio entre las tarjetas */
+.mb-4 {
+    margin-bottom: 1.5rem; /* Espacio inferior entre tarjetas */
+}
+
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .card-title {
+        font-size: 1.25rem; /* Tamaño de fuente más pequeño en pantallas pequeñas */
+    }
+}

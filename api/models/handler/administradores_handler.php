@@ -51,6 +51,7 @@ class AdministradorHandler
          } elseif (password_verify($password, $data['clave_administrador'])) {
              $_SESSION['idAdministrador'] = $data['id_administrador'];
              $_SESSION['aliasAdministrador'] = $data['alias_administrador'];
+             $_SESSION['idNivel'] = $data['id_nivel'];
              return true;
          } else {
              return false;
@@ -95,7 +96,7 @@ class AdministradorHandler
 
     public function readProfile()
     {
-        $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, foto_administrador, nivel, fecha_registro, estado_adminstrador,
+        $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, foto_administrador, id_nivel, nivel, fecha_registro, estado_adminstrador,
                 ultima_sesion
                 FROM tb_administradores
                 INNER JOIN tb_niveles_administradores USING(id_nivel)

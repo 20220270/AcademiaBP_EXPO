@@ -12,10 +12,15 @@ const PROFILE_FORM = document.getElementById('profileForm'),
     ALIAS_ADMINISTRADOR = document.getElementById('aliasAdministrador');
     ULTIMA_CONECCION = document.getElementById('ultimaConeccion');
     FOTO_ADMINISTRADOR = document.getElementById('imagen');
+    IDNIVEL = document.getElementById('idAdmin');
 // Constante para establecer la modal de cambiar contraseña.
 const PASSWORD_MODAL = new bootstrap.Modal('#passwordModal');
 // Constante para establecer el formulario de cambiar contraseña.
 const PASSWORD_FORM = document.getElementById('passwordForm');
+
+const NOTIFICACIONES_FORM = document.getElementById('notificacionesForm');
+const NOTIFICACIONES_API = 'services/admin/notificacion.php';
+CARD_NOTIFICACIONES = document.getElementById('notificaciones');
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
@@ -33,10 +38,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         NIVEL_ADMINISTRADOR.value = ROW.nivel;
         ALIAS_ADMINISTRADOR.value = ROW.alias_administrador;
         ULTIMA_CONECCION.value = ROW.ultima_sesion;
+        IDNIVEL.value = ROW.id_nivel;
         FOTO_ADMINISTRADOR.src = `${SERVER_URL}images/administradores/${ROW.foto_administrador}`; //Mandamos a llamar la foto del administrador
     } else {
         sweetAlert(2, DATA.error, null);
     }
+    fillTable();
 });
 
 const fotoInput = document.getElementById('fotoInput');
@@ -57,6 +64,55 @@ fotoInput.addEventListener('change', function() {
     }
 });
 
+const fillTable = async (form = null) => {
+    CARD_NOTIFICACIONES.innerHTML = '';
+    const action = (form) ? 'searchRows' : 'readAll';
+
+    // Crear un nuevo objeto FormData
+    const formData = new FormData();
+
+    // Agregar el idAdmin a FormData si es necesario
+    formData.append('idAdmin', IDNIVEL.value); // Captura el valor del nivel de administrador
+
+    // Usar formData como el cuerpo de la solicitud
+    const DATA = await fetchData(NOTIFICACIONES_API, action, form ? form : formData);
+    if (DATA.status) {
+        DATA.dataset.forEach(row => {
+            // Definir el color del borde izquierdo según el tipo de notificación
+            const borderColor = 
+                row.tipo_notificacion === 'Nueva inscripción' ? 'blue' :
+                row.tipo_notificacion === 'Dato agregado' ? 'red' :
+                row.tipo_notificacion === 'Compra realizada' ? 'green' :
+                row.tipo_notificacion === 'Valoración realizada' ? 'orange' :
+                'gray'; // Color por defecto
+
+            CARD_NOTIFICACIONES.innerHTML += `
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4 mt-5 text-center">
+          <div class="card h-100" id="cards" style="border-left: 5px solid ${borderColor};"> <!-- Estilo de borde izquierdo -->
+            <div class="card-body">
+              <div class="status-circle ${row.tipo_notificacion === 'Nueva inscripción' ? 'nuevainscripción' : 
+                  row.tipo_notificacion === 'Dato agregado' ? 'datoagregado' :  
+                  row.tipo_notificacion === 'Compra realizada' ? 'comprarealizada' : 
+                  row.tipo_notificacion === 'Valoración realizada' ? 'valoracionrealizada' : 
+                  'erroneo'}" title="Tipo de notificación: ${row.tipo_notificacion}"></div>
+
+              <h5 class="card-title">${row.titulo}</h5>
+              <p>${row.mensaje}</p>
+              <div class="d-flex justify-content-center gap-2">
+                  <button type="button" class="btn mt-1 btn1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_notificacion})">
+                      <i class="bi bi-search"></i>
+                      <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px" class="mb-1">
+                  </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+        });
+    } else {
+        sweetAlert(4, DATA.error, true);
+    }
+}
 
 
 
@@ -75,6 +131,7 @@ PROFILE_FORM.addEventListener('submit', async (event) => {
         sweetAlert(2, DATA.error, false); //
     }
 });
+
 
 // Mètodo del evento para cuando se envía el formulario de cambiar contraseña.
 PASSWORD_FORM.addEventListener('submit', async (event) => {
@@ -105,6 +162,28 @@ const openPassword = () => {
     PASSWORD_MODAL.show();
     // Se restauran los elementos del formulario.
     PASSWORD_FORM.reset();
+}
+
+const openDelete = async (id) => {
+    // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
+    const RESPONSE = await confirmAction('¿Desea eliminar esta notificación de forma permanente?');
+    // Se verifica la respuesta del mensaje.
+    if (RESPONSE) {
+        // Se define una constante tipo objeto con los datos del registro seleccionado.
+        const FORM = new FormData();
+        FORM.append('idNotificacion', id);
+        // Petición para eliminar el registro seleccionado.
+        const DATA = await fetchData(NOTIFICACIONES_API, 'deleteRow', FORM);
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            // Se muestra un mensaje de éxito.
+            await sweetAlert(1, DATA.message, true);
+            // Se carga nuevamente la tabla para visualizar los cambios.
+            fillTable();
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    }
 }
 
 
