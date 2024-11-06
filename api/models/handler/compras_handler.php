@@ -387,7 +387,7 @@ ORDER BY
 SELECT 
     meses.año,
     meses.mes,
-    IFNULL(SUM(CASE WHEN estado_compra = 'Finalizada' OR estado_compra = 'Entregada' THEN cantidad_producto * precio_producto ELSE 0 END), 0) AS total_ventas_mensual
+    IFNULL(SUM(CASE WHEN estado_compra = 'Finalizada' OR estado_compra = 'Entregada' THEN ROUND((tb_detalles_compras.cantidad_producto * tb_detalles_compras.precio_producto)/2, 2) ELSE 0 END), 0) AS total_ventas_mensual
 FROM 
     meses
 LEFT JOIN 
@@ -429,7 +429,7 @@ ORDER BY
     SELECT 
     meses.año,
     meses.mes,
-    IFNULL(SUM(CASE WHEN estado_compra = 'Anulada' THEN cantidad_producto * precio_producto ELSE 0 END), 0) AS total_ventas_anuladas_mensual
+    IFNULL(SUM(CASE WHEN estado_compra = 'Anulada' THEN ROUND((tb_detalles_compras.cantidad_producto * tb_detalles_compras.precio_producto)/2, 2) ELSE 0 END), 0) AS total_ventas_anuladas_mensual
     FROM 
     meses
     LEFT JOIN 

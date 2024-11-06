@@ -34,11 +34,15 @@ class NotificacionesHandler
 
     public function readAll()
     {
-        $sql = 'SELECT id_notificacion, titulo, mensaje, tipo_notificacion, fecha_notificacion, estado_notificacion, id_nivel
-                FROM tb_notificaciones
-                WHERE id_nivel = ?
-                ORDER BY id_notificacion';
-        $params = array($this->idnivel);
+        $sql = "SELECT n.id_notificacion, n.titulo, n.mensaje, n.tipo_notificacion, n.fecha_notificacion, n.estado_notificacion, n.id_nivel
+                FROM tb_notificaciones n
+                JOIN tb_niveles_administradores na ON n.id_nivel = na.id_nivel
+                WHERE (
+                        (SELECT nivel FROM tb_niveles_administradores WHERE id_nivel = ?) = 'Administrador'
+                        OR n.id_nivel = ?
+                    )
+                ORDER BY n.id_notificacion;";
+        $params = array($this->idnivel, $this->idnivel);
         return Database::getRows($sql, $params);
     }
 
