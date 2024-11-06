@@ -15,6 +15,8 @@ const SAVE_FORM = document.getElementById('saveForm');
 const ID_SOPORTE = document.getElementById('idSoporte');
 const ESTADO_MENSAJE = document.getElementById('selectEstadoMensaje');
 
+let currentMethod = 'readAll'
+
 
 
 // Método del evento para cuando el documento ha cargado.
@@ -25,6 +27,30 @@ document.addEventListener('DOMContentLoaded', () => {
     //MAIN_TITLE.textContent = 'Gestionar categorías';
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
+
+    document.getElementById('toggleViewBtn').addEventListener('click', () => {
+        if (currentMethod === 'readAll') {
+            currentMethod = 'readAllRecientes';
+            document.getElementById('toggleViewBtn').textContent = 'Ver mensajes pendientes';
+        }
+        else if (currentMethod === 'readAllRecientes') {
+            currentMethod = 'readAllPendientes';
+            document.getElementById('toggleViewBtn').textContent = 'Mensajes ya vistos';
+        }
+        else if (currentMethod === 'readAllPendientes') {
+            currentMethod = 'readAllVistos';
+            document.getElementById('toggleViewBtn').textContent = 'Mensajes ya atendidos';
+        }
+        else if (currentMethod === 'readAllVistos') {
+            currentMethod = 'readAllAtendidos';
+            document.getElementById('toggleViewBtn').textContent = 'Mensajes antiguos';
+        }
+        else {
+            currentMethod = 'readAll';
+            document.getElementById('toggleViewBtn').textContent = 'Ver mensajes pendientes';
+        }
+        fillTable();
+    })
 });
 
 
@@ -60,7 +86,7 @@ const fillTable = async (form = null) => {
     // Inicializa el contenido de las cards.
     CARD_MENSAJES.innerHTML = '';
     // Verifica la acción a realizar.
-    const action = (form) ? 'searchRows' : 'readAll';
+    const action = (form) ? 'searchRows' : currentMethod;
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(SOPORTE_API, action, form);
     // Comprueba si la respuesta es satisfactoria, de lo contrario muestra un mensaje con la excepción.
@@ -86,8 +112,8 @@ const fillTable = async (form = null) => {
                     <p class="card-text"><b>Estado del mensaje:</b> 
                         <span class="estado-mensaje">
                             ${row.estado_mensaje === "Pendiente" ? '<i class="far fa-check-circle"></i>' :
-                              row.estado_mensaje === "Visto" ? '<i class="far fa-check-circle"></i><i class="far fa-check-circle"></i>' :
-                              row.estado_mensaje === "Atendido" ? '<i class="fas fa-check-circle" style="color: green;"></i><i class="fas fa-check-circle" style="color: green;"></i>' : ''}
+                    row.estado_mensaje === "Visto" ? '<i class="far fa-check-circle"></i><i class="far fa-check-circle"></i>' :
+                        row.estado_mensaje === "Atendido" ? '<i class="fas fa-check-circle" style="color: green;"></i><i class="fas fa-check-circle" style="color: green;"></i>' : ''}
                         </span>${row.estado_mensaje}
                     </p>
                     <p class="card-text"><small class="text-muted">Mensaje enviado en la fecha: ${row.fecha_envio}</small></p>
@@ -131,13 +157,13 @@ const openUpdate = async (id) => {
         const ROW = DATA.dataset;
         ID_SOPORTE.value = ROW.id_soporte;
         ESTADO_MENSAJE.value = ROW.estado_mensaje;
-        
+
     } else {
         sweetAlert(2, DATA.error, false);
     }
-  }
+}
 
-  const openDelete = async (id) => {
+const openDelete = async (id) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
     const RESPONSE = await confirmAction('¿Desea eliminar este mensaje de forma permanente?');
     // Se verifica la respuesta del mensaje.
@@ -157,4 +183,4 @@ const openUpdate = async (id) => {
             sweetAlert(2, DATA.error, false);
         }
     }
-  }
+}

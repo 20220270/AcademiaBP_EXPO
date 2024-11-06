@@ -41,6 +41,47 @@ class SoporteTecnicoHandler
         return Database::getRows($sql);
     }
 
+    //Más vistas para el soporte técnico
+    //Consultas más recientes
+    public function readAllRecientes()
+    {
+        $sql = "SELECT id_soporte, mensaje, fecha_envio, estado_mensaje,  CONCAT(nombre_cliente, ' ', apellido_cliente) as 'cliente', correo_cliente, foto_cliente
+                FROM tb_soporte_tecnico
+                INNER JOIN tb_clientes USING(id_cliente)
+                ORDER BY fecha_envio DESC";
+        return Database::getRows($sql);
+    }
+
+    //Consultas más recientes
+    public function readAllVistos()
+    {
+        $sql = "SELECT id_soporte, mensaje, fecha_envio, estado_mensaje,  CONCAT(nombre_cliente, ' ', apellido_cliente) as 'cliente', correo_cliente, foto_cliente
+                FROM tb_soporte_tecnico
+                INNER JOIN tb_clientes USING(id_cliente)
+                WHERE estado_mensaje = 'Visto'";
+        return Database::getRows($sql);
+    }
+
+    //Consultas más recientes
+    public function readAllAtendidos()
+    {
+        $sql = "SELECT id_soporte, mensaje, fecha_envio, estado_mensaje,  CONCAT(nombre_cliente, ' ', apellido_cliente) as 'cliente', correo_cliente, foto_cliente
+                FROM tb_soporte_tecnico
+                INNER JOIN tb_clientes USING(id_cliente)
+                WHERE estado_mensaje = 'Atendido'";
+        return Database::getRows($sql);
+    }
+
+    //Consultas más recientes
+    public function readAllPendientes()
+    {
+        $sql = "SELECT id_soporte, mensaje, fecha_envio, estado_mensaje,  CONCAT(nombre_cliente, ' ', apellido_cliente) as 'cliente', correo_cliente, foto_cliente
+                FROM tb_soporte_tecnico
+                INNER JOIN tb_clientes USING(id_cliente)
+                WHERE estado_mensaje = 'Pendiente'";
+        return Database::getRows($sql);
+    }
+
     public function readOne()
     {
         $sql = 'SELECT id_soporte, mensaje, fecha_envio, estado_mensaje, id_cliente

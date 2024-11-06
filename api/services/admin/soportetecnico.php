@@ -24,7 +24,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
-            
+
             case 'readAll':
                 if ($result['dataset'] = $soporte->readAll()) {
                     $result['status'] = 1;
@@ -33,6 +33,40 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen datos registrados';
                 }
                 break;
+
+            case 'readAllRecientes':
+                if ($result['dataset'] = $soporte->readAllRecientes()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen datos registrados';
+                }
+                break;
+            case 'readAllVistos':
+                if ($result['dataset'] = $soporte->readAllVistos()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen datos registrados';
+                }
+                break;
+            case 'readAllAtendidos':
+                if ($result['dataset'] = $soporte->readAllAtendidos()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen datos registrados';
+                }
+                break;
+            case 'readAllPendientes':
+                if ($result['dataset'] = $soporte->readAllPendientes()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen datos registrados';
+                }
+                break;
+
             case 'readOne':
                 if (!$soporte->setIdSoporte($_POST['idSoporte'])) {
                     $result['error'] = $soporte->getDataError();
@@ -52,7 +86,6 @@ if (isset($_GET['action'])) {
                 } elseif ($soporte->updateRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Estado del comentario modificado correctamente';
-                    
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar el dato';
                 }
