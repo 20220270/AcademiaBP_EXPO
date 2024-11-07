@@ -176,6 +176,41 @@ class AdministradorHandler
         return Database::getRows($sql);
     }
 
+    //Administradores activos
+    public function readAllActivos()
+    {
+        $sql = "SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, nivel, estado_adminstrador, fecha_registro, foto_administrador,
+        ultima_sesion
+        FROM tb_administradores
+        INNER JOIN tb_niveles_administradores USING(id_nivel)
+        WHERE estado_adminstrador = 'Activo'
+                ORDER BY id_administrador";
+        return Database::getRows($sql);
+    }
+
+    //Administradores activos
+    public function readAllInactivos()
+    {
+        $sql = "SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, nivel, estado_adminstrador, fecha_registro, foto_administrador,
+        ultima_sesion
+        FROM tb_administradores
+        INNER JOIN tb_niveles_administradores USING(id_nivel)
+        WHERE estado_adminstrador = 'Inactivo'
+                ORDER BY id_administrador";
+        return Database::getRows($sql);
+    }
+
+    //Administradores activos
+    public function readAllAdminsRecientes()
+    {
+        $sql = "SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, nivel, estado_adminstrador, fecha_registro, foto_administrador,
+        ultima_sesion
+        FROM tb_administradores
+        INNER JOIN tb_niveles_administradores USING(id_nivel)
+                ORDER BY fecha_registro DESC";
+        return Database::getRows($sql);
+    }
+
     public function readOne()
     {
         $sql = 'SELECT id_administrador, nombre_admistrador, apellido_administrador, dui_administrador, correo_administrador, telefono_administrador, alias_administrador, clave_administrador, id_nivel, estado_adminstrador, fecha_registro, foto_administrador

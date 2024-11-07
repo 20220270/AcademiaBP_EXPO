@@ -58,6 +58,35 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen administradores registrados';
                 }
                 break;
+
+            case 'readAllActivos':
+                if ($result['dataset'] = $administrador->readAllActivos()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen administradores registrados';
+                }
+                break;
+
+            case 'readAllInactivos':
+                if ($result['dataset'] = $administrador->readAllInactivos()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen administradores registrados';
+                }
+                break;
+
+            case 'readAllAdminsRecientes':
+                if ($result['dataset'] = $administrador->readAllAdminsRecientes()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen administradores registrados';
+                }
+                break;
+
+
             case 'readOne':
                 if (!$administrador->setId($_POST['idAdministrador'])) {
                     $result['error'] = 'Administrador incorrecto';
@@ -247,7 +276,6 @@ if (isset($_GET['action'])) {
                         $_SESSION['idAdministrador'] = $administrador->getIdAdministrador($_POST['usuarioAdmin']); // Asegúrate de que esta función retorne el ID correcto
                         $result['status'] = 1; // Indicar que se ha iniciado sesión correctamente
                         $result['message'] = 'Autenticación correcta';
-                        
                     } else {
                         $result['error'] = 'Credenciales incorrectas'; // Mensaje de error para credenciales incorrectas
                     }

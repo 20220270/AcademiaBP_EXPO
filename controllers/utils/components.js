@@ -124,6 +124,50 @@ const fillSelect = async (filename, action, select, selected = null) => {
     document.getElementById(select).innerHTML = content;
 };
 
+const fillSelect2 = async (filename, action, select, selected = null) => {
+    const DATA = await fetchData(filename, action);
+    let content = '';
+
+    if (DATA.status) {
+        content += '<option value="" selected>Seleccione una opción</option>';
+
+        DATA.dataset.forEach(row => {
+            const value = Object.values(row)[1];
+            const text = Object.values(row)[1];
+
+            if (select === 'selectColor') {
+                let colorHex = Object.values(row)[1];
+
+                if (colorHex && colorHex.trim() !== '') {
+                    // Asegúrate de que el color tenga el prefijo '#'
+                    if (!colorHex.startsWith('#')) {
+                        colorHex = `#${colorHex}`;
+                        console.log(colorHex)
+                    }
+
+                    content += `
+                        <option value="${value}" style="background-color: ${colorHex}; color: ${getContrastingTextColor(colorHex)};">
+                            ${text}
+                        </option>`;
+                } else {
+                    console.error('El valor hexadecimal de color no está definido para:', row);
+                    console.log(colorHex)
+                }
+            } else {
+                if (value != selected) {
+                    content += `<option value="${value}">${text}</option>`;
+                } else {
+                    content += `<option value="${value}" selected>${text}</option>`;
+                }
+            }
+        });
+    } else {
+        content += '<option>No hay opciones disponibles</option>';
+    }
+
+    document.getElementById(select).innerHTML = content;
+};
+
 // Función para determinar un color de texto que contraste con el fondo
 function getContrastingTextColor(hex) {
     // Verifica que hex sea una cadena válida

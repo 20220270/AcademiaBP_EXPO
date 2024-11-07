@@ -44,17 +44,26 @@
                                         <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
                                     </div>
                                 </div>
-                                
+
                             </form>
                         </div>
                         <div class="col-12 d-flex justify-content-end">
-                            <button type="button" class="btn btn-white" onclick="openCreate()" title="Registrar usuarios">
+                            <div class="mb-2">
+                                <!-- Dropdown para el nivel del usuario -->
+                                <label class="form-label">Buscar por nivel de usuario:</label>
+                                <select class="form-select mb-2" id="nivelSelect" name="nivelSelect" required>
+
+                                </select>
+                            </div>
+
+                            <button type="button" class="btn btn-white" onclick="openCreate()"
+                                title="Registrar usuarios">
                                 <img src="../../resources/images/agregar.png" alt="Agregar" width="60rem" />
                             </button>
-                            <button class="btn fw-semibold" id="btnRegistrar" name="btnRegistrar"
-                                onclick="openReport()" title="Generar reporte de usuarios">
+                            <button class="btn fw-semibold" id="btnRegistrar" name="btnRegistrar" onclick="openReport()"
+                                title="Generar reporte de usuarios">
 
-                                <img src="../../resources/images/reportee.png" alt=""width="40px" height="40px"sss
+                                <img src="../../resources/images/reportee.png" alt="" width="40px" height="40px" sss
                                     class="mb-1">
                             </button>
                         </div>
@@ -86,9 +95,10 @@
                                 </div>
                             </form>
                         </div>
-                        
+
                         <div class="col-12 d-flex justify-content-end">
-                            <button type="button" class="btn btn-white" onclick="openCreate2()" title="Registrar nivel de usuario">
+                            <button type="button" class="btn btn-white" onclick="openCreate2()"
+                                title="Registrar nivel de usuario">
                                 <img src="../../resources/images/agregar.png" alt="Agregar" width="60rem" />
                             </button>
                         </div>
@@ -137,13 +147,15 @@
                                     <!-- Label e input para agregar el nombre del administrador -->
                                     <label class="form-label">Nombre:</label>
                                     <input type="text" class="form-control mb-2" id="nombreAdministrador"
-                                        name="nombreAdministrador" required oninput="this.value = this.value.replace(/[0-9]/g, '')">
+                                        name="nombreAdministrador" required
+                                        oninput="this.value = this.value.replace(/[0-9]/g, '')">
                                 </div>
                                 <div class="mb-2">
                                     <!-- Label e input para agregar el apellido del administrador -->
                                     <label class="form-label">Apellido:</label>
                                     <input type="text" class="form-control mb-2" id="apellidoAdministrador"
-                                        name="apellidoAdministrador" required oninput="this.value = this.value.replace(/[0-9]/g, '')">
+                                        name="apellidoAdministrador" required
+                                        oninput="this.value = this.value.replace(/[0-9]/g, '')">
                                 </div>
                                 <div class="mb-2">
                                     <!-- Label e input para agregar el correo del administrador -->
@@ -155,13 +167,14 @@
                                     <!-- Label e input para agregar el DUI del administrador -->
                                     <label class="form-label">DUI:</label>
                                     <input type="text" class="form-control mb-2" id="duiAdministrador"
-                                        name="duiAdministrador" required maxlength="10" oninput="this.value = this.value.replace(/[^0-9-]/g, '')" pattern="[0-9-]+">
+                                        name="duiAdministrador" required maxlength="10"
+                                        oninput="this.value = this.value.replace(/[^0-9-]/g, '')" pattern="[0-9-]+">
                                 </div>
                                 <div class="mb-2">
                                     <!-- Label e input para agregar el teléfono del administrador -->
                                     <label class="form-label">Teléfono:</label>
                                     <input type="text" class="form-control mb-2" id="telefonoAdministrador"
-                                        name="telefonoAdministrador" required maxlength="9" pattern="[0-9\-]*"  
+                                        name="telefonoAdministrador" required maxlength="9" pattern="[0-9\-]*"
                                         oninput="this.value = this.value.replace(/[^\d-]/g, '');">
                                 </div>
 
