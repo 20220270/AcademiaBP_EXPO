@@ -151,17 +151,17 @@ input[type=range]::-moz-range-thumb {
 }
 
 #contenedor2{
-    max-height: 280px;
+    max-height: 350px;
     overflow-y: auto;
 }
 
 #contenedor3{
-    max-height: 300px;
+    max-height: 350px;
     overflow-y: auto;
 }
 
 #contenedor4{
-    max-height: 320px;
+    max-height: 350px;
     overflow-y: auto;
 }
 

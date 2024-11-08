@@ -11,7 +11,7 @@ class PagosMensualidadHandler
      */
     protected $idpago = null;
     protected $fecha = null;
-    protected $idalumno= null;
+    protected $idalumno = null;
     protected $cuotasanuales = null;
     protected $cuotaspendiente = null;
     protected $estado = null;
@@ -30,7 +30,7 @@ class PagosMensualidadHandler
             INNER JOIN tb_dias_pagos USING(id_dia_pago)
         WHERE nombre_cliente LIKE ? OR nombre_alumno LIKE ? OR apellido_alumno LIKE ? OR apellido_cliente LIKE ? OR estado_pago LIKE ? OR fecha_pago LIKE ?
         ORDER BY id_pago;";
-        $params = array($value, $value, $value, $value , $value , $value);
+        $params = array($value, $value, $value, $value, $value, $value);
         return Database::getRows($sql, $params);
     }
 
@@ -41,7 +41,52 @@ class PagosMensualidadHandler
         return Database::executeRow($sql, $params);
     }
 
+    //Consultas para mostrar los pagos de mensualidad
+
+
+    //Ver todos los pagos
     public function readAll()
+    {
+        $sql = "SELECT id_pago, 
+                   CONCAT(nombre_alumno, ' ', apellido_alumno) AS 'Alumno',
+                   CONCAT(nombre_cliente, ' ', apellido_cliente) AS 'Encargado', 
+                   telefono_cliente,
+                    cuotas_anuales,
+                    cuotas_pendientes, 
+                   numero_dias, 
+                   mensualidad_pagar, 
+                   estado_pago, 
+                   fecha_pago 
+            FROM tb_pagos
+            INNER JOIN tb_alumnos USING(id_alumno)
+            INNER JOIN tb_clientes USING(id_cliente)
+            INNER JOIN tb_dias_pagos USING(id_dia_pago)
+            ORDER BY fecha_pago ASC;";
+        return Database::getRows($sql);
+    }
+
+    public function readAll5()
+    {
+        $sql = "SELECT id_pago, 
+                   CONCAT(nombre_alumno, ' ', apellido_alumno) AS 'Alumno',
+                   CONCAT(nombre_cliente, ' ', apellido_cliente) AS 'Encargado', 
+                   telefono_cliente,
+                    cuotas_anuales,
+                    cuotas_pendientes, 
+                   numero_dias, 
+                   mensualidad_pagar, 
+                   estado_pago, 
+                   fecha_pago 
+            FROM tb_pagos
+            INNER JOIN tb_alumnos USING(id_alumno)
+            INNER JOIN tb_clientes USING(id_cliente)
+            INNER JOIN tb_dias_pagos USING(id_dia_pago)
+            ORDER BY fecha_pago DESC;";
+        return Database::getRows($sql);
+    }
+
+    //Ver los pagos del mes actual
+    public function readAll2()
     {
         $sql = "SELECT id_pago, 
                    CONCAT(nombre_alumno, ' ', apellido_alumno) AS 'Alumno',
@@ -49,6 +94,8 @@ class PagosMensualidadHandler
                    telefono_cliente, 
                    numero_dias, 
                    mensualidad_pagar, 
+                    cuotas_anuales,
+                    cuotas_pendientes, 
                    estado_pago, 
                    fecha_pago 
             FROM tb_pagos
@@ -59,6 +106,52 @@ class PagosMensualidadHandler
               AND MONTH(fecha_pago) = MONTH(CURDATE())
             ORDER BY fecha_pago DESC;";
         return Database::getRows($sql);
+    }
+
+    //Ver los pagos del mes anterior al actual
+    public function readAll3()
+    {
+        $sql = "SELECT id_pago, 
+                   CONCAT(nombre_alumno, ' ', apellido_alumno) AS 'Alumno',
+                   CONCAT(nombre_cliente, ' ', apellido_cliente) AS 'Encargado', 
+                   telefono_cliente, 
+                   numero_dias, 
+                   mensualidad_pagar, 
+                    cuotas_anuales,
+                    cuotas_pendientes, 
+                   estado_pago, 
+                   fecha_pago 
+            FROM tb_pagos
+            INNER JOIN tb_alumnos USING(id_alumno)
+            INNER JOIN tb_clientes USING(id_cliente)
+            INNER JOIN tb_dias_pagos USING(id_dia_pago)
+            WHERE YEAR(fecha_pago) = YEAR(CURDATE())
+              AND MONTH(fecha_pago) = MONTH(CURDATE()) - 1
+            ORDER BY fecha_pago DESC;";
+        return Database::getRows($sql);
+    }
+
+    //Ver los pagos por fecha específica
+    public function readAll4()
+    {
+        $sql = "SELECT id_pago, 
+                   CONCAT(nombre_alumno, ' ', apellido_alumno) AS 'Alumno',
+                   CONCAT(nombre_cliente, ' ', apellido_cliente) AS 'Encargado', 
+                   telefono_cliente, 
+                   numero_dias, 
+                   mensualidad_pagar, 
+                    cuotas_anuales,
+                    cuotas_pendientes, 
+                   estado_pago, 
+                   fecha_pago 
+            FROM tb_pagos
+            INNER JOIN tb_alumnos USING(id_alumno)
+            INNER JOIN tb_clientes USING(id_cliente)
+            INNER JOIN tb_dias_pagos USING(id_dia_pago)
+            WHERE DATE(tb_pagos.fecha_pago) = ?
+            ORDER BY fecha_pago DESC;";
+        $params = array($this ->fecha);
+        return Database::getRows($sql, $params);
     }
 
     public function readOne()

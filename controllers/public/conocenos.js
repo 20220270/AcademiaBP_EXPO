@@ -54,7 +54,7 @@ async function loadValoresData() {
             DATA.dataset.forEach((row, index) => {
                 // Crea la estructura de cada tarjeta de valor
                 let card = `
-                    <div class="col-sm-12 col-md-6 col-lg-4 mb-4 mx-auto">
+                    <div class="col-sm-12 col-md-6 col-lg-3 mb-4 mx-auto">
                         <div class="card h-100">
                             <img src="${SERVER_URL}images/valores/${row.imagen_valor}" class="card-img-top rounded-4" alt="${row.nombre_valor}">
                             <div class="card-body text-center">

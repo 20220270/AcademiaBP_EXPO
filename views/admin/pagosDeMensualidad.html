@@ -28,7 +28,7 @@
 
 
                 <!--Contenedores para mostrar datos de los alumnos registrados-->
-                <div class="card-container shadow p-3 mb-5 bg-body-tertiary rounded">
+                <div class="card-container shadow p-3 mb-1 bg-body-tertiary rounded">
                     <!--Contenedor para mostrar el total de alumnos registrados-->
                     <div class="card" id="alumnototal">
 
@@ -50,15 +50,15 @@
                         <button class="nav-link active text-success" id="calendar-tab" data-bs-toggle="tab"
                             data-bs-target="#calendar-section" type="button" role="tab" aria-controls="calendar-section"
                             aria-selected="true" title="Días de pago">
-                            <img src="../../resources/images/dia-de-pago.png" alt="calendar.png"
-                                class="mt-2" width="50px" height="50px"></button>
+                            <img src="../../resources/images/dia-de-pago.png" alt="calendar.png" class="mt-2"
+                                width="50px" height="50px"></button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link text-success" id="chartPrediction-tab" data-bs-toggle="tab"
                             data-bs-target="#chartPrediction-section" type="button" role="tab"
                             aria-controls="chartPrediction-section" aria-selected="false" title="Pagos de mensualidad">
-                            <img src="../../resources/images/salario.png" alt="calendar.png" class="mt-2"
-                                width="50px" height="50px"></button>
+                            <img src="../../resources/images/salario.png" alt="calendar.png" class="mt-2" width="50px"
+                                height="50px"></button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link text-success" id="chart1-tab" data-bs-toggle="tab"
@@ -96,7 +96,8 @@
                                     </div>
                                     <div class="col-3 d-flex justify-content-end">
                                         <!-- Botón alineado a la derecha -->
-                                        <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate()" title="Agregar día y cuota de pago">
+                                        <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate()"
+                                            title="Agregar día y cuota de pago">
                                             <img src="../../resources/images/agregar.png" alt="buttonpng"
                                                 width="60rem" />
                                         </button>
@@ -121,15 +122,17 @@
                                 <div class="container">
                                     <h4><b>Tabla de pagos</b></h4>
 
-                                    <div class="col-6 offset-3 d-flex justify-content-center">
-                                        <!-- Añadimos una clase offset-3 para centrar el buscador -->
-                                        <form class="d-flex flex-grow-1" id="searchForm2">
-                                            <div class="buscador mx-auto position-relative">
+                                    <div class="col-8 offset-2 d-flex flex-wrap justify-content-center">
+                                        <!-- Centrar el buscador y los botones con margen adecuado -->
+
+                                        <!-- Formulario de búsqueda -->
+                                        <form class="d-flex flex-grow-1 mb-3" id="searchForm2">
+                                            <div class="buscador position-relative w-100">
                                                 <i class="fas fa-microphone search-icon microphone-button"
                                                     id="microphone-button2"></i>
-                                                <input class="busc light-table-filter" data-table="order-table"
-                                                    type="text" placeholder="Busque por cliente, alumno o fechas"
-                                                    id="Buscador2" name="search2">
+                                                <input class="busc form-control" data-table="order-table" type="text"
+                                                    placeholder="Busque por cliente, alumno o fechas" id="Buscador2"
+                                                    name="search2">
                                                 <div class="btna">
                                                     <i class="fa fa-search"><ion-icon
                                                             name="search-outline"></ion-icon></i>
@@ -137,21 +140,37 @@
                                             </div>
                                         </form>
 
-                                        <button type="submit" class="btn mx-5" id="btnGuardar" name="btnGuardar"
-                                            onclick="openReport()" title="Generar reporte de pagos de mensualidad"><img src="../../resources/images/report.png"
-                                                alt="buttonpng" width="40rem"/></button>
+                                        <!-- Botón para generar reporte -->
+                                        <button type="button" class="btn mx-4 my-3" id="btnGuardar" name="btnGuardar"
+                                            onclick="openReport()" title="Generar reporte de pagos de mensualidad">
+                                            <img src="../../resources/images/report.png" alt="buttonpng"
+                                                width="40rem" />
+                                        </button>
 
-                                        <div class="col-3 col-lg-9 d-flex justify-content-end">
-                                            <!-- Botón alineado a la derecha -->
-                                            <button type="button" class="btn btn-white me-md-2 mt-4"
-                                                onclick="openCreate2()" title="Registrar pago de mensualidad">
-                                                <img src="../../resources/images/agregar.png" alt="buttonpng"
-                                                    width="60rem" />
-                                            </button>
-                                            <p class="mt-5"><b>Realice el pago de un alumno aquí</b></p>
+                                        <!-- Botón para registrar un pago -->
+                                        <button type="button" class="btn btn-white me-md-3 my-3" onclick="openCreate2()"
+                                            title="Registrar pago de mensualidad">
+                                            <img src="../../resources/images/agregar.png" alt="buttonpng"
+                                                width="60rem" />
+                                        </button>
 
-                                        </div>
+                                        <!-- Filtro de fecha -->
+                                        <form class="flex-grow-1 d-flex flex-column my-3" id="filterForm">
+                                            <div class="mb-3 w-100">
+                                                <label for="fechaCompra" class="form-label">Filtrar pago por una fecha
+                                                    específica</label>
+                                                <input type="date" id="fechaCompra" name="fechaCompra"
+                                                    class="form-control">
+                                            </div>
+                                        </form>
+
+                                        <!-- Botón para alternar vista -->
+                                        <button type="button" id="toggleViewBtn"
+                                            class="btn btn-dark my-3 mx-4">
+                                            Ver pagos recientes
+                                        </button>
                                     </div>
+
 
 
                                     <table class="table light-table-filter">
@@ -169,6 +188,8 @@
                                                 <th class="table-dark text-white fw-bold">Días que entrena el alumno
                                                 </th>
                                                 <th class="table-dark text-white fw-bold">Mensualidad a pagar</th>
+                                                <th class="table-dark text-white fw-bold">Cuotas anuales</th>
+                                                <th class="table-dark text-white fw-bold">Cuotas pendientes</th>
                                                 <th class="table-dark text-white fw-bold">Estado de la mensualidad
                                                 </th>
                                                 <th class="table-dark text-white fw-bold">Fecha del último pago</th>
@@ -193,30 +214,56 @@
                                 <div class="col-md-12 col-lg-12 mx-auto">
                                     <div class="container">
                                         <h4><b>Datos para boleta de pago</b></h4>
-                                        <div class="col-6 offset-3 d-flex justify-content-center">
-                                            <!-- Añadimos una clase offset-3 para centrar el buscador -->
-                                            <form class="d-flex flex-grow-1" id="searchForm3">
-                                                <div class="buscador mx-auto position-relative">
-                                                    <i class="fas fa-microphone search-icon microphone-button"
-                                                        id="microphone-button3"></i>
-                                                    <input class="busc light-table-filter" data-table="order-table"
-                                                        type="text" placeholder="Busque por alumno, cliente o fechas"
-                                                        id="Buscador3" name="search3">
-                                                    <div class="btna">
-                                                        <i class="fa fa-search"><ion-icon
-                                                                name="search-outline"></ion-icon></i>
-                                                    </div>
+                                        <div class="container my-3">
+                                            <div class="row">
+                                                <!-- Buscador y botón de registrar alineados en el centro -->
+                                                <div
+                                                    class="col-md-7 offset-md-2 d-flex align-items-center justify-content-center">
+                                                    <!-- Formulario de búsqueda -->
+                                                    <form class="d-flex flex-grow-1" id="searchForm3">
+                                                        <div class="buscador mx-auto position-relative">
+                                                            <i class="fas fa-microphone search-icon microphone-button"
+                                                                id="microphone-button3"></i>
+                                                            <input class="busc light-table-filter"
+                                                                data-table="order-table" type="text"
+                                                                placeholder="Busque por alumno, cliente o fechas"
+                                                                id="Buscador3" name="search3">
+                                                            <div class="btna">
+                                                                <i class="fa fa-search"><ion-icon
+                                                                        name="search-outline"></ion-icon></i>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                    <!-- Botón de registrar datos -->
+                                                    <button type="button" class="btn btn-white ms-3"
+                                                        onclick="openCreate3()"
+                                                        title="Registrar datos para boleta de pago">
+                                                        <img src="../../resources/images/agregar.png" alt="buttonpng"
+                                                            width="60rem" />
+                                                    </button>
                                                 </div>
-                                            </form>
-                                            <div class="col-3 d-flex justify-content-end">
-                                                <!-- Botón alineado a la derecha -->
-                                                <button type="button" class="btn btn-white me-md-2 mt-1"
-                                                    onclick="openCreate3()" title="Registrar datos para boleta de pago">
-                                                    <img src="../../resources/images/agregar.png" alt="buttonpng"
-                                                        width="60rem" />
-                                                </button>
+
+                                                <!-- Filtro de fecha y botón de alternar vista, alineados a la derecha -->
+                                                <div
+                                                    class="col-md-8 offset-md-2 d-flex flex-column flex-md-row align-items-center justify-content-between mt-4">
+                                                    <!-- Filtro de fecha -->
+                                                    <form id="filterForm" class="mb-3 mb-md-0">
+                                                        <label for="fechaCompra" class="form-label">Filtrar boleta por una
+                                                            fecha específica</label>
+                                                        <input type="date" id="fechaProximoPago" name="fechaProximoPago"
+                                                            class="form-control">
+                                                    </form>
+
+                                                    <!-- Botón para alternar vista -->
+                                                    <button type="button" id="toggleViewBtn2"
+                                                        class="btn btn-dark">
+                                                        Ver boletas recientes
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
+
 
 
                                         <table class="table">
@@ -389,7 +436,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/051460de0f.js" crossorigin="anonymous"></script>
     <script src="../../controllers/utils/sweetalert.min.js"></script>
     <script src="../../controllers/utils/components.js"></script>

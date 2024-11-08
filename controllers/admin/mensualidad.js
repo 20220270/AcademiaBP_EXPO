@@ -44,7 +44,7 @@ const SAVE_FORM2 = document.getElementById('saveForm2'),
     DATOS_PAGO = document.getElementById('SelectDatosPago'),
     CUOTAS_A_PAGAR = document.getElementById('cuotasApagar'),
     ESTADO_PAGO = document.getElementById('selectEstado');
-    COLUMNA_ESTADO = document.getElementById('columnaEstado');
+COLUMNA_ESTADO = document.getElementById('columnaEstado');
 
 const SAVE_FORM3 = document.getElementById('saveForm3'),
     ID_DETALLEPAGO = document.getElementById('idDetallePagoMensualidad'),
@@ -52,6 +52,8 @@ const SAVE_FORM3 = document.getElementById('saveForm3'),
     DESCRIPCION_PAGO = document.getElementById('descripcionPago'),
     PRXIMO_PAGO = document.getElementById('proximoPago');
 
+let currentMethod = 'readAll';
+let currentMethod2 = 'readAll';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -65,9 +67,55 @@ document.addEventListener('DOMContentLoaded', () => {
     fillTable4();
     fillTable5();
     fillTable6();
+
+    document.getElementById('toggleViewBtn').addEventListener('click', () => {
+        if (currentMethod === 'readAll') {
+            currentMethod = 'readAll5';
+            document.getElementById('toggleViewBtn').textContent = 'Ver pagos del mes actual';
+        }
+        else if (currentMethod === 'readAll5') {
+            currentMethod = 'readAll2';
+            document.getElementById('toggleViewBtn').textContent = 'Ver pagos del mes anterior';
+        }
+        else if (currentMethod === 'readAll2') {
+            currentMethod = 'readAll3';
+            document.getElementById('toggleViewBtn').textContent = 'Ver pagos antiguos';
+        }
+        else {
+            currentMethod = 'readAll';
+            document.getElementById('toggleViewBtn').textContent = 'Ver pagos recientes';
+        }
+        fillTable2();
+    })
+
+    document.getElementById('toggleViewBtn2').addEventListener('click', () => {
+        if (currentMethod2 === 'readAll') {
+            currentMethod2 = 'readAllRecientes';
+            document.getElementById('toggleViewBtn2').textContent = 'Ver pagos cancelados';
+        }
+        else if (currentMethod2 === 'readAllRecientes') {
+            currentMethod2 = 'readAllPagadas';
+            document.getElementById('toggleViewBtn2').textContent = 'Ver pagos no cancelados';
+        }
+        else if (currentMethod2 === 'readAllPagadas') {
+            currentMethod2 = 'readAllNoPagadas';
+            document.getElementById('toggleViewBtn2').textContent = 'Ver pagos antiguos';
+        }
+        else {
+            currentMethod2 = 'readAll';
+            document.getElementById('toggleViewBtn2').textContent = 'Ver pagos recientes';
+        }
+        fillTable3();
+    })
 });
 
+document.getElementById('fechaPago').addEventListener('change', function () {
+    fillTable2(); // Llama a fillTable al cambiar la fecha
+});
 
+document.getElementById('fechaProximoPago').addEventListener('change', function () {
+    fillTable3(); // Llama a fillTable al cambiar la fecha
+});
 
 SEARCH_FORM.addEventListener('submit', (event) => {
     // Se evita recargar la página web después de enviar el formulario.
@@ -207,9 +255,21 @@ const fillTable2 = async (form = null) => {
     // Se inicializa el contenido de la tabla.
     ROWS_FOUND.textContent = '';
     TABLE_BODY.innerHTML = '';
-    //CARD_CATEGORIAS.innerHTML = '';
+    // Verificar si el input de fecha tiene un valor.
+    const fechaPago = document.getElementById('fechaPago').value;
+    let action;
+
+    if (fechaPago) {
+        // Si hay una fecha seleccionada, usar 'readAll3' para filtrar por fecha.
+        action = 'readAll4';
+        form = new FormData();  // Crear un nuevo FormData si no existe uno
+        form.append('fechaPago', fechaPago);
+    } else {
+        // Si no hay fecha seleccionada, usar la acción según la lógica previa.
+        action = (form) ? 'searchRows' : currentMethod;
+    }
     // Se verifica la acción a realizar.
-    const action = (form) ? 'searchRows' : 'readAll';
+
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(MENSUALIDAD_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -218,7 +278,7 @@ const fillTable2 = async (form = null) => {
         DATA.dataset.forEach(row => {
             // Definir la clase CSS para el estado de pago
             const statusClass = (row.estado_pago === 'Pagado') ? 'pagado' : 'pendiente';
-            
+
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
             <tr>
@@ -228,6 +288,8 @@ const fillTable2 = async (form = null) => {
                 <td>${row.telefono_cliente}</td>
                 <td>${row.numero_dias}</td>
                 <td>$${row.mensualidad_pagar}</td>
+                <td>${row.cuotas_anuales}</td>
+                <td>${row.cuotas_pendientes}</td>
                 <td class="${statusClass}"><b>${row.estado_pago}</b></td>
                 <td>${row.fecha_pago}</td>
                 <td>
@@ -255,9 +317,20 @@ const fillTable3 = async (form = null) => {
     // Se inicializa el contenido de la tabla.
     ROWS_FOUND2.textContent = '';
     TABLE_BODY2.innerHTML = '';
-    //CARD_CATEGORIAS.innerHTML = '';
-    // Se verifica la acción a realizar.
-    const action = (form) ? 'searchRows' : 'readAll';
+    
+    const fechaProximoPago = document.getElementById('fechaProximoPago').value;
+    let action;
+
+    if (fechaProximoPago) {
+        // Si hay una fecha seleccionada, usar 'readAll3' para filtrar por fecha.
+        action = 'readAllFecha';
+        form = new FormData();  // Crear un nuevo FormData si no existe uno
+        form.append('fechaProximoPago', fechaProximoPago);
+    } else {
+        // Si no hay fecha seleccionada, usar la acción según la lógica previa.
+        action = (form) ? 'searchRows' : currentMethod2;
+    }
+
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(DETALLESMENSUALIDAD_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -265,7 +338,7 @@ const fillTable3 = async (form = null) => {
         // Se recorre el conjunto de registros fila por fila.
         DATA.dataset.forEach(row => {
             const statusClass = (row.estado_proximo_pago === 'Pagado') ? 'pagado' : 'pendiente';
-            
+
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY2.innerHTML += `
             <tr>
@@ -315,7 +388,7 @@ const fillTable4 = async (form = null) => {
         // Se recorre el conjunto de registros fila por fila.
         DATA.dataset.forEach(row => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-                CARD_ALUMNOSTOTAL.innerHTML += `
+            CARD_ALUMNOSTOTAL.innerHTML += `
                             <div class="card-body">
                                 <h1 class="card-title titulo-card">Total de alumnos registrados.</h1>
                                 <p class="card-text mt-5">
@@ -446,7 +519,7 @@ const openUpdate2 = async (id) => {
     const FORM = new FormData();
     FORM.append('idPagoARealizar', id);
     COLUMNA_ESTADO.hidden = false;
-    
+
     // Petición para obtener los datos del registro solicitado.
     const DATA = await fetchData(MENSUALIDAD_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -460,9 +533,9 @@ const openUpdate2 = async (id) => {
         const ROW = DATA.dataset;
         ESTADO_PAGO.value = ROW.estado_pago;
         ID_PAGO.value = ROW.id_pago;
-        
 
-        
+
+
 
         fillSelect(MENSUALIDAD_API, 'readAllAlumnosCliente', 'SelectDatosPago', ROW.id_alumno);
 
@@ -500,7 +573,7 @@ const openUpdate3 = async (id) => {
 
 const openDelete = async (id, nombre) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar este día y pago: ' +nombre+ ', de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar este día y pago: ' + nombre + ', de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.

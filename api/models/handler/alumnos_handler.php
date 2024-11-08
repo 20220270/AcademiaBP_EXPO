@@ -59,7 +59,7 @@ class AlumnosHandler
     //Mostrar todos los alumnos
     public function readAll()
     {
-        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, foto_alumno, estado_alumno
+        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ' ,apellido_alumno) AS nombre, foto_alumno, estado_alumno, fecha_nacimiento
     FROM 
     tb_alumnos
     LEFT JOIN 

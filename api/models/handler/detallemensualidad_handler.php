@@ -44,7 +44,9 @@ class DetallesPagosMensualidadHandler
 
 
     
+    //Métodos para visualizar la boleta de pago
 
+    //Ordenar boltas por ID
     public function readAll()
     {
         $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar,  CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
@@ -55,6 +57,62 @@ class DetallesPagosMensualidadHandler
                 INNER JOIN tb_clientes USING(id_cliente)
                 ORDER BY id_detalle_pago";
         return Database::getRows($sql);
+    }
+
+    //Boletas de pago recientes
+    public function readAllRecientes()
+    {
+        $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar,  CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
+                descripcion_pago, fecha_proximo_pago, estado_proximo_pago from tb_detalles_pagos
+                INNER JOIN tb_pagos USING (id_pago)
+                INNER JOIN tb_alumnos USING (id_alumno)
+                INNER JOIN tb_dias_pagos USING (id_dia_pago)
+                INNER JOIN tb_clientes USING(id_cliente)
+                ORDER BY id_detalle_pago DESC";
+        return Database::getRows($sql);
+    }
+
+    //Boletas de pago pagadas
+    public function readAllPagadas()
+    {
+        $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar,  CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
+                descripcion_pago, fecha_proximo_pago, estado_proximo_pago from tb_detalles_pagos
+                INNER JOIN tb_pagos USING (id_pago)
+                INNER JOIN tb_alumnos USING (id_alumno)
+                INNER JOIN tb_dias_pagos USING (id_dia_pago)
+                INNER JOIN tb_clientes USING(id_cliente)
+                WHERE estado_proximo_pago = 'Pagado'
+                ORDER BY id_detalle_pago";
+        return Database::getRows($sql);
+    }
+
+    //Boletas de pago no pagadas
+    public function readAllNoPagadas()
+    {
+        $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar,  CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
+                descripcion_pago, fecha_proximo_pago, estado_proximo_pago from tb_detalles_pagos
+                INNER JOIN tb_pagos USING (id_pago)
+                INNER JOIN tb_alumnos USING (id_alumno)
+                INNER JOIN tb_dias_pagos USING (id_dia_pago)
+                INNER JOIN tb_clientes USING(id_cliente)
+                WHERE estado_proximo_pago = 'Pendiente de pago'
+                ORDER BY id_detalle_pago";
+        return Database::getRows($sql);
+    }
+
+    //Boletas de pago no pagadas
+    public function readAllFecha()
+    {
+        $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar,  CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
+                descripcion_pago, fecha_proximo_pago, estado_proximo_pago from tb_detalles_pagos
+                INNER JOIN tb_pagos USING (id_pago)
+                INNER JOIN tb_alumnos USING (id_alumno)
+                INNER JOIN tb_dias_pagos USING (id_dia_pago)
+                INNER JOIN tb_clientes USING(id_cliente)
+                WHERE fecha_proximo_pago = ?
+                ORDER BY id_detalle_pago";
+            $params = array($this->fechaproximopago);
+        return Database::getRows($sql, $params);
     }
 
     public function readOne()

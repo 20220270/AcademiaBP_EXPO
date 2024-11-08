@@ -46,6 +46,41 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen detalles de pagos registrados';
                 }
                 break;
+
+
+            case 'readAllRecientes':
+                if ($result['dataset'] = $detallemensualidad->readAllRecientes()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No existen detalles de pagos registrados';
+                }
+                break;
+            case 'readAllPagadas':
+                if ($result['dataset'] = $detallemensualidad->readAllPagadas()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No existen detalles de pagos registrados';
+                }
+                break;
+            case 'readAllNoPagadas':
+                if ($result['dataset'] = $detallemensualidad->readAllNoPagadas()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No existen detalles de pagos registrados';
+                }
+                break;
+
+            case 'readAllFecha':
+                if (!$detallemensualidad->setFechaProximoPago($_POST['fechaProximoPago'])) {
+                    $result['error'] = $detallemensualidad->getDataError();
+                } elseif ($result['dataset'] = $detallemensualidad->readAllFecha()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Detalle de pago inexistente';
+                }
+                break;
+
+
             case 'readOne':
                 if (!$detallemensualidad->setIdDetalle($_POST['idDetallePagoMensualidad'])) {
                     $result['error'] = $detallemensualidad->getDataError();
@@ -55,6 +90,8 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Detalle de pago inexistente';
                 }
                 break;
+
+
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (

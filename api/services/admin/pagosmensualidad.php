@@ -28,7 +28,7 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    
+
                     !$pagos->setIdAlumnoCliente($_POST['SelectDatosPago'])
                 ) {
                     $result['error'] = $pagos->getDataError();
@@ -45,6 +45,40 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                 } else {
                     $result['error'] = 'No existen pagos registradas';
+                }
+                break;
+
+                case 'readAll5':
+                    if ($result['dataset'] = $pagos->readAll5()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'No existen pagos registradas';
+                    }
+                    break;
+
+            case 'readAll2':
+                if ($result['dataset'] = $pagos->readAll2()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No existen pagos registradas';
+                }
+                break;
+
+            case 'readAll3':
+                if ($result['dataset'] = $pagos->readAll3()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No existen pagos registradas';
+                }
+                break;
+
+            case 'readAll4':
+                if (!$pagos->setFechaPago($_POST['fechaPago'])) {
+                    $result['error'] = $pagos->getDataError();
+                } elseif ($result['dataset'] = $pagos->readAll4()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Pago inexistente';
                 }
                 break;
 
