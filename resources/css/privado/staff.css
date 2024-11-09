@@ -147,6 +147,12 @@ a.sidebar-link:hover {
     overflow-y: auto; /* Habilita el desplazamiento vertical */
 }
 
+.staff,
+.asignacion {
+    height: 550px; /* Altura fija del contenedor */
+    overflow-y: auto; /* Habilita el desplazamiento vertical */
+}
+
 .contenedorStaff{
     border-radius: 20px;
 }

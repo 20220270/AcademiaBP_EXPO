@@ -4,6 +4,14 @@
 
 }
 
+.niveles,
+.categorias,
+.asignacion
+{
+    overflow-y: auto; 
+    max-height: 620px; 
+}
+
 .position-relative {
     position: relative;
 }

@@ -43,7 +43,7 @@ class MetodosPagosHandler
     {
         $sql = 'SELECT id_metodo_pago, nombre_metodo, imagen_metodo
                 FROM tb_metodos_pago
-                ORDER BY nombre_metodo';
+                ORDER BY id_metodo_pago';
         return Database::getRows($sql);
     }
 

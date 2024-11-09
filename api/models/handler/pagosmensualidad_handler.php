@@ -15,7 +15,8 @@ class PagosMensualidadHandler
     protected $cuotasanuales = null;
     protected $cuotaspendiente = null;
     protected $estado = null;
-
+    protected $idmetodopago = null;
+    protected $informacionmetodo = null;
 
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
@@ -24,20 +25,21 @@ class PagosMensualidadHandler
     {
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = "SELECT id_pago, CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
-            CONCAT(nombre_cliente, ' ', apellido_cliente) as 'Encargado',   telefono_cliente, numero_dias, mensualidad_pagar, estado_pago, fecha_pago from tb_pagos
+            CONCAT(nombre_cliente, ' ', apellido_cliente) as 'Encargado',   telefono_cliente, numero_dias, mensualidad_pagar, estado_pago, fecha_pago, nombre_metodo from tb_pagos
             INNER JOIN tb_alumnos USING(id_alumno)
             INNER JOIN tb_clientes USING(id_cliente)
             INNER JOIN tb_dias_pagos USING(id_dia_pago)
-        WHERE nombre_cliente LIKE ? OR nombre_alumno LIKE ? OR apellido_alumno LIKE ? OR apellido_cliente LIKE ? OR estado_pago LIKE ? OR fecha_pago LIKE ?
+            LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
+        WHERE nombre_cliente LIKE ? OR nombre_alumno LIKE ? OR nombre_metodo LIKE ? OR apellido_alumno LIKE ? OR apellido_cliente LIKE ? OR estado_pago LIKE ? OR fecha_pago LIKE ?
         ORDER BY id_pago;";
-        $params = array($value, $value, $value, $value, $value, $value);
+        $params = array($value, $value, $value, $value, $value, $value, $value);
         return Database::getRows($sql, $params);
     }
 
     public function createRow()
     {
-        $sql = 'CALL insertar_pago(?)';
-        $params = array($this->idalumno);
+        $sql = 'CALL insertar_pago(?, ?, ?)';
+        $params = array($this->idalumno, $this->idmetodopago, $this->informacionmetodo);
         return Database::executeRow($sql, $params);
     }
 
@@ -56,11 +58,13 @@ class PagosMensualidadHandler
                    numero_dias, 
                    mensualidad_pagar, 
                    estado_pago, 
-                   fecha_pago 
+                   fecha_pago,
+                   nombre_metodo 
             FROM tb_pagos
             INNER JOIN tb_alumnos USING(id_alumno)
             INNER JOIN tb_clientes USING(id_cliente)
             INNER JOIN tb_dias_pagos USING(id_dia_pago)
+            LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
             ORDER BY fecha_pago ASC;";
         return Database::getRows($sql);
     }
@@ -76,11 +80,13 @@ class PagosMensualidadHandler
                    numero_dias, 
                    mensualidad_pagar, 
                    estado_pago, 
-                   fecha_pago 
+                   fecha_pago, 
+            nombre_metodo 
             FROM tb_pagos
             INNER JOIN tb_alumnos USING(id_alumno)
             INNER JOIN tb_clientes USING(id_cliente)
             INNER JOIN tb_dias_pagos USING(id_dia_pago)
+            LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
             ORDER BY fecha_pago DESC;";
         return Database::getRows($sql);
     }
@@ -97,11 +103,13 @@ class PagosMensualidadHandler
                     cuotas_anuales,
                     cuotas_pendientes, 
                    estado_pago, 
-                   fecha_pago 
+                   fecha_pago,
+            nombre_metodo 
             FROM tb_pagos
             INNER JOIN tb_alumnos USING(id_alumno)
             INNER JOIN tb_clientes USING(id_cliente)
             INNER JOIN tb_dias_pagos USING(id_dia_pago)
+            LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
             WHERE YEAR(fecha_pago) = YEAR(CURDATE()) 
               AND MONTH(fecha_pago) = MONTH(CURDATE())
             ORDER BY fecha_pago DESC;";
@@ -120,11 +128,13 @@ class PagosMensualidadHandler
                     cuotas_anuales,
                     cuotas_pendientes, 
                    estado_pago, 
-                   fecha_pago 
+                   fecha_pago, 
+            nombre_metodo 
             FROM tb_pagos
             INNER JOIN tb_alumnos USING(id_alumno)
             INNER JOIN tb_clientes USING(id_cliente)
             INNER JOIN tb_dias_pagos USING(id_dia_pago)
+            LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
             WHERE YEAR(fecha_pago) = YEAR(CURDATE())
               AND MONTH(fecha_pago) = MONTH(CURDATE()) - 1
             ORDER BY fecha_pago DESC;";
@@ -143,11 +153,13 @@ class PagosMensualidadHandler
                     cuotas_anuales,
                     cuotas_pendientes, 
                    estado_pago, 
-                   fecha_pago 
+                   fecha_pago, 
+            nombre_metodo 
             FROM tb_pagos
             INNER JOIN tb_alumnos USING(id_alumno)
             INNER JOIN tb_clientes USING(id_cliente)
             INNER JOIN tb_dias_pagos USING(id_dia_pago)
+            LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
             WHERE DATE(tb_pagos.fecha_pago) = ?
             ORDER BY fecha_pago DESC;";
         $params = array($this ->fecha);

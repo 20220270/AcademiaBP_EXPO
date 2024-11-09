@@ -140,8 +140,11 @@ a.sidebar-link:hover {
 }
 
 
-.scrollable-content1 {
-    height: 530px; /* Altura fija del contenedor */
+.contenedorHorarios,
+.contenedorLugares,
+.horarios
+{
+    height: 620px; /* Altura fija del contenedor */
     overflow-y: auto; /* Habilita el desplazamiento vertical */
 }
 

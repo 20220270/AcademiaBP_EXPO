@@ -159,14 +159,12 @@
                                             <div class="mb-3 w-100">
                                                 <label for="fechaCompra" class="form-label">Filtrar pago por una fecha
                                                     específica</label>
-                                                <input type="date" id="fechaCompra" name="fechaCompra"
-                                                    class="form-control">
+                                                <input type="date" id="fechaPago" name="fechaPago" class="form-control">
                                             </div>
                                         </form>
 
                                         <!-- Botón para alternar vista -->
-                                        <button type="button" id="toggleViewBtn"
-                                            class="btn btn-dark my-3 mx-4">
+                                        <button type="button" id="toggleViewBtn" class="btn btn-dark my-3 mx-4">
                                             Ver pagos recientes
                                         </button>
                                     </div>
@@ -176,7 +174,7 @@
                                     <table class="table light-table-filter">
                                         <thead>
                                             <tr>
-                                                <td colspan="9" id="rowsFound"></td>
+                                                <td colspan="10" id="rowsFound"></td>
                                             </tr>
                                             <tr>
                                                 <th class="table-dark text-white fw-bold">ID</th>
@@ -187,7 +185,8 @@
                                                 </th>
                                                 <th class="table-dark text-white fw-bold">Días que entrena el alumno
                                                 </th>
-                                                <th class="table-dark text-white fw-bold">Mensualidad a pagar</th>
+                                                <th class="table-dark text-white fw-bold">Mensualidad pagada</th>
+                                                <th class="table-dark text-white fw-bold">Método de pago</th>
                                                 <th class="table-dark text-white fw-bold">Cuotas anuales</th>
                                                 <th class="table-dark text-white fw-bold">Cuotas pendientes</th>
                                                 <th class="table-dark text-white fw-bold">Estado de la mensualidad
@@ -249,15 +248,15 @@
                                                     class="col-md-8 offset-md-2 d-flex flex-column flex-md-row align-items-center justify-content-between mt-4">
                                                     <!-- Filtro de fecha -->
                                                     <form id="filterForm" class="mb-3 mb-md-0">
-                                                        <label for="fechaCompra" class="form-label">Filtrar boleta por una
+                                                        <label for="fechaCompra" class="form-label">Filtrar boleta por
+                                                            una
                                                             fecha específica</label>
                                                         <input type="date" id="fechaProximoPago" name="fechaProximoPago"
                                                             class="form-control">
                                                     </form>
 
                                                     <!-- Botón para alternar vista -->
-                                                    <button type="button" id="toggleViewBtn2"
-                                                        class="btn btn-dark">
+                                                    <button type="button" id="toggleViewBtn2" class="btn btn-dark">
                                                         Ver boletas recientes
                                                     </button>
                                                 </div>
@@ -378,10 +377,107 @@
 
                             </div>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-dark" id="btnGuardar"
-                                name="btnGuardar">Guardar</button>
+                            <form id="metodosForm" class="p-3">
+                                <h4 class="modal-title fs-5 text-white">Seleccione un método de pago</h4>
+
+                                <!-- Cards de métodos de pago -->
+                                <div class="row rounded border-3" id="cardsMetodos"></div>
+
+                                <input type="hidden" id="idMetodoPago" name="idMetodoPago">
+
+                                <!-- Inputs del método de pago -->
+                                <div class="text-center mb-3">
+                                    <div class="row">
+                                        <!-- Datos del pago y método de pago -->
+                                        <div class="col-sm-12 col-md-6 mb-3">
+                                            <label for="datosPago" class="col-sm-7 col-form-label">Datos del
+                                                pago</label>
+                                            <input id="datosPago" type="text" name="datosPago" class="form-control"
+                                                autocomplete="off" readonly>
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-6 mb-3">
+                                            <label for="nombreMetodo" class="col-sm-7 col-form-label">Método de
+                                                pago:</label>
+                                            <input id="nombreMetodo" type="text" name="nombreMetodo"
+                                                class="form-control" readonly autocomplete="off"
+                                                oninput="debouncedActualizarDatosPago()">
+                                        </div>
+
+                                        <!-- Inputs para tarjeta de crédito y débito -->
+                                        <div class="col-sm-12 col-md-6 mb-3">
+                                            <label for="numeroTarjeta" class="col-sm-7 col-form-label"
+                                                id="labeltarjeta">Número de tarjeta:</label>
+                                            <input id="numeroTarjeta" type="text" name="numeroTarjeta"
+                                                class="form-control" autocomplete="off"
+                                                oninput="debouncedActualizarDatosPago()">
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-6 mb-3">
+                                            <label for="nombreTarjeta" class="col-sm-7 col-form-label"
+                                                id="nombretarjeta">Nombre en tarjeta:</label>
+                                            <input id="nombreTarjeta" type="text" name="nombreTarjeta"
+                                                class="form-control" autocomplete="off"
+                                                oninput="debouncedActualizarDatosPago()">
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-6 mb-3">
+                                            <label for="mesVencimiento" class="col-sm-7 col-form-label"
+                                                id="mesvecnimientotarjeta">Mes de vencimiento:</label>
+                                            <input id="mesVencimiento" type="number" name="mesVencimiento"
+                                                class="form-control" placeholder="MM" min="1" max="12"
+                                                autocomplete="off" oninput="debouncedActualizarDatosPago()">
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-6 mb-3">
+                                            <label for="anioVencimiento" class="col-sm-7 col-form-label"
+                                                id="aniovecnimientolabeltarjeta">Año de vencimiento:</label>
+                                            <input id="anioVencimiento" type="number" name="anioVencimiento"
+                                                class="form-control" placeholder="AAAA" min="2024" autocomplete="off"
+                                                oninput="debouncedActualizarDatosPago()">
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-6 mb-3">
+                                            <label for="codigoCVV" class="col-sm-7 col-form-label"
+                                                id="cvvtarjeta">Código CVV:</label>
+                                            <input id="codigoCVV" type="number" name="codigoCVV" class="form-control"
+                                                autocomplete="off" oninput="debouncedActualizarDatosPago()">
+                                        </div>
+
+                                        <!-- PayPal: Input para correo electrónico -->
+                                        <div class="col-sm-12 col-md-6 mb-3" id="inputPayPal">
+                                            <label for="paypalCorreo" class="col-sm-7 col-form-label"
+                                                id="correoPaypal">Correo de PayPal:</label>
+                                            <input id="paypalCorreo" type="email" name="paypalCorreo"
+                                                class="form-control" autocomplete="off"
+                                                oninput="debouncedActualizarDatosPago()">
+                                        </div>
+
+                                        <!-- Transferencia Bancaria: Inputs para número de cuenta y código SWIFT/BAN -->
+                                        <div class="col-sm-12 col-md-6 mb-3" id="inputTransferencia">
+                                            <label for="numeroCuenta" class="col-sm-7 col-form-label"
+                                                id="cuentanumero">Número de cuenta:</label>
+                                            <input id="numeroCuenta" type="text" name="numeroCuenta"
+                                                class="form-control" autocomplete="off"
+                                                oninput="debouncedActualizarDatosPago()">
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-6 mb-3" id="inputSWIFT">
+                                            <label for="codigoSWIFT" class="col-sm-7 col-form-label" id="codigos">Código
+                                                SWIFT/BAN:</label>
+                                            <input id="codigoSWIFT" type="text" name="codigoSWIFT" class="form-control"
+                                                autocomplete="off" oninput="debouncedActualizarDatosPago()">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                
+                                    <button type="submit" class="btn btn-dark" id="btnGuardar"
+                                        name="btnGuardar">Guardar</button>
+
+                                
+                            </form>
 
                         </div>
                     </form>

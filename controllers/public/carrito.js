@@ -224,7 +224,7 @@ function actualizarDatosPago() {
     }
 
     // Validaciones para Transferencia
-    if (metodoPago === "Transferencia") {
+    if (metodoPago === "Transferencia bancaria") {
         if (!numeroCuenta || !codigoSWIFT) {
             document.getElementById('botonFinalizar').style.display = 'none';
             alert('Debe completar todos los campos de la transferencia.');
@@ -232,7 +232,7 @@ function actualizarDatosPago() {
         }
 
         // 7. Validación de que numeroCuenta no contenga letras
-        const cuentaRegex = /^\d+$/;
+        const cuentaRegex = /^\d+(-\d+)*$/;
         if (!cuentaRegex.test(numeroCuenta)) {
             document.getElementById('botonFinalizar').style.display = 'none';
             alert('El número de cuenta no debe contener letras.');
@@ -271,7 +271,7 @@ function actualizarDatosPago() {
     } else if (metodoPago === "PayPal") {
         inputDatosGuardados.value = datosConcatenadosPaypal;
         document.getElementById('botonFinalizar').style.display = 'block';
-    } else if (metodoPago === "Transferencia") {
+    } else if (metodoPago === "Transferencia bancaria") {
         inputDatosGuardados.value = datosConcatenadosTransferencia;
         document.getElementById('botonFinalizar').style.display = 'block';
     }
