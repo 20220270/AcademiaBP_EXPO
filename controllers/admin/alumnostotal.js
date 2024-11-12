@@ -1,5 +1,6 @@
 // Constante para completar la ruta de la API.
 const ALUMNOS_API = 'services/admin/alumnos.php';
+const COMPRA_API = 'services/admin/compras.php';
 
 const CLIENTES_API = 'services/admin/clientes.php';
 // Constante para establecer el formulario de buscar.
@@ -8,7 +9,7 @@ const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer los elementos de la tabla.
 //const TABLE_BODY = document.getElementById('tableBody'),
 //ROWS_FOUND = document.getElementById('rowsFound');
-
+const ALUMNOS_FORM = document.getElementById('alumnosForm');
 const CARD_ALUMNOS = document.getElementById('cardsAlumnos');
 const CARD_ALUMNOS2 = document.getElementById('cardsAlumnos2');
 //CARD_CATEGORIAS = document.getElementById('cardCategorias');
@@ -167,6 +168,10 @@ const fillTable = async (form = null) => {
                         <button type="button" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="verDatosAlumno(${row.id_alumno}, '${row.nombre}')" title="Ver datos del alumno ${row.nombre}">
                             <img src="../../resources/images/btnDetalles.png" alt="Ver datos" width="30px" height="30px" class="mb-1">
                         </button>
+                        <button type="button" class="btn mt-1" data-id="${row.id_alumno}" onclick="submitForm(${row.id_alumno})" title="Iniciar compra. Alumno: ${row.nombre}">
+                            <img src="../../resources/images/iniciarcompra.png" width="30px" height="30px" class="mb-1">
+                        </button>
+
                     </div>
                 </div>
             </div>
@@ -177,6 +182,30 @@ const fillTable = async (form = null) => {
         sweetAlert(4, DATA.error, true);
     }
 }
+
+async function submitForm(id_alumno) {
+    // Mostrar un mensaje de confirmación y capturar la respuesta
+    const RESPONSE = await confirmAction('¿Está seguro de iniciar una compra?');
+    
+    // Verificar la respuesta del mensaje
+    if (RESPONSE) {
+        // Constante tipo objeto con los datos del formulario
+        const FORM = new FormData(ALUMNOS_FORM);
+        // Añadir el ID del alumno al formulario
+        FORM.append('idAlumno', id_alumno);
+        
+        // Petición para iniciar la compra
+        const DATA = await fetchData(COMPRA_API, 'startOrder2', FORM);
+        
+        // Comprobar si la respuesta es satisfactoria, de lo contrario mostrar un mensaje con la excepción
+        if (DATA.status) {
+            sweetAlert(1, DATA.message, true);
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    }
+}
+
 
 //Función para mostrar datos dentro de una modal
 const verDatosAlumno = async (id, nombre) => {

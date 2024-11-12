@@ -168,6 +168,43 @@ const fillSelect2 = async (filename, action, select, selected = null) => {
     document.getElementById(select).innerHTML = content;
 };
 
+const fillSelect3 = async (filename, action, select, selected = null) => {
+    const DATA = await fetchData(filename, action);
+    let content = '';
+
+    if (DATA.status) {
+        content += '<option value="" selected>Seleccione una opción</option>';
+
+        DATA.dataset.forEach(row => {
+            const value = row.id_detalle_producto;
+            const productInfo = row.datoproducto;
+
+            // Extract color from the product info (e.g., Color 000000)
+            const colorMatch = productInfo.match(/Color\s([a-fA-F0-9]{6})/);
+            const colorHex = colorMatch ? `#${colorMatch[1]}` : '#FFFFFF';
+
+            // Calculate contrasting text color
+            const textColor = getContrastingTextColor(colorHex);
+
+            // Remove the color text from the product info to display only the product name and size
+            const displayText = productInfo.replace(/, Color [a-fA-F0-9]{6}/, '');
+
+            // Create an option with background color
+            content += `
+                <option value="${value}" style="background-color: ${colorHex}; color: ${textColor};">
+                    ${displayText}
+                </option>`;
+        });
+    } else {
+        content += '<option>No hay opciones disponibles</option>';
+    }
+
+    document.getElementById(select).innerHTML = content;
+};
+
+
+
+
 // Función para determinar un color de texto que contraste con el fondo
 function getContrastingTextColor(hex) {
     // Verifica que hex sea una cadena válida

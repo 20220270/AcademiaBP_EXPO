@@ -90,6 +90,16 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al modificar el dato';
                 }
                 break;
+
+            case 'updateEstado': // Nueva acción para actualizar mensajes de "Pendiente" a "Visto"
+                if ($soporte->updateEstado()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Todos los mensajes pendientes se han marcado como vistos';
+                } else {
+                    $result['error'] = 'No se pudieron actualizar los mensajes';
+                }
+                break;
+                
             case 'deleteRow':
                 if (
                     !$soporte->setIdSoporte($_POST['idSoporte'])

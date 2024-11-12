@@ -25,8 +25,83 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+            case 'startOrder2':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$ordenes->setIdAlumno($_POST['idAlumno'])
+                ) {
+                    $result['error'] = $ordenes->getDataError();
+                } else {
+                    try {
+                        if ($ordenes->startOrder2()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Compra iniciado con éxito';
+                        } else {
+                            $result['error'] = 'No se pudo iniciar la compra';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al registrar la compra: ' . $e->getMessage();
+                    }
+                }
+                break;
+
+            case 'createDetail2':
+                $_POST = Validator::validateForm($_POST);
+                if (
+
+                    !$ordenes->setIdDetalle($_POST['idDetalleSelect']) or
+                    !$ordenes->setCantidad($_POST['cantidadProducto']) or
+                    !$ordenes->setPersonalizacion($_POST['datosPersonalizacion']) or
+                    !$ordenes->setIdOrden($_POST['idCompraSelect'])
+                ) {
+                    $result['error'] = $ordenes->getDataError();
+                } elseif ($ordenes->createDetail2()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Producto agregado correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al agregar el producto';
+                    $result['exception'] = 'Se ha ingresado una cantidad mayor a las existencias disponibles';
+                }
+                break;
+
             case 'readAll':
                 if ($result['dataset'] = $ordenes->readAll()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen compras registradas';
+                }
+                break;
+                
+            case 'readCompras':
+                if ($result['dataset'] = $ordenes->readCompras()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen compras registradas';
+                }
+                break;
+
+            case 'finishOrder2':
+                $_POST = Validator::validateForm($_POST); // Validar los datos de entrada
+
+                // Verificar que se puedan establecer los métodos de pago e información de pago
+                if (
+                    !$ordenes->setIdOrden($_POST['idPago']) ||
+                    !$ordenes->setIdMetodo($_POST['idMetodoPago']) ||
+                    !$ordenes->setInformacion($_POST['datosPago'])
+                ) {
+                    $result['error'] = $ordenes->getDataError(); // Obtener el error si no se pueden establecer
+                } elseif ($ordenes->finishOrder2()) { // Llamar al método para finalizar la orden
+                    $result['status'] = 1; // Indicar éxito
+                    $result['message'] = 'Compra finalizada correctamente'; // Mensaje de éxito
+                } else {
+                    $result['error'] = 'Ocurrió un problema al finalizar la compra'; // Mensaje de error
+                }
+                break;
+
+            case 'readAllCompraNueva':
+                if ($result['dataset'] = $ordenes->readAllCompraNueva()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {

@@ -61,6 +61,16 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen detalles asignados a productos';
                 }
                 break;
+
+            case 'readDetalles':
+                if ($result['dataset'] = $detalleproducto->readDetalles()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen detalles asignados a productos';
+                }
+                break;
+
             case 'readAllMayorMenor':
                 if ($result['dataset'] = $detalleproducto->readAllMayorMenor()) {
                     $result['status'] = 1;

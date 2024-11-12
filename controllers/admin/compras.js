@@ -1,5 +1,7 @@
 const COMPRAS_API = 'services/admin/compras.php';
 const PRODUCTOS_API = 'services/admin/productos.php';
+const DETALLEPRODUCTOS_API = 'services/admin/detallesproductos.php';
+const METODOS_API = 'services/admin/metodospagos.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
 const FILTER_FORM = document.getElementById('filterForm');
@@ -24,6 +26,16 @@ const PRECIO_PRODUCTO = document.getElementById('precioProductoDetalle');
 const CANTIDAD_PRODUCTO = document.getElementById('cantidadProductoDetalle');
 const TOTAL_PAGADO = document.getElementById('TotalPagadoProductoDetalle');
 const FECHA_FILTRO = document.getElementById('fechaCompra');
+
+const MODAL_COMPRA = new bootstrap.Modal('#modalCompletarCompra');
+const COMPRA_FORM = document.getElementById('saveFormCompra');
+const MODAL_TITLE2 = document.getElementById('modalTitle2');
+
+const MODAL_METODOS = new bootstrap.Modal('#modalMetodos');
+const METODOS_FORM = document.getElementById('metodosForm');
+const MODAL_TITLE3 = document.getElementById('modalTitle3');
+const METODOS_CARDS = document.getElementById('cardsMetodos');
+const COMPRA_SELECT = document.getElementById('cardsMetodos');
 
 // Variable para rastrear la vista actual
 let isUsingReadAll2 = false;
@@ -142,10 +154,356 @@ const fillTable = async (form = null) => {
 };
 
 
+const fillTable2 = async (form = null) => {
+    // Inicializa el contenido de las cards.
+    METODOS_CARDS.innerHTML = '';
+    // Verifica la acción a realizar.
+    const action = (form) ? 'searchRows' : 'readAll';
+    // Petición para obtener los registros disponibles.
+    const DATA = await fetchData(METODOS_API, action, form);
+    // Comprueba si la respuesta es satisfactoria, de lo contrario muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Crea y concatena las cards con los datos de cada registro.
+            METODOS_CARDS.innerHTML += `
+                <div class="col-12 col-md-12 col-lg-6 mt-3 mb-3 mx-auto" >
+                    <div class="card h-100" data-id-metodo="${row.id_metodo_pago}">
+                        <div class="row mb-5 mt-2 mx-auto" onclick="seleccionarMetodoPago(${row.id_metodo_pago}, '${row.nombre_metodo}')">
+                            <div class="col-3">
+                                <div class="mt-4"><img src="${SERVER_URL}images/metodospagos/${row.imagen_metodo}" class="card-img-top"></div>
+                            </div>
+                            <div class="col-8 mt-3">
+                                <div class="card-body text-start">
+                                    <h5 class="card-title fs-3 mb-2"> ${row.nombre_metodo}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    } else {
+        sweetAlert(4, DATA.error, true);
+    }
+}
+
+const openCreate = () => {
+    // Se muestra la caja de diálogo con su título.
+    MODAL_COMPRA.show();
+    MODAL_TITLE2.textContent = 'Continuar compra';
+    // Se prepara el formulario.
+    COMPRA_FORM.reset();
+
+    fillSelect(COMPRAS_API, 'readAllCompraNueva', 'idCompraSelect');
+    fillSelect3(DETALLEPRODUCTOS_API, 'readDetalles', 'idDetalleSelect');
+}
+
+const openCreate2 = () => {
+    // Se muestra la caja de diálogo con su título.
+    MODAL_METODOS.show();
+    MODAL_TITLE3.textContent = 'Completar compra';
+    // Se prepara el formulario.
+    METODOS_FORM.reset();
+    fillSelect(COMPRAS_API, 'readCompras', 'idPago');
+    fillTable2();
+
+    mostrarInputs();
+
+}
+
+function mostrarInputs() {
+    const metodoPago = document.getElementById('nombreMetodo').value;
+
+    // Ocultar todos los inputs inicialmente
+    document.getElementById('numeroTarjeta').style.display = 'none';
+    document.getElementById('nombreTarjeta').style.display = 'none';
+    document.getElementById('mesVencimiento').style.display = 'none';
+    document.getElementById('anioVencimiento').style.display = 'none';
+    document.getElementById('codigoCVV').style.display = 'none';
+    document.getElementById('inputPayPal').style.display = 'none';
+    document.getElementById('inputTransferencia').style.display = 'none';
+    document.getElementById('inputSWIFT').style.display = 'none';
+
+    document.getElementById('labeltarjeta').style.display = 'none';
+    document.getElementById('nombretarjeta').style.display = 'none';
+    document.getElementById('mesvecnimientotarjeta').style.display = 'none';
+    document.getElementById('aniovecnimientolabeltarjeta').style.display = 'none';
+    document.getElementById('cvvtarjeta').style.display = 'none';
+    document.getElementById('correoPaypal').style.display = 'none';
+    document.getElementById('cuentanumero').style.display = 'none';
+    document.getElementById('codigos').style.display = 'none';
+    document.getElementById('botonFinalizar').style.display = 'none';
+
+    // Mostrar los inputs según el método de pago seleccionado
+    if (metodoPago === "Tarjeta de crédito" || metodoPago === "Tarjeta de débito") {
+        document.getElementById('numeroTarjeta').style.display = 'block';
+        document.getElementById('nombreTarjeta').style.display = 'block';
+        document.getElementById('mesVencimiento').style.display = 'block';
+        document.getElementById('anioVencimiento').style.display = 'block';
+        document.getElementById('codigoCVV').style.display = 'block';
+        document.getElementById('labeltarjeta').style.display = 'block';
+        document.getElementById('nombretarjeta').style.display = 'block';
+        document.getElementById('mesvecnimientotarjeta').style.display = 'block';
+        document.getElementById('aniovecnimientolabeltarjeta').style.display = 'block';
+        document.getElementById('cvvtarjeta').style.display = 'block';
+    } else if (metodoPago === "PayPal") {
+        document.getElementById('inputPayPal').style.display = 'block';
+        document.getElementById('correoPaypal').style.display = 'block';
+    } else if (metodoPago === "Transferencia bancaria") {
+        document.getElementById('inputTransferencia').style.display = 'block';
+        document.getElementById('inputSWIFT').style.display = 'block';
+        document.getElementById('cuentanumero').style.display = 'block';
+        document.getElementById('codigos').style.display = 'block';
+    }
+}
+
+
+
+function seleccionarMetodoPago(id_metodo_pago, nombre_metodo) {
+    // Asignar el id_metodo_pago y el nombre_metodo a los inputs ocultos
+    document.getElementById('idMetodoPago').value = id_metodo_pago;
+    document.getElementById('nombreMetodo').value = nombre_metodo;
+
+    // Obtener todos los elementos que tengan la clase 'selected'
+    const elementosSeleccionados = document.querySelectorAll('.selected');
+
+    // Remover la clase 'selected' de los elementos previamente seleccionados
+    elementosSeleccionados.forEach(elemento => {
+        elemento.classList.remove('selected');
+    });
+
+    // Añadir la clase 'selected' al elemento seleccionado
+    const metodoSeleccionado = document.querySelector(`[data-id-metodo="${id_metodo_pago}"]`);
+    metodoSeleccionado.classList.add('selected');
+
+    mostrarInputs();
+}
+
+//Función para esperar un cambio en los inputs para ejecutar la función actualizarPago
+function debounce(func, timeout = 300) {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            func.apply(this, args);
+        }, timeout);
+    };
+}
+
+function actualizarDatosPago() {
+    // Obtén los valores de los inputs
+    const metodoPago = document.getElementById('nombreMetodo').value;
+    const numeroTarjeta = document.getElementById('numeroTarjeta').value;
+    const nombreTarjeta = document.getElementById('nombreTarjeta').value;
+    const mesVencimiento = document.getElementById('mesVencimiento').value;
+    const anioVencimiento = document.getElementById('anioVencimiento').value;
+    const codigoCVV = document.getElementById('codigoCVV').value;
+    const correoPaypal = document.getElementById('paypalCorreo').value;
+    const numeroCuenta = document.getElementById('numeroCuenta').value;
+    const codigoSWIFT = document.getElementById('codigoSWIFT').value;
+
+    // Validaciones generales
+    if (!metodoPago) {
+        alert('Debe seleccionar un método de pago.');
+        return;
+    }
+
+    // Validaciones para Tarjeta
+    if (metodoPago === "Tarjeta de crédito" || metodoPago === "Tarjeta de débito") {
+        if (!numeroTarjeta || !nombreTarjeta || !mesVencimiento || !anioVencimiento || !codigoCVV) {
+            document.getElementById('botonFinalizar').style.display = 'none';
+            alert('Debe completar todos los campos de la tarjeta.');
+            return;
+        }
+
+        // 2. Validación máscara número de tarjeta: 0000-0000-0000-0000
+        const tarjetaRegex = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
+        if (!tarjetaRegex.test(numeroTarjeta)) {
+            document.getElementById('botonFinalizar').style.display = 'none';
+            alert('El número de tarjeta debe tener el formato 0000-0000-0000-0000.');
+            document.getElementById('numeroTarjeta').value = ''; // Limpia el campo si no es válido
+            return;
+        }
+
+        // 3. Validación de nombreTarjeta no debe contener números
+        const nombreRegex = /^[a-zA-Z\s]+$/;
+        if (!nombreRegex.test(nombreTarjeta)) {
+            document.getElementById('botonFinalizar').style.display = 'none';
+            alert('El nombre de la tarjeta no debe contener números.');
+            document.getElementById('nombreTarjeta').value = ''; // Limpia el campo si no es válido
+            return;
+        }
+
+        // 4. Validación del mes de vencimiento entre 1 y 12
+        if (mesVencimiento < 1 || mesVencimiento > 12) {
+            document.getElementById('botonFinalizar').style.display = 'none';
+            alert('El mes de vencimiento debe estar entre 1 y 12.');
+            document.getElementById('mesVencimiento').value = ''; // Limpia el campo si no es válido
+            return;
+        }
+
+        // 5. Comparación del mes y año de vencimiento con la fecha actual
+        const fechaActual = new Date();
+        const mesActual = fechaActual.getMonth() + 1; // Los meses en JavaScript son de 0 a 11
+        const anioActual = fechaActual.getFullYear();
+
+        if (anioVencimiento < anioActual || (anioVencimiento == anioActual && mesVencimiento < mesActual)) {
+            alert('Tarjeta vencida.');
+            document.getElementById('botonFinalizar').style.display = 'none';
+            document.getElementById('mesVencimiento').value = ''; // Limpia mes de vencimiento
+            document.getElementById('anioVencimiento').value = ''; // Limpia año de vencimiento
+            return;
+        }
+
+        // 6. Validación del código CVV de 3 dígitos
+        const cvvRegex = /^\d{3}$/;
+        if (!cvvRegex.test(codigoCVV)) {
+            document.getElementById('botonFinalizar').style.display = 'none';
+            alert('El código CVV debe tener exactamente 3 dígitos.');
+            document.getElementById('codigoCVV').value = ''; // Limpia el campo si no es válido
+            return;
+        }
+    }
+
+    if (metodoPago === "PayPal") {
+        // Validación de correo en formato válido
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!correoPaypal || !emailRegex.test(correoPaypal)) {
+            document.getElementById('botonFinalizar').style.display = 'none';
+            alert('Debe ingresar un correo de PayPal válido.');
+            document.getElementById('paypalCorreo').value = ''; // Limpia el campo si no es válido
+            return;
+        }
+    }
+
+    // Validaciones para Transferencia
+    if (metodoPago === "Transferencia bancaria") {
+        if (!numeroCuenta || !codigoSWIFT) {
+            document.getElementById('botonFinalizar').style.display = 'none';
+            alert('Debe completar todos los campos de la transferencia.');
+            return;
+        }
+
+        // 7. Validación de que numeroCuenta no contenga letras
+        const cuentaRegex = /^\d+(-\d+)*$/;
+        if (!cuentaRegex.test(numeroCuenta)) {
+            document.getElementById('botonFinalizar').style.display = 'none';
+            alert('El número de cuenta no debe contener letras.');
+            document.getElementById('numeroCuenta').value = ''; // Limpia el campo si no es válido
+            return;
+        }
+
+        // 8. Validación de longitud del código SWIFT entre 8 y 11 caracteres
+        if (codigoSWIFT.length < 8 || codigoSWIFT.length > 11) {
+            document.getElementById('botonFinalizar').style.display = 'none';
+            alert('El código SWIFT debe tener entre 8 y 11 caracteres.');
+            document.getElementById('codigoSWIFT').value = ''; // Limpia el campo si no es válido
+            return;
+        }
+    }
+
+    // Validaciones para PayPal
+    if (metodoPago === "PayPal" && !correoPaypal) {
+        alert('Debe ingresar un correo de PayPal.');
+        return;
+    }
+
+    // Concatenación de datos
+    const datosConcatenadosTarjeta = `${metodoPago}, ${numeroTarjeta}, ${nombreTarjeta}, ${mesVencimiento}, ${anioVencimiento}, ${codigoCVV}`;
+    const datosConcatenadosPaypal = `${metodoPago}, ${correoPaypal}`;
+    const datosConcatenadosTransferencia = `${metodoPago}, ${numeroCuenta}, ${codigoSWIFT}`;
+
+    // Selección de la variable donde se guardarán los datos dependiendo del método de pago
+    const inputDatosGuardados = document.getElementById('datosPago');
+
+    // Lógica para seleccionar qué datos guardar según el método de pago
+    //El botón se mostrará hasta que todas las validaciones de confirmen
+    if (metodoPago === "Tarjeta de crédito" || metodoPago === "Tarjeta de débito") {
+        inputDatosGuardados.value = datosConcatenadosTarjeta;
+        document.getElementById('botonFinalizar').style.display = 'block'; 
+    } else if (metodoPago === "PayPal") {
+        inputDatosGuardados.value = datosConcatenadosPaypal;
+        document.getElementById('botonFinalizar').style.display = 'block';
+    } else if (metodoPago === "Transferencia bancaria") {
+        inputDatosGuardados.value = datosConcatenadosTransferencia;
+        document.getElementById('botonFinalizar').style.display = 'block';
+    }
+}
+// Crear una versión "debounced" de actualizarDatosPago
+const debouncedActualizarDatosPago = debounce(actualizarDatosPago, 1000); // Espera 3000ms de inactividad
+
+
+async function finishOrder2() {
+
+    const idPago = document.getElementById('idPago').value
+    const idMetodoPago = document.getElementById('idMetodoPago').value
+    const datosPago = document.getElementById('datosPago').value
+
+     // Mostrar un mensaje de confirmación y capturar la respuesta
+    const RESPONSE = await confirmAction('¿Está seguro de finalizar la compra?');
+    // Verificar la respuesta del mensaje
+    if (RESPONSE) {
+        // Constante tipo objeto con los datos del formulario
+        const FORM = new FormData(METODOS_FORM);
+        // Añadir el ID del alumno al formulario
+        FORM.append('idPago', idPago);
+        FORM.append('idMetodoPago', idMetodoPago);
+        FORM.append('datosPago', datosPago);
+        
+        // Petición para actualizar los datos personales del usuario
+        const DATA = await fetchData(COMPRAS_API, 'finishOrder2', FORM);
+        // Comprobar si la respuesta es satisfactoria, de lo contrario mostrar un mensaje con la excepción
+        if (DATA.status) {
+            sweetAlert(1, DATA.message, true);
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    }
+}
+
+
+// Añadir evento al botón de guardar
+document.getElementById("btnGuardar").addEventListener("click", async (event) => {
+    event.preventDefault(); // Prevenir el envío automático del formulario
+
+    // Capturar los valores de los campos de entrada
+    const idCompra = document.getElementById("idCompraSelect").value;
+    const idDetalle = document.getElementById("idDetalleSelect").value;
+    const cantidad = document.getElementById("cantidadProducto").value;
+    const personalizacion = document.getElementById("datosPersonalizacion").value;
+
+    // Mostrar un mensaje de confirmación y capturar la respuesta
+    const RESPONSE = await confirmAction('¿Está seguro de continuar la compra?');
+    
+    // Verificar la respuesta del mensaje
+    if (RESPONSE) {
+        // Crear un objeto FormData con los datos del formulario
+        const FORM = new FormData();
+        FORM.append('idCompraSelect', idCompra);
+        FORM.append('idDetalleSelect', idDetalle);
+        FORM.append('cantidadProducto', cantidad);
+        FORM.append('datosPersonalizacion', personalizacion);
+        
+        // Petición para iniciar la compra
+        const DATA = await fetchData(COMPRAS_API, 'createDetail2', FORM);
+        
+        // Comprobar si la respuesta es satisfactoria, de lo contrario mostrar un mensaje con la excepción
+        if (DATA.status) {
+            sweetAlert(1, DATA.message, true);
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    }
+});
+
+
+
 const openUpdate = async (id) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idCompra', id);
+    console.log(id)
     // Petición para obtener los datos del registro solicitado.
     const DATA = await fetchData(COMPRAS_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -273,269 +631,3 @@ const openReport2 = () => {
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }
-
-
-
-//Código anterior
-
-/**
- * const COMPRAS_API = 'services/admin/compras.php';
-const PRODUCTOS_API = 'services/admin/productos.php';
-// Constante para establecer el formulario de buscar.
-const SEARCH_FORM = document.getElementById('searchForm');
-// Constantes para establecer los elementos de la tabla.
-const TABLE_BODY = document.getElementById('tableBody'),
-    ROWS_FOUND = document.getElementById('rowsFound');
-// Constantes para establecer los elementos del componente Modal.
-const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
-    MODAL_TITLE = document.getElementById('modalTitle');
-// Constantes para establecer los elementos del formulario de guardar.
-const SAVE_FORM = document.getElementById('saveForm'),
-    ID_COMPRA = document.getElementById('idCompra'),
-    ESTADO_COMPRA = document.getElementById('selectEstadoOrden');
-// Constantes para establecer los elementos del formulario del detalle.
-const DETALLE_FORM = new bootstrap.Modal('#detailModal'),
-    DETAIL_FORM = document.getElementById('detailForm')
-    const TABLE_BODY2 = document.getElementById('tableBody2'),
-    ROWS_FOUND2 = document.getElementById('rowsFound2');
-    ID_DETALLE = document.getElementById('idDetalle'),
-    MODAL_TITLED = document.getElementById('modalTitleD');
-    IMAGEN_PRODUCTO = document.getElementById('imagenProductoDetalle');
-    NOMBRE_PRODUCTO = document.getElementById('nombreProductoDetalle'),
-    PRECIO_PRODUCTO = document.getElementById('precioProductoDetalle'),
-    CANTIDAD_PRODUCTO = document.getElementById('cantidadProductoDetalle'),
-    TOTAL_PAGADO = document.getElementById('TotalPagadoProductoDetalle');
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Llamada a la función para mostrar el encabezado y pie del documento.
-    loadTemplate();
-    // Se establece el título del contenido principal.
-    //MAIN_TITLE.textContent = 'Gestionar categorías';
-    // Llamada a la función para llenar la tabla con los registros existentes.
-    fillTable();
-});
-
-// Método del evento para cuando se envía el formulario de buscar.
-SEARCH_FORM.addEventListener('submit', (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
-    event.preventDefault();
-    // Constante tipo objeto con los datos del formulario.
-    const FORM = new FormData(SEARCH_FORM);
-    // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
-    fillTable(FORM);
-});
-
-// Método del evento para cuando se envía el formulario de guardar.
-SAVE_FORM.addEventListener('submit', async (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
-    event.preventDefault();
-    // Se verifica la acción a realizar.
-    (ID_COMPRA.value) ? action = 'updateRow' : action = 'createRow';
-    // Constante tipo objeto con los datos del formulario.
-    const FORM = new FormData(SAVE_FORM);
-    // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(COMPRAS_API, action, FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        // Se cierra la caja de diálogo.
-        SAVE_MODAL.hide();
-        // Se muestra un mensaje de éxito.
-        sweetAlert(1, DATA.message, true);
-        // Se carga nuevamente la tabla para visualizar los cambios.
-        fillTable();
-    } else {
-        sweetAlert(2, DATA.error, false);
-    }
-});
-
-const fillTable = async (form = null) => {
-    // Se inicializa el contenido de la tabla.
-    ROWS_FOUND.textContent = '';
-    TABLE_BODY.innerHTML = '';
-    // Se verifica la acción a realizar.
-    (form) ? action = 'searchRows' : action = 'readAll';
-    // Petición para obtener los registros disponibles.
-    const DATA = await fetchData(COMPRAS_API, action, form);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        // Se recorre el conjunto de registros fila por fila.
-        DATA.dataset.forEach(row => {
-            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-            TABLE_BODY.innerHTML += 
-              <tr>
-                  <td>${row.id_compra}</td>
-                  <td>${row.nombre_completo}</td>
-                  <td>${row.direccion_compra}</td>
-                  <td>${row.fecha_registro}</td>
-                  <td>${row.estado_compra}</td>
-                  <td>
-                      
-
-                    
-                    <button type="submit" class="btn mt-1" id="btnEliminar" name="btnEliminar" onclick="openDelete(${row.id_compra})">
-                        
-                        <img src="../../resources/images/btnEliminarIMG.png" alt="" width="30px" height="30px"
-                            class="mb-1">
-
-                    </button>
-                    <button type="submit" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openUpdate(${row.id_compra})">
-                        
-                        <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px"
-                            class="mb-1">
-                    </button>
-
-                    <button type="submit" class="btn mt-1" id="btnDetalles" name="btnDetalles" onclick="openDetail(${row.id_compra})">
-                    
-                    <img src="../../resources/images/btnDetalles.png" alt="" width="30px" height="30px"
-                        class="mb-1">
-                    </button>
-
-                    <button type="submit" class="btn mt-1" id="btnDetalles" name="btnDetalles" onclick="openReport(${row.id_compra})">
-                    
-                    <img src="../../resources/images/report.png" alt="" width="30px" height="30px"
-                        class="mb-1">
-                    </button>
-
-                  </td>
-              </tr>
-          ;
-        });
-        // Se muestra un mensaje de acuerdo con el resultado.
-        ROWS_FOUND.textContent = DATA.message;
-    } else {
-        sweetAlert(4, DATA.error, true);
-    }
-}
-
-const openUpdate = async (id) => {
-    // Se define una constante tipo objeto con los datos del registro seleccionado.
-    const FORM = new FormData();
-    FORM.append('idCompra', id);
-    // Petición para obtener los datos del registro solicitado.
-    const DATA = await fetchData(COMPRAS_API, 'readOne', FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        // Se muestra la caja de diálogo con su título.
-        SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar estado de la compra';
-        // Se prepara el formulario.
-        SAVE_FORM.reset();
-        // Se inicializan los campos con los datos.
-        const ROW = DATA.dataset;
-        ID_COMPRA.value = ROW.id_compra;
-        ESTADO_COMPRA.value = ROW.estado_compra;
-
-    } else {
-        sweetAlert(2, DATA.error, false);
-    }
-}
-
-//Metodo para visualizar el detalle de cada orden
-const openDetail = async (id) => {
-    ROWS_FOUND2.textContent = '';
-    TABLE_BODY2.innerHTML = '';
-    // Se define una constante tipo objeto con los datos del registro seleccionado.
-    const FORM = new FormData();
-    FORM.append('idCompra', id);
-    // Petición para obtener los datos del registro solicitado.
-    const DATA = await fetchData(COMPRAS_API, 'readDetails', FORM);
-
-    //Variable para calcular el total de la compra a partir de los sub totales
-    let totalCompra = 0;
-
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        if (DATA.status) {
-            // Se recorre el conjunto de registros fila por fila.
-            DATA.dataset.forEach(row => {
-                // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-                TABLE_BODY2.innerHTML += 
-                  <tr>
-                      <td>${row.id_detalle_compra}</td>
-                      <td><img src="${SERVER_URL}images/productos/${row.imagen_producto}" alt="..." width="200px" height="200px" name="imagenProductoDetalle"
-                      id="imagenProductoDetalle"></td>
-                      <td>${row.nombre_producto}</td>
-                      <td>$${row.precio_producto}</td>
-                      <td>${row.cantidad_producto}</td>
-                      <td>${row.descuento_producto}%</td>
-                      <td>$${row.SubtotalConDescuento}</td>
-                      
-                  </tr>
-              ;
-
-              totalCompra += parseFloat(row.SubtotalConDescuento);
-            });
-            // Se muestra un mensaje de acuerdo con el resultado.
-            ROWS_FOUND.textContent = DATA.message;
-        } else {
-            sweetAlert(4, DATA.error, true);
-        }
-
-        TABLE_BODY2.innerHTML += 
-                  <tr>
-                    <td colspan="6" class="bg-dark text-white fw-bold">Total de la compra</td>
-                    <td class="bg-dark text-white fw-bold">$${totalCompra.toFixed(2)}</td>
-                </tr>
-              
-        
-        // Se muestra la caja de diálogo con su título.
-        DETALLE_FORM.show();
-        MODAL_TITLED.textContent = 'Detalles del pedido';
-
-        
-        // Se prepara el formulario.
-        DETAIL_FORM.reset();
-        // Se inicializan los campos con los datos.
-        const ROW = DATA.dataset;
-        ID_DETALLE.value = ROW.id_detalle_compra;
-        
-    } else {
-        sweetAlert(2, DATA.error, false);
-    }
-}
-
-/*
-*   Función asíncrona para eliminar un registro.
-*   Parámetros: id (identificador del registro seleccionado).
-*   Retorno: ninguno.
-
-const openDelete = async (id) => {
-    // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar este detalle de forma permanente?');
-    // Se verifica la respuesta del mensaje.
-    if (RESPONSE) {
-        // Se define una constante tipo objeto con los datos del registro seleccionado.
-        const FORM = new FormData();
-        FORM.append('idCompra', id);
-        // Petición para eliminar el registro seleccionado.
-        const DATA = await fetchData(COMPRAS_API, 'deleteRow', FORM);
-        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-        if (DATA.status) {
-            // Se muestra un mensaje de éxito.
-            await sweetAlert(1, DATA.message, true);
-            // Se carga nuevamente la tabla para visualizar los cambios.
-            fillTable();
-        } else {
-            sweetAlert(2, DATA.error, false);
-        }
-    }
-}
-
-const openReport = (id) => {
-    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(${SERVER_URL}reports/admin/compra_productos.php);
-    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
-    PATH.searchParams.append('idCompra', id);
-    // Se abre el reporte en una nueva pestaña.
-    window.open(PATH.href);
-}
-
-
-const openReport2 = () => {
-    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(${SERVER_URL}reports/admin/prediccion_productos_ventas.php);
-    // Se abre el reporte en una nueva pestaña.
-    window.open(PATH.href);
-}
- */

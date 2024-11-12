@@ -91,6 +91,17 @@ class SoporteTecnicoHandler
         return Database::getRow($sql, $params);
     }
 
+    public function updateEstado()
+    {
+        $this->estado = 'Visto';
+        $sql = 'UPDATE tb_soporte_tecnico
+            SET estado_mensaje = ?
+            WHERE estado_mensaje = "Pendiente"';
+        $params = array($this->estado);
+        return Database::executeRow($sql, $params);
+    }
+
+
     public function updateRow()
     {
         $sql = 'UPDATE tb_soporte_tecnico

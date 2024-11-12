@@ -51,7 +51,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         fillTable();
     })
+
+    setTimeout(async () => {
+        await updateEstado();
+    }, 1000); // 7000 milisegundos = 7 segundos
 });
+
+const updateEstado = async () => {
+    try {
+        // Define la acción que se va a realizar
+        const action = 'updateEstado'; // Asume que esta acción actualiza el estado
+        // Crea un objeto FormData vacío si no necesitas enviar datos específicos
+        const FORM = new FormData();
+        
+        // Petición para ejecutar la acción updateRow en la API
+        const DATA = await fetchData(SOPORTE_API, action, FORM);
+        
+        // Verifica si la respuesta es satisfactoria
+        if (DATA.status) {
+            // Recarga la tabla para reflejar los cambios
+            fillTable();
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    } catch (error) {
+        console.error('Error en la función updateEstado:', error);
+        sweetAlert(2, 'Error al actualizar el estado de los mensajes', false);
+    }
+};
 
 
 SEARCH_FORM.addEventListener('submit', (event) => {

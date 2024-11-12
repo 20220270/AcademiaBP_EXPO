@@ -132,4 +132,14 @@ class DetalleProductoHandler
         id_color;";
         return Database::getRows($sql);
     }
+
+    public function readDetalles()
+    {
+        $sql = "SELECT id_detalle_producto,
+                CONCAT(nombre_producto, ', Color ', color, ', Talla ', talla) AS datoproducto FROM tb_detalleproducto
+                INNER JOIN tb_productos USING (id_producto)
+                INNER JOIN tb_colores USING (id_color)
+                INNER JOIN tb_tallas USING (id_talla);";
+        return Database::getRows($sql);
+    }
 }

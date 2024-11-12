@@ -43,7 +43,8 @@
                             </div>
                         </form>
 
-                        <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openReport2()" title="Generar reporte predictivo de ventas">
+                        <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openReport2()"
+                            title="Generar reporte predictivo de ventas">
                             <img src="../../resources/images/reporteee.png" alt="buttonpng" width="50rem"
                                 height="50rem" />
                         </button>
@@ -58,14 +59,25 @@
                                     <button id="toggleViewBtn" class="btn btn-dark">Filtrar por fecha de la
                                         compra</button>
                                     <!-- Este input estará inicialmente oculto -->
-
+                                    <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate()"
+                                        title="Continuar compra">
+                                        <img src="../../resources/images/iniciarcompra.png" alt="buttonpng"
+                                            width="60rem" />
+                                    </button>
+                                    <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate2()"
+                                        title="Pagar compra">
+                                        <img src="../../resources/images/finalizarcompra.png" alt="buttonpng"
+                                            width="60rem" />
+                                    </button>
                                     <form class="d-flex flex-column flex-grow-1" id="filterForm">
+
                                         <div class="mb-3">
-                                            <label for="fechaCompra" class="form-label">Filtrar por una fecha específica</label>
+                                            <label for="fechaCompra" class="form-label">Filtrar por una fecha
+                                                específica</label>
                                             <input type="date" id="fechaCompra" name="fechaCompra" class="form-control">
                                         </div>
                                     </form>
-                                    
+
 
                                 </div>
                                 <tr>
@@ -164,6 +176,173 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
                         </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalCompletarCompra" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Encabezado de la ventana modal -->
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title fs-3 w-100 text-center" id="modalTitle2">Completar compra</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Contenido de la ventana modal -->
+                    <form id="saveFormCompra">
+                        <div class="modal-body row g-4">
+
+                            <div class="col col-lg-6 text-start">
+                                <!-- campo del nombre producto -->
+                                <label for="DiaEntreno" id="DiaEntreno">Persona de la orden:</label>
+                                <select class="form-select" aria-label="Default select example" name="idCompraSelect"
+                                    id="idCompraSelect" required>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="Categoria" class="col-sm-7">Producto a adquirir:</label>
+                                <select class="form-select" id="idDetalleSelect" name="idDetalleSelect"
+                                    aria-label="Default select example">
+
+                                </select>
+                            </div>
+
+                            <div class="col col-lg-6 text-start">
+                                <label for="DiaEntreno" id="DiaEntreno">Cantidad:</label>
+                                <input type="number" class="form-control mt-2" id="cantidadProducto"
+                                    name="cantidadProducto" aria-describedby="apellido" required>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="descripcionProducto" class="form-label">Personalizar producto:</label>
+                                <input id="datosPersonalizacion" type="text" name="datosPersonalizacion"
+                                    class="form-control" required>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-dark" id="btnGuardar"
+                                name="btnGuardar">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalMetodos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <!-- Encabezado del modal -->
+                    <div class="modal-header border-0">
+                        <h1 class="modal-title fs-5 text-dark" id="modalTitle3"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="col col-lg-11 text-center mx-auto">
+                        <!-- campo del nombre producto -->
+                        <label for="DiaEntreno" id="DiaEntreno">Datos de la compra:</label>
+                        <select class="form-select" aria-label="Default select example" name="idPago"
+                            id="idPago" required>
+                        </select>
+                    </div>
+
+                    <!-- Formulario para métodos de pago -->
+                    <form id="metodosForm" class="p-3">
+                        <h4 class="modal-title fs-5 text-dark">Seleccione un método de pago</h4>
+
+                        <!-- Cards de métodos de pago -->
+                        <div class="row rounded border-3" id="cardsMetodos"></div>
+
+                        <input type="hidden" id="idMetodoPago" name="idMetodoPago">
+
+                        <!-- Inputs del método de pago -->
+                        <div class="text-center mb-3">
+                            <div class="row">
+                                <!-- Datos del pago y método de pago -->
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label for="datosPago" class="col-sm-7 col-form-label">Datos del pago</label>
+                                    <input id="datosPago" type="text" name="datosPago" class="form-control"
+                                        autocomplete="off" readonly>
+                                </div>
+
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label for="nombreMetodo" class="col-sm-7 col-form-label">Método de pago:</label>
+                                    <input id="nombreMetodo" type="text" name="nombreMetodo" class="form-control"
+                                        readonly autocomplete="off" oninput="debouncedActualizarDatosPago()">
+                                </div>
+
+                                <!-- Inputs para tarjeta de crédito y débito -->
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label for="numeroTarjeta" class="col-sm-7 col-form-label" id="labeltarjeta">Número
+                                        de tarjeta:</label>
+                                    <input id="numeroTarjeta" type="text" name="numeroTarjeta" class="form-control"
+                                        autocomplete="off" oninput="debouncedActualizarDatosPago()">
+                                </div>
+
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label for="nombreTarjeta" class="col-sm-7 col-form-label" id="nombretarjeta">Nombre
+                                        en tarjeta:</label>
+                                    <input id="nombreTarjeta" type="text" name="nombreTarjeta" class="form-control"
+                                        autocomplete="off" oninput="debouncedActualizarDatosPago()">
+                                </div>
+
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label for="mesVencimiento" class="col-sm-7 col-form-label"
+                                        id="mesvecnimientotarjeta">Mes de vencimiento:</label>
+                                    <input id="mesVencimiento" type="number" name="mesVencimiento" class="form-control"
+                                        placeholder="MM" min="1" max="12" autocomplete="off"
+                                        oninput="debouncedActualizarDatosPago()">
+                                </div>
+
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label for="anioVencimiento" class="col-sm-7 col-form-label"
+                                        id="aniovecnimientolabeltarjeta">Año de vencimiento:</label>
+                                    <input id="anioVencimiento" type="number" name="anioVencimiento"
+                                        class="form-control" placeholder="AAAA" min="2024" autocomplete="off"
+                                        oninput="debouncedActualizarDatosPago()">
+                                </div>
+
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label for="codigoCVV" class="col-sm-7 col-form-label" id="cvvtarjeta">Código
+                                        CVV:</label>
+                                    <input id="codigoCVV" type="number" name="codigoCVV" class="form-control"
+                                        autocomplete="off" oninput="debouncedActualizarDatosPago()">
+                                </div>
+
+                                <!-- PayPal: Input para correo electrónico -->
+                                <div class="col-sm-12 col-md-6 mb-3" id="inputPayPal">
+                                    <label for="paypalCorreo" class="col-sm-7 col-form-label" id="correoPaypal">Correo
+                                        de PayPal:</label>
+                                    <input id="paypalCorreo" type="email" name="paypalCorreo" class="form-control"
+                                        autocomplete="off" oninput="debouncedActualizarDatosPago()">
+                                </div>
+
+                                <!-- Transferencia Bancaria: Inputs para número de cuenta y código SWIFT/BAN -->
+                                <div class="col-sm-12 col-md-6 mb-3" id="inputTransferencia">
+                                    <label for="numeroCuenta" class="col-sm-7 col-form-label" id="cuentanumero">Número
+                                        de cuenta:</label>
+                                    <input id="numeroCuenta" type="text" name="numeroCuenta" class="form-control"
+                                        autocomplete="off" oninput="debouncedActualizarDatosPago()">
+                                </div>
+
+                                <div class="col-sm-12 col-md-6 mb-3" id="inputSWIFT">
+                                    <label for="codigoSWIFT" class="col-sm-7 col-form-label" id="codigos">Código
+                                        SWIFT/BAN:</label>
+                                    <input id="codigoSWIFT" type="text" name="codigoSWIFT" class="form-control"
+                                        autocomplete="off" oninput="debouncedActualizarDatosPago()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn but col-lg-6 mt-1" onclick="finishOrder2()" id="botonFinalizar">
+                            <img src="../../resources/images/finich.png" alt="..." width="30px" height="30px">
+                            Finalizar compra
+                        </button>
                     </form>
                 </div>
             </div>

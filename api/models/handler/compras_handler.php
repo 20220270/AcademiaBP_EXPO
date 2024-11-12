@@ -22,6 +22,7 @@ class ComprasHandler
     protected $fecha = null;
     protected $idmetodopago = null;
     protected $informacionmetodo = null;
+    protected $idalumno = null;
 
     // Constante para establecer la ruta de las imágenes a mostrar.
     const RUTA_IMAGEN = '../../images/productos/';
@@ -42,17 +43,51 @@ class ComprasHandler
 
     public function readAll()
     {
-        $sql = "SELECT id_compra, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro, nombre_metodo FROM tb_compras p
-        INNER JOIN tb_clientes USING(id_cliente)
-        LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
-                ORDER BY id_compra";
+        $sql = "SELECT 
+    id_compra, 
+    COALESCE(CONCAT(nombre_cliente, ' ', apellido_cliente), CONCAT(nombre_alumno, ' ', apellido_alumno)) AS nombre_completo,
+    estado_compra, 
+    direccion_compra, 
+    p.fecha_registro, 
+    nombre_metodo 
+    FROM 
+    tb_compras p
+    LEFT JOIN 
+    tb_clientes USING(id_cliente)
+    LEFT JOIN 
+    tb_metodos_pago USING(id_metodo_pago)
+    LEFT JOIN 
+    tb_alumnos USING(id_alumno)
+    ORDER BY id_compra";
+        return Database::getRows($sql);
+    }
+
+    public function readAllCompraNueva()
+    {
+        $sql = "SELECT 
+    id_compra, 
+    COALESCE(CONCAT(nombre_cliente, ' ', apellido_cliente), CONCAT(nombre_alumno, ' ', apellido_alumno)) AS nombre_completo
+    FROM 
+    tb_compras p
+    LEFT JOIN 
+    tb_clientes USING(id_cliente)
+    LEFT JOIN 
+    tb_metodos_pago USING(id_metodo_pago)
+    LEFT JOIN 
+    tb_alumnos USING(id_alumno)
+    WHERE estado_compra = 'Pendiente'
+    ORDER BY id_compra";
         return Database::getRows($sql);
     }
 
     public function readAll2()
     {
-        $sql = "SELECT id_compra, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro, nombre_metodo FROM tb_compras p
-        INNER JOIN tb_clientes USING(id_cliente)
+        $sql = "SELECT id_compra, CONCAT(
+                    COALESCE(CONCAT(nombre_cliente, ' ', apellido_cliente), 
+                    CONCAT(nombre_alumno, ' ', apellido_alumno))
+                ) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro, nombre_metodo FROM tb_compras p
+        LEFT JOIN tb_clientes USING(id_cliente)
+        LEFT JOIN tb_alumnos USING(id_alumno)
         LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
                 ORDER BY p.fecha_registro";
         return Database::getRows($sql);
@@ -60,8 +95,12 @@ class ComprasHandler
 
     public function readAll3()
     {
-        $sql = "SELECT id_compra, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro, nombre_metodo FROM tb_compras p
-        INNER JOIN tb_clientes USING(id_cliente)
+        $sql = "SELECT id_compra, CONCAT(
+                    COALESCE(CONCAT(nombre_cliente, ' ', apellido_cliente), 
+                    CONCAT(nombre_alumno, ' ', apellido_alumno))
+                ) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro, nombre_metodo FROM tb_compras p
+        LEFT JOIN tb_clientes USING(id_cliente)
+        LEFT JOIN tb_alumnos USING(id_alumno)
         LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
                 WHERE p.fecha_registro = ?";
         $params = array($this->fecha);
@@ -70,8 +109,12 @@ class ComprasHandler
 
     public function readOne()
     {
-        $sql = "SELECT id_compra, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro, nombre_metodo FROM tb_compras p
-        INNER JOIN tb_clientes USING(id_cliente)
+        $sql = "SELECT id_compra, CONCAT(
+                    COALESCE(CONCAT(nombre_cliente, ' ', apellido_cliente), 
+                    CONCAT(nombre_alumno, ' ', apellido_alumno))
+                ) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro, nombre_metodo FROM tb_compras p
+        LEFT JOIN tb_clientes USING(id_cliente)
+        LEFT JOIN tb_alumnos USING(id_alumno)
         LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
                 WHERE id_compra = ?";
         $params = array($this->idcompra);
@@ -143,6 +186,21 @@ class ComprasHandler
         }
     }
 
+    public function getOrder2()
+    {
+        $this->estadocompra = 'Pendiente';
+        $sql = 'SELECT id_compra
+                FROM tb_compras
+                WHERE estado_compra = ? AND id_alumno = ?';
+        $params = array($this->estadocompra, $this->idalumno);
+        if ($data = Database::getRow($sql, $params)) {
+            $_SESSION['idCompra'] = $data['id_compra'];
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // Método para iniciar un pedido en proceso.
     public function startOrder()
     {
@@ -152,6 +210,25 @@ class ComprasHandler
             $sql = 'INSERT INTO tb_compras(direccion_compra, id_cliente, estado_compra)
                     VALUES((SELECT direccion_cliente FROM tb_clientes WHERE id_cliente = ?), ?, ?)'; //Se manda la direccion dependiendo el ID del cliente
             $params = array($_SESSION['idCliente'], $_SESSION['idCliente'], $this->estadocompra);
+            // Se obtiene el ultimo valor insertado de la llave primaria en la tabla pedido.
+            if ($_SESSION['idCompra'] = Database::getLastRow($sql, $params)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    //Función para iniciar ordenes por parte de los alumnos
+    public function startOrder2()
+    {
+        if ($this->getOrder2()) {
+            return true;
+        } else {
+            $sql = 'INSERT INTO tb_compras(direccion_compra, id_alumno, estado_compra)
+                    VALUES((SELECT direccion_cliente FROM tb_alumnos
+                    INNER JOIN tb_clientes USING (id_cliente) WHERE id_alumno = ?), ?, ?)'; //Se manda la direccion dependiendo el ID del cliente
+            $params = array($this->idalumno, $this->idalumno, $this->estadocompra);
             // Se obtiene el ultimo valor insertado de la llave primaria en la tabla pedido.
             if ($_SESSION['idCompra'] = Database::getLastRow($sql, $params)) {
                 return true;
@@ -171,6 +248,52 @@ class ComprasHandler
 
         return Database::executeRow($sql, $params);
     }
+
+    public function createDetail2()
+    {
+        // Se realiza una subconsulta para obtener el precio del producto.
+        $sql = 'INSERT INTO tb_detalles_compras(id_detalle_producto, cantidad_producto, personalizacion, id_compra)
+                VALUES(?, ?, ?, ?)';
+        $params = array($this->iddetalle, $this->cantidad, $this->personalizacion, $this->idcompra);
+
+        return Database::executeRow($sql, $params);
+    }
+
+    public function readCompras()
+    {
+    $sql = "SELECT 
+                id_compra, 
+                CONCAT(
+                    COALESCE(CONCAT(nombre_cliente, ' ', apellido_cliente), 
+                    CONCAT(nombre_alumno, ' ', apellido_alumno)), 
+                    ' - ', 
+                    GROUP_CONCAT(nombre_producto SEPARATOR ', ')
+                ) AS datocompra
+            FROM 
+                tb_detalles_compras 
+            LEFT JOIN 
+                tb_compras USING(id_compra)
+            LEFT JOIN 
+                tb_detalleproducto USING(id_detalle_producto)
+            LEFT JOIN 
+                tb_productos USING(id_producto)
+            LEFT JOIN 
+                tb_clientes USING(id_cliente)
+            LEFT JOIN 
+                tb_metodos_pago USING(id_metodo_pago)
+            LEFT JOIN 
+                tb_alumnos USING(id_alumno)
+            WHERE 
+                estado_compra = 'Pendiente'
+            GROUP BY 
+                id_compra
+            ORDER BY 
+                id_compra";
+    
+    return Database::getRows($sql);
+    }
+
+
 
     // Método para obtener los productos que se encuentran en el carrito de compras.
     public function readDetail()
@@ -218,6 +341,16 @@ class ComprasHandler
                 SET estado_compra= ?, id_metodo_pago = ?, informacion_metodo_pago = ?
                 WHERE id_compra= ?';
         $params = array($this->estadocompra, $this->idmetodopago, $this->informacionmetodo, $_SESSION['idCompra']);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function finishOrder2()
+    {
+        $this->estadocompra = 'Finalizada';
+        $sql = 'UPDATE tb_compras
+                SET estado_compra= ?, id_metodo_pago = ?, informacion_metodo_pago = ?
+                WHERE id_compra= ?';
+        $params = array($this->estadocompra, $this->idmetodopago, $this->informacionmetodo, $this->idcompra);
         return Database::executeRow($sql, $params);
     }
 
@@ -360,7 +493,7 @@ ORDER BY
         return Database::getRows($sql);
     }
 
-//Función para mostrar las ventas registradas de la base de datos
+    //Función para mostrar las ventas registradas de la base de datos
     public function ventasPredictGraph2()
     {
         $sql = "WITH meses AS (
@@ -403,7 +536,7 @@ ORDER BY
         return Database::getRows($sql);
     }
 
-//Función para mostrar las pérdidas registradas de todos los años
+    //Función para mostrar las pérdidas registradas de todos los años
     public function ventasPredictGraph3()
     {
         $sql = "WITH meses AS (
