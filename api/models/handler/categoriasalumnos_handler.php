@@ -402,9 +402,11 @@ class CategoriasAlumnosHandler
 
     public function readCategoriasAlumnos()
     {
-        $sql = "SELECT id_categoria_alumno, categoria FROM tb_categorias_alumnos
-        ORDER BY 
-        id_categoria_alumno;";
+        $sql = "SELECT MAX(id_categoria_alumno) AS id_categoria_alumno  , categoria
+FROM tb_categorias_alumnos
+GROUP BY  categoria
+ORDER BY id_categoria_alumno;
+";
         return Database::getRows($sql);
     }
 
@@ -431,7 +433,8 @@ class CategoriasAlumnosHandler
                 fecha_nacimiento,
                 TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad,
                 posicion_alumno 
-                FROM tb_alumnos
+                FROM tb_alumnos_categorias
+                INNER JOIN tb_alumnos USING (id_alumno)
                 INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
                 INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
                 INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
@@ -448,8 +451,8 @@ class CategoriasAlumnosHandler
         $sql = 'WITH Edades AS (
     SELECT 
         TIMESTAMPDIFF(YEAR, a.fecha_nacimiento, CURDATE()) AS edad -- Convertimos las fechas de nacimiento a edad entera, tomando el año actual y el año de nacimiento del alumno
-    FROM 
-        tb_alumnos a
+    FROM tb_alumnos_categorias
+                INNER JOIN tb_alumnos a USING (id_alumno)
     INNER JOIN 
         tb_staffs_categorias sc USING (id_staff_categorias)
     INNER JOIN 

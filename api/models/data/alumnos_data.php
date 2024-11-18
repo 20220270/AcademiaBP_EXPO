@@ -156,6 +156,17 @@ class AlumnosData extends AlumnosHandler
         }
     }
 
+    public function setIdAlumnosCategoria($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->idalumnoscategoria = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del alumno-categoria es incorrecto';
+            return false;
+        }
+    }
+
     public function setFilename()
     {
         if ($data = $this->readFilename()) {

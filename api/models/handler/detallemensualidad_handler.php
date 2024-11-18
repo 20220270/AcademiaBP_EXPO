@@ -52,6 +52,7 @@ class DetallesPagosMensualidadHandler
         $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar,  CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
                 descripcion_pago, fecha_proximo_pago, estado_proximo_pago from tb_detalles_pagos
                 INNER JOIN tb_pagos USING (id_pago)
+                INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
                 INNER JOIN tb_alumnos USING (id_alumno)
                 INNER JOIN tb_dias_pagos USING (id_dia_pago)
                 INNER JOIN tb_clientes USING(id_cliente)
@@ -65,6 +66,7 @@ class DetallesPagosMensualidadHandler
         $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar,  CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
                 descripcion_pago, fecha_proximo_pago, estado_proximo_pago from tb_detalles_pagos
                 INNER JOIN tb_pagos USING (id_pago)
+                INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
                 INNER JOIN tb_alumnos USING (id_alumno)
                 INNER JOIN tb_dias_pagos USING (id_dia_pago)
                 INNER JOIN tb_clientes USING(id_cliente)
@@ -78,6 +80,7 @@ class DetallesPagosMensualidadHandler
         $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar,  CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
                 descripcion_pago, fecha_proximo_pago, estado_proximo_pago from tb_detalles_pagos
                 INNER JOIN tb_pagos USING (id_pago)
+                INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
                 INNER JOIN tb_alumnos USING (id_alumno)
                 INNER JOIN tb_dias_pagos USING (id_dia_pago)
                 INNER JOIN tb_clientes USING(id_cliente)
@@ -92,6 +95,7 @@ class DetallesPagosMensualidadHandler
         $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar,  CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
                 descripcion_pago, fecha_proximo_pago, estado_proximo_pago from tb_detalles_pagos
                 INNER JOIN tb_pagos USING (id_pago)
+                INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
                 INNER JOIN tb_alumnos USING (id_alumno)
                 INNER JOIN tb_dias_pagos USING (id_dia_pago)
                 INNER JOIN tb_clientes USING(id_cliente)
@@ -106,6 +110,7 @@ class DetallesPagosMensualidadHandler
         $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, mensualidad_pagar,  CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
                 descripcion_pago, fecha_proximo_pago, estado_proximo_pago from tb_detalles_pagos
                 INNER JOIN tb_pagos USING (id_pago)
+                INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
                 INNER JOIN tb_alumnos USING (id_alumno)
                 INNER JOIN tb_dias_pagos USING (id_dia_pago)
                 INNER JOIN tb_clientes USING(id_cliente)
@@ -150,6 +155,7 @@ class DetallesPagosMensualidadHandler
                 mensualidad_pagar
                 ) AS Detalles
                 FROM tb_pagos
+                INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
                 INNER JOIN tb_alumnos USING (id_alumno)
                 INNER JOIN tb_dias_pagos USING (id_dia_pago)    
                 ORDER BY id_pago";
@@ -163,6 +169,7 @@ class DetallesPagosMensualidadHandler
                 fecha_pago,
                 descripcion_pago from tb_detalles_pagos
                 INNER JOIN tb_pagos USING(id_pago)
+                INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
                 INNER JOIN tb_alumnos USING(id_alumno)
                 INNER JOIN tb_clientes USING(id_cliente)
                 INNER JOIN tb_dias_pagos USING(id_dia_pago)

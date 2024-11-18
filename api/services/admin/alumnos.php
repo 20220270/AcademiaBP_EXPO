@@ -156,6 +156,18 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+
+
+            case 'readDatosAlumnosCategorias':
+                if (!$alumno->setId($_POST['idAlumno'])) {
+                    $result['error'] = $alumno->getDataError();
+                } elseif ($result['dataset'] = $alumno->readDatosAlumnosCategorias()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Alumno inexistente';
+                }
+                break;
+
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
 
@@ -176,7 +188,6 @@ if (isset($_GET['action'])) {
                             !$alumno->setApellido($_POST['apellidoAlumno']) ||
                             !$alumno->setNacimiento($_POST['fechaNacimiento']) ||
                             !$alumno->setPosicion($_POST['selectPosicion']) ||
-                            !$alumno->setIdStaffCategoria($_POST['selectCategoriaEncargado']) ||
                             !$alumno->setIdDiasPago($_POST['selectDias']) ||
                             !$alumno->setEstado($_POST['selectEstado']) ||
                             !$alumno->setFechaInscripcion($_POST['fechaInscripcion']) ||
@@ -273,6 +284,69 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+            case 'createRowAlumnosCategorias':
+                $_POST = Validator::validateForm($_POST);
+
+                if (
+                    !$alumno->setId($_POST['selectAlumno']) ||
+                    !$alumno->setIdStaffCategoria($_POST['selectCategoriaa'])
+                ) {
+                    $result['error'] = $alumno->getDataError();
+                } elseif ($alumno->createRowAlumnosCategorias()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Asignación registrado correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al registrar la asignación';
+                }
+                break;
+
+            case 'updateRowAlumnosCategorias':
+                $_POST = Validator::validateForm($_POST);
+
+                if (
+                    !$alumno->setIdAlumnosCategoria($_POST['idAlumnoCategoria']) ||
+                    !$alumno->setId($_POST['selectAlumno']) ||
+                    !$alumno->setIdStaffCategoria($_POST['selectCategoriaa'])
+                ) {
+                    $result['error'] = $alumno->getDataError();
+                } elseif ($alumno->updateRowAlumnosCategorias()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Alumno modificado correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al modificar datos del alumno';
+                }
+                break;
+
+            case 'deleteRowAlumnosCategorias':
+                if (
+                    !$alumno->setIdAlumnosCategoria($_POST['idAlumnoCategoria'])
+                ) {
+                    $result['error'] = $alumno->getDataError();
+                } elseif ($alumno->deleteRowAlumnosCategorias()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Asignación eliminada correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al eliminar la asignación';
+                }
+                break;
+
+            case 'readOneAlumnosCategorias':
+                if (!$alumno->setIdAlumnosCategoria($_POST['idAlumnoCategoria'])) {
+                    $result['error'] = $alumno->getDataError();
+                } elseif ($result['dataset'] = $alumno->readOneAlumnosCategorias()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Alumno inexistente';
+                }
+                break;
+
+            case 'readComboStaffCategorias':
+                if ($result['dataset'] = $alumno->readComboStaffCategorias()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No hay datos disponibles';
+                }
+                break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

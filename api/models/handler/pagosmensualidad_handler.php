@@ -17,6 +17,7 @@ class PagosMensualidadHandler
     protected $estado = null;
     protected $idmetodopago = null;
     protected $informacionmetodo = null;
+    protected $idalumnocategoria = null;
 
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
@@ -39,7 +40,7 @@ class PagosMensualidadHandler
     public function createRow()
     {
         $sql = 'CALL insertar_pago(?, ?, ?)';
-        $params = array($this->idalumno, $this->idmetodopago, $this->informacionmetodo);
+        $params = array($this->idalumnocategoria, $this->idmetodopago, $this->informacionmetodo);
         return Database::executeRow($sql, $params);
     }
 
@@ -61,6 +62,7 @@ class PagosMensualidadHandler
                    fecha_pago,
                    nombre_metodo 
             FROM tb_pagos
+            INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
             INNER JOIN tb_alumnos USING(id_alumno)
             INNER JOIN tb_clientes USING(id_cliente)
             INNER JOIN tb_dias_pagos USING(id_dia_pago)
@@ -168,7 +170,8 @@ class PagosMensualidadHandler
 
     public function readOne()
     {
-        $sql = "SELECT id_pago, id_alumno, estado_pago from tb_pagos
+        $sql = "SELECT id_pago, id_alumno_categoria, estado_pago from tb_pagos
+        INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
         INNER JOIN tb_alumnos USING(id_alumno)
         INNER JOIN tb_clientes USING(id_cliente)
         INNER JOIN tb_dias_pagos USING(id_dia_pago)
@@ -199,21 +202,24 @@ class PagosMensualidadHandler
     public function readAllAlumnosCliente()
     {
         $sql = "SELECT 
-                id_alumno, 
-                CONCAT(
-                nombre_alumno, ' ', apellido_alumno, ' - ', 
-                nombre_cliente, ' ', apellido_cliente, ' - ', 
-                numero_dias, ' ', 
-                CASE 
-                WHEN numero_dias = 1 THEN 'día' 
-                ELSE 'días' 
-                END, ' - $ ', 
-                mensualidad_pagar
-                ) AS Detalles
-            FROM tb_alumnos
-            INNER JOIN tb_clientes USING(id_cliente)
-            INNER JOIN tb_dias_pagos USING(id_dia_pago)
-            ORDER BY id_alumno";
+    id_alumno_categoria, 
+    CONCAT(
+        nombre_alumno, ' ', apellido_alumno, ' - ', 
+        nombre_cliente, ' ', apellido_cliente, ' - ', 
+        numero_dias, ' ', 
+        CASE 
+            WHEN numero_dias = 1 THEN 'día' 
+            ELSE 'días' 
+        END, ' - $ ', 
+        mensualidad_pagar
+    ) AS Detalles
+FROM tb_alumnos_categorias
+INNER JOIN tb_alumnos USING (id_alumno)
+INNER JOIN tb_clientes USING(id_cliente)
+INNER JOIN tb_dias_pagos USING(id_dia_pago)
+GROUP BY id_alumno_categoria, nombre_alumno, apellido_alumno, nombre_cliente, apellido_cliente, numero_dias, mensualidad_pagar
+ORDER BY id_alumno_categoria;
+";
         return Database::getRows($sql);
     }
 
@@ -221,7 +227,7 @@ class PagosMensualidadHandler
 
     public function readAlumnosTotal()
     {
-        $sql = "SELECT COUNT(*) AS total_alumnos_registrados FROM tb_alumnos;";
+        $sql = "SELECT COUNT(*) AS total_alumnos_registrados FROM tb_alumnos WHERE estado_alumno = 'Activo' OR estado_alumno = 'Inactivo';";
         return Database::getRows($sql);
     }
 
@@ -232,10 +238,12 @@ class PagosMensualidadHandler
         $sql = "SELECT 'Alumnos solventes con el pago.' AS descripcion, 
                 COUNT(CONCAT(nombre_alumno, ' ', apellido_alumno)) AS total_alumnos_registradoss 
                 FROM tb_pagos
+                INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
                 INNER JOIN tb_alumnos USING(id_alumno)
                 WHERE estado_pago = 'Pagado'
                 AND YEAR(fecha_pago) = YEAR(CURDATE()) 
-                AND MONTH(fecha_pago) = MONTH(CURDATE());";
+                AND MONTH(fecha_pago) = MONTH(CURDATE())
+                AND (estado_alumno = 'Activo' OR estado_alumno = 'Inactivo');";
         return Database::getRows($sql);
     }
 
@@ -244,8 +252,11 @@ class PagosMensualidadHandler
     public function readAlumnosSinPagar()
     {
         $sql = "SELECT 
-                (SELECT COUNT(*) FROM tb_alumnos) - 
-                (SELECT COUNT(*) FROM tb_pagos WHERE estado_pago = 'Pagado' AND YEAR(fecha_pago) = YEAR(CURDATE()) 
+                (SELECT COUNT(*) FROM tb_alumnos WHERE estado_alumno = 'Activo' OR estado_alumno = 'Inactivo') - 
+                (SELECT COUNT(*) FROM tb_pagos 
+                INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
+                INNER JOIN tb_alumnos USING(id_alumno)
+                WHERE estado_pago = 'Pagado' AND YEAR(fecha_pago) = YEAR(CURDATE()) AND (estado_alumno = 'Activo' OR estado_alumno = 'Inactivo')
               AND MONTH(fecha_pago) = MONTH(CURDATE())) 
                 AS total_alumnos_sin_pagar;";
         return Database::getRows($sql);
@@ -255,6 +266,7 @@ class PagosMensualidadHandler
     {
         $sql = "SELECT CONCAT(nombre_alumno, ' ', apellido_alumno) AS Nombre, CONCAT(nombre_cliente, ' ', apellido_cliente) AS NombreCliente, 
         mensualidad_pagar, fecha_pago from tb_pagos
+        INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
         INNER JOIN tb_alumnos USING (id_alumno)
         INNER JOIN tb_clientes USING (id_cliente)
         INNER JOIN tb_dias_pagos USING (id_dia_pago)
@@ -267,9 +279,10 @@ class PagosMensualidadHandler
     public function readBoletaPagos()
     {
         $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, numero_dias, mensualidad_pagar, CONCAT(nombre_alumno, ' ', apellido_alumno) as nombre,
-            categoria, descripcion_pago, fecha_proximo_pago 
+            GROUP_CONCAT(categoria SEPARATOR ', ') as categoria , descripcion_pago, fecha_proximo_pago 
             FROM tb_detalles_pagos
             INNER JOIN tb_pagos USING (id_pago)
+            INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
             INNER JOIN tb_alumnos USING (id_alumno)
             INNER JOIN tb_dias_pagos USING (id_dia_pago)
             INNER JOIN tb_staffs_categorias USING (id_staff_categorias)

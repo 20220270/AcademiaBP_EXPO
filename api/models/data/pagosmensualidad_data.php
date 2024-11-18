@@ -104,6 +104,17 @@ class PagosMensualidadData extends PagosMensualidadHandler
         }
     }
 
+    public function setIdAlumnoCategoria($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->idalumnocategoria = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del alumno-categoría es incorrecto';
+            return false;
+        }
+    }
+
 
 
     // Método para obtener el error de los datos.

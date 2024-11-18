@@ -167,15 +167,6 @@
                             </select>
                         </div>
 
-                        <div class="col-sm-12 col-md-6" id="selectCategoriaEncargadopo">
-                            <label for="selectCategoriaEncargado" class="col-sm-7 col-form-label">Categoría y su
-                                encargado:</label>
-                            <select class="form-select" id="selectCategoriaEncargado" name="selectCategoriaEncargado"
-                                aria-label="Default select example">
-
-                            </select>
-                        </div>
-
                         <div class="col-sm-12 col-md-6">
                             <label for="selectDias" class="col-sm-7 col-form-label">Días que entrenará:</label>
                             <select class="form-select" id="selectDias" name="selectDias"
@@ -242,6 +233,45 @@
                         <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="alumnoCategoria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fs-3 w-100 text-center" id="modalTitleD2"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form id="formaAlumnoCategoria">
+                    <div class="modal-body" id="modalBodyD2">
+                        <input type="hidden" id="idAlumnoCategoria" name="idAlumnoCategoria">
+                
+                        <div class="d-flex justify-content-between">
+                            <!-- Campo Alumno -->
+                            <div class="col-sm-12 col-md-5">
+                                <label for="nombreCategoria" class="col-form-label">Alumno</label>
+                                <input type="text" id="selectAlumno" name="selectAlumno" hidden>
+                                <input readonly id="nombreAlumnoo" type="text" name="nombreAlumnoo" class="form-control" required>
+                            </div>
+                
+                            <!-- Campo Categoría a asignar -->
+                            <div class="col-sm-12 col-md-5">
+                                <label for="Orden" class="col-form-label">Categoría a asignar:</label>
+                                <select class="form-select mb-4" id="selectCategoriaa" name="selectCategoriaa" aria-label="Default select example">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-dark" id="btnGuardar2" name="btnGuardar2">Guardar</button>
+                    </div>
+                </form>
+                
             </div>
         </div>
     </div>

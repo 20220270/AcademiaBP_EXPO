@@ -85,7 +85,8 @@ class DiasPagoHandler
     public function readDiasCategsAlumnos()
     {
         $sql = 'SELECT categoria, COUNT(*) AS total_alumnos
-                FROM tb_alumnos
+                FROM tb_alumnos_categorias
+                INNER JOIN tb_alumnos USING (id_alumno)
                 INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
                 INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
                 INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)

@@ -29,7 +29,7 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
 
-                    !$pagos->setIdAlumnoCliente($_POST['SelectDatosPago']) or
+                    !$pagos->setIdAlumnoCategoria($_POST['SelectDatosPago']) or
                     !$pagos->setIdMetodo($_POST['idMetodoPago']) ||
                     !$pagos->setInformacion($_POST['datosPago'])
                 ) {

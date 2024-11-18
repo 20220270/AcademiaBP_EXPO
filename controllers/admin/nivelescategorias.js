@@ -511,7 +511,7 @@ const openDelete3 = async (id, nombre) => {
 
         // Se define una constante tipo objeto con los datos del registro seleccionado.
         const FORM = new FormData();
-        FORM.append('idCategoriaAlumno', id);
+        FORM.append('idCategoriaHorario', id);
 
         // Petición para eliminar el registro seleccionado.
         const DATA = await fetchData(CATEGORIA_ALUMNO_API, 'deleteRowAlumnosHorario', FORM);
@@ -522,7 +522,7 @@ const openDelete3 = async (id, nombre) => {
             // Se muestra un mensaje de éxito.
             await sweetAlert(1, DATA.message, true);
             // Se carga nuevamente la tabla para visualizar los cambios.
-            fillTable2();
+            fillTable3();
         } else {
             sweetAlert(2, DATA.error, false);
         }

@@ -271,19 +271,32 @@ class ClienteHandler
     //Reporte para
     public function readAlumnos()
     {
-        $sql = "SELECT id_alumno, CONCAT(nombre_alumno, ' ', apellido_alumno) as nombre,
-                TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) as edad,
-                categoria,
-                numero_dias,
-                foto_alumno,
-                estado_alumno
-                FROM tb_alumnos
-                INNER JOIN tb_clientes USING (id_cliente)
-                INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
-                INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
-                INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
-                INNER JOIN tb_dias_pagos USING (id_dia_pago)
-                WHERE id_cliente = ? AND estado_alumno = 'Activo'";
+        $sql = "SELECT 
+    MAX(ac.id_alumno_categoria) AS id_alumno_categoria,  -- Usar MAX o MIN
+    a.id_alumno, 
+    CONCAT(a.nombre_alumno, ' ', a.apellido_alumno) AS nombre,
+    TIMESTAMPDIFF(YEAR, a.fecha_nacimiento, CURDATE()) AS edad,
+    GROUP_CONCAT(ca.categoria SEPARATOR ', ') AS categoria,
+    SUM(dp.numero_dias) AS numero_dias,
+    a.foto_alumno,
+    a.estado_alumno
+FROM tb_alumnos_categorias ac
+INNER JOIN tb_alumnos a USING(id_alumno)
+INNER JOIN tb_clientes c USING(id_cliente)
+INNER JOIN tb_staffs_categorias sc USING(id_staff_categorias)
+INNER JOIN tb_categorias_horarios ch USING(id_categoria_horario)
+INNER JOIN tb_categorias_alumnos ca USING(id_categoria_alumno)
+INNER JOIN tb_dias_pagos dp USING(id_dia_pago)
+WHERE a.id_cliente = ? AND a.estado_alumno = 'Activo'
+GROUP BY 
+    a.id_alumno, 
+    a.nombre_alumno, 
+    a.apellido_alumno, 
+    a.fecha_nacimiento, 
+    a.foto_alumno, 
+    a.estado_alumno;
+
+";
         $params = array($_SESSION['idCliente']);
         return Database::getRows($sql, $params); //Se manda rows, para que traiga todos los datos
     }

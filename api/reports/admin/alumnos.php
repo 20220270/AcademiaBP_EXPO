@@ -17,19 +17,19 @@ if ($dataalumnos = $alumnos->readAllReport()) {
     // Se establece un color de relleno para los encabezados.
     $pdf->setFillColor(64, 136, 64);
     // Se establece la fuente para los encabezados.
-    $pdf->setFont('Arial', 'B', 9);
+    $pdf->setFont('Arial', 'B', 8);
     $pdf->setTextColor(255, 255, 255);
 
     // Se imprimen las celdas con los encabezados.
-    $pdf->cell(95, 10, 'Nombre y foto', 1, 0, 'C', 1);
+    $pdf->cell(78, 10, 'Nombre y foto', 1, 0, 'C', 1);
     $pdf->cell(35, 10, 'Fecha de nacimiento', 1, 0, 'C', 1);
-    $pdf->cell(25, 10, 'Edad', 1, 0, 'C', 1);
-    $pdf->cell(35, 10, $pdf->encodeString('Categoría'), 1, 0, 'C', 1);
+    $pdf->cell(20, 10, 'Edad', 1, 0, 'C', 1);
+    $pdf->cell(55, 10, $pdf->encodeString('Categoría'), 1, 0, 'C', 1);
     $pdf->cell(30, 10, $pdf->encodeString('Número de días'), 1, 0, 'C', 1);
     $pdf->cell(30, 10, $pdf->encodeString('Inscrito desde'), 1, 1, 'C', 1);
 
     // Se establece la fuente para los datos de los productos.
-    $pdf->setFont('Arial', '', 8);
+    $pdf->setFont('Arial', '', 6.8);
     $pdf->setTextColor(0, 0, 0);
 
     // Tamaño de la celda y de la imagen.
@@ -45,9 +45,9 @@ if ($dataalumnos = $alumnos->readAllReport()) {
         if ($pdf->GetY() + $cellHeight > $pdf->GetPageHeight() - 20) {
             $pdf->AddPage('L', 'Letter'); //Generamos otra página con la misma orientación que definimos para el reporte en un principio
             $pdf->setFillColor(64, 136, 64);
-            $pdf->setFont('Arial', 'B', 9);
+            $pdf->setFont('Arial', 'B', 7);
             $pdf->setTextColor(255, 255, 255);
-            $pdf->setFont('Arial', '', 8);
+            $pdf->setFont('Arial', '', 7);
             $pdf->setTextColor(0, 0, 0);
         }
 
@@ -64,10 +64,10 @@ if ($dataalumnos = $alumnos->readAllReport()) {
         }
 
         // Imprime los datos del alumno.
-        $pdf->cell(77, $cellHeight, $pdf->encodeString($rowAlumnos['nombre']), 1, 0, 'C');
+        $pdf->cell(60, $cellHeight, $pdf->encodeString($rowAlumnos['nombre']), 1, 0, 'C');
         $pdf->cell(35, $cellHeight, $rowAlumnos['fecha_nacimiento'], 1, 0, 'C');
-        $pdf->cell(25, $cellHeight, $pdf->encodeString($rowAlumnos['edad'] . ' años'), 1, 0, 'C');
-        $pdf->cell(35, $cellHeight, $pdf->encodeString($rowAlumnos['categoria']), 1, 0, 'C');
+        $pdf->cell(20, $cellHeight, $pdf->encodeString($rowAlumnos['edad'] . ' años'), 1, 0, 'C');
+        $pdf->cell(55, $cellHeight, $pdf->encodeString($rowAlumnos['categoria']), 1, 0, 'C');
         $pdf->cell(30, $cellHeight, $rowAlumnos['numero_dias'], 1, 0, 'C');
         $pdf->cell(30, $cellHeight, $rowAlumnos['fecha_inscripcion'], 1, 1, 'C');
     }
