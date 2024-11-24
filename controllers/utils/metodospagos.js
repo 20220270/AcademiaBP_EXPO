@@ -19,6 +19,11 @@ function mostrarInputs() {
     document.getElementById('correoPaypal').style.display = 'none';
     document.getElementById('cuentanumero').style.display = 'none';
     document.getElementById('codigos').style.display = 'none';
+
+    document.getElementById('inputTotalPagar').style.display = 'none';
+    document.getElementById('InputTotalDado').style.display = 'none';
+    document.getElementById('inputVuelto').style.display = 'none';
+
     document.getElementById('botonFinalizar').style.display = 'none';
 
     // Mostrar los inputs según el método de pago seleccionado
@@ -42,7 +47,57 @@ function mostrarInputs() {
         document.getElementById('cuentanumero').style.display = 'block';
         document.getElementById('codigos').style.display = 'block';
     }
+    else if (metodoPago === "Efectivo") {
+        
+        document.getElementById('inputTotalPagar').style.display = 'block';
+        document.getElementById('InputTotalDado').style.display = 'block';
+        document.getElementById('inputVuelto').style.display = 'block';  
+    }
 }
+
+// Función genérica para manejar el evento 'change' de ambos select
+const handleSelectChange = (event) => {
+    // Obtener el combobox que disparó el evento
+    const comboBox = event.target;
+
+    // Comprobar si se ha seleccionado una opción (no está vacío)
+    if (comboBox.selectedIndex !== -1) {
+        // Obtener el texto de la opción seleccionada
+        const dato = comboBox.options[comboBox.selectedIndex].text;
+
+        // Extraer el precio (todo lo que sigue después del último ' - ')
+        const precio = dato.split(' - ').pop(); // Obtener el último elemento después de ' - '
+
+        // Asignar el precio al campo 'totalPagar'
+        document.getElementById('totalPagar').value = precio;
+    } else {
+        // Si no hay opción seleccionada, mostrar una alerta
+        alert('Debe seleccionar una compra');
+    }
+};
+
+// Agregar el evento 'change' a ambos select
+document.getElementById('idPago').addEventListener('change', handleSelectChange);
+
+
+// Obtén los elementos de los inputs
+const inputTotalPagar = document.getElementById('inputTotalPagar');
+const inputTotalDado = document.getElementById('InputTotalDado');
+const inputVuelto = document.getElementById('inputVuelto');
+
+// Función para realizar la resta y asignar el resultado
+function calcularVuelto() {
+  const totalPagar = parseFloat(inputTotalPagar.value) || 0; // Si no hay valor, se asigna 0
+  const totalDado = parseFloat(inputTotalDado.value) || 0;  // Si no hay valor, se asigna 0
+
+  const vuelto = totalDado - totalPagar;  // Realiza la resta
+  inputVuelto.value = vuelto.toFixed(2);   // Asigna el resultado al input 'vuelto' con dos decimales
+}
+
+// Escucha los cambios en los inputs
+inputTotalPagar.addEventListener('input', calcularVuelto);
+inputTotalDado.addEventListener('input', calcularVuelto);
+
 
 function seleccionarMetodoPago(id_metodo_pago, nombre_metodo) {
     // Asignar el id_metodo_pago y el nombre_metodo a los inputs ocultos
@@ -86,6 +141,10 @@ function actualizarDatosPago() {
     const correoPaypal = document.getElementById('paypalCorreo').value;
     const numeroCuenta = document.getElementById('numeroCuenta').value;
     const codigoSWIFT = document.getElementById('codigoSWIFT').value;
+    const totalDado = document.getElementById('totalDado').value; // Input donde el usuario ingresa el dinero dado
+    const totalPagar = document.getElementById('totalPagar').value; // Total a pagar (obtenido como texto y convertido a número)
+    const cambioDado = document.getElementById('cambioDado').value; // Elemento donde se mostrará el cambio
+
 
     // Validaciones generales
     if (!metodoPago) {
@@ -187,6 +246,31 @@ function actualizarDatosPago() {
         }
     }
 
+    if (metodoPago === "Efectivo") {
+
+        // Verifica que el input totalDado esté definido y sea un input con valor
+        if (!totalPagar) {
+            console.error("El campo 'totalDado' no está definido o no tiene valor.");
+            return;
+        }
+    
+        // Expresión regular para validar el input (solo números y un punto)
+        const regex = /^[0-9]*\.?[0-9]*$/;
+    
+        if (!regex.test(totalPagar)) {
+            alert('Por favor, introduce solo números o un punto decimal.');
+            totalPagar = totalPagar.value.slice(0, -1); // Elimina caracteres inválidos
+        } else {
+            // Convertimos a número para realizar cálculos
+            const dinerodado = document.getElementById('totalDado').value;
+            const dinerocambio = dinerodado - totalPagar;
+    
+            document.getElementById('cambioDado').value = dinerocambio;
+        }
+    }
+    
+
+
     // Validaciones para PayPal
     if (metodoPago === "PayPal" && !correoPaypal) {
         alert('Debe ingresar un correo de PayPal.');
@@ -197,6 +281,7 @@ function actualizarDatosPago() {
     const datosConcatenadosTarjeta = `${metodoPago}, ${numeroTarjeta}, ${nombreTarjeta}, ${mesVencimiento}, ${anioVencimiento}, ${codigoCVV}`;
     const datosConcatenadosPaypal = `${metodoPago}, ${correoPaypal}`;
     const datosConcatenadosTransferencia = `${metodoPago}, ${numeroCuenta}, ${codigoSWIFT}`;
+    const datosConcatenadosEfectivo = `${metodoPago}, ${totalPagar}, ${totalDado}, ${totalDado - totalPagar}`;
 
     // Selección de la variable donde se guardarán los datos dependiendo del método de pago
     const inputDatosGuardados = document.getElementById('datosPago');
@@ -205,12 +290,16 @@ function actualizarDatosPago() {
     //El botón se mostrará hasta que todas las validaciones de confirmen
     if (metodoPago === "Tarjeta de crédito" || metodoPago === "Tarjeta de débito") {
         inputDatosGuardados.value = datosConcatenadosTarjeta;
-        document.getElementById('botonFinalizar').style.display = 'block'; 
+        document.getElementById('botonFinalizar').style.display = 'block';
     } else if (metodoPago === "PayPal") {
         inputDatosGuardados.value = datosConcatenadosPaypal;
         document.getElementById('botonFinalizar').style.display = 'block';
     } else if (metodoPago === "Transferencia bancaria") {
         inputDatosGuardados.value = datosConcatenadosTransferencia;
+        document.getElementById('botonFinalizar').style.display = 'block';
+    }
+    else if (metodoPago === "Efectivo") {
+        inputDatosGuardados.value = datosConcatenadosEfectivo;
         document.getElementById('botonFinalizar').style.display = 'block';
     }
 }

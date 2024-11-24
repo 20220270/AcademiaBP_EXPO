@@ -199,7 +199,7 @@ const openCreate = () => {
     fillSelect3(DETALLEPRODUCTOS_API, 'readDetalles', 'idDetalleSelect');
 }
 
-const openCreate2 = () => {
+async function openCreate2() {
     // Se muestra la caja de diálogo con su título.
     MODAL_METODOS.show();
     MODAL_TITLE3.textContent = 'Completar compra';
@@ -234,6 +234,8 @@ async function finishOrder2() {
         // Comprobar si la respuesta es satisfactoria, de lo contrario mostrar un mensaje con la excepción
         if (DATA.status) {
             sweetAlert(1, DATA.message, true);
+            fillTable()
+            
         } else {
             sweetAlert(2, DATA.error, false);
         }

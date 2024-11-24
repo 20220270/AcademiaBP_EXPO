@@ -47,6 +47,15 @@ class MetodosPagosHandler
         return Database::getRows($sql);
     }
 
+    public function readAll2()
+    {
+        $sql = "SELECT id_metodo_pago, nombre_metodo, imagen_metodo
+                FROM tb_metodos_pago
+                WHERE nombre_metodo != 'Efectivo'
+                ORDER BY id_metodo_pago";
+        return Database::getRows($sql);
+    }
+
     public function readOne()
     {
         $sql = 'SELECT id_metodo_pago, nombre_metodo, imagen_metodo

@@ -55,6 +55,16 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen métodos de pago registrados';
                 }
                 break;
+
+            case 'readAll2':
+                if ($result['dataset'] = $metodospagos->readAll2()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen métodos de pago registrados';
+                }
+                break;
+
             case 'readOne':
                 if (!$metodospagos->setId($_POST['idMetodoPago'])) {
                     $result['error'] = $metodospagos->getDataError();

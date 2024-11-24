@@ -34,6 +34,10 @@ const SAVE_MODAL2 = new bootstrap.Modal('#saveModal2'),
 const SAVE_MODAL3 = new bootstrap.Modal('#saveModal3'),
     MODAL_TITLE3 = document.getElementById('modalTitle3');
 
+const SAVE_MODAL4 = new bootstrap.Modal('#modalOptions');
+const SAVE_MODAL5 = new bootstrap.Modal('#modalEnviarFechaEspecifica');
+const SAVE_MODAL6 = new bootstrap.Modal('#modalEnviarFechaMesAnio')
+
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
     ID_DIA = document.getElementById('idDiasPago'),
@@ -42,7 +46,7 @@ const SAVE_FORM = document.getElementById('saveForm'),
 
 const SAVE_FORM2 = document.getElementById('saveForm2'),
     ID_PAGO = document.getElementById('idPagoARealizar'),
-    DATOS_PAGO = document.getElementById('SelectDatosPago'),
+    DATOS_PAGO = document.getElementById('idPago'),
     CUOTAS_A_PAGAR = document.getElementById('cuotasApagar'),
     ESTADO_PAGO = document.getElementById('selectEstado');
 COLUMNA_ESTADO = document.getElementById('columnaEstado');
@@ -53,9 +57,11 @@ const SAVE_FORM3 = document.getElementById('saveForm3'),
     DESCRIPCION_PAGO = document.getElementById('descripcionPago'),
     PRXIMO_PAGO = document.getElementById('proximoPago');
 
-    const CARD_METODOS = document.getElementById('cardsMetodos');
+const CARD_METODOS = document.getElementById('cardsMetodos');
 
-    const MODAL_METODOS = document.getElementById('metodosForm');
+const MODAL_METODOS = document.getElementById('metodosForm');
+const INFORMACION_PAGO = document.getElementById('datosPago');
+const NOMBRE_METODO = document.getElementById('nombreMetodo');
 
 let currentMethod = 'readAll';
 let currentMethod2 = 'readAll';
@@ -176,16 +182,15 @@ SAVE_FORM2.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
-    
+
     const RESPONSE = await confirmAction('¿Está seguro de finalizar el pago?');
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if(RESPONSE)
-    {
+    if (RESPONSE) {
         (ID_PAGO.value) ? action = 'updateRow' : action = 'createRow';
-    // Constante tipo objeto con los datos del formulario.
-    const FORM = new FormData(SAVE_FORM2);
-    // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(MENSUALIDAD_API, action, FORM);
+        // Constante tipo objeto con los datos del formulario.
+        const FORM = new FormData(SAVE_FORM2);
+        // Petición para guardar los datos del formulario.
+        const DATA = await fetchData(MENSUALIDAD_API, action, FORM);
         if (DATA.status) {
             // Se cierra la caja de diálogo.
             SAVE_MODAL2.hide();
@@ -197,7 +202,7 @@ SAVE_FORM2.addEventListener('submit', async (event) => {
             sweetAlert(2, DATA.error, false);
         }
     }
-    
+
 });
 
 SAVE_FORM3.addEventListener('submit', async (event) => {
@@ -334,7 +339,7 @@ const fillTable3 = async (form = null) => {
     // Se inicializa el contenido de la tabla.
     ROWS_FOUND2.textContent = '';
     TABLE_BODY2.innerHTML = '';
-    
+
 
     const fechaProximoPago = document.getElementById('fechaProximoPago').value;
     let action;
@@ -348,7 +353,7 @@ const fillTable3 = async (form = null) => {
         // Si no hay fecha seleccionada, usar la acción según la lógica previa.
         action = (form) ? 'searchRows' : currentMethod2;
     }
-    
+
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(DETALLESMENSUALIDAD_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -378,7 +383,7 @@ const fillTable3 = async (form = null) => {
                             <i class="bi bi-x-square-fill"></i>
                             <img src="../../resources/images/btnActualizarIMG.png" alt="" width="30px" height="30px" class="mb-1">
                         </button>
-                        <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openReport2(${row.id_pago})" title="Generar boleta de pago de ${row.Alumno}">
+                        <button type="reset" class="btn mt-1" id="btnActualizar" name="btnActualizar" onclick="openReport5(${row.id_pago})" title="Generar boleta de pago de ${row.Alumno}">
                             <i class="bi bi-x-square-fill"></i>
                             <img src="../../resources/images/reporte_2.png" alt="" width="30px" height="30px" class="mb-1">
                         </button>
@@ -529,8 +534,7 @@ const openCreate2 = () => {
     MODAL_TITLE2.textContent = 'Registrar pago de mensualidad';
     // Se prepara el formulario.
     SAVE_FORM2.reset();
-    fillSelect(MENSUALIDAD_API, 'readAllAlumnosCliente', 'SelectDatosPago');
-    fillSelect(DMETODOSPAGO_API, 'readAll', 'selectMetodo');
+    fillSelect(MENSUALIDAD_API, 'readAllAlumnosCliente', 'idPago');
     fillTable7();
     mostrarInputs();
 }
@@ -589,10 +593,12 @@ const openUpdate2 = async (id) => {
         ESTADO_PAGO.value = ROW.estado_pago;
         ID_PAGO.value = ROW.id_pago;
 
-
-
-
-        fillSelect(MENSUALIDAD_API, 'readAllAlumnosCliente', 'SelectDatosPago', ROW.id_alumno);
+        fillSelect(MENSUALIDAD_API, 'readAllAlumnosCliente', 'idPago', ROW.id_alumno_categoria);
+        document.getElementById('datosdelpago').style.display = 'none';
+        document.getElementById('nombredelmetodo').style.display = 'none';
+        
+        mostrarInputs()
+        document.getElementById('botonFinalizar').style.display = 'block';
 
     } else {
         sweetAlert(2, DATA.error, false);
@@ -692,15 +698,65 @@ const openDelete3 = async (id) => {
     }
 }
 
-const openReport = () => {
-    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/admin/pagosmensualidad.php`);
-
-    // Se abre el reporte en una nueva pestaña.
-    window.open(PATH.href);
+//Función para mostrar una modal para escoger el tipo de reporte de pagos a generar
+const openModalOptions = () => {
+    SAVE_MODAL4.show();
 }
 
-const openReport2 = (id) => {
+const openModalFechaEspecifica = () => {
+    SAVE_MODAL4.hide();
+    SAVE_MODAL5.show();
+}
+
+const openModalFechaMesAnio = () => {
+    SAVE_MODAL4.hide();
+    SAVE_MODAL6.show();
+}
+// Reportes de pagos
+const generateReport = () => {
+    // Obtén el valor del campo de fecha
+    const fecha = document.getElementById('fechaEspecifica').value;
+
+    // Verifica si se seleccionó una fecha
+    if (!fecha) {
+        alert('Por favor, selecciona una fecha antes de generar el reporte.');
+        return;
+    }
+
+    // Llama a la función openReport con la fecha seleccionada
+    openReport(fecha, 'fechaEspecifica');
+};
+
+const generateReport2 = () => {
+    // Obtén el valor del campo de fecha
+    const fechamesanio = document.getElementById('fechaMesAnio').value;
+
+    // Verifica si se seleccionó una fecha
+    if (!fechamesanio) {
+        alert('Por favor, selecciona una fecha antes de generar el reporte.');
+        return;
+    }
+
+    const fechamesanioFormatted = fechamesanio.substring(0, 7);
+
+    // Llama a la función openReport con el parámetro correcto
+    openReport(fechamesanioFormatted, 'fechaMesAnio');
+};
+
+// Función para abrir el reporte con el parámetro correcto
+//Ahora la función recibirá dos parámetros:
+
+//1- el valor del campo (Que será para filtrar la información para el reporte)
+//2- el nombre del campo de donde provendrá el valor.
+const openReport = (value, paramName) => {
+    const PATH = new URL(`${SERVER_URL}reports/admin/pagosmensualidad.php?${paramName}=${value}`);
+    window.open(PATH.href);
+};
+
+
+
+//Boleta de pago
+const openReport5 = (id) => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
     const PATH = new URL(`${SERVER_URL}reports/admin/boleta_pagos.php`);
     PATH.searchParams.append('idPagoARealizar', id);

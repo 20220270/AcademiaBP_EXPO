@@ -457,7 +457,6 @@ ORDER BY
                 INNER JOIN tb_alumnos USING(id_alumno)
                 INNER JOIN tb_clientes USING(id_cliente)
                 INNER JOIN tb_dias_pagos USING(id_dia_pago)
-                INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
                 INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
                 INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
                 INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)

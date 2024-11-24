@@ -246,8 +246,8 @@
                     <div class="col col-lg-11 text-center mx-auto">
                         <!-- campo del nombre producto -->
                         <label for="DiaEntreno" id="DiaEntreno">Datos de la compra:</label>
-                        <select class="form-select" aria-label="Default select example" name="idPago"
-                            id="idPago" required>
+                        <select class="form-select" aria-label="Default select example" name="idPago" id="idPago"
+                            required>
                         </select>
                     </div>
 
@@ -336,10 +336,30 @@
                                     <input id="codigoSWIFT" type="text" name="codigoSWIFT" class="form-control"
                                         autocomplete="off" oninput="debouncedActualizarDatosPago()">
                                 </div>
+
+                                <!-- Efectivo: Inputs para mostrar el precio a pagar, cuánto se pagó, cuánto se dio de cambio-->
+                                <div class="col-sm-12 col-md-6 mb-3" id="inputTotalPagar">
+                                    <label for="totalPagar" class="col-sm-7 col-form-label" id="cuentanumero">Total a pagar:</label>
+                                    <input id="totalPagar" type="numeber" name="totalPagar" class="form-control"
+                                        autocomplete="off" oninput="debouncedActualizarDatosPago()" disabled>
+                                </div>
+
+                                <div class="col-sm-12 col-md-6 mb-3" id="InputTotalDado">
+                                    <label for="totalDado" class="col-sm-7 col-form-label" id="codigos">Total dado por el cliente</label>
+                                    <input id="totalDado" type="number" name="totalDado" class="form-control"
+                                        autocomplete="off" oninput="debouncedActualizarDatosPago()">
+                                </div>
+
+                                <div class="col-sm-12 col-md-6 mb-3" id="inputVuelto">
+                                    <label for="cambioDado" class="col-sm-7 col-form-label" id="codigos">Cambio entregado</label>
+                                    <input id="cambioDado" type="text" name="cambioDado" class="form-control"
+                                        autocomplete="off" oninput="debouncedActualizarDatosPago()" disabled>
+                                </div>
                             </div>
                         </div>
 
-                        <button type="button" class="btn btn-dark col-lg-6 mt-1" onclick="finishOrder2()" id="botonFinalizar">
+                        <button type="button" class="btn btn-dark col-lg-6 mt-1" onclick="finishOrder2()"
+                            id="botonFinalizar">
                             <img src="../../resources/images/finich.png" alt="..." width="30px" height="30px">
                             Finalizar compra
                         </button>

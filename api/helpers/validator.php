@@ -211,38 +211,39 @@ class Validator
     *   Método para validar una contraseña.
     *   Parámetros: $value (dato a validar).
     *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
-    */    public static function validatePassword($value)
+    */
+    public static function validatePassword($value)
     {
         // Verificar si la contraseña contiene espacios.
         if (strpos($value, ' ') !== false) {
             self::$password_error = 'La contraseña no debe contener espacios';
             return false;
         }
- 
+
         // Verificar si la contraseña tiene al menos un número.
         if (!preg_match('/\d/', $value)) {
             self::$password_error = 'La contraseña debe contener al menos un número';
             return false;
         }
- 
+
         // Verificar si la contraseña tiene al menos un carácter especial.
         if (!preg_match('/[\W_]/', $value)) { // \W coincide con cualquier carácter no alfanumérico.
             self::$password_error = 'La contraseña debe contener al menos un carácter especial';
             return false;
         }
- 
+
         // Se verifica la longitud mínima.
         if (strlen($value) < 8) {
             self::$password_error = 'La contraseña es menor a 8 caracteres';
             return false;
         }
- 
+
         // Se verifica la longitud máxima.
         if (strlen($value) > 72) {
             self::$password_error = 'La contraseña es mayor a 72 caracteres';
             return false;
         }
- 
+
         return true;
     }
     /*
@@ -291,6 +292,25 @@ class Validator
         }
     }
 
+    public static function validateYearMonth($value)
+    {
+        // Divide el valor en dos partes separadas por '-'
+        $date = explode('-', $value);
+
+        // Verifica que tenga exactamente dos partes (año y mes)
+        if (count($date) === 2) {
+            $year = $date[0];
+            $month = $date[1];
+
+            // Verifica que el año tenga 4 dígitos y que el mes sea válido
+            if (preg_match('/^\d{4}$/', $year) && intval($month) >= 1 && intval($month) <= 12) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     /*
     *   Método para validar un valor de búsqueda.
     *   Parámetros: $value (dato a validar).
@@ -301,7 +321,7 @@ class Validator
         if (trim($value) == '') {
             self::$search_error = 'Ingrese un valor para buscar';
             return false;
-        } elseif(str_word_count($value) > 4) {
+        } elseif (str_word_count($value) > 4) {
             self::$search_error = 'La búsqueda contiene más de 4 palabras';
             return false;
         } elseif (self::validateString($value)) {
@@ -360,6 +380,4 @@ class Validator
             return false;
         }
     }
-
-    
 }

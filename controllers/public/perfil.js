@@ -240,7 +240,7 @@ const fillTable2 = async (form = null) => {
     // Inicializa el contenido de las cards.
     CARD_METODOS.innerHTML = '';
     // Verifica la acción a realizar.
-    const action = (form) ? 'searchRows' : 'readAll';
+    const action = (form) ? 'searchRows' : 'readAll2';
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(MENSUALIDAD_API, action, form);
     // Comprueba si la respuesta es satisfactoria, de lo contrario muestra un mensaje con la excepción.

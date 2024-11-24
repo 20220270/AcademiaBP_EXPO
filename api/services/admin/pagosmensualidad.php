@@ -29,7 +29,7 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
 
-                    !$pagos->setIdAlumnoCategoria($_POST['SelectDatosPago']) or
+                    !$pagos->setIdAlumnoCategoria($_POST['idPago']) or
                     !$pagos->setIdMetodo($_POST['idMetodoPago']) ||
                     !$pagos->setInformacion($_POST['datosPago'])
                 ) {
@@ -100,7 +100,7 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$pagos->setIdPago($_POST['idPagoARealizar']) or
-                    !$pagos->setIdAlumnoCliente($_POST['SelectDatosPago']) or
+                    !$pagos->setIdAlumnoCategoria($_POST['idPago']) or
                     !$pagos->setEstado($_POST['selectEstado'])
                 ) {
                     $result['error'] = $pagos->getDataError();

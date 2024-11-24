@@ -41,7 +41,15 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen métodos de pago registrados';
                 }
                 break;
-                
+
+            case 'readAll2':
+                if ($result['dataset'] = $metodospagos->readAll2()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No existen métodos de pago registrados';
+                }
+                break;
+
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

@@ -262,33 +262,40 @@ class ComprasHandler
     public function readCompras()
     {
     $sql = "SELECT 
-                id_compra, 
-                CONCAT(
-                    COALESCE(CONCAT(nombre_cliente, ' ', apellido_cliente), 
-                    CONCAT(nombre_alumno, ' ', apellido_alumno)), 
-                    ' - ', 
-                    GROUP_CONCAT(nombre_producto SEPARATOR ', ')
-                ) AS datocompra
-            FROM 
-                tb_detalles_compras 
-            LEFT JOIN 
-                tb_compras USING(id_compra)
-            LEFT JOIN 
-                tb_detalleproducto USING(id_detalle_producto)
-            LEFT JOIN 
-                tb_productos USING(id_producto)
-            LEFT JOIN 
-                tb_clientes USING(id_cliente)
-            LEFT JOIN 
-                tb_metodos_pago USING(id_metodo_pago)
-            LEFT JOIN 
-                tb_alumnos USING(id_alumno)
-            WHERE 
-                estado_compra = 'Pendiente'
-            GROUP BY 
-                id_compra
-            ORDER BY 
-                id_compra";
+    id_compra, 
+    CONCAT(
+        COALESCE(CONCAT(nombre_cliente, ' ', apellido_cliente), 
+        CONCAT(nombre_alumno, ' ', apellido_alumno)), 
+        ' - ', 
+        GROUP_CONCAT(nombre_producto SEPARATOR ', '), 
+        ' - ', 
+        FORMAT(SUM(tb_productos.precio_producto), 2)
+    ) AS datocompra
+FROM 
+    tb_detalles_compras 
+LEFT JOIN 
+    tb_compras USING(id_compra)
+LEFT JOIN 
+    tb_detalleproducto USING(id_detalle_producto)
+LEFT JOIN 
+    tb_productos USING(id_producto)
+LEFT JOIN 
+    tb_clientes USING(id_cliente)
+LEFT JOIN 
+    tb_metodos_pago USING(id_metodo_pago)
+LEFT JOIN 
+    tb_alumnos USING(id_alumno)
+WHERE 
+    estado_compra = 'Pendiente'
+GROUP BY 
+    id_compra, 
+    nombre_cliente, 
+    apellido_cliente, 
+    nombre_alumno, 
+    apellido_alumno
+ORDER BY 
+    id_compra;
+";
     
     return Database::getRows($sql);
     }
@@ -329,7 +336,10 @@ class ComprasHandler
     //Método para consultar los métodos de pago
     public function readMetodosPago()
     {
-        $sql = "SELECT id_metodo_pago, nombre_metodo, imagen_metodo FROM tb_metodos_pago ORDER BY id_metodo_pago";
+        $sql = "SELECT id_metodo_pago, nombre_metodo, imagen_metodo
+                FROM tb_metodos_pago
+                WHERE nombre_metodo != 'Efectivo'
+                ORDER BY id_metodo_pago";
         return Database::getRows($sql);
     }
 

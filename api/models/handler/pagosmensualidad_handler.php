@@ -85,6 +85,7 @@ class PagosMensualidadHandler
                    fecha_pago, 
             nombre_metodo 
             FROM tb_pagos
+            INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
             INNER JOIN tb_alumnos USING(id_alumno)
             INNER JOIN tb_clientes USING(id_cliente)
             INNER JOIN tb_dias_pagos USING(id_dia_pago)
@@ -108,6 +109,7 @@ class PagosMensualidadHandler
                    fecha_pago,
             nombre_metodo 
             FROM tb_pagos
+            INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
             INNER JOIN tb_alumnos USING(id_alumno)
             INNER JOIN tb_clientes USING(id_cliente)
             INNER JOIN tb_dias_pagos USING(id_dia_pago)
@@ -133,6 +135,7 @@ class PagosMensualidadHandler
                    fecha_pago, 
             nombre_metodo 
             FROM tb_pagos
+            INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
             INNER JOIN tb_alumnos USING(id_alumno)
             INNER JOIN tb_clientes USING(id_cliente)
             INNER JOIN tb_dias_pagos USING(id_dia_pago)
@@ -158,20 +161,22 @@ class PagosMensualidadHandler
                    fecha_pago, 
             nombre_metodo 
             FROM tb_pagos
+            INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
             INNER JOIN tb_alumnos USING(id_alumno)
             INNER JOIN tb_clientes USING(id_cliente)
             INNER JOIN tb_dias_pagos USING(id_dia_pago)
             LEFT JOIN tb_metodos_pago USING (id_metodo_pago)
             WHERE DATE(tb_pagos.fecha_pago) = ?
             ORDER BY fecha_pago DESC;";
-        $params = array($this ->fecha);
+        $params = array($this->fecha);
         return Database::getRows($sql, $params);
     }
 
     public function readOne()
     {
-        $sql = "SELECT id_pago, id_alumno_categoria, estado_pago from tb_pagos
+        $sql = "SELECT id_pago, id_alumno_categoria, estado_pago, fecha_pago, id_metodo_pago, nombre_metodo, informacion_metodo_pago from tb_pagos
         INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
+        INNER JOIN tb_metodos_pago USING(id_metodo_pago)
         INNER JOIN tb_alumnos USING(id_alumno)
         INNER JOIN tb_clientes USING(id_cliente)
         INNER JOIN tb_dias_pagos USING(id_dia_pago)
@@ -180,12 +185,45 @@ class PagosMensualidadHandler
         return Database::getRow($sql, $params);
     }
 
+    //Método para validar un pago dependiendo la fecha seleccionada (reporte)
+    public function readOne2()
+    {
+        $sql = "SELECT id_pago, id_alumno_categoria, estado_pago, fecha_pago, id_metodo_pago, nombre_metodo, informacion_metodo_pago from tb_pagos
+        INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
+        INNER JOIN tb_metodos_pago USING(id_metodo_pago)
+        INNER JOIN tb_alumnos USING(id_alumno)
+        INNER JOIN tb_clientes USING(id_cliente)
+        INNER JOIN tb_dias_pagos USING(id_dia_pago)
+        INNER JOIN tb_metodos_pago USING(id_metodo_pago)
+        WHERE fecha_pago = ?";
+        $params = array($this->fecha);
+        return Database::getRow($sql, $params);
+    }
+
+    //Método para validar un pago dependiendo la fecha seleccionada (reporte)
+    public function readOne3()
+    {
+        $sql = "SELECT id_pago, id_alumno_categoria, estado_pago, fecha_pago, nombre_metodo,
+    DATE_FORMAT(fecha_pago, '%Y-%m') as mesanio, id_metodo_pago, nombre_metodo, informacion_metodo_pago 
+            FROM tb_pagos
+            INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
+                    INNER JOIN tb_metodos_pago USING(id_metodo_pago)
+            INNER JOIN tb_alumnos USING(id_alumno)
+            INNER JOIN tb_clientes USING(id_cliente)
+            INNER JOIN tb_dias_pagos USING(id_dia_pago)
+            INNER JOIN tb_metodos_pago USING(id_metodo_pago)
+            WHERE DATE_FORMAT(fecha_pago, '%Y-%m') = ?";
+        $params = array($this->fecha);
+        return Database::getRow($sql, $params);
+    }
+
+
     public function updateRow()
     {
         $sql = 'UPDATE tb_pagos
-                SET estado_pago = ?, id_alumno = ?
+                SET estado_pago = ?, id_alumno_categoria = ?
                 WHERE id_pago = ?';
-        $params = array($this->estado, $this->idalumno, $this->idpago);
+        $params = array($this->estado, $this->idalumnocategoria, $this->idpago);
         return Database::executeRow($sql, $params);
     }
 
@@ -204,13 +242,12 @@ class PagosMensualidadHandler
         $sql = "SELECT 
     id_alumno_categoria, 
     CONCAT(
-        nombre_alumno, ' ', apellido_alumno, ' - ', 
-        nombre_cliente, ' ', apellido_cliente, ' - ', 
+        nombre_alumno, ' ', apellido_alumno, ', ', nombre_cliente, ' ', apellido_cliente, ' - ', 
         numero_dias, ' ', 
         CASE 
             WHEN numero_dias = 1 THEN 'día' 
             ELSE 'días' 
-        END, ' - $ ', 
+        END, ' - ', 
         mensualidad_pagar
     ) AS Detalles
 FROM tb_alumnos_categorias
@@ -262,6 +299,9 @@ ORDER BY id_alumno_categoria;
         return Database::getRows($sql);
     }
 
+    //Reportes de pagos de mensualidad -----------------------
+
+    //Reporte para una fecha específica
     public function reportPagos()
     {
         $sql = "SELECT CONCAT(nombre_alumno, ' ', apellido_alumno) AS Nombre, CONCAT(nombre_cliente, ' ', apellido_cliente) AS NombreCliente, 
@@ -270,9 +310,32 @@ ORDER BY id_alumno_categoria;
         INNER JOIN tb_alumnos USING (id_alumno)
         INNER JOIN tb_clientes USING (id_cliente)
         INNER JOIN tb_dias_pagos USING (id_dia_pago)
-        ORDER BY fecha_pago ASC";
-        return Database::getRows($sql);
+        WHERE DATE(tb_pagos.fecha_pago) = ?
+        ORDER BY id_pago ASC";
+        $params = array($this->fecha);
+        return Database::getRows($sql, $params);
     }
+
+    public function reportPagosMesAnio()
+    {
+        $sql = "SELECT CONCAT(nombre_alumno, ' ', apellido_alumno) AS Nombre, 
+                   CONCAT(nombre_cliente, ' ', apellido_cliente) AS NombreCliente, 
+                   mensualidad_pagar, fecha_pago, DATE_FORMAT(tb_pagos.fecha_pago, '%Y-%m') as mesanio 
+            FROM tb_pagos
+            INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
+            INNER JOIN tb_alumnos USING (id_alumno)
+            INNER JOIN tb_clientes USING (id_cliente)
+            INNER JOIN tb_dias_pagos USING (id_dia_pago)
+            WHERE DATE_FORMAT(tb_pagos.fecha_pago, '%Y-%m') = ?
+            ORDER BY id_pago ASC";
+        $params = array($this->fecha);
+        return Database::getRows($sql, $params);
+    }
+
+
+    //Fin de reportes de pagos de mensualidad -----------------------
+
+
 
     //Consulta para el reporte de la boleta de pagos
 

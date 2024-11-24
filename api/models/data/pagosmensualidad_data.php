@@ -38,15 +38,24 @@ class PagosMensualidadData extends PagosMensualidadHandler
     }
 
     public function setFechaPago($value)
-    {
-        if (Validator::validateDate($value)) {
-            $this->fecha = $value;
-            return true;
-        } else {
-            $this->data_error = 'Formato de fecha incorrecto';
-            return false;
-        }
+{
+
+    
+    // Valida si el formato es YYYY-MM
+    if (Validator::validateYearMonth($value)) {
+        $this->fecha = $value;
+        return true;
     }
+    // Valida si el formato es YYYY-MM-DD
+    else if (Validator::validateDate($value)) {
+        $this->fecha = $value;
+        return true;
+    } else {
+        $this->data_error = 'Formato de fecha incorrecto';
+        return false;
+    }
+}
+
 
      
     public function setCuotasAnuales($value)
