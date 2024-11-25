@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 <button type="button" class="btn mt-1 mx-1" id="btnDetalles" name="btnDetalles" onclick="fillTable(${row.id_producto})">
                                     <img src="../../resources/images/verdetalles.png" alt="" width="30px" height="30px" class="mb-1">
                                 </button>
-                                <button type="button" class="btn mt-1 mx-1" id="btnComentarios" name="btnComentarios" onclick="fillTable2(${row.id_producto}, '${row.nombre_producto}')">
-                                    <img src="../../resources/images/comentarios.png" alt="" width="30px" height="30px" class="mb-1">
+                                <button type="button" class="btn mt-1 mx-1" id="btnComentarios" name="btnComentarios" onclick="fillTable2(${row.id_producto}, '${row.nombre_producto}')" title="Ver valoraciones realizadas: ${row.total_valoraciones} valoraciones">
+                                    <img src="../../resources/images/comentarios.png" alt="" width="30px" height="30px" class="mb-1"> ${row.total_valoraciones}
                                 </button>
                                     </div>
                                         </ul>
@@ -137,7 +137,7 @@ const fillTable = async (id) => {
                                 </div>
                             </div>
                             <div class="card-body text-center">
-                                <a href="detallesproductos.html?idDetalle=${row.id_detalle_producto}&idProducto=${row.id_producto}&nombreProducto=${row.nombre_producto}&idTalla=${row.id_talla}&idColor=${row.id_color}" class="btn" id="btnVermas">Comenzar compra</a>
+                                <a href="detallesproductos.html?idDetalle=${row.id_detalle_producto}&idProducto=${row.id_producto}&nombreProducto=${row.nombre_producto}&idTalla=${row.id_talla}&idColor=${row.id_color}" class="btn" id="btnVermas" title="Inicia tu compra">Comenzar compra</a>
                             </div>
                         </div>
                     </div>

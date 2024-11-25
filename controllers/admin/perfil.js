@@ -84,11 +84,12 @@ const fillTable = async (form = null) => {
                 row.tipo_notificacion === 'Dato agregado' ? 'red' :
                 row.tipo_notificacion === 'Compra realizada' ? 'green' :
                 row.tipo_notificacion === 'Valoración realizada' ? 'orange' :
+                row.tipo_notificacion === 'Pago realizado' ? 'yellow' :
                 'gray'; // Color por defecto
 
             CARD_NOTIFICACIONES.innerHTML += `
         <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4 mt-5 text-center">
-          <div class="card h-100" id="cards" style="border-left: 5px solid ${borderColor};"> <!-- Estilo de borde izquierdo -->
+          <div class="card h-100" id="cards" title="${row.tipo_notificacion}" style="border-left: 5px solid ${borderColor};"> <!-- Estilo de borde izquierdo -->
             <div class="card-body">
               <div class="status-circle ${row.tipo_notificacion === 'Nueva inscripción' ? 'nuevainscripción' : 
                   row.tipo_notificacion === 'Dato agregado' ? 'datoagregado' :  
