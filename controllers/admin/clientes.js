@@ -1,4 +1,5 @@
 const CLIENTES_API = 'services/admin/clientes.php';
+const COMPRA_API = 'services/admin/compras.php';
 const CLIENTES_API2 = 'http://localhost/AcademiaBP_EXPO/api/services/admin/clientes.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
@@ -15,6 +16,7 @@ const CARD_CLIENTESINACTIVOS = document.getElementById('clientesInactivos');
 
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm')
+const CLIENTECOMPRA_FORM = document.getElementById('formClientes')
 
 ID_CLIENTE = document.getElementById('idCliente'),
     NOMBRE_CLIENTE = document.getElementById('nombreCliente'),
@@ -116,7 +118,8 @@ const fillTable = async (form = null) => {
             // Crea y concatena las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
             <tr>
-                <td>${row.id_cliente}</td>
+                
+                <td class="d-none" id="idclien">${row.id_cliente}</td>
                 <td><img src="${SERVER_URL}images/clientes/${row.foto_cliente}" class="card-img-top rounded-circle"></td>
                 <td>${row.nombre_completo}</td>
                 <td>${row.dui_cliente}</td>
@@ -134,6 +137,9 @@ const fillTable = async (form = null) => {
                     </button>
                     <button type="button" class="btn btn-sm" onclick="openGraph(${row.id_cliente}, this)"  title="Generar gráfico de compras del cliente ${row.nombre_completo}">
                         <img src="../../resources/images/graph.png" alt="" width="20px" height="20px" class="mb-1">
+                    </button>
+                    <button type="button" class="btn btn-sm" onclick="iniciarCompra(${row.id_cliente}, this)"  title="Iniciar compra para el cliente ${row.nombre_completo}">
+                        <img src="../../resources/images/iniciarcompra.png" alt="" width="25px" height="25px" class="mb-1">
                     </button>
                 </td>
                 <td id="chartColumn-${row.id_cliente}"></td>
@@ -284,6 +290,29 @@ const openReport = () => {
     const PATH = new URL(`${SERVER_URL}reports/admin/clientes.php`);
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
+}
+
+async function iniciarCompra(idcliente) {
+    // Mostrar un mensaje de confirmación y capturar la respuesta
+    const RESPONSE = await confirmAction('¿Está seguro de iniciar una compra?');
+    
+    // Verificar la respuesta del mensaje
+    if (RESPONSE) {
+        // Constante tipo objeto con los datos del formulario
+        const FORM = new FormData(CLIENTECOMPRA_FORM);
+        // Añadir el ID del alumno al formulario
+        FORM.append('idclien', idcliente);
+        
+        // Petición para iniciar la compra
+        const DATA = await fetchData(COMPRA_API, 'startOrder3', FORM);
+        
+        // Comprobar si la respuesta es satisfactoria, de lo contrario mostrar un mensaje con la excepción
+        if (DATA.status) {
+            sweetAlert(1, DATA.message, true);
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    }
 }
 
 //Método para generar el gráfico de los productos más comprados por un cliente seleccionado

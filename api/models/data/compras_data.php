@@ -158,13 +158,24 @@ class ComprasData extends ComprasHandler
         }
     }
 
-    public function setIdAlumno($value) //id del pedido
+    public function setIdAlumno($value) //id del alumno
     {
         if (Validator::validateNaturalNumber($value)) {
             $this->idalumno = $value;
             return true;
         } else {
             $this->data_error = 'El identificador del alumno es incorrecto';
+            return false;
+        }
+    }
+
+    public function setIdCliente($value) //id del cliente, sitio privado
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->idcliente = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del cliente es incorrecto';
             return false;
         }
     }

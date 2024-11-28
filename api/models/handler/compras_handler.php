@@ -22,6 +22,7 @@ class ComprasHandler
     protected $fecha = null;
     protected $idmetodopago = null;
     protected $informacionmetodo = null;
+    protected $idcliente = null;
     protected $idalumno = null;
 
     // Constante para establecer la ruta de las imágenes a mostrar.
@@ -201,6 +202,21 @@ class ComprasHandler
         }
     }
 
+    public function getOrder3()
+    {
+        $this->estadocompra = 'Pendiente';
+        $sql = 'SELECT id_compra
+                FROM tb_compras
+                WHERE estado_compra = ? AND id_cliente = ?';
+        $params = array($this->estadocompra, $this->idcliente);
+        if ($data = Database::getRow($sql, $params)) {
+            $_SESSION['idCompra'] = $data['id_compra'];
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // Método para iniciar un pedido en proceso.
     public function startOrder()
     {
@@ -229,6 +245,23 @@ class ComprasHandler
                     VALUES((SELECT direccion_cliente FROM tb_alumnos
                     INNER JOIN tb_clientes USING (id_cliente) WHERE id_alumno = ?), ?, ?)'; //Se manda la direccion dependiendo el ID del cliente
             $params = array($this->idalumno, $this->idalumno, $this->estadocompra);
+            // Se obtiene el ultimo valor insertado de la llave primaria en la tabla pedido.
+            if ($_SESSION['idCompra'] = Database::getLastRow($sql, $params)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public function startOrder3()
+    {
+        if ($this->getOrder3()) {
+            return true;
+        } else {
+            $sql = 'INSERT INTO tb_compras(direccion_compra, id_cliente, estado_compra)
+                    VALUES((SELECT direccion_cliente FROM tb_clientes WHERE id_cliente = ?), ?, ?)'; //Se manda la direccion dependiendo el ID del cliente
+            $params = array($this->idcliente, $this->idcliente, $this->estadocompra);
             // Se obtiene el ultimo valor insertado de la llave primaria en la tabla pedido.
             if ($_SESSION['idCompra'] = Database::getLastRow($sql, $params)) {
                 return true;

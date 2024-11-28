@@ -45,6 +45,26 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+            case 'startOrder3':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$ordenes->setIdCliente($_POST['idclien'])
+                ) {
+                    $result['error'] = $ordenes->getDataError();
+                } else {
+                    try {
+                        if ($ordenes->startOrder3()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Compra iniciado con éxito';
+                        } else {
+                            $result['error'] = 'No se pudo iniciar la compra';
+                        }
+                    } catch (Exception $e) {
+                        $result['error'] = 'Error al registrar la compra: ' . $e->getMessage();
+                    }
+                }
+                break;
+
             case 'createDetail2':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -72,7 +92,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen compras registradas';
                 }
                 break;
-                
+
             case 'readCompras':
                 if ($result['dataset'] = $ordenes->readCompras()) {
                     $result['status'] = 1;

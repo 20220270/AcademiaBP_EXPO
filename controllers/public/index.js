@@ -45,7 +45,12 @@ const SOPORTETECNICO_API = 'services/public/soportetecnico.php';
             });
         } else {
             // Se asigna al título del contenido de la excepción cuando no existen datos para mostrar.
-            MAIN_TITLE.textContent = DATA.error;
+            CATEGORIAS.innerHTML = `
+                    <div class="center-content">
+                        <img src="../../resources/images/no-hay-resultados.png" alt="No comments available" height="80px" width="80px">
+                        <b>Aún no hay categorías disponibles</b>
+                    </div>
+                `;
         }
 
         if (DATA2.status) {

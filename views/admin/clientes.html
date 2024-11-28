@@ -27,7 +27,7 @@
 </head>
 
 <body>
-    
+
     <button class="toggle-btn1 d-md-none d-flex" type="button" onclick="toggleSidebar()">
         <img src="../../resources/images/logoAcademiaBP.png" alt="" width="30px" height="30px">
     </button>
@@ -40,14 +40,14 @@
             <div class="card-container d-flex justify-content-around">
                 <!-- Contenedor para mostrar el total de clientes -->
                 <div class="card col-4 col-md-4 my-2" id="clientestotal"></div>
-            
+
                 <!-- Contenedor para clientes activos -->
                 <div class="card col-4 col-md-4 my-2" id="clientesActivos"></div>
-            
+
                 <!-- Contenedor para clientes inactivos -->
                 <div class="card col-4 col-md-4 my-2" id="clientesInactivos"></div>
             </div>
-            
+
 
             <div class="col">
                 <div class="row">
@@ -64,23 +64,26 @@
                             </div>
 
                         </form>
-                        
+
                         <div class="col-3 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
-                            <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate()"  title="Registrar cliente">
+                            <button type="button" class="btn btn-white me-md-2 mt-1" onclick="openCreate()"
+                                title="Registrar cliente">
                                 <img src="../../resources/images/agregar.png" alt="buttonpng" width="60rem" />
                             </button>
                         </div>
                         <div class="col-3 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
-                            <button type="button" class="btn btn-white me-md-2" onclick="openReport()"  title="Generar reporte de todos los clientes registrados">
-                                <img src="../../resources/images/reportee.png" alt="buttonpng" width="50rem" height="50rem"/>
+                            <button type="button" class="btn btn-white me-md-2" onclick="openReport()"
+                                title="Generar reporte de todos los clientes registrados">
+                                <img src="../../resources/images/reportee.png" alt="buttonpng" width="50rem"
+                                    height="50rem" />
                             </button>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
 
-            
+
             <div class="col-7 d-flex justify-content-end"> <!-- Botón alineado a la derecha -->
                 <button type="button" id="toggleViewBtn" class="toggleViewBtn btn btn-dark me-md-2 mt-5 mb-4 mx-5">
                     Ver clientes recientes
@@ -107,10 +110,12 @@
                                 <th class="table-dark text-white fw-bold">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="tableBody" class="justify-content-center align-items-center">
+                        <form id="formClientes">
+                            <tbody id="tableBody" class="justify-content-center align-items-center">
 
 
-                        </tbody>
+                            </tbody>
+                        </form>
                     </table>
                 </div>
             </div>
@@ -153,7 +158,8 @@
                                     <!-- Label e input para agregar el DUI -->
                                     <label class="form-label">Dui:</label>
                                     <input type="text" class="form-control mb-2" id="duiCliente" name="duiCliente"
-                                        required maxlength="10" oninput="this.value = this.value.replace(/[^0-9-]/g, '')" pattern="[0-9-]+">
+                                        required maxlength="10"
+                                        oninput="this.value = this.value.replace(/[^0-9-]/g, '')" pattern="[0-9-]+">
                                 </div>
 
                                 <div class="mb-2">
