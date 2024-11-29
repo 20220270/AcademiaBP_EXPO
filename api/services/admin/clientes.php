@@ -57,6 +57,15 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen clientes registrados';
                 }
                 break;
+                case 'readAlumnos2':
+                    if (!$cliente->setId($_POST['idCliente'])) {
+                        $result['error'] = $cliente->getDataError();
+                    } elseif ($result['dataset'] = $cliente->readAlumnos2()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Cliente inexistente';
+                    }
+                    break;
             case 'readOne':
                 if (!$cliente->setId($_POST['idCliente'])) {
                     $result['error'] = $cliente->getDataError();

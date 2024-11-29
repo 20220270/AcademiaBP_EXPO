@@ -206,23 +206,28 @@ const fillTable = async (correo) => {
             rows.forEach(row => {
                 CARDS_ALUMNOSREG.innerHTML += `
                     <div class="card mb-4 mt-4" id="borderAlumnos">
-                        <div class="card-body">
-                        <img src="${SERVER_URL}images/alumnos/${row.foto_alumno}" class="card-img-top rounded-circle mb-4" height="30px" width="30px">
-                            <input id="SelectDatosPago-${row.id_alumno}" type="text" name="SelectDatosPago" class="form-control" value="${row.id_alumno}" hidden>
-                            <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
-                            <p class="card-text"><b>Edad: </b>${row.edad} años</p>
-                            <p class="card-text"><b>Categoría(s): </b>${row.categoria}</p>
-                            <p class="card-text"><b>Numero de dias que entrena: </b>${row.numero_dias}</p>
-                            <button type="button" class="btn .btn-pagar btnPagar" onclick= openCreate(${row.id_alumno_categoria}) data-id="${row.id_alumno_categoria}">
+    <div class="card-body">
+        <div class="row align-items-center">
+            <!-- Columna para la imagen -->
+            <div class="col-md-6 text-center mx-auto">
+                <img src="${SERVER_URL}images/alumnos/${row.foto_alumno}" class="rounded-circle mb-4" height="10px" width="10px">
+            </div>
+            <!-- Columna para la información -->
+            <div class="col-md-12 mx-auto">
+                <input id="SelectDatosPago-${row.id_alumno}" type="text" name="SelectDatosPago" class="form-control" value="${row.id_alumno}" hidden>
+                <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
+                <p class="card-text"><b>Edad: </b>${row.edad} años</p>
+                <p class="card-text"><b>Categoría(s): </b>${row.categoria}</p>
+                <button type="button" class="btn .btn-pagar btnPagar" onclick= openCreate(${row.id_alumno_categoria}) data-id="${row.id_alumno_categoria}">
                                 <img src="../../resources/images/mensualidadp.png" height="25px" width="25px" class="me-2"> Pagar mensualidad
                             </button>
                             <button type="button" class="btn btnPagar mt-3" data-id="${row.id_alumno}" onclick="openReport(this)">
                                 <img src="../../resources/images/mensualidadp.png" height="25px" width="25px" class="me-2"> Historial de pago del alumno
                             </button>
-
-
-                        </div>
-                    </div>
+            </div>
+        </div>
+    </div>
+</div>
                 `;
             });
         } else {
@@ -283,6 +288,7 @@ const openCreate = (idAlumno) => {
     fillTable2();
     mostrarInputs();
 };
+
 
 
 async function submitForm(event) {

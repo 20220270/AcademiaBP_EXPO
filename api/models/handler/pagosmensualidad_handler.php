@@ -27,6 +27,7 @@ class PagosMensualidadHandler
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = "SELECT id_pago, CONCAT(nombre_alumno, ' ', apellido_alumno) as 'Alumno',
             CONCAT(nombre_cliente, ' ', apellido_cliente) as 'Encargado',   telefono_cliente, numero_dias, mensualidad_pagar, estado_pago, fecha_pago, nombre_metodo from tb_pagos
+            INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
             INNER JOIN tb_alumnos USING(id_alumno)
             INNER JOIN tb_clientes USING(id_cliente)
             INNER JOIN tb_dias_pagos USING(id_dia_pago)
@@ -194,8 +195,7 @@ class PagosMensualidadHandler
         INNER JOIN tb_alumnos USING(id_alumno)
         INNER JOIN tb_clientes USING(id_cliente)
         INNER JOIN tb_dias_pagos USING(id_dia_pago)
-        INNER JOIN tb_metodos_pago USING(id_metodo_pago)
-        WHERE fecha_pago = ?";
+        WHERE DATE(fecha_pago) = ?";
         $params = array($this->fecha);
         return Database::getRow($sql, $params);
     }
@@ -207,11 +207,10 @@ class PagosMensualidadHandler
     DATE_FORMAT(fecha_pago, '%Y-%m') as mesanio, id_metodo_pago, nombre_metodo, informacion_metodo_pago 
             FROM tb_pagos
             INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
-                    INNER JOIN tb_metodos_pago USING(id_metodo_pago)
-            INNER JOIN tb_alumnos USING(id_alumno)
-            INNER JOIN tb_clientes USING(id_cliente)
-            INNER JOIN tb_dias_pagos USING(id_dia_pago)
-            INNER JOIN tb_metodos_pago USING(id_metodo_pago)
+        INNER JOIN tb_metodos_pago USING(id_metodo_pago)
+        INNER JOIN tb_alumnos USING(id_alumno)
+        INNER JOIN tb_clientes USING(id_cliente)
+        INNER JOIN tb_dias_pagos USING(id_dia_pago)
             WHERE DATE_FORMAT(fecha_pago, '%Y-%m') = ?";
         $params = array($this->fecha);
         return Database::getRow($sql, $params);
@@ -264,7 +263,13 @@ ORDER BY id_alumno_categoria;
 
     public function readAlumnosTotal()
     {
-        $sql = "SELECT COUNT(*) AS total_alumnos_registrados FROM tb_alumnos WHERE estado_alumno = 'Activo' OR estado_alumno = 'Inactivo';";
+        $sql = "SELECT COUNT(*) AS total_alumnos_registrados 
+        FROM tb_alumnos 
+        INNER JOIN tb_dias_pagos USING(id_dia_pago)
+        WHERE 
+        (estado_alumno = 'Activo' OR estado_alumno = 'Inactivo')
+        AND mensualidad_pagar != 0.00;
+        ";
         return Database::getRows($sql);
     }
 
@@ -277,9 +282,11 @@ ORDER BY id_alumno_categoria;
                 FROM tb_pagos
                 INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
                 INNER JOIN tb_alumnos USING(id_alumno)
+                INNER JOIN tb_dias_pagos USING(id_dia_pago)
                 WHERE estado_pago = 'Pagado'
                 AND YEAR(fecha_pago) = YEAR(CURDATE()) 
                 AND MONTH(fecha_pago) = MONTH(CURDATE())
+                AND mensualidad_pagar != 0.00
                 AND (estado_alumno = 'Activo' OR estado_alumno = 'Inactivo');";
         return Database::getRows($sql);
     }
@@ -289,12 +296,21 @@ ORDER BY id_alumno_categoria;
     public function readAlumnosSinPagar()
     {
         $sql = "SELECT 
-                (SELECT COUNT(*) FROM tb_alumnos WHERE estado_alumno = 'Activo' OR estado_alumno = 'Inactivo') - 
+                (SELECT COUNT(*) AS total_alumnos_registrados 
+                FROM tb_alumnos 
+                INNER JOIN tb_dias_pagos USING(id_dia_pago)
+                WHERE 
+                (estado_alumno = 'Activo' OR estado_alumno = 'Inactivo')
+                AND mensualidad_pagar != 0.00) - 
                 (SELECT COUNT(*) FROM tb_pagos 
                 INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
                 INNER JOIN tb_alumnos USING(id_alumno)
-                WHERE estado_pago = 'Pagado' AND YEAR(fecha_pago) = YEAR(CURDATE()) AND (estado_alumno = 'Activo' OR estado_alumno = 'Inactivo')
-              AND MONTH(fecha_pago) = MONTH(CURDATE())) 
+                INNER JOIN tb_dias_pagos USING(id_dia_pago)
+                WHERE estado_pago = 'Pagado'
+                AND YEAR(fecha_pago) = YEAR(CURDATE()) 
+                AND MONTH(fecha_pago) = MONTH(CURDATE())
+                AND mensualidad_pagar != 0.00
+                AND (estado_alumno = 'Activo' OR estado_alumno = 'Inactivo'))
                 AS total_alumnos_sin_pagar;";
         return Database::getRows($sql);
     }
@@ -326,7 +342,7 @@ ORDER BY id_alumno_categoria;
             INNER JOIN tb_alumnos USING (id_alumno)
             INNER JOIN tb_clientes USING (id_cliente)
             INNER JOIN tb_dias_pagos USING (id_dia_pago)
-            WHERE DATE_FORMAT(tb_pagos.fecha_pago, '%Y-%m') = ?
+            WHERE DATE_FORMAT(tb_pagos.fecha_pago, '%Y-%m') = '2024-11'
             ORDER BY id_pago ASC";
         $params = array($this->fecha);
         return Database::getRows($sql, $params);

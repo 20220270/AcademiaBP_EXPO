@@ -1,11 +1,16 @@
 tbody{
-    font-size: 11px;
+    font-size: 10px;
 }
 ::placeholder{
     font-size: 13px;
 }
 main{
     max-height: 740px;
+    overflow-y: auto;
+}
+
+#formAlumnos{
+    max-height: 400px;
     overflow-y: auto;
 }
 

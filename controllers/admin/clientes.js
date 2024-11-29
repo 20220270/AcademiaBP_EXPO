@@ -10,12 +10,17 @@ const TABLE_BODY = document.getElementById('tableBody'),
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
 
+const SAVE_MODAL2 = new bootstrap.Modal('#saveModal2'),
+    MODAL_TITLE2 = document.getElementById('modalTitle2');
+
 const CARD_CLIENTES = document.getElementById('clientestotal');
 const CARD_CLIENTESACTIVOS = document.getElementById('clientesActivos');
 const CARD_CLIENTESINACTIVOS = document.getElementById('clientesInactivos');
+const CARDS_ALUMNOS = document.getElementById('cardsAlumnos');
 
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm')
+const SAVE_FORM2 = document.getElementById('formAlumnos')
 const CLIENTECOMPRA_FORM = document.getElementById('formClientes')
 
 ID_CLIENTE = document.getElementById('idCliente'),
@@ -141,6 +146,9 @@ const fillTable = async (form = null) => {
                     <button type="button" class="btn btn-sm" onclick="iniciarCompra(${row.id_cliente}, this)"  title="Iniciar compra para el cliente ${row.nombre_completo}">
                         <img src="../../resources/images/iniciarcompra.png" alt="" width="25px" height="25px" class="mb-1">
                     </button>
+                    <button type="button" class="btn btn-sm" onclick="fillTable5(${row.id_cliente}, '${row.nombre_completo}')"  title="Ver alumnos a cargo de ${row.nombre_completo}">
+                        <img src="../../resources/images/nosotros.negro.png" alt="" width="25px" height="25px" class="mb-1">
+                    </button>
                 </td>
                 <td id="chartColumn-${row.id_cliente}"></td>
             </tr>
@@ -213,6 +221,50 @@ const fillTable4 = async (form = null) => {
     } else {
         sweetAlert(4, DATA.error, true);
     }
+}
+
+const fillTable5 = async (id, nombre) => {
+    CARDS_ALUMNOS.innerHTML = '';
+
+    const FORM = new FormData();
+    FORM.append('idCliente', id);
+
+    // Petición para obtener los registros disponibles.
+    const DATA = await fetchData(CLIENTES_API, 'readAlumnos2', FORM);
+
+    // Comprueba si la respuesta es satisfactoria; de lo contrario, muestra un mensaje de error.
+    if (DATA.status) {
+        // Recorre el conjunto de registros fila por fila.
+        DATA.dataset.forEach(row => {
+            // Crea y concatena las filas de la tabla con los datos de cada registro.
+            CARDS_ALUMNOS.innerHTML += `
+            <div class="card mb-4 mt-4" id="borderAlumnos">
+    <div class="card-body">
+        <div class="row align-items-center">
+            <!-- Columna para la imagen -->
+            <div class="col-md-4 text-center">
+                <img src="${SERVER_URL}images/alumnos/${row.foto_alumno}" class="rounded-circle mb-4 mx-auto" height="80px" width="80px">
+            </div>
+            <!-- Columna para la información -->
+            <div class="col-md-8">
+                <input id="SelectDatosPago-${row.id_alumno}" type="text" name="SelectDatosPago" class="form-control" value="${row.id_alumno}" hidden>
+                <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
+                <p class="card-text"><b>Edad: </b>${row.edad} años</p>
+                <p class="card-text"><b>Categoría(s): </b>${row.categoria}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+            `;
+        });
+        SAVE_MODAL2.show();
+        MODAL_TITLE2.textContent = 'Alumnos a cargo de ' + nombre;
+
+    } else {
+        sweetAlert(4, DATA.error, true);
+    }
+
 }
 
 
@@ -295,17 +347,17 @@ const openReport = () => {
 async function iniciarCompra(idcliente) {
     // Mostrar un mensaje de confirmación y capturar la respuesta
     const RESPONSE = await confirmAction('¿Está seguro de iniciar una compra?');
-    
+
     // Verificar la respuesta del mensaje
     if (RESPONSE) {
         // Constante tipo objeto con los datos del formulario
         const FORM = new FormData(CLIENTECOMPRA_FORM);
         // Añadir el ID del alumno al formulario
         FORM.append('idclien', idcliente);
-        
+
         // Petición para iniciar la compra
         const DATA = await fetchData(COMPRA_API, 'startOrder3', FORM);
-        
+
         // Comprobar si la respuesta es satisfactoria, de lo contrario mostrar un mensaje con la excepción
         if (DATA.status) {
             sweetAlert(1, DATA.message, true);
