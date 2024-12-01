@@ -259,19 +259,24 @@ const verDatosAlumno = async (id, nombre) => {
         if (Array.isArray(DATA.dataset)) {
             DATA.dataset.forEach(row => {
                 MODAL_BODY.innerHTML += `
-                <div class="row">
-                    <div class="col-md-6">
+                <div class="row mx-auto">
+                    <div class="col-md-4 col-sm-12 col-12">
                         <p class="card-text"><b>Nombre del alumno: </b>${row.nombre}</p>
                         <p class="card-text"><b>Encargado del alumno: </b>${row.Encargado}</p>
                         <p class="card-text"><b>Fecha de nacimiento: </b>${row.fecha_nacimiento}<b> -- </b>${row.edad} años</p>
                         <p class="card-text"><b>Inscrito desde: </b>${row.fecha_inscripcion}</p>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4 col-sm-12 col-12">
                         <p class="card-text"><b>Posición del alumno: </b>${row.posicion_alumno}</p>
                         <p class="card-text"><b>Número de días que entrena: </b>${row.numero_dias}</p>
                         <p class="card-text"><b>Mensualidad que paga: </b>$${row.mensualidad_pagar}</p>
                     </div>
-                    <p>---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+                    <div class="col-md-4 col-sm-12 col-12">
+                        <p class="card-text"><b>Último pago realizo: </b>${row.fecha_pago}</p>
+                        <p class="card-text"><b>Próximo pago a realizar: </b>${row.fecha_proximo_pago}</p>
+                        <p class="card-text"><b>Producto más comprado por el alumno: </b>${row.producto_mas_comprado} - ${row.total_producto_mas_comprado}</p>
+                    </div>
+                    <div class="separator"></div>
                     <div class="row align-items-center">
                     <!-- Título -->
                      <div class="col-md-10">

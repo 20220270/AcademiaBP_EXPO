@@ -34,11 +34,24 @@ class ComprasHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = "SELECT id_compra, CONCAT(nombre_cliente, ' ', apellido_cliente) AS nombre_completo, estado_compra, direccion_compra, p.fecha_registro FROM tb_compras p
-                INNER JOIN tb_clientes USING(id_cliente)
-                WHERE nombre_cliente LIKE ? OR apellido_cliente LIKE ? OR estado_compra LIKE ? OR p.fecha_registro LIKE ?
-                ORDER BY id_compra";
-        $params = array($value, $value, $value, $value);
+        $sql = "SELECT 
+    id_compra, 
+    COALESCE(CONCAT(nombre_cliente, ' ', apellido_cliente), CONCAT(nombre_alumno, ' ', apellido_alumno)) AS nombre_completo,
+    estado_compra, 
+    direccion_compra, 
+    p.fecha_registro, 
+    nombre_metodo 
+    FROM 
+    tb_compras p
+    LEFT JOIN 
+    tb_clientes USING(id_cliente)
+    LEFT JOIN 
+    tb_metodos_pago USING(id_metodo_pago)
+    LEFT JOIN 
+    tb_alumnos USING(id_alumno)
+    WHERE COALESCE(CONCAT(nombre_cliente, ' ', apellido_cliente), CONCAT(nombre_alumno, ' ', apellido_alumno)) LIKE ? OR estado_compra LIKE ? OR p.fecha_registro LIKE ?
+    ORDER BY id_compra";
+        $params = array($value, $value, $value);
         return Database::getRows($sql, $params);
     }
 

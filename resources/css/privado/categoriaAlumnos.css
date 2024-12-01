@@ -17,6 +17,14 @@
     overflow-y: auto;
 }
 
+.separator {
+    border: 0;
+    border-top: 3px solid #ccc; /* Línea gris */
+    margin: 10px 0; /* Espaciado vertical */
+    width: 100%;
+}
+
+
 
 @media only screen and (max-width:6000px) {
     #horario {

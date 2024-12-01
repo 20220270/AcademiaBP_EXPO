@@ -108,14 +108,54 @@ class AlumnosHandler
     estado_alumno, 
     numero_dias, 
     mensualidad_pagar,
-    CONCAT(nombre_cliente, ' ', apellido_cliente) AS 'Encargado' 
+    CONCAT(nombre_cliente, ' ', apellido_cliente) AS 'Encargado',
+    
+    COALESCE((SELECT fecha_pago FROM tb_detalles_pagos
+    INNER JOIN tb_pagos USING (id_pago)
+    INNER JOIN tb_alumnos_categorias USING (id_alumno_categoria)
+    INNER JOIN tb_alumnos USING(id_alumno)
+    WHERE id_alumno = ?), 'No hay fecha registrada') as fecha_pago,
+    
+    COALESCE((SELECT fecha_proximo_pago FROM tb_detalles_pagos
+    INNER JOIN tb_pagos USING (id_pago)
+    INNER JOIN tb_alumnos_categorias USING (id_alumno_categoria)
+    INNER JOIN tb_alumnos USING(id_alumno)
+    WHERE id_alumno = ?), 'No hay fecha registrada') as fecha_proximo_pago,
+    
+	COALESCE((
+    SELECT nombre_producto
+    FROM tb_detalles_compras
+    JOIN tb_compras c USING (id_compra)
+    JOIN tb_alumnos cl USING (id_alumno)
+    JOIN tb_detalleproducto dp USING (id_detalle_producto)
+    JOIN tb_productos p USING (id_producto)
+    WHERE id_alumno = ?
+    GROUP BY p.nombre_producto
+    ORDER BY SUM(cantidad_producto) DESC 
+    LIMIT 1
+), 'No hay') as producto_mas_comprado,
+
+
+    COALESCE((
+    SELECT SUM(dp.cantidad_producto) 
+    FROM tb_detalles_compras dp
+    JOIN tb_compras c USING (id_compra)
+    JOIN tb_alumnos cl USING (id_alumno)
+    JOIN tb_detalleproducto dp2 USING (id_detalle_producto)
+    JOIN tb_productos p USING (id_producto)
+    WHERE id_alumno = ?
+    GROUP BY p.nombre_producto
+    ORDER BY SUM(dp.cantidad_producto) DESC 
+    LIMIT 1
+),0) as total_producto_mas_comprado
+    
     FROM 
     tb_alumnos 
     LEFT JOIN tb_dias_pagos USING (id_dia_pago)
     LEFT JOIN
     tb_clientes USING(id_cliente)
     WHERE id_alumno = ?;";
-        $params = array($this->id);
+        $params = array($this->id, $this->id, $this->id, $this->id, $this->id);
         return Database::getRows($sql, $params);
     }
     
