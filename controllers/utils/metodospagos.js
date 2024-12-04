@@ -9,7 +9,7 @@ function mostrarInputs() {
     document.getElementById('codigoCVV').style.display = 'none';
     document.getElementById('inputPayPal').style.display = 'none';
     document.getElementById('inputTransferencia').style.display = 'none';
-    document.getElementById('inputSWIFT').style.display = 'none';
+
 
     document.getElementById('labeltarjeta').style.display = 'none';
     document.getElementById('nombretarjeta').style.display = 'none';
@@ -18,6 +18,11 @@ function mostrarInputs() {
     document.getElementById('cvvtarjeta').style.display = 'none';
     document.getElementById('correoPaypal').style.display = 'none';
     document.getElementById('cuentanumero').style.display = 'none';
+
+    document.getElementById('inputCorreoTransferencia').style.display = 'none';
+    document.getElementById('selectTipoCuenta').style.display = 'none';
+    document.getElementById('inputReceptor').style.display = 'none';
+    
     document.getElementById('codigos').style.display = 'none';
 
     document.getElementById('inputTotalPagar').style.display = 'none';
@@ -43,12 +48,14 @@ function mostrarInputs() {
         document.getElementById('correoPaypal').style.display = 'block';
     } else if (metodoPago === "Transferencia bancaria") {
         document.getElementById('inputTransferencia').style.display = 'block';
-        document.getElementById('inputSWIFT').style.display = 'block';
         document.getElementById('cuentanumero').style.display = 'block';
-        document.getElementById('codigos').style.display = 'block';
+        document.getElementById('inputCorreoTransferencia').style.display = 'block';
+        document.getElementById('selectTipoCuenta').style.display = 'block';
+        document.getElementById('inputReceptor').style.display = 'block';
+
     }
     else if (metodoPago === "Efectivo") {
-        
+        document.getElementById('codigos').style.display = 'block';
         document.getElementById('inputTotalPagar').style.display = 'block';
         document.getElementById('InputTotalDado').style.display = 'block';
         document.getElementById('inputVuelto').style.display = 'block';  
@@ -140,7 +147,11 @@ function actualizarDatosPago() {
     const codigoCVV = document.getElementById('codigoCVV').value;
     const correoPaypal = document.getElementById('paypalCorreo').value;
     const numeroCuenta = document.getElementById('numeroCuenta').value;
-    const codigoSWIFT = document.getElementById('codigoSWIFT').value;
+
+    const correoEmisor = document.getElementById('CorreoTransferencia').value;
+    const tipoCuenta = document.getElementById('selectCuenta').value;
+    const nombreTitularReceptor = document.getElementById('receptorNombre').value;
+
     const totalDado = document.getElementById('totalDado').value; // Input donde el usuario ingresa el dinero dado
     const totalPagar = document.getElementById('totalPagar').value; // Total a pagar (obtenido como texto y convertido a número)
     const cambioDado = document.getElementById('cambioDado').value; // Elemento donde se mostrará el cambio
@@ -210,6 +221,7 @@ function actualizarDatosPago() {
     }
 
     if (metodoPago === "PayPal") {
+        
         // Validación de correo en formato válido
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!correoPaypal || !emailRegex.test(correoPaypal)) {
@@ -222,12 +234,12 @@ function actualizarDatosPago() {
 
     // Validaciones para Transferencia
     if (metodoPago === "Transferencia bancaria") {
-        if (!numeroCuenta || !codigoSWIFT) {
+
+        if (!numeroCuenta || !correoEmisor|| !tipoCuenta|| !nombreTitularReceptor) { // Agregar ||
             document.getElementById('botonFinalizar').style.display = 'none';
             alert('Debe completar todos los campos de la transferencia.');
             return;
         }
-
         // 7. Validación de que numeroCuenta no contenga letras
         const cuentaRegex = /^\d+(-\d+)*$/;
         if (!cuentaRegex.test(numeroCuenta)) {
@@ -237,11 +249,11 @@ function actualizarDatosPago() {
             return;
         }
 
-        // 8. Validación de longitud del código SWIFT entre 8 y 11 caracteres
-        if (codigoSWIFT.length < 8 || codigoSWIFT.length > 11) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!correoEmisor || !emailRegex.test(correoEmisor)) {
             document.getElementById('botonFinalizar').style.display = 'none';
-            alert('El código SWIFT debe tener entre 8 y 11 caracteres.');
-            document.getElementById('codigoSWIFT').value = ''; // Limpia el campo si no es válido
+            alert('Debe ingresar un correo válido.');
+            document.getElementById('CorreoTransferencia').value = ''; // Limpia el campo si no es válido
             return;
         }
     }
@@ -280,7 +292,7 @@ function actualizarDatosPago() {
     // Concatenación de datos
     const datosConcatenadosTarjeta = `${metodoPago}, ${numeroTarjeta}, ${nombreTarjeta}, ${mesVencimiento}, ${anioVencimiento}, ${codigoCVV}`;
     const datosConcatenadosPaypal = `${metodoPago}, ${correoPaypal}`;
-    const datosConcatenadosTransferencia = `${metodoPago}, ${numeroCuenta}, ${codigoSWIFT}`;
+    const datosConcatenadosTransferencia = `${metodoPago}, ${numeroCuenta}, ${correoEmisor}, ${tipoCuenta}, ${nombreTitularReceptor}`;
     const datosConcatenadosEfectivo = `${metodoPago}, ${totalPagar}, ${totalDado}, ${totalDado - totalPagar}`;
 
     // Selección de la variable donde se guardarán los datos dependiendo del método de pago

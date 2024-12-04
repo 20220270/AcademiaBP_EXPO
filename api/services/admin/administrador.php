@@ -144,15 +144,22 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Usuario inexistente';
                 }
                 break;
-            case 'logOut':
-                if (session_destroy()) {
-                    $administrador->updateLastLogin(); //Después que se ha cerrado la sesión, se ejecuta el método que actualiza la última conección del usuario
-                    $result['status'] = 1;
-                    $result['message'] = 'Sesión eliminada correctamente';
-                } else {
-                    $result['error'] = 'Ocurrió un problema al cerrar la sesión';
-                }
-                break;
+                case 'logOut':
+                    // Cambia el nombre de la sesión solo para el sitio público
+                    session_name('private_session');
+                    
+                    // Inicia la sesión si aún no está iniciada
+                    if (session_status() == PHP_SESSION_NONE) {
+                        session_start();
+                    }
+            
+                    // Verifica si la sesión 'idCliente' está establecida y la elimina
+                    if (isset($_SESSION['idAdministrador'])) {
+                        unset($_SESSION['idAdministrador']);
+                    }
+            
+                    // Opcionalmente, redirecciona al usuario después de cerrar la sesión
+                    exit();
             case 'readProfile':
                 if ($result['dataset'] = $administrador->readProfile()) {
                     $result['status'] = 1;

@@ -185,18 +185,33 @@
 
                                     <!-- Transferencia Bancaria: Inputs para número de cuenta y código SWIFT/BAN -->
                                     <div class="col-sm-12 col-md-6 mb-3" id="inputTransferencia">
-                                        <label for="numeroCuenta" class="col-sm-7 col-form-label"
-                                            id="cuentanumero">Número de cuenta:</label>
-                                        <input id="numeroCuenta" type="text" name="numeroCuenta" class="form-control"
+                                        <label for="numeroCuenta" class="col-sm-7 col-form-label" id="cuentanumero">Número
+                                            de cuenta:</label>
+                                        <input id="numeroCuenta" type="number" name="numeroCuenta" class="form-control"
+                                            autocomplete="off" oninput="debouncedActualizarDatosPago()">
+                                    </div>
+    
+                                    <div class="col-sm-12 col-md-6 mb-3" id="inputCorreoTransferencia">
+                                        <label for="CorreoTransferenciaA" class="col-sm-7 col-form-label" id="CorreoTransferenciaA">
+                                            Correo del emisor:</label>
+                                        <input id="CorreoTransferencia" type="email" name="CorreoTransferencia" class="form-control"
+                                            autocomplete="off" oninput="debouncedActualizarDatosPago()">
+                                    </div>
+    
+                                    <div class="col-sm-12 col-md-6 col-lg-6" id="selectTipoCuenta">
+                                        <label for="selectCuenta" class="col-sm-10 col-form-label">Tipo de cuenta:</label>
+                                        <select class="form-select" id="selectCuenta" name="selectCuenta" aria-label="Default select example" onchange="debouncedActualizarDatosPago()">
+                                            <option>Cuenta de ahorro</option>
+                                            <option>Cuenta corriente</option>
+                                        </select>
+                                    </div>
+    
+                                    <div class="col-sm-12 col-md-6 mb-3" id="inputReceptor">
+                                        <label for="receptorNombre" class="col-sm-7 col-form-label" id="correoPaypal">Titular de la cuenta receptora:</label>
+                                        <input id="receptorNombre" type="text" name="receptorNombre" class="form-control"
                                             autocomplete="off" oninput="debouncedActualizarDatosPago()">
                                     </div>
 
-                                    <div class="col-sm-12 col-md-6 mb-3" id="inputSWIFT">
-                                        <label for="codigoSWIFT" class="col-sm-7 col-form-label" id="codigos">Código
-                                            SWIFT/BAN:</label>
-                                        <input id="codigoSWIFT" type="text" name="codigoSWIFT" class="form-control"
-                                            autocomplete="off" oninput="debouncedActualizarDatosPago()">
-                                    </div>
 
                                     <!-- Efectivo: Inputs para mostrar el precio a pagar, cuánto se pagó, cuánto se dio de cambio-->
                                     <div class="col-sm-12 col-md-6 mb-3" id="inputTotalPagar">
