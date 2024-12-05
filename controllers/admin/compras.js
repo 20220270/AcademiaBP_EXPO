@@ -170,12 +170,12 @@ const fillTable2 = async (form = null) => {
                 <div class="col-12 col-md-12 col-lg-6 mt-3 mb-3 mx-auto" >
                     <div class="card h-100" data-id-metodo="${row.id_metodo_pago}">
                         <div class="row mb-5 mt-2 mx-auto" onclick="seleccionarMetodoPago(${row.id_metodo_pago}, '${row.nombre_metodo}')">
-                            <div class="col-3">
-                                <div class="mt-4"><img src="${SERVER_URL}images/metodospagos/${row.imagen_metodo}" class="card-img-top"></div>
+                            <div class="col-12 mx-5">
+                                <div class="mt-4 mx-5"><img src="${SERVER_URL}images/metodospagos/${row.imagen_metodo}" class="card-img-top"></div>
                             </div>
-                            <div class="col-8 mt-3">
-                                <div class="card-body text-start">
-                                    <h5 class="card-title fs-3 mb-2"> ${row.nombre_metodo}</h5>
+                            <div class="col-12 mt-3">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title fs-5 mb-2"> ${row.nombre_metodo}</h6>
                                 </div>
                             </div>
                         </div>

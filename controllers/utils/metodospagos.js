@@ -22,7 +22,7 @@ function mostrarInputs() {
     document.getElementById('inputCorreoTransferencia').style.display = 'none';
     document.getElementById('selectTipoCuenta').style.display = 'none';
     document.getElementById('inputReceptor').style.display = 'none';
-    
+
     document.getElementById('codigos').style.display = 'none';
 
     document.getElementById('inputTotalPagar').style.display = 'none';
@@ -58,7 +58,7 @@ function mostrarInputs() {
         document.getElementById('codigos').style.display = 'block';
         document.getElementById('inputTotalPagar').style.display = 'block';
         document.getElementById('InputTotalDado').style.display = 'block';
-        document.getElementById('inputVuelto').style.display = 'block';  
+        document.getElementById('inputVuelto').style.display = 'block';
     }
 }
 
@@ -92,14 +92,31 @@ const inputTotalPagar = document.getElementById('inputTotalPagar');
 const inputTotalDado = document.getElementById('InputTotalDado');
 const inputVuelto = document.getElementById('inputVuelto');
 
+
+
 // Función para realizar la resta y asignar el resultado
 function calcularVuelto() {
-  const totalPagar = parseFloat(inputTotalPagar.value) || 0; // Si no hay valor, se asigna 0
-  const totalDado = parseFloat(inputTotalDado.value) || 0;  // Si no hay valor, se asigna 0
+    // Obtiene los valores ingresados y los convierte a números
+    const totalPagar = parseFloat(inputTotalPagar.value) || 0; // Si no hay valor, se asigna 0
+    const totalDado = parseFloat(inputTotalDado.value) || 0;  // Si no hay valor, se asigna 0
 
-  const vuelto = totalDado - totalPagar;  // Realiza la resta
-  inputVuelto.value = vuelto.toFixed(2);   // Asigna el resultado al input 'vuelto' con dos decimales
+    // Verifica si el monto dado es menor que el monto a pagar
+    if (totalDado < totalPagar) {
+        alert('El total pagado no debe ser menor al total a pagar');
+        document.getElementById('botonFinalizar').style.display = 'none'; // Oculta el botón finalizar
+        document.getElementById('InputTotalDado').value = ''; // Limpia el campo del monto dado
+        document.getElementById('inputVuelto').value = '';    // Limpia el campo del vuelto
+        return; // Sale de la función sin realizar la resta
+    }
+
+    // Si el monto dado es suficiente, calcula el vuelto
+    const vuelto = totalDado - totalPagar;
+
+    // Muestra el botón finalizar y asigna el vuelto al input correspondiente
+    document.getElementById('botonFinalizar').style.display = 'block';
+    inputVuelto.value = vuelto.toFixed(2); // Asigna el resultado con dos decimales
 }
+
 
 // Escucha los cambios en los inputs
 inputTotalPagar.addEventListener('input', calcularVuelto);
@@ -221,7 +238,7 @@ function actualizarDatosPago() {
     }
 
     if (metodoPago === "PayPal") {
-        
+
         // Validación de correo en formato válido
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!correoPaypal || !emailRegex.test(correoPaypal)) {
@@ -235,7 +252,7 @@ function actualizarDatosPago() {
     // Validaciones para Transferencia
     if (metodoPago === "Transferencia bancaria") {
 
-        if (!numeroCuenta || !correoEmisor|| !tipoCuenta|| !nombreTitularReceptor) { // Agregar ||
+        if (!numeroCuenta || !correoEmisor || !tipoCuenta || !nombreTitularReceptor) { // Agregar ||
             document.getElementById('botonFinalizar').style.display = 'none';
             alert('Debe completar todos los campos de la transferencia.');
             return;
@@ -265,22 +282,16 @@ function actualizarDatosPago() {
             console.error("El campo 'totalDado' no está definido o no tiene valor.");
             return;
         }
-    
+
         // Expresión regular para validar el input (solo números y un punto)
         const regex = /^[0-9]*\.?[0-9]*$/;
-    
+
         if (!regex.test(totalPagar)) {
             alert('Por favor, introduce solo números o un punto decimal.');
             totalPagar = totalPagar.value.slice(0, -1); // Elimina caracteres inválidos
-        } else {
-            // Convertimos a número para realizar cálculos
-            const dinerodado = document.getElementById('totalDado').value;
-            const dinerocambio = dinerodado - totalPagar;
-    
-            document.getElementById('cambioDado').value = dinerocambio;
-        }
+        } 
     }
-    
+
 
 
     // Validaciones para PayPal
@@ -293,8 +304,11 @@ function actualizarDatosPago() {
     const datosConcatenadosTarjeta = `${metodoPago}, ${numeroTarjeta}, ${nombreTarjeta}, ${mesVencimiento}, ${anioVencimiento}, ${codigoCVV}`;
     const datosConcatenadosPaypal = `${metodoPago}, ${correoPaypal}`;
     const datosConcatenadosTransferencia = `${metodoPago}, ${numeroCuenta}, ${correoEmisor}, ${tipoCuenta}, ${nombreTitularReceptor}`;
-    const datosConcatenadosEfectivo = `${metodoPago}, ${totalPagar}, ${totalDado}, ${totalDado - totalPagar}`;
+    
+    const vuelto = (totalDado - totalPagar).toFixed(2); // Asegura que tenga dos decimales
 
+    const datosConcatenadosEfectivo = `${metodoPago}, ${totalPagar}, ${totalDado}, ${vuelto}`;
+    
     // Selección de la variable donde se guardarán los datos dependiendo del método de pago
     const inputDatosGuardados = document.getElementById('datosPago');
 

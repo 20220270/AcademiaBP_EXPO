@@ -49,7 +49,7 @@ class PagosMensualidadHandler
 
 
     //Ver todos los pagos
-    public function readAll()
+    public function readAll2()
     {
         $sql = "SELECT id_pago, 
                    CONCAT(nombre_alumno, ' ', apellido_alumno) AS 'Alumno',
@@ -96,7 +96,7 @@ class PagosMensualidadHandler
     }
 
     //Ver los pagos del mes actual
-    public function readAll2()
+    public function readAll()
     {
         $sql = "SELECT id_pago, 
                    CONCAT(nombre_alumno, ' ', apellido_alumno) AS 'Alumno',
