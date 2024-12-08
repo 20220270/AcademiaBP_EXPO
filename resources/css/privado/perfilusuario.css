@@ -300,4 +300,9 @@ a.sidebar-link:hover {
     .card-title {
         font-size: 1.25rem; /* Tamaño de fuente más pequeño en pantallas pequeñas */
     }
+
+    #conte{
+        max-height: 630px;
+        overflow-y: auto;
+    }
 }

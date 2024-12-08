@@ -12,4 +12,9 @@
     max-width: 100%;
 }
 
+#contenedorPrin{
+    max-height: 620px;
+    overflow-y: auto;
+}
+
 

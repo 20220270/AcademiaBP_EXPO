@@ -33,41 +33,41 @@
                     <!-- Buscador y botón de crear nuevo usuario -->
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
-                            <form class="d-flex" id="searchForm">
-                                <div class="buscador mx-auto position-relative">
-                                    <i class="fas fa-microphone search-icon microphone-button"
-                                        id="microphone-button"></i>
-                                    <input class="busc light-table-filter" data-table="order-table" type="text"
-                                        placeholder="Busque por alias, nombre, correo o DUI" id="Buscador"
-                                        name="search">
+                            <form class="d-flex flex-column flex-md-row w-100" id="searchForm">
+                                <div class="buscador mx-auto position-relative w-100">
+                                    <i class="fas fa-microphone search-icon microphone-button" id="microphone-button"></i>
+                                    <input class="busc light-table-filter form-control" data-table="order-table" type="text"
+                                        placeholder="Busque por alias, nombre, correo o DUI" id="Buscador" name="search">
                                     <div class="btna">
                                         <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
-                        <div class="col-12 d-flex justify-content-end">
-                            <div class="mb-2">
+                        <div class="col-12 d-flex flex-column flex-md-row justify-content-md-end align-items-center mt-3 mt-md-0">
+                            <div class="mb-2 w-100 w-md-auto me-md-3">
                                 <!-- Dropdown para el nivel del usuario -->
-                                <label class="form-label">Buscar por nivel de usuario:</label>
+                                <label class="form-label d-block text-center text-md-start">Buscar por nivel de usuario:</label>
                                 <select class="form-select mb-2" id="nivelSelect" name="nivelSelect" required>
-
+                                    <!-- Opciones del dropdown -->
                                 </select>
                             </div>
-
-                            <button type="button" class="btn btn-white" onclick="openCreate()"
-                                title="Registrar usuarios">
-                                <img src="../../resources/images/agregar.png" alt="Agregar" width="60rem" />
-                            </button>
-                            <button class="btn fw-semibold" id="btnRegistrar" name="btnRegistrar" onclick="openReport()"
-                                title="Generar reporte de usuarios">
-
-                                <img src="../../resources/images/reportee.png" alt="" width="40px" height="40px" sss
-                                    class="mb-1">
-                            </button>
+                            <div class="d-flex flex-column flex-md-row align-items-center gap-2 mt-3 mt-md-0">
+                                <button type="button" id="toggleViewBtn" class="btn btn-dark">
+                                    Ver clientes recientes
+                                </button>
+                                <button type="button" class="btn btn-white d-flex align-items-center justify-content-center" onclick="openCreate()" title="Registrar usuarios">
+                                    <img src="../../resources/images/agregar.png" alt="Agregar" width="40px" />
+                                </button>
+                                <button class="btn fw-semibold d-flex align-items-center justify-content-center" id="btnRegistrar" name="btnRegistrar" onclick="openReport()" title="Generar reporte de usuarios">
+                                    <img src="../../resources/images/reportee.png" alt="Reporte" width="40px" />
+                                </button>
+                            </div>
                         </div>
+                        
+                        
                     </div>
+                    
                     <!-- Área de tarjetas con scroll -->
                     <div class="scrollable-cards">
                         <div class="container">
