@@ -402,10 +402,12 @@ class CategoriasAlumnosHandler
 
     public function readCategoriasAlumnos()
     {
-        $sql = "SELECT MAX(id_categoria_alumno) AS id_categoria_alumno  , categoria
-FROM tb_categorias_alumnos
+        $sql = "SELECT MAX(id_staff_categorias) AS id_categoria_alumno , categoria
+FROM tb_staffs_categorias
+INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
+INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
 GROUP BY  categoria
-ORDER BY id_categoria_alumno;
+ORDER BY id_staff_categorias;
 ";
         return Database::getRows($sql);
     }

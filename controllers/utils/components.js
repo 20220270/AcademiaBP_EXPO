@@ -249,6 +249,8 @@ const barGraph = (canvas, xAxis, yAxis, legend, title) => {
             }]
         },
         options: {
+            responsive: true,
+    maintainAspectRatio: true,
             plugins: {
                 title: {
                     display: true,
@@ -279,7 +281,7 @@ const barGraphA = (canvas, data, title) => {
             return record ? record.total_inscripciones : 0;
         });
         console.log("Datos de entrada:", data);
-console.log("Meses:", months);
+        console.log("Meses:", months);
         datasets.push({
             label: `Año ${year}:`,
             data: yearData,
@@ -296,6 +298,8 @@ console.log("Meses:", months);
             datasets: datasets
         },
         options: {
+            responsive: true,
+    maintainAspectRatio: true,
             plugins: {
                 title: {
                     display: true,
@@ -306,7 +310,7 @@ console.log("Meses:", months);
                 },
                 tooltip: {
                     callbacks: {
-                        label: function(context) {
+                        label: function (context) {
                             let label = context.dataset.label || '';
                             if (label) {
                                 label += ' ';
@@ -364,17 +368,19 @@ const barGraphVP = (canvas, data, title) => {
             datasets: datasets
         },
         options: {
+            responsive: true,
+            maintainAspectRatio: true,
             plugins: {
                 title: {
                     display: true,
                     text: title
                 },
                 legend: {
-                    display: true 
+                    display: true
                 },
                 tooltip: {
                     callbacks: {
-                        label: function(context) {
+                        label: function (context) {
                             let label = context.dataset.label || '';
                             if (label) {
                                 label += ' ';
@@ -396,7 +402,7 @@ const barGraphVP = (canvas, data, title) => {
                 y: {
                     stacked: false,
                     ticks: {
-                        callback: function(value) {
+                        callback: function (value) {
                             return `$${value}`; //Aquí se formatean los datos para que se coloque el signo de dólar al principio
                         }
                     }
@@ -447,6 +453,8 @@ const pieGraph = (canvasId, legends, values, title) => {
             }]
         },
         options: {
+            responsive: true,
+    maintainAspectRatio: true,
             plugins: {
                 title: {
                     display: true,
@@ -476,6 +484,8 @@ const horizontalBarGraph = (canvas, xAxis, yAxis, legend, title) => {
             }]
         },
         options: {
+            responsive: true,
+    maintainAspectRatio: true,
             indexAxis: 'y', // Para gráficos horizontales
             plugins: {
                 title: {
@@ -513,6 +523,8 @@ const doughnutGraph = (canvas, legends, values, title) => {
             }]
         },
         options: {
+            responsive: true,
+    maintainAspectRatio: true,
             plugins: {
                 title: {
                     display: true,

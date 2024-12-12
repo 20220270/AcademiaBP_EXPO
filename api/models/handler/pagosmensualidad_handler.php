@@ -357,17 +357,37 @@ ORDER BY id_alumno_categoria;
 
     public function readBoletaPagos()
     {
-        $sql = "SELECT id_detalle_pago, id_pago, fecha_pago, numero_dias, mensualidad_pagar, CONCAT(nombre_alumno, ' ', apellido_alumno) as nombre,
-            GROUP_CONCAT(categoria SEPARATOR ', ') as categoria , descripcion_pago, fecha_proximo_pago 
-            FROM tb_detalles_pagos
-            INNER JOIN tb_pagos USING (id_pago)
-            INNER JOIN tb_alumnos_categorias USING(id_alumno_categoria)
-            INNER JOIN tb_alumnos USING (id_alumno)
-            INNER JOIN tb_dias_pagos USING (id_dia_pago)
-            INNER JOIN tb_staffs_categorias USING (id_staff_categorias)
-            INNER JOIN tb_categorias_horarios USING (id_categoria_horario)
-            INNER JOIN tb_categorias_alumnos USING (id_categoria_alumno)
-            WHERE id_pago = ?";
+        $sql = "SELECT 
+    id_detalle_pago, 
+    id_pago, 
+    fecha_pago, 
+    numero_dias, 
+    mensualidad_pagar, 
+    CONCAT(nombre_alumno, ' ', apellido_alumno) AS nombre,
+    GROUP_CONCAT(categoria SEPARATOR ', ') AS categoria, 
+    descripcion_pago, 
+    fecha_proximo_pago
+FROM 
+    tb_detalles_pagos
+INNER JOIN 
+    tb_pagos USING (id_pago)
+INNER JOIN 
+    tb_alumnos_categorias USING (id_alumno_categoria)
+INNER JOIN 
+    tb_alumnos USING (id_alumno)
+INNER JOIN 
+    tb_dias_pagos USING (id_dia_pago)
+INNER JOIN 
+    tb_staffs_categorias USING (id_staff_categorias)
+INNER JOIN 
+    tb_categorias_horarios USING (id_categoria_horario)
+INNER JOIN 
+    tb_categorias_alumnos USING (id_categoria_alumno)
+WHERE 
+    id_pago = ? 
+GROUP BY 
+    id_detalle_pago, id_pago, fecha_pago, numero_dias, mensualidad_pagar, nombre, descripcion_pago, fecha_proximo_pago;
+";
         $params = array($this->idpago);
         return Database::getRows($sql, $params);
     }

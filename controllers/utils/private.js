@@ -218,7 +218,7 @@ const loadTemplate = async () => {
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                             data-bs-target="#auth456" aria-expanded="false" aria-controls="auth">
-                            <img src="../../resources/images/tienda.png" alt="..." width="20px" height="20px"
+                            <img src="../../resources/images/tienda.png" alt="..." width="10px" height="10px"
                                 class="me-2">
                         </a>
                         <ul id="auth456" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">

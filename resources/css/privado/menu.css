@@ -37,50 +37,99 @@ body {
 }
 
 .chart-container2 {
-  width: 100%;
-  margin: auto;
+    width: 100%;
+    margin: auto;
 }
 
 canvas {
     max-width: 110%;
-
 }
 
-
-
+/* Ajustes para pantallas medianas (hasta 768px) */
 @media (max-width: 768px) {
     .tab-pane .chart-container, 
     .tab-pane .chart-container2 {
-        margin-bottom: 30px; /* Espaciado entre gráficos */
+        margin-bottom: 30px;
     }
 
-    canvas {
-        height: 180px !important; /* Ajustar la altura de los canvas */
-    }
-    .imagenGrafico{
+
+    .imagenGrafico {
         width: 50px;
         height: 50px;
     }
 }
 
-/* Ajustes adicionales si es necesario */
+/* Ajustes para pantallas pequeñas (hasta 576px) */
 @media (max-width: 576px) {
-    canvas {
-        height: 350px !important; /* Mayor altura en pantallas muy pequeñas */
-    }
-    img{
+
+    img {
         width: 30px;
         height: 30px;
+    }
+
+    /* Botones del calendario */
+    .fc-button {
+        font-size: 0.7rem; /* Tamaño más pequeño */
+        padding: 2px 4px; /* Reducir padding */
+        margin: 1px; /* Reducir márgenes */
+    }
+
+    /* Celdas de los días */
+    .fc-daygrid-day {
+        height: 40px; /* Reducir altura */
+        font-size: 0.7rem; /* Reducir tamaño del texto */
+        line-height: 1; /* Compactar espacio */
+    }
+
+    /* Encabezados de días de la semana */
+    .fc-col-header-cell {
+        font-size: 0.8rem; /* Texto más compacto */
+    }
+
+    /* Título del calendario */
+    .fc-toolbar-title {
+        font-size: 0.9rem;
     }
 }
 
-
+/* Ajustes para pantallas muy pequeñas (hasta 500px) */
 @media (max-width: 500px) {
-    canvas {
-        height: 450px !important; /* Mayor altura en pantallas muy pequeñas */
+
+    #chartPredictionVentas {
+        width: 100%;
+        height: 400px; /* Ajusta la altura según lo que prefieras */
+        max-width: 800px; /* Limita el ancho máximo */
+        margin: 0 auto; /* Centra el gráfico */
     }
-    img{
-        width: 30px;
-        height: 30px;
+
+    h2#fc-dom-1{
+        font-size: 12px;
+        margin: 1px 10px 10px 10px;
+    }
+
+    .fc-toolbar-chunk{
+        transform: translateY(10%);
+    }
+
+    .fc-today-button{
+       transform: translateY(10%);
+    }
+
+    .fc-daygrid-day {
+        height: 35px;
+        font-size: 0.6rem;
+    }
+
+    .fc-toolbar-title {
+        font-size: 0.8rem;
+    }
+
+    .fc-scrollgrid{
+        max-width: 110%;
+    }
+
+    canvas#chartPredictionVentas
+    {
+        max-height: 500px;
     }
 }
