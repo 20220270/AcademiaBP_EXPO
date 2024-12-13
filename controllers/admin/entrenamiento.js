@@ -181,7 +181,8 @@ const fillTable = async (form = null) => {
         DATA.dataset.forEach(row => {
 
             CARDS_HORARIOS.innerHTML += `
-                <div class="card mb-3">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4 mt-5 text-center">
+                <div class="card h-100" id="cards">
                     <div class="card-body">
                         <h5 class="card-title fw-bold mb-4"> Horario ${row.id_horario}</h5>
                         <div class="d-flex flex-column">
@@ -215,6 +216,7 @@ const fillTable = async (form = null) => {
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             `;
         });

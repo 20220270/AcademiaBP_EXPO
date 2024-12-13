@@ -169,6 +169,13 @@ a.sidebar-link:hover {
 }
 
 
+@media (min-width: 768px) {
+    .collapsee {
+        display: block !important;
+    }
+  }
+
+
 @media (min-width: 768px) and (max-width: 992px) {
     .img-fluid{
         height: 200px;

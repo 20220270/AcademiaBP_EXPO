@@ -151,8 +151,8 @@ const fillTable = async (form = null) => {
             const icon = (row.estado_producto) ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill';
             // Crea y concatena las cards con los datos de cada registro.
             CARD_PRODUCTOS.innerHTML += `
-                <div class="col">
-                    <div class="card mb-3">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4 mt-5 text-center">
+                    <div class="card h-100" id="cards">
                         <img src="${SERVER_URL}images/productos/${row.imagen_producto}" class="card-img-top" alt="${row.nombre_producto}">
                         <div class="card-body text-start">
                             <h5 class="card-title fs-2 mb-2">${row.nombre_producto}</h5>
@@ -193,8 +193,8 @@ const fillTable2 = async (form = null) => {
         DATA.dataset.forEach(row => {
             //Y los ordenamos para mostrarlos dentro de las cards de detalles
             CARD_DETALLES.innerHTML += `
-                <div class="col">
-                    <div class="card mb-3">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4 mt-5 text-center">
+                    <div class="card h-100" id="cards">
                         <img src="${SERVER_URL}images/productos/${row.imagen_producto}" class="card-img-top" alt="${row.nombre_producto}">
                         <div class="card-body text-start">
                             <h5 class="card-title fs-2 mb-3">Detalle: ${row.id_detalle_producto}</h5>

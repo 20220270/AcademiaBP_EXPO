@@ -25,14 +25,26 @@
         <div class="main p-3">
             <div class="text-center">
                 <h1>Productos y detalles</h1>
+
+                <div class="d-md-none text-center my-3">
+                    <button class="btn btn-dark mb-2 collapsee" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#ProductosCollapse" aria-expanded="false" aria-controls="ProductosCollapse">
+                        Productos
+                    </button>
+                    <button class="btn btn-dark mb-2 collapsee" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#detallesCollapse" aria-expanded="false" aria-controls="detallesCollapse">
+                        Detalles
+                    </button>
+                </div>
+
                 <div class="">
 
                     <div class="container row row-cols-1 row-cols-md-2 g-3">
                         <div class="col">
-                            <div class="col p-5 productos">
+                            <div class="col p-5 productos" id="ProductosCollapse">
                                 <h1>Productos</h1>
                                 <div class="row">
-                                    <div class="col-5 col-lg-12 d-flex justify-content-center">
+                                    <div class="col-12 col-lg-12 d-flex justify-content-center">
                                         <!-- Añadimos una clase offset-3 para centrar el buscador -->
                                         <form class="d-flex flex-column w-100" id="searchForm">
                                             <div class="buscador mx-auto position-relative mb-3">
@@ -77,17 +89,16 @@
 
                                 </div>
 
-                                <div class="mt-2 mb-2">
-                                    <!-- Aquí se coloca la tarjeta de asignación de horarios a entrenamientos -->
-                                    <div class="w-100 shadow p-3 mb-5 bg-body-tertiary rounded" id="cardsProductos">
-
+                                <div class="container">
+                                    <div class="row shadow-lg bg-body-tertiary rounded " id="cardsProductos">
+    
                                     </div>
                                 </div>
                             </div>
 
                         </div>
                         <div class="col">
-                            <div class="col p-5 detproductos">
+                            <div class="col p-5 detproductos" id="detallesCollapse">
                                 <h1>Detalles de los productos</h1>
                                 <div class="row">
                                     <div class="col-6 offset-3 d-flex justify-content-center">
@@ -122,10 +133,9 @@
                                     </button>
                                 </div>
 
-                                <div class="mt-2 mb-2">
-                                    <!-- Aquí se coloca la tarjeta de asignación de horarios a entrenamientos -->
-                                    <div class="w-100 shadow p-3 mb-5 bg-body-tertiary rounded" id="cardsDetalles">
-
+                                <div class="container">
+                                    <div class="row shadow-lg bg-body-tertiary rounded " id="cardsDetalles">
+    
                                     </div>
                                 </div>
 

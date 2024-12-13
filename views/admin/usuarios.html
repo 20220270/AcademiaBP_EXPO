@@ -26,28 +26,44 @@
                 <h1>Gestión de usuarios y niveles de usuario</h1>
             </div>
 
+            <div class="d-md-none text-center my-3">
+                <button class="btn btn-dark mb-2 collapsee" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#usuariosCollapse" aria-expanded="false" aria-controls="usuariosCollapse">
+                    Usuarios
+                </button>
+                <button class="btn btn-dark mb-2 collapsee" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#nivelesusuariosCollapse" aria-expanded="false"
+                    aria-controls="nivelesusuariosCollapse">
+                    Niveles de usuario
+                </button>
+            </div>
+
             <!-- Contenido principal: tarjetas y tabla -->
             <div class="row mt-5">
                 <!-- Div de tarjetas con scroll, incluyendo buscador y botón de agregar -->
-                <div class="col-lg-6 col-md-12">
+                <div class="col-lg-6 col-md-12" id="usuariosCollapse">
                     <!-- Buscador y botón de crear nuevo usuario -->
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
                             <form class="d-flex flex-column flex-md-row w-100" id="searchForm">
                                 <div class="buscador mx-auto position-relative w-100">
-                                    <i class="fas fa-microphone search-icon microphone-button" id="microphone-button"></i>
-                                    <input class="busc light-table-filter form-control" data-table="order-table" type="text"
-                                        placeholder="Busque por alias, nombre, correo o DUI" id="Buscador" name="search">
+                                    <i class="fas fa-microphone search-icon microphone-button"
+                                        id="microphone-button"></i>
+                                    <input class="busc light-table-filter form-control" data-table="order-table"
+                                        type="text" placeholder="Busque por alias, nombre, correo o DUI" id="Buscador"
+                                        name="search">
                                     <div class="btna">
                                         <i class="fa fa-search"><ion-icon name="search-outline"></ion-icon></i>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <div class="col-12 d-flex flex-column flex-md-row justify-content-md-end align-items-center mt-3 mt-md-0">
+                        <div
+                            class="col-12 d-flex flex-column flex-md-row justify-content-md-end align-items-center mt-3 mt-md-0">
                             <div class="mb-2 w-100 w-md-auto me-md-3">
                                 <!-- Dropdown para el nivel del usuario -->
-                                <label class="form-label d-block text-center text-md-start">Buscar por nivel de usuario:</label>
+                                <label class="form-label d-block text-center text-md-start">Buscar por nivel de
+                                    usuario:</label>
                                 <select class="form-select mb-2" id="nivelSelect" name="nivelSelect" required>
                                     <!-- Opciones del dropdown -->
                                 </select>
@@ -56,18 +72,22 @@
                                 <button type="button" id="toggleViewBtn" class="btn btn-dark">
                                     Ver clientes recientes
                                 </button>
-                                <button type="button" class="btn btn-white d-flex align-items-center justify-content-center" onclick="openCreate()" title="Registrar usuarios">
+                                <button type="button"
+                                    class="btn btn-white d-flex align-items-center justify-content-center"
+                                    onclick="openCreate()" title="Registrar usuarios">
                                     <img src="../../resources/images/agregar.png" alt="Agregar" width="40px" />
                                 </button>
-                                <button class="btn fw-semibold d-flex align-items-center justify-content-center" id="btnRegistrar" name="btnRegistrar" onclick="openReport()" title="Generar reporte de usuarios">
+                                <button class="btn fw-semibold d-flex align-items-center justify-content-center"
+                                    id="btnRegistrar" name="btnRegistrar" onclick="openReport()"
+                                    title="Generar reporte de usuarios">
                                     <img src="../../resources/images/reportee.png" alt="Reporte" width="40px" />
                                 </button>
                             </div>
                         </div>
-                        
-                        
+
+
                     </div>
-                    
+
                     <!-- Área de tarjetas con scroll -->
                     <div class="scrollable-cards">
                         <div class="container">
@@ -79,7 +99,7 @@
                 </div>
 
                 <!-- Div de la tabla -->
-                <div class="col-lg-6 col-md-12">
+                <div class="col-lg-6 col-md-12" id="nivelesusuariosCollapse">
                     <!-- Botón nuevo justo arriba de la tabla -->
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
@@ -104,21 +124,23 @@
                         </div>
 
                     </div>
-                    <table class="table text-center">
-                        <thead>
-                            <tr>
-                                <td colspan="3" id="rowsFound"></td>
-                            </tr>
-                            <tr>
-                                <th class="table-dark text-white fw-bold">ID</th>
-                                <th class="table-dark text-white fw-bold">Nivel</th>
-                                <th class="table-dark text-white fw-bold">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody">
-                            <!-- Contenido de la tabla se insertará aquí -->
-                        </tbody>
-                    </table>
+                    <div class=" scrollable-cards">
+                        <table class="table text-center">
+                            <thead>
+                                <tr>
+                                    <td colspan="3" id="rowsFound"></td>
+                                </tr>
+                                <tr>
+                                    <th class="table-dark text-white fw-bold">ID</th>
+                                    <th class="table-dark text-white fw-bold">Nivel</th>
+                                    <th class="table-dark text-white fw-bold">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <!-- Contenido de la tabla se insertará aquí -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

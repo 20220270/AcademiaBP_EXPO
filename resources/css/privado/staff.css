@@ -280,3 +280,10 @@ a.sidebar-link:hover {
     height: 260px;
     object-fit: cover; /* Asegura que la imagen se recorte y mantenga su proporción */
 }
+
+
+@media (min-width: 768px) {
+    .collapsee {
+        display: block !important;
+    }
+  }

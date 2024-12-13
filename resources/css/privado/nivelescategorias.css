@@ -134,3 +134,9 @@ body {
     width: 150px; 
     object-fit: cover;
 }
+
+@media (min-width: 768px) {
+    .collapsee {
+        display: block !important;
+    }
+  }

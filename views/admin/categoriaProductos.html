@@ -22,13 +22,30 @@
     <main>
         <div class="main p-3">
             <div class="text-center">
-                <h1 class="mt-4">Categorías, colores y tallas de productos</h1>
+                <h1 class="mt-4">Categorías, colores y tallas de productos
+                </h1>
 
 
+
+
+                <div class="d-md-none text-center my-3">
+                    <button class="btn btn-dark mb-2 collapsee" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#categoriasCollapse" aria-expanded="false" aria-controls="categoriasCollapse">
+                        Categorías
+                    </button>
+                    <button class="btn btn-dark mb-2 collapsee" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#coloresCollapse" aria-expanded="false" aria-controls="coloresCollapse">
+                        Colores
+                    </button>
+                    <button class="btn btn-dark mb-2 collapsee" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#tallasCollapse" aria-expanded="false" aria-controls="tallasCollapse">
+                        Tallas
+                    </button>
+                </div>
                 <div class="scrollable-content mt-4">
                     <div class="row justify-content-center">
                         <!-- Primera columna -->
-                        <div class="col-md-4 col-12 py-2 px-5">
+                        <div class="col-md-4 col-12 py-2 px-5 scrollable-content" id="categoriasCollapse">
                             <h5>Categorías</h5>
                             <form class="d-flex flex-grow-1 mt-4" id="searchForm">
                                 <div class="buscador mx-auto position-relative">
@@ -53,7 +70,7 @@
                             </div>
                         </div>
                         <!-- Segunda columna -->
-                        <div class="col-md-4 py-2 px-5">
+                        <div class="col-md-4 py-2 px-5" id="coloresCollapse">
                             <h5>Colores</h5>
                             <form class="d-flex flex-grow-1 mt-4" id="searchForm2">
                                 <div class="buscador mx-auto position-relative">
@@ -78,7 +95,7 @@
                             </div>
                         </div>
                         <!-- Tercera columna -->
-                        <div class="col-md-4 py-2 px-5">
+                        <div class="col-md-4 py-2 px-5" id="tallasCollapse">
                             <h5>Tallas</h5>
                             <form class="d-flex flex-grow-1 mt-4" id="searchForm3">
                                 <div class="buscador mx-auto position-relative">

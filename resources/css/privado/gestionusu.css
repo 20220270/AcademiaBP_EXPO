@@ -7,7 +7,7 @@
     width: 200px;
 }
 
-.scrollable-cards {
+.scrollable-cards{
     max-height: 400px; /* Define la altura máxima del div scroll */
     overflow-y: auto; /* Habilita el desplazamiento vertical */
     overflow-x: hidden; /* Deshabilita el desplazamiento horizontal */
@@ -199,3 +199,12 @@ main {
 .btna:hover {
     background: #000000;
 }
+
+
+
+
+@media (min-width: 768px) {
+    .collapsee {
+        display: block !important;
+    }
+  }

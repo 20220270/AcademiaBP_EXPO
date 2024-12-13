@@ -37,12 +37,26 @@
                 <h1 class="mt-5">Entrenamientos</h1>
 
                 
+                <div class="d-md-none text-center my-3">
+                    <button class="btn btn-dark mb-2 collapsee" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#horariosCollapse" aria-expanded="false" aria-controls="horariosCollapse">
+                        Horarios
+                    </button>
+                    <button class="btn btn-dark mb-2 collapsee" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#lugaresCollapse" aria-expanded="false" aria-controls="lugaresCollapse">
+                        Lugares
+                    </button>
+                    <button class="btn btn-dark mb-2 collapsee" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#asigancionCollapse" aria-expanded="false" aria-controls="asigancionCollapse">
+                        Asignar horarios
+                    </button>
+                </div>
 
                 <div class="">
 
                     <div class="container text-center">
                         <div class="row">
-                            <div class="col horarios">
+                            <div class="col-lg-4 horarios" id="horariosCollapse">
                                 <h5 class="mt-5 fw-bold mb-2">Horarios de entrenamiento</h5>
                                 <div class="row">
                                     <div class="col-12 d-flex justify-content-center">
@@ -70,7 +84,7 @@
 
                                 <!--Division 2, los lugares de entreno-->
                             </div>
-                            <div class="col contenedorLugares">
+                            <div class="col-lg-4 contenedorLugares" id="lugaresCollapse">
                                 <h5 class="mt-5 fw-bold mb-2">Lugares de entrenamiento</h5>
                                 <div class="row">
                                     <div class="col-12 d-flex justify-content-center">
@@ -100,7 +114,7 @@
                                 </div>
                             </div>
 
-                            <div class="col contenedorLugares">
+                            <div class="col-lg-4 contenedorLugares" id="asigancionCollapse">
                                 <h5 class="mt-5 fw-bold mb-2">Asignar horarios</h5>
                                 <div class="row">
                                     <div class="col-12 d-flex justify-content-center">

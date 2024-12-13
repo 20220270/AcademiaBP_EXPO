@@ -27,7 +27,22 @@
                     </button>
                 </h1>
 
+                
 
+                <div class="d-md-none text-center my-3">
+                    <button class="btn btn-dark mb-2 collapsee" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#nivelesCollapse" aria-expanded="false" aria-controls="nivelesCollapse">
+                        Niveles
+                    </button>
+                    <button class="btn btn-dark mb-2 collapsee" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#categoriasCollapse" aria-expanded="false" aria-controls="categoriasCollapse">
+                        Categorías
+                    </button>
+                    <button class="btn btn-dark mb-2 collapsee" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#horariosCollapse" aria-expanded="false" aria-controls="horariosCollapse">
+                        Horarios
+                    </button>
+                </div>
                 <!-- Sección de tarjetas -->
                 <div class="row mt-4">
                     <div class="col-lg-12 col-md-12">
@@ -35,7 +50,7 @@
 
                         <!-- Área de tarjetas con scroll -->
                         <div class="row">
-                            <div class="col-lg-4 niveles">
+                            <div class="col-12 col-lg-4 niveles" id="nivelesCollapse">
                                 <h5 class="fw-normal">Niveles de entrenamiento</h5>
                                 <div class="col-12 d-flex justify-content-center">
                                     <form class="d-flex" id="searchForm">
@@ -62,7 +77,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 categorias">
+                            <div class="col-lg-4 categorias" id="categoriasCollapse">
                                 <h5 class="fw-normal">Categorías de entrenamiento</h5>
                                 <div class="col-12 d-flex justify-content-center">
                                     <form class="d-flex" id="searchForm2">
@@ -87,12 +102,12 @@
                                     </button>
                                 </div>
                                 <div class="container">
-                                    <div class="row" id="cardsCategoriasAlumnos">
-                                        <!-- Aquí se insertarán las tarjetas -->
+                                    <div class="row shadow-lg bg-body-tertiary rounded" id="cardsCategoriasAlumnos">
+    
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 asignacion">
+                            <div class="col-lg-4 asignacion" id="horariosCollapse">
                                 <h5 class="fw-normal">Horarios de categorías</h5>
                                 <div class="col-12 d-flex justify-content-center">
                                     <form class="d-flex" id="searchForm3">
