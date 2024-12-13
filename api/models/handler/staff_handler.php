@@ -8,6 +8,7 @@ class StaffHandler
     protected $apellido = null; // Apellido del staff
     protected $descripcion = null; // Descripción adicional del staff
     protected $imagen = null; // Imagen del staff
+    protected $fechanacimiento = null;
 
     const RUTA_IMAGEN = '../../images/staff/'; // Ruta para las imágenes del staff
 
@@ -18,7 +19,7 @@ class StaffHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%'; // Prepara el valor de búsqueda
-        $sql = "SELECT id_staff, CONCAT(nombre_staff, ' ', apellido_staff) AS nombre_completo, descripcion_extra, imagen_staff 
+        $sql = "SELECT id_staff, CONCAT(nombre_staff, ' ', apellido_staff) AS nombre_completo, descripcion_extra, imagen_staff, fecha_nacimiento, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad 
                 FROM tb_staffs
                 WHERE CONCAT(nombre_staff, ' ', apellido_staff) LIKE ? OR apellido_staff LIKE ?
                 ORDER BY id_staff";
@@ -32,9 +33,9 @@ class StaffHandler
      */
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_staffs(nombre_staff, apellido_staff, descripcion_extra, imagen_staff)
-                VALUES(?, ?, ?, ?)';
-        $params = array($this->nombre, $this->apellido, $this->descripcion, $this->imagen);
+        $sql = 'INSERT INTO tb_staffs(nombre_staff, apellido_staff, fecha_nacimiento, descripcion_extra, imagen_staff)
+                VALUES(?, ?, ?, ?, ?)';
+        $params = array($this->nombre, $this->apellido, $this->fechanacimiento, $this->descripcion, $this->imagen);
         return Database::executeRow($sql, $params);
     }
 
@@ -44,7 +45,7 @@ class StaffHandler
      */
     public function readAll()
     {
-        $sql = "SELECT id_staff, CONCAT(nombre_staff, ' ', apellido_staff) AS nombre_completo, imagen_staff, descripcion_extra
+        $sql = "SELECT id_staff, CONCAT(nombre_staff, ' ', apellido_staff) AS nombre_completo, fecha_nacimiento, TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) AS edad, imagen_staff, descripcion_extra
                 FROM tb_staffs
                 ORDER BY id_staff";
         return Database::getRows($sql);
@@ -56,7 +57,7 @@ class StaffHandler
      */
     public function readAllReport()
     {
-        $sql = "SELECT id_staff, CONCAT(nombre_staff, ' ', apellido_staff) AS nombre_completo, categoria, nivel_entrenamiento
+        $sql = "SELECT id_staff, CONCAT(nombre_staff, ' ', apellido_staff) AS nombre_completo, fecha_nacimiento, categoria, nivel_entrenamiento
                 FROM tb_staffs_categorias LEFT JOIN tb_staffs USING (id_staff)
                 LEFT JOIN tb_categorias_horarios USING (id_categoria_horario)
                 LEFT JOIN tb_categorias_alumnos USING (id_categoria_alumno)
@@ -71,7 +72,7 @@ class StaffHandler
      */
     public function readOne()
     {
-        $sql = "SELECT id_staff, nombre_staff, apellido_staff, imagen_staff, descripcion_extra, CONCAT(nombre_staff, ' ' ,apellido_staff) as 'Nombre'
+        $sql = "SELECT id_staff, nombre_staff, apellido_staff, imagen_staff, fecha_nacimiento, descripcion_extra, CONCAT(nombre_staff, ' ' ,apellido_staff) as 'Nombre'
                 FROM tb_staffs
                 WHERE id_staff = ?";
         $params = array($this->id);
@@ -98,9 +99,9 @@ class StaffHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_staffs
-                SET imagen_staff = ?, nombre_staff = ?, apellido_staff = ?, descripcion_extra = ?
+                SET imagen_staff = ?, nombre_staff = ?, apellido_staff = ?, descripcion_extra = ?, fecha_nacimiento = ?
                 WHERE id_staff = ?';
-        $params = array($this->imagen, $this->nombre, $this->apellido, $this->descripcion, $this->id);
+        $params = array($this->imagen, $this->nombre, $this->apellido, $this->descripcion, $this->fechanacimiento, $this->id);
         return Database::executeRow($sql, $params);
     }
 
@@ -142,7 +143,8 @@ class StaffHandler
     $sql = "SELECT 
                 s.id_staff, 
                 CONCAT(s.nombre_staff, ' ', s.apellido_staff) AS nombre_completo,
-                COALESCE(ca.categoria, 'Ninguna categoría') AS categoria
+                COALESCE(ca.categoria, 'Ninguna categoría') AS categoria,
+                s.fecha_nacimiento
             FROM tb_staffs AS s
             LEFT JOIN tb_staffs_categorias AS sc USING (id_staff)
             LEFT JOIN tb_categorias_horarios AS ch USING (id_categoria_horario)

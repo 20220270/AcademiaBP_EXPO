@@ -21,6 +21,7 @@ const SAVE_FORM = document.getElementById('saveForm'),
     ID_STAFF = document.getElementById('idStaff'),
     NOMBRE_STAFF = document.getElementById('nombreStaff'),
     APELLIDO_STAFF = document.getElementById('apellidoStaff'),
+    FECHANACIMIENTO = document.getElementById('fechaNacimiento'),
     DESCRIPCION_STAFF = document.getElementById('descripcionStaff'),
     IMAGEN_STAFF = document.getElementById('imagenStaff');
 
@@ -133,6 +134,8 @@ const fillTable = async (form = null) => {
                         <div class="card-body text-start">
                             <h5 class="card-title fs-2 mb-2">${row.id_staff}</h5>
                             <p class="card-text"><b>Nombre completo: </b>${row.nombre_completo} </p>
+                            <p class="card-text"><b>Fecha de nacimiento: </b> ${row.fecha_nacimiento}</p>
+                            <p class="card-text"><b>Edad: </b> ${row.edad} años</p>
                             <p class="card-text"><b>Descripción: </b> ${row.descripcion_extra}</p>
                             
                             <div class="d-flex justify-content-center gap-1">
@@ -223,6 +226,7 @@ const openUpdate = async (id, nombre) => {
         const ROW = DATA.dataset;
         ID_STAFF.value = ROW.id_staff;
         NOMBRE_STAFF.value = ROW.nombre_staff;
+        FECHANACIMIENTO.value = ROW.fecha_nacimiento;
         APELLIDO_STAFF.value = ROW.apellido_staff;
         DESCRIPCION_STAFF.value = ROW.descripcion_extra;
     } else {

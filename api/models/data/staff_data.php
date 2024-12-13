@@ -56,6 +56,17 @@ class StaffData extends StaffHandler
         }
     }
 
+    public function setFecha($value)
+    {
+        if (Validator::validateDate($value)) {
+            $this->fechanacimiento = $value;
+            return true;
+        } else {
+            $this->data_error = 'La fecha de nacimiento es incorrecta';
+            return false;
+        }
+    }
+
 
     public function setImagen($file, $filename = null)
     {

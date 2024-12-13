@@ -29,6 +29,7 @@ if (isset($_GET['action'])) {
                 if (
                     !$staff->setNombre($_POST['nombreStaff']) or
                     !$staff->setApellido($_POST['apellidoStaff']) or
+                    !$staff->setFecha($_POST['fechaNacimiento']) or
                     !$staff->setDescripcion($_POST['descripcionStaff']) or
                     !$staff->setImagen($_FILES['imagenStaff'])
                 ) {
@@ -66,6 +67,7 @@ if (isset($_GET['action'])) {
                     !$staff->setFilename() or
                     !$staff->setNombre($_POST['nombreStaff']) or
                     !$staff->setApellido($_POST['apellidoStaff']) or
+                    !$staff->setFecha($_POST['fechaNacimiento']) or
                     !$staff->setDescripcion($_POST['descripcionStaff']) or
                     !$staff->setImagen($_FILES['imagenStaff'], $staff->getFilename())
                 ) {
