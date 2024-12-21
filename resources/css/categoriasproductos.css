@@ -12,6 +12,13 @@ header {
 margin-top: 230px;
   }
 
+  .descuento {
+    background-color: #408840;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
   .imagenUser{
     cursor: pointer;
   }

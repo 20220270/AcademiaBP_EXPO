@@ -34,9 +34,8 @@ const SOPORTETECNICO_API = 'services/public/soportetecnico.php';
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="position-relative">
                             <a href="${url}"><img src="${SERVER_URL}images/categorias_productos/${row.imagen_categoria}" class="imagenn rounded-4 mb-3" alt="${row.categoria_producto}" width="340px" height="250px" /></a>
-                            <span class="span-overlay text-white span-texto-gorras fs-3">${row.categoria_producto}</span>
-                            <span class="span-overlay text-white span-guiones-gorras fs-3">--</span>
-                            <span class="span-overlay text-white span-ver-gorras fs-4">Ver ${row.categoria_producto}</span>
+                            <p class="fs-4">${row.categoria_producto}</p>
+                            
                         </div>
                     </div>
                 `;
